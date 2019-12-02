@@ -5,22 +5,35 @@ import Layout from '../components/layout';
 
 const Person = ({ data }) => {
 	const person = data.people;
-	//const frontmatter = person.childMarkdownRemark.frontmatter;
+	const frontmatter = person.childMarkdownRemark.frontmatter;
 	const profileHtml = person.childMarkdownRemark.html;
 
 	return (
 		<Layout>
 			<div>
-				<h1>{person.name}</h1>
+				<h1>{frontmatter.name}</h1>
+				<dl>
+					<dt>Position</dt>
+					<dd>{frontmatter.role}</dd>
+				</dl>
+				<dl>
+					<dt>Qualification</dt>
+					<dd>{frontmatter.qualifications}</dd>
+				</dl>
+				<dl>
+					<dt>Location</dt>
+					<dd>{frontmatter.location}</dd>
+				</dl>
 				<dl>
 					<dt>Skills</dt>
 					{data.skills.advancedSkills.map((skill, i) => (
-						<dd key="a{i}">{skill}</dd>
+						<dd key={`a${i}`}>{skill}</dd>
 					))}
 					{data.skills.intermediateSkills.map((skill, i) => (
-						<dd key="i{i}">{skill}</dd>
+						<dd key={`i${i}`}>{skill}</dd>
 					))}
 				</dl>
+
 				<div
 					dangerouslySetInnerHTML={{
 						__html: profileHtml,

@@ -19,6 +19,22 @@ h3 {
 a:not(.unstyled) {
     @apply text-blue-600 underline;
 }
+
+dl {
+    @apply block;
+    @apply mx-0;
+    @apply my-4;
+}
+
+dt {
+    @apply inline;
+    @apply mr-3;
+}
+
+dd {
+    @apply inline;
+    @apply mr-1;
+}
  
 /**
 * This injects Tailwind's component classes and any component classes
