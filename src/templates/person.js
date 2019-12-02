@@ -4,16 +4,23 @@ import { graphql } from 'gatsby';
 import Layout from '../components/layout';
 
 const Person = ({ data }) => {
-	const person = data.people.edges[0].node;
-	const frontmatter = person.childMarkdownRemark.frontmatter;
+	const person = data.people;
+	//const frontmatter = person.childMarkdownRemark.frontmatter;
 	const profileHtml = person.childMarkdownRemark.html;
-
-	//console.log(frontmatter);
 
 	return (
 		<Layout>
 			<div>
 				<h1>{person.name}</h1>
+				<dl>
+					<dt>Skills</dt>
+					{data.skills.advancedSkills.map((skill, i) => (
+						<dd key="a{i}">{skill}</dd>
+					))}
+					{data.skills.intermediateSkills.map((skill, i) => (
+						<dd key="i{i}">{skill}</dd>
+					))}
+				</dl>
 				<div
 					dangerouslySetInnerHTML={{
 						__html: profileHtml,
@@ -32,34 +39,31 @@ export default Person;
 
 export const query = graphql`
 	query($slug: String!) {
-		people: allFile(
-			limit: 1
-			filter: { sourceInstanceName: { eq: "people" }, name: { eq: $slug } }
-		) {
-			edges {
-				node {
+		people: file(sourceInstanceName: { eq: "people" }, name: { eq: $slug }) {
+			name
+			childMarkdownRemark {
+				frontmatter {
 					name
-					childMarkdownRemark {
-						frontmatter {
-							name
-							nickname
-							role
-							category
-							current_employee
-							blog
-							facebook
-							linkedin
-							location
-							qualifications
-							quote
-							skype
-							twitter
-							website
-						}
-						html
-					}
+					nickname
+					role
+					category
+					current_employee
+					blog
+					facebook
+					linkedin
+					location
+					qualifications
+					quote
+					skype
+					twitter
+					website
 				}
+				html
 			}
+		}
+		skills: userSkillsCollection(slug: { eq: $slug }) {
+			intermediateSkills
+			advancedSkills
 		}
 	}
 `;

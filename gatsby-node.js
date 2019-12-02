@@ -1,3 +1,5 @@
+const axios = require('axios');
+const crypto = require('crypto');
 const path = require('path');
 const DirectoryNamedWebpackPlugin = require('directory-named-webpack-plugin');
 
@@ -26,6 +28,51 @@ exports.onCreateWebpackConfig = ({
   });
 };
 
+exports.sourceNodes = async ({ actions }) => {
+  const { createNode } = actions;
+
+  const userSkillsResult = await axios({
+    method: 'get',
+    url: process.env.SOPHIE_API_URL,
+    data: {},
+    headers: {
+      Authorization: process.env.SOPHIE_AUTHORIZATION,
+      Tenant: process.env.SOPHIE_TENANT
+    }
+  });
+  
+  userSkillsResult.data.map((user, i) => {
+    const userNode = {
+      id: user.userId,
+      parent: `__SOURCE__`,
+      internal: {
+        type: `UserSkillsCollection`,
+      },
+      children: [],
+
+      slug: `${user.firstName}-${user.lastName}`,
+      fullName: `${user.firstName} ${user.lastName}`,
+      emailAddress: user.emailAddress,
+      location: user.defaultSite.name,
+      intermediateSkills: user.skills.filter(s => s.experienceLevel === 'Intermediate').map(s => s.technology),
+      advancedSkills: user.skills.filter(s => s.experienceLevel === 'Advanced').map(s => s.technology),
+    };
+
+    // Get content digest of node. (Required field)
+    const contentDigest = crypto
+      .createHash(`md5`)
+      .update(JSON.stringify(userNode))
+      .digest(`hex`);
+    // add it to userNode
+    userNode.internal.contentDigest = contentDigest;
+
+    // Create node with the gatsby createNode() API
+    createNode(userNode);
+  });
+
+  return;
+}
+
 exports.createPages = async function({ actions, graphql }) {
   const { data } = await graphql(`
     query {
@@ -38,11 +85,6 @@ exports.createPages = async function({ actions, graphql }) {
       }
     }
   `);
-  
-  if (result.errors) {
-    reporter.panicOnBuild(`Error while running GraphQL query to create people.`)
-    return
-  }
 
   data.people.edges.forEach(edge => {
     const slug = edge.node.name;
