@@ -1,6 +1,6 @@
-import React from 'react';
-import PropTypes from 'prop-types';
 import { graphql } from 'gatsby';
+import PropTypes from 'prop-types';
+import React from 'react';
 import Layout from '../components/layout';
 
 const Person = ({ data }) => {
@@ -8,14 +8,15 @@ const Person = ({ data }) => {
 	const childMarkdownRemark = person.childMarkdownRemark || {};
 	const frontmatter = childMarkdownRemark.frontmatter || {};
 	const profileHtml = childMarkdownRemark.html || {};
-	const skills = data.skills || {};
-	const intermediateSkills = skills.advancedSkills || [];
-	const advancedSkills = skills.advancedSkills || [];
+  const crmData = data.crmData || {};
+  const skills = crmData.skills || {};
+  const intermediateSkills = skills.intermediateSkills || [];
+  const advancedSkills = skills.advancedSkills || [];
 	const profileImage = data.profileImage.nodes[0];
 
 	return (
 		<Layout>
-			<div className="flex mb-4">
+		<div className="flex mb-4">
 				<div className="w-1/4">
 					<div
 						className="relative bg-cover shadow-lg mx-auto"
@@ -91,10 +92,6 @@ export const query = graphql`
 				html
 			}
 		}
-		skills: userSkillsCollection(slug: { eq: $slug }) {
-			intermediateSkills
-			advancedSkills
-		}
 		profileImage: allFile(
 			filter: {
 				sourceInstanceName: { eq: "people" }
@@ -112,5 +109,14 @@ export const query = graphql`
 				}
 			}
 		}
+		crmData: crmDataCollection(slug: { eq: $slug }) {
+			skills {
+        intermediateSkills
+        advancedSkills
+      }
+      location: location
+      emailAddress: emailAddress
+    }
+
 	}
 `;
