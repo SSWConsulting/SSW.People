@@ -4,9 +4,13 @@ import { graphql } from 'gatsby';
 import Layout from '../components/layout';
 
 const Person = ({ data }) => {
-	const person = data.people;
-	const frontmatter = person.childMarkdownRemark.frontmatter;
-	const profileHtml = person.childMarkdownRemark.html;
+  const person = data.people;
+  const childMarkdownRemark = person.childMarkdownRemark || {};
+	const frontmatter = childMarkdownRemark.frontmatter || {};
+	const profileHtml = childMarkdownRemark.html || {};
+  const skills = data.skills || {};
+  const intermediateSkills = skills.advancedSkills || [];
+  const advancedSkills = skills.advancedSkills || [];
 
 	return (
 		<Layout>
@@ -25,13 +29,17 @@ const Person = ({ data }) => {
 					<dd>{frontmatter.location}</dd>
 				</dl>
 				<dl>
-					<dt>Skills</dt>
-					{data.skills.advancedSkills.map((skill, i) => (
-						<dd key={`a${i}`}>{skill}</dd>
-					))}
-					{data.skills.intermediateSkills.map((skill, i) => (
-						<dd key={`i${i}`}>{skill}</dd>
-					))}
+          <dt>Skills</dt>
+          {
+            advancedSkills.map((skill, i) => (
+              <dd key={`a${i}`}>{skill}</dd>
+            ))
+          }
+          {
+            intermediateSkills.map((skill, i) => (
+              <dd key={`i${i}`}>{skill}</dd>
+            ))
+          }
 				</dl>
 
 				<div
