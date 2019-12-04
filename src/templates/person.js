@@ -8,8 +8,9 @@ const Person = ({ data }) => {
   const childMarkdownRemark = person.childMarkdownRemark || {};
 	const frontmatter = childMarkdownRemark.frontmatter || {};
 	const profileHtml = childMarkdownRemark.html || {};
-  const skills = data.skills || {};
-  const intermediateSkills = skills.advancedSkills || [];
+  const crmData = data.crmData || {};
+  const skills = crmData.skills || {};
+  const intermediateSkills = skills.intermediateSkills || [];
   const advancedSkills = skills.advancedSkills || [];
 
 	return (
@@ -26,7 +27,7 @@ const Person = ({ data }) => {
 				</dl>
 				<dl>
 					<dt>Location</dt>
-					<dd>{frontmatter.location}</dd>
+					<dd>{crmData.location}</dd>
 				</dl>
 				<dl>
           <dt>Skills</dt>
@@ -82,9 +83,14 @@ export const query = graphql`
 				html
 			}
 		}
-		skills: userSkillsCollection(slug: { eq: $slug }) {
-			intermediateSkills
-			advancedSkills
-		}
+		crmData: crmDataCollection(slug: { eq: $slug }) {
+			skills {
+        intermediateSkills
+        advancedSkills
+      }
+      location: location
+      emailAddress: emailAddress
+    }
+
 	}
 `;

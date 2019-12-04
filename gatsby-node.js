@@ -17,7 +17,7 @@ exports.onCreateWebpackConfig = ({
       'react-dom': '@hot-loader/react-dom'
     }
   }
-  
+
   actions.setWebpackConfig({
     resolve: {
       modules: [path.resolve(__dirname, 'src'), 'node_modules'],
@@ -31,7 +31,7 @@ exports.onCreateWebpackConfig = ({
 exports.sourceNodes = async ({ actions }) => {
   const { createNode } = actions;
 
-  const userSkillsResult = await axios({
+  const crmDataResult = await axios({
     method: 'get',
     url: process.env.SOPHIE_API_URL,
     data: {},
@@ -40,13 +40,13 @@ exports.sourceNodes = async ({ actions }) => {
       Tenant: process.env.SOPHIE_TENANT
     }
   });
-  
-  userSkillsResult.data.map((user, i) => {
+
+  crmDataResult.data.map((user, i) => {
     const userNode = {
       id: user.userId,
       parent: `__SOURCE__`,
       internal: {
-        type: `UserSkillsCollection`,
+        type: `CrmDataCollection`,
       },
       children: [],
 
@@ -54,8 +54,10 @@ exports.sourceNodes = async ({ actions }) => {
       fullName: `${user.firstName} ${user.lastName}`,
       emailAddress: user.emailAddress,
       location: user.defaultSite.name,
-      intermediateSkills: user.skills.filter(s => s.experienceLevel === 'Intermediate').map(s => s.technology),
-      advancedSkills: user.skills.filter(s => s.experienceLevel === 'Advanced').map(s => s.technology),
+      skills: {
+        intermediateSkills: user.skills.filter(s => s.experienceLevel === 'Intermediate').map(s => s.technology),
+        advancedSkills: user.skills.filter(s => s.experienceLevel === 'Advanced').map(s => s.technology),
+      }
     };
 
     // Get content digest of node. (Required field)
@@ -91,8 +93,8 @@ exports.createPages = async function({ actions, graphql }) {
     actions.createPage({
       path: slug,
       component: require.resolve(`./src/templates/person.js`),
-      context: { 
-        slug: slug 
+      context: {
+        slug: slug
       },
     });
   });
