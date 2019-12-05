@@ -14,6 +14,5 @@ SOPHIE_API_URL=
 SOPHIE_AUTHORIZATION=
 SOPHIE_TENANT=
 ```
-- Run *yarn build* 
 - Run *yarn develop*
 

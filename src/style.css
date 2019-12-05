@@ -8,24 +8,20 @@
  /* purgecss end ignore */
 
 h1 {
-    color: #cc4141;
     @apply text-4xl;
+    color: #cc4141;
 }
 h2 {
     @apply text-xl;
+    color: #cc4141;
 }
 h3 {
     @apply text-lg;
-}
-a:not(.unstyled) {
-    @apply text-blue-600;
-    @apply underline;
 }
 
 dl {
     @apply block;
     @apply mx-0;
-    @apply my-4;
 }
 
 dt {
@@ -37,6 +33,91 @@ dd {
     @apply inline;
     @apply font-bold;
     @apply mr-1;
+}
+
+.ms-rteCustom-FigureNormal {
+  font-weight: bold;
+  font-size: 14px;
+  display: block;
+  margin: 3px 10px 10px 0px;
+}
+
+ul li {
+  background: url(./images/bullet_square.gif) 0 7px no-repeat;
+  padding: 0 0 10px 15px;
+  line-height: 1.5em;
+}
+
+p {
+  margin: 0px 0px 10px 0px;
+    line-height: 1.6;
+}
+
+.gatsby-resp-image-wrapper{
+  margin-left: 0% !important;
+}
+
+.person-favor {
+  font-family: Georgia;
+  padding-left: 10px;
+  line-height: 1.4em;
+  margin: 15px 20px 15px 11px
+}
+
+.person-quote{
+  padding-left: 10px;
+  font-style: italic;
+  background-image: url(./images/selfquoteMark.gif);
+  background-repeat: no-repeat;
+}
+
+.person-quote-name{
+  text-align: right;
+}
+
+.profile-content{
+  margin-top: 14px;
+}
+
+.favor-content {
+  background-color: #efefef;
+  border: 1px solid #dddddd;
+  border-radius: 4px;
+  margin: 20px 0;
+}
+
+.profile-image {
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 3px;
+}
+
+.favor-list{
+  margin: 10px 0 10px 12px;
+}
+
+.social {
+  padding: 0px 0px 0px 20px;
+}
+
+#facebook{
+  background: url(./images/facebook.png) 0 3px no-repeat;
+}
+
+#linkedin{
+  background: url(./images/linkedin.png) 0 3px no-repeat;
+}
+
+#skype{
+  background: url(./images/skype.png) 0 3px no-repeat;
+}
+
+#twitter{
+  background: url(./images/twitter.png) 0 3px no-repeat;
+}
+
+#email{
+  background: url(./images/favor_email.gif) 0 3px no-repeat;
 }
 
 /**
