@@ -89,12 +89,14 @@ exports.createPages = async function({ actions, graphql }) {
   `);
 
   data.people.edges.forEach(edge => {
-    const slug = edge.node.name;
+		const slug = edge.node.name;
+		const squareImage = slug + '-Profile-Square';
     actions.createPage({
       path: slug,
       component: require.resolve(`./src/templates/person.js`),
       context: {
-        slug: slug
+				slug: slug,
+				squareImage: squareImage,
       },
     });
   });
