@@ -18,15 +18,17 @@ const Person = ({ data }) => {
 		<Layout>
 			<div className="flex mb-5">
 				<div className="w-1/5">
-					<div>
-						<img
-							className="profile-image relative bg-cover shadow-lg mx-auto"
-							src={profileImage.childImageSharp.original.src}
-							alt="Profile"
-							height={profileImage.childImageSharp.original.height}
-							width={profileImage.childImageSharp.original.width}
-						/>
-					</div>
+					{profileImage != undefined && (
+						<div>
+							<img
+								className="profile-image relative bg-cover shadow-lg mx-auto"
+								src={profileImage.childImageSharp.original.src}
+								alt="Profile"
+								height={profileImage.childImageSharp.original.height}
+								width={profileImage.childImageSharp.original.width}
+							/>
+						</div>
+					)}
 					<div className="person-favor">
 						<div className="person-quote">{frontmatter.quote}</div>
 						<div className="person-quote-name">{frontmatter.nickname}</div>
