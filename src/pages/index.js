@@ -45,7 +45,7 @@ class Index extends React.Component {
 
 		const allSkills = this.getAllSkills(data.allSkills.nodes);
 
-		const allLocations = this.getAllLocations(peopleCollection);
+		const allLocations = this.getAllLocations(data.allSkills.nodes);
 
 		return (
 			<Layout>
@@ -147,15 +147,13 @@ class Index extends React.Component {
 		this.setState({ selectedLocation: event.target.id });
 	}
 
-	getAllLocations(peopleCollection) {
+	getAllLocations(crmData) {
 		var allLocations = [];
-		peopleCollection.forEach(category => {
-			category.people.forEach(person => {
-				var location = person.frontmatter.location;
-				if (location != null && allLocations.indexOf(location) === -1) {
-					allLocations.push(location);
-				}
-			});
+		crmData.forEach(element => {
+			var location = element.location;
+			if (location != null && allLocations.indexOf(location) === -1) {
+				allLocations.push(location);
+			}
 		});
 
 		allLocations.sort();
@@ -184,16 +182,20 @@ class Index extends React.Component {
 	}
 
 	getPersonSkills(person, crmDataSkills) {
-		var skills;
+		var personSkills = {
+			skills: [],
+			location: '',
+		};
 		for (var i = 0; i < crmDataSkills.length; i++) {
 			if (crmDataSkills[i].fullName === person.name) {
-				skills = crmDataSkills[i].skills.advancedSkills.concat(
+				personSkills.skills = crmDataSkills[i].skills.advancedSkills.concat(
 					crmDataSkills[i].skills.intermediateSkills
 				);
+				personSkills.location = crmDataSkills[i].location;
 				break;
 			}
 		}
-		return skills !== undefined ? skills : [];
+		return personSkills;
 	}
 
 	getPeople(categoryCollection, crmData) {
@@ -206,12 +208,12 @@ class Index extends React.Component {
 			var profileImages = this.getProfileImages(crmData, person.parent.name);
 			if (
 				(this.state.selectedSkill === 'All Skills' ||
-					personSkills.indexOf(this.state.selectedSkill) !== -1) &&
+					personSkills.skills.indexOf(this.state.selectedSkill) !== -1) &&
 				profileImages.profileImage != null
 			) {
 				if (
 					this.state.selectedLocation === 'All Locations' ||
-					person.frontmatter.location === this.state.selectedLocation
+					personSkills.location === this.state.selectedLocation
 				) {
 					var personToAdd = {
 						profile: person.frontmatter,

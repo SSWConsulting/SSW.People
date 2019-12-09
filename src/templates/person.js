@@ -89,7 +89,7 @@ const Person = ({ data }) => {
 					</dl>
 					<dl>
 						<dt>Location:</dt>
-						<dd>{frontmatter.location}</dd>
+						<dd>{crmData.location}</dd>
 					</dl>
 					<dl>
 						<dt>Skills:</dt>
