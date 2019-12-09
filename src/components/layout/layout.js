@@ -9,7 +9,7 @@ const Layout = ({ data, children }) => (
 	<div className="flex flex-col min-h-screen">
 		<Head />
 		<Header title={data.site.siteMetadata.siteTitle} />
-		<main className="flex-1 max-w-6xl mx-auto p-4 md:px-8 md:py-16 w-full">
+		<main className="flex-1 max-w-6xl mx-auto p-4 md:px-8 md:py-10 w-full">
 			{children}
 		</main>
 	</div>

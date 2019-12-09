@@ -16,7 +16,7 @@ const Person = ({ data }) => {
 
 	return (
 		<Layout>
-			<div className="flex mb-5">
+			<div className="flex mb-5 person-content">
 				<div className="w-1/5">
 					{profileImage != undefined && (
 						<div>
