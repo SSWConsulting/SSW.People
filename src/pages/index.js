@@ -3,13 +3,12 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import Layout from 'components/layout';
-import { graphql } from 'gatsby';
+import { StaticQuery, graphql } from 'gatsby';
 import ProfileBox from 'components/profile-box';
+import { Location } from '@reach/router';
+import queryString from 'query-string';
 
-const Index = ({ data }) => {
-	const [selectedSkill, selectSkill] = useState('All Skills');
-	const [selectedLocation, selectLocation] = useState('All Locations');
-
+const Index = ({ data, search }) => {
 	const managers = {
 		name: 'Managers',
 		people: data.managers.nodes,
@@ -30,8 +29,20 @@ const Index = ({ data }) => {
 	const peopleCollection = [managers, developers, designers, admin];
 
 	const allSkills = getAllSkills(data.allSkills.nodes);
-
 	const allLocations = getAllLocations(data.allSkills.nodes);
+
+	const searchSkill =
+		search.skill === undefined ? '' : getSearchValue(allSkills, search.skill);
+	const searchLocation =
+		search.location === undefined
+			? ''
+			: getSearchValue(allLocations, search.location);
+	const [selectedSkill, selectSkill] = useState(
+		searchSkill === '' ? 'All Skills' : searchSkill
+	);
+	const [selectedLocation, selectLocation] = useState(
+		searchLocation === '' ? 'All Locations' : searchLocation
+	);
 
 	return (
 		<Layout>
@@ -215,165 +226,190 @@ function getPeople(
 	return peopleList;
 }
 
+function getSearchValue(allValues, searchTerm) {
+	const allValuesToUpperCase = allValues.map(value => {
+		return value.toUpperCase();
+	});
+	const foundIndex = allValuesToUpperCase.indexOf(searchTerm.toUpperCase());
+	const searchValue = foundIndex === -1 ? '' : allValues[foundIndex];
+	return searchValue;
+}
+
 Index.propTypes = {
 	data: PropTypes.object.isRequired,
+	search: PropTypes.object.isRequired,
 };
 
-export default Index;
+const IndexWithQuery = props => (
+	<StaticQuery
+		query={graphql`
+			query HomepageQuery {
+				managers: allMarkdownRemark(
+					filter: {
+						frontmatter: {
+							current_employee: { eq: true }
+							category: { eq: "Managers" }
+						}
+					}
+					sort: { fields: frontmatter___nickname }
+				) {
+					nodes {
+						frontmatter {
+							category
+							current_employee
+							location
+							name
+							nickname
+							role
+						}
+						parent {
+							... on File {
+								name
+							}
+						}
+					}
+				}
+				developers: allMarkdownRemark(
+					filter: {
+						frontmatter: {
+							current_employee: { eq: true }
+							category: { eq: "Developers" }
+						}
+					}
+					sort: { fields: frontmatter___nickname }
+				) {
+					nodes {
+						frontmatter {
+							category
+							current_employee
+							location
+							name
+							nickname
+							role
+						}
+						parent {
+							... on File {
+								name
+							}
+						}
+					}
+				}
+				designers: allMarkdownRemark(
+					filter: {
+						frontmatter: {
+							current_employee: { eq: true }
+							category: { eq: "Designers" }
+						}
+					}
+					sort: { fields: frontmatter___nickname }
+				) {
+					nodes {
+						frontmatter {
+							category
+							current_employee
+							location
+							name
+							nickname
+							role
+						}
+						parent {
+							... on File {
+								name
+							}
+						}
+					}
+				}
+				admin: allMarkdownRemark(
+					filter: {
+						frontmatter: {
+							current_employee: { eq: true }
+							category: { eq: "Admin" }
+						}
+					}
+					sort: { fields: frontmatter___nickname }
+				) {
+					nodes {
+						frontmatter {
+							category
+							current_employee
+							location
+							name
+							nickname
+							role
+						}
+						parent {
+							... on File {
+								name
+							}
+						}
+					}
+				}
+				profile_images: allFile(
+					filter: {
+						sourceInstanceName: { eq: "people" }
+						name: { glob: "*-Profile" }
+					}
+				) {
+					nodes {
+						name
+						childImageSharp {
+							original {
+								height
+								src
+								width
+							}
+						}
+					}
+				}
+				sketch_profile_images: allFile(
+					filter: {
+						sourceInstanceName: { eq: "people" }
+						name: { glob: "*-Sketch" }
+					}
+				) {
+					nodes {
+						name
+						childImageSharp {
+							original {
+								height
+								src
+								width
+							}
+						}
+					}
+				}
+				homeJson {
+					title
+					content {
+						childMarkdownRemark {
+							html
+						}
+					}
+				}
+				allSkills: allCrmDataCollection(filter: { id: {} }) {
+					nodes {
+						skills {
+							advancedSkills
+							intermediateSkills
+						}
+						fullName
+						location
+					}
+				}
+			}
+		`}
+		render={data => (
+			<Location>
+				{({ location }) => (
+					<Index
+						{...data.HomepageQuery}
+						{...props}
+						search={location.search ? queryString.parse(location.search) : {}}
+					/>
+				)}
+			</Location>
+		)}
+	/>
+);
 
-export const query = graphql`
-	query HomepageQuery {
-		managers: allMarkdownRemark(
-			filter: {
-				frontmatter: {
-					current_employee: { eq: true }
-					category: { eq: "Managers" }
-				}
-			}
-			sort: { fields: frontmatter___nickname }
-		) {
-			nodes {
-				frontmatter {
-					category
-					current_employee
-					location
-					name
-					nickname
-					role
-				}
-				parent {
-					... on File {
-						name
-					}
-				}
-			}
-		}
-		developers: allMarkdownRemark(
-			filter: {
-				frontmatter: {
-					current_employee: { eq: true }
-					category: { eq: "Developers" }
-				}
-			}
-			sort: { fields: frontmatter___nickname }
-		) {
-			nodes {
-				frontmatter {
-					category
-					current_employee
-					location
-					name
-					nickname
-					role
-				}
-				parent {
-					... on File {
-						name
-					}
-				}
-			}
-		}
-		designers: allMarkdownRemark(
-			filter: {
-				frontmatter: {
-					current_employee: { eq: true }
-					category: { eq: "Designers" }
-				}
-			}
-			sort: { fields: frontmatter___nickname }
-		) {
-			nodes {
-				frontmatter {
-					category
-					current_employee
-					location
-					name
-					nickname
-					role
-				}
-				parent {
-					... on File {
-						name
-					}
-				}
-			}
-		}
-		admin: allMarkdownRemark(
-			filter: {
-				frontmatter: {
-					current_employee: { eq: true }
-					category: { eq: "Admin" }
-				}
-			}
-			sort: { fields: frontmatter___nickname }
-		) {
-			nodes {
-				frontmatter {
-					category
-					current_employee
-					location
-					name
-					nickname
-					role
-				}
-				parent {
-					... on File {
-						name
-					}
-				}
-			}
-		}
-		profile_images: allFile(
-			filter: {
-				sourceInstanceName: { eq: "people" }
-				name: { glob: "*-Profile" }
-			}
-		) {
-			nodes {
-				name
-				childImageSharp {
-					original {
-						height
-						src
-						width
-					}
-				}
-			}
-		}
-		sketch_profile_images: allFile(
-			filter: {
-				sourceInstanceName: { eq: "people" }
-				name: { glob: "*-Sketch" }
-			}
-		) {
-			nodes {
-				name
-				childImageSharp {
-					original {
-						height
-						src
-						width
-					}
-				}
-			}
-		}
-		homeJson {
-			title
-			content {
-				childMarkdownRemark {
-					html
-				}
-			}
-		}
-		allSkills: allCrmDataCollection(filter: { id: {} }) {
-			nodes {
-				skills {
-					advancedSkills
-					intermediateSkills
-				}
-				fullName
-				location
-			}
-		}
-	}
-`;
+export default IndexWithQuery;
