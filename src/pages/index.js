@@ -1,231 +1,218 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import Layout from 'components/layout';
 import { graphql } from 'gatsby';
 import ProfileBox from 'components/profile-box';
-import selectedSkill from '../images/selectedSkill.png';
 
-class Index extends React.Component {
-	constructor(props) {
-		super(props);
-		this.selectSkill = this.selectSkill.bind(this);
-		this.selectLocation = this.selectLocation.bind(this);
-	}
+const Index = ({ data }) => {
+	const [selectedSkill, selectSkill] = useState('All Skills');
+	const [selectedLocation, selectLocation] = useState('All Locations');
 
-	state = { selectedSkill: 'All Skills', selectedLocation: 'All Locations' };
+	const managers = {
+		name: 'Managers',
+		people: data.managers.nodes,
+	};
+	const developers = {
+		name: 'Developers',
+		people: data.developers.nodes,
+	};
+	const designers = {
+		name: 'Designers',
+		people: data.designers.nodes,
+	};
+	const admin = {
+		name: 'Admin',
+		people: data.admin.nodes,
+	};
 
-	render() {
-		const { data } = this.props;
+	const peopleCollection = [managers, developers, designers, admin];
 
-		const selectedStyle = {
-			background: `url(${selectedSkill}) 0px 7px no-repeat`,
-			fontWeight: 'bold',
-		};
+	const allSkills = getAllSkills(data.allSkills.nodes);
 
-		const managers = {
-			name: 'Managers',
-			people: data.managers.nodes,
-		};
-		const developers = {
-			name: 'Developers',
-			people: data.developers.nodes,
-		};
-		const designers = {
-			name: 'Designers',
-			people: data.designers.nodes,
-		};
-		const admin = {
-			name: 'Admin',
-			people: data.admin.nodes,
-		};
+	const allLocations = getAllLocations(data.allSkills.nodes);
 
-		const peopleCollection = [managers, developers, designers, admin];
-
-		const allSkills = this.getAllSkills(data.allSkills.nodes);
-
-		const allLocations = this.getAllLocations(data.allSkills.nodes);
-
-		return (
-			<Layout>
-				<div
-					dangerouslySetInnerHTML={{
-						__html: data.homeJson.content.childMarkdownRemark.html,
-					}}
-				/>
-				<div className="flex mb-4">
-					<div className="w-1/4">
-						<h3 className="filter-title">I am looking for...</h3>
-						<ul>
-							{allLocations.map((location, i) => {
-								return (
-									<li
-										key={i}
-										id={location}
-										className="employee-filter"
-										onClick={this.selectLocation}
-										style={
-											this.state.selectedLocation === location
-												? selectedStyle
-												: null
-										}
-									>
-										{location}
-									</li>
-								);
-							})}
-						</ul>
-						<div className="separator-div"></div>
-						<ul>
-							{allSkills.map((skill, i) => {
-								return (
-									<li
-										key={i}
-										id={skill}
-										className="employee-filter"
-										onClick={this.selectSkill}
-										style={
-											this.state.selectedSkill === skill ? selectedStyle : null
-										}
-									>
-										{skill}
-									</li>
-								);
-							})}
-						</ul>
-					</div>
-					<div className="w-3/4">
-						{peopleCollection.map((category, i) => {
-							var peopleList = this.getPeople(category, data);
+	return (
+		<Layout>
+			<div
+				dangerouslySetInnerHTML={{
+					__html: data.homeJson.content.childMarkdownRemark.html,
+				}}
+			/>
+			<div className="flex mb-4">
+				<div className="w-1/4">
+					<h3 className="filter-title">I am looking for...</h3>
+					<ul>
+						{allLocations.map((location, i) => {
 							return (
-								peopleList.length > 0 && (
-									<div key={i} className={category.name}>
-										<h2>{category.name}</h2>
-										<div className="flex flex-wrap">
-											{peopleList.map((person, y) => {
-												return (
-													<ProfileBox
-														key={y}
-														profile={person.profile}
-														sanitisedName={person.sanitisedName}
-														profileImages={person.profileImages}
-													/>
-												);
-											})}
-										</div>
-									</div>
-								)
+								<li
+									key={i}
+									id={location}
+									className={
+										selectedLocation === location
+											? 'selected employee-filter'
+											: 'employee-filter'
+									}
+									onClick={() => selectLocation(location)}
+								>
+									{location}
+								</li>
 							);
 						})}
-					</div>
+					</ul>
+					<div className="separator-div"></div>
+					<ul>
+						{allSkills.map((skill, i) => {
+							return (
+								<li
+									key={i}
+									id={skill}
+									className={
+										selectedSkill === skill
+											? 'selected employee-filter'
+											: 'employee-filter'
+									}
+									onClick={() => selectSkill(skill)}
+								>
+									{skill}
+								</li>
+							);
+						})}
+					</ul>
 				</div>
-			</Layout>
-		);
-	}
+				<div className="w-3/4">
+					{peopleCollection.map((category, i) => {
+						var peopleList = getPeople(
+							category,
+							data,
+							selectedSkill,
+							selectedLocation
+						);
+						return (
+							peopleList.length > 0 && (
+								<div key={i} className={category.name}>
+									<h2>{category.name}</h2>
+									<div className="flex flex-wrap">
+										{peopleList.map((person, y) => {
+											return (
+												<ProfileBox
+													key={y}
+													profile={person.profile}
+													sanitisedName={person.sanitisedName}
+													profileImages={person.profileImages}
+												/>
+											);
+										})}
+									</div>
+								</div>
+							)
+						);
+					})}
+				</div>
+			</div>
+		</Layout>
+	);
+};
 
-	getProfileImages(crmData, name) {
-		const profileImage = crmData.profile_images.nodes.find(
-			n => n.name === `${name}-Profile`
-		);
-		const sketchProfileImage = crmData.sketch_profile_images.nodes.find(
-			n => n.name === `${name}-Sketch`
-		);
+function getProfileImages(crmData, name) {
+	const profileImage = crmData.profile_images.nodes.find(
+		n => n.name === `${name}-Profile`
+	);
+	const sketchProfileImage = crmData.sketch_profile_images.nodes.find(
+		n => n.name === `${name}-Sketch`
+	);
 
-		var profileImages = {
-			profileImage: profileImage,
-			sketchProfileImage: sketchProfileImage,
-		};
-		return profileImages;
-	}
+	var profileImages = {
+		profileImage: profileImage,
+		sketchProfileImage: sketchProfileImage,
+	};
+	return profileImages;
+}
 
-	selectSkill(event) {
-		this.setState({ selectedSkill: event.target.id });
-	}
+function getAllLocations(crmData) {
+	var allLocations = [];
+	crmData.forEach(element => {
+		var location = element.location;
+		if (location != null && allLocations.indexOf(location) === -1) {
+			allLocations.push(location);
+		}
+	});
 
-	selectLocation(event) {
-		this.setState({ selectedLocation: event.target.id });
-	}
+	allLocations.sort();
+	allLocations.unshift('All Locations');
+	return allLocations;
+}
 
-	getAllLocations(crmData) {
-		var allLocations = [];
-		crmData.forEach(element => {
-			var location = element.location;
-			if (location != null && allLocations.indexOf(location) === -1) {
-				allLocations.push(location);
+function getAllSkills(crmData) {
+	var allSkills = [];
+	crmData.forEach(element => {
+		element.skills.advancedSkills.forEach(skill => {
+			if (skill !== null && allSkills.indexOf(skill) === -1) {
+				allSkills.push(skill);
 			}
 		});
-
-		allLocations.sort();
-		allLocations.unshift('All Locations');
-		return allLocations;
-	}
-
-	getAllSkills(crmData) {
-		var allSkills = [];
-		crmData.forEach(element => {
-			element.skills.advancedSkills.forEach(skill => {
-				if (skill !== null && allSkills.indexOf(skill) === -1) {
-					allSkills.push(skill);
-				}
-			});
-			element.skills.intermediateSkills.forEach(skill => {
-				if (skill !== null && allSkills.indexOf(skill) === -1) {
-					allSkills.push(skill);
-				}
-			});
+		element.skills.intermediateSkills.forEach(skill => {
+			if (skill !== null && allSkills.indexOf(skill) === -1) {
+				allSkills.push(skill);
+			}
 		});
+	});
 
-		allSkills.sort();
-		allSkills.unshift('All Skills');
-		return allSkills;
+	allSkills.sort();
+	allSkills.unshift('All Skills');
+	return allSkills;
+}
+
+function getPersonSkills(person, crmDataSkills) {
+	var personSkills = {
+		skills: [],
+		location: '',
+	};
+	for (var i = 0; i < crmDataSkills.length; i++) {
+		if (crmDataSkills[i].fullName === person.name) {
+			personSkills.skills = crmDataSkills[i].skills.advancedSkills.concat(
+				crmDataSkills[i].skills.intermediateSkills
+			);
+			personSkills.location = crmDataSkills[i].location;
+			break;
+		}
 	}
+	return personSkills;
+}
 
-	getPersonSkills(person, crmDataSkills) {
-		var personSkills = {
-			skills: [],
-			location: '',
-		};
-		for (var i = 0; i < crmDataSkills.length; i++) {
-			if (crmDataSkills[i].fullName === person.name) {
-				personSkills.skills = crmDataSkills[i].skills.advancedSkills.concat(
-					crmDataSkills[i].skills.intermediateSkills
-				);
-				personSkills.location = crmDataSkills[i].location;
-				break;
+function getPeople(
+	categoryCollection,
+	crmData,
+	selectedSkill,
+	selectedLocation
+) {
+	var peopleList = [];
+	categoryCollection.people.forEach(person => {
+		var personSkills = getPersonSkills(
+			person.frontmatter,
+			crmData.allSkills.nodes
+		);
+		var profileImages = getProfileImages(crmData, person.parent.name);
+		if (
+			(selectedSkill === 'All Skills' ||
+				personSkills.skills.indexOf(selectedSkill) !== -1) &&
+			profileImages.profileImage != null
+		) {
+			if (
+				selectedLocation === 'All Locations' ||
+				personSkills.location === selectedLocation
+			) {
+				var personToAdd = {
+					profile: person.frontmatter,
+					sanitisedName: person.parent.name,
+					profileImages: profileImages,
+				};
+				peopleList.push(personToAdd);
 			}
 		}
-		return personSkills;
-	}
-
-	getPeople(categoryCollection, crmData) {
-		var peopleList = [];
-		categoryCollection.people.forEach(person => {
-			var personSkills = this.getPersonSkills(
-				person.frontmatter,
-				crmData.allSkills.nodes
-			);
-			var profileImages = this.getProfileImages(crmData, person.parent.name);
-			if (
-				(this.state.selectedSkill === 'All Skills' ||
-					personSkills.skills.indexOf(this.state.selectedSkill) !== -1) &&
-				profileImages.profileImage != null
-			) {
-				if (
-					this.state.selectedLocation === 'All Locations' ||
-					personSkills.location === this.state.selectedLocation
-				) {
-					var personToAdd = {
-						profile: person.frontmatter,
-						sanitisedName: person.parent.name,
-						profileImages: profileImages,
-					};
-					peopleList.push(personToAdd);
-				}
-			}
-		});
-		return peopleList;
-	}
+	});
+	return peopleList;
 }
 
 Index.propTypes = {

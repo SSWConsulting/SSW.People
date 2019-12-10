@@ -118,23 +118,23 @@ p a {
 }
 
 #facebook{
-  background: url(./images/facebook.png) 0 3px no-repeat;
+  background: url(./images/facebook.png) 0 4px no-repeat;
 }
 
 #linkedin{
-  background: url(./images/linkedin.png) 0 3px no-repeat;
+  background: url(./images/linkedin.png) 0 4px no-repeat;
 }
 
 #skype{
-  background: url(./images/skype.png) 0 3px no-repeat;
+  background: url(./images/skype.png) 0 4px no-repeat;
 }
 
 #twitter{
-  background: url(./images/twitter.png) 0 3px no-repeat;
+  background: url(./images/twitter.png) 0 4px no-repeat;
 }
 
 #email{
-  background: url(./images/favor_email.gif) 0 3px no-repeat;
+  background: url(./images/favor_email.gif) 0 6px no-repeat;
 }
 
 .absolute.inset-x-0.bottom-0.px-1.pb-4.h-15.text-center {
@@ -144,6 +144,11 @@ p a {
 .employee-filter {
   background: none;
   cursor: pointer;
+}
+
+.selected.employee-filter {
+  background: url(./images/selectedSkill.png) 0px 7px no-repeat;
+	font-weight: bold;
 }
 
 .selected-skill {
@@ -163,6 +168,11 @@ p a {
   background: url(./images/filterSymbol.png) no-repeat left center;
   padding-left: 23px;
   margin: 0 0 3px;
+}
+
+.hovered {
+  background-color: #cc4141;
+  color: #fff
 }
 
 /**
