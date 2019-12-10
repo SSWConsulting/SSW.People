@@ -6,13 +6,19 @@
  @tailwind base;
 
  /* purgecss end ignore */
+html{
+  font-family: "SegoeUILight", "Helvetica", "sans-serif"
+}
 
 h1 {
     @apply text-4xl;
     color: #cc4141;
 }
+h1.title {
+  color: #414141;
+}
 h2 {
-    @apply text-xl;
+    @apply text-2xl;
     color: #cc4141;
 }
 h3 {
@@ -53,18 +59,27 @@ p {
     line-height: 1.6;
 }
 
+p a {
+  text-decoration: underline;
+  font-weight: bold;
+}
+
 .gatsby-resp-image-wrapper{
   margin-left: 0% !important;
 }
 
+.person-content {
+  font-family: "Segoe UI","Segoe", Tahoma, Helvetica, Arial, sans-serif
+}
+
 .person-favor {
-  font-family: Georgia;
   padding-left: 10px;
   line-height: 1.4em;
   margin: 15px 20px 15px 11px
 }
 
 .person-quote{
+  font-family: Georgia;
   padding-left: 10px;
   font-style: italic;
   background-image: url(./images/selfquoteMark.gif);
@@ -72,7 +87,9 @@ p {
 }
 
 .person-quote-name{
+  font-family: Georgia;
   text-align: right;
+  font-style: italic;
 }
 
 .profile-content{
@@ -118,6 +135,34 @@ p {
 
 #email{
   background: url(./images/favor_email.gif) 0 3px no-repeat;
+}
+
+.absolute.inset-x-0.bottom-0.px-1.pb-4.h-15.text-center {
+  border-radius: 0px 0px 4px 4px;
+}
+
+.employee-filter {
+  background: none;
+  cursor: pointer;
+}
+
+.selected-skill {
+  background-position: 5px center;
+  background-image: url(./images/selectedSkill.png);
+  font-weight: bold;
+}
+
+.separator-div {
+  border-bottom: 1px dotted #ccc;
+  width: 90%;
+  margin: 0px 0px 5px 0px;
+  display: block;
+}
+
+.filter-title {
+  background: url(./images/filterSymbol.png) no-repeat left center;
+  padding-left: 23px;
+  margin: 0 0 3px;
 }
 
 /**

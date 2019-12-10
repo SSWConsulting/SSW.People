@@ -16,7 +16,7 @@ const Person = ({ data }) => {
 
 	return (
 		<Layout>
-			<div className="flex mb-5">
+			<div className="flex mb-5 person-content">
 				<div className="w-1/5">
 					{profileImage != undefined && (
 						<div>
@@ -89,7 +89,7 @@ const Person = ({ data }) => {
 					</dl>
 					<dl>
 						<dt>Location:</dt>
-						<dd>{frontmatter.location}</dd>
+						<dd>{crmData.location}</dd>
 					</dl>
 					<dl>
 						<dt>Skills:</dt>
