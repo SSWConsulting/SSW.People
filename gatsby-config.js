@@ -11,14 +11,6 @@ module.exports = {
   plugins: [
     `gatsby-plugin-react-helmet`,
     `gatsby-plugin-sitemap`,
-    {
-      resolve: `gatsby-plugin-offline`,
-      options: {
-        workboxConfig: {
-          importWorkboxFrom: `cdn`,
-        },
-      },
-    },
     `gatsby-transformer-json`,
     {
       resolve: `gatsby-source-git`,
