@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Layout from 'components/layout';
 import { StaticQuery, graphql } from 'gatsby';
@@ -43,6 +43,16 @@ const Index = ({ data, search }) => {
 	const [selectedLocation, selectLocation] = useState(
 		searchLocation === '' ? 'All Locations' : searchLocation
 	);
+
+	//component update
+	useEffect(() => {
+		updateQueryString(selectedSkill, selectedLocation);
+	}, [selectedSkill, selectedLocation]);
+
+	//component unmount
+	useEffect(() => {
+		return;
+	});
 
 	return (
 		<Layout>
@@ -125,6 +135,14 @@ const Index = ({ data, search }) => {
 		</Layout>
 	);
 };
+
+function updateQueryString(selectedSkill, selectedLocation) {
+	window.history.replaceState(
+		null,
+		'Title',
+		'?skill=' + selectedSkill + '&location=' + selectedLocation
+	);
+}
 
 function getProfileImages(crmData, name) {
 	const profileImage = crmData.profile_images.nodes.find(
