@@ -140,7 +140,10 @@ function updateQueryString(selectedSkill, selectedLocation) {
 	window.history.replaceState(
 		null,
 		'Title',
-		'?skill=' + selectedSkill + '&location=' + selectedLocation
+		'?skill=' +
+			selectedSkill.replace(/ - | /g, '-') +
+			'&location=' +
+			selectedLocation.replace(/ - | /g, '-')
 	);
 }
 
@@ -248,7 +251,15 @@ function getSearchValue(allValues, searchTerm) {
 	const allValuesToUpperCase = allValues.map(value => {
 		return value.toUpperCase();
 	});
-	const foundIndex = allValuesToUpperCase.indexOf(searchTerm.toUpperCase());
+	searchTerm = searchTerm.replace(/-/g, ' ');
+	let foundIndex = -1;
+	for (var i = 0; i < allValuesToUpperCase.length; i++) {
+		const skill = allValuesToUpperCase[i].replace(' - ', ' ');
+		if (skill === searchTerm.toUpperCase()) {
+			foundIndex = i;
+			break;
+		}
+	}
 	const searchValue = foundIndex === -1 ? '' : allValues[foundIndex];
 	return searchValue;
 }
