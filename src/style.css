@@ -141,22 +141,6 @@ p a {
   border-radius: 0px 0px 4px 4px;
 }
 
-.employee-filter {
-  background: none;
-  cursor: pointer;
-}
-
-.selected.employee-filter {
-  background: url(./images/selectedSkill.png) 0px 7px no-repeat;
-	font-weight: bold;
-}
-
-.selected-skill {
-  background-position: 5px center;
-  background-image: url(./images/selectedSkill.png);
-  font-weight: bold;
-}
-
 .separator-div {
   border-bottom: 1px dotted #ccc;
   width: 90%;
@@ -165,14 +149,28 @@ p a {
 }
 
 .filter-title {
-  background: url(./images/filterSymbol.png) no-repeat left center;
-  padding-left: 23px;
-  margin: 0 0 3px;
+  margin-top: 10px;
+  font-weight: bold;
 }
 
 .hovered {
   background-color: #cc4141;
   color: #fff
+}
+
+.filter-location {
+  /* padding-left: 16rem; */
+  background: #333333;
+  color: #CCCCCC;
+  padding-left: 16rem;
+}
+
+.filter-location-selected{
+  font-weight: bold;
+}
+
+button:focus{
+  outline: 0
 }
 
 /**

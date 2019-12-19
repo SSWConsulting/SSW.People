@@ -28,7 +28,7 @@ const Header = ({ title }) => (
 					<Link to="/">
 						<img src={sswLogo} alt="SSW logo"></img>
 					</Link>
-					<h1 className="title">Employees</h1>
+					<h1 className="title">Our People</h1>
 				</div>
 			</div>
 		</header>

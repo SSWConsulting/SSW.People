@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import React, { useState, useEffect } from 'react';
@@ -29,29 +30,44 @@ const Index = ({ data, search }) => {
 	const peopleCollection = [managers, developers, designers, admin];
 
 	const allSkills = getAllSkills(data.allSkills.nodes);
+
 	const allLocations = getAllLocations(data.allSkills.nodes);
 
-	const searchSkill =
-		search.skill === undefined ? '' : getSearchValue(allSkills, search.skill);
-	const searchLocation =
-		search.location === undefined
-			? ''
-			: getSearchValue(allLocations, search.location);
-	const [selectedSkill, selectSkill] = useState(
-		searchSkill === '' ? 'All Skills' : searchSkill
-	);
-	const [selectedLocation, selectLocation] = useState(
-		searchLocation === '' ? 'All Locations' : searchLocation
-	);
+	const [selectedLocation, selectLocation] = useState('All');
 
-	//component update
-	useEffect(() => {
-		updateQueryString(selectedSkill, selectedLocation);
-	}, [selectedSkill, selectedLocation]);
+	const [checkedSkills, setSkill] = useState(new Map());
 
-	//component unmount
-	useEffect(() => {
-		return;
+	const [checkedRoles, setRole] = useState(new Map());
+
+	const handleSkillChange = e => {
+		const item = e.target.name;
+		const isChecked = e.target.checked;
+		setSkill(new Map(checkedSkills.set(item, isChecked)));
+	};
+
+	const handleRoleChange = e => {
+		const item = e.target.name;
+		const isChecked = e.target.checked;
+		setRole(new Map(checkedRoles.set(item, isChecked)));
+	};
+
+	const selectedSkills = getSelectedValues(checkedSkills);
+
+	const selectedRoles = getSelectedValues(checkedRoles);
+
+	let roleFilters = new Map();
+
+	let filteredCollection = [];
+
+	peopleCollection.forEach(category => {
+		let peopleList = getPeopleFilteredBySkillsAndLocation(
+			category,
+			data,
+			selectedSkills,
+			selectedLocation
+		);
+		roleFilters.set(category.name, peopleList.length);
+		filteredCollection.push({ name: category.name, peopleList: peopleList });
 	});
 
 	return (
@@ -61,54 +77,66 @@ const Index = ({ data, search }) => {
 					__html: data.homeJson.content.childMarkdownRemark.html,
 				}}
 			/>
+			{/* TODO: style the location banner */}
+			<div className="filter-location mb-8 py-4 pl-96 text-16">
+				<div className="items-center flex">
+					{allLocations.map((location, i) => {
+						return (
+							<button
+								key={i}
+								id={location}
+								className={
+									selectedLocation === location
+										? 'filter-location-selected mr-12'
+										: 'mr-12'
+								}
+								onClick={() => selectLocation(location)}
+							>
+								{location}
+							</button>
+						);
+					})}
+				</div>
+			</div>
 			<div className="flex mb-4">
 				<div className="w-1/4">
-					<h3 className="filter-title">I am looking for...</h3>
-					<ul>
-						{allLocations.map((location, i) => {
-							return (
-								<li
-									key={i}
-									id={location}
-									className={
-										selectedLocation === location
-											? 'selected employee-filter'
-											: 'employee-filter'
-									}
-									onClick={() => selectLocation(location)}
-								>
-									{location}
-								</li>
-							);
-						})}
-					</ul>
-					<div className="separator-div"></div>
-					<ul>
-						{allSkills.map((skill, i) => {
-							return (
-								<li
-									key={i}
-									id={skill}
-									className={
-										selectedSkill === skill
-											? 'selected employee-filter'
-											: 'employee-filter'
-									}
-									onClick={() => selectSkill(skill)}
-								>
+					<div className="filter-role">
+						{Array.from(roleFilters).map(([key, value]) => (
+							<div key={key}>
+								<label>
+									<input
+										type="checkbox"
+										name={key}
+										checked={!!checkedRoles.get(key)}
+										onChange={handleRoleChange}
+									/>
+									{`${key} ${value}`}
+								</label>
+							</div>
+						))}
+					</div>
+					<h3 className="filter-title">Technologies</h3>
+					<div className="filter-skills">
+						{allSkills.map((skill, i) => (
+							<div key={i}>
+								<label>
+									<input
+										type="checkbox"
+										name={skill}
+										checked={!!checkedSkills.get(skill)}
+										onChange={handleSkillChange}
+									/>
 									{skill}
-								</li>
-							);
-						})}
-					</ul>
+								</label>
+							</div>
+						))}
+					</div>
 				</div>
 				<div className="w-3/4">
-					{peopleCollection.map((category, i) => {
-						var peopleList = getPeople(
-							category,
-							data,
-							selectedSkill,
-							selectedLocation
+					{filteredCollection.map((category, i) => {
+						const peopleList = getPeopleFilteredByRoles(
+							category.peopleList,
+							selectedRoles
 						);
 						return (
 							peopleList.length > 0 && (
@@ -116,14 +144,19 @@ const Index = ({ data, search }) => {
 									<h2>{category.name}</h2>
 									<div className="flex flex-wrap">
 										{peopleList.map((person, y) => {
-											return (
-												<ProfileBox
-													key={y}
-													profile={person.profile}
-													sanitisedName={person.sanitisedName}
-													profileImages={person.profileImages}
-												/>
-											);
+											if (
+												selectedRoles[0] === 'All' ||
+												selectedRoles.indexOf(person.profile.category) !== -1
+											) {
+												return (
+													<ProfileBox
+														key={y}
+														profile={person.profile}
+														sanitisedName={person.sanitisedName}
+														profileImages={person.profileImages}
+													/>
+												);
+											}
 										})}
 									</div>
 								</div>
@@ -135,17 +168,6 @@ const Index = ({ data, search }) => {
 		</Layout>
 	);
 };
-
-function updateQueryString(selectedSkill, selectedLocation) {
-	window.history.replaceState(
-		null,
-		'Title',
-		'?skill=' +
-			selectedSkill.replace(/ - | /g, '-') +
-			'&location=' +
-			selectedLocation.replace(/ - | /g, '-')
-	);
-}
 
 function getProfileImages(crmData, name) {
 	const profileImage = crmData.profile_images.nodes.find(
@@ -165,14 +187,14 @@ function getProfileImages(crmData, name) {
 function getAllLocations(crmData) {
 	var allLocations = [];
 	crmData.forEach(element => {
-		var location = element.location;
+		var location =
+			element.location === 'Other' ? 'ElseWhere' : element.location;
 		if (location != null && allLocations.indexOf(location) === -1) {
 			allLocations.push(location);
 		}
 	});
 
-	allLocations.sort();
-	allLocations.unshift('All Locations');
+	allLocations.unshift('All');
 	return allLocations;
 }
 
@@ -192,7 +214,6 @@ function getAllSkills(crmData) {
 	});
 
 	allSkills.sort();
-	allSkills.unshift('All Skills');
 	return allSkills;
 }
 
@@ -213,55 +234,78 @@ function getPersonSkills(person, crmDataSkills) {
 	return personSkills;
 }
 
-function getPeople(
+function getPeopleFilteredBySkillsAndLocation(
 	categoryCollection,
 	crmData,
-	selectedSkill,
+	selectedSkills,
 	selectedLocation
 ) {
-	var peopleList = [];
+	let peopleList = [];
 	categoryCollection.people.forEach(person => {
 		var personSkills = getPersonSkills(
 			person.frontmatter,
 			crmData.allSkills.nodes
 		);
-		var profileImages = getProfileImages(crmData, person.parent.name);
-		if (
-			(selectedSkill === 'All Skills' ||
-				personSkills.skills.indexOf(selectedSkill) !== -1) &&
-			profileImages.profileImage != null
-		) {
+		let profileImages = getProfileImages(crmData, person.parent.name);
+		selectedSkills.forEach(selectedSkill => {
 			if (
-				selectedLocation === 'All Locations' ||
-				personSkills.location === selectedLocation
+				(selectedSkill === 'All' ||
+					personSkills.skills.indexOf(selectedSkill) !== -1) &&
+				profileImages.profileImage != null
 			) {
-				var personToAdd = {
-					profile: person.frontmatter,
-					sanitisedName: person.parent.name,
-					profileImages: profileImages,
-				};
-				peopleList.push(personToAdd);
+				if (
+					selectedLocation === 'All' ||
+					personSkills.location === selectedLocation ||
+					personSkills.location === 'Other'
+				) {
+					var personToAdd = {
+						profile: person.frontmatter,
+						sanitisedName: person.parent.name,
+						profileImages: profileImages,
+					};
+					if (!personAlreadyAdded(personToAdd, peopleList)) {
+						peopleList.push(personToAdd);
+					}
+				}
 			}
-		}
+		});
 	});
 	return peopleList;
 }
 
-function getSearchValue(allValues, searchTerm) {
-	const allValuesToUpperCase = allValues.map(value => {
-		return value.toUpperCase();
+function getPeopleFilteredByRoles(peopleList, selectedRoles) {
+	let filteredPeopleList = [];
+	peopleList.forEach(person => {
+		if (
+			selectedRoles[0] === 'All' ||
+			selectedRoles.indexOf(person.profile.category) !== -1
+		) {
+			filteredPeopleList.push(person);
+		}
 	});
-	searchTerm = searchTerm.replace(/-/g, ' ');
-	let foundIndex = -1;
-	for (var i = 0; i < allValuesToUpperCase.length; i++) {
-		const skill = allValuesToUpperCase[i].replace(' - ', ' ');
-		if (skill === searchTerm.toUpperCase()) {
-			foundIndex = i;
-			break;
+	return filteredPeopleList;
+}
+
+function getSelectedValues(checkedList) {
+	const selectedValues = [];
+	for (let [key, value] of checkedList) {
+		if (value) {
+			selectedValues.push(key);
 		}
 	}
-	const searchValue = foundIndex === -1 ? '' : allValues[foundIndex];
-	return searchValue;
+	if (selectedValues.length === 0) {
+		selectedValues.push('All');
+	}
+	return selectedValues;
+}
+
+function personAlreadyAdded(personToAdd, peopleList) {
+	for (let i = 0; i < peopleList.length; i++) {
+		if (peopleList[i].sanitisedName === personToAdd.sanitisedName) {
+			return true;
+		}
+	}
+	return false;
 }
 
 Index.propTypes = {

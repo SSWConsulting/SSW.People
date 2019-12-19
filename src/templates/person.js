@@ -19,7 +19,7 @@ const Person = ({ data }) => {
 			<div className="flex mb-5 person-content">
 				<div className="w-1/5">
 					{profileImage != undefined && (
-						<div>
+						<div className="text-center">
 							<img
 								className="profile-image relative bg-cover shadow-lg mx-auto"
 								src={profileImage.childImageSharp.original.src}
