@@ -8,6 +8,12 @@ import { StaticQuery, graphql } from 'gatsby';
 import ProfileBox from 'components/profile-box';
 import { Location } from '@reach/router';
 import queryString from 'query-string';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+	faCheckSquare,
+	faCheck,
+	faSquare,
+} from '@fortawesome/free-solid-svg-icons';
 
 const Index = ({ data, search }) => {
 	const managers = {
@@ -51,6 +57,10 @@ const Index = ({ data, search }) => {
 		setRole(new Map(checkedRoles.set(item, isChecked)));
 	};
 
+	const handleClear = () => {
+		setSkill(new Map());
+	};
+
 	const selectedSkills = getSelectedValues(checkedSkills);
 
 	const selectedRoles = getSelectedValues(checkedRoles);
@@ -77,7 +87,6 @@ const Index = ({ data, search }) => {
 					__html: data.homeJson.content.childMarkdownRemark.html,
 				}}
 			/>
-			{/* TODO: style the location banner */}
 			<div className="filter-location mb-8 py-4 pl-96 text-16">
 				<div className="items-center flex">
 					{allLocations.map((location, i) => {
@@ -98,35 +107,64 @@ const Index = ({ data, search }) => {
 					})}
 				</div>
 			</div>
-			<div className="flex mb-4">
+			<div className="flex">
 				<div className="w-1/4">
 					<div className="filter-role">
 						{Array.from(roleFilters).map(([key, value]) => (
-							<div key={key}>
-								<label>
-									<input
-										type="checkbox"
-										name={key}
-										checked={!!checkedRoles.get(key)}
-										onChange={handleRoleChange}
-									/>
-									{`${key} ${value}`}
-								</label>
+							<div key={key} className="flex">
+								<div className="w-3/4">
+									<label className="filter-checkbox">
+										<input
+											type="checkbox"
+											name={key}
+											checked={!!checkedRoles.get(key)}
+											onChange={handleRoleChange}
+										/>
+										<FontAwesomeIcon
+											icon={faCheckSquare}
+											className="filter-checked"
+										/>
+										<FontAwesomeIcon
+											icon={faSquare}
+											className="filter-unchecked"
+										/>
+										<span className="filter-text">{`${key}`}</span>
+									</label>
+								</div>
+								<div className="w-1/4">{value}</div>
 							</div>
 						))}
 					</div>
-					<h3 className="filter-title">Technologies</h3>
+					<h4 className="filter-title" onClick={handleClear}>
+						Technologies
+					</h4>
 					<div className="filter-skills">
 						{allSkills.map((skill, i) => (
 							<div key={i}>
-								<label>
+								<label className="filter-checkbox">
 									<input
 										type="checkbox"
 										name={skill}
 										checked={!!checkedSkills.get(skill)}
 										onChange={handleSkillChange}
 									/>
-									{skill}
+									<FontAwesomeIcon
+										icon={faSquare}
+										className="filter-unchecked-hide"
+									/>
+									<FontAwesomeIcon
+										icon={faCheck}
+										className="filter-checked-tick"
+									/>
+									<span
+										className={
+											checkedSkills.get(skill)
+												? 'filter-text-checked'
+												: 'filter-text'
+										}
+									>
+										{skill}
+									</span>
 								</label>
 							</div>
 						))}
@@ -141,22 +179,17 @@ const Index = ({ data, search }) => {
 						return (
 							peopleList.length > 0 && (
 								<div key={i} className={category.name}>
-									<h2>{category.name}</h2>
+									<h2 className="category-header">{category.name}</h2>
 									<div className="flex flex-wrap">
 										{peopleList.map((person, y) => {
-											if (
-												selectedRoles[0] === 'All' ||
-												selectedRoles.indexOf(person.profile.category) !== -1
-											) {
-												return (
-													<ProfileBox
-														key={y}
-														profile={person.profile}
-														sanitisedName={person.sanitisedName}
-														profileImages={person.profileImages}
-													/>
-												);
-											}
+											return (
+												<ProfileBox
+													key={y}
+													profile={person.profile}
+													sanitisedName={person.sanitisedName}
+													profileImages={person.profileImages}
+												/>
+											);
 										})}
 									</div>
 								</div>

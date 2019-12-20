@@ -26,8 +26,8 @@ const ProfileBox = ({ profile, sanitisedName, profileImages }) => {
 					<div
 						className={
 							isHover
-								? 'absolute inset-x-0 bottom-0 px-1 pb-4 h-15 text-center hovered'
-								: 'absolute inset-x-0 bottom-0 px-1 pb-4 h-15 text-center'
+								? 'absolute inset-x-0 bottom-0 px-1 pb-4 pt-2 h-15 text-center hovered'
+								: 'absolute inset-x-0 bottom-0 px-1 pb-4 pt-2 h-15 text-center'
 						}
 					>
 						<div className="font-bold text-sm">{profile.nickname}</div>
