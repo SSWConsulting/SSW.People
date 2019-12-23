@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import Layout from 'components/layout';
 import { StaticQuery, graphql } from 'gatsby';
@@ -14,6 +14,7 @@ import {
 	faCheck,
 	faSquare,
 } from '@fortawesome/free-solid-svg-icons';
+import LocationFilter from '../components/location-filter/location-filter';
 
 const Index = ({ data, search }) => {
 	const managers = {
@@ -39,7 +40,7 @@ const Index = ({ data, search }) => {
 
 	const allLocations = getAllLocations(data.allSkills.nodes);
 
-	const [selectedLocation, selectLocation] = useState('All');
+	const [selectedLocation, setLocation] = useState('All');
 
 	const [checkedSkills, setSkill] = useState(new Map());
 
@@ -88,24 +89,10 @@ const Index = ({ data, search }) => {
 				}}
 			/>
 			<div className="filter-location mb-8 py-4 pl-96 text-16">
-				<div className="items-center flex">
-					{allLocations.map((location, i) => {
-						return (
-							<button
-								key={i}
-								id={location}
-								className={
-									selectedLocation === location
-										? 'filter-location-selected mr-12'
-										: 'mr-12'
-								}
-								onClick={() => selectLocation(location)}
-							>
-								{location}
-							</button>
-						);
-					})}
-				</div>
+				<LocationFilter
+					locations={ allLocations }
+					selectedLocation={ selectedLocation }
+					setLocation={ setLocation }/>
 			</div>
 			<div className="flex">
 				<div className="w-1/4">
