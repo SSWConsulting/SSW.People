@@ -28,7 +28,7 @@ const Header = ({ title }) => (
 					<Link to="/">
 						<SSWLogo ariaLabel="logo" />
 					</Link>
-					<h1 className="title">Our People</h1>
+					<h1 className="title ml-2">Our People</h1>
 				</div>
 			</div>
 		</header>
