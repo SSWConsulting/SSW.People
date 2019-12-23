@@ -200,10 +200,6 @@ button:focus{
   font-weight: bold;
 }
 
-.category-header{
-  padding-left:1rem;
-}
-
 /**
 * This injects Tailwind's component classes and any component classes
 * registered by plugins.
