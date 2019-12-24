@@ -136,10 +136,7 @@ function buildPeople(data) {
 			n.fullName,
 			[n.skills.advancedSkills, n.skills.intermediateSkills].flat()
 		);
-		locationsMap.set(
-			n.fullName,
-			n.location
-		);
+		locationsMap.set(n.fullName, n.location);
 	});
 
 	return data.people.nodes.map(node => {

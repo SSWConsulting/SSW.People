@@ -45,6 +45,31 @@ dd {
     @apply mr-1;
 }
 
+a:not(.unstyled),
+a:not(.btn),
+a:link:not(.btn) {
+  color: #333;
+  border-bottom: 1px dotted #9e9e9e;
+}
+
+a:not(.btn),
+a:link:not(.btn) {
+  color: #333;
+  border-bottom: 1px dotted #9e9e9e;
+}
+
+a:not(.btn):hover,
+a:link:not(.btn):hover {
+  color: #cc4141;
+  border-bottom: 1px dotted #cc4141;
+}
+
+a:not(.btn),
+a:link:not(.btn) {
+  color: #333;
+  border-bottom: 1px dotted #9e9e9e;
+}
+
 .ms-rteCustom-FigureNormal {
   font-weight: bold;
   font-size: 14px;
@@ -56,16 +81,6 @@ ul li {
   background: url(./images/bullet_square.gif) 0 7px no-repeat;
   padding: 0 0 10px 15px;
   line-height: 1.5em;
-}
-
-p {
-  margin: 0px 0px 10px 0px;
-    line-height: 1.6;
-}
-
-p a {
-  text-decoration: underline;
-  font-weight: bold;
 }
 
 .gatsby-resp-image-wrapper{
@@ -142,6 +157,10 @@ p a {
 
 button:focus{
   outline: 0
+}
+
+.text-ssw-red {
+  color: #cc4141;
 }
 
 .bg-ssw-red {

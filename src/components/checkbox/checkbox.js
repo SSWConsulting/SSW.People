@@ -10,9 +10,12 @@ const Checkbox = ({
 	onChange,
 	checkedIcon,
 	unCheckedIcon,
+	checkedClassName,
+	unCheckedClassName,
+	checkboxColor,
 }) => {
 	return (
-		<label className="cursor-pointer">
+		<label className={`cursor-pointer ${(isChecked ? checkedClassName : unCheckedClassName)}`}>
 			<input
 				type="checkbox"
 				className="hidden"
@@ -22,7 +25,7 @@ const Checkbox = ({
 			/>
 			<div className="inline-block w-4 mr-1">
 				{isChecked || unCheckedIcon ? (
-					<FontAwesomeIcon icon={isChecked ? checkedIcon : unCheckedIcon} />
+					<FontAwesomeIcon icon={isChecked ? checkedIcon : unCheckedIcon} color={checkboxColor} />
 				) : (
 					<></>
 				)}
@@ -39,6 +42,9 @@ Checkbox.propTypes = {
 	onChange: PropTypes.func.isRequired,
 	checkedIcon: PropTypes.object.isRequired,
 	unCheckedIcon: PropTypes.object,
+	checkboxColor: PropTypes.string,
+	checkedClassName: PropTypes.string,
+	unCheckedClassName: PropTypes.string,
 };
 
 export default Checkbox;
