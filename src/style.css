@@ -22,7 +22,11 @@ h2 {
     color: #cc4141;
 }
 h3 {
-    @apply text-lg;
+    @apply text-xl;
+}
+
+h4 {
+  @apply text-lg;
 }
 
 dl {
@@ -103,12 +107,6 @@ p a {
   margin: 20px 0;
 }
 
-.profile-image {
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  padding: 3px;
-}
-
 .favor-list{
   margin: 10px 0 10px 12px;
 }
@@ -118,51 +116,88 @@ p a {
 }
 
 #facebook{
-  background: url(./images/facebook.png) 0 3px no-repeat;
+  background: url(./images/facebook.png) 0 4px no-repeat;
 }
 
 #linkedin{
-  background: url(./images/linkedin.png) 0 3px no-repeat;
+  background: url(./images/linkedin.png) 0 4px no-repeat;
 }
 
 #skype{
-  background: url(./images/skype.png) 0 3px no-repeat;
+  background: url(./images/skype.png) 0 4px no-repeat;
 }
 
 #twitter{
-  background: url(./images/twitter.png) 0 3px no-repeat;
+  background: url(./images/twitter.png) 0 4px no-repeat;
 }
 
 #email{
-  background: url(./images/favor_email.gif) 0 3px no-repeat;
-}
-
-.absolute.inset-x-0.bottom-0.px-1.pb-4.h-15.text-center {
-  border-radius: 0px 0px 4px 4px;
-}
-
-.employee-filter {
-  background: none;
-  cursor: pointer;
-}
-
-.selected-skill {
-  background-position: 5px center;
-  background-image: url(./images/selectedSkill.png);
-  font-weight: bold;
-}
-
-.separator-div {
-  border-bottom: 1px dotted #ccc;
-  width: 90%;
-  margin: 0px 0px 5px 0px;
-  display: block;
+  background: url(./images/favor_email.gif) 0 6px no-repeat;
 }
 
 .filter-title {
-  background: url(./images/filterSymbol.png) no-repeat left center;
-  padding-left: 23px;
-  margin: 0 0 3px;
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+.hovered {
+  background-color: #cc4141;
+  color: #fff
+}
+
+.filter-location {
+  background: #333333;
+  color: #CCCCCC;
+  padding-left: 16rem;
+}
+
+.filter-location-selected{
+  font-weight: bold;
+}
+
+button:focus{
+  outline: 0
+}
+
+.filter-checkbox input[type="checkbox"], .filter-checked, .filter-checkbox input[type="checkbox"], .filter-checked-tick
+{
+  display: none;
+}
+
+.filter-checkbox input[type="checkbox"]:checked ~ .filter-checked
+{
+    display: inline-block;
+    color: #414141
+}
+
+.filter-checkbox input[type="checkbox"]:checked ~ .filter-checked-tick
+{
+    display: inline-block;
+    color: #cc4141;
+}
+
+.filter-checkbox input[type="checkbox"]:checked ~ .filter-unchecked, .filter-checkbox input[type="checkbox"]:checked ~ .filter-unchecked-hide
+{
+    display: none;
+}
+
+.filter-unchecked {
+  color: #ccc
+}
+
+.filter-unchecked-hide{
+  color: #fff
+}
+
+.filter-text {
+  position: relative;
+  left: 10px;
+}
+
+.filter-text-checked {
+  position: relative;
+  left: 8px;
+  font-weight: bold;
 }
 
 /**

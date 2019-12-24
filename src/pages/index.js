@@ -1,392 +1,243 @@
-/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-import React from 'react';
+/* eslint-disable no-undef */
+import React, { useState, useEffect, useMemo } from 'react';
 import PropTypes from 'prop-types';
+import { StaticQuery, graphql } from 'gatsby';
+import { Location } from '@reach/router';
+import queryString from 'query-string';
 import Layout from 'components/layout';
-import { graphql } from 'gatsby';
-import ProfileBox from 'components/profile-box';
-import selectedSkill from '../images/selectedSkill.png';
+import ProfileList from 'components/profile-list';
+import LocationFilter from '../components/location-filter/location-filter';
+import SkillsFilter from '../components/skills-filter/skills-filter';
+import RoleFilter from '../components/role-filter/role-filter';
+import Distinct from '../helpers/arrayHelpers';
+import LocationSanitiser from '../helpers/valueHelpers';
 
-class Index extends React.Component {
-	constructor(props) {
-		super(props);
-		this.selectSkill = this.selectSkill.bind(this);
-		this.selectLocation = this.selectLocation.bind(this);
-	}
+const Index = ({ data, search }) => {
+	const allPeople = useMemo(() => buildPeople(data), [data]);
 
-	state = { selectedSkill: 'All Skills', selectedLocation: 'All Locations' };
+	const allLocations = useMemo(
+		() => [
+			'All',
+			...allPeople
+				.map(d => d.location)
+				.filter(Distinct)
+				.filter(l => l.length > 0),
+		],
+		[allPeople]
+	);
 
-	render() {
-		const { data } = this.props;
+	const allSkills = useMemo(
+		() =>
+			allPeople
+				.map(d => d.skills)
+				.flat()
+				.filter(Distinct)
+				.sort(),
+		[allPeople]
+	);
 
-		const selectedStyle = {
-			background: `url(${selectedSkill}) 0px 7px no-repeat`,
-			fontWeight: 'bold',
-		};
+	const allRoles = useMemo(
+		() =>
+			allPeople
+				.map(d => d.role)
+				.filter(Distinct)
+				.sort(),
+		[allPeople]
+	);
 
-		const managers = {
-			name: 'Managers',
-			people: data.managers.nodes,
-		};
-		const developers = {
-			name: 'Developers',
-			people: data.developers.nodes,
-		};
-		const designers = {
-			name: 'Designers',
-			people: data.designers.nodes,
-		};
-		const admin = {
-			name: 'Admin',
-			people: data.admin.nodes,
-		};
+	const [selectedLocation, setSelectedLocation] = useState(allLocations[0]);
+	const [selectedSkills, setSelectedSkills] = useState([]);
+	const [selectedRoles, setSelectedRoles] = useState(allRoles);
+	const [filteredPeople, setFilteredPeople] = useState(allPeople);
 
-		const peopleCollection = [managers, developers, designers, admin];
-
-		const allSkills = this.getAllSkills(data.allSkills.nodes);
-
-		const allLocations = this.getAllLocations(data.allSkills.nodes);
-
-		return (
-			<Layout>
-				<div
-					dangerouslySetInnerHTML={{
-						__html: data.homeJson.content.childMarkdownRemark.html,
-					}}
-				/>
-				<div className="flex mb-4">
-					<div className="w-1/4">
-						<h3 className="filter-title">I am looking for...</h3>
-						<ul>
-							{allLocations.map((location, i) => {
-								return (
-									<li
-										key={i}
-										id={location}
-										className="employee-filter"
-										onClick={this.selectLocation}
-										style={
-											this.state.selectedLocation === location
-												? selectedStyle
-												: null
-										}
-									>
-										{location}
-									</li>
-								);
-							})}
-						</ul>
-						<div className="separator-div"></div>
-						<ul>
-							{allSkills.map((skill, i) => {
-								return (
-									<li
-										key={i}
-										id={skill}
-										className="employee-filter"
-										onClick={this.selectSkill}
-										style={
-											this.state.selectedSkill === skill ? selectedStyle : null
-										}
-									>
-										{skill}
-									</li>
-								);
-							})}
-						</ul>
-					</div>
-					<div className="w-3/4">
-						{peopleCollection.map((category, i) => {
-							var peopleList = this.getPeople(category, data);
-							return (
-								peopleList.length > 0 && (
-									<div key={i} className={category.name}>
-										<h2>{category.name}</h2>
-										<div className="flex flex-wrap">
-											{peopleList.map((person, y) => {
-												return (
-													<ProfileBox
-														key={y}
-														profile={person.profile}
-														sanitisedName={person.sanitisedName}
-														profileImages={person.profileImages}
-													/>
-												);
-											})}
-										</div>
-									</div>
-								)
-							);
-						})}
-					</div>
-				</div>
-			</Layout>
-		);
-	}
-
-	getProfileImages(crmData, name) {
-		const profileImage = crmData.profile_images.nodes.find(
-			n => n.name === `${name}-Profile`
-		);
-		const sketchProfileImage = crmData.sketch_profile_images.nodes.find(
-			n => n.name === `${name}-Sketch`
-		);
-
-		var profileImages = {
-			profileImage: profileImage,
-			sketchProfileImage: sketchProfileImage,
-		};
-		return profileImages;
-	}
-
-	selectSkill(event) {
-		this.setState({ selectedSkill: event.target.id });
-	}
-
-	selectLocation(event) {
-		this.setState({ selectedLocation: event.target.id });
-	}
-
-	getAllLocations(crmData) {
-		var allLocations = [];
-		crmData.forEach(element => {
-			var location = element.location;
-			if (location != null && allLocations.indexOf(location) === -1) {
-				allLocations.push(location);
-			}
-		});
-
-		allLocations.sort();
-		allLocations.unshift('All Locations');
-		return allLocations;
-	}
-
-	getAllSkills(crmData) {
-		var allSkills = [];
-		crmData.forEach(element => {
-			element.skills.advancedSkills.forEach(skill => {
-				if (skill !== null && allSkills.indexOf(skill) === -1) {
-					allSkills.push(skill);
-				}
-			});
-			element.skills.intermediateSkills.forEach(skill => {
-				if (skill !== null && allSkills.indexOf(skill) === -1) {
-					allSkills.push(skill);
-				}
-			});
-		});
-
-		allSkills.sort();
-		allSkills.unshift('All Skills');
-		return allSkills;
-	}
-
-	getPersonSkills(person, crmDataSkills) {
-		var personSkills = {
-			skills: [],
-			location: '',
-		};
-		for (var i = 0; i < crmDataSkills.length; i++) {
-			if (crmDataSkills[i].fullName === person.name) {
-				personSkills.skills = crmDataSkills[i].skills.advancedSkills.concat(
-					crmDataSkills[i].skills.intermediateSkills
-				);
-				personSkills.location = crmDataSkills[i].location;
-				break;
-			}
-		}
-		return personSkills;
-	}
-
-	getPeople(categoryCollection, crmData) {
-		var peopleList = [];
-		categoryCollection.people.forEach(person => {
-			var personSkills = this.getPersonSkills(
-				person.frontmatter,
-				crmData.allSkills.nodes
+	useEffect(() => {
+		const people = allPeople
+			.filter(
+				p => selectedLocation === 'All' || p.location === selectedLocation
+			)
+			.filter(
+				p =>
+					selectedSkills.length === 0 ||
+					selectedSkills.filter(s => p.skills.includes(s)).length > 0
 			);
-			var profileImages = this.getProfileImages(crmData, person.parent.name);
-			if (
-				(this.state.selectedSkill === 'All Skills' ||
-					personSkills.skills.indexOf(this.state.selectedSkill) !== -1) &&
-				profileImages.profileImage != null
-			) {
-				if (
-					this.state.selectedLocation === 'All Locations' ||
-					personSkills.location === this.state.selectedLocation
-				) {
-					var personToAdd = {
-						profile: person.frontmatter,
-						sanitisedName: person.parent.name,
-						profileImages: profileImages,
-					};
-					peopleList.push(personToAdd);
-				}
-			}
-		});
-		return peopleList;
-	}
-}
+		setFilteredPeople(people);
+	}, [selectedLocation, selectedSkills]);
+
+	return (
+		<Layout>
+			<div
+				dangerouslySetInnerHTML={{
+					__html: data.homeJson.content.childMarkdownRemark.html,
+				}}
+			/>
+			<div className="filter-location mb-8 py-4 pl-96 text-16">
+				<LocationFilter
+					locations={allLocations}
+					selectedLocation={selectedLocation}
+					onLocationChange={setSelectedLocation}
+				/>
+			</div>
+			<div className="flex">
+				<div className="w-1/4">
+					<RoleFilter
+						allRoles={allRoles}
+						selectedRoles={selectedRoles}
+						onRoleChange={setSelectedRoles}
+						filteredPeople={filteredPeople}
+					/>
+					<SkillsFilter
+						allSkills={allSkills}
+						selectedSkills={selectedSkills}
+						onSkillChange={setSelectedSkills}
+					/>
+				</div>
+				<div className="w-3/4">
+					<ProfileList
+						filteredPeople={filteredPeople.filter(
+							p => selectedRoles.length === 0 || selectedRoles.includes(p.role)
+						)}
+					/>
+				</div>
+			</div>
+		</Layout>
+	);
+};
 
 Index.propTypes = {
 	data: PropTypes.object.isRequired,
+	search: PropTypes.object.isRequired,
 };
 
-export default Index;
+function buildPeople(data) {
+	const profileImageMap = new Map();
+	const sketchProfileImageMap = new Map();
+	const skillsMap = new Map();
 
-export const query = graphql`
-	query HomepageQuery {
-		managers: allMarkdownRemark(
-			filter: {
-				frontmatter: {
-					current_employee: { eq: true }
-					category: { eq: "Managers" }
+	data.profile_images.nodes.forEach(n =>
+		profileImageMap.set(
+			n.name.replace('-Profile', ''),
+			n.childImageSharp.original.src
+		)
+	);
+	data.sketch_profile_images.nodes.forEach(n =>
+		sketchProfileImageMap.set(
+			n.name.replace('-Sketch', ''),
+			n.childImageSharp.original.src
+		)
+	);
+	data.allSkills.nodes.forEach(n =>
+		skillsMap.set(
+			n.fullName,
+			[n.skills.advancedSkills, n.skills.intermediateSkills].flat()
+		)
+	);
+
+	return data.people.nodes.map(node => {
+		return {
+			fullName: node.frontmatter.name,
+			profile: node.frontmatter,
+			location: LocationSanitiser(node.frontmatter.location),
+			sanitisedName: node.parent.name,
+			role: node.frontmatter.category,
+			profileImages: {
+				profileImage: profileImageMap.get(node.parent.name),
+				sketchProfileImage: sketchProfileImageMap.get(node.parent.name),
+			},
+			skills: skillsMap.get(node.frontmatter.name) || [],
+		};
+	});
+}
+
+const IndexWithQuery = props => (
+	<StaticQuery
+		query={graphql`
+			query HomepageQuery {
+				people: allMarkdownRemark(
+					filter: { frontmatter: { current_employee: { eq: true } } }
+					sort: { fields: frontmatter___nickname }
+				) {
+					nodes {
+						frontmatter {
+							category
+							current_employee
+							location
+							name
+							nickname
+							role
+						}
+						parent {
+							... on File {
+								name
+							}
+						}
+					}
 				}
-			}
-			sort: { fields: frontmatter___nickname }
-		) {
-			nodes {
-				frontmatter {
-					category
-					current_employee
-					location
-					name
-					nickname
-					role
-				}
-				parent {
-					... on File {
+				profile_images: allFile(
+					filter: {
+						sourceInstanceName: { eq: "people" }
+						name: { glob: "*-Profile" }
+					}
+				) {
+					nodes {
 						name
+						childImageSharp {
+							original {
+								height
+								src
+								width
+							}
+						}
 					}
 				}
-			}
-		}
-		developers: allMarkdownRemark(
-			filter: {
-				frontmatter: {
-					current_employee: { eq: true }
-					category: { eq: "Developers" }
-				}
-			}
-			sort: { fields: frontmatter___nickname }
-		) {
-			nodes {
-				frontmatter {
-					category
-					current_employee
-					location
-					name
-					nickname
-					role
-				}
-				parent {
-					... on File {
+				sketch_profile_images: allFile(
+					filter: {
+						sourceInstanceName: { eq: "people" }
+						name: { glob: "*-Sketch" }
+					}
+				) {
+					nodes {
 						name
+						childImageSharp {
+							original {
+								height
+								src
+								width
+							}
+						}
+					}
+				}
+				homeJson {
+					title
+					content {
+						childMarkdownRemark {
+							html
+						}
+					}
+				}
+				allSkills: allCrmDataCollection(filter: { id: {} }) {
+					nodes {
+						skills {
+							advancedSkills
+							intermediateSkills
+						}
+						fullName
+						location
 					}
 				}
 			}
-		}
-		designers: allMarkdownRemark(
-			filter: {
-				frontmatter: {
-					current_employee: { eq: true }
-					category: { eq: "Designers" }
-				}
-			}
-			sort: { fields: frontmatter___nickname }
-		) {
-			nodes {
-				frontmatter {
-					category
-					current_employee
-					location
-					name
-					nickname
-					role
-				}
-				parent {
-					... on File {
-						name
-					}
-				}
-			}
-		}
-		admin: allMarkdownRemark(
-			filter: {
-				frontmatter: {
-					current_employee: { eq: true }
-					category: { eq: "Admin" }
-				}
-			}
-			sort: { fields: frontmatter___nickname }
-		) {
-			nodes {
-				frontmatter {
-					category
-					current_employee
-					location
-					name
-					nickname
-					role
-				}
-				parent {
-					... on File {
-						name
-					}
-				}
-			}
-		}
-		profile_images: allFile(
-			filter: {
-				sourceInstanceName: { eq: "people" }
-				name: { glob: "*-Profile" }
-			}
-		) {
-			nodes {
-				name
-				childImageSharp {
-					original {
-						height
-						src
-						width
-					}
-				}
-			}
-		}
-		sketch_profile_images: allFile(
-			filter: {
-				sourceInstanceName: { eq: "people" }
-				name: { glob: "*-Sketch" }
-			}
-		) {
-			nodes {
-				name
-				childImageSharp {
-					original {
-						height
-						src
-						width
-					}
-				}
-			}
-		}
-		homeJson {
-			title
-			content {
-				childMarkdownRemark {
-					html
-				}
-			}
-		}
-		allSkills: allCrmDataCollection(filter: { id: {} }) {
-			nodes {
-				skills {
-					advancedSkills
-					intermediateSkills
-				}
-				fullName
-				location
-			}
-		}
-	}
-`;
+		`}
+		render={data => (
+			<Location>
+				{({ location }) => (
+					<Index
+						{...data.HomepageQuery}
+						{...props}
+						search={location.search ? queryString.parse(location.search) : {}}
+					/>
+				)}
+			</Location>
+		)}
+	/>
+);
+
+export default IndexWithQuery;

@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'gatsby';
 import posed from 'react-pose';
-import sswLogo from '../../images/SSWLogo.svg';
+import SSWLogo from '-!svg-react-loader!../../images/SSWLogo.svg';
 
 // Example of a component-specific page transition
 const AnimatedContainer = posed.div({
@@ -26,9 +26,9 @@ const Header = ({ title }) => (
 			<div className="flex flex-wrap md:flex-no-wrap items-center justify-between max-w-6xl mx-auto p-4 md:p-8">
 				<div className="flex items-center">
 					<Link to="/">
-						<img src={sswLogo} alt="SSW logo"></img>
+						<SSWLogo aria-label="logo" />
 					</Link>
-					<h1 className="title">Employees</h1>
+					<h1 className="title ml-2">Our People</h1>
 				</div>
 			</div>
 		</header>
