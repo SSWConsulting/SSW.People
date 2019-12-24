@@ -12,7 +12,7 @@ const Checkbox = ({
 	unCheckedIcon,
 }) => {
 	return (
-		<label>
+		<label className="cursor-pointer">
 			<input
 				type="checkbox"
 				className="hidden"
