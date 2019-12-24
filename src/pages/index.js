@@ -114,10 +114,16 @@ function buildPeople(data) {
 	const skillsMap = new Map();
 
 	data.profile_images.nodes.forEach(n =>
-		profileImageMap.set(n.name.replace('-Profile', ''), n)
+		profileImageMap.set(
+			n.name.replace('-Profile', ''),
+			n.childImageSharp.original.src
+		)
 	);
 	data.sketch_profile_images.nodes.forEach(n =>
-		sketchProfileImageMap.set(n.name.replace('-Sketch', ''), n)
+		sketchProfileImageMap.set(
+			n.name.replace('-Sketch', ''),
+			n.childImageSharp.original.src
+		)
 	);
 	data.allSkills.nodes.forEach(n =>
 		skillsMap.set(

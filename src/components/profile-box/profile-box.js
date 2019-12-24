@@ -3,20 +3,22 @@ import { Link } from 'gatsby';
 import PropTypes from 'prop-types';
 
 const ProfileBox = ({ profile, sanitisedName, profileImages }) => {
-	const [isHover, setHover] = useState(false);
-	const profileImage = isHover
-		? profileImages.profileImage
-		: profileImages.sketchProfileImage;
+	const [hover, setHover] = useState(false);
+
 	return (
 		<Link
 			to={`/${sanitisedName}`}
 			className="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 mb-4 unstyled"
 		>
-			{profileImage !== undefined && (
+			{profileImages.profileImage !== undefined && (
 				<div
 					className="relative bg-cover shadow-lg mx-auto profile-image"
 					style={{
-						backgroundImage: `url(${profileImage.childImageSharp.original.src})`,
+						backgroundImage: `url(${
+							hover
+								? profileImages.profileImage
+								: profileImages.sketchProfileImage
+						})`,
 						height: '242px',
 						width: '172px',
 					}}
@@ -25,7 +27,7 @@ const ProfileBox = ({ profile, sanitisedName, profileImages }) => {
 				>
 					<div
 						className={
-							isHover
+							hover
 								? 'absolute inset-x-0 bottom-0 px-1 pb-4 pt-2 h-15 text-center hovered'
 								: 'absolute inset-x-0 bottom-0 px-1 pb-4 pt-2 h-15 text-center'
 						}
@@ -42,7 +44,10 @@ const ProfileBox = ({ profile, sanitisedName, profileImages }) => {
 ProfileBox.propTypes = {
 	profile: PropTypes.object.isRequired,
 	sanitisedName: PropTypes.string.isRequired,
-	profileImages: PropTypes.object.isRequired,
+	profileImages: PropTypes.exact({
+		profileImage: PropTypes.string,
+		sketchProfileImage: PropTypes.string
+	}),
 };
 
 export default ProfileBox;
