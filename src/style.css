@@ -12,21 +12,25 @@ html{
 
 h1 {
     @apply text-4xl;
+    @apply mb-2;
     color: #cc4141;
 }
 h1.title {
   color: #414141;
 }
 h2 {
-    @apply text-2xl;
+    @apply text-3xl;
+    @apply mb-2;
     color: #cc4141;
 }
 h3 {
-    @apply text-xl;
+    @apply text-2xl;
+    @apply mb-2;
 }
 
 h4 {
   @apply text-lg;
+  @apply mb-2;
 }
 
 dl {
@@ -45,29 +49,25 @@ dd {
     @apply mr-1;
 }
 
-a:not(.unstyled),
-a:not(.btn),
-a:link:not(.btn) {
+a:not(.btn):not(.unstyled),
+a:link:not(.btn):not(.unstyled) {
   color: #333;
   border-bottom: 1px dotted #9e9e9e;
 }
 
-a:not(.btn),
-a:link:not(.btn) {
-  color: #333;
-  border-bottom: 1px dotted #9e9e9e;
-}
-
-a:not(.btn):hover,
-a:link:not(.btn):hover {
-  color: #cc4141;
+a:not(.btn):not(.unstyled):hover,
+a:link:not(.btn):not(.unstyled):hover {
+  @apply text-ssw-red;
   border-bottom: 1px dotted #cc4141;
 }
 
-a:not(.btn),
-a:link:not(.btn) {
-  color: #333;
-  border-bottom: 1px dotted #9e9e9e;
+footer > a:not(.unstyled) {
+  @apply text-gray-300 !important;
+}
+
+footer > a:not(.unstyled):hover {
+  @apply text-ssw-red !important;
+  border-bottom: 1px dotted #cc4141;
 }
 
 .ms-rteCustom-FigureNormal {
@@ -151,12 +151,12 @@ ul li {
 }
 
 .hovered {
-  background-color: #cc4141;
-  color: #fff
+  @apply bg-ssw-red;
+  color: #fff;
 }
 
 button:focus{
-  outline: 0
+  outline: 0;
 }
 
 .text-ssw-red {

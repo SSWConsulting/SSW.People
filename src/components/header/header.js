@@ -23,9 +23,9 @@ const AnimatedContainer = posed.div({
 const Header = ({ title }) => (
 	<AnimatedContainer>
 		<header>
-			<div className="flex ml-12 mt-4 mb-12">
+			<div className="flex ml-12 mt-4 mb-6">
 				<div className="flex items-center">
-					<Link to="/">
+					<Link to="/" className="unstyled">
 						<SSWLogo aria-label="logo" />
 					</Link>
 					<h1 className="title ml-2">Our People</h1>

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { StaticQuery, graphql } from 'gatsby';
 import Head from 'components/head';
 import Header from 'components/header';
+import Footer from 'components/footer';
 import '../../style.css';
 
 const Layout = ({ data, children }) => (
@@ -12,6 +13,7 @@ const Layout = ({ data, children }) => (
 		<main className="flex-1">
 			{children}
 		</main>
+		<Footer />
 	</div>
 );
 

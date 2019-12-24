@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { StaticQuery, graphql } from 'gatsby';
 import { Location } from '@reach/router';
 import queryString from 'query-string';
+import { createBrowserHistory } from 'history';
 import Layout from 'components/layout';
 import ProfileList from 'components/profile-list';
 import LocationFilter from '../components/location-filter/location-filter';
@@ -13,6 +14,8 @@ import Distinct from '../helpers/arrayHelpers';
 import LocationSanitiser from '../helpers/locationSanitizer';
 
 const Index = ({ data, search }) => {
+	const history = createBrowserHistory();
+
 	const allPeople = useMemo(() => buildPeople(data), [data]);
 
 	const allLocations = useMemo(
@@ -47,7 +50,7 @@ const Index = ({ data, search }) => {
 
 	const [selectedLocation, setSelectedLocation] = useState(allLocations[0]);
 	const [selectedSkills, setSelectedSkills] = useState([]);
-	const [selectedRoles, setSelectedRoles] = useState(allRoles);
+	const [selectedRoles, setSelectedRoles] = useState([]);
 	const [filteredPeople, setFilteredPeople] = useState(allPeople);
 
 	useEffect(() => {
@@ -62,6 +65,15 @@ const Index = ({ data, search }) => {
 			);
 		setFilteredPeople(people);
 	}, [selectedLocation, selectedSkills]);
+
+	useEffect(() => {
+		// TODO: load search params from querystring
+		// TODO: push search params to querystring
+		history.push({
+			pathname: '/',
+			search: '',
+		});
+	}, [selectedLocation, selectedSkills, selectedRoles]);
 
 	return (
 		<Layout>
@@ -143,7 +155,9 @@ function buildPeople(data) {
 		return {
 			fullName: node.frontmatter.name,
 			profile: node.frontmatter,
-			location: LocationSanitiser(locationsMap.get(node.frontmatter.name) || node.frontmatter.location),
+			location: LocationSanitiser(
+				locationsMap.get(node.frontmatter.name) || node.frontmatter.location
+			),
 			sanitisedName: node.parent.name,
 			role: node.frontmatter.category,
 			profileImages: {
