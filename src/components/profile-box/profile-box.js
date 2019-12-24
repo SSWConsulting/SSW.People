@@ -12,7 +12,7 @@ const ProfileBox = ({ profile, sanitisedName, profileImages }) => {
 		>
 			{profileImages.profileImage !== undefined && (
 				<div
-					className="relative bg-cover shadow-lg mx-auto profile-image"
+					className="relative bg-cover shadow-lg profile-image"
 					style={{
 						backgroundImage: `url(${
 							hover

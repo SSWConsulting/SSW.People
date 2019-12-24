@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCheckSquare, faSquare } from '@fortawesome/free-solid-svg-icons';
+import Checkbox from '../checkbox';
+import { faCheck } from '@fortawesome/free-solid-svg-icons';
 import RoleSort from '../../helpers/roleSort';
 import '../../style.css';
 
@@ -29,20 +29,13 @@ const RoleFilter = ({
 			{allRoles.sort(RoleSort).map(role => (
 				<div key={role} className="flex">
 					<div className="w-3/4">
-						<label className="filter-checkbox">
-							<input
-								type="checkbox"
-								name={role}
-								checked={isRoleSelected(role)}
-								onChange={() => onRoleClicked(role)}
-							/>
-							<FontAwesomeIcon
-								icon={faCheckSquare}
-								className="filter-checked"
-							/>
-							<FontAwesomeIcon icon={faSquare} className="filter-unchecked" />
-							<span className="filter-text">{role}</span>
-						</label>
+						<Checkbox
+							labelText={role}
+							checkboxValue={role}
+							isChecked={isRoleSelected(role)}
+							onChange={() => onRoleClicked(role)}
+							checkedIcon={faCheck}
+						/>
 					</div>
 					<div className="w-1/4">{filteredPeople.filter(p => p.role === role).length}</div>
 				</div>

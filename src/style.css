@@ -135,69 +135,21 @@ p a {
   background: url(./images/favor_email.gif) 0 6px no-repeat;
 }
 
-.filter-title {
-  margin-top: 10px;
-  font-weight: bold;
-}
-
 .hovered {
   background-color: #cc4141;
   color: #fff
-}
-
-.filter-location {
-  background: #333333;
-  color: #CCCCCC;
-  padding-left: 16rem;
-}
-
-.filter-location-selected{
-  font-weight: bold;
 }
 
 button:focus{
   outline: 0
 }
 
-.filter-checkbox input[type="checkbox"], .filter-checked, .filter-checkbox input[type="checkbox"], .filter-checked-tick
-{
-  display: none;
+.bg-ssw-red {
+  background-color: #cc4141;
 }
 
-.filter-checkbox input[type="checkbox"]:checked ~ .filter-checked
-{
-    display: inline-block;
-    color: #414141
-}
-
-.filter-checkbox input[type="checkbox"]:checked ~ .filter-checked-tick
-{
-    display: inline-block;
-    color: #cc4141;
-}
-
-.filter-checkbox input[type="checkbox"]:checked ~ .filter-unchecked, .filter-checkbox input[type="checkbox"]:checked ~ .filter-unchecked-hide
-{
-    display: none;
-}
-
-.filter-unchecked {
-  color: #ccc
-}
-
-.filter-unchecked-hide{
-  color: #fff
-}
-
-.filter-text {
-  position: relative;
-  left: 10px;
-}
-
-.filter-text-checked {
-  position: relative;
-  left: 8px;
-  font-weight: bold;
+.bg-ssw-grey {
+  background-color: rgb(238,238,238);
 }
 
 /**

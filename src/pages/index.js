@@ -10,7 +10,7 @@ import LocationFilter from '../components/location-filter/location-filter';
 import SkillsFilter from '../components/skills-filter/skills-filter';
 import RoleFilter from '../components/role-filter/role-filter';
 import Distinct from '../helpers/arrayHelpers';
-import LocationSanitiser from '../helpers/valueHelpers';
+import LocationSanitiser from '../helpers/locationSanitizer';
 
 const Index = ({ data, search }) => {
 	const allPeople = useMemo(() => buildPeople(data), [data]);
@@ -66,30 +66,35 @@ const Index = ({ data, search }) => {
 	return (
 		<Layout>
 			<div
+				className="mx-12"
 				dangerouslySetInnerHTML={{
 					__html: data.homeJson.content.childMarkdownRemark.html,
 				}}
 			/>
-			<div className="filter-location mb-8 py-4 pl-96 text-16">
+			<div className="mt-8 mb-12">
 				<LocationFilter
 					locations={allLocations}
 					selectedLocation={selectedLocation}
 					onLocationChange={setSelectedLocation}
 				/>
 			</div>
-			<div className="flex">
+			<div className="mx-12 flex">
 				<div className="w-1/4">
-					<RoleFilter
-						allRoles={allRoles}
-						selectedRoles={selectedRoles}
-						onRoleChange={setSelectedRoles}
-						filteredPeople={filteredPeople}
-					/>
-					<SkillsFilter
-						allSkills={allSkills}
-						selectedSkills={selectedSkills}
-						onSkillChange={setSelectedSkills}
-					/>
+					<div className="w-5/6 mx-auto">
+						<RoleFilter
+							allRoles={allRoles}
+							selectedRoles={selectedRoles}
+							onRoleChange={setSelectedRoles}
+							filteredPeople={filteredPeople}
+						/>
+						<div className="mt-4">
+							<SkillsFilter
+								allSkills={allSkills}
+								selectedSkills={selectedSkills}
+								onSkillChange={setSelectedSkills}
+							/>
+						</div>
+					</div>
 				</div>
 				<div className="w-3/4">
 					<ProfileList
@@ -112,6 +117,7 @@ function buildPeople(data) {
 	const profileImageMap = new Map();
 	const sketchProfileImageMap = new Map();
 	const skillsMap = new Map();
+	const locationsMap = new Map();
 
 	data.profile_images.nodes.forEach(n =>
 		profileImageMap.set(
@@ -125,18 +131,22 @@ function buildPeople(data) {
 			n.childImageSharp.original.src
 		)
 	);
-	data.allSkills.nodes.forEach(n =>
+	data.allSkills.nodes.forEach(n => {
 		skillsMap.set(
 			n.fullName,
 			[n.skills.advancedSkills, n.skills.intermediateSkills].flat()
-		)
-	);
+		);
+		locationsMap.set(
+			n.fullName,
+			n.location
+		);
+	});
 
 	return data.people.nodes.map(node => {
 		return {
 			fullName: node.frontmatter.name,
 			profile: node.frontmatter,
-			location: LocationSanitiser(node.frontmatter.location),
+			location: LocationSanitiser(locationsMap.get(node.frontmatter.name) || node.frontmatter.location),
 			sanitisedName: node.parent.name,
 			role: node.frontmatter.category,
 			profileImages: {
@@ -160,7 +170,6 @@ const IndexWithQuery = props => (
 						frontmatter {
 							category
 							current_employee
-							location
 							name
 							nickname
 							role

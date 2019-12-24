@@ -1,10 +1,9 @@
-
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import React from 'react';
 import PropTypes from 'prop-types';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCheck, faSquare } from '@fortawesome/free-solid-svg-icons';
+import Checkbox from '../checkbox';
+import { faCheck } from '@fortawesome/free-solid-svg-icons';
 import '../../style.css';
 
 const SkillsFilter = ({ allSkills, selectedSkills, onSkillChange }) => {
@@ -23,34 +22,19 @@ const SkillsFilter = ({ allSkills, selectedSkills, onSkillChange }) => {
 
 	return (
 		<>
-			<h4 className="filter-title" onClick={() => onSkillChange([])}>
+			<h4 className="font-bold" onClick={() => onSkillChange([])}>
 				Technologies
 			</h4>
 			<div className="filter-skills">
 				{allSkills.map((skill, i) => (
 					<div key={i}>
-						<label className="filter-checkbox">
-							<input
-								type="checkbox"
-								name={skill}
-								checked={isSkillSelected(skill)}
-								onChange={() => onSkillClicked(skill)}
-							/>
-							<FontAwesomeIcon
-								icon={faSquare}
-								className="filter-unchecked-hide"
-							/>
-							<FontAwesomeIcon icon={faCheck} className="filter-checked-tick" />
-							<span
-								className={
-									isSkillSelected(skill)
-										? 'filter-text-checked'
-										: 'filter-text'
-								}
-							>
-								{skill}
-							</span>
-						</label>
+						<Checkbox
+							labelText={skill}
+							checkboxValue={skill}
+							isChecked={isSkillSelected(skill)}
+							onChange={() => onSkillClicked(skill)}
+							checkedIcon={faCheck}
+						/>
 					</div>
 				))}
 			</div>

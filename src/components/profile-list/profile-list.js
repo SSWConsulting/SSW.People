@@ -21,7 +21,7 @@ const ProfileList = ({ filteredPeople }) => {
 				return (
 					people.length > 0 && (
 						<div key={i} className={role}>
-							<h2 className="pl-4">{role}</h2>
+							<h2 className="mb-2">{role}</h2>
 							<div className="flex flex-wrap">
 								{people.map((person, id) => {
 									return (
