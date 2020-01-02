@@ -14,7 +14,7 @@ import Distinct from '../helpers/arrayHelpers';
 import LocationSanitiser from '../helpers/locationSanitizer';
 
 const Index = ({ data, search }) => {
-	const history = createBrowserHistory();
+	const history = typeof window !== 'undefined' ? createBrowserHistory() : null;
 
 	const allPeople = useMemo(() => buildPeople(data), [data]);
 

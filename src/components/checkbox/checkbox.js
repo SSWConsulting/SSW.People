@@ -15,7 +15,11 @@ const Checkbox = ({
 	checkboxColor,
 }) => {
 	return (
-		<label className={`cursor-pointer ${(isChecked ? checkedClassName : unCheckedClassName)}`}>
+		<label
+			className={`cursor-pointer ${
+				isChecked ? checkedClassName : unCheckedClassName
+			}`}
+		>
 			<input
 				type="checkbox"
 				className="hidden"
@@ -25,7 +29,10 @@ const Checkbox = ({
 			/>
 			<div className="inline-block w-4 mr-1">
 				{isChecked || unCheckedIcon ? (
-					<FontAwesomeIcon icon={isChecked ? checkedIcon : unCheckedIcon} color={checkboxColor} />
+					<FontAwesomeIcon
+						icon={isChecked ? checkedIcon : unCheckedIcon}
+						color={checkboxColor}
+					/>
 				) : (
 					<></>
 				)}

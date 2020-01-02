@@ -46,7 +46,7 @@ ProfileBox.propTypes = {
 	sanitisedName: PropTypes.string.isRequired,
 	profileImages: PropTypes.exact({
 		profileImage: PropTypes.string,
-		sketchProfileImage: PropTypes.string
+		sketchProfileImage: PropTypes.string,
 	}),
 };
 
