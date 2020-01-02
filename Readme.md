@@ -15,21 +15,22 @@ This is a Gatsby generated site pulling data from:
 ### Getting ready for development
 - Clone the repo from https://github.com/SSWConsulting/people.ssw.com.au
 - Run *yarn* (or *npm install*) to install packages
-- Create an environment file (.env) and fill out the values for the following keys:
+- Create environment files (.env.development and .env.production) and fill out the values for the following keys:
 ```
 SOPHIE_API_URL=
 SOPHIE_AUTHORIZATION=
 SOPHIE_TENANT=
+VERSION_DEPLOYED=
 ```
 
 ### Development
 1. Branch off master for your PBI
-2. Run *yarn build* (or *npm run-script build*)
+2. Run *yarn build* (or *npm run-script build*) (.env.production is required for this step)
 3. Do your work
-4. Commit code and push
-5. Raise a PR
-6. Get it merged!
+4. Run the site in development mode by *yarn develop* (or *npm run-script develop*) (.env.development is required for this step)
+5. Commit code and push
+6. Raise a PR
+7. Get it merged!
 
 ### Running a Production Build
-Azure DevOps does this for us but if you'd like to create the site:
-- Run *yarn develop* (or *npm run-script develop*)
+- After merging master, Azure DevOps automatically builds and deploys the master build to the production site: https://people.ssw.com.au/
