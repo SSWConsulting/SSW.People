@@ -14,23 +14,23 @@ const Footer = () => {
 					Reserved.
 				</div>
 				<div className="w-3/6 text-right">
-					<a className="text-gray-800" href="mailto:info@ssw.com.au">
+					<a className="footer-link" href="mailto:info@ssw.com.au">
 						FEEDBACK TO SSW
 					</a>
-					&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+					<span className="px-2">|</span>
 					<a
-						className="text-gray-800"
+						className="footer-link"
 						href="http://www.ssw.com.au/ssw/Standards/Forms/ConsultingOrderTermsConditions.aspx"
 					>
 						TERMS AND CONDITION
 					</a>
-					&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-					<a className="text-gray-800" href="https://www.facebook.com/SSW.page">
+					<span className="px-2">|</span>
+					<a className="footer-link" href="https://www.facebook.com/SSW.page">
 						FIND US ON FACEBOOK
 					</a>
-					&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+					<span className="px-2">|</span>
 					<a
-						className="text-gray-800"
+						className="footer-link"
 						href="https://www.w3.org/html/logo/faq.html"
 					>
 						HTML 5
@@ -43,7 +43,7 @@ const Footer = () => {
 				<div className="py-2 w-4/6 border-t border-gray-800">
 					Our website is under{' '}
 					<a
-						className="text-gray-800"
+						className="footer-link"
 						href="https://rules.ssw.com.au/WebSites/RulestoBetterWebsites-Deployment/Pages/Do-your-developers-deploy-manually.aspx"
 					>
 						CONSTANT CONTINUOUS DEPLOYMENT
