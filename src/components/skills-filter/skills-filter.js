@@ -34,8 +34,8 @@ const SkillsFilter = ({ allSkills, selectedSkills, onSkillChange }) => {
 							isChecked={isSkillSelected(skill)}
 							onChange={() => onSkillClicked(skill)}
 							checkedIcon={faCheck}
-							checkedClassName='font-bold'
-							checkboxColor={isSkillSelected(skill) ? '#cc4141': ''}
+							checkedClassName="font-bold"
+							checkboxColor={isSkillSelected(skill) ? '#cc4141' : ''}
 						/>
 					</div>
 				))}

@@ -35,11 +35,13 @@ const RoleFilter = ({
 							isChecked={isRoleSelected(role)}
 							onChange={() => onRoleClicked(role)}
 							checkedIcon={faCheck}
-							checkedClassName='font-bold'
-							checkboxColor={isRoleSelected(role) ? '#cc4141': ''}
+							checkedClassName="font-bold"
+							checkboxColor={isRoleSelected(role) ? '#cc4141' : ''}
 						/>
 					</div>
-					<div className="w-1/4">{filteredPeople.filter(p => p.role === role).length}</div>
+					<div className="w-1/4">
+						{filteredPeople.filter(p => p.role === role).length}
+					</div>
 				</div>
 			))}
 		</div>

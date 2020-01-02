@@ -15,7 +15,9 @@ const LocationFilter = ({ locations, selectedLocation, onLocationChange }) => {
 							<button
 								key={i}
 								id={location}
-								className={`p-3 ${selectedLocation === location ? 'text-gray-800 bg-white font-bold' : ''}`}
+								className={`p-3 ${
+									selectedLocation === location ? 'font-bold' : ''
+								}`}
 								onClick={() => onLocationChange(location)}
 							>
 								{location}

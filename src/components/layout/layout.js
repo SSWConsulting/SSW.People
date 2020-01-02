@@ -10,9 +10,7 @@ const Layout = ({ data, children }) => (
 	<div className="flex flex-col min-h-screen">
 		<Head />
 		<Header title={data.site.siteMetadata.siteTitle} />
-		<main className="flex-1">
-			{children}
-		</main>
+		<main className="flex-1">{children}</main>
 		<Footer />
 	</div>
 );
