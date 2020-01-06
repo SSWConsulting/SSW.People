@@ -6,51 +6,51 @@ import RoleSort from '../../helpers/roleSort';
 import '../../style.css';
 
 const RoleFilter = ({
-  allRoles,
-  selectedRoles,
-  onRoleChange,
-  filteredPeople,
+	allRoles,
+	selectedRoles,
+	onRoleChange,
+	filteredPeople,
 }) => {
-  const onRoleClicked = role => {
-    const previouslySelected = isRoleSelected(role);
-    if (previouslySelected) {
-      onRoleChange(selectedRoles.filter(s => s !== role));
-    } else {
-      onRoleChange([role, ...selectedRoles]);
-    }
-  };
+	const onRoleClicked = role => {
+		const previouslySelected = isRoleSelected(role);
+		if (previouslySelected) {
+			onRoleChange(selectedRoles.filter(s => s !== role));
+		} else {
+			onRoleChange([role, ...selectedRoles]);
+		}
+	};
 
-  const isRoleSelected = role => {
-    return selectedRoles.indexOf(role) !== -1;
-  };
+	const isRoleSelected = role => {
+		return selectedRoles.indexOf(role) !== -1;
+	};
 
-  return (
-    <div className="filter-role">
-      {allRoles.sort(RoleSort).map(role => (
-        <div key={role} className="flex">
-          <div className="w-4/4">
-            <Checkbox
-              labelText={role}
-              checkboxValue={role}
-              isChecked={isRoleSelected(role)}
-              onChange={() => onRoleClicked(role)}
-              checkedIcon={faCheck}
-              checkedClassName="font-bold"
-              checkboxColor={isRoleSelected(role) ? '#cc4141' : ''}
-            /> ({filteredPeople.filter(p => p.role === role).length})
+	return (
+		<div className="filter-role">
+			{allRoles.sort(RoleSort).map(role => (
+				<div key={role} className="flex">
+					<div className="w-4/4">
+						<Checkbox
+							labelText={role}
+							checkboxValue={role}
+							isChecked={isRoleSelected(role)}
+							onChange={() => onRoleClicked(role)}
+							checkedIcon={faCheck}
+							checkedClassName="font-bold"
+							checkboxColor={isRoleSelected(role) ? '#cc4141' : ''}
+						/>{' '}
+						({filteredPeople.filter(p => p.role === role).length})
 					</div>
-        </div>
-      ))}
-    </div>
-
-  );
+				</div>
+			))}
+		</div>
+	);
 };
 
 RoleFilter.propTypes = {
-  allRoles: PropTypes.array.isRequired,
-  selectedRoles: PropTypes.array.isRequired,
-  onRoleChange: PropTypes.func.isRequired,
-  filteredPeople: PropTypes.array.isRequired,
+	allRoles: PropTypes.array.isRequired,
+	selectedRoles: PropTypes.array.isRequired,
+	onRoleChange: PropTypes.func.isRequired,
+	filteredPeople: PropTypes.array.isRequired,
 };
 
 export default RoleFilter;
