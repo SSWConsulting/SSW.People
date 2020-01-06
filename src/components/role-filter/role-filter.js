@@ -28,7 +28,7 @@ const RoleFilter = ({
 		<div className="filter-role">
 			{allRoles.sort(RoleSort).map(role => (
 				<div key={role} className="flex">
-					<div className="w-3/4">
+					<div className="w-4/4">
 						<Checkbox
 							labelText={role}
 							checkboxValue={role}
@@ -37,10 +37,8 @@ const RoleFilter = ({
 							checkedIcon={faCheck}
 							checkedClassName="font-bold"
 							checkboxColor={isRoleSelected(role) ? '#cc4141' : ''}
-						/>
-					</div>
-					<div className="w-1/4">
-						{filteredPeople.filter(p => p.role === role).length}
+						/>{' '}
+						({filteredPeople.filter(p => p.role === role).length})
 					</div>
 				</div>
 			))}
