@@ -16,8 +16,8 @@ const Person = ({ data }) => {
 
 	return (
 		<Layout>
-			<div className="flex mb-5 person-content">
-				<div className="w-1/5">
+			<div className="flex flex-wrap mb-5 person-content">
+				<div className="sm:w-1/1 md:w-1/1 lg:w-1/4 xl:w-1/6">
 					{profileImage != undefined && (
 						<div className="text-center">
 							<img
@@ -77,7 +77,7 @@ const Person = ({ data }) => {
 						</div>
 					</div>
 				</div>
-				<div className="w-3/4">
+				<div className="sm:w-1/1 md:w-1/1 lg:w-3/4 xl:5/6">
 					<h1>{frontmatter.name}</h1>
 					<dl>
 						<dt>Position:</dt>
