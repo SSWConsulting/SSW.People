@@ -48,7 +48,26 @@ module.exports = {
 						},
 					},
 					'gatsby-remark-relative-images',
-					'gatsby-remark-copy-linked-files',
+          'gatsby-remark-copy-linked-files',
+          {
+            resolve: "gatsby-remark-custom-blocks",
+            options: {
+              blocks: {
+                imgBadge: {
+                  classes: "img-badge",
+                },
+                imgLg: {
+                  classes: "img-large",
+                },
+                imgMd: {
+                  classes: "img-medium",
+                },
+                imgSm: {
+                  classes: "img-small",
+                },
+              },
+            },
+          },
 				],
 			},
 		},

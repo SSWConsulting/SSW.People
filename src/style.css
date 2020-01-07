@@ -184,6 +184,40 @@ button:focus{
   flex-basis: 172px;
 }
 
+/** Custom blocks images handling **/
+
+.img-badge {
+  margin-bottom: 20px;
+  display: inline-block;
+  vertical-align: middle;
+  min-width: 135px;
+  width:auto;
+  max-height: 135px;
+}
+
+.img-badge a {
+  border-bottom: none !important;
+}
+
+.img-badge img {
+  margin: 5px;
+  min-width: 135px;
+  width:auto;
+  max-height: 135px;
+}
+
+.img-medium img, .img-medium {
+  height: auto;
+  max-width: 400px;
+}
+
+.img-small img, .img-small {
+  height: auto;
+  max-width: 200px;
+}
+
+
+
 /**
 * This injects Tailwind's component classes and any component classes
 * registered by plugins.
