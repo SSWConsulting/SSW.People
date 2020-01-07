@@ -176,6 +176,11 @@ button:focus{
   background-color: rgb(238,238,238);
 }
 
+.flex-profile-box {
+  flex-grow: 0;
+  flex-basis: 172px;
+}
+
 /**
 * This injects Tailwind's component classes and any component classes
 * registered by plugins.

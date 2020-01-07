@@ -8,7 +8,7 @@ const ProfileBox = ({ profile, sanitisedName, profileImages }) => {
 	return (
 		<Link
 			to={`/${sanitisedName}`}
-			className="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 mb-4 unstyled"
+			className="w-full flex-profile-box mr-4 mb-4 unstyled"
 		>
 			{profileImages.profileImage !== undefined && (
 				<div
