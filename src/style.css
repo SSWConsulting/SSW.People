@@ -16,7 +16,10 @@ h1 {
     color: #cc4141;
 }
 h1.title {
+  font-family: "Segoe UI Medium", "Helvetica", "sans-serif";
+  font-size: 2em;
   color: #414141;
+  margin-bottom: 0.1em;
 }
 h2 {
     @apply text-3xl;
