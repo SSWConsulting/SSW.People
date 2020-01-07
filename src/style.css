@@ -17,6 +17,7 @@ h1 {
 }
 h1.title {
   color: #414141;
+  margin-bottom: 0em;
 }
 h2 {
     @apply text-3xl;
