@@ -5,7 +5,7 @@ import '../../style.css';
 
 const LocationFilter = ({ locations, selectedLocation, onLocationChange }) => {
 	return (
-		<div className="flex bg-gray-800 text-white">
+		<div className="flex bg-ssw-grey text-black">
 			<div className="w-1/3"></div>
 
 			<div className="w-1/3">
@@ -16,7 +16,7 @@ const LocationFilter = ({ locations, selectedLocation, onLocationChange }) => {
 								key={i}
 								id={location}
 								className={`p-3 ${
-									selectedLocation === location ? 'font-bold' : ''
+									selectedLocation === location ? 'font-bold text-ssw-red' : ''
 								}`}
 								onClick={() => onLocationChange(location)}
 							>

@@ -1,4 +1,6 @@
 /* eslint-disable no-undef */
+// Fix weird build error on some machines
+import 'array-flat-polyfill';
 import React, { useState, useEffect, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { StaticQuery, graphql } from 'gatsby';
@@ -12,6 +14,7 @@ import SkillsFilter from '../components/skills-filter/skills-filter';
 import RoleFilter from '../components/role-filter/role-filter';
 import Distinct from '../helpers/arrayHelpers';
 import LocationSanitiser from '../helpers/locationSanitizer';
+import 'array-flat-polyfill';
 
 const Index = ({ data, search }) => {
 	const history = typeof window !== 'undefined' ? createBrowserHistory() : null;
