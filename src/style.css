@@ -215,7 +215,9 @@ button:focus{
   max-width: 200px;
 }
 
-@media screen and (max-width: 768px) {
+
+
+@media screen and (max-width: 1024px) {
   iframe{
     height:auto;
     max-width: 100%;
@@ -233,6 +235,10 @@ button:focus{
 
   .descriptionwidth{
     width: 100vw;
+  }
+
+  .profileHeaderWidth{
+    width:100%;
   }
 }
 

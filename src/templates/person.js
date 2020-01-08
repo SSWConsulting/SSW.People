@@ -17,7 +17,7 @@ const Person = ({ data }) => {
 	return (
 		<Layout>
 			<div className="flex flex-wrap mb-5 person-content">
-				<div className="sm:w-1/1 md:w-1/1 lg:w-1/4 xl:w-1/6">
+				<div className="sm:w-1/1 md:w-1/1 lg:w-1/4 xl:w-1/6 profileHeaderWidth">
 					{profileImage != undefined && (
 						<div className="text-center">
 							<img
