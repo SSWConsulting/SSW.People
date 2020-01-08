@@ -86,7 +86,7 @@ const Index = ({ data, search }) => {
 					__html: data.homeJson.content.childMarkdownRemark.html,
 				}}
 			/>
-			<div className="mt-8 mb-12">
+			<div className="mt-8 mb-12 mx-12">
 				<LocationFilter
 					locations={allLocations}
 					selectedLocation={selectedLocation}

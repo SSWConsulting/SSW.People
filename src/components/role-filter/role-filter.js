@@ -27,7 +27,7 @@ const RoleFilter = ({
 	return (
 		<div className="filter-role">
 			{allRoles.sort(RoleSort).map(role => (
-				<div key={role} className="flex">
+				<div key={role} className="flex category">
 					<div className="w-4/4">
 						<Checkbox
 							labelText={role}
