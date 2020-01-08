@@ -5,7 +5,7 @@ const LocationSanitiser = value => {
 		case 'brisbane':
 			return value;
 		default:
-			return 'Elsewhere';
+			return 'Others';
 	}
 };
 

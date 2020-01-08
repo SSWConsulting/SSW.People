@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import React from 'react';
 import PropTypes from 'prop-types';
 import Checkbox from '../checkbox';
@@ -25,24 +27,29 @@ const RoleFilter = ({
 	};
 
 	return (
-		<div className="filter-role">
-			{allRoles.sort(RoleSort).map(role => (
-				<div key={role} className="flex category">
-					<div className="w-4/4">
-						<Checkbox
-							labelText={role}
-							checkboxValue={role}
-							isChecked={isRoleSelected(role)}
-							onChange={() => onRoleClicked(role)}
-							checkedIcon={faCheck}
-							checkedClassName="font-bold"
-							checkboxColor={isRoleSelected(role) ? '#cc4141' : ''}
-						/>{' '}
-						({filteredPeople.filter(p => p.role === role).length})
+		<>
+			<h4 className="font-bold" onClick={() => onRoleChange([])}>
+				Roles
+			</h4>
+			<div className="filter-role">
+				{allRoles.sort(RoleSort).map(role => (
+					<div key={role} className="flex category">
+						<div className="w-4/4">
+							<Checkbox
+								labelText={role}
+								checkboxValue={role}
+								isChecked={isRoleSelected(role)}
+								onChange={() => onRoleClicked(role)}
+								checkedIcon={faCheck}
+								checkedClassName="font-bold"
+								checkboxColor={isRoleSelected(role) ? '#cc4141' : ''}
+							/>{' '}
+							({filteredPeople.filter(p => p.role === role).length})
+						</div>
 					</div>
-				</div>
-			))}
-		</div>
+				))}
+			</div>
+		</>
 	);
 };
 
