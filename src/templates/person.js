@@ -77,36 +77,38 @@ const Person = ({ data }) => {
 						</div>
 					</div>
 				</div>
-				<div className="sm:w-1/1 md:w-1/1 lg:w-3/4 xl:5/6">
-					<h1>{frontmatter.name}</h1>
-					<dl>
-						<dt>Position:</dt>
-						<dd>{frontmatter.role}</dd>
-					</dl>
-					<dl>
-						<dt>Qualification:</dt>
-						<dd>{frontmatter.qualifications}</dd>
-					</dl>
-					<dl>
-						<dt>Location:</dt>
-						<dd>{crmData.location}</dd>
-					</dl>
-					<dl>
-						<dt>Skills:</dt>
-						{advancedSkills.map((skill, i) => (
-							<dd key={`a${i}`}>{skill};</dd>
-						))}
-						{intermediateSkills.map((skill, i) => (
-							<dd key={`i${i}`}>{skill};</dd>
-						))}
-					</dl>
+				<div className="sm:w-1/1 md:w-1/1 lg:w-3/4 xl:5/6 descriptionwidth">
+					<div className="person-description">
+						<h1>{frontmatter.name}</h1>
+						<dl>
+							<dt>Position:</dt>
+							<dd>{frontmatter.role}</dd>
+						</dl>
+						<dl>
+							<dt>Qualification:</dt>
+							<dd>{frontmatter.qualifications}</dd>
+						</dl>
+						<dl>
+							<dt>Location:</dt>
+							<dd>{crmData.location}</dd>
+						</dl>
+						<dl>
+							<dt>Skills:</dt>
+							{advancedSkills.map((skill, i) => (
+								<dd key={`a${i}`}> {skill};</dd>
+							))}
+							{intermediateSkills.map((skill, i) => (
+								<dd key={`i${i}`}> {skill};</dd>
+							))}
+						</dl>
 
-					<div
-						className="profile-content"
-						dangerouslySetInnerHTML={{
-							__html: profileHtml,
-						}}
-					/>
+						<div
+							className="profile-content"
+							dangerouslySetInnerHTML={{
+								__html: profileHtml,
+							}}
+						/>
+					</div>
 				</div>
 			</div>
 		</Layout>
