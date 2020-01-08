@@ -27,7 +27,7 @@ const SkillsFilter = ({ allSkills, selectedSkills, onSkillChange }) => {
 			</h4>
 			<div className="filter-skills">
 				{allSkills.map((skill, i) => (
-					<div key={i}>
+					<div key={i} className="category">
 						<Checkbox
 							labelText={skill}
 							checkboxValue={skill}

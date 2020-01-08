@@ -7,7 +7,7 @@ import Footer from 'components/footer';
 import '../../style.css';
 
 const Layout = ({ data, children }) => (
-	<div className="flex flex-col min-h-screen">
+	<div className="flex flex-col min-h-screen lg:mx-24 xl:mx-24">
 		<Head />
 		<Header title={data.site.siteMetadata.siteTitle} />
 		<main className="flex-1">{children}</main>
