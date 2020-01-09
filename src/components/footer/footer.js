@@ -66,8 +66,10 @@ const Footer = () => {
 						Azure
 					</a>{' '}
 					and{' '}
-					{/*TODO fix the link when Link to Static site generation Rule is created*/}
-					<a className="footer-link" href="https://rules.ssw.com.au/">
+					<a
+						className="footer-link"
+						href=" https://rules.ssw.com.au/static-site-generator"
+					>
 						{' '}
 						GitHub
 					</a>
