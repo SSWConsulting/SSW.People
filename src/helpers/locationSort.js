@@ -3,7 +3,7 @@ const locationOrdering = [
 	'Sydney',
 	'Melbourne',
 	'Brisbane',
-	'Elsewhere',
+	'Others',
 ];
 
 const LocationSort = (a, b) => {
