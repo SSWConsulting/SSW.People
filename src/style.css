@@ -249,6 +249,7 @@ button:focus {
   display: flex;
   align-items: center;
   font-size: 1.5em;
+  margin-right: 20px;
 }
 
 .action-btn-link {
@@ -266,6 +267,21 @@ button:focus {
 .action-btn-label {
   margin-right: auto;
   order: 1;
+}
+
+@media screen and (max-width: 600px) {
+  header>div.flex {
+    flex-direction: column;
+  }
+  .action-btn-container {
+    margin-left: 0;
+    margin-right: 0;
+    font-size: 1em;
+  }
+  .action-btn-link {
+    margin-left: 0;
+    margin-right: 10px;
+  }
 }
 
 /**
