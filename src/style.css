@@ -66,13 +66,36 @@ a:not(.btn):not(.unstyled):hover, a:link:not(.btn):not(.unstyled):hover {
   border-bottom: 1px dotted #cc4141;
 }
 
-.footer-link {
-  @apply text-gray-300 !important
+.footer-link  {
+  @apply text-gray-300 !important;
+  font-weight: bolder;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  -ms-transition: all 0.3s ease-in-out;
 }
 
 .footer-link:hover {
   @apply text-ssw-red !important;
   border-bottom: 1px dotted #cc4141;
+}
+
+a.footer-facebook {
+  background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAwCAYAAAAlzZsxAAAAmklEQVRIx82Suw3AIAwFXdF6puyTUbMHrQeI5JCICsXwLD4C6So4PzsOqSplWud7R70CGVSFuQlWZbilGxG6Wxq3B4h1AnqawpnvGRVCIqIJ8nNnClIMy2gCe4beUKguzvdrXMfxog3GCGRQFeYm/Fb2tHQjQndL4/bQZK2gCIhw5uqMCiER0QQpP3dNkGJgRhPYM/SGgr04Dw+JrFft00TR4QAAAABJRU5ErkJggg==') no-repeat right -12px;
+  padding-right: 16px;
+}
+
+a.footer-html {
+  background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAwCAYAAAAlzZsxAAAAmklEQVRIx82Suw3AIAwFXdF6puyTUbMHrQeI5JCICsXwLD4C6So4PzsOqSplWud7R70CGVSFuQlWZbilGxG6Wxq3B4h1AnqawpnvGRVCIqIJ8nNnClIMy2gCe4beUKguzvdrXMfxog3GCGRQFeYm/Fb2tHQjQndL4/bQZK2gCIhw5uqMCiER0QQpP3dNkGJgRhPYM/SGgr04Dw+JrFft00TR4QAAAABJRU5ErkJggg==') no-repeat right 1px;
+  padding-right: 14px;
+}
+
+a.footer-facebook:hover {
+  background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAwCAYAAAAlzZsxAAAAmklEQVRIx82Suw3AIAwFXdF6puyTUbMHrQeI5JCICsXwLD4C6So4PzsOqSplWud7R70CGVSFuQlWZbilGxG6Wxq3B4h1AnqawpnvGRVCIqIJ8nNnClIMy2gCe4beUKguzvdrXMfxog3GCGRQFeYm/Fb2tHQjQndL4/bQZK2gCIhw5uqMCiER0QQpP3dNkGJgRhPYM/SGgr04Dw+JrFft00TR4QAAAABJRU5ErkJggg==') no-repeat right -36px;
+}
+
+a.footer-html:hover {
+  background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAwCAYAAAAlzZsxAAAAmklEQVRIx82Suw3AIAwFXdF6puyTUbMHrQeI5JCICsXwLD4C6So4PzsOqSplWud7R70CGVSFuQlWZbilGxG6Wxq3B4h1AnqawpnvGRVCIqIJ8nNnClIMy2gCe4beUKguzvdrXMfxog3GCGRQFeYm/Fb2tHQjQndL4/bQZK2gCIhw5uqMCiER0QQpP3dNkGJgRhPYM/SGgr04Dw+JrFft00TR4QAAAABJRU5ErkJggg==') no-repeat right -23px;
 }
 
 footer {
