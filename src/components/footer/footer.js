@@ -14,7 +14,10 @@ const Footer = () => {
 					Reserved.
 				</div>
 				<div className="w-3/6 text-right">
-					<a className="footer-link" href="mailto:info@ssw.com.au">
+					<a
+						className="footer-link"
+						href="https://github.com/SSWConsulting/people.ssw.com.au/issues"
+					>
 						FEEDBACK TO SSW
 					</a>
 					<span className="px-2">|</span>
@@ -25,22 +28,25 @@ const Footer = () => {
 						TERMS AND CONDITION
 					</a>
 					<span className="px-2">|</span>
-					<a className="footer-link" href="https://www.facebook.com/SSW.page">
-						FIND US ON FACEBOOK
+					<a
+						className="footer-link footer-facebook"
+						href="https://www.facebook.com/SSW.page"
+					>
+						FIND US ON
 					</a>
 					<span className="px-2">|</span>
 					<a
-						className="footer-link"
+						className="footer-link footer-html"
 						href="https://www.w3.org/html/logo/faq.html"
 					>
-						HTML 5
+						HTML
 					</a>
 				</div>
 				{/* Copyright © SSW 1990 - {new Date().getFullYear()}. All Rights Reserved. */}
 			</div>
 			<div className="flex">
 				<div className="w-1/6" />
-				<div className="py-2 w-4/6 border-t border-gray-800">
+				<div className="py-2 w-3/6 border-t border-gray-800">
 					Our website is under{' '}
 					<a
 						className="footer-link"
@@ -50,6 +56,21 @@ const Footer = () => {
 					</a>
 					. Last deployed {getLastDeployTime()} ago (Build #{' '}
 					{process.env.VERSION_DEPLOYED})
+				</div>
+				<div className="py-2 w-1/6 border-t border-gray-800 text-right">
+					Powered by{' '}
+					<a
+						className="footer-link"
+						href="https://rules.ssw.com.au/rules-to-better-azure"
+					>
+						Azure
+					</a>{' '}
+					and{' '}
+					{/*TODO fix the link when Link to Static site generation Rule is created*/}
+					<a className="footer-link" href="https://rules.ssw.com.au/">
+						{' '}
+						GitHub
+					</a>
 				</div>
 			</div>
 		</footer>
