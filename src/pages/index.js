@@ -79,7 +79,7 @@ const Index = ({ data, search }) => {
 	}, [selectedLocation, selectedSkills, selectedRoles]);
 
 	return (
-		<Layout>
+		<Layout displayActions={false}>
 			<div
 				className="mx-12"
 				dangerouslySetInnerHTML={{
