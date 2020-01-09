@@ -68,7 +68,7 @@ const Footer = () => {
 					and{' '}
 					<a
 						className="footer-link"
-						href=" https://rules.ssw.com.au/static-site-generator"
+						href="https://rules.ssw.com.au/static-site-generator"
 					>
 						{' '}
 						GitHub
