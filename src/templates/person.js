@@ -17,21 +17,28 @@ const Person = ({ data }) => {
 	return (
 		<Layout displayActions={true} profileId={person.name}>
 			<div className="flex flex-wrap mb-5 person-content">
-				<div className="sm:w-1/1 md:w-1/1 lg:w-1/4 xl:w-1/6 profileHeaderWidth">
+				<div className="sm:w-full md:w-full lg:w-1/4 xl:w-1/6 profileHeaderWidth">
 					{profileImage != undefined && (
-						<div className="image-bg text-center">
-							<img
-								className="profile-image relative bg-cover mx-auto"
-								src={profileImage.childImageSharp.original.src}
-								alt="Profile"
-							/>
+						<div className="flex">
+							<div className="image-bg text-center w-1/2 mx-auto">
+								<img
+									className="profile-image relative bg-cover mx-auto"
+									src={profileImage.childImageSharp.original.src}
+									alt="Profile"
+								/>
+							</div>
+							<div className="person-description lg:hidden xl:hidden w-1/2 my-auto">
+								<h1>{frontmatter.name}</h1>
+							</div>
 						</div>
 					)}
-					<div className="person-favor">
-						<div className="person-quote">{frontmatter.quote}</div>
-						<br />
-						<div className="person-quote-name">{frontmatter.nickname}</div>
-						<div className="favor-content">
+					<div className="flex person-favor flex-row lg:flex-col">
+						<div className="w-1/2 pr-2  lg:pr-0 lg:w-full">
+							<div className="person-quote">{frontmatter.quote}</div>
+							<br />
+							<div className="person-quote-name">{frontmatter.nickname}</div>
+						</div>
+						<div className="favor-content w-1/2 lg:w-full">
 							<ul className="favor-list">
 								{crmData.emailAddress != '' && (
 									<li id="email" className="social">
@@ -76,9 +83,9 @@ const Person = ({ data }) => {
 						</div>
 					</div>
 				</div>
-				<div className="sm:w-1/1 md:w-1/1 lg:w-3/4 xl:5/6 descriptionwidth">
+				<div className="sm:w-full md:w-full lg:w-3/4 xl:5/6 descriptionwidth">
 					<div className="person-description">
-						<h1>{frontmatter.name}</h1>
+						<h1 className="hidden lg:inline xl:inline">{frontmatter.name}</h1>
 						<dl>
 							<dt>Position:</dt>
 							<dd>{frontmatter.role}</dd>
