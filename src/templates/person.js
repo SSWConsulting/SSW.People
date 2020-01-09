@@ -12,10 +12,11 @@ const Person = ({ data }) => {
 	const skills = crmData.skills || {};
 	const intermediateSkills = skills.intermediateSkills || [];
 	const advancedSkills = skills.advancedSkills || [];
-	const profileImage = data.profileImage.nodes[0];
+  const profileImage = data.profileImage.nodes[0];
+
 
 	return (
-		<Layout>
+		<Layout displayActions={true} profileId={person.name}>
 			<div className="flex flex-wrap mb-5 person-content">
 				<div className="sm:w-1/1 md:w-1/1 lg:w-1/4 xl:w-1/6 profileHeaderWidth">
 					{profileImage != undefined && (
