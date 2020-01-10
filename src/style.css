@@ -273,6 +273,12 @@ button:focus {
   .profileHeaderWidth {
     width: 100%;
   }
+  .favor-content {
+    background-color: #efefef;
+    border: 1px solid #dddddd;
+    border-radius: 4px;
+    margin: 0px;
+  }
 }
 
 .category:hover {
