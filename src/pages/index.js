@@ -93,16 +93,18 @@ const Index = ({ data, search }) => {
 					onLocationChange={setSelectedLocation}
 				/>
 			</div>
-			<div className="mx-12 flex">
-				<div className="w-1/4">
-					<div className="w-5/6 mx-auto">
-						<RoleFilter
-							allRoles={allRoles}
-							selectedRoles={selectedRoles}
-							onRoleChange={setSelectedRoles}
-							filteredPeople={filteredPeople}
-						/>
-						<div className="mt-4">
+			<div className="mx-12 flex flex-col lg:flex-row">
+				<div className="lg:w-1/4">
+					<div className="mx-auto flex flex-row lg:flex-col">
+						<div className="w-1/2">
+							<RoleFilter
+								allRoles={allRoles}
+								selectedRoles={selectedRoles}
+								onRoleChange={setSelectedRoles}
+								filteredPeople={filteredPeople}
+							/>
+						</div>
+						<div className="w-1/2 mt-0 lg:mt-4">
 							<SkillsFilter
 								allSkills={allSkills}
 								selectedSkills={selectedSkills}
@@ -111,7 +113,7 @@ const Index = ({ data, search }) => {
 						</div>
 					</div>
 				</div>
-				<div className="w-3/4">
+				<div className="lg:w-3/4">
 					<ProfileList
 						filteredPeople={filteredPeople.filter(
 							p => selectedRoles.length === 0 || selectedRoles.includes(p.role)

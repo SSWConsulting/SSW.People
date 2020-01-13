@@ -117,6 +117,19 @@ ul li {
   line-height: 1.5em;
 }
 
+.clear-filter{
+  @apply text-ssw-red;
+}
+
+.filter-role li, .filter-skills li{
+  background: none;
+  padding: 0 0 0 0;
+}
+
+.filter-role-opener{
+  display: none;
+}
+
 .gatsby-resp-image-wrapper {
   margin-left: 0% !important;
 }
@@ -279,7 +292,13 @@ button:focus {
     border-radius: 4px;
     margin: 0px;
   }
+
+  .filter-role-opener{
+    display: inline;
+  }
 }
+
+
 
 .category:hover {
   background-color: rgb(238, 238, 238);
@@ -309,6 +328,11 @@ button:focus {
 .action-btn-label {
   margin-right: auto;
   order: 1;
+}
+
+.text-ident{
+  padding-left: 0.5em;
+  text-indent:-0.5em;
 }
 
 @media screen and (max-width: 600px) {
