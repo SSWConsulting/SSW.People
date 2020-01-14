@@ -169,6 +169,13 @@ ul li {
   margin-top: 14px;
 }
 
+.profile-content p{
+  margin-bottom: 10px;
+}
+.profile-content ul{
+  margin-bottom: 10px;
+ }
+
 .favor-content {
   background-color: #efefef;
   border: 1px solid #dddddd;
@@ -223,6 +230,10 @@ button:focus {
 
 .bg-ssw-grey {
   background-color: rgb(238, 238, 238);
+}
+
+.border-ssw-grey{
+  border-color:rgb(238, 238, 238);
 }
 
 .flex-profile-box {

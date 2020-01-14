@@ -81,22 +81,22 @@ const Index = ({ data, search }) => {
 	return (
 		<Layout displayActions={false}>
 			<div
-				className="mx-12"
+				className="mx-8 lg:mx-12"
 				dangerouslySetInnerHTML={{
 					__html: data.homeJson.content.childMarkdownRemark.html,
 				}}
 			/>
-			<div className="mt-8 mb-12 mx-12">
+			<div className="mt-8 mb-12 lg:mx-12">
 				<LocationFilter
 					locations={allLocations}
 					selectedLocation={selectedLocation}
 					onLocationChange={setSelectedLocation}
 				/>
 			</div>
-			<div className="mx-12 flex flex-col lg:flex-row">
+			<div className="mx-8 lg:mx-12 flex flex-col lg:flex-row">
 				<div className="lg:w-1/4">
-					<div className="mx-auto flex flex-row lg:flex-col">
-						<div className="w-1/2">
+					<div className="mx-auto flex flex-col sm:flex-row lg:flex-col lg:w-5/6">
+						<div className="w-full sm:w-1/2 lg:w-full">
 							<RoleFilter
 								allRoles={allRoles}
 								selectedRoles={selectedRoles}
@@ -104,7 +104,7 @@ const Index = ({ data, search }) => {
 								filteredPeople={filteredPeople}
 							/>
 						</div>
-						<div className="w-1/2 mt-0 lg:mt-4">
+						<div className="w-full sm:w-1/2 lg:w-full mt-0 lg:mt-4">
 							<SkillsFilter
 								allSkills={allSkills}
 								selectedSkills={selectedSkills}

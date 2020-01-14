@@ -1,12 +1,13 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-import React, { useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 import Checkbox from '../checkbox';
 import {
 	faCheck,
 	faAngleDown,
 	faAngleUp,
+	faTimes,
 } from '@fortawesome/free-solid-svg-icons';
 import RoleSort from '../../helpers/roleSort';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -18,6 +19,7 @@ const RoleFilter = ({
 	onRoleChange,
 	filteredPeople,
 }) => {
+	const node = useRef();
 	const [listOpen, setListOpen] = useState(false);
 
 	const onRoleClicked = role => {
@@ -29,64 +31,75 @@ const RoleFilter = ({
 		}
 	};
 
+	const handleClick = e => {
+		if (node.current.contains(e.target)) {
+			// inside click
+			return;
+		}
+		// outside click
+		setListOpen(false);
+	};
+
 	const isRoleSelected = role => {
 		return selectedRoles.indexOf(role) !== -1;
 	};
 
-	// return (
-	// 	<>
-	// 		<h4 className="font-bold" onClick={() => onRoleChange([])}>
-	// 			Roles
-	// 		</h4>
-	// 		<div className="filter-role">
-	// 			{allRoles.sort(RoleSort).map(role => (
-	// 				<div key={role} className="flex category">
-	// 					<div className="w-4/4">
-	// 						<Checkbox
-	// 							labelText={role}
-	// 							checkboxValue={role}
-	// 							isChecked={isRoleSelected(role)}
-	// 							onChange={() => onRoleClicked(role)}
-	// 							checkedIcon={faCheck}
-	// 							checkedClassName="font-bold"
-	// 							checkboxColor={isRoleSelected(role) ? '#cc4141' : ''}
-	// 						/>{' '}
-	// 						({filteredPeople.filter(p => p.role === role).length})
-	// 					</div>
-	// 				</div>
-	// 			))}
-	// 		</div>
-	// 	</>
-	// );
+	useEffect(() => {
+		document.addEventListener('mousedown', handleClick);
+
+		return () => {
+			document.removeEventListener('mousedown', handleClick);
+		};
+	}, []);
 
 	return (
 		<>
-			<div>
-				<div className="block sm:block lg:hidden">
-					<h4
-						className="font-bold whitespace-no-wrap"
-						onClick={() => setListOpen(!listOpen)}
+			<div ref={node} className="relative lg:static">
+				<div className="flex justify-between items-center align-middle">
+					<div className="block sm:block lg:hidden">
+						<h4
+							className="font-bold whitespace-no-wrap"
+							onClick={() => setListOpen(!listOpen)}
+						>
+							Roles{' '}
+							<FontAwesomeIcon icon={listOpen ? faAngleUp : faAngleDown} />
+						</h4>
+					</div>
+					<div className="hidden sm:hidden lg:block ">
+						<h4 className="font-bold whitespace-no-wrap">Roles</h4>
+					</div>
+					{/* eslint-disable-next-line jsx-a11y/no-static-element-interactions */}
+					<small
+						className={
+							selectedRoles.length > 0
+								? 'text-ssw-red cursor-pointer mb-1 mr-2'
+								: 'hidden'
+						}
+						onClick={() => {
+							onRoleChange([]);
+							setListOpen(false);
+						}}
 					>
-						Roles <FontAwesomeIcon icon={listOpen ? faAngleUp : faAngleDown} />
-					</h4>
+						<FontAwesomeIcon icon={faTimes} />
+						Clear filter
+					</small>
 				</div>
-				<div className="hidden sm:hidden lg:block ">
-					<h4 className="font-bold whitespace-no-wrap cursor-pointer">Roles</h4>
-				</div>
-
 				<ul
-					className={listOpen ? 'filter-role' : 'filter-role hidden lg:inline'}
+					className={
+						listOpen
+							? 'filter-role mr-1 sm:py-1 lg:py-1 lg:border-0 border border-ssw-grey absolute bg-white  lg:static w-full z-50 lg:z.0'
+							: 'filter-role hidden lg:inline'
+					}
 				>
-					<li className="flex clear-filter" onClick={() => onRoleChange([])}>
-						Clear filters
-					</li>
 					{allRoles.sort(RoleSort).map(role => (
-						<li key={role} className="flex category">
-							<div className="w-4/4 whitespace-no-wrap">
+						<li key={role} className="flex category w-full">
+							<div className="w-full whitespace-no-wrap">
 								<Checkbox
 									labelText={role}
-                  checkboxValue={role}
-                  checkboxCount={filteredPeople.filter(p => p.role === role).length}
+									checkboxValue={role}
+									checkboxCount={
+										filteredPeople.filter(p => p.role === role).length
+									}
 									isChecked={isRoleSelected(role)}
 									onChange={() => onRoleClicked(role)}
 									checkedIcon={faCheck}
