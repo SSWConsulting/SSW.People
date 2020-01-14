@@ -6,7 +6,7 @@ import '../../style.css';
 const LocationFilter = ({ locations, selectedLocation, onLocationChange }) => {
   return (
     <div className="flex bg-ssw-grey text-black justify-center">
-      <div className="flex flex-wrap justify-around">
+      <div className="flex flex-wrap justify-around location-filter">
         {locations.sort(LocationSort).map((location, i) => {
           return (
             <button

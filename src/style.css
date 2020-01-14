@@ -64,9 +64,9 @@ a:link {
     font-weight: bolder;
 
     &.footer-link  {
-        @apply text-gray-300;
-        font-weight: bolder;
-        transition: all 0.3s ease-in-out;
+      @apply text-gray-300;
+      font-weight: bolder;
+      transition: all 0.3s ease-in-out;
     }
 
     &:hover {
@@ -361,6 +361,14 @@ button:focus {
   }
 }
 
+.location-filter {
+  button {
+    &:hover {
+      @apply hovered;
+      transition: all 0.2s ease-in-out;
+    }
+  }
+}
 
 .people-grid-container {
   display: grid;
