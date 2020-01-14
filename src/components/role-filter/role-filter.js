@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-import React, { useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 import Checkbox from '../checkbox';
 import {
@@ -19,6 +19,7 @@ const RoleFilter = ({
 	onRoleChange,
 	filteredPeople,
 }) => {
+	const node = useRef();
 	const [listOpen, setListOpen] = useState(false);
 
 	const onRoleClicked = role => {
@@ -30,13 +31,30 @@ const RoleFilter = ({
 		}
 	};
 
+	const handleClick = e => {
+		if (node.current.contains(e.target)) {
+			// inside click
+			return;
+		}
+		// outside click
+		setListOpen(false);
+	};
+
 	const isRoleSelected = role => {
 		return selectedRoles.indexOf(role) !== -1;
 	};
 
+	useEffect(() => {
+		document.addEventListener('mousedown', handleClick);
+
+		return () => {
+			document.removeEventListener('mousedown', handleClick);
+		};
+	}, []);
+
 	return (
 		<>
-			<div className="relative lg:static">
+			<div ref={node} className="relative lg:static">
 				<div className="flex justify-between items-center align-middle">
 					<div className="block sm:block lg:hidden">
 						<h4
