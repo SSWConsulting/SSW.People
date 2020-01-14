@@ -71,7 +71,7 @@ const RoleFilter = ({
 					</h4>
 				</div>
 				<div className="hidden sm:hidden lg:block ">
-					<h4 className="font-bold whitespace-no-wrap cursor-pointer">Roles</h4>
+					<h4 className="font-bold whitespace-no-wrap">Roles</h4>
 				</div>
 
 				<ul
@@ -85,8 +85,10 @@ const RoleFilter = ({
 							<div className="w-4/4 whitespace-no-wrap">
 								<Checkbox
 									labelText={role}
-                  checkboxValue={role}
-                  checkboxCount={filteredPeople.filter(p => p.role === role).length}
+									checkboxValue={role}
+									checkboxCount={
+										filteredPeople.filter(p => p.role === role).length
+									}
 									isChecked={isRoleSelected(role)}
 									onChange={() => onRoleClicked(role)}
 									checkedIcon={faCheck}
