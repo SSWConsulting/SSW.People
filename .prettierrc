@@ -6,6 +6,5 @@
   "jsxBracketSameLine": false,
   "parser": "babel",
   "semi": true,
-  "endOfLine":"auto",
-  "useTabs": true
+  "endOfLine":"auto"
 }

@@ -5,15 +5,12 @@ import PropTypes from 'prop-types';
 const ProfileBox = ({ profile, sanitisedName, profileImages }) => {
   const [hover, setHover] = useState(false);
 
-
   const content = profileImages.profileImage !== undefined && (
     <div
       className="relative bg-cover shadow-lg profile-image"
       style={{
         backgroundImage: `url(${
-          hover
-            ? profileImages.profileImage
-            : profileImages.sketchProfileImage
+          hover ? profileImages.profileImage : profileImages.sketchProfileImage
         })`,
         height: '242px',
       }}
@@ -33,29 +30,27 @@ const ProfileBox = ({ profile, sanitisedName, profileImages }) => {
     </div>
   );
 
-  return (profile.role === "enthusiastic People" ?
+  return profile.role === 'enthusiastic People' ? (
     <a
-      href='https://www.ssw.com.au/ssw/Employment/default.aspx'
-      className='w-full flex-profile-box unstyled' >
+      href="https://www.ssw.com.au/ssw/Employment/default.aspx"
+      className="w-full flex-profile-box unstyled"
+    >
       {content}
     </a>
-    :
-		<Link
-			to={`/${sanitisedName}`}
-			className="w-full flex-profile-box unstyled"
-		>
+  ) : (
+    <Link to={`/${sanitisedName}`} className="w-full flex-profile-box unstyled">
       {content}
-		</Link>
-	);
+    </Link>
+  );
 };
 
 ProfileBox.propTypes = {
-	profile: PropTypes.object.isRequired,
-	sanitisedName: PropTypes.string.isRequired,
-	profileImages: PropTypes.exact({
-		profileImage: PropTypes.string,
-		sketchProfileImage: PropTypes.string,
-	}),
+  profile: PropTypes.object.isRequired,
+  sanitisedName: PropTypes.string.isRequired,
+  profileImages: PropTypes.exact({
+    profileImage: PropTypes.string,
+    sketchProfileImage: PropTypes.string,
+  }),
 };
 
 export default ProfileBox;
