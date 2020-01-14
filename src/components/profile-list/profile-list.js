@@ -20,9 +20,9 @@ const ProfileList = ({ filteredPeople }) => {
 				const people = getPeopleInRole(role);
 				return (
 					people.length > 0 && (
-						<div key={i} className={role}>
+						<section key={i} className={'role-section '+ role}>
 							<h2 className="mb-2">{role}</h2>
-							<div className="flex flex-wrap">
+							<div className="people-grid-container">
 								{people.map((person, id) => {
 									return (
 										<ProfileBox
@@ -34,7 +34,7 @@ const ProfileList = ({ filteredPeople }) => {
 									);
 								})}
 							</div>
-						</div>
+						</section>
 					)
 				);
 			})}
