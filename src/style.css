@@ -321,6 +321,38 @@ button:focus {
   }
 }
 
+
+.people-grid-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-column-gap: 1.5rem;
+  grid-row-gap: 1.5rem;
+}
+
+@media(min-width: 1440px) {
+  .people-grid-container {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+
+
+@media(max-width: 1200px) {
+  .people-grid-container {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media(max-width: 680px) {
+  .people-grid-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media(max-width: 460px) {
+  .people-grid-container {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
 /**
 * This injects Tailwind's component classes and any component classes
 * registered by plugins.

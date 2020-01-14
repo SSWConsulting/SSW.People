@@ -16,7 +16,6 @@ const ProfileBox = ({ profile, sanitisedName, profileImages }) => {
             : profileImages.sketchProfileImage
         })`,
         height: '242px',
-        width: '172px',
       }}
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
@@ -37,13 +36,13 @@ const ProfileBox = ({ profile, sanitisedName, profileImages }) => {
   return (profile.role === "enthusiastic People" ?
     <a
       href='https://www.ssw.com.au/ssw/Employment/default.aspx'
-      className='w-full flex-profile-box mr-4 mb-4 unstyled' >
+      className='w-full flex-profile-box unstyled' >
       {content}
     </a>
     :
 		<Link
 			to={`/${sanitisedName}`}
-			className="w-full flex-profile-box mr-4 mb-4 unstyled"
+			className="w-full flex-profile-box unstyled"
 		>
       {content}
 		</Link>
