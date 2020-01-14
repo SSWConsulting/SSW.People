@@ -302,6 +302,11 @@ button:focus {
   .filter-role-opener{
     display: inline;
   }
+
+  .profile-image-quote{
+    padding-left: 10px;
+    margin: 15px 20px 15px 11px
+  }
 }
 
 
@@ -373,6 +378,22 @@ button:focus {
 @media(max-width: 520px) {
   .people-grid-container {
     grid-template-columns: repeat(2, 1fr);
+  }
+
+  .person-quote {
+    font-family: Georgia;
+    font-size: 16px;
+    padding-left: 10px;
+    font-style: italic;
+    background-image: url(./images/selfquoteMark.gif);
+    background-repeat: no-repeat;
+  }
+
+  .person-quote-name {
+    font-family: Georgia;
+    text-align: right;
+    font-style: italic;
+    font-size: 16px;
   }
 }
 
