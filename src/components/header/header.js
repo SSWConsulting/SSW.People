@@ -26,7 +26,7 @@ const Header = ({ title, displayActions, profileId }) => {
 	return (
 		<AnimatedContainer>
 			<header>
-				<div className="flex ml-12 mt-4 mb-6">
+				<div className="flex ml-8 lg:ml-12 mt-4 mb-6">
 					<div className="flex items-center">
 						<Link to="/" className="unstyled">
 							<SSWLogo aria-label="logo" />
