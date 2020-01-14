@@ -69,7 +69,10 @@ const SkillsFilter = ({ allSkills, selectedSkills, onSkillChange }) => {
 								? 'text-ssw-red cursor-pointer mb-1 mr-2'
 								: 'hidden'
 						}
-						onClick={() => onSkillChange([])}
+						onClick={() => {
+							onSkillChange([]);
+							setListOpen(false);
+						}}
 					>
 						<FontAwesomeIcon icon={faTimes} />
 						Clear filter

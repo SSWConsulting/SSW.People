@@ -75,7 +75,10 @@ const RoleFilter = ({
 								? 'text-ssw-red cursor-pointer mb-1 mr-2'
 								: 'hidden'
 						}
-						onClick={() => onRoleChange([])}
+						onClick={() => {
+							onRoleChange([]);
+							setListOpen(false);
+						}}
 					>
 						<FontAwesomeIcon icon={faTimes} />
 						Clear filter
