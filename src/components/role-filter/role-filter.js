@@ -7,6 +7,7 @@ import {
 	faCheck,
 	faAngleDown,
 	faAngleUp,
+	faTimes,
 } from '@fortawesome/free-solid-svg-icons';
 import RoleSort from '../../helpers/roleSort';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -33,56 +34,45 @@ const RoleFilter = ({
 		return selectedRoles.indexOf(role) !== -1;
 	};
 
-	// return (
-	// 	<>
-	// 		<h4 className="font-bold" onClick={() => onRoleChange([])}>
-	// 			Roles
-	// 		</h4>
-	// 		<div className="filter-role">
-	// 			{allRoles.sort(RoleSort).map(role => (
-	// 				<div key={role} className="flex category">
-	// 					<div className="w-4/4">
-	// 						<Checkbox
-	// 							labelText={role}
-	// 							checkboxValue={role}
-	// 							isChecked={isRoleSelected(role)}
-	// 							onChange={() => onRoleClicked(role)}
-	// 							checkedIcon={faCheck}
-	// 							checkedClassName="font-bold"
-	// 							checkboxColor={isRoleSelected(role) ? '#cc4141' : ''}
-	// 						/>{' '}
-	// 						({filteredPeople.filter(p => p.role === role).length})
-	// 					</div>
-	// 				</div>
-	// 			))}
-	// 		</div>
-	// 	</>
-	// );
-
 	return (
 		<>
-			<div>
-				<div className="block sm:block lg:hidden">
-					<h4
-						className="font-bold whitespace-no-wrap"
-						onClick={() => setListOpen(!listOpen)}
+			<div className="relative lg:static">
+				<div className="flex justify-between items-center align-middle">
+					<div className="block sm:block lg:hidden">
+						<h4
+							className="font-bold whitespace-no-wrap"
+							onClick={() => setListOpen(!listOpen)}
+						>
+							Roles{' '}
+							<FontAwesomeIcon icon={listOpen ? faAngleUp : faAngleDown} />
+						</h4>
+					</div>
+					<div className="hidden sm:hidden lg:block ">
+						<h4 className="font-bold whitespace-no-wrap">Roles</h4>
+					</div>
+					{/* eslint-disable-next-line jsx-a11y/no-static-element-interactions */}
+					<small
+						className={
+							selectedRoles.length > 0
+								? 'text-ssw-red cursor-pointer mb-1 mr-2'
+								: 'hidden'
+						}
+						onClick={() => onRoleChange([])}
 					>
-						Roles <FontAwesomeIcon icon={listOpen ? faAngleUp : faAngleDown} />
-					</h4>
+						<FontAwesomeIcon icon={faTimes} />
+						Clear filter
+					</small>
 				</div>
-				<div className="hidden sm:hidden lg:block ">
-					<h4 className="font-bold whitespace-no-wrap">Roles</h4>
-				</div>
-
 				<ul
-					className={listOpen ? 'filter-role' : 'filter-role hidden lg:inline'}
+					className={
+						listOpen
+							? 'filter-role mr-1 sm:py-1 lg:py-1 lg:border-0 border border-ssw-grey absolute bg-white  lg:static w-full z-50 lg:z.0'
+							: 'filter-role hidden lg:inline'
+					}
 				>
-					<li className="flex clear-filter" onClick={() => onRoleChange([])}>
-						Clear filters
-					</li>
 					{allRoles.sort(RoleSort).map(role => (
-						<li key={role} className="flex category">
-							<div className="w-4/4 whitespace-no-wrap">
+						<li key={role} className="flex category w-full">
+							<div className="w-full whitespace-no-wrap">
 								<Checkbox
 									labelText={role}
 									checkboxValue={role}

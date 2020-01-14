@@ -7,6 +7,7 @@ import {
 	faCheck,
 	faAngleUp,
 	faAngleDown,
+	faTimes,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import '../../style.css';
@@ -27,54 +28,44 @@ const SkillsFilter = ({ allSkills, selectedSkills, onSkillChange }) => {
 		return selectedSkills.indexOf(skill) !== -1;
 	};
 
-	// return (
-	// 	<>
-	// 		<h4 className="font-bold" onClick={() => onSkillChange([])}>
-	// 			Technologies
-	// 		</h4>
-	// 		<div className="filter-skills">
-	// 			{allSkills.map((skill, i) => (
-	// 				<div key={i} className="category">
-	// 					<Checkbox
-	// 						labelText={skill}
-	// 						checkboxValue={skill}
-	// 						isChecked={isSkillSelected(skill)}
-	// 						onChange={() => onSkillClicked(skill)}
-	// 						checkedIcon={faCheck}
-	// 						checkedClassName="font-bold"
-	// 						checkboxColor={isSkillSelected(skill) ? '#cc4141' : ''}
-	// 					/>
-	// 				</div>
-	// 			))}
-	// 		</div>
-	// 	</>
-	// );
-
 	return (
 		<>
-			<div>
-				<div className="block sm:block lg:hidden">
-					<h4
-						className="font-bold whitespace-no-wrap cursor-pointer"
-						onClick={() => setListOpen(!listOpen)}
+			<div className="relative lg:static">
+				<div className="flex justify-between items-center align-middle">
+					<div className="block sm:block lg:hidden">
+						<h4
+							className="font-bold whitespace-no-wrap"
+							onClick={() => setListOpen(!listOpen)}
+						>
+							Technologies{' '}
+							<FontAwesomeIcon icon={listOpen ? faAngleUp : faAngleDown} />
+						</h4>
+					</div>
+					<div className="hidden sm:hidden lg:block">
+						<h4 className="font-bold whitespace-no-wrap">Technologies</h4>
+					</div>
+					{/* eslint-disable-next-line jsx-a11y/no-static-element-interactions */}
+					<small
+						className={
+							selectedSkills.length > 0
+								? 'text-ssw-red cursor-pointer mb-1 mr-2'
+								: 'hidden'
+						}
+						onClick={() => onSkillChange([])}
 					>
-						Technologies{' '}
-						<FontAwesomeIcon icon={listOpen ? faAngleUp : faAngleDown} />
-					</h4>
-				</div>
-				<div className="hidden sm:hidden lg:block">
-					<h4 className="font-bold whitespace-no-wrap">Technologies</h4>
+						<FontAwesomeIcon icon={faTimes} />
+						Clear filter
+					</small>
 				</div>
 				<ul
 					className={
-						listOpen ? 'filter-skills' : 'filter-skills hidden lg:inline'
+						listOpen
+							? 'filter-skills ml-1 lg:ml-0 py-1 lg:py-1 absolute lg:border-0 border border-ssw-grey lg:static w-full z-50 lg:z.0 bg-white'
+							: 'filter-skills hidden lg:inline'
 					}
 				>
-					<li className="flex clear-filter" onClick={() => onSkillChange([])}>
-						Clear filters
-					</li>
 					{allSkills.map((skill, i) => (
-						<li key={i} className="category">
+						<li key={i} className="category w-full">
 							<Checkbox
 								labelText={skill}
 								checkboxValue={skill}
