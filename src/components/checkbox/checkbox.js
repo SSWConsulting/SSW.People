@@ -6,6 +6,7 @@ import '../../style.css';
 const Checkbox = ({
 	labelText,
 	checkboxValue,
+	checkboxCount,
 	isChecked,
 	onChange,
 	checkedIcon,
@@ -27,17 +28,22 @@ const Checkbox = ({
 				checked={isChecked}
 				onChange={onChange}
 			/>
-			<div className="inline-block w-4 mr-1">
-				{isChecked || unCheckedIcon ? (
+			<div className="flex">
+				<div
+					className={
+						'inline-block w-4 mr-1' +
+						(isChecked || unCheckedIcon ? '' : ' invisible')
+					}
+				>
 					<FontAwesomeIcon
-						icon={isChecked ? checkedIcon : unCheckedIcon}
+						icon={checkedIcon}
 						color={checkboxColor}
 					/>
-				) : (
-					<></>
-				)}
+				</div>
+				<div className="inline-block text-ident">
+					{labelText} {checkboxCount != null ? ' (' + checkboxCount + ')' : ''}
+				</div>
 			</div>
-			{labelText}
 		</label>
 	);
 };
@@ -45,6 +51,7 @@ const Checkbox = ({
 Checkbox.propTypes = {
 	labelText: PropTypes.string.isRequired,
 	checkboxValue: PropTypes.string.isRequired,
+	checkboxCount: PropTypes.number,
 	isChecked: PropTypes.bool.isRequired,
 	onChange: PropTypes.func.isRequired,
 	checkedIcon: PropTypes.object.isRequired,
