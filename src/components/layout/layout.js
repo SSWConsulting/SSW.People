@@ -7,16 +7,18 @@ import Footer from 'components/footer';
 import '../../style.css';
 
 const Layout = ({ data, children, displayActions, profileId }) => (
-  <div className="flex flex-col min-h-screen main-container">
-    <Head />
-    <Header
-      title={data.site.siteMetadata.siteTitle}
-      displayActions={displayActions}
-      profileId={profileId}
-    />
-    <main className="flex-1 mx-auto">{children}</main>
+  <>
+    <div className="flex flex-col min-h-screen main-container">
+      <Head />
+      <Header
+        title={data.site.siteMetadata.siteTitle}
+        displayActions={displayActions}
+        profileId={profileId}
+      />
+      <main className="flex-1 mx-auto">{children}</main>
+    </div>
     <Footer />
-  </div>
+  </>
 );
 
 Layout.propTypes = {

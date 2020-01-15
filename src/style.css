@@ -372,9 +372,15 @@ button:focus {
 
 .people-grid-container {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(5, 1fr);
   grid-column-gap: 1.5rem;
   grid-row-gap: 1.5rem;
+}
+
+@media(max-width: 1200px) {
+  .people-grid-container {
+    grid-template-columns: repeat(4, 1fr);
+  }
 }
 
 @media(max-width: 767px) {
