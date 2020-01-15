@@ -201,6 +201,10 @@ ul.favor-list li {
   }
 }
 
+.skill-separator {
+  color: #aaa;
+  font-weight: 400;
+}
 
 .social {
   padding: 0px 0px 0px 20px;
