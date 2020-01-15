@@ -15,7 +15,11 @@ const Person = ({ data }) => {
   const profileImage = data.profileImage.nodes[0];
 
   return (
-    <Layout displayActions={true} profileId={person.name}>
+    <Layout
+      pageTitle={childMarkdownRemark.frontmatter.name}
+      displayActions={true}
+      profileId={person.name}
+    >
       <div className="flex flex-wrap mb-5 person-content">
         <div className="sm:w-full md:w-full lg:w-1/4 xl:w-1/6 profileHeaderWidth">
           {profileImage != undefined && (
