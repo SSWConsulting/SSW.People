@@ -9,17 +9,16 @@
 /* purgecss end ignore */
 
 html {
-  font-family: "SegoeUILight", "Helvetica", "sans-serif"
+  font-family: "Helvetica", "SegoeUILight", "sans-serif"
 }
 
 h1 {
   @apply text-4xl;
   @apply mb-2;
-  color: #cc4141;
+  @apply text-ssw-red;
 }
 
 h1.title {
-  font-family: "Segoe UI Medium", "Helvetica", "sans-serif";
   font-size: 2em;
   color: #414141;
   margin-bottom: 0.1em;
@@ -28,7 +27,7 @@ h1.title {
 h2 {
   @apply text-3xl;
   @apply mb-2;
-  color: #cc4141;
+  @apply text-ssw-red;
 }
 
 h3 {
@@ -116,7 +115,8 @@ ul li {
   @apply text-ssw-red;
 }
 
-.filter-role li, .filter-skills li{
+.filter-role li,
+.filter-skills li {
   background: none;
   padding: 0 0 0 0;
 }
@@ -130,8 +130,6 @@ ul li {
 }
 
 .person-content {
-  font-family: "Segoe UI", "Segoe", Tahoma, Helvetica, Arial, sans-serif;
-
   .image-bg{
     min-width: 182px;
     width: 182px;
@@ -149,19 +147,20 @@ ul li {
   margin: 15px 20px 15px 11px;
 }
 
-.person-quote {
+.quoteblock {
   font-family: Georgia;
+  font-style: italic;
+}
+
+.person-quote {
   font-size: 20px;
   padding-left: 10px;
-  font-style: italic;
   background-image: url(./images/selfquoteMark.gif);
   background-repeat: no-repeat;
 }
 
 .person-quote-name {
-  font-family: Georgia;
   text-align: right;
-  font-style: italic;
   font-size: 20px;
 }
 
@@ -169,10 +168,10 @@ ul li {
   margin-top: 14px;
 }
 
-.profile-content p{
+.profile-content p {
   margin-bottom: 10px;
 }
-.profile-content ul{
+.profile-content ul {
   margin-bottom: 10px;
  }
 
@@ -388,19 +387,8 @@ button:focus {
     grid-template-columns: repeat(2, 1fr);
   }
 
-  .person-quote {
-    font-family: Georgia;
-    font-size: 16px;
-    padding-left: 10px;
-    font-style: italic;
-    background-image: url(./images/selfquoteMark.gif);
-    background-repeat: no-repeat;
-  }
-
+  .person-quote,
   .person-quote-name {
-    font-family: Georgia;
-    text-align: right;
-    font-style: italic;
     font-size: 16px;
   }
 }
