@@ -6,10 +6,10 @@ import Header from 'components/header';
 import Footer from 'components/footer';
 import '../../style.css';
 
-const Layout = ({ data, children, displayActions, profileId }) => (
+const Layout = ({ data, children, displayActions, profileId, pageTitle }) => (
   <>
     <div className="flex flex-col min-h-screen main-container">
-      <Head />
+      <Head pageTitle={pageTitle} />
       <Header
         title={data.site.siteMetadata.siteTitle}
         displayActions={displayActions}
@@ -26,6 +26,7 @@ Layout.propTypes = {
   data: PropTypes.object.isRequired,
   displayActions: PropTypes.bool.isRequired,
   profileId: PropTypes.string,
+  pageTitle: PropTypes.string,
 };
 
 const LayoutWithQuery = props => (
