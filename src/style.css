@@ -57,7 +57,7 @@ dd {
 
 a,
 a:link {
-  &:not(.btn):not(.unstyled) {
+  &:not(.btn):not(.unstyled):not(.gatsby-resp-image-link) {
     color: #333;
     border-bottom: 2px dotted #9e9e9e;
     font-weight: bolder;
