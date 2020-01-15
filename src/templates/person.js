@@ -16,7 +16,9 @@ const Person = ({ data }) => {
 
   return (
     <Layout
-      pageTitle={childMarkdownRemark.frontmatter.name}
+      pageTitle={
+        childMarkdownRemark.frontmatter && childMarkdownRemark.frontmatter.name
+      }
       displayActions={true}
       profileId={person.name}
     >
