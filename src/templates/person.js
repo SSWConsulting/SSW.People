@@ -116,13 +116,17 @@ const Person = ({ data }) => {
               {advancedSkills.map((skill, i, arr) => (
                 <dd key={`advancedSkill-${i}`}>
                   {skill}
-                  {arr.length - 1 !== i && <span className="skill-separator"> | </span>}
+                  {i !== arr.length - 1 && (
+                    <span className="skill-separator"> | </span>
+                  )}
                 </dd>
               ))}
               {intermediateSkills.map((skill, i, arr) => (
                 <dd key={`intermediateSkill-${i}`}>
                   {skill}
-                  {arr.length - 1 !== i && <span className="skill-separator"> | </span>}
+                  {i !== arr.length - 1 && (
+                    <span className="skill-separator"> | </span>
+                  )}
                 </dd>
               ))}
             </dl>
