@@ -141,10 +141,9 @@ ul li {
   }
 }
 
-.person-favor {
-  padding-left: 10px;
-  line-height: 1.4em;
-  margin: 15px 20px 15px 11px;
+.person-favor,
+.profile-image-quote {
+  margin: 1rem;
 }
 
 .quoteblock {
@@ -300,11 +299,6 @@ button:focus {
 
   .filter-role-opener{
     display: inline;
-  }
-
-  .profile-image-quote{
-    padding-left: 10px;
-    margin: 15px 20px 15px 11px
   }
 }
 

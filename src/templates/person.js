@@ -30,7 +30,7 @@ const Person = ({ data }) => {
                 <h1 className="inline">{frontmatter.name}</h1>
                 <h4>{frontmatter.role}</h4>
               </div>
-              <div className="flex pr-2 profile-image-quote">
+              <div className="flex profile-image-quote">
                 <div className="image-bg text-center">
                   <img
                     className="profile-image relative bg-cover mx-auto"
