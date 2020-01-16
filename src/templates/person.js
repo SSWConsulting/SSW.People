@@ -23,10 +23,10 @@ const Person = ({ data }) => {
       profileId={person.name}
     >
       <div className="flex flex-wrap mb-5 person-content">
-        <div className="sm:w-full md:w-full lg:w-1/4 xl:w-1/6 profileHeaderWidth">
-          {profileImage != undefined && (
+        <div className="sm:w-full lg:w-1/4 xl:w-1/6 profileHeaderWidth">
+          {!!profileImage && (
             <>
-              <div className="person-description lg:hidden xl:hidden w-full my-auto">
+              <div className="person-description lg:hidden w-full my-auto">
                 <h1 className="inline">{frontmatter.name}</h1>
                 <h4>{frontmatter.role}</h4>
               </div>
@@ -38,7 +38,7 @@ const Person = ({ data }) => {
                     alt="Profile"
                   />
                 </div>
-                <div className="w-full pr-2 lg:hidden lg:hidden quoteblock">
+                <div className="w-full pr-2 lg:hidden quoteblock">
                   <div className="person-quote">{frontmatter.quote}</div>
                   <br />
                   <div className="person-quote-name">
@@ -49,12 +49,12 @@ const Person = ({ data }) => {
             </>
           )}
           <div className="flex person-favor flex-row lg:flex-col">
-            <div className="hidden w-1/2 pr-2  lg:pr-0 lg:w-full lg:block quoteblock">
+            <div className="hidden w-1/2 pr-2 lg:pr-0 lg:w-full lg:block quoteblock">
               <div className="person-quote">{frontmatter.quote}</div>
               <br />
               <div className="person-quote-name">{frontmatter.nickname}</div>
             </div>
-            <div className="favor-content w-full lg:w-full">
+            <div className="favor-content w-full">
               <ul className="favor-list">
                 {crmData.emailAddress != '' && (
                   <li id="email" className="social">
@@ -99,37 +99,44 @@ const Person = ({ data }) => {
             </div>
           </div>
         </div>
-        <div className="sm:w-full md:w-full lg:w-3/4 xl:5/6 descriptionwidth">
+        <div className="sm:w-full lg:w-3/4 xl:5/6 descriptionwidth">
           <div className="person-description">
-            <h1 className="hidden lg:inline xl:inline">{frontmatter.name}</h1>
-            <h4 className="hidden lg:block xl:block">{frontmatter.role}</h4>
-            <dl>
-              <dt>Qualification:</dt>
-              <dd>{frontmatter.qualifications}</dd>
-            </dl>
-            <dl>
-              <dt>Location:</dt>
-              <dd>{crmData.location}</dd>
-            </dl>
-            <dl>
-              <dt>Skills:</dt>
-              {advancedSkills.map((skill, i, arr) => (
-                <dd key={`advancedSkill-${i}`}>
-                  {skill}
-                  {i !== arr.length - 1 && (
-                    <span className="skill-separator"> | </span>
-                  )}
-                </dd>
-              ))}
-              {intermediateSkills.map((skill, i, arr) => (
-                <dd key={`intermediateSkill-${i}`}>
-                  {skill}
-                  {i !== arr.length - 1 && (
-                    <span className="skill-separator"> | </span>
-                  )}
-                </dd>
-              ))}
-            </dl>
+            <h1 className="hidden lg:inline">{frontmatter.name}</h1>
+            <h4 className="hidden lg:block">{frontmatter.role}</h4>
+            {!!frontmatter.qualifications && (
+              <dl>
+                <dt>Qualification:</dt>
+                <dd>{frontmatter.qualifications}</dd>
+              </dl>
+            )}
+            {!!crmData.location && (
+              <dl>
+                <dt>Location:</dt>
+                <dd>{crmData.location}</dd>
+              </dl>
+            )}
+            {((advancedSkills && advancedSkills.length) ||
+              (intermediateSkills && intermediateSkills.length)) && (
+              <dl>
+                <dt>Skills:</dt>
+                {advancedSkills.map((skill, i, arr) => (
+                  <dd key={`advancedSkill-${i}`}>
+                    {skill}
+                    {i !== arr.length - 1 && (
+                      <span className="skill-separator"> | </span>
+                    )}
+                  </dd>
+                ))}
+                {intermediateSkills.map((skill, i, arr) => (
+                  <dd key={`intermediateSkill-${i}`}>
+                    {skill}
+                    {i !== arr.length - 1 && (
+                      <span className="skill-separator"> | </span>
+                    )}
+                  </dd>
+                ))}
+              </dl>
+            )}
 
             <div
               className="profile-content"
