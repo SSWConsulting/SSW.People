@@ -113,11 +113,21 @@ const Person = ({ data }) => {
             </dl>
             <dl>
               <dt>Skills:</dt>
-              {advancedSkills.map((skill, i) => (
-                <dd key={`a${i}`}> {skill};</dd>
+              {advancedSkills.map((skill, i, arr) => (
+                <dd key={`advancedSkill-${i}`}>
+                  {skill}
+                  {i !== arr.length - 1 && (
+                    <span className="skill-separator"> | </span>
+                  )}
+                </dd>
               ))}
-              {intermediateSkills.map((skill, i) => (
-                <dd key={`i${i}`}> {skill};</dd>
+              {intermediateSkills.map((skill, i, arr) => (
+                <dd key={`intermediateSkill-${i}`}>
+                  {skill}
+                  {i !== arr.length - 1 && (
+                    <span className="skill-separator"> | </span>
+                  )}
+                </dd>
               ))}
             </dl>
 
