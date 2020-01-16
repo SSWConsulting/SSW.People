@@ -50,17 +50,17 @@ const SkillsFilter = ({ allSkills, selectedSkills, onSkillChange }) => {
     <>
       <div ref={node} className="relative lg:static">
         <div className="flex justify-between items-center align-middle">
-          <div className="block sm:block lg:hidden">
+          <div className="block lg:hidden">
             <h4
-              className="font-bold whitespace-no-wrap"
+              className="cursor-pointer font-bold whitespace-no-wrap"
               onClick={() => setListOpen(!listOpen)}
             >
               Technologies{' '}
               <FontAwesomeIcon icon={listOpen ? faAngleUp : faAngleDown} />
             </h4>
           </div>
-          <div className="hidden sm:hidden lg:block">
-            <h4 className="font-bold whitespace-no-wrap">Technologies</h4>
+          <div className="hidden lg:block">
+            <h4 className="cursor-pointer font-bold whitespace-no-wrap">Technologies</h4>
           </div>
           {/* eslint-disable-next-line jsx-a11y/no-static-element-interactions */}
           <small
@@ -74,14 +74,14 @@ const SkillsFilter = ({ allSkills, selectedSkills, onSkillChange }) => {
               setListOpen(false);
             }}
           >
-            <FontAwesomeIcon icon={faTimes} />
+            <FontAwesomeIcon icon={faTimes} className='mr-1' />
             Clear filter
           </small>
         </div>
         <ul
           className={
             listOpen
-              ? 'filter-skills ml-1 lg:ml-0 py-1 lg:py-1 absolute lg:border-0 border border-ssw-grey lg:static w-full z-50 lg:z.0 bg-white'
+              ? 'filter-skills lg:ml-0 absolute lg:border-0 border border-ssw-grey lg:static w-full z-50 lg:z.0 bg-white'
               : 'filter-skills hidden lg:inline'
           }
         >

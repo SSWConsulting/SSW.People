@@ -56,17 +56,17 @@ const RoleFilter = ({
     <>
       <div ref={node} className="relative lg:static">
         <div className="flex justify-between items-center align-middle">
-          <div className="block sm:block lg:hidden">
+          <div className="block lg:hidden">
             <h4
-              className="font-bold whitespace-no-wrap"
+              className="cursor-pointer font-bold whitespace-no-wrap"
               onClick={() => setListOpen(!listOpen)}
             >
               Roles{' '}
               <FontAwesomeIcon icon={listOpen ? faAngleUp : faAngleDown} />
             </h4>
           </div>
-          <div className="hidden sm:hidden lg:block ">
-            <h4 className="font-bold whitespace-no-wrap">Roles</h4>
+          <div className="hidden lg:block ">
+            <h4 className="cursor-pointer font-bold whitespace-no-wrap">Roles</h4>
           </div>
           {/* eslint-disable-next-line jsx-a11y/no-static-element-interactions */}
           <small
@@ -80,14 +80,14 @@ const RoleFilter = ({
               setListOpen(false);
             }}
           >
-            <FontAwesomeIcon icon={faTimes} />
+            <FontAwesomeIcon icon={faTimes} className='mr-1' />
             Clear filter
           </small>
         </div>
         <ul
           className={
             listOpen
-              ? 'filter-role mr-1 sm:py-1 lg:py-1 lg:border-0 border border-ssw-grey absolute bg-white  lg:static w-full z-50 lg:z.0'
+              ? 'filter-role mr-1 lg:border-0 border border-ssw-grey absolute bg-white  lg:static w-full z-50 lg:z.0'
               : 'filter-role hidden lg:inline'
           }
         >

@@ -125,7 +125,7 @@ ul li {
 .filter-role li,
 .filter-skills li {
   background: none;
-  padding: 0 0 0 0;
+  padding: 0.5rem 0.25rem;
 }
 
 .filter-role-opener{
@@ -251,7 +251,7 @@ button:focus {
   background-color: rgb(238, 238, 238);
 }
 
-.border-ssw-grey{
+.border-ssw-grey {
   border-color:rgb(238, 238, 238);
 }
 
@@ -321,9 +321,20 @@ button:focus {
   .filter-role-opener{
     display: inline;
   }
+
+  .filter-role li,
+  .filter-skills li {
+    &:not(:last-child) {
+      border-bottom: 1px solid;
+      @apply border-ssw-grey;
+    }
+
+  }
 }
 
-
+.cursor-pointer {
+  cursor: pointer;
+}
 
 .category:hover {
   background-color: rgb(238, 238, 238);
