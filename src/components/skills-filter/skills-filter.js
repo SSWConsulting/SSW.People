@@ -74,14 +74,14 @@ const SkillsFilter = ({ allSkills, selectedSkills, onSkillChange }) => {
               setListOpen(false);
             }}
           >
-            <FontAwesomeIcon icon={faTimes} />
+            <FontAwesomeIcon icon={faTimes} className='mr-1' />
             Clear filter
           </small>
         </div>
         <ul
           className={
             listOpen
-              ? 'filter-skills ml-1 lg:ml-0 py-1 lg:py-1 absolute lg:border-0 border border-ssw-grey lg:static w-full z-50 lg:z.0 bg-white'
+              ? 'filter-skills lg:ml-0 absolute lg:border-0 border border-ssw-grey lg:static w-full z-50 lg:z.0 bg-white'
               : 'filter-skills hidden lg:inline'
           }
         >

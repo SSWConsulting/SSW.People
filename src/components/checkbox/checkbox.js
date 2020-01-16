@@ -12,7 +12,7 @@ const Checkbox = ({
   checkedIcon,
   unCheckedIcon,
   checkedClassName,
-  unCheckedClassName,
+  unCheckedClassName = '',
   checkboxColor,
 }) => {
   return (

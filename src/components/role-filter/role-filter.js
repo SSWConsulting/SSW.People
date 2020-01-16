@@ -80,14 +80,14 @@ const RoleFilter = ({
               setListOpen(false);
             }}
           >
-            <FontAwesomeIcon icon={faTimes} />
+            <FontAwesomeIcon icon={faTimes} className='mr-1' />
             Clear filter
           </small>
         </div>
         <ul
           className={
             listOpen
-              ? 'filter-role mr-1 sm:py-1 lg:py-1 lg:border-0 border border-ssw-grey absolute bg-white  lg:static w-full z-50 lg:z.0'
+              ? 'filter-role mr-1 lg:border-0 border border-ssw-grey absolute bg-white  lg:static w-full z-50 lg:z.0'
               : 'filter-role hidden lg:inline'
           }
         >
