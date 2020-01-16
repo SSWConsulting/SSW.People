@@ -103,33 +103,40 @@ const Person = ({ data }) => {
           <div className="person-description">
             <h1 className="hidden lg:inline xl:inline">{frontmatter.name}</h1>
             <h4 className="hidden lg:block xl:block">{frontmatter.role}</h4>
-            <dl>
-              <dt>Qualification:</dt>
-              <dd>{frontmatter.qualifications}</dd>
-            </dl>
-            <dl>
-              <dt>Location:</dt>
-              <dd>{crmData.location}</dd>
-            </dl>
-            <dl>
-              <dt>Skills:</dt>
-              {advancedSkills.map((skill, i, arr) => (
-                <dd key={`advancedSkill-${i}`}>
-                  {skill}
-                  {i !== arr.length - 1 && (
-                    <span className="skill-separator"> | </span>
-                  )}
-                </dd>
-              ))}
-              {intermediateSkills.map((skill, i, arr) => (
-                <dd key={`intermediateSkill-${i}`}>
-                  {skill}
-                  {i !== arr.length - 1 && (
-                    <span className="skill-separator"> | </span>
-                  )}
-                </dd>
-              ))}
-            </dl>
+            {!!frontmatter.qualifications && (
+              <dl>
+                <dt>Qualification:</dt>
+                <dd>{frontmatter.qualifications}</dd>
+              </dl>
+            )}
+            {!!crmData.location && (
+              <dl>
+                <dt>Location:</dt>
+                <dd>{crmData.location}</dd>
+              </dl>
+            )}
+            {((advancedSkills && advancedSkills.length) ||
+              (intermediateSkills && intermediateSkills.length)) && (
+              <dl>
+                <dt>Skills:</dt>
+                {advancedSkills.map((skill, i, arr) => (
+                  <dd key={`advancedSkill-${i}`}>
+                    {skill}
+                    {i !== arr.length - 1 && (
+                      <span className="skill-separator"> | </span>
+                    )}
+                  </dd>
+                ))}
+                {intermediateSkills.map((skill, i, arr) => (
+                  <dd key={`intermediateSkill-${i}`}>
+                    {skill}
+                    {i !== arr.length - 1 && (
+                      <span className="skill-separator"> | </span>
+                    )}
+                  </dd>
+                ))}
+              </dl>
+            )}
 
             <div
               className="profile-content"
