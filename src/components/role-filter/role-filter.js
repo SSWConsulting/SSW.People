@@ -66,7 +66,9 @@ const RoleFilter = ({
             </h4>
           </div>
           <div className="hidden lg:block ">
-            <h4 className="cursor-pointer font-bold whitespace-no-wrap">Roles</h4>
+            <h4 className="cursor-pointer font-bold whitespace-no-wrap">
+              Roles
+            </h4>
           </div>
           {/* eslint-disable-next-line jsx-a11y/no-static-element-interactions */}
           <small
@@ -80,7 +82,7 @@ const RoleFilter = ({
               setListOpen(false);
             }}
           >
-            <FontAwesomeIcon icon={faTimes} className='mr-1' />
+            <FontAwesomeIcon icon={faTimes} className="mr-1" />
             Clear filter
           </small>
         </div>

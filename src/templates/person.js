@@ -2,6 +2,8 @@ import { graphql } from 'gatsby';
 import PropTypes from 'prop-types';
 import React from 'react';
 import Layout from '../components/layout';
+import { faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const Person = ({ data }) => {
   const person = data.people;
@@ -23,12 +25,20 @@ const Person = ({ data }) => {
       profileId={person.name}
     >
       <div className="flex flex-wrap mb-5 person-content">
-        <div className="sm:w-full lg:w-1/4 xl:w-1/6 profileHeaderWidth">
+        <div className="sm:w-full lg:w-1/4 xl:w-1/6">
           {!!profileImage && (
             <>
               <div className="person-description lg:hidden w-full my-auto">
                 <h1 className="inline">{frontmatter.name}</h1>
-                <h4>{frontmatter.role}</h4>
+                <h4 className="mb-0">{frontmatter.role}</h4>
+                {!!crmData.location && (
+                  <h4 className="mb-0">
+                    <FontAwesomeIcon icon={faMapMarkerAlt} /> {crmData.location}
+                  </h4>
+                )}
+                {!!frontmatter.qualifications && (
+                  <strong>{frontmatter.qualifications}</strong>
+                )}
               </div>
               <div className="flex profile-image-quote">
                 <div className="image-bg text-center">
@@ -99,44 +109,46 @@ const Person = ({ data }) => {
             </div>
           </div>
         </div>
-        <div className="sm:w-full lg:w-3/4 xl:5/6 descriptionwidth">
+        <div className="sm:w-full lg:w-3/4 xl:5/6">
           <div className="person-description">
             <h1 className="hidden lg:inline">{frontmatter.name}</h1>
-            <h4 className="hidden lg:block">{frontmatter.role}</h4>
+            <h4 className="hidden lg:block mb-0">
+              {frontmatter.role}
+              {!!crmData.location && (
+                <span className="ml-2">
+                  <FontAwesomeIcon icon={faMapMarkerAlt} /> {crmData.location}
+                </span>
+              )}
+            </h4>
             {!!frontmatter.qualifications && (
-              <dl>
-                <dt>Qualification:</dt>
-                <dd>{frontmatter.qualifications}</dd>
-              </dl>
+              <strong className="hidden lg:block">
+                {frontmatter.qualifications}
+              </strong>
             )}
-            {!!crmData.location && (
-              <dl>
-                <dt>Location:</dt>
-                <dd>{crmData.location}</dd>
-              </dl>
-            )}
-            {((advancedSkills && advancedSkills.length) ||
-              (intermediateSkills && intermediateSkills.length)) && (
-              <dl>
-                <dt>Skills:</dt>
+            <hr />
+            {((advancedSkills && !!advancedSkills.length) ||
+              (intermediateSkills && !!intermediateSkills.length)) && (
+              <span>
                 {advancedSkills.map((skill, i, arr) => (
-                  <dd key={`advancedSkill-${i}`}>
+                  <strong key={`advancedSkill-${i}`}>
                     {skill}
                     {i !== arr.length - 1 && (
                       <span className="skill-separator"> | </span>
                     )}
-                  </dd>
+                  </strong>
                 ))}
                 {intermediateSkills.map((skill, i, arr) => (
-                  <dd key={`intermediateSkill-${i}`}>
+                  <strong key={`intermediateSkill-${i}`}>
                     {skill}
                     {i !== arr.length - 1 && (
                       <span className="skill-separator"> | </span>
                     )}
-                  </dd>
+                  </strong>
                 ))}
-              </dl>
+              </span>
             )}
+
+            <hr />
 
             <div
               className="profile-content"
