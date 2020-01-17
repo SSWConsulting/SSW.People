@@ -40,21 +40,6 @@ h4 {
   @apply mb-2;
 }
 
-dl {
-  @apply block;
-  @apply mx-0;
-}
-
-dt {
-  @apply inline;
-  @apply mr-3;
-}
-
-dd {
-  @apply inline;
-  @apply font-bold;
-}
-
 a,
 a:link {
   &:not(.unstyled) {
@@ -105,20 +90,13 @@ footer {
   font-size: 0.65rem;
 }
 
-.ms-rteCustom-FigureNormal {
-  font-weight: bold;
-  font-size: 14px;
-  display: block;
-  margin: 3px 10px 10px 0px;
-}
-
 ul li {
   background: url(./images/bullet_square.gif) 0 7px no-repeat;
   padding: 0 0 10px 15px;
   line-height: 1.5em;
 }
 
-.clear-filter{
+.clear-filter {
   @apply text-ssw-red;
 }
 
@@ -128,7 +106,7 @@ ul li {
   padding: 0.5rem 0.25rem;
 }
 
-.filter-role-opener{
+.filter-role-opener {
   display: none;
 }
 
@@ -292,6 +270,13 @@ button:focus {
   max-width: 200px;
 }
 
+.person-description {
+  hr {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+}
+
 @media screen and (max-width: 1024px) {
   iframe {
     height: auto;
@@ -304,12 +289,6 @@ button:focus {
   .person-description {
     padding-left: 10px;
     margin: 15px 20px 15px 11px
-  }
-  .descriptionwidth {
-    width: 100vw;
-  }
-  .profileHeaderWidth {
-    width: 100%;
   }
   .favor-content {
     background-color: #efefef;
