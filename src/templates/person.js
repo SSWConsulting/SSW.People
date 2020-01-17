@@ -125,30 +125,33 @@ const Person = ({ data }) => {
                 {frontmatter.qualifications}
               </strong>
             )}
-            <hr />
             {((advancedSkills && !!advancedSkills.length) ||
               (intermediateSkills && !!intermediateSkills.length)) && (
-              <span>
-                {advancedSkills.map((skill, i, arr) => (
-                  <strong key={`advancedSkill-${i}`}>
-                    {skill}
-                    {i !== arr.length - 1 && (
-                      <span className="skill-separator"> | </span>
-                    )}
-                  </strong>
-                ))}
-                {intermediateSkills.map((skill, i, arr) => (
-                  <strong key={`intermediateSkill-${i}`}>
-                    {skill}
-                    {i !== arr.length - 1 && (
-                      <span className="skill-separator"> | </span>
-                    )}
-                  </strong>
-                ))}
-              </span>
-            )}
+              <>
+                <hr />
 
-            <hr />
+                <h4 className="text-ssw-red mb-0">Skills:</h4>
+                <span>
+                  {advancedSkills.map((skill, i, arr) => (
+                    <strong key={`advancedSkill-${i}`}>
+                      {skill}
+                      {i !== arr.length - 1 && (
+                        <span className="skill-separator"> | </span>
+                      )}
+                    </strong>
+                  ))}
+                  {intermediateSkills.map((skill, i, arr) => (
+                    <strong key={`intermediateSkill-${i}`}>
+                      {skill}
+                      {i !== arr.length - 1 && (
+                        <span className="skill-separator"> | </span>
+                      )}
+                    </strong>
+                  ))}
+                </span>
+                <hr />
+              </>
+            )}
 
             <div
               className="profile-content"
