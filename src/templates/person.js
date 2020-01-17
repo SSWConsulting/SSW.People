@@ -69,7 +69,7 @@ const Person = ({ data }) => {
                 {crmData.emailAddress != '' && (
                   <li id="email" className="social">
                     <a href={'mailto:' + crmData.emailAddress}>
-                      Contact {frontmatter.nickname}
+                      Email
                     </a>
                   </li>
                 )}
