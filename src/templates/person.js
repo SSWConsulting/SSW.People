@@ -125,10 +125,11 @@ const Person = ({ data }) => {
                 {frontmatter.qualifications}
               </strong>
             )}
-            <hr />
             {((advancedSkills && !!advancedSkills.length) ||
               (intermediateSkills && !!intermediateSkills.length)) && (
               <>
+                <hr />
+
                 <h4 className="text-ssw-red mb-0">Skills:</h4>
                 <span>
                   {advancedSkills.map((skill, i, arr) => (
@@ -148,10 +149,9 @@ const Person = ({ data }) => {
                     </strong>
                   ))}
                 </span>
+                <hr />
               </>
             )}
-
-            <hr />
 
             <div
               className="profile-content"
