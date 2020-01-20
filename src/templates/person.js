@@ -68,9 +68,7 @@ const Person = ({ data }) => {
               <ul className="favor-list">
                 {crmData.emailAddress != '' && (
                   <li id="email" className="social">
-                    <a href={'mailto:' + crmData.emailAddress}>
-                      Email
-                    </a>
+                    <a href={'mailto:' + crmData.emailAddress}>Email</a>
                   </li>
                 )}
                 {frontmatter.facebook != '' && (
@@ -109,7 +107,7 @@ const Person = ({ data }) => {
             </div>
           </div>
         </div>
-        <div className="sm:w-full lg:w-3/4 xl:5/6">
+        <div className="sm:w-full lg:w-3/4 xl:w-5/6">
           <div className="person-description">
             <h1 className="hidden lg:inline">{frontmatter.name}</h1>
             <h4 className="hidden lg:block mb-0">
