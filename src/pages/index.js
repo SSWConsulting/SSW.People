@@ -15,6 +15,10 @@ import RoleFilter from '../components/role-filter/role-filter';
 import Distinct from '../helpers/arrayHelpers';
 import LocationSanitiser from '../helpers/locationSanitizer';
 import 'array-flat-polyfill';
+import { config } from '@fortawesome/fontawesome-svg-core';
+import '@fortawesome/fontawesome-svg-core/styles.css';
+
+config.autoAddCss = false;
 
 const Index = ({ data, search }) => {
   const history = typeof window !== 'undefined' ? createBrowserHistory() : null;

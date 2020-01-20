@@ -4,9 +4,9 @@ import React from 'react';
 import Layout from '../components/layout';
 import { faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-
 import { config } from '@fortawesome/fontawesome-svg-core';
 import '@fortawesome/fontawesome-svg-core/styles.css';
+
 config.autoAddCss = false;
 
 const Person = ({ data }) => {
