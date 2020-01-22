@@ -6,7 +6,7 @@ const buildTimestamp = preval`module.exports = new Date().getTime();`;
 
 const Footer = () => {
   return (
-    <footer className="bg-black">
+    <footer className="bg-black py-6 md:py-4 lg:py-2">
       <section className="main-container">
         <div className="xl:mx-6">
           <div className="py-2 mx-6 flex flex-col-reverse md:flex-row justify-between">
