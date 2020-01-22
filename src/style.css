@@ -133,19 +133,17 @@ ul li {
 
 .quoteblock {
   font-family: Georgia;
-  font-style: italic;
 }
 
 .person-quote {
-  font-size: 20px;
   padding-left: 10px;
   background-image: url(./images/selfquoteMark.gif);
   background-repeat: no-repeat;
+  font-style: italic;
 }
 
 .person-quote-name {
   text-align: right;
-  font-size: 20px;
 }
 
 .profile-content {
@@ -402,11 +400,6 @@ button:focus {
 @media(max-width: 520px) {
   .people-grid-container {
     grid-template-columns: repeat(2, 1fr);
-  }
-
-  .person-quote,
-  .person-quote-name {
-    font-size: 16px;
   }
 }
 
