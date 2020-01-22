@@ -335,7 +335,6 @@ button:focus {
   order: 2;
   display: flex;
   align-items: center;
-  font-size: 1.5em;
   margin-right: 20px;
 }
 
@@ -365,10 +364,7 @@ button:focus {
   header>div.flex {
     flex-direction: column;
   }
-  .action-btn-container {
-    margin-right: 0;
-    font-size: 1em;
-  }
+
   .action-btn-link {
     margin-left: 0;
     margin-right: 10px;
