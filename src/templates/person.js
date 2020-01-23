@@ -6,6 +6,7 @@ import { faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { config } from '@fortawesome/fontawesome-svg-core';
 import '@fortawesome/fontawesome-svg-core/styles.css';
+import Contact from '../components/contact/contact';
 
 config.autoAddCss = false;
 
@@ -163,6 +164,8 @@ const Person = ({ data }) => {
                 __html: profileHtml,
               }}
             />
+            <hr/>
+            <Contact profileName={frontmatter.name} />
           </div>
         </div>
       </div>
