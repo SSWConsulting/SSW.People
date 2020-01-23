@@ -409,6 +409,29 @@ button:focus {
   margin-right: auto;
 }
 
+
+.contact{
+  padding-top: 3em;
+  text-align: center;
+}
+
+.contact .btn{
+    color: #fff;
+    cursor: pointer;
+    font-size: 1rem;
+    line-height: 18px;
+    text-transform: uppercase;
+    font-weight: normal;
+    display: inline-block;
+    text-decoration: none;
+  background-color: #cc4141;
+  margin-top: 14px;
+  padding: 8px 15px;
+  text-align: center;
+    vertical-align: middle;
+    touch-action: manipulation;
+}
+
 /**
 * This injects Tailwind's component classes and any component classes
 * registered by plugins.
