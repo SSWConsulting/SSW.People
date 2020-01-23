@@ -3,7 +3,7 @@
 import 'array-flat-polyfill';
 import React, { useState, useEffect, useMemo } from 'react';
 import PropTypes from 'prop-types';
-import { StaticQuery, graphql } from 'gatsby';
+import { StaticQuery, graphql, withPrefix } from 'gatsby';
 import { Location } from '@reach/router';
 import queryString from 'query-string';
 import { createBrowserHistory } from 'history';
@@ -77,7 +77,7 @@ const Index = ({ data, search }) => {
     // TODO: load search params from querystring
     // TODO: push search params to querystring
     history.push({
-      pathname: '/',
+      pathname: withPrefix('/'),
       search: '',
     });
   }, [selectedLocation, selectedSkills, selectedRoles]);
