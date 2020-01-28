@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types';
 import posed, { PoseGroup } from 'react-pose';
 import { timeout } from 'constants/transition';

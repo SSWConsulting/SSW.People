@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const Contact = ({onClick, profileName,}) => {
+
   return (
     <div className="contact">
       <h3 className="text-ssw-red">

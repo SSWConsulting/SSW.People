@@ -5,6 +5,7 @@ require('dotenv').config({
 });
 
 module.exports = {
+	pathPrefix: `/people`,
 	siteMetadata: {
 		...siteConfig,
 	},
