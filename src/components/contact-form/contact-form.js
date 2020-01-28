@@ -237,7 +237,7 @@ const ContactForm = ({ onClose }) => {
           </div>
           <small>Maximium 2000 characters.</small>
         </div>
-        <div className="form-group">
+        <div className="form-group recaptcha">
           <ReCAPTCHA
             sitekey="6LfiGykUAAAAAK3t_LGME2V-FLmWpq1sHRhmctZ0"
             onChange={e => setContactReCaptcha(e.target.value)}

@@ -409,7 +409,6 @@ button:focus {
   margin-right: auto;
 }
 
-
 .contact{
   padding-top: 4em;
   padding-bottom: 4em;
@@ -512,6 +511,7 @@ button:focus {
   border-bottom: 2px solid #cc4141;
   outline: 0px;
 }
+
 .form-group .field-wrapper:focus {
   outline: 0px;
 }
@@ -538,6 +538,7 @@ button:focus {
 .form-control::placeholder {
   color: #999;
 }
+
 .form-group label {
   position: absolute;
   top: -10px;
@@ -612,6 +613,12 @@ label {
   margin-bottom: 20px;
   border: 1px solid transparent;
   border-radius: 0;
+}
+
+.recaptcha{
+  width: 304px;
+  height: 78px;
+  margin-bottom: 1em;
 }
 
 /**
