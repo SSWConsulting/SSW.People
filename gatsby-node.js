@@ -98,7 +98,7 @@ exports.createPages = async function({ actions, graphql }) {
 		const slug = edge.node.name;
 		const squareImage = slug + '-Profile-Square';
 		actions.createPage({
-			path: slug,
+			path: slug.toLowerCase(),
 			component: require.resolve('./src/templates/person.js'),
 			context: {
 				slug: slug,
