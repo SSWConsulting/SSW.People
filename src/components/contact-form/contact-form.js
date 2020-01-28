@@ -1,17 +1,19 @@
 import React, { useEffect, useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
+import ReCAPTCHA from 'react-google-recaptcha';
 
 const ContactForm = ({ onClose }) => {
   const node = useRef();
-  const [contactSuccess, setcontactSuccess] = useState(false);
-  const [contactFormName, setcontactFormName] = useState('');
-  const [contactFormEmail, setcontactFormEmail] = useState('');
-  const [contactFormPhone, setcontactFormPhone] = useState('');
-  const [contactFormCompanyName, setcontactFormCompanyName] = useState('');
-  const [contactFormNote, setcontactFormNote] = useState('');
-  const [contactFormCountry, setcontactFormCountry] = useState('');
-  const [contactFormStateText, setcontactFormStateText] = useState('');
+  const [contactSuccess, setContactSuccess] = useState(false);
+  const [contactFormName, setContactFormName] = useState('');
+  const [contactFormEmail, setContactFormEmail] = useState('');
+  const [contactFormPhone, setContactFormPhone] = useState('');
+  const [contactFormCompanyName, setContactFormCompanyName] = useState('');
+  const [contactFormNote, setContactFormNote] = useState('');
+  const [contactFormCountry, setContactFormCountry] = useState('');
+  const [contactFormStateText, setContactFormStateText] = useState('');
+  const [contactReCaptcha, setContactReCaptcha] = useState('');
 
   const handleSubmit = async event => {
     let subject =
@@ -24,7 +26,7 @@ const ContactForm = ({ onClose }) => {
     body = body + 'Company: ' + contactFormCompanyName + '<br/>';
     body = body + 'Country: ' + contactFormCountry + '<br/>';
     if (contactFormStateText == '') {
-      setcontactFormStateText('100000008');
+      setContactFormStateText('100000008');
     } else {
       body = body + 'State:  ' + contactFormStateText + '<br/>';
     }
@@ -45,14 +47,14 @@ const ContactForm = ({ onClose }) => {
           State: contactFormStateText,
           Email: contactFormEmail,
           Phone: contactFormPhone,
-          //Recaptcha: grecaptcha.getResponse(),
+          Recaptcha: contactReCaptcha,
           EmailSubject: subject,
           EmailBody: body + 'The associated CRM lead is ',
         },
         { headers: { 'Content-Type': 'application/json' } }
       )
       .then(() => {
-        setcontactSuccess(true);
+        setContactSuccess(true);
 
         //redirect to thank you page
         window.location = '/ssw/Thankyou.aspx';
@@ -107,7 +109,7 @@ const ContactForm = ({ onClose }) => {
               id="contactFormName"
               type="text"
               value={contactFormName}
-              onChange={e => setcontactFormName(e.target.value)}
+              onChange={e => setContactFormName(e.target.value)}
               className="form-control ng-untouched"
               required
               placeholder="Full Name *"
@@ -123,7 +125,7 @@ const ContactForm = ({ onClose }) => {
             <input
               id="contactFormEmail"
               value={contactFormEmail}
-              onChange={e => setcontactFormEmail(e.target.value)}
+              onChange={e => setContactFormEmail(e.target.value)}
               type="email"
               className="form-control ng-untouched"
               required
@@ -140,7 +142,7 @@ const ContactForm = ({ onClose }) => {
             <input
               id="contactFormPhone"
               value={contactFormPhone}
-              onChange={e => setcontactFormPhone(e.target.value)}
+              onChange={e => setContactFormPhone(e.target.value)}
               type="text"
               className="form-control"
               placeholder="Phone"
@@ -158,7 +160,7 @@ const ContactForm = ({ onClose }) => {
               id="contactFormCountry"
               className="form-control"
               value={contactFormCountry}
-              onChange={e => setcontactFormCountry(e.target.value)}
+              onChange={e => setContactFormCountry(e.target.value)}
             >
               <option value="" disabled="" hidden="">
                 Location
@@ -183,7 +185,7 @@ const ContactForm = ({ onClose }) => {
               id="contactFormState"
               className="form-control"
               value={contactFormStateText}
-              onChange={e => setcontactFormStateText(event.target.value)}
+              onChange={e => setContactFormStateText(event.target.value)}
             >
               <option value="" disabled="" hidden="">
                 State
@@ -209,7 +211,7 @@ const ContactForm = ({ onClose }) => {
             <input
               id="contactFormCompanyName"
               value={contactFormCompanyName}
-              onChange={e => setcontactFormCompanyName(e.target.value)}
+              onChange={e => setContactFormCompanyName(e.target.value)}
               type="text"
               className="form-control"
               placeholder="Company"
@@ -225,7 +227,7 @@ const ContactForm = ({ onClose }) => {
             <textarea
               id="contactFormNote"
               value={contactFormNote}
-              onChange={e => setcontactFormNote(e.target.value)}
+              onChange={e => setContactFormNote(e.target.value)}
               className="form-control"
               placeholder="Note"
               rows="4"
@@ -235,7 +237,12 @@ const ContactForm = ({ onClose }) => {
           </div>
           <small>Maximium 2000 characters.</small>
         </div>
-
+        <div className="form-group">
+          <ReCAPTCHA
+            sitekey="6LfiGykUAAAAAK3t_LGME2V-FLmWpq1sHRhmctZ0"
+            onChange={e => setContactReCaptcha(e.target.value)}
+          />
+        </div>
         <div className="form-group">
           <button id="contactFormSubmit" className="btn submit">
             Submit
