@@ -4,9 +4,9 @@ import React, { useEffect, useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 import Checkbox from '../checkbox';
 import {
-  faCheck,
   faAngleDown,
   faAngleUp,
+  faCheck,
   faTimes,
 } from '@fortawesome/free-solid-svg-icons';
 import RoleSort from '../../helpers/roleSort';

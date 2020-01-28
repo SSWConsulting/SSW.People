@@ -9,7 +9,7 @@
     "format": "prettier --config ./.prettierrc --write src/**/*.js",
     "build:dir": "mkdirp ./public/icons/",
     "build:favicons": "node scripts/favicons",
-    "build": "npm run build:dir && npm run build:favicons && gatsby build",
+    "build": "npm run build:dir && npm run build:favicons && gatsby build --prefix-paths",
     "test": "ava **/*.test.js --verbose"
   },
   "greenkeeper": {
@@ -23,10 +23,11 @@
     "@reach/router": "^1.2.1",
     "@reach/visually-hidden": "^0.5.0",
     "autoprefixer": "^9.7.3",
-    "axios": "^0.19.0",
+    "axios": "^0.19.2",
     "babel-plugin-styled-components": "^1.10.0",
     "crypto": "^1.0.1",
-    "gatsby": "^2.3.26",
+    "gatsby": "^2.19.2",
+    "gatsby-cli": "^2.8.27",
     "gatsby-image": "^2.0.39",
     "gatsby-plugin-postcss": "^2.1.13",
     "gatsby-plugin-react-helmet": "^3.0.12",
@@ -54,7 +55,9 @@
     "prop-types": "^15.6.2",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
+    "react-google-recaptcha": "^2.0.1",
     "react-helmet": "^5.2.0",
+    "react-modal": "^3.11.1",
     "react-pose": "^4.0.5",
     "styled-components": "^4.1.3"
   },

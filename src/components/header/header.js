@@ -36,6 +36,8 @@ const Header = ({ title, displayActions, profileId }) => {
           {displayActions ? (
             <div className="action-btn-container">
               <a
+                target="_blank"
+                rel="noopener noreferrer"
                 href={`https://github.com/SSWConsulting/People/blob/master/${profileId}/${profileId}.md`}
                 className="action-btn-link"
               >
@@ -43,6 +45,8 @@ const Header = ({ title, displayActions, profileId }) => {
                 <GitHubIcon aria-label="logo" className="action-btn-icon" />
               </a>
               <a
+                target="_blank"
+                rel="noopener noreferrer"
                 href="https://rules.ssw.com.au/make-your-site-easy-to-maintain"
                 className="action-btn-link"
               >

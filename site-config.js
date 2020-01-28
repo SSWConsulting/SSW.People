@@ -4,7 +4,7 @@ module.exports = {
   siteTitle: `SSW.People`,
   siteTitleShort: `SSW.People`,
   siteDescription: `​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​We work together to form an amazing collective brain​​ - ​SSW is made up of a great team of staff that are passionate about technology and how it meets business needs! We're enthusiastic and have a "Make it happen" culture.`,
-  siteUrl: `https://people.ssw.com.au`,
+  siteUrl: `https://ssw.com.au/people`,
   themeColor: `#cc4141`,
   backgroundColor: `#fff`,
   pathPrefix: null,
