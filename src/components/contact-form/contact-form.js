@@ -34,7 +34,7 @@ const ContactForm = ({ onClose }) => {
     body = body + 'Phone:   ' + contactFormPhone + '<br/>';
     body = body + 'Email:   ' + contactFormEmail + '<br/>';
     body = body + 'Note:    ' + contactFormNote + '<br/><br/>';
-
+    event.preventDefault();
     const response = await axios
       .post(
         '/ssw/api/crm/createlead',
@@ -55,15 +55,15 @@ const ContactForm = ({ onClose }) => {
       )
       .then(() => {
         setContactSuccess(true);
-
-        //redirect to thank you page
-        window.location = '/ssw/Thankyou.aspx';
+        setTimeout(function() {
+          setContactSuccess(false);
+          //redirect to thank you page
+          window.location = '/ssw/Thankyou.aspx';
+        }, 2000);
       })
       .catch(error => {
         alert('Failed to create lead in CRM');
       });
-
-    event.preventDefault();
   };
 
   const handleClick = e => {
@@ -84,11 +84,7 @@ const ContactForm = ({ onClose }) => {
   }, []);
 
   return (
-    <form
-      ref={node}
-      className="contactUs-form w-full lg:w-1/2 object-center"
-      onSubmit={e => handleSubmit(e)}
-    >
+    <form ref={node} className="contactUs-form w-full lg:w-1/2 object-center">
       <div className="contactUs">
         <h2>Get your project started!</h2>
         <div
@@ -244,7 +240,11 @@ const ContactForm = ({ onClose }) => {
           />
         </div>
         <div className="form-group">
-          <button id="contactFormSubmit" className="btn submit">
+          <button
+            id="contactFormSubmit"
+            className="btn submit"
+            onClick={e => handleSubmit(e)}
+          >
             Submit
           </button>
           &nbsp;
