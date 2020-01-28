@@ -335,7 +335,6 @@ button:focus {
   order: 2;
   display: flex;
   align-items: center;
-  margin-right: 20px;
 }
 
 .action-btn-link {
