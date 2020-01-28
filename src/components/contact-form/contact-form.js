@@ -1,143 +1,257 @@
-import React,{ useState }  from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 
+const ContactForm = ({ onClose }) => {
+  const node = useRef();
+  const [contactSuccess, setcontactSuccess] = useState(false);
+  const [contactFormName, setcontactFormName] = useState('');
+  const [contactFormEmail, setcontactFormEmail] = useState('');
+  const [contactFormPhone, setcontactFormPhone] = useState('');
+  const [contactFormCompanyName, setcontactFormCompanyName] = useState('');
+  const [contactFormNote, setcontactFormNote] = useState('');
+  const [contactFormCountry, setcontactFormCountry] = useState('');
+  const [contactFormStateText, setcontactFormStateText] = useState('');
 
-const ContactForm = () => {
-    const [contactFormName, setcontactFormName] = useState('');
-    const [contactFormEmail, setcontactFormEmail] = useState('');
-    const [contactFormPhone, setcontactFormPhone] = useState('');
-    const [contactFormCompanyName, setcontactFormCompanyName] = useState('');
-    const [contactFormNote, setcontactFormNote] = useState('');
-    const [contactFormCountry, setcontactFormCountry] = useState('');
-    const [contactFormStateText, setcontactFormStateText] = useState('');
+  const handleSubmit = async event => {
+    let subject =
+      'Consulting enquiry - ' +
+      contactFormCompanyName +
+      ' - ' +
+      contactFormName;
 
-    const handleSubmit = async (event)=> {
-        let subject = "Consulting enquiry - " + contactFormCompanyName + " - " + contactFormName;
-           
-        let body = "Consulting enquiry from "  + document.URL + "<br/>";
-        body = body + "Company: " + contactFormCompanyName + "<br/>";
-        body = body + "Country: " + contactFormCountry + "<br/>";
-        if (contactFormStateText == '') {
-            setcontactFormStateText('100000008');
-        } else {
-            body = body + "State:  " + contactFormStateText + "<br/>";
-        }
-        body = body + "Name:  " + contactFormName + "<br/>";
-        body = body + "Phone:   " + contactFormPhone + "<br/>";
-        body = body + "Email:   " + contactFormEmail + "<br/>";
-        body = body + "Note:    " + contactFormNote + "<br/><br/>";
-
-        const response = await axios.post(
-            '/ssw/api/crm/createlead',
-            {
-                Name: contactFormName,
-                Topic: subject,
-                Company: contactFormCompanyName,
-                Note: contactFormNote,
-                Country: contactFormCountry,
-                State: contactFormStateText,
-                Email: contactFormEmail,
-                Phone: contactFormPhone,
-                //Recaptcha: grecaptcha.getResponse(),
-                EmailSubject: subject,
-                EmailBody: body + "The associated CRM lead is "
-            },
-            { headers: { 'Content-Type': 'application/json' } }
-          )
-        
-
-        event.preventDefault(); 
+    let body = 'Consulting enquiry from ' + document.URL + '<br/>';
+    body = body + 'Company: ' + contactFormCompanyName + '<br/>';
+    body = body + 'Country: ' + contactFormCountry + '<br/>';
+    if (contactFormStateText == '') {
+      setcontactFormStateText('100000008');
+    } else {
+      body = body + 'State:  ' + contactFormStateText + '<br/>';
     }
+    body = body + 'Name:  ' + contactFormName + '<br/>';
+    body = body + 'Phone:   ' + contactFormPhone + '<br/>';
+    body = body + 'Email:   ' + contactFormEmail + '<br/>';
+    body = body + 'Note:    ' + contactFormNote + '<br/><br/>';
+
+    const response = await axios
+      .post(
+        '/ssw/api/crm/createlead',
+        {
+          Name: contactFormName,
+          Topic: subject,
+          Company: contactFormCompanyName,
+          Note: contactFormNote,
+          Country: contactFormCountry,
+          State: contactFormStateText,
+          Email: contactFormEmail,
+          Phone: contactFormPhone,
+          //Recaptcha: grecaptcha.getResponse(),
+          EmailSubject: subject,
+          EmailBody: body + 'The associated CRM lead is ',
+        },
+        { headers: { 'Content-Type': 'application/json' } }
+      )
+      .then(() => {
+        setcontactSuccess(true);
+
+        //redirect to thank you page
+        window.location = '/ssw/Thankyou.aspx';
+      })
+      .catch(error => {
+        alert('Failed to create lead in CRM');
+      });
+
+    event.preventDefault();
+  };
+
+  const handleClick = e => {
+    if (node.current.contains(e.target)) {
+      // inside click
+      return;
+    }
+    // outside click
+    onClose(e);
+  };
+
+  useEffect(() => {
+    document.addEventListener('mousedown', handleClick);
+
+    return () => {
+      document.removeEventListener('mousedown', handleClick);
+    };
+  }, []);
+
   return (
-      <form onSubmit={(e) => handleSubmit(e)}>
-    <div className="contactUs">
-        <div className="contactUs-form">
+    <form
+      ref={node}
+      className="contactUs-form w-full lg:w-1/2 object-center"
+      onSubmit={e => handleSubmit(e)}
+    >
+      <div className="contactUs">
         <h2>Get your project started!</h2>
-        <div className="form-group hidden" id="contactFormAlert">
-            <div className="alert alert-success" role="alert">An email has been sent to the SSW Sales team and someone will be in contact with you soon</div>
+        <div
+          className={contactSuccess ? 'form-group fadeIn' : 'fadeOut'}
+          id="contactFormAlert"
+        >
+          <div className="alert alert-success" role="alert">
+            An email has been sent to the SSW Sales team and someone will be in
+            contact with you soon
+          </div>
         </div>
         <div className="form-group">
-            <div className="field-wrapper">
-                <label htmlFor ="contactFormName" className="control-label">Full Name *</label>
-                <input id ="contactFormName" type="text" value={contactFormName} onChange={e=>setcontactFormName(event.target.value)} className="form-control ng-untouched ng-empty ng-invalid ng-invalid-required ng-dirty ng-valid-parse watermark" placeholder="Full Name *"/>
-            </div>
-        </div>
-
-        <div className="form-group">
-            <div className="field-wrapper">
-                <label htmlFor ="contactFormEmail" className="control-label">Email *</label>
-                <input id ="contactFormEmail" value={contactFormEmail} onChange={e=>setcontactFormEmail(event.target.value)} type="email" className="form-control ng-untouched ng-empty ng-valid-email ng-invalid ng-invalid-required ng-dirty watermark" required="" placeholder="Email *" />
-            </div>
-        </div>
-
-        <div className="form-group">
-            <div className="field-wrapper">
-                <label htmlFor ="contactFormPhone" className="control-label">Phone</label>
-                <input id="contactFormPhone" value={contactFormPhone} onChange={e=>setcontactFormPhone(event.target.value)} type="text" className="form-control ng-untouched ng-valid ng-empty ng-dirty ng-valid-parse watermark" placeholder="Phone" />
-            </div>
-        </div>
-
-        <div className="form-group">       
-            <div className="field-wrapper list">
-                <label htmlFor ="contactFormCountry" className="control-label">Location</label>
-                {/* eslint-disable-next-line jsx-a11y/no-onchange */}
-                <select id ="contactFormCountry" className="form-control ng-untouched ng-empty ng-invalid ng-invalid-required ng-dirty ng-valid-parse" value={contactFormCountry} onChange={e=>setcontactFormCountry(event.target.value)} >
-                  <option value="" disabled="" hidden="" selected="">Location</option>
-                  <option value="Australia">Australia</option>
-                  <option value="China">China</option>
-                  <option value="Europe">Europe</option>
-                  <option value="SouthAmerica">South America</option>
-                  <option value="USA">USA</option>
-                  <option value="Other">Other</option>
-                </select>
-            </div>
-        </div>
-
-        <div className="form-group ng-hide" id="contactFormState" ng-show="country=== 'Australia'">            
-            <div className="field-wrapper list">
-                <label htmlFor ="contactFormState" className="control-label">State</label>
-                {/* eslint-disable-next-line jsx-a11y/no-onchange */}
-                <select id="contactFormState" className="form-control ng-untouched ng-valid ng-empty ng-dirty ng-valid-parse" value={contactFormStateText} onChange={e=>setcontactFormStateText(event.target.value)} >
-                    <option value="" disabled="" hidden="" selected="">State</option>
-                  <option value="100000000">NSW</option>
-                  <option value="100000001">VIC</option>
-                  <option value="100000002">QLD</option>
-                  <option value="100000003">ACT</option>
-                  <option value="100000004">SA</option>
-                  <option value="100000005">WA</option>
-                  <option value="100000006">NT</option>
-                  <option value="100000007">TAS</option>
-                  <option value="100000008">Other</option>
-                </select>
-            </div>
+          <div className="field-wrapper">
+            <label htmlFor="contactFormName" className="control-label">
+              Full Name *
+            </label>
+            <input
+              id="contactFormName"
+              type="text"
+              value={contactFormName}
+              onChange={e => setcontactFormName(e.target.value)}
+              className="form-control ng-untouched"
+              required
+              placeholder="Full Name *"
+            />
+          </div>
         </div>
 
         <div className="form-group">
-            <div className="field-wrapper">
-                <label htmlFor ="contactFormCompanyName" className="control-label">Company</label>
-                <input id ="contactFormCompanyName" value={contactFormCompanyName} onChange={e=>setcontactFormCompanyName(event.target.value)} type="text" className="form-control ng-untouched ng-valid ng-empty ng-dirty ng-valid-parse watermark" placeholder="Company" />
-            </div>
+          <div className="field-wrapper">
+            <label htmlFor="contactFormEmail" className="control-label">
+              Email *
+            </label>
+            <input
+              id="contactFormEmail"
+              value={contactFormEmail}
+              onChange={e => setcontactFormEmail(e.target.value)}
+              type="email"
+              className="form-control ng-untouched"
+              required
+              placeholder="Email *"
+            />
+          </div>
         </div>
 
         <div className="form-group">
-            <div className="field-wrapper">
-                <label htmlFor ="contactFormNote" className="control-label">Message</label>
-                 <textarea id ="contactFormNote" value={contactFormNote} onChange={e=>setcontactFormNote(event.target.value)} className="form-control ng-untouched ng-valid ng-empty ng-valid-maxlength ng-dirty ng-valid-parse watermark" placeholder="Note" rows="4" val="" maxLength="2000"></textarea>
-            </div>
-            <small>Maximium 2000 characters.</small>
-        </div>      
+          <div className="field-wrapper">
+            <label htmlFor="contactFormPhone" className="control-label">
+              Phone
+            </label>
+            <input
+              id="contactFormPhone"
+              value={contactFormPhone}
+              onChange={e => setcontactFormPhone(e.target.value)}
+              type="text"
+              className="form-control"
+              placeholder="Phone"
+            />
+          </div>
+        </div>
 
         <div className="form-group">
-            <button id="contactFormSubmit" className="btn submit" ng-click="submit($event)" ng-disabled="disabled">Submit</button>
+          <div className="field-wrapper list">
+            <label htmlFor="contactFormCountry" className="control-label">
+              Location
+            </label>
+            {/* eslint-disable-next-line jsx-a11y/no-onchange */}
+            <select
+              id="contactFormCountry"
+              className="form-control"
+              value={contactFormCountry}
+              onChange={e => setcontactFormCountry(e.target.value)}
+            >
+              <option value="" disabled="" hidden="">
+                Location
+              </option>
+              <option value="Australia">Australia</option>
+              <option value="China">China</option>
+              <option value="Europe">Europe</option>
+              <option value="SouthAmerica">South America</option>
+              <option value="USA">USA</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
         </div>
-    </div>
-    </div>
+
+        <div className="form-group ng-hide" id="contactFormState">
+          <div className="field-wrapper list">
+            <label htmlFor="contactFormState" className="control-label">
+              State
+            </label>
+            {/* eslint-disable-next-line jsx-a11y/no-onchange */}
+            <select
+              id="contactFormState"
+              className="form-control"
+              value={contactFormStateText}
+              onChange={e => setcontactFormStateText(event.target.value)}
+            >
+              <option value="" disabled="" hidden="">
+                State
+              </option>
+              <option value="100000000">NSW</option>
+              <option value="100000001">VIC</option>
+              <option value="100000002">QLD</option>
+              <option value="100000003">ACT</option>
+              <option value="100000004">SA</option>
+              <option value="100000005">WA</option>
+              <option value="100000006">NT</option>
+              <option value="100000007">TAS</option>
+              <option value="100000008">Other</option>
+            </select>
+          </div>
+        </div>
+
+        <div className="form-group">
+          <div className="field-wrapper">
+            <label htmlFor="contactFormCompanyName" className="control-label">
+              Company
+            </label>
+            <input
+              id="contactFormCompanyName"
+              value={contactFormCompanyName}
+              onChange={e => setcontactFormCompanyName(e.target.value)}
+              type="text"
+              className="form-control"
+              placeholder="Company"
+            />
+          </div>
+        </div>
+
+        <div className="form-group">
+          <div className="field-wrapper">
+            <label htmlFor="contactFormNote" className="control-label">
+              Message
+            </label>
+            <textarea
+              id="contactFormNote"
+              value={contactFormNote}
+              onChange={e => setcontactFormNote(e.target.value)}
+              className="form-control"
+              placeholder="Note"
+              rows="4"
+              val=""
+              maxLength="2000"
+            ></textarea>
+          </div>
+          <small>Maximium 2000 characters.</small>
+        </div>
+
+        <div className="form-group">
+          <button id="contactFormSubmit" className="btn submit">
+            Submit
+          </button>
+          &nbsp;
+          <button id="contactFormClose" className="btn close" onClick={onClose}>
+            Close
+          </button>
+        </div>
+      </div>
     </form>
   );
 };
 
 ContactForm.propTypes = {
+  onClose: PropTypes.func.isRequired,
 };
 
 export default ContactForm;

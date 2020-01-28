@@ -411,7 +411,8 @@ button:focus {
 
 
 .contact{
-  padding-top: 3em;
+  padding-top: 4em;
+  padding-bottom: 4em;
   text-align: center;
 }
 
@@ -424,7 +425,7 @@ button:focus {
     font-weight: normal;
     display: inline-block;
     text-decoration: none;
-  background-color: #cc4141;
+    background-color: #cc4141;
   margin-top: 14px;
   padding: 8px 15px;
   text-align: center;
@@ -435,10 +436,11 @@ button:focus {
 
 .modal{
   position: absolute;
-    top: 0px;
-    left: 0px;
-    right: 0px;
-    bottom: 0px;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  display: flex;
 }
 
 .overlay{
@@ -452,18 +454,18 @@ button:focus {
 }
 
 .contactUs{
-  @apply bg-ssw-grey;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: auto;
-  margin-bottom: auto;
-  width: 50%;
-  height: fit-content;
+  margin: 0;
+  padding: 2.25rem 1.5rem 1.25rem;
+  border: 1px solid;
+  border-color: #999;
+  box-shadow: 0 .5rem 1rem rgba(0,0,0,.15);
 }
 
 .contactUs-form{
-  margin: 0;
-  padding: 2.25rem 1.5rem 1.25rem;
+  @apply bg-ssw-grey;
+  margin: auto;
+  height: fit-content;
+  box-sizing: content-box;
 }
 
 .submit{
@@ -471,6 +473,11 @@ button:focus {
   background-position: center right;
   background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAQCAYAAAAMJL+VAAABGklEQVQ4y7XUsUoDURAF0CCIVWJhYWdhaVKolf6ERVIknQlWpvIXREg+QdsUCgmkFxs7BUEbv8AqCNZ24Vg4wrIk5mXFgYE3l3vnLvvmTamUC5RxgiEeIoeBlUt/CRxjghu0cBjZCmyC46LNe3hF7RdOLTi9ZZt3QlhJ4FaC20ltvo537CzgVbEZ553QrKcYdDFYwNnAG+4z2ACnKQZjNDL1ClZz9R0+sZvBGxinGDxjP1Nf4vbHBBe+o53T7eGliEEbU4xwFOerGbpkgzHqOewsvnqKJ6zN0NVTf9HMS8Y5PrA1RzdA909jiu05mvQx/feHlhH2E1ZFNTj9ovuoHQvtGk0cRDYDm+THtYhJJVbzCI+Ro8Aqy/b7Ai65u7TwIdSpAAAAAElFTkSuQmCC);
   padding-right: 30px;
+
+}
+
+.close{
+  background-color: #999;
 }
 
 .form-group .field-wrapper select {
@@ -528,6 +535,9 @@ button:focus {
   transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
 }
 
+.form-control::placeholder {
+  color: #999;
+}
 .form-group label {
   position: absolute;
   top: -10px;
@@ -559,8 +569,6 @@ button:focus {
 label {
   font-weight: normal;
   color: #666;
-}
-label {
   display: inline-block;
   max-width: 100%;
   margin-bottom: 5px;
@@ -572,6 +580,40 @@ label {
   margin-bottom: 20px;
   display: block;
 }
+
+.fadeOut{
+  opacity:0;
+  width:0;
+  height:0;
+  transition: width 0.5s 0.5s, height 0.5s 0.5s, opacity 0.5s;
+
+}
+.fadeIn{
+  opacity:1;
+  width:100px;
+  height:100px;
+  transition: width 0.5s, height 0.5s, opacity 0.5s 0.5s;
+
+}
+
+.alert-success {
+  background-color: #dfefc9;
+  border-color: #c7e3a1;
+  color: #72a230;
+}
+
+.alert {
+  display: block;
+  width: 100%;
+  height: 34px;
+  font-size: 14px;
+  line-height: 1.42857143;
+  padding: 15px;
+  margin-bottom: 20px;
+  border: 1px solid transparent;
+  border-radius: 0;
+}
+
 /**
 * This injects Tailwind's component classes and any component classes
 * registered by plugins.

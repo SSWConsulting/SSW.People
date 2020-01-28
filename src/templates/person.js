@@ -25,7 +25,7 @@ const Person = ({ data }) => {
 
   const [displayContactForm, setdisplayContactForm] = useState(false);
 
-  const onContactButtonClick = ()=>{
+  const onContactButtonClick = () => {
     setdisplayContactForm(!displayContactForm);
   };
 
@@ -172,11 +172,20 @@ const Person = ({ data }) => {
                 __html: profileHtml,
               }}
             />
-            <hr/>
-            <Contact onClick={() => onContactButtonClick()} profileName={frontmatter.name} />
-            <Modal isOpen={displayContactForm} contentLabel="Contact Form" className="modal"
-              >
-              <ContactForm profileName={frontmatter.name} />
+            <hr />
+            <Contact
+              onClick={() => onContactButtonClick()}
+              profileName={frontmatter.nickname}
+            />
+            <Modal
+              isOpen={displayContactForm}
+              contentLabel="Contact Form"
+              className="modal"
+            >
+              <ContactForm
+                profileName={frontmatter.name}
+                onClose={() => setdisplayContactForm(false)}
+              />
             </Modal>
           </div>
         </div>
