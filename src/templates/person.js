@@ -63,7 +63,6 @@ const Person = ({ data }) => {
                 </div>
                 <div className="w-full pr-2 lg:hidden quoteblock">
                   <div className="person-quote">{frontmatter.quote}</div>
-                  <br />
                   <div className="person-quote-name">
                     {frontmatter.nickname}
                   </div>
@@ -74,7 +73,6 @@ const Person = ({ data }) => {
           <div className="flex person-favor flex-row lg:flex-col">
             <div className="hidden w-1/2 pr-2 lg:pr-0 lg:w-full lg:block quoteblock">
               <div className="person-quote">{frontmatter.quote}</div>
-              <br />
               <div className="person-quote-name">{frontmatter.nickname}</div>
             </div>
             <div className="favor-content w-full">

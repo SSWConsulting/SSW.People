@@ -144,6 +144,8 @@ ul li {
 
 .person-quote-name {
   text-align: right;
+  margin-top: 0.5em;
+  margin-bottom: 1em;
 }
 
 .profile-content {
