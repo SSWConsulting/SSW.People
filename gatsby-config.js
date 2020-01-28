@@ -16,9 +16,9 @@ module.exports = {
 			resolve: 'gatsby-source-git',
 			options: {
 				name: 'people',
-				remote: 'https://github.com/patriba/People.git',
+				remote: 'https://github.com/SSWConsulting/People.git',
 				// Optionally supply a branch. If none supplied, you'll get the default branch.
-				branch: 'patch-5',
+				branch: 'master',
 				// Tailor which files get imported eg. import the docs folder from a codebase.
 				patterns: '*-*/**',
 			},
