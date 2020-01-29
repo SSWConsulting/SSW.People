@@ -206,6 +206,12 @@ ul.favor-list li {
   background: url(./images/favor_email.gif) 0 6px no-repeat;
 }
 
+.breadcrumb {
+  display: inline;
+  font-size: 1.1em;
+  color: "#5b5656";
+}
+
 .hovered {
   @apply bg-ssw-red;
   color: #fff;
