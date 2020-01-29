@@ -6,7 +6,6 @@ import { faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { config } from '@fortawesome/fontawesome-svg-core';
 import '@fortawesome/fontawesome-svg-core/styles.css';
-import { Breadcrumb } from 'gatsby-plugin-breadcrumb';
 
 config.autoAddCss = false;
 
@@ -22,21 +21,13 @@ const Person = ({ data, pageContext: {breadcrumb: {crumbs}} }) => {
   const profileImage = data.profileImage.nodes[0];
 
   return (
-    <Layout
+    <Layout crumbs={crumbs} crumbLabel={frontmatter.name}
       pageTitle={
         childMarkdownRemark.frontmatter && childMarkdownRemark.frontmatter.name
       }
       displayActions={true}
       profileId={person.name}
     >
-      <div className="mx-6">
-        <Breadcrumb
-          className="breadcrumb"
-          crumbs={crumbs}
-          crumbLabel={frontmatter.name}
-          crumbSeparator=" > "
-        />
-      </div>
       <div className="flex flex-wrap mb-5 md:mx-2 person-content">
         <div className="sm:w-full lg:w-1/4 xl:w-1/6">
           {!!profileImage && (

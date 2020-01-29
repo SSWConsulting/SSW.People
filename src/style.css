@@ -207,9 +207,15 @@ ul.favor-list li {
 }
 
 .breadcrumb {
-  display: inline;
-  font-size: 1.1em;
+  display: inline-flex;
+  font-size: 1.3rem;
   color: "#5b5656";
+  text-align: center;
+  flex-wrap: wrap;
+
+  span {
+    min-width: 1.5rem;
+  }
 }
 
 .hovered {

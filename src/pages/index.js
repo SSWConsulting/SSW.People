@@ -20,7 +20,7 @@ import '@fortawesome/fontawesome-svg-core/styles.css';
 
 config.autoAddCss = false;
 
-const Index = ({ data, search }) => {
+const Index = ({ data, pageContext: {breadcrumb: {crumbs}} }) => {
   const history = typeof window !== 'undefined' ? createBrowserHistory() : null;
 
   const allPeople = useMemo(() => buildPeople(data), [data]);
@@ -83,7 +83,8 @@ const Index = ({ data, search }) => {
   }, [selectedLocation, selectedSkills, selectedRoles]);
 
   return (
-    <Layout displayActions={false}>
+    <Layout crumbs={crumbs}
+     displayActions={false}>
       <div
         className="mx-6"
         dangerouslySetInnerHTML={{
