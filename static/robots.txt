@@ -1,3 +1,2 @@
 User-agent: *
-Disallow:
-Sitemap: https://people.ssw.com.au/sitemap.xml
+Sitemap: https://ssw.com.au/people/sitemap.xml
