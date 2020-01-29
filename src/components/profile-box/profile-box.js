@@ -38,7 +38,10 @@ const ProfileBox = ({ profile, sanitisedName, profileImages }) => {
       {content}
     </a>
   ) : (
-    <Link to={`/${sanitisedName.toLowerCase()}`} className="w-full flex-profile-box unstyled">
+    <Link
+      to={`/${sanitisedName.toLowerCase()}`}
+      className="w-full flex-profile-box unstyled"
+    >
       {content}
     </Link>
   );

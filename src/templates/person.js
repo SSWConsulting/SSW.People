@@ -9,7 +9,12 @@ import '@fortawesome/fontawesome-svg-core/styles.css';
 
 config.autoAddCss = false;
 
-const Person = ({ data, pageContext: {breadcrumb: {crumbs}} }) => {
+const Person = ({
+  data,
+  pageContext: {
+    breadcrumb: { crumbs },
+  },
+}) => {
   const person = data.people;
   const childMarkdownRemark = person.childMarkdownRemark || {};
   const frontmatter = childMarkdownRemark.frontmatter || {};
@@ -21,7 +26,9 @@ const Person = ({ data, pageContext: {breadcrumb: {crumbs}} }) => {
   const profileImage = data.profileImage.nodes[0];
 
   return (
-    <Layout crumbs={crumbs} crumbLabel={frontmatter.name}
+    <Layout
+      crumbs={crumbs}
+      crumbLabel={frontmatter.name}
       pageTitle={
         childMarkdownRemark.frontmatter && childMarkdownRemark.frontmatter.name
       }
@@ -172,6 +179,7 @@ const Person = ({ data, pageContext: {breadcrumb: {crumbs}} }) => {
 
 Person.propTypes = {
   data: PropTypes.object.isRequired,
+  pageContext: PropTypes.object.isRequired,
 };
 
 export default Person;
