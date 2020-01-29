@@ -1,11 +1,14 @@
 import { graphql } from 'gatsby';
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useState } from 'react';
 import Layout from '../components/layout';
 import { faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { config } from '@fortawesome/fontawesome-svg-core';
 import '@fortawesome/fontawesome-svg-core/styles.css';
+import Contact from '../components/contact/contact';
+import ContactForm from '../components/contact-form/contact-form';
+import Modal from 'react-modal';
 
 config.autoAddCss = false;
 
@@ -24,6 +27,12 @@ const Person = ({
   const intermediateSkills = skills.intermediateSkills || [];
   const advancedSkills = skills.advancedSkills || [];
   const profileImage = data.profileImage.nodes[0];
+
+  const [displayContactForm, setdisplayContactForm] = useState(false);
+
+  const onContactButtonClick = () => {
+    setdisplayContactForm(!displayContactForm);
+  };
 
   return (
     <Layout
@@ -61,9 +70,10 @@ const Person = ({
                 </div>
                 <div className="w-full pr-2 lg:hidden quoteblock">
                   <div className="person-quote">{frontmatter.quote}</div>
-                  <br />
                   <div className="person-quote-name">
-                    {frontmatter.nickname}
+                    {frontmatter.quote_author
+                      ? frontmatter.quote_author
+                      : frontmatter.nickname}
                   </div>
                 </div>
               </div>
@@ -72,8 +82,11 @@ const Person = ({
           <div className="flex person-favor flex-row lg:flex-col">
             <div className="hidden w-1/2 pr-2 lg:pr-0 lg:w-full lg:block quoteblock">
               <div className="person-quote">{frontmatter.quote}</div>
-              <br />
-              <div className="person-quote-name">{frontmatter.nickname}</div>
+              <div className="person-quote-name">
+                {frontmatter.quote_author
+                  ? frontmatter.quote_author
+                  : frontmatter.nickname}
+              </div>
             </div>
             <div className="favor-content w-full">
               <ul className="favor-list">
@@ -170,6 +183,21 @@ const Person = ({
                 __html: profileHtml,
               }}
             />
+            <hr />
+            <Contact
+              onClick={() => onContactButtonClick()}
+              profileName={frontmatter.nickname}
+            />
+            <Modal
+              isOpen={displayContactForm}
+              contentLabel="Contact Form"
+              className="modal"
+            >
+              <ContactForm
+                profileName={frontmatter.name}
+                onClose={() => setdisplayContactForm(false)}
+              />
+            </Modal>
           </div>
         </div>
       </div>
@@ -201,6 +229,7 @@ export const query = graphql`
           location
           qualifications
           quote
+          quote_author
           skype
           twitter
           website
