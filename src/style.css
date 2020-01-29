@@ -155,9 +155,23 @@ ul li {
 .profile-content p {
   margin-bottom: 10px;
 }
-.profile-content ul {
+.profile-content ul, .profile-content ol {
   margin-bottom: 10px;
  }
+
+.profile-content ol {
+  padding: 0 0 0 20px;
+  list-style: decimal;
+}
+
+.profile-content ol li{
+  line-height: 1.5em;
+  padding-bottom: 10px;
+}
+
+.profile-content ol li li, .profile-content li ul{
+  padding-bottom: 0;
+}
 
 .favor-content {
   background-color: #efefef;
@@ -297,6 +311,10 @@ pre {
   white-space: -pre-wrap;      /* Opera 4-6 */
   white-space: -o-pre-wrap;    /* Opera 7 */
   word-wrap: break-word;       /* Internet Explorer 5.5+ */
+  background-color: #1b262c;
+  color: #fff;
+  border-radius: .5rem;
+  padding: .5rem 1rem;
  }
 
 @media screen and (max-width: 1024px) {
