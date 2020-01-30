@@ -35,7 +35,7 @@ const ContactForm = ({ onClose }) => {
     body = body + 'Email:   ' + contactFormEmail + '<br/>';
     body = body + 'Note:    ' + contactFormNote + '<br/><br/>';
     event.preventDefault();
-    const response = await axios
+    await axios
       .post(
         '/ssw/api/crm/createlead',
         {
@@ -61,7 +61,7 @@ const ContactForm = ({ onClose }) => {
           window.location = '/ssw/Thankyou.aspx';
         }, 2000);
       })
-      .catch(error => {
+      .catch(() => {
         alert('Failed to create lead in CRM');
       });
   };
@@ -181,7 +181,7 @@ const ContactForm = ({ onClose }) => {
               id="contactFormState"
               className="form-control"
               value={contactFormStateText}
-              onChange={e => setContactFormStateText(event.target.value)}
+              onChange={() => setContactFormStateText(event.target.value)}
             >
               <option value="" disabled="" hidden="">
                 State

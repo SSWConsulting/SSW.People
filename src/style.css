@@ -224,6 +224,18 @@ ul.favor-list li {
   background: url(./images/favor_email.gif) 0 6px no-repeat;
 }
 
+.breadcrumb {
+  display: inline-flex;
+  font-size: 1.3rem;
+  color: "#5b5656";
+  text-align: center;
+  flex-wrap: wrap;
+
+  span {
+    min-width: 1.5rem;
+  }
+}
+
 .hovered {
   @apply bg-ssw-red;
   color: #fff;

@@ -20,7 +20,12 @@ import '@fortawesome/fontawesome-svg-core/styles.css';
 
 config.autoAddCss = false;
 
-const Index = ({ data, search }) => {
+const Index = ({
+  data,
+  pageContext: {
+    breadcrumb: { crumbs },
+  },
+}) => {
   const history = typeof window !== 'undefined' ? createBrowserHistory() : null;
 
   const allPeople = useMemo(() => buildPeople(data), [data]);
@@ -76,14 +81,14 @@ const Index = ({ data, search }) => {
   useEffect(() => {
     // TODO: load search params from querystring
     // TODO: push search params to querystring
-    history.push({
-      pathname: withPrefix('/'),
-      search: '',
-    });
+    // history.push({
+    //   pathname: withPrefix('/'),
+    //   search: '',
+    // });
   }, [selectedLocation, selectedSkills, selectedRoles]);
 
   return (
-    <Layout displayActions={false}>
+    <Layout crumbs={crumbs} displayActions={false}>
       <div
         className="mx-6"
         dangerouslySetInnerHTML={{
@@ -132,6 +137,7 @@ const Index = ({ data, search }) => {
 Index.propTypes = {
   data: PropTypes.object.isRequired,
   search: PropTypes.object.isRequired,
+  pageContext: PropTypes.object.isRequired,
 };
 
 function buildPeople(data) {

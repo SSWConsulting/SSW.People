@@ -98,6 +98,14 @@ module.exports = {
 					include: /images\/.*\.svg$/,
 				},
 			},
-		},
+    },
+    {
+      resolve: 'gatsby-plugin-breadcrumb',
+      options: {
+        useAutoGen: true,
+        autoGenHomeLabel: "People",
+        useClassNames: true
+      }
+    },
 	],
 };

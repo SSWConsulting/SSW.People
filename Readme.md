@@ -58,6 +58,9 @@ VERSION_DEPLOYED=
 ### People profiles repository
 
 > People profiles repository lives here: https://github.com/SSWConsulting/People
+- Sample Profile: 
+  - Staging: https://sydiisp01.sydney.ssw.com.au/people/bob-northwind
+  - Production: https://www.ssw.com.au/people/bob-northwind
 
 Merging changes to **master** on this repo will trigger:
 - a build/release of the **master** branch in Staging (https://sydiisp01.sydney.ssw.com.au/people/)
