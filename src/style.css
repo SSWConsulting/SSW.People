@@ -201,7 +201,9 @@ ul.favor-list li {
 .social {
   padding: 0px 0px 0px 20px;
 }
-
+#blog {
+  background: url(./images/website.png) 0 4px no-repeat;
+}
 #facebook {
   background: url(./images/facebook.png) 0 4px no-repeat;
 }
