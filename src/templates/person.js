@@ -12,7 +12,12 @@ import Modal from 'react-modal';
 
 config.autoAddCss = false;
 
-const Person = ({ data }) => {
+const Person = ({
+  data,
+  pageContext: {
+    breadcrumb: { crumbs },
+  },
+}) => {
   const person = data.people;
   const childMarkdownRemark = person.childMarkdownRemark || {};
   const frontmatter = childMarkdownRemark.frontmatter || {};
@@ -31,6 +36,8 @@ const Person = ({ data }) => {
 
   return (
     <Layout
+      crumbs={crumbs}
+      crumbLabel={frontmatter.name}
       pageTitle={
         childMarkdownRemark.frontmatter && childMarkdownRemark.frontmatter.name
       }
@@ -200,6 +207,7 @@ const Person = ({ data }) => {
 
 Person.propTypes = {
   data: PropTypes.object.isRequired,
+  pageContext: PropTypes.object.isRequired,
 };
 
 export default Person;
