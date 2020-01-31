@@ -84,7 +84,11 @@ const ContactForm = ({ onClose }) => {
   }, []);
 
   return (
-    <form ref={node} className="contactUs-form w-full lg:w-1/2 object-center">
+    <form
+      ref={node}
+      className="contactUs-form w-full lg:w-1/2 object-center"
+      onSubmit={e => handleSubmit(e)}
+    >
       <div className="contactUs">
         <h2>Get your project started!</h2>
         <div
@@ -236,15 +240,11 @@ const ContactForm = ({ onClose }) => {
         <div className="form-group recaptcha">
           <ReCAPTCHA
             sitekey="6LfiGykUAAAAAK3t_LGME2V-FLmWpq1sHRhmctZ0"
-            onChange={e => setContactReCaptcha(e.target.value)}
+            onChange={value => setContactReCaptcha(value)}
           />
         </div>
         <div className="form-group">
-          <button
-            id="contactFormSubmit"
-            className="btn submit"
-            onClick={e => handleSubmit(e)}
-          >
+          <button id="contactFormSubmit" className="btn submit">
             Submit
           </button>
           &nbsp;
