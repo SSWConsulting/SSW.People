@@ -44,16 +44,20 @@ VERSION_DEPLOYED=
 > <As per rule: [Done - Do you go beyond 'Done' and follow a 'Definition of Done'](https://rules.ssw.com.au/done-do-you-go-beyond-done-and-follow-a-definition-of-done)?>
 
 ### Branches
-- There are two main branches for this repo: **Master** is the main 'dev' branch, **Release** is the 'production' one
+- Branching strategy is based off [Release Flow](https://docs.microsoft.com/en-us/azure/devops/learn/devops-at-microsoft/release-flow) 
+- **Master** is the main 'dev' branch
+- **Release/xx** is the 'production' one (where xx is the Sprint number)
 - Always create a new branch for your PBIs 
 - Always delete your branch once your PR has been merged
 
-### Running a Production Build
-- After merging **master**, Azure DevOps automatically builds and deploys the **master** build to the **staging** site: https://sydiisp01.sydney.ssw.com.au/people/
+### Builds
+- Changes made to http://github.com/SSWConsulting/People (i.e. profile changes) trigger builds that deploy:
+  - **master** to the **staging** site: https://sydiisp01.sydney.ssw.com.au/people/
+  - latest **release/xx** to the **production** site: https://www.ssw.com.au/people
   
-- After merging **release**, Azure DevOps automatically builds and deploys the **release** build to the **production** site: https://www.ssw.com.au/people
+- Branching off **master** to **release/xx**, or making changes to **release/xx** will build and deploy to the **production** site: https://www.ssw.com.au/people
 
-> Note: people.ssw.com.au is the old URL for the production site
+> Note: people.ssw.com.au is the old URL for the production site and redirects to https://www.ssw.com.au/people
 
 ### People profiles repository
 
