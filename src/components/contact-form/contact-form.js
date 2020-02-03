@@ -246,7 +246,7 @@ const ContactForm = ({ onClose }) => {
           />
         </div>
         <div className="form-group">
-          <button id="contactFormSubmit" className="btn submit">
+          <button id="contactFormSubmit" className="btn btn-red submit">
             Submit
           </button>
           &nbsp;

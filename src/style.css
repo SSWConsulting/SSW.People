@@ -489,7 +489,7 @@ pre {
     font-weight: normal;
     display: inline-block;
     text-decoration: none;
-    background-color: #cc4141;
+
   margin-top: 14px;
   padding: 8px 15px;
   text-align: center;
@@ -497,6 +497,13 @@ pre {
     touch-action: manipulation;
 }
 
+.btn-red{
+  background-color: #cc4141;
+}
+
+.btn-red:hover{
+  background-color: #cc2121;
+}
 
 .modal{
   position: absolute;
@@ -542,6 +549,9 @@ pre {
 
 .close{
   background-color: #999;
+}
+.close:hover{
+  background-color: #888;
 }
 
 .form-group .field-wrapper select {
