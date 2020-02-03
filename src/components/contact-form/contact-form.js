@@ -175,33 +175,35 @@ const ContactForm = ({ onClose }) => {
           </div>
         </div>
 
-        <div className="form-group ng-hide" id="contactFormState">
-          <div className="field-wrapper list">
-            <label htmlFor="contactFormState" className="control-label">
-              State
-            </label>
-            {/* eslint-disable-next-line jsx-a11y/no-onchange */}
-            <select
-              id="contactFormState"
-              className="form-control"
-              value={contactFormStateText}
-              onChange={() => setContactFormStateText(event.target.value)}
-            >
-              <option value="" disabled="" hidden="">
+        {contactFormCountry === 'Australia' && (
+          <div className="form-group ng-hide" id="contactFormState">
+            <div className="field-wrapper list">
+              <label htmlFor="contactFormState" className="control-label">
                 State
-              </option>
-              <option value="100000000">NSW</option>
-              <option value="100000001">VIC</option>
-              <option value="100000002">QLD</option>
-              <option value="100000003">ACT</option>
-              <option value="100000004">SA</option>
-              <option value="100000005">WA</option>
-              <option value="100000006">NT</option>
-              <option value="100000007">TAS</option>
-              <option value="100000008">Other</option>
-            </select>
+              </label>
+              {/* eslint-disable-next-line jsx-a11y/no-onchange */}
+              <select
+                id="contactFormState"
+                className="form-control"
+                value={contactFormStateText}
+                onChange={() => setContactFormStateText(event.target.value)}
+              >
+                <option value="" disabled="" hidden="">
+                  State
+                </option>
+                <option value="100000000">NSW</option>
+                <option value="100000001">VIC</option>
+                <option value="100000002">QLD</option>
+                <option value="100000003">ACT</option>
+                <option value="100000004">SA</option>
+                <option value="100000005">WA</option>
+                <option value="100000006">NT</option>
+                <option value="100000007">TAS</option>
+                <option value="100000008">Other</option>
+              </select>
+            </div>
           </div>
-        </div>
+        )}
 
         <div className="form-group">
           <div className="field-wrapper">
