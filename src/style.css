@@ -279,7 +279,9 @@ button:focus {
 }
 
 .img-large img,
-.img-large {
+.img-large,
+.img-banner img,
+.img-banner {
   height: auto;
   min-width: 600px;
 }
