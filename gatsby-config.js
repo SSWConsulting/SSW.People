@@ -60,6 +60,9 @@ module.exports = {
                 imgBadge: {
                   classes: "img-badge",
                 },
+                imgBanner: {
+                  classes: "img-banner",
+                },
                 imgLg: {
                   classes: "img-large",
                 },
