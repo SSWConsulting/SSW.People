@@ -224,9 +224,13 @@ ul.favor-list li {
   background: url(./images/favor_email.gif) 0 6px no-repeat;
 }
 
+.breadcrumb-container{
+  font-size: 0.8rem;
+  color: "#5b5656";
+}
+
 .breadcrumb {
   display: inline-flex;
-  font-size: 0.9em;
   color: "#5b5656";
   text-align: center;
   flex-wrap: wrap;

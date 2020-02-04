@@ -25,7 +25,9 @@ const Layout = ({
         profileId={profileId}
       />
       {crumbs ? (
-        <Breadcrumbs crumbs={crumbs} crumbLabel={crumbLabel} />
+        <div className="breadcrumb-container">
+          <Breadcrumbs crumbs={crumbs} crumbLabel={crumbLabel} />
+        </div>
       ) : (
         <div></div>
       )}
