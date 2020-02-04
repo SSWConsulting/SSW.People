@@ -4,16 +4,15 @@ import ReactGA from 'react-ga';
 
 ReactGA.initialize(process.env.GOOGLE_ANALYTICS);
 
-const GoogleAnalytics = ({
-  pageTitle
-}) => (
+const GoogleAnalytics = ({ pageTitle }) => (
   <>
-  {ReactGA.pageview(window.location.pathname, null, pageTitle)}
+    {typeof window !== `undefined` &&
+      ReactGA.pageview(window.location.pathname, null, pageTitle)}
   </>
 );
 
 GoogleAnalytics.propTypes = {
-  pageTitle: PropTypes.string
+  pageTitle: PropTypes.string,
 };
 
 export default GoogleAnalytics;
