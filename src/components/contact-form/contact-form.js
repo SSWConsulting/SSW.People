@@ -241,7 +241,7 @@ const ContactForm = ({ onClose }) => {
         </div>
         <div className="form-group recaptcha">
           <ReCAPTCHA
-            sitekey="6LfiGykUAAAAAK3t_LGME2V-FLmWpq1sHRhmctZ0"
+            sitekey={process.env.RECAPTCHA_KEY}
             onChange={value => setContactReCaptcha(value)}
           />
         </div>
