@@ -35,7 +35,7 @@ const ContactForm = ({ onClose }) => {
     body = body + 'Email:   ' + contactFormEmail + '<br/>';
     body = body + 'Note:    ' + contactFormNote + '<br/><br/>';
     event.preventDefault();
-    const response = await axios
+    await axios
       .post(
         '/ssw/api/crm/createlead',
         {
@@ -61,7 +61,7 @@ const ContactForm = ({ onClose }) => {
           window.location = '/ssw/Thankyou.aspx';
         }, 2000);
       })
-      .catch(error => {
+      .catch(() => {
         alert('Failed to create lead in CRM');
       });
   };
@@ -84,7 +84,11 @@ const ContactForm = ({ onClose }) => {
   }, []);
 
   return (
-    <form ref={node} className="contactUs-form w-full lg:w-1/2 object-center">
+    <form
+      ref={node}
+      className="contactUs-form w-full lg:w-1/2 object-center"
+      onSubmit={e => handleSubmit(e)}
+    >
       <div className="contactUs">
         <h2>Get your project started!</h2>
         <div
@@ -171,33 +175,35 @@ const ContactForm = ({ onClose }) => {
           </div>
         </div>
 
-        <div className="form-group ng-hide" id="contactFormState">
-          <div className="field-wrapper list">
-            <label htmlFor="contactFormState" className="control-label">
-              State
-            </label>
-            {/* eslint-disable-next-line jsx-a11y/no-onchange */}
-            <select
-              id="contactFormState"
-              className="form-control"
-              value={contactFormStateText}
-              onChange={e => setContactFormStateText(event.target.value)}
-            >
-              <option value="" disabled="" hidden="">
+        {contactFormCountry === 'Australia' && (
+          <div className="form-group ng-hide" id="contactFormState">
+            <div className="field-wrapper list">
+              <label htmlFor="contactFormState" className="control-label">
                 State
-              </option>
-              <option value="100000000">NSW</option>
-              <option value="100000001">VIC</option>
-              <option value="100000002">QLD</option>
-              <option value="100000003">ACT</option>
-              <option value="100000004">SA</option>
-              <option value="100000005">WA</option>
-              <option value="100000006">NT</option>
-              <option value="100000007">TAS</option>
-              <option value="100000008">Other</option>
-            </select>
+              </label>
+              {/* eslint-disable-next-line jsx-a11y/no-onchange */}
+              <select
+                id="contactFormState"
+                className="form-control"
+                value={contactFormStateText}
+                onChange={() => setContactFormStateText(event.target.value)}
+              >
+                <option value="" disabled="" hidden="">
+                  State
+                </option>
+                <option value="100000000">NSW</option>
+                <option value="100000001">VIC</option>
+                <option value="100000002">QLD</option>
+                <option value="100000003">ACT</option>
+                <option value="100000004">SA</option>
+                <option value="100000005">WA</option>
+                <option value="100000006">NT</option>
+                <option value="100000007">TAS</option>
+                <option value="100000008">Other</option>
+              </select>
+            </div>
           </div>
-        </div>
+        )}
 
         <div className="form-group">
           <div className="field-wrapper">
@@ -236,15 +242,11 @@ const ContactForm = ({ onClose }) => {
         <div className="form-group recaptcha">
           <ReCAPTCHA
             sitekey="6LfiGykUAAAAAK3t_LGME2V-FLmWpq1sHRhmctZ0"
-            onChange={e => setContactReCaptcha(e.target.value)}
+            onChange={value => setContactReCaptcha(value)}
           />
         </div>
         <div className="form-group">
-          <button
-            id="contactFormSubmit"
-            className="btn submit"
-            onClick={e => handleSubmit(e)}
-          >
+          <button id="contactFormSubmit" className="btn btn-red submit">
             Submit
           </button>
           &nbsp;
