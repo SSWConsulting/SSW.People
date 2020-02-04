@@ -6,6 +6,7 @@ import Header from 'components/header';
 import Footer from 'components/footer';
 import '../../style.css';
 import Breadcrumbs from '../breadcrumb/breadcrumb';
+import GoogleAnalytics from '../google-analytics/google-analytics';
 
 const Layout = ({
   data,
@@ -24,6 +25,7 @@ const Layout = ({
         displayActions={displayActions}
         profileId={profileId}
       />
+      <GoogleAnalytics pageTitle={pageTitle}></GoogleAnalytics>
       {crumbs ? (
         <Breadcrumbs crumbs={crumbs} crumbLabel={crumbLabel} />
       ) : (
