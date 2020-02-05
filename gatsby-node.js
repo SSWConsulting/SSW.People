@@ -55,7 +55,8 @@ exports.sourceNodes = async ({ actions }) => {
 			slug: `${user.firstName}-${user.lastName}`,
 			fullName: `${user.firstName} ${user.lastName}`,
 			emailAddress: user.emailAddress,
-			location: user.defaultSite.name,
+      location: user.defaultSite.name,
+      billingRate: 0, //TODO: integrate with CRM data
 			skills: {
 				intermediateSkills: user.skills
 					.filter(s => s.experienceLevel === 'Intermediate')
