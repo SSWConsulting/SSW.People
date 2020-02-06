@@ -12,6 +12,7 @@ const ContactForm = ({ onClose }) => {
   const [contactFormCompanyName, setContactFormCompanyName] = useState('');
   const [contactFormNote, setContactFormNote] = useState('');
   const [contactFormCountry, setContactFormCountry] = useState('');
+  const [contactFormState, setContactFormState] = useState('');
   const [contactFormStateText, setContactFormStateText] = useState('');
   const [contactReCaptcha, setContactReCaptcha] = useState('');
 
@@ -26,7 +27,7 @@ const ContactForm = ({ onClose }) => {
     body = body + 'Company: ' + contactFormCompanyName + '<br/>';
     body = body + 'Country: ' + contactFormCountry + '<br/>';
     if (contactFormStateText == '') {
-      setContactFormStateText('100000008');
+      setContactFormState('100000008');
     } else {
       body = body + 'State:  ' + contactFormStateText + '<br/>';
     }
@@ -44,7 +45,7 @@ const ContactForm = ({ onClose }) => {
           Company: contactFormCompanyName,
           Note: contactFormNote,
           Country: contactFormCountry,
-          State: contactFormStateText,
+          State: contactFormState,
           Email: contactFormEmail,
           Phone: contactFormPhone,
           Recaptcha: contactReCaptcha,
@@ -179,14 +180,18 @@ const ContactForm = ({ onClose }) => {
           <div className="form-group ng-hide" id="contactFormState">
             <div className="field-wrapper list">
               <label htmlFor="contactFormState" className="control-label">
-                State
+                State - {contactFormState} {contactFormStateText}
               </label>
               {/* eslint-disable-next-line jsx-a11y/no-onchange */}
               <select
                 id="contactFormState"
                 className="form-control"
-                value={contactFormStateText}
-                onChange={() => setContactFormStateText(event.target.value)}
+                value={contactFormState}
+                onChange={() => {
+                  setContactFormState(event.target.value);
+                  let index = event.target.selectedIndex;
+                  setContactFormStateText(event.target[index].text);
+                }}
               >
                 <option value="" disabled="" hidden="">
                   State
