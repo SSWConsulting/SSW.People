@@ -12,6 +12,7 @@ const ContactForm = ({ onClose }) => {
   const [contactFormCompanyName, setContactFormCompanyName] = useState('');
   const [contactFormNote, setContactFormNote] = useState('');
   const [contactFormCountry, setContactFormCountry] = useState('');
+  const [contactFormState, setContactFormState] = useState('');
   const [contactFormStateText, setContactFormStateText] = useState('');
   const [contactReCaptcha, setContactReCaptcha] = useState('');
 
@@ -26,7 +27,7 @@ const ContactForm = ({ onClose }) => {
     body = body + 'Company: ' + contactFormCompanyName + '<br/>';
     body = body + 'Country: ' + contactFormCountry + '<br/>';
     if (contactFormStateText == '') {
-      setContactFormStateText('100000008');
+      setContactFormState('100000008');
     } else {
       body = body + 'State:  ' + contactFormStateText + '<br/>';
     }
@@ -44,7 +45,7 @@ const ContactForm = ({ onClose }) => {
           Company: contactFormCompanyName,
           Note: contactFormNote,
           Country: contactFormCountry,
-          State: contactFormStateText,
+          State: contactFormState,
           Email: contactFormEmail,
           Phone: contactFormPhone,
           Recaptcha: contactReCaptcha,
@@ -175,33 +176,39 @@ const ContactForm = ({ onClose }) => {
           </div>
         </div>
 
-        <div className="form-group ng-hide" id="contactFormState">
-          <div className="field-wrapper list">
-            <label htmlFor="contactFormState" className="control-label">
-              State
-            </label>
-            {/* eslint-disable-next-line jsx-a11y/no-onchange */}
-            <select
-              id="contactFormState"
-              className="form-control"
-              value={contactFormStateText}
-              onChange={() => setContactFormStateText(event.target.value)}
-            >
-              <option value="" disabled="" hidden="">
-                State
-              </option>
-              <option value="100000000">NSW</option>
-              <option value="100000001">VIC</option>
-              <option value="100000002">QLD</option>
-              <option value="100000003">ACT</option>
-              <option value="100000004">SA</option>
-              <option value="100000005">WA</option>
-              <option value="100000006">NT</option>
-              <option value="100000007">TAS</option>
-              <option value="100000008">Other</option>
-            </select>
+        {contactFormCountry === 'Australia' && (
+          <div className="form-group ng-hide" id="contactFormState">
+            <div className="field-wrapper list">
+              <label htmlFor="contactFormState" className="control-label">
+                State - {contactFormState} {contactFormStateText}
+              </label>
+              {/* eslint-disable-next-line jsx-a11y/no-onchange */}
+              <select
+                id="contactFormState"
+                className="form-control"
+                value={contactFormState}
+                onChange={() => {
+                  setContactFormState(event.target.value);
+                  let index = event.target.selectedIndex;
+                  setContactFormStateText(event.target[index].text);
+                }}
+              >
+                <option value="" disabled="" hidden="">
+                  State
+                </option>
+                <option value="100000000">NSW</option>
+                <option value="100000001">VIC</option>
+                <option value="100000002">QLD</option>
+                <option value="100000003">ACT</option>
+                <option value="100000004">SA</option>
+                <option value="100000005">WA</option>
+                <option value="100000006">NT</option>
+                <option value="100000007">TAS</option>
+                <option value="100000008">Other</option>
+              </select>
+            </div>
           </div>
-        </div>
+        )}
 
         <div className="form-group">
           <div className="field-wrapper">
@@ -239,12 +246,12 @@ const ContactForm = ({ onClose }) => {
         </div>
         <div className="form-group recaptcha">
           <ReCAPTCHA
-            sitekey="6LfiGykUAAAAAK3t_LGME2V-FLmWpq1sHRhmctZ0"
+            sitekey={process.env.RECAPTCHA_KEY}
             onChange={value => setContactReCaptcha(value)}
           />
         </div>
         <div className="form-group">
-          <button id="contactFormSubmit" className="btn submit">
+          <button id="contactFormSubmit" className="btn btn-red submit">
             Submit
           </button>
           &nbsp;

@@ -8,7 +8,7 @@ const Contact = ({ onClick, profileName }) => {
         Interested in what {profileName} can do for you?
       </h3>
       <p>Contact an Account Manager to discuss your project</p>
-      <button className="btn" onClick={() => onClick()}>
+      <button className="btn btn-red" onClick={() => onClick()}>
         Book a Free Initial Meeting
       </button>
       <p>
