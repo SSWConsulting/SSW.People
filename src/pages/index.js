@@ -168,7 +168,7 @@ function buildPeople(data) {
       [n.skills.advancedSkills, n.skills.intermediateSkills].flat()
     );
     locationsMap.set(n.fullName, n.location);
-    billingRatesMap.set(n.fullName, n.billingHours);
+    billingRatesMap.set(n.fullName, n.billingRate);
   });
 
   return data.people.nodes.map(node => {
