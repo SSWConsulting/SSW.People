@@ -17,6 +17,7 @@ import LocationSanitiser from '../helpers/locationSanitizer';
 import 'array-flat-polyfill';
 import { config } from '@fortawesome/fontawesome-svg-core';
 import '@fortawesome/fontawesome-svg-core/styles.css';
+import ProfileSort from '../helpers/profileSort';
 
 config.autoAddCss = false;
 
@@ -74,7 +75,9 @@ const Index = ({
         p =>
           selectedSkills.length === 0 ||
           selectedSkills.filter(s => p.skills.includes(s)).length > 0
-      );
+      )
+      .sort(ProfileSort);
+
     setFilteredPeople(people);
   }, [selectedLocation, selectedSkills]);
 
@@ -145,6 +148,7 @@ function buildPeople(data) {
   const sketchProfileImageMap = new Map();
   const skillsMap = new Map();
   const locationsMap = new Map();
+  const billingRatesMap = new Map();
 
   data.profile_images.nodes.forEach(n =>
     profileImageMap.set(
@@ -164,6 +168,7 @@ function buildPeople(data) {
       [n.skills.advancedSkills, n.skills.intermediateSkills].flat()
     );
     locationsMap.set(n.fullName, n.location);
+    billingRatesMap.set(n.fullName, n.billingRate);
   });
 
   return data.people.nodes.map(node => {
@@ -173,6 +178,7 @@ function buildPeople(data) {
       location: LocationSanitiser(
         locationsMap.get(node.frontmatter.name) || node.frontmatter.location
       ),
+      billingRate: billingRatesMap.get(node.frontmatter.name) || 0,
       sanitisedName: node.parent.name,
       role: node.frontmatter.category,
       profileImages: {
@@ -190,7 +196,6 @@ const IndexWithQuery = props => (
       query HomepageQuery {
         people: allMarkdownRemark(
           filter: { frontmatter: { current_employee: { eq: true } } }
-          sort: { fields: frontmatter___nickname }
         ) {
           nodes {
             frontmatter {
@@ -257,6 +262,7 @@ const IndexWithQuery = props => (
             }
             fullName
             location
+            billingRate
           }
         }
       }
