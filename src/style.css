@@ -321,14 +321,6 @@ button:focus {
   }
 }
 
-.img-large img,
-.img-large,
-.img-banner img,
-.img-banner {
-  height: auto;
-  min-width: 600px;
-}
-
 .img-medium img,
 .img-medium {
   height: auto;
@@ -388,10 +380,12 @@ pre {
   white-space: -pre-wrap;      /* Opera 4-6 */
   white-space: -o-pre-wrap;    /* Opera 7 */
   word-wrap: break-word;       /* Internet Explorer 5.5+ */
+  overflow-wrap: break-word;
   background-color: #1b262c;
   color: #fff;
   border-radius: .5rem;
   padding: .5rem 1rem;
+  word-break: break-all;
  }
 
 @media screen and (max-width: 1024px) {
@@ -461,6 +455,16 @@ pre {
   text-indent:-0.5em;
 }
 
+@media screen and (min-width: 600px) {
+  .img-large img,
+  .img-large,
+  .img-banner img,
+  .img-banner {
+    height: auto;
+    min-width: 600px;
+  }
+}
+
 @media screen and (max-width: 600px) {
   header>div.flex {
     flex-direction: column;
@@ -479,6 +483,7 @@ pre {
       transition: all 0.2s ease-in-out;
     }
   }
+
 }
 
 .people-grid-container {
