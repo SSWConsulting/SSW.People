@@ -1,11 +1,9 @@
 const ProfileSort = (a, b) => {
   if (
-    a.sanitisedName.toLowerCase() === 'bob-northwind' ||
     a.sanitisedName.toLowerCase() === 'we-are-hiring'
   ) {
     return 1;
   } else if (
-    b.sanitisedName.toLowerCase() === 'bob-northwind' ||
     b.sanitisedName.toLowerCase() === 'we-are-hiring'
   ) {
     return -1;
