@@ -34,6 +34,11 @@ const Person = ({
     setdisplayContactForm(!displayContactForm);
   };
 
+  const onSendEmail = (e, emailTo) => {
+    e.preventDefault();
+    window.location.href = 'mailTo:' + emailTo;
+  };
+
   return (
     <Layout
       crumbs={crumbs}
@@ -92,7 +97,7 @@ const Person = ({
               <ul className="favor-list">
                 {crmData.emailAddress != '' && (
                   <li id="email" className="social">
-                    <a href={'mailto:' + crmData.emailAddress}>Email</a>
+                    <a href={'mailto:' + frontmatter.nickname} onClick={(event) => onSendEmail(event,crmData.emailAddress)}>Email</a>
                   </li>
                 )}
                 {frontmatter.blog != '' && (
