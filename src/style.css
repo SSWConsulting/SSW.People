@@ -228,6 +228,7 @@ ul.favor-list li {
   font-size: 0.8rem;
   color: "#5b5656";
 }
+
 .breadcrumb {
   display: inline-flex;
   color: "#5b5656";
@@ -325,6 +326,9 @@ button:focus {
   margin-right: auto;
 }
 
+.img-banner figcaption {
+  display: none;
+}
 .img-medium img,
 .img-medium {
   height: auto;
