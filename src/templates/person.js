@@ -133,6 +133,13 @@ const Person = ({
                     </a>
                   </li>
                 )}
+                {(frontmatter.github && frontmatter.github != '') && (
+                  <li id="github" className="social">
+                    <a target="_blank" rel="noopener noreferrer" href={'https://www.github.com/' + frontmatter.github}>
+                      GitHub
+                    </a>
+                  </li>
+                )}
               </ul>
             </div>
           </div>
@@ -239,6 +246,7 @@ export const query = graphql`
           skype
           twitter
           website
+          github
         }
         html
       }
