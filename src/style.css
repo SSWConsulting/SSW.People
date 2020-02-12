@@ -228,7 +228,6 @@ ul.favor-list li {
   font-size: 0.8rem;
   color: "#5b5656";
 }
-
 .breadcrumb {
   display: inline-flex;
   color: "#5b5656";
@@ -298,6 +297,7 @@ button:focus {
 /** Custom blocks images handling **/
 
 .img-badge {
+  margin: 5px;
   margin-bottom: 20px;
   display: inline-block;
   vertical-align: middle;
@@ -310,8 +310,6 @@ button:focus {
   }
 
   img {
-    margin: 5px;
-    min-width: 135px;
     width: auto;
     max-height: 135px;
   }
@@ -319,6 +317,12 @@ button:focus {
   figcaption {
     display: none;
   }
+
+}
+
+.img-badge .gatsby-resp-image-wrapper{
+  margin-left: auto !important;
+  margin-right: auto;
 }
 
 .img-large img,
