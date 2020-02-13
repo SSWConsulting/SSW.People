@@ -102,14 +102,22 @@ const Person = ({
                 )}
                 {frontmatter.blog != '' && (
                   <li id="blog" className="social">
-                    <a target="_blank" rel="noopener noreferrer" href={frontmatter.blog}>
+                    <a
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      href={frontmatter.blog}
+                    >
                       Blog
                     </a>
                   </li>
                 )}
                 {frontmatter.facebook != '' && (
                   <li id="facebook" className="social">
-                    <a target="_blank" rel="noopener noreferrer" href={'https://www.facebook.com/' + frontmatter.facebook}>
+                    <a
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      href={'https://www.facebook.com/' + frontmatter.facebook}
+                    >
                       Facebook
                     </a>
                   </li>
@@ -121,14 +129,24 @@ const Person = ({
                 )}
                 {frontmatter.linkedin != '' && (
                   <li id="linkedin" className="social">
-                    <a target="_blank" rel="noopener noreferrer" href={'https://www.linkedin.com/in/' + frontmatter.linkedin}>
+                    <a
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      href={
+                        'https://www.linkedin.com/in/' + frontmatter.linkedin
+                      }
+                    >
                       LinkedIn
                     </a>
                   </li>
                 )}
                 {frontmatter.twitter != '' && (
                   <li id="twitter" className="social">
-                    <a target="_blank" rel="noopener noreferrer" href={'https://www.twitter.com/' + frontmatter.twitter}>
+                    <a
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      href={'https://www.twitter.com/' + frontmatter.twitter}
+                    >
                       Twitter
                     </a>
                   </li>
