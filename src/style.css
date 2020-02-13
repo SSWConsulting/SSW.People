@@ -329,26 +329,22 @@ button:focus {
 .img-banner figcaption {
   display: none;
 }
-.img-medium img,
+
 .img-medium {
   height: auto;
   max-width: 400px;
 }
 
-.img-small img,
 .img-small {
   height: auto;
   max-width: 200px;
 }
 
-.img-large img,
-.img-medium img,
-.img-small img {
-  width: 100%;
+.img-large .gatsby-resp-image-wrapper,
+.img-medium .gatsby-resp-image-wrapper,
+.img-small .gatsby-resp-image-wrapper {
   border: 5px solid #eee;
   border-radius: .25rem;
-  max-width: 100%;
-  height: auto;
 }
 
 figure figcaption {
@@ -469,7 +465,6 @@ pre {
 }
 
 @media screen and (min-width: 600px) {
-  .img-large img,
   .img-large,
   .img-banner img,
   .img-banner {
