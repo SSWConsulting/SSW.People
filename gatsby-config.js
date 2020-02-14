@@ -74,6 +74,9 @@ module.exports = {
                 imgBanner: {
                   classes: 'img-banner',
                 },
+                imgBanner: {
+                  classes: "img-banner",
+                },
                 imgLg: {
                   classes: 'img-large',
                 },

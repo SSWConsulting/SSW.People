@@ -332,6 +332,7 @@ button:focus {
   display: none;
 }
 
+
 .img-medium {
   height: auto;
   max-width: 400px;
@@ -347,6 +348,7 @@ button:focus {
 .img-small .gatsby-resp-image-wrapper {
   border: 5px solid #eee;
   border-radius: .25rem;
+
 }
 
 figure figcaption {
