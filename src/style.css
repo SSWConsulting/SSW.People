@@ -219,7 +219,9 @@ ul.favor-list li {
 #twitter {
   background: url(./images/twitter.png) 0 4px no-repeat;
 }
-
+#github {
+  background: url(./images/github.png) 0 4px no-repeat;
+}
 #email {
   background: url(./images/favor_email.gif) 0 6px no-repeat;
 }
