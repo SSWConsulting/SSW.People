@@ -9,12 +9,12 @@ const Footer = () => {
     <footer className="bg-black py-6 md:py-4 lg:py-2">
       <section className="main-container">
         <div className="xl:mx-6">
-          <div className="py-2 mx-6 flex flex-col-reverse md:flex-row justify-between">
-            <div>
+          <div className="mx-6 flex flex-col-reverse md:flex-row justify-between">
+            <div className="py-2">
               Copyright © SSW 1990 - {new Date().getFullYear()}. All Rights
               Reserved.
             </div>
-            <div className="w-full md:w-3/6 md:text-right">
+            <div className="w-full md:w-3/6 md:text-right py-2">
               <a
                 className="footer-link"
                 href="https://github.com/SSWConsulting/people.ssw.com.au/issues"
@@ -26,7 +26,7 @@ const Footer = () => {
                 className="footer-link"
                 href="http://www.ssw.com.au/ssw/Standards/Forms/ConsultingOrderTermsConditions.aspx"
               >
-                TERMS AND CONDITION
+                TERMS AND CONDITIONS
               </a>
               <span className="px-2">|</span>
               <a
@@ -45,9 +45,9 @@ const Footer = () => {
             </div>
             {/* Copyright © SSW 1990 - {new Date().getFullYear()}. All Rights Reserved. */}
           </div>
-          <hr className="border-gray-800"></hr>
-          <div className="flex flex-col md:flex-row justify-between mx-6 py-2">
-            <div>
+          <hr className="border-gray-800 my-2"></hr>
+          <div className="flex flex-col md:flex-row justify-between mx-6">
+            <div className="py-2">
               Our website is under{' '}
               <a
                 className="footer-link"
@@ -58,7 +58,7 @@ const Footer = () => {
               . Last deployed {getLastDeployTime()} ago (Build #{' '}
               {process.env.VERSION_DEPLOYED})
             </div>
-            <div className="md:text-right">
+            <div className="md:text-right py-2">
               Powered by{' '}
               <a
                 className="footer-link"

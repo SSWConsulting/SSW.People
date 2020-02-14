@@ -68,21 +68,21 @@ a:link.gatsby-resp-image-link {
 }
 
 a.footer-facebook {
-  background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAwCAYAAAAlzZsxAAAAmklEQVRIx82Suw3AIAwFXdF6puyTUbMHrQeI5JCICsXwLD4C6So4PzsOqSplWud7R70CGVSFuQlWZbilGxG6Wxq3B4h1AnqawpnvGRVCIqIJ8nNnClIMy2gCe4beUKguzvdrXMfxog3GCGRQFeYm/Fb2tHQjQndL4/bQZK2gCIhw5uqMCiER0QQpP3dNkGJgRhPYM/SGgr04Dw+JrFft00TR4QAAAABJRU5ErkJggg==') no-repeat right -11px;
+  background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAA4CAYAAADJnhlcAAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH5AILBxgJEkgRLQAAAOpJREFUSMftVMENwyAMPEdRv+HZX5dgAQbqQl2GBbJHvuFbqXI/IKGUGENUqVJ6P7AOn7mTCRHMzBBARAQAA3ohdchrYwvxeIcSKQ2bMEhFAK/tA2PtRZGgGbjfhzOBWvJDRFT71ns00nyEawcXZl7SoSYpEJHJa5KkQEQmy5ZK0srMU37RlaXvE5qNO2+8AWB2Tvwp6/3B7S11yGtjC/F4hxIpDVsM37ao2t4F0j5BM/B/e6vjrc2P9b6+vaORRuvDY3ZuAbBqCMF6/wRw1TgdrPcmy5bZDV/ENDu3Arjlcn50e0uEaau/C299qrIdHcgr4wAAAABJRU5ErkJggg==') no-repeat right -14px;
   padding-right: 16px;
 }
 
 a.footer-html {
-  background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAwCAYAAAAlzZsxAAAAmklEQVRIx82Suw3AIAwFXdF6puyTUbMHrQeI5JCICsXwLD4C6So4PzsOqSplWud7R70CGVSFuQlWZbilGxG6Wxq3B4h1AnqawpnvGRVCIqIJ8nNnClIMy2gCe4beUKguzvdrXMfxog3GCGRQFeYm/Fb2tHQjQndL4/bQZK2gCIhw5uqMCiER0QQpP3dNkGJgRhPYM/SGgr04Dw+JrFft00TR4QAAAABJRU5ErkJggg==') no-repeat right 1px;
+  background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAA4CAYAAADJnhlcAAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH5AILBxgJEkgRLQAAAOpJREFUSMftVMENwyAMPEdRv+HZX5dgAQbqQl2GBbJHvuFbqXI/IKGUGENUqVJ6P7AOn7mTCRHMzBBARAQAA3ohdchrYwvxeIcSKQ2bMEhFAK/tA2PtRZGgGbjfhzOBWvJDRFT71ns00nyEawcXZl7SoSYpEJHJa5KkQEQmy5ZK0srMU37RlaXvE5qNO2+8AWB2Tvwp6/3B7S11yGtjC/F4hxIpDVsM37ao2t4F0j5BM/B/e6vjrc2P9b6+vaORRuvDY3ZuAbBqCMF6/wRw1TgdrPcmy5bZDV/ENDu3Arjlcn50e0uEaau/C299qrIdHcgr4wAAAABJRU5ErkJggg==') no-repeat right 1px;
   padding-right: 14px;
 }
 
 a.footer-facebook:hover {
-  background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAwCAYAAAAlzZsxAAAAmklEQVRIx82Suw3AIAwFXdF6puyTUbMHrQeI5JCICsXwLD4C6So4PzsOqSplWud7R70CGVSFuQlWZbilGxG6Wxq3B4h1AnqawpnvGRVCIqIJ8nNnClIMy2gCe4beUKguzvdrXMfxog3GCGRQFeYm/Fb2tHQjQndL4/bQZK2gCIhw5uqMCiER0QQpP3dNkGJgRhPYM/SGgr04Dw+JrFft00TR4QAAAABJRU5ErkJggg==') no-repeat right -36px;
+  background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAA4CAYAAADJnhlcAAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH5AILBxgJEkgRLQAAAOpJREFUSMftVMENwyAMPEdRv+HZX5dgAQbqQl2GBbJHvuFbqXI/IKGUGENUqVJ6P7AOn7mTCRHMzBBARAQAA3ohdchrYwvxeIcSKQ2bMEhFAK/tA2PtRZGgGbjfhzOBWvJDRFT71ns00nyEawcXZl7SoSYpEJHJa5KkQEQmy5ZK0srMU37RlaXvE5qNO2+8AWB2Tvwp6/3B7S11yGtjC/F4hxIpDVsM37ao2t4F0j5BM/B/e6vjrc2P9b6+vaORRuvDY3ZuAbBqCMF6/wRw1TgdrPcmy5bZDV/ENDu3Arjlcn50e0uEaau/C299qrIdHcgr4wAAAABJRU5ErkJggg==') no-repeat right -44px;
 }
 
 a.footer-html:hover {
-  background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAwCAYAAAAlzZsxAAAAmklEQVRIx82Suw3AIAwFXdF6puyTUbMHrQeI5JCICsXwLD4C6So4PzsOqSplWud7R70CGVSFuQlWZbilGxG6Wxq3B4h1AnqawpnvGRVCIqIJ8nNnClIMy2gCe4beUKguzvdrXMfxog3GCGRQFeYm/Fb2tHQjQndL4/bQZK2gCIhw5uqMCiER0QQpP3dNkGJgRhPYM/SGgr04Dw+JrFft00TR4QAAAABJRU5ErkJggg==') no-repeat right -23px;
+  background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAA4CAYAAADJnhlcAAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH5AILBxgJEkgRLQAAAOpJREFUSMftVMENwyAMPEdRv+HZX5dgAQbqQl2GBbJHvuFbqXI/IKGUGENUqVJ6P7AOn7mTCRHMzBBARAQAA3ohdchrYwvxeIcSKQ2bMEhFAK/tA2PtRZGgGbjfhzOBWvJDRFT71ns00nyEawcXZl7SoSYpEJHJa5KkQEQmy5ZK0srMU37RlaXvE5qNO2+8AWB2Tvwp6/3B7S11yGtjC/F4hxIpDVsM37ao2t4F0j5BM/B/e6vjrc2P9b6+vaORRuvDY3ZuAbBqCMF6/wRw1TgdrPcmy5bZDV/ENDu3Arjlcn50e0uEaau/C299qrIdHcgr4wAAAABJRU5ErkJggg==') no-repeat right -29px;
 }
 
 footer {
@@ -219,7 +219,9 @@ ul.favor-list li {
 #twitter {
   background: url(./images/twitter.png) 0 4px no-repeat;
 }
-
+#github {
+  background: url(./images/github.png) 0 4px no-repeat;
+}
 #email {
   background: url(./images/favor_email.gif) 0 6px no-repeat;
 }
@@ -298,6 +300,7 @@ button:focus {
 /** Custom blocks images handling **/
 
 .img-badge {
+  margin: 5px;
   margin-bottom: 20px;
   display: inline-block;
   vertical-align: middle;
@@ -310,8 +313,6 @@ button:focus {
   }
 
   img {
-    margin: 5px;
-    min-width: 135px;
     width: auto;
     max-height: 135px;
   }
@@ -319,36 +320,35 @@ button:focus {
   figcaption {
     display: none;
   }
+
 }
 
-.img-large img,
-.img-large,
-.img-banner img,
-.img-banner {
-  height: auto;
-  min-width: 600px;
+.img-badge .gatsby-resp-image-wrapper{
+  margin-left: auto !important;
+  margin-right: auto;
 }
 
-.img-medium img,
+.img-banner figcaption {
+  display: none;
+}
+
+
 .img-medium {
   height: auto;
   max-width: 400px;
 }
 
-.img-small img,
 .img-small {
   height: auto;
   max-width: 200px;
 }
 
-.img-large img,
-.img-medium img,
-.img-small img {
-  width: 100%;
+.img-large .gatsby-resp-image-wrapper,
+.img-medium .gatsby-resp-image-wrapper,
+.img-small .gatsby-resp-image-wrapper {
   border: 5px solid #eee;
   border-radius: .25rem;
-  max-width: 100%;
-  height: auto;
+
 }
 
 figure figcaption {
@@ -388,11 +388,18 @@ pre {
   white-space: -pre-wrap;      /* Opera 4-6 */
   white-space: -o-pre-wrap;    /* Opera 7 */
   word-wrap: break-word;       /* Internet Explorer 5.5+ */
+  overflow-wrap: break-word;
   background-color: #1b262c;
   color: #fff;
   border-radius: .5rem;
   padding: .5rem 1rem;
- }
+  word-break: break-all;
+}
+
+.footer-link {
+  display: inline-block;
+  line-height: initial;
+}
 
 @media screen and (max-width: 1024px) {
   img {
@@ -461,6 +468,15 @@ pre {
   text-indent:-0.5em;
 }
 
+@media screen and (min-width: 600px) {
+  .img-large,
+  .img-banner img,
+  .img-banner {
+    height: auto;
+    min-width: 600px;
+  }
+}
+
 @media screen and (max-width: 600px) {
   header>div.flex {
     flex-direction: column;
@@ -479,6 +495,7 @@ pre {
       transition: all 0.2s ease-in-out;
     }
   }
+
 }
 
 .people-grid-container {
@@ -527,10 +544,9 @@ pre {
     font-weight: normal;
     display: inline-block;
     text-decoration: none;
-
-  margin-top: 14px;
-  padding: 8px 15px;
-  text-align: center;
+    margin: 1rem;
+    padding: 8px 15px;
+    text-align: center;
     vertical-align: middle;
     touch-action: manipulation;
 }

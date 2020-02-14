@@ -34,6 +34,11 @@ const Person = ({
     setdisplayContactForm(!displayContactForm);
   };
 
+  const onSendEmail = (e, emailTo) => {
+    e.preventDefault();
+    window.location.href = 'mailTo:' + emailTo;
+  };
+
   return (
     <Layout
       crumbs={crumbs}
@@ -92,7 +97,7 @@ const Person = ({
               <ul className="favor-list">
                 {crmData.emailAddress != '' && (
                   <li id="email" className="social">
-                    <a href={'mailto:' + crmData.emailAddress}>Email</a>
+                    <a href={'mailto:' + frontmatter.nickname} onClick={(event) => onSendEmail(event,crmData.emailAddress)}>Email</a>
                   </li>
                 )}
                 {frontmatter.blog != '' && (
@@ -125,6 +130,13 @@ const Person = ({
                   <li id="twitter" className="social">
                     <a target="_blank" rel="noopener noreferrer" href={'https://www.twitter.com/' + frontmatter.twitter}>
                       Twitter
+                    </a>
+                  </li>
+                )}
+                {(frontmatter.github && frontmatter.github != '') && (
+                  <li id="github" className="social">
+                    <a target="_blank" rel="noopener noreferrer" href={'https://www.github.com/' + frontmatter.github}>
+                      GitHub
                     </a>
                   </li>
                 )}
@@ -234,6 +246,7 @@ export const query = graphql`
           skype
           twitter
           website
+          github
         }
         html
       }
