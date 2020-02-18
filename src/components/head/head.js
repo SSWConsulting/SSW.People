@@ -10,7 +10,7 @@ const Head = ({
   siteDescription,
   siteUrl,
   pageTitle,
-  pageTitleFull = pageTitle ? `${siteTitle} | ${pageTitle}` : siteTitle,
+  pageTitleFull = pageTitle ? `${pageTitle} | ${siteTitle}` : siteTitle,
   themeColor,
   social,
   imageUrl,
