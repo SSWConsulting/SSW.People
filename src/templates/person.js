@@ -76,7 +76,7 @@ const Person = ({
                 <div className="w-full pr-2 lg:hidden quoteblock">
                   <div className="person-quote">{frontmatter.quote}</div>
                   <div className="person-quote-name">
-                    {frontmatter.quote_author != ''
+                    {frontmatter.quote_author
                       ? frontmatter.quote_author
                       : frontmatter.nickname}
                   </div>
@@ -88,7 +88,7 @@ const Person = ({
             <div className="hidden w-1/2 pr-2 lg:pr-0 lg:w-full lg:block quoteblock">
               <div className="person-quote">{frontmatter.quote}</div>
               <div className="person-quote-name">
-                {frontmatter.quote_author != ''
+                {frontmatter.quote_author
                   ? frontmatter.quote_author
                   : frontmatter.nickname}
               </div>
@@ -97,7 +97,14 @@ const Person = ({
               <ul className="favor-list">
                 {crmData.emailAddress != '' && (
                   <li id="email" className="social">
-                    <a href={'mailto:' + frontmatter.nickname} onClick={(event) => onSendEmail(event,crmData.emailAddress)}>Email</a>
+                    <a
+                      href={'mailto:' + frontmatter.nickname}
+                      onClick={event =>
+                        onSendEmail(event, crmData.emailAddress)
+                      }
+                    >
+                      Email
+                    </a>
                   </li>
                 )}
                 {frontmatter.blog != '' && (
