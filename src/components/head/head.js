@@ -65,7 +65,10 @@ const Head = ({
     <meta content="512" property="og:image:height" />
 
     <meta content={themeColor} name="msapplication-TileColor" />
-    <meta content="/ssw/include/pigeon/img/mstile-70x70.png" name="msapplication-square70x70" />
+    <meta
+      content="/ssw/include/pigeon/img/mstile-70x70.png"
+      name="msapplication-square70x70"
+    />
     <meta
       content="/ssw/include/pigeon/img/mstile-144x144.png"
       name="msapplication-square144x144"

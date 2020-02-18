@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Breadcrumb } from 'gatsby-plugin-breadcrumb';
 
 const Breadcrumbs = ({ crumbs, crumbLabel }) => {
@@ -15,6 +16,11 @@ const Breadcrumbs = ({ crumbs, crumbLabel }) => {
       </div>
     </div>
   );
+};
+
+Breadcrumbs.propTypes = {
+  crumbs: PropTypes.string,
+  crumbLabel: PropTypes.any,
 };
 
 export default Breadcrumbs;

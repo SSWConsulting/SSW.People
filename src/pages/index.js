@@ -3,10 +3,10 @@
 import 'array-flat-polyfill';
 import React, { useState, useEffect, useMemo } from 'react';
 import PropTypes from 'prop-types';
-import { StaticQuery, graphql, withPrefix } from 'gatsby';
+import { StaticQuery, graphql } from 'gatsby';
 import { Location } from '@reach/router';
 import queryString from 'query-string';
-import { createBrowserHistory } from 'history';
+//import { createBrowserHistory } from 'history';
 import Layout from 'components/layout';
 import ProfileList from 'components/profile-list';
 import LocationFilter from '../components/location-filter/location-filter';
@@ -27,7 +27,7 @@ const Index = ({
     breadcrumb: { crumbs },
   },
 }) => {
-  const history = typeof window !== 'undefined' ? createBrowserHistory() : null;
+  //const history = typeof window !== 'undefined' ? createBrowserHistory() : null;
 
   const allPeople = useMemo(() => buildPeople(data), [data]);
 
