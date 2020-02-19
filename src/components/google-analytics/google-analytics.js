@@ -6,7 +6,7 @@ ReactGA.initialize(process.env.GOOGLE_ANALYTICS);
 
 const GoogleAnalytics = ({ pageTitle }) => (
   <>
-    {typeof window !== `undefined` &&
+    {typeof window !== 'undefined' &&
       ReactGA.pageview(window.location.pathname, null, pageTitle)}
   </>
 );

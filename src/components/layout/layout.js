@@ -16,7 +16,7 @@ const Layout = ({
   pageTitle,
   crumbs,
   crumbLabel,
-  }) => (
+}) => (
   <>
     <div className="flex flex-col min-h-screen main-container">
       <Head pageTitle={pageTitle} />
@@ -43,6 +43,8 @@ Layout.propTypes = {
   displayActions: PropTypes.bool.isRequired,
   profileId: PropTypes.string,
   pageTitle: PropTypes.string,
+  crumbs: PropTypes.any,
+  crumbLabel: PropTypes.string,
 };
 
 const LayoutWithQuery = props => (
