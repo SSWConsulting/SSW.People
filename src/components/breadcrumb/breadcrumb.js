@@ -20,7 +20,7 @@ const Breadcrumbs = ({ crumbs, crumbLabel }) => {
 
 Breadcrumbs.propTypes = {
   crumbs: PropTypes.string,
-  crumbLabel: PropTypes.any,
+  crumbLabel: PropTypes.string,
 };
 
 export default Breadcrumbs;
