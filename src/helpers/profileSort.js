@@ -9,7 +9,12 @@ const ProfileSort = (a, b) => {
 
   if (sorting === 0)
     //must be equal
-    sorting = a.sanitisedName < b.sanitisedName;
+    sorting =
+      a.sanitisedName.toLowerCase() < b.sanitisedName.toLowerCase()
+        ? -1
+        : a.sanitisedName.toLowerCase() > b.sanitisedName.toLowerCase()
+        ? 1
+        : 0;
 
   return sorting;
 };
