@@ -126,6 +126,7 @@ SkillsFilter.propTypes = {
   allSkills: PropTypes.array.isRequired,
   selectedSkills: PropTypes.array.isRequired,
   onSkillChange: PropTypes.func.isRequired,
+  search: PropTypes.object
 };
 
 export default withURLLocation(SkillsFilter);

@@ -141,6 +141,7 @@ RoleFilter.propTypes = {
   selectedRoles: PropTypes.array.isRequired,
   onRoleChange: PropTypes.func.isRequired,
   filteredPeople: PropTypes.array.isRequired,
+  search: PropTypes.object,
 };
 
 export default withURLLocation(RoleFilter);

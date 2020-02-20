@@ -62,6 +62,7 @@ LocationFilter.propTypes = {
   locations: PropTypes.array.isRequired,
   selectedLocation: PropTypes.string.isRequired,
   onLocationChange: PropTypes.func.isRequired,
+  search: PropTypes.object,
 };
 
 export default withURLLocation(LocationFilter);
