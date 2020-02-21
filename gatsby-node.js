@@ -85,7 +85,34 @@ exports.sourceNodes = async ({ actions }) => {
 exports.createPages = async function({ actions, graphql }) {
   const { data } = await graphql(`
     query {
-      people: allFile(filter: { sourceInstanceName: { eq: "people" } }) {
+      people: allFile(
+        filter: {
+          sourceInstanceName: { eq: "people" }
+          childMarkdownRemark: {
+            frontmatter: { current_employee: { eq: true } }
+          }
+        }
+      ) {
+        edges {
+          node {
+            name
+            childMarkdownRemark {
+              frontmatter {
+                custom_url
+                current_employee
+              }
+            }
+          }
+        }
+      }
+      previouspeople: allFile(
+        filter: {
+          sourceInstanceName: { eq: "people" }
+          childMarkdownRemark: {
+            frontmatter: { current_employee: { eq: false } }
+          }
+        }
+      ) {
         edges {
           node {
             name
@@ -105,30 +132,11 @@ exports.createPages = async function({ actions, graphql }) {
     const slug = edge.node.name;
     const squareImage = slug + '-Profile-Square';
     let isCurrent = true;
-    if (
-      edge.node.childMarkdownRemark &&
-      edge.node.childMarkdownRemark.frontmatter
-    ) {
-      if (
-        edge.node.childMarkdownRemark.frontmatter.current_employee === false
-      ) {
-        isCurrent = false;
-      }
-
-      if (edge.node.childMarkdownRemark.frontmatter.custom_url) {
-        actions.createPage({
-          path:
-            (isCurrent ? '' : 'previous-employees/') +
-            edge.node.childMarkdownRemark.frontmatter.custom_url.toLowerCase(),
-          component: require.resolve('./src/templates/person.js'),
-          context: {
-            slug: slug,
-            squareImage: squareImage,
-          },
-        });
-      }
+    if (edge.node.childMarkdownRemark.frontmatter.custom_url) {
       actions.createPage({
-        path: (isCurrent ? '' : 'previous-employees/') + slug.toLowerCase(),
+        path:
+          (isCurrent ? '' : 'previous-employees/') +
+          edge.node.childMarkdownRemark.frontmatter.custom_url.toLowerCase(),
         component: require.resolve('./src/templates/person.js'),
         context: {
           slug: slug,
@@ -136,5 +144,39 @@ exports.createPages = async function({ actions, graphql }) {
         },
       });
     }
+    actions.createPage({
+      path: (isCurrent ? '' : 'previous-employees/') + slug.toLowerCase(),
+      component: require.resolve('./src/templates/person.js'),
+      context: {
+        slug: slug,
+        squareImage: squareImage,
+      },
+    });
+  });
+
+  data.previouspeople.edges.forEach(edge => {
+    const slug = edge.node.name;
+    const squareImage = slug + '-Profile-Square';
+    let isCurrent = true;
+    if (edge.node.childMarkdownRemark.frontmatter.custom_url) {
+      actions.createPage({
+        path:
+          'previous-employees/' +
+          edge.node.childMarkdownRemark.frontmatter.custom_url.toLowerCase(),
+        component: require.resolve('./src/templates/person.js'),
+        context: {
+          slug: slug,
+          squareImage: squareImage,
+        },
+      });
+    }
+    actions.createPage({
+      path: 'previous-employees/' + slug.toLowerCase(),
+      component: require.resolve('./src/templates/person.js'),
+      context: {
+        slug: slug,
+        squareImage: squareImage,
+      },
+    });
   });
 };

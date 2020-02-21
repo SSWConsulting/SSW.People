@@ -2,7 +2,7 @@ import React from 'react';
 import { Location } from '@reach/router';
 import queryString from 'query-string';
 
-let search = location.search ? queryString.parse(location.search) : {};
+let search = Location.search ? queryString.parse(Location.search) : {};
 
 const withURLLocation = ComponentToWrap => props => (
   <Location>
