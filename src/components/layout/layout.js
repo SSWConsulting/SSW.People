@@ -43,7 +43,7 @@ Layout.propTypes = {
   displayActions: PropTypes.bool.isRequired,
   profileId: PropTypes.string,
   pageTitle: PropTypes.string,
-  crumbs: PropTypes.any,
+  crumbs: PropTypes.string,
   crumbLabel: PropTypes.string,
 };
 
