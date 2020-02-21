@@ -2,7 +2,10 @@ import React from 'react';
 import { Location } from '@reach/router';
 import queryString from 'query-string';
 
-let search = Location.search ? queryString.parse(Location.search) : {};
+let search =
+  typeof location !== 'undefined' && location.search
+    ? queryString.parse(window.location.search)
+    : {};
 
 const withURLLocation = ComponentToWrap => props => (
   <Location>
