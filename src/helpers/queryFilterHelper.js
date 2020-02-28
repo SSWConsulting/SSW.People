@@ -7,7 +7,7 @@ const initFilter = (
   selectedVaules,
   onFilterChange
 ) => {
-  let filterArray = urlFilter ? urlFilter.split('+') : [];
+  let filterArray = urlFilter ? urlFilter : [];
   filterArray.forEach(sk => {
     const valueTxt = allValues.filter(
       s => sanitizeFilter(s.toLowerCase()) === sk.toLowerCase()
@@ -19,13 +19,13 @@ const initFilter = (
 };
 
 const updateUrlFilter = (filtername, search, filterToAdd, add) => {
-  let filterArray = search[filtername] ? search[filtername].split('+') : [];
+  let filterArray = search[filtername] ? search[filtername] : [];
   if (add) {
     filterArray.push(sanitizeFilter(filterToAdd));
   } else {
     filterArray = filterArray.filter(s => s !== sanitizeFilter(filterToAdd));
   }
-  search[filtername] = filterArray.join('+');
+  search[filtername] = filterArray;
   history.pushState(
     { search },
     filtername,
