@@ -16,7 +16,7 @@ const Layout = ({
   pageTitle,
   crumbs,
   crumbLabel,
-}) => (
+  }) => (
   <>
     <div className="flex flex-col min-h-screen main-container">
       <Head pageTitle={pageTitle} />
