@@ -7,10 +7,10 @@ const initFilter = (
   selectedVaules,
   onFilterChange
 ) => {
-  let filterArray = urlFilter ? urlFilter.split(',') : [];
+  let filterArray = urlFilter ? urlFilter : [];
   filterArray.forEach(sk => {
     const valueTxt = allValues.filter(
-      s => s.toLowerCase() === sk.toLowerCase()
+      s => sanitizeFilter(s.toLowerCase()) === sk.toLowerCase()
     )[0];
     if (valueTxt && !isValueSelected(valueTxt)) {
       onFilterChange([valueTxt, ...selectedVaules]);
@@ -19,18 +19,22 @@ const initFilter = (
 };
 
 const updateUrlFilter = (filtername, search, filterToAdd, add) => {
-  let filterArray = search[filtername] ? search[filtername].split(',') : [];
+  let filterArray = search[filtername] ? search[filtername] : [];
   if (add) {
-    filterArray.push(filterToAdd);
+    filterArray.push(sanitizeFilter(filterToAdd));
   } else {
-    filterArray = filterArray.filter(s => s !== filterToAdd);
+    filterArray = filterArray.filter(s => s !== sanitizeFilter(filterToAdd));
   }
-  search[filtername] = filterArray.join(',');
+  search[filtername] = filterArray;
   history.pushState(
     { search },
     filtername,
     '?' + queryString.stringify(search)
   );
+};
+
+const sanitizeFilter = (filter) => {
+  return filter.replace(/ - /g,'-').replace(/\s/g,'-');
 };
 
 const clearUrlFilter = (filtername, search) => {
