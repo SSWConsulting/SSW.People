@@ -19,7 +19,7 @@ const Breadcrumbs = ({ crumbs, crumbLabel }) => {
 };
 
 Breadcrumbs.propTypes = {
-  crumbs: PropTypes.string,
+  crumbs: PropTypes.array,
   crumbLabel: PropTypes.string,
 };
 
