@@ -8,6 +8,7 @@ const initFilter = (
   onFilterChange
 ) => {
   let filterArray = urlFilter ? urlFilter : [];
+  if (typeof filterArray == 'string') filterArray = [filterArray];
   filterArray.forEach(sk => {
     const valueTxt = allValues.filter(
       s => sanitizeFilter(s.toLowerCase()) === sk.toLowerCase()
@@ -33,7 +34,7 @@ const updateUrlFilter = (filtername, search, filterToAdd, add) => {
   );
 };
 
-const sanitizeFilter = (filter) => {
+const sanitizeFilter = filter => {
   return filter.replace(/ - /g,'-').replace(/\s/g,'-');
 };
 
