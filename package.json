@@ -56,6 +56,7 @@
     "postcss-nested": "^4.2.1",
     "preval.macro": "^4.0.0",
     "prop-types": "^15.6.2",
+    "query-string": "^6.11.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-ga": "^2.7.0",

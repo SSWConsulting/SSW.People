@@ -12,12 +12,19 @@ import {
 import RoleSort from '../../helpers/roleSort';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import '../../style.css';
+import withURLLocation from '../withLocation/withURLLocation';
+import {
+  initFilter,
+  updateUrlFilter,
+  clearUrlFilter,
+} from '../../helpers/queryFilterHelper';
 
 const RoleFilter = ({
   allRoles,
   selectedRoles,
   onRoleChange,
   filteredPeople,
+  search,
 }) => {
   const node = useRef();
   const [listOpen, setListOpen] = useState(false);
@@ -26,9 +33,17 @@ const RoleFilter = ({
     const previouslySelected = isRoleSelected(role);
     if (previouslySelected) {
       onRoleChange(selectedRoles.filter(s => s !== role));
+      updateUrlFilter('role', search, role, false);
     } else {
       onRoleChange([role, ...selectedRoles]);
+      updateUrlFilter('role', search, role, true);
     }
+  };
+
+  const clearFilter = () => {
+    onRoleChange([]);
+    setListOpen(false);
+    clearUrlFilter('role', search);
   };
 
   const handleClick = e => {
@@ -51,6 +66,9 @@ const RoleFilter = ({
       document.removeEventListener('mousedown', handleClick);
     };
   }, []);
+
+  const { role } = search;
+  initFilter(role, allRoles, isRoleSelected, selectedRoles, onRoleChange);
 
   return (
     <>
@@ -78,8 +96,7 @@ const RoleFilter = ({
                 : 'hidden'
             }
             onClick={() => {
-              onRoleChange([]);
-              setListOpen(false);
+              clearFilter();
             }}
           >
             <FontAwesomeIcon icon={faTimes} className="mr-1" />
@@ -124,6 +141,7 @@ RoleFilter.propTypes = {
   selectedRoles: PropTypes.array.isRequired,
   onRoleChange: PropTypes.func.isRequired,
   filteredPeople: PropTypes.array.isRequired,
+  search: PropTypes.object,
 };
 
-export default RoleFilter;
+export default withURLLocation(RoleFilter);

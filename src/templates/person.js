@@ -1,6 +1,6 @@
 import { graphql } from 'gatsby';
 import PropTypes from 'prop-types';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Layout from '../components/layout';
 import { faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -9,6 +9,7 @@ import '@fortawesome/fontawesome-svg-core/styles.css';
 import Contact from '../components/contact/contact';
 import ContactForm from '../components/contact-form/contact-form';
 import Modal from 'react-modal';
+
 
 config.autoAddCss = false;
 
@@ -34,9 +35,36 @@ const Person = ({
     setdisplayContactForm(!displayContactForm);
   };
 
-  const onSendEmail = (e, emailTo) => {
+  const encodeEmail = emailAddress => {
+    let encodedString = '';
+
+    for (var i = 0; i < emailAddress.length; i++) {
+      encodedString += emailAddress.charCodeAt(i).toString(16);
+    }
+    return encodedString;
+  };
+  const encodedEmailAddress = crmData.emailAddress ? encodeEmail(crmData.emailAddress) : '';
+
+  const decodeEmail = encodedEmail => {
+    // holds the decoded email address
+    let email = '';
+
+    if (encodedEmail !== undefined) {
+      // go through and decode the email address
+      for (var i = 0; i < encodedEmail.length; i += 2) {
+        // holds each letter (2 digits)
+        const letter = encodedEmail.charAt(i) + encodedEmail.charAt(i + 1);
+
+        // build the real email address
+        email += String.fromCharCode(parseInt(letter, 16));
+      }
+    }
+    return email;
+  };
+
+  const sendEmail = (e) => {
     e.preventDefault();
-    window.location.href = 'mailTo:' + emailTo;
+    window.location.href = 'mailTo:' + decodeEmail(encodedEmailAddress);
   };
 
   return (
@@ -73,43 +101,55 @@ const Person = ({
                     alt="Profile"
                   />
                 </div>
-                <div className="w-full pr-2 lg:hidden quoteblock">
-                  <div className="person-quote">{frontmatter.quote}</div>
-                  <div className="person-quote-name">
-                    {frontmatter.quote_author != ''
-                      ? frontmatter.quote_author
-                      : frontmatter.nickname}
+                {frontmatter.quote && (
+                  <div className="w-full pr-2 lg:hidden quoteblock">
+                    <div className="person-quote">{frontmatter.quote}</div>
+                    <div className="person-quote-name">
+                      {frontmatter.quote_author
+                        ? frontmatter.quote_author
+                        : frontmatter.nickname}
+                    </div>
                   </div>
-                </div>
+                )}
               </div>
             </>
           )}
           <div className="flex person-favor flex-row lg:flex-col">
-            <div className="hidden w-1/2 pr-2 lg:pr-0 lg:w-full lg:block quoteblock">
-              <div className="person-quote">{frontmatter.quote}</div>
-              <div className="person-quote-name">
-                {frontmatter.quote_author != ''
-                  ? frontmatter.quote_author
-                  : frontmatter.nickname}
+            {frontmatter.quote && (
+              <div className="hidden w-1/2 pr-2 lg:pr-0 lg:w-full lg:block quoteblock">
+                <div className="person-quote">{frontmatter.quote}</div>
+                <div className="person-quote-name">
+                  {frontmatter.quote_author
+                    ? frontmatter.quote_author
+                    : frontmatter.nickname}
+                </div>
               </div>
-            </div>
+            )}
             <div className="favor-content w-full">
               <ul className="favor-list">
                 {crmData.emailAddress != '' && (
                   <li id="email" className="social">
-                    <a href={'mailto:' + frontmatter.nickname} onClick={(event) => onSendEmail(event,crmData.emailAddress)}>Email</a>
+                    <a href={'#0'} onClick = {(event) => {sendEmail(event)}}> Email </a>
                   </li>
                 )}
                 {frontmatter.blog != '' && (
                   <li id="blog" className="social">
-                    <a target="_blank" rel="noopener noreferrer" href={frontmatter.blog}>
+                    <a
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      href={frontmatter.blog}
+                    >
                       Blog
                     </a>
                   </li>
                 )}
                 {frontmatter.facebook != '' && (
                   <li id="facebook" className="social">
-                    <a target="_blank" rel="noopener noreferrer" href={'https://www.facebook.com/' + frontmatter.facebook}>
+                    <a
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      href={'https://www.facebook.com/' + frontmatter.facebook}
+                    >
                       Facebook
                     </a>
                   </li>
@@ -121,14 +161,24 @@ const Person = ({
                 )}
                 {frontmatter.linkedin != '' && (
                   <li id="linkedin" className="social">
-                    <a target="_blank" rel="noopener noreferrer" href={'https://www.linkedin.com/in/' + frontmatter.linkedin}>
+                    <a
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      href={
+                        'https://www.linkedin.com/in/' + frontmatter.linkedin
+                      }
+                    >
                       LinkedIn
                     </a>
                   </li>
                 )}
                 {frontmatter.twitter != '' && (
                   <li id="twitter" className="social">
-                    <a target="_blank" rel="noopener noreferrer" href={'https://www.twitter.com/' + frontmatter.twitter}>
+                    <a
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      href={'https://www.twitter.com/' + frontmatter.twitter}
+                    >
                       Twitter
                     </a>
                   </li>

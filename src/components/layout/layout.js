@@ -43,6 +43,8 @@ Layout.propTypes = {
   displayActions: PropTypes.bool.isRequired,
   profileId: PropTypes.string,
   pageTitle: PropTypes.string,
+  crumbs: PropTypes.array,
+  crumbLabel: PropTypes.string,
 };
 
 const LayoutWithQuery = props => (

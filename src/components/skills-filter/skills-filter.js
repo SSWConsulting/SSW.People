@@ -11,8 +11,14 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import '../../style.css';
+import withURLLocation from '../withLocation/withURLLocation';
+import {
+  initFilter,
+  updateUrlFilter,
+  clearUrlFilter,
+} from '../../helpers/queryFilterHelper';
 
-const SkillsFilter = ({ allSkills, selectedSkills, onSkillChange }) => {
+const SkillsFilter = ({ allSkills, selectedSkills, onSkillChange, search }) => {
   const node = useRef();
   const [listOpen, setListOpen] = useState(false);
 
@@ -20,9 +26,17 @@ const SkillsFilter = ({ allSkills, selectedSkills, onSkillChange }) => {
     const previouslySelected = isSkillSelected(skill);
     if (previouslySelected) {
       onSkillChange(selectedSkills.filter(s => s !== skill));
+      updateUrlFilter('skill', search, skill, false);
     } else {
       onSkillChange([skill, ...selectedSkills]);
+      updateUrlFilter('skill', search, skill, true);
     }
+  };
+
+  const clearFilter = () => {
+    onSkillChange([]);
+    setListOpen(false);
+    clearUrlFilter('skill', search);
   };
 
   const handleClick = e => {
@@ -45,6 +59,9 @@ const SkillsFilter = ({ allSkills, selectedSkills, onSkillChange }) => {
       document.removeEventListener('mousedown', handleClick);
     };
   }, []);
+
+  const { skill } = search;
+  initFilter(skill, allSkills, isSkillSelected, selectedSkills, onSkillChange);
 
   return (
     <>
@@ -72,8 +89,7 @@ const SkillsFilter = ({ allSkills, selectedSkills, onSkillChange }) => {
                 : 'hidden'
             }
             onClick={() => {
-              onSkillChange([]);
-              setListOpen(false);
+              clearFilter();
             }}
           >
             <FontAwesomeIcon icon={faTimes} className="mr-1" />
@@ -110,6 +126,7 @@ SkillsFilter.propTypes = {
   allSkills: PropTypes.array.isRequired,
   selectedSkills: PropTypes.array.isRequired,
   onSkillChange: PropTypes.func.isRequired,
+  search: PropTypes.object
 };
 
-export default SkillsFilter;
+export default withURLLocation(SkillsFilter);
