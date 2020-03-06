@@ -34,6 +34,7 @@ const updateUrlFilter = (filtername, search, filterToAdd, add) => {
   );
 };
 
+
 const sanitizeFilter = filter => {
   return filter.replace(/ - /g,'-').replace(/\s/g,'-');
 };
