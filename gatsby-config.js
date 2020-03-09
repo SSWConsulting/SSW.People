@@ -74,9 +74,6 @@ module.exports = {
                 imgBanner: {
                   classes: 'img-banner',
                 },
-                imgBanner: {
-                  classes: "img-banner",
-                },
                 imgLg: {
                   classes: 'img-large',
                 },
@@ -128,5 +125,6 @@ module.exports = {
         useClassNames: true,
       },
     },
+    'gatsby-plugin-netlify',
   ],
 };
