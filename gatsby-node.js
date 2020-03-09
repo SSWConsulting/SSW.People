@@ -132,51 +132,43 @@ exports.createPages = async function({ actions, graphql }) {
     const slug = edge.node.name;
     const squareImage = slug + '-Profile-Square';
     let isCurrent = true;
-    if (edge.node.childMarkdownRemark.frontmatter.custom_url) {
-      actions.createPage({
-        path:
-          (isCurrent ? '' : 'previous-employees/') +
-          edge.node.childMarkdownRemark.frontmatter.custom_url.toLowerCase(),
-        component: require.resolve('./src/templates/person.js'),
-        context: {
-          slug: slug,
-          squareImage: squareImage,
-        },
-      });
-    }
-    actions.createPage({
-      path: (isCurrent ? '' : 'previous-employees/') + slug.toLowerCase(),
-      component: require.resolve('./src/templates/person.js'),
-      context: {
-        slug: slug,
-        squareImage: squareImage,
-      },
-    });
+    const path = (isCurrent ? '' : 'previous-employees/') + slug.toLowerCase();
+    const customPath = (isCurrent ? '' : 'previous-employees/') + (edge.node.childMarkdownRemark.frontmatter.custom_url ?
+        edge.node.childMarkdownRemark.frontmatter.custom_url.toLowerCase() : '');
+
+        actions.createPage({
+          path: path,
+          component: require.resolve('./src/templates/person.js'),
+          context: {
+            slug: slug,
+            squareImage: squareImage,
+          },
+        });
+
+        if (customPath) {
+          actions.createRedirect({ fromPath: '/' + customPath, toPath: '/' + path, isPermanent: true, redirectInBrowser: true });
+        }
   });
 
   data.previouspeople.edges.forEach(edge => {
     const slug = edge.node.name;
     const squareImage = slug + '-Profile-Square';
-    let isCurrent = true;
-    if (edge.node.childMarkdownRemark.frontmatter.custom_url) {
-      actions.createPage({
-        path:
-          'previous-employees/' +
-          edge.node.childMarkdownRemark.frontmatter.custom_url.toLowerCase(),
-        component: require.resolve('./src/templates/person.js'),
-        context: {
-          slug: slug,
-          squareImage: squareImage,
-        },
-      });
-    }
-    actions.createPage({
-      path: 'previous-employees/' + slug.toLowerCase(),
-      component: require.resolve('./src/templates/person.js'),
-      context: {
-        slug: slug,
-        squareImage: squareImage,
-      },
-    });
+    const path = 'previous-employees/' + slug.toLowerCase();
+    const customPath = edge.node.childMarkdownRemark.frontmatter.custom_url ?
+          'previous-employees/' + edge.node.childMarkdownRemark.frontmatter.custom_url.toLowerCase() : '';
+
+        actions.createPage({
+          path: customPath? customPath : path,
+          component: require.resolve('./src/templates/person.js'),
+          context: {
+            slug: slug,
+            squareImage: squareImage,
+          },
+        });
+
+        if (customPath) {
+          actions.createRedirect({ fromPath: '/' + customPath, toPath: '/' + path, isPermanent: true, redirectInBrowser: true });
+        }
+
   });
 };

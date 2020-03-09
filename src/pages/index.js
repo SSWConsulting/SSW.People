@@ -28,7 +28,6 @@ const Index = ({
   },
 }) => {
   //const history = typeof window !== 'undefined' ? createBrowserHistory() : null;
-
   const allPeople = useMemo(() => buildPeople(data), [data]);
 
   const allLocations = useMemo(
@@ -179,9 +178,7 @@ function buildPeople(data) {
         locationsMap.get(node.frontmatter.name) || node.frontmatter.location
       ),
       billingRate: billingRatesMap.get(node.frontmatter.name) || 0,
-      sanitisedName: node.frontmatter.custom_url
-        ? node.frontmatter.custom_url
-        : node.parent.name,
+      sanitisedName: node.parent.name,
       role: node.frontmatter.category,
       profileImages: {
         profileImage: profileImageMap.get(node.parent.name),
