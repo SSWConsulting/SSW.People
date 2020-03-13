@@ -2,6 +2,11 @@ const axios = require('axios');
 const crypto = require('crypto');
 const path = require('path');
 const DirectoryNamedWebpackPlugin = require('directory-named-webpack-plugin');
+const WebpackAssetsManifest = require('webpack-assets-manifest');
+const makePluginData = require('./src/helpers/plugin-data');
+const createRewriteMapsFile = require('./src/helpers/createRewriteMap');
+
+let assetsManifest = {};
 
 exports.onCreateWebpackConfig = ({
   stage,
@@ -19,6 +24,12 @@ exports.onCreateWebpackConfig = ({
   }
 
   actions.setWebpackConfig({
+    plugins: [
+      new WebpackAssetsManifest({
+        assets: assetsManifest, // mutates object with entries
+        merge: true,
+      }),
+    ],
     resolve: {
       modules: [path.resolve(__dirname, 'src'), 'node_modules'],
       plugins: [
@@ -105,7 +116,7 @@ exports.createPages = async function({ actions, graphql }) {
           }
         }
       }
-      previouspeople: allFile(
+      previousPeople: allFile(
         filter: {
           sourceInstanceName: { eq: "people" }
           childMarkdownRemark: {
@@ -128,47 +139,59 @@ exports.createPages = async function({ actions, graphql }) {
     }
   `);
 
-  data.people.edges.forEach(edge => {
+  const people = data.people.edges.map(edge => {
+    const isCurrent = edge.node.childMarkdownRemark.frontmatter.current_employee;
+    const customUrl = edge.node.childMarkdownRemark.frontmatter.custom_url;
     const slug = edge.node.name;
-    const squareImage = slug + '-Profile-Square';
-    let isCurrent = true;
-    const path = (isCurrent ? '' : 'previous-employees/') + slug.toLowerCase();
-    const customPath = (isCurrent ? '' : 'previous-employees/') + (edge.node.childMarkdownRemark.frontmatter.custom_url ?
-        edge.node.childMarkdownRemark.frontmatter.custom_url.toLowerCase() : '');
-
-        actions.createPage({
-          path: path,
-          component: require.resolve('./src/templates/person.js'),
-          context: {
-            slug: slug,
-            squareImage: squareImage,
-          },
-        });
-
-        if (customPath) {
-          actions.createRedirect({ fromPath: '/' + customPath, toPath: '/' + path, isPermanent: true, redirectInBrowser: true });
-        }
+    const prefix = isCurrent ? '' : 'previous-employees/';
+    return {
+      slug: slug,
+      squareImage: slug + '-Profile-Square',
+      path: prefix + slug.toLowerCase(),
+      customPath: customUrl ? prefix + customUrl.toLowerCase() : '',
+    };
+  });
+  const previousPeople = data.previousPeople.edges.map(edge => {
+    const isCurrent = edge.node.childMarkdownRemark.frontmatter.current_employee;
+    const customUrl = edge.node.childMarkdownRemark.frontmatter.custom_url;
+    const slug = edge.node.name;
+    const prefix = isCurrent ? '' : 'previous-employees/';
+    return {
+      slug: slug,
+      squareImage: slug + '-Profile-Square',
+      path: prefix + slug.toLowerCase(),
+      customPath: customUrl ? prefix + customUrl.toLowerCase() : '',
+    };
   });
 
-  data.previouspeople.edges.forEach(edge => {
-    const slug = edge.node.name;
-    const squareImage = slug + '-Profile-Square';
-    const path = 'previous-employees/' + slug.toLowerCase();
-    const customPath = edge.node.childMarkdownRemark.frontmatter.custom_url ?
-          'previous-employees/' + edge.node.childMarkdownRemark.frontmatter.custom_url.toLowerCase() : '';
-
-        actions.createPage({
-          path: customPath? customPath : path,
-          component: require.resolve('./src/templates/person.js'),
-          context: {
-            slug: slug,
-            squareImage: squareImage,
-          },
-        });
-
-        if (customPath) {
-          actions.createRedirect({ fromPath: '/' + customPath, toPath: '/' + path, isPermanent: true, redirectInBrowser: true });
-        }
-
+  const pages = [...people,...previousPeople];
+  pages.forEach(person => {
+    actions.createPage({
+      path: person.path,
+      component: require.resolve('./src/templates/person.js'),
+      context: {
+        slug: person.slug,
+        squareImage: person.squareImage,
+        customPath: person.customPath,
+      },
+    });
   });
+};
+
+exports.onPostBuild = async ({ store, pathPrefix }) => {
+  const { pages } = store.getState();
+  const pluginData = makePluginData(store, assetsManifest, pathPrefix);
+
+  const rewrites = Array.from(pages.values())
+    .filter(
+      page => page.context.customPath && page.context.customPath !== page.path
+    )
+    .map(page => {
+      return {
+        fromPath: page.context.customPath,
+        toPath: page.path,
+      };
+    });
+
+  await createRewriteMapsFile(pluginData, rewrites);
 };
