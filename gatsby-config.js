@@ -125,6 +125,5 @@ module.exports = {
         useClassNames: true,
       },
     },
-    'gatsby-plugin-netlify',
   ],
 };
