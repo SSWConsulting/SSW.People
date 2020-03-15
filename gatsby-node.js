@@ -164,7 +164,7 @@ exports.createPages = async function({ actions, graphql }) {
     };
   });
 
-  const pages = [...people,...previousPeople];
+  const pages = [...people, ...previousPeople];
   pages.forEach(person => {
     actions.createPage({
       path: person.path,
@@ -181,17 +181,15 @@ exports.createPages = async function({ actions, graphql }) {
 exports.onPostBuild = async ({ store, pathPrefix }) => {
   const { pages } = store.getState();
   const pluginData = makePluginData(store, assetsManifest, pathPrefix);
-
   const rewrites = Array.from(pages.values())
     .filter(
       page => page.context.customPath && page.context.customPath !== page.path
     )
     .map(page => {
       return {
-        fromPath: page.context.customPath,
-        toPath: page.path,
+        fromPath: pathPrefix + '/' + page.context.customPath,
+        toPath: pathPrefix + page.path,
       };
     });
-
   await createRewriteMapsFile(pluginData, rewrites);
 };
