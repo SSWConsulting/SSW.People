@@ -96,34 +96,7 @@ exports.sourceNodes = async ({ actions }) => {
 exports.createPages = async function({ actions, graphql }) {
   const { data } = await graphql(`
     query {
-      people: allFile(
-        filter: {
-          sourceInstanceName: { eq: "people" }
-          childMarkdownRemark: {
-            frontmatter: { current_employee: { eq: true } }
-          }
-        }
-      ) {
-        edges {
-          node {
-            name
-            childMarkdownRemark {
-              frontmatter {
-                custom_url
-                current_employee
-              }
-            }
-          }
-        }
-      }
-      previousPeople: allFile(
-        filter: {
-          sourceInstanceName: { eq: "people" }
-          childMarkdownRemark: {
-            frontmatter: { current_employee: { eq: false } }
-          }
-        }
-      ) {
+      people: allFile(filter: { sourceInstanceName: { eq: "people" } }) {
         edges {
           node {
             name
@@ -140,20 +113,12 @@ exports.createPages = async function({ actions, graphql }) {
   `);
 
   const people = data.people.edges.map(edge => {
-    const isCurrent = edge.node.childMarkdownRemark.frontmatter.current_employee;
-    const customUrl = edge.node.childMarkdownRemark.frontmatter.custom_url;
-    const slug = edge.node.name;
-    const prefix = isCurrent ? '' : 'previous-employees/';
-    return {
-      slug: slug,
-      squareImage: slug + '-Profile-Square',
-      path: prefix + slug.toLowerCase(),
-      customPath: customUrl ? prefix + customUrl.toLowerCase() : '',
-    };
-  });
-  const previousPeople = data.previousPeople.edges.map(edge => {
-    const isCurrent = edge.node.childMarkdownRemark.frontmatter.current_employee;
-    const customUrl = edge.node.childMarkdownRemark.frontmatter.custom_url;
+    const isCurrent = edge.node.childMarkdownRemark
+      ? edge.node.childMarkdownRemark.frontmatter.current_employee
+      : false;
+    const customUrl = edge.node.childMarkdownRemark
+      ? edge.node.childMarkdownRemark.frontmatter.custom_url
+      : null;
     const slug = edge.node.name;
     const prefix = isCurrent ? '' : 'previous-employees/';
     return {
@@ -164,8 +129,7 @@ exports.createPages = async function({ actions, graphql }) {
     };
   });
 
-  const pages = [...people, ...previousPeople];
-  pages.forEach(person => {
+  people.forEach(person => {
     actions.createPage({
       path: person.path,
       component: require.resolve('./src/templates/person.js'),
