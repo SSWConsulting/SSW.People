@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'gatsby';
+import Img from 'gatsby-image';
 import PropTypes from 'prop-types';
 
 const ProfileBox = ({ profile, sanitisedName, profileImages }) => {
@@ -7,16 +8,19 @@ const ProfileBox = ({ profile, sanitisedName, profileImages }) => {
 
   const content = profileImages.profileImage !== undefined && (
     <div
-      className="relative bg-cover shadow-lg profile-image"
-      style={{
-        backgroundImage: `url(${
-          hover ? profileImages.profileImage : profileImages.sketchProfileImage
-        })`,
-        height: '242px',
-      }}
+      className="relative shadow-lg profile-image"
+      style={{ height: '242px' }}
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
     >
+      <Img
+        alt={`${profile.nickname} profile image`}
+        fluid={
+          hover ? profileImages.profileImage : profileImages.sketchProfileImage
+        }
+        style={{ position: 'static' }}
+        fadeIn={false}
+      />
       <div
         className={
           hover
@@ -51,8 +55,8 @@ ProfileBox.propTypes = {
   profile: PropTypes.object.isRequired,
   sanitisedName: PropTypes.string.isRequired,
   profileImages: PropTypes.exact({
-    profileImage: PropTypes.string,
-    sketchProfileImage: PropTypes.string,
+    profileImage: PropTypes.object,
+    sketchProfileImage: PropTypes.object,
   }),
 };
 

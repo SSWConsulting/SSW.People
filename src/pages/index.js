@@ -80,19 +80,10 @@ const Index = ({
     setFilteredPeople(people);
   }, [selectedLocation, selectedSkills]);
 
-  useEffect(() => {
-    // TODO: load search params from querystring
-    // TODO: push search params to querystring
-    // history.push({
-    //   pathname: withPrefix('/'),
-    //   search: '',
-    // });
-  }, [selectedLocation, selectedSkills, selectedRoles]);
-
   return (
     <Layout crumbs={crumbs} displayActions={false}>
       <div
-        className="mx-6"
+        className="hero-para mx-6"
         dangerouslySetInnerHTML={{
           __html: data.homeJson.content.childMarkdownRemark.html,
         }}
@@ -150,15 +141,12 @@ function buildPeople(data) {
   const billingRatesMap = new Map();
 
   data.profile_images.nodes.forEach(n =>
-    profileImageMap.set(
-      n.name.replace('-Profile', ''),
-      n.childImageSharp.original.src
-    )
+    profileImageMap.set(n.name.replace('-Profile', ''), n.childImageSharp.fixed)
   );
   data.sketch_profile_images.nodes.forEach(n =>
     sketchProfileImageMap.set(
       n.name.replace('-Sketch', ''),
-      n.childImageSharp.original.src
+      n.childImageSharp.fixed
     )
   );
   data.allSkills.nodes.forEach(n => {
@@ -221,10 +209,8 @@ const IndexWithQuery = props => (
           nodes {
             name
             childImageSharp {
-              original {
-                height
-                src
-                width
+              fixed(height: 242) {
+                ...GatsbyImageSharpFixed_noBase64
               }
             }
           }
@@ -238,10 +224,8 @@ const IndexWithQuery = props => (
           nodes {
             name
             childImageSharp {
-              original {
-                height
-                src
-                width
+              fixed(height: 242) {
+                ...GatsbyImageSharpFixed_noBase64
               }
             }
           }
