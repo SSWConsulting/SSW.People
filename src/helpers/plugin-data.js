@@ -10,7 +10,7 @@ function buildPrefixer(prefix, ...paths) {
 const makePluginData = (store, assetsManifest, pathPrefix) => {
   const { program, pages: storePages } = store.getState();
   const publicFolder = buildPrefixer(program.directory, 'public');
-  const stats = require(publicFolder('ßwebpack.stats.json'));
+  const stats = require(publicFolder('webpack.stats.json'));
   // Get all the files, not just the first
   const chunkManifest = stats.assetsByChunkName;
   const pages = storePages;
