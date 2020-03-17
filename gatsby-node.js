@@ -8,13 +8,7 @@ const createRewriteMapsFile = require('./src/helpers/createRewriteMap');
 
 let assetsManifest = {};
 
-exports.onCreateWebpackConfig = ({
-  stage,
-  getConfig,
-  rules,
-  loaders,
-  actions,
-}) => {
+exports.onCreateWebpackConfig = ({ stage, getConfig, actions }) => {
   const config = getConfig();
   if (stage.startsWith('develop') && config.resolve) {
     config.resolve.alias = {
@@ -54,7 +48,7 @@ exports.sourceNodes = async ({ actions }) => {
     },
   });
 
-  crmDataResult.data.map((user, i) => {
+  crmDataResult.data.map(user => {
     const userNode = {
       id: user.userId,
       parent: '__SOURCE__',

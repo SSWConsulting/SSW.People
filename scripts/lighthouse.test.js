@@ -16,7 +16,8 @@ const launchChromeAndRunLighthouse = (
   });
 
 let scores;
-test.before(async t => {
+test.before(async () => {
+  // eslint-disable-next-line no-console
   console.log(`Auditing ${siteUrl}.\n`);
   scores = await launchChromeAndRunLighthouse(siteUrl).then(
     ({ categories }) => categories

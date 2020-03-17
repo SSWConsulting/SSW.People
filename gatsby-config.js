@@ -5,7 +5,7 @@ require('dotenv').config({
 });
 
 module.exports = {
-  pathPrefix: `/people`,
+  pathPrefix: '/people',
   siteMetadata: {
     ...siteConfig,
   },
@@ -50,7 +50,7 @@ module.exports = {
       options: {
         plugins: [
           {
-            resolve: `gatsby-remark-figure-caption`,
+            resolve: 'gatsby-remark-figure-caption',
           },
           {
             resolve: 'gatsby-remark-images',

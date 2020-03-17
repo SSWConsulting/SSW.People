@@ -11,7 +11,8 @@
     "build:favicons": "node scripts/favicons",
     "build": "npm run build:dir && npm run build:favicons && gatsby build --prefix-paths",
     "devbuild": "npm run build:dir && npm run build:favicons && gatsby build",
-    "test": "ava **/*.test.js --verbose"
+    "test": "ava **/*.test.js --verbose",
+    "lint": "eslint --max-warnings=0 --ignore-path .gitignore . --ext ts --ext tsx --ext js --ext jsx"
   },
   "greenkeeper": {
     "ignore": [
