@@ -1,4 +1,4 @@
-const path = require( 'path');
+const path = require('path');
 
 function buildPrefixer(prefix, ...paths) {
   return (...subpaths) => path.join(prefix, ...paths, ...subpaths);
@@ -9,8 +9,8 @@ function buildPrefixer(prefix, ...paths) {
 // hashed filenames and ensure we pull in the componentChunkName.
 const makePluginData = (store, assetsManifest, pathPrefix) => {
   const { program, pages: storePages } = store.getState();
-  const publicFolder = buildPrefixer(program.directory, `public`);
-  const stats = require(publicFolder(`webpack.stats.json`));
+  const publicFolder = buildPrefixer(program.directory, 'public');
+  const stats = require(publicFolder('ßwebpack.stats.json'));
   // Get all the files, not just the first
   const chunkManifest = stats.assetsByChunkName;
   const pages = storePages;

@@ -15,7 +15,7 @@ export const replaceRenderer = ({
 
   // Add styled-components in SSR/build
   const sheet = new ServerStyleSheet();
-  const bodyHTML = renderToString(sheet.collectStyles(<ConnectedBody />));
+  renderToString(sheet.collectStyles(<ConnectedBody />));
   const styleElement = sheet.getStyleElement();
   setHeadComponents(styleElement);
 };

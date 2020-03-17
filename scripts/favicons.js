@@ -43,6 +43,7 @@ const configuration = {
 
 const callback = function(err, res) {
   if (err) {
+    // eslint-disable-next-line no-console
     console.log(err.message);
     return;
   }
@@ -53,6 +54,7 @@ const callback = function(err, res) {
       image.contents,
       err => {
         if (err) {
+          // eslint-disable-next-line no-console
           console.log(err);
         }
       }
@@ -65,6 +67,7 @@ const callback = function(err, res) {
       file.contents,
       err => {
         if (err) {
+          // eslint-disable-next-line no-console
           console.log(err);
         }
       }
