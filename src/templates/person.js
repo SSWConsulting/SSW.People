@@ -1,6 +1,6 @@
 import { graphql } from 'gatsby';
 import PropTypes from 'prop-types';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import Layout from '../components/layout';
 import { faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -9,7 +9,6 @@ import '@fortawesome/fontawesome-svg-core/styles.css';
 import Contact from '../components/contact/contact';
 import ContactForm from '../components/contact-form/contact-form';
 import Modal from 'react-modal';
-
 
 config.autoAddCss = false;
 
@@ -43,7 +42,9 @@ const Person = ({
     }
     return encodedString;
   };
-  const encodedEmailAddress = crmData.emailAddress ? encodeEmail(crmData.emailAddress) : '';
+  const encodedEmailAddress = crmData.emailAddress
+    ? encodeEmail(crmData.emailAddress)
+    : '';
 
   const decodeEmail = encodedEmail => {
     // holds the decoded email address
@@ -62,7 +63,7 @@ const Person = ({
     return email;
   };
 
-  const sendEmail = (e) => {
+  const sendEmail = e => {
     e.preventDefault();
     window.location.href = 'mailTo:' + decodeEmail(encodedEmailAddress);
   };
@@ -129,7 +130,15 @@ const Person = ({
               <ul className="favor-list">
                 {crmData.emailAddress != '' && (
                   <li id="email" className="social">
-                    <a href={'#0'} onClick = {(event) => {sendEmail(event)}}> Email </a>
+                    <a
+                      href={'#0'}
+                      onClick={event => {
+                        sendEmail(event);
+                      }}
+                    >
+                      {' '}
+                      Email{' '}
+                    </a>
                   </li>
                 )}
                 {frontmatter.blog != '' && (
@@ -183,9 +192,13 @@ const Person = ({
                     </a>
                   </li>
                 )}
-                {(frontmatter.github && frontmatter.github != '') && (
+                {frontmatter.github && frontmatter.github != '' && (
                   <li id="github" className="social">
-                    <a target="_blank" rel="noopener noreferrer" href={'https://www.github.com/' + frontmatter.github}>
+                    <a
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      href={'https://www.github.com/' + frontmatter.github}
+                    >
                       GitHub
                     </a>
                   </li>

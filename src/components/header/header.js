@@ -22,7 +22,7 @@ const AnimatedContainer = posed.div({
   },
 });
 
-const Header = ({ title, displayActions, profileId }) => {
+const Header = ({ displayActions, profileId }) => {
   return (
     <AnimatedContainer>
       <header>
@@ -64,7 +64,6 @@ const Header = ({ title, displayActions, profileId }) => {
 };
 
 Header.propTypes = {
-  title: PropTypes.string.isRequired,
   displayActions: PropTypes.bool.isRequired,
   profileId: PropTypes.string,
 };

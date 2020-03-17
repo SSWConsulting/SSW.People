@@ -9,22 +9,17 @@ import Breadcrumbs from '../breadcrumb/breadcrumb';
 import GoogleAnalytics from '../google-analytics/google-analytics';
 
 const Layout = ({
-  data,
   children,
   displayActions,
   profileId,
   pageTitle,
   crumbs,
   crumbLabel,
-  }) => (
+}) => (
   <>
     <div className="flex flex-col min-h-screen main-container">
       <Head pageTitle={pageTitle} />
-      <Header
-        title={data.site.siteMetadata.siteTitle}
-        displayActions={displayActions}
-        profileId={profileId}
-      />
+      <Header displayActions={displayActions} profileId={profileId} />
       <GoogleAnalytics pageTitle={pageTitle}></GoogleAnalytics>
       {crumbs ? (
         <Breadcrumbs crumbs={crumbs} crumbLabel={crumbLabel} />
