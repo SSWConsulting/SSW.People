@@ -102,8 +102,8 @@ exports.createPages = async function({ actions, graphql }) {
             name
             childMarkdownRemark {
               frontmatter {
-                custom_url
-                current_employee
+                customUrl
+                currentEmployee
               }
             }
           }
@@ -114,10 +114,10 @@ exports.createPages = async function({ actions, graphql }) {
 
   const people = data.people.edges.map(edge => {
     const isCurrent = edge.node.childMarkdownRemark
-      ? edge.node.childMarkdownRemark.frontmatter.current_employee
+      ? edge.node.childMarkdownRemark.frontmatter.currentEmployee
       : false;
     const customUrl = edge.node.childMarkdownRemark
-      ? edge.node.childMarkdownRemark.frontmatter.custom_url
+      ? edge.node.childMarkdownRemark.frontmatter.customUrl
       : null;
     const slug = edge.node.name;
     const prefix = isCurrent ? '' : 'previous-employees/';

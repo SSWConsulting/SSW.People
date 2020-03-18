@@ -194,16 +194,17 @@ const IndexWithQuery = props => (
     query={graphql`
       query HomepageQuery {
         people: allMarkdownRemark(
-          filter: { frontmatter: { current_employee: { eq: true } } }
+          filter: { frontmatter: { currentEmployee: { eq: true } } }
         ) {
           nodes {
             frontmatter {
               category
-              current_employee
+              currentEmployee
               name
               nickname
-              custom_url
+              customUrl
               role
+              alternativeUrl
             }
             parent {
               ... on File {

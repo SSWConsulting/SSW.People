@@ -30,9 +30,9 @@ const ProfileBox = ({ profile, sanitisedName, profileImages }) => {
     </div>
   );
 
-  return profile.role === 'enthusiastic People' ? (
+  return profile.alternativeUrl ? (
     <a
-      href="https://www.ssw.com.au/ssw/Employment/default.aspx"
+      href={profile.alternativeUrl}
       className="w-full flex-profile-box unstyled"
     >
       {content}
