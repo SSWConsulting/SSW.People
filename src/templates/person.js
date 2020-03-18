@@ -106,8 +106,8 @@ const Person = ({
                   <div className="w-full pr-2 lg:hidden quoteblock">
                     <div className="person-quote">{frontmatter.quote}</div>
                     <div className="person-quote-name">
-                      {frontmatter.quote_author
-                        ? frontmatter.quote_author
+                      {frontmatter.quoteAuthor
+                        ? frontmatter.quoteAuthor
                         : frontmatter.nickname}
                     </div>
                   </div>
@@ -120,8 +120,8 @@ const Person = ({
               <div className="hidden w-1/2 pr-2 lg:pr-0 lg:w-full lg:block quoteblock">
                 <div className="person-quote">{frontmatter.quote}</div>
                 <div className="person-quote-name">
-                  {frontmatter.quote_author
-                    ? frontmatter.quote_author
+                  {frontmatter.quoteAuthor
+                    ? frontmatter.quoteAuthor
                     : frontmatter.nickname}
                 </div>
               </div>
@@ -298,14 +298,14 @@ export const query = graphql`
           nickname
           role
           category
-          current_employee
+          currentEmployee
           blog
           facebook
           linkedin
           location
           qualifications
           quote
-          quote_author
+          quoteAuthor
           skype
           twitter
           website
