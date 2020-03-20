@@ -119,7 +119,9 @@ exports.createPages = async function({ actions, graphql }) {
       slug: slug,
       squareImage: slug + '-Profile-Square',
       path: prefix + slug.toLowerCase(),
-      nicknamePath: nickname ? prefix + nickname.replace(/ /g,'-').toLowerCase() : '',
+      nicknamePath: nickname
+        ? prefix + nickname.replace(/ /g, '-').toLowerCase()
+        : '',
     };
   });
 
@@ -142,7 +144,9 @@ exports.onPostBuild = async ({ store, pathPrefix }) => {
   const pluginData = makePluginData(store, assetsManifest, pathPrefix);
   const rewrites = Array.from(pages.values())
     .filter(
-      page => page.context.nicknamePath && page.context.originalPath !== page.context.nicknamePath
+      page =>
+        page.context.nicknamePath &&
+        page.context.originalPath !== page.context.nicknamePath
     )
     .map(page => {
       return {

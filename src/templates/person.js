@@ -27,7 +27,9 @@ const Person = ({
   const intermediateSkills = skills.intermediateSkills || [];
   const advancedSkills = skills.advancedSkills || [];
   const profileImage = data.profileImage.nodes[0];
-  const personName = frontmatter.nickname ? `${frontmatter.name} (${frontmatter.nickname})` : frontmatter.name;
+  const personName = frontmatter.nickname
+    ? `${frontmatter.name} (${frontmatter.nickname})`
+    : frontmatter.name;
   const [displayContactForm, setdisplayContactForm] = useState(false);
 
   const onContactButtonClick = () => {
