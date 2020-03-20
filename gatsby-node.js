@@ -96,7 +96,7 @@ exports.createPages = async function({ actions, graphql }) {
             name
             childMarkdownRemark {
               frontmatter {
-                customUrl
+                nickname
                 currentEmployee
               }
             }
@@ -110,8 +110,8 @@ exports.createPages = async function({ actions, graphql }) {
     const isCurrent = edge.node.childMarkdownRemark
       ? edge.node.childMarkdownRemark.frontmatter.currentEmployee
       : false;
-    const customUrl = edge.node.childMarkdownRemark
-      ? edge.node.childMarkdownRemark.frontmatter.customUrl
+    const nickname = edge.node.childMarkdownRemark
+      ? edge.node.childMarkdownRemark.frontmatter.nickname
       : null;
     const slug = edge.node.name;
     const prefix = isCurrent ? '' : 'previous-employees/';
@@ -119,18 +119,19 @@ exports.createPages = async function({ actions, graphql }) {
       slug: slug,
       squareImage: slug + '-Profile-Square',
       path: prefix + slug.toLowerCase(),
-      customPath: customUrl ? prefix + customUrl.toLowerCase() : '',
+      nicknamePath: nickname ? prefix + nickname.replace(/ /g,'-').toLowerCase() : '',
     };
   });
 
   people.forEach(person => {
     actions.createPage({
-      path: person.path,
+      path: person.nicknamePath ? person.nicknamePath : person.path,
       component: require.resolve('./src/templates/person.js'),
       context: {
         slug: person.slug,
         squareImage: person.squareImage,
-        customPath: person.customPath,
+        originalPath: person.path,
+        nicknamePath: person.nicknamePath,
       },
     });
   });
@@ -141,11 +142,11 @@ exports.onPostBuild = async ({ store, pathPrefix }) => {
   const pluginData = makePluginData(store, assetsManifest, pathPrefix);
   const rewrites = Array.from(pages.values())
     .filter(
-      page => page.context.customPath && page.context.customPath !== page.path
+      page => page.context.nicknamePath && page.context.originalPath !== page.context.nicknamePath
     )
     .map(page => {
       return {
-        fromPath: pathPrefix + '/' + page.context.customPath,
+        fromPath: pathPrefix + '/' + page.context.originalPath,
         toPath: pathPrefix + page.path,
       };
     });

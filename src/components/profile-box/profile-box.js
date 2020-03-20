@@ -3,9 +3,9 @@ import { Link } from 'gatsby';
 import Img from 'gatsby-image';
 import PropTypes from 'prop-types';
 
-const ProfileBox = ({ profile, sanitisedName, profileImages }) => {
+const ProfileBox = ({ profile, sanitisedName, profileImages, sanitisedNickname }) => {
   const [hover, setHover] = useState(false);
-
+  const tileName = profile.nickname ? profile.nickname : profile.name.split(' ')[0];
   const content = profileImages.profileImage !== undefined && (
     <div
       className="relative shadow-lg profile-image"
@@ -14,7 +14,7 @@ const ProfileBox = ({ profile, sanitisedName, profileImages }) => {
       onMouseLeave={() => setHover(false)}
     >
       <Img
-        alt={`${profile.nickname} profile image`}
+        alt={`${profile.name} profile image`}
         fluid={
           hover ? profileImages.profileImage : profileImages.sketchProfileImage
         }
@@ -28,7 +28,7 @@ const ProfileBox = ({ profile, sanitisedName, profileImages }) => {
             : 'absolute inset-x-0 bottom-0 px-1 pb-4 pt-2 h-15 text-center'
         }
       >
-        <div className="font-bold text-sm">{profile.nickname}</div>
+        <div className="font-bold text-sm">{ hover ? profile.name : tileName}</div>
         <div className="text-xs leading-none">{profile.role}</div>
       </div>
     </div>
@@ -43,7 +43,7 @@ const ProfileBox = ({ profile, sanitisedName, profileImages }) => {
     </a>
   ) : (
     <Link
-      to={`/${sanitisedName.toLowerCase()}`}
+      to={`/${profile.nickname ? sanitisedNickname.toLowerCase() : sanitisedName.toLowerCase()}`}
       className="w-full flex-profile-box unstyled"
     >
       {content}
@@ -58,6 +58,7 @@ ProfileBox.propTypes = {
     profileImage: PropTypes.object,
     sketchProfileImage: PropTypes.object,
   }),
+  sanitisedNickname: PropTypes.string,
 };
 
 export default ProfileBox;

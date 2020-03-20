@@ -173,6 +173,8 @@ function buildPeople(data) {
         sketchProfileImage: sketchProfileImageMap.get(node.parent.name),
       },
       skills: skillsMap.get(node.frontmatter.name) || [],
+      nickname: node.frontmatter.nickname,
+      sanitisedNickname: node.frontmatter.nickname.replace(/\s+/g, '-'),
     };
   });
 }
@@ -190,7 +192,6 @@ const IndexWithQuery = props => (
               currentEmployee
               name
               nickname
-              customUrl
               role
               alternativeUrl
             }
