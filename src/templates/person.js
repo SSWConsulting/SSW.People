@@ -27,7 +27,9 @@ const Person = ({
   const intermediateSkills = skills.intermediateSkills || [];
   const advancedSkills = skills.advancedSkills || [];
   const profileImage = data.profileImage.nodes[0];
-
+  const personName = frontmatter.nickname
+    ? `${frontmatter.name} (${frontmatter.nickname})`
+    : frontmatter.name;
   const [displayContactForm, setdisplayContactForm] = useState(false);
 
   const onContactButtonClick = () => {
@@ -71,10 +73,8 @@ const Person = ({
   return (
     <Layout
       crumbs={crumbs}
-      crumbLabel={frontmatter.name}
-      pageTitle={
-        childMarkdownRemark.frontmatter && childMarkdownRemark.frontmatter.name
-      }
+      crumbLabel={personName}
+      pageTitle={childMarkdownRemark.frontmatter && personName}
       displayActions={true}
       profileId={person.name}
     >
@@ -83,7 +83,7 @@ const Person = ({
           {!!profileImage && (
             <>
               <div className="person-description lg:hidden w-full my-auto">
-                <h1 className="inline">{frontmatter.name}</h1>
+                <h1 className="inline">{personName}</h1>
                 <h4 className="mb-0">{frontmatter.role}</h4>
                 {!!crmData.location && (
                   <h4 className="mb-0">
@@ -108,7 +108,7 @@ const Person = ({
                     <div className="person-quote-name">
                       {frontmatter.quoteAuthor
                         ? frontmatter.quoteAuthor
-                        : frontmatter.nickname}
+                        : frontmatter.name}
                     </div>
                   </div>
                 )}
@@ -122,7 +122,7 @@ const Person = ({
                 <div className="person-quote-name">
                   {frontmatter.quoteAuthor
                     ? frontmatter.quoteAuthor
-                    : frontmatter.nickname}
+                    : frontmatter.name}
                 </div>
               </div>
             )}
@@ -209,7 +209,7 @@ const Person = ({
         </div>
         <div className="sm:w-full lg:w-3/4 xl:w-5/6">
           <div className="person-description md:pl-4">
-            <h1 className="hidden lg:inline">{frontmatter.name}</h1>
+            <h1 className="hidden lg:inline">{personName}</h1>
             <h4 className="hidden lg:block mb-0">
               {frontmatter.role}
               {!!crmData.location && (
