@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'gatsby';
 import Img from 'gatsby-image';
 import PropTypes from 'prop-types';
@@ -8,17 +8,42 @@ const ProfileBox = ({
   sanitisedName,
   profileImages,
   sanitisedNickname,
+  profileAudio,
 }) => {
   const [hover, setHover] = useState(false);
   const tileName = profile.nickname
     ? profile.nickname
     : profile.name.split(' ')[0];
+  const [audio, setAudio] = useState({});
+
+  const playAudio = srcAudio => {
+    audio.src = srcAudio;
+    audio.load();
+    audio.play();
+  };
+  const stopAudio = () => {
+    audio.pause();
+    audio.currentTime = 0;
+  };
+  useEffect(() => {
+    setAudio(new Audio());
+  }, []);
   const content = profileImages.profileImage !== undefined && (
     <div
       className="relative shadow-lg profile-image"
       style={{ height: '242px' }}
-      onMouseEnter={() => setHover(true)}
-      onMouseLeave={() => setHover(false)}
+      onMouseEnter={() => {
+        setHover(true);
+        if (profileAudio) {
+          playAudio(profileAudio);
+        }
+      }}
+      onMouseLeave={() => {
+        setHover(false);
+        if (profileAudio) {
+          stopAudio();
+        }
+      }}
     >
       <Img
         alt={`${profile.name} profile image`}
@@ -72,6 +97,7 @@ ProfileBox.propTypes = {
     sketchProfileImage: PropTypes.object,
   }),
   sanitisedNickname: PropTypes.string,
+  profileAudio: PropTypes.string,
 };
 
 export default ProfileBox;

@@ -31,6 +31,7 @@ const ProfileList = ({ filteredPeople }) => {
                       sanitisedName={person.sanitisedName}
                       profileImages={person.profileImages}
                       sanitisedNickname={person.sanitisedNickname}
+                      profileAudio={person.profileAudio}
                     />
                   );
                 })}
