@@ -139,6 +139,7 @@ function buildPeople(data) {
   const skillsMap = new Map();
   const locationsMap = new Map();
   const billingRatesMap = new Map();
+  const audioMap = new Map();
 
   data.profile_images.nodes.forEach(n =>
     profileImageMap.set(n.name.replace('-Profile', ''), n.childImageSharp.fixed)
@@ -158,6 +159,10 @@ function buildPeople(data) {
     billingRatesMap.set(n.fullName, n.billingRate);
   });
 
+  data.profile_audios.nodes.forEach(n =>
+    audioMap.set(n.name.replace('-Audio-Name', ''), n.publicURL)
+  );
+
   return data.people.nodes.map(node => {
     return {
       fullName: node.frontmatter.name,
@@ -172,6 +177,7 @@ function buildPeople(data) {
         profileImage: profileImageMap.get(node.parent.name),
         sketchProfileImage: sketchProfileImageMap.get(node.parent.name),
       },
+      profileAudio: audioMap.get(node.parent.name),
       skills: skillsMap.get(node.frontmatter.name) || [],
       nickname: node.frontmatter.nickname,
       sanitisedNickname: node.frontmatter.nickname.replace(/\s+/g, '-'),
@@ -230,6 +236,17 @@ const IndexWithQuery = props => (
                 ...GatsbyImageSharpFixed_noBase64
               }
             }
+          }
+        }
+        profile_audios: allFile(
+          filter: {
+            sourceInstanceName: { eq: "people" }
+            name: { glob: "*-Audio-Name" }
+          }
+        ) {
+          nodes {
+            name
+            publicURL
           }
         }
         homeJson {
