@@ -160,7 +160,7 @@ function buildPeople(data) {
   });
 
   data.profile_audios.nodes.forEach(n =>
-    audioMap.set(n.name.replace('-Audio-Name',''),n.publicURL)
+    audioMap.set(n.name.replace('-Audio-Name', ''), n.publicURL)
   );
 
   return data.people.nodes.map(node => {
