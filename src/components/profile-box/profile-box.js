@@ -13,6 +13,7 @@ const ProfileBox = ({
   profileAudio,
 }) => {
   const [hover, setHover] = useState(false);
+  const [hoverAudio, setHoverAudio] = useState(false);
   const tileName = profile.nickname
     ? profile.nickname
     : profile.name.split(' ')[0];
@@ -95,7 +96,7 @@ const ProfileBox = ({
       <div
         style={profileAudio ? {} : { display: 'none' }}
         className={
-          hover
+          hoverAudio
             ? 'absolute top-0 right-0 p-1 hovered'
             : 'absolute top-0 right-0 p-1 bg-ssw-dark-grey'
         }
@@ -109,6 +110,12 @@ const ProfileBox = ({
               stopAudio();
               playAudio(profileAudio);
             }
+          }}
+          onMouseEnter={() => {
+            setHoverAudio(true);
+          }}
+          onMouseLeave={() => {
+            setHoverAudio(false);
           }}
         />
       </div>
