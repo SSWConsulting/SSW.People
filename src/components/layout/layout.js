@@ -7,6 +7,7 @@ import Footer from 'components/footer';
 import '../../style.css';
 import Breadcrumbs from '../breadcrumb/breadcrumb';
 import GoogleAnalytics from '../google-analytics/google-analytics';
+import Menu from '../megamenu/menu';
 
 const Layout = ({
   children,
@@ -21,6 +22,7 @@ const Layout = ({
       <Head pageTitle={pageTitle} />
       <Header displayActions={displayActions} profileId={profileId} />
       <GoogleAnalytics pageTitle={pageTitle}></GoogleAnalytics>
+      <Menu></Menu>
       {crumbs ? (
         <Breadcrumbs crumbs={crumbs} crumbLabel={crumbLabel} />
       ) : (
