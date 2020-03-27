@@ -97,12 +97,15 @@ const Person = ({
 
   const playContext = profileAudio ? (
     // eslint-disable-next-line jsx-a11y/no-static-element-interactions
-    // eslint-disable-next-line jsx-a11y/click-events-have-key-events
     <small
       className={'cursor-pointer'}
       onClick={() => {
         stopAudio();
         playAudio(profileAudio.publicURL);
+      }}
+      onKeyPress={() => {
+        // eslint-disable-next-line no-console
+        console.log('play');
       }}
     >
       (
