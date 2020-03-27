@@ -101,8 +101,8 @@ const Person = ({
     <small
       className={'cursor-pointer'}
       onClick={() => {
-          stopAudio();
-          playAudio(profileAudio.publicURL);
+        stopAudio();
+        playAudio(profileAudio.publicURL);
       }}
     >
       (
