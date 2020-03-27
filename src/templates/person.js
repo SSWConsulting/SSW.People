@@ -105,7 +105,7 @@ const Person = ({
       }}
       onKeyPress={() => {
         // eslint-disable-next-line no-console
-        console.log('play');
+        // console.log('play');
       }}
     >
       (
