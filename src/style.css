@@ -294,6 +294,10 @@ button:focus {
   background-color: rgb(238, 238, 238);
 }
 
+.bg-ssw-dark-grey {
+  background-color: #CCCCCC;
+}
+
 .border-ssw-grey {
   border-color:rgb(238, 238, 238);
 }

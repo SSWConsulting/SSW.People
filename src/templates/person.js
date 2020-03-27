@@ -1,8 +1,8 @@
 import { graphql } from 'gatsby';
 import PropTypes from 'prop-types';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Layout from '../components/layout';
-import { faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons';
+import { faMapMarkerAlt, faVolumeUp } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { config } from '@fortawesome/fontawesome-svg-core';
 import '@fortawesome/fontawesome-svg-core/styles.css';
@@ -31,6 +31,7 @@ const Person = ({
     ? `${frontmatter.name} (${frontmatter.nickname})`
     : frontmatter.name;
   const [displayContactForm, setdisplayContactForm] = useState(false);
+  const profileAudio = data.profileAudio.nodes[0];
 
   const onContactButtonClick = () => {
     setdisplayContactForm(!displayContactForm);
@@ -70,6 +71,51 @@ const Person = ({
     window.location.href = 'mailTo:' + decodeEmail(encodedEmailAddress);
   };
 
+  const [audio, setAudio] = useState({});
+  const [isPlaying, setIsPlaying] = useState(false);
+
+  const playAudio = srcAudio => {
+    audio.src = srcAudio;
+    audio.load();
+    audio.play();
+    setIsPlaying(
+      audio.currentTime > 0 &&
+        !audio.paused &&
+        !audio.ended &&
+        audio.readyState > 2
+    );
+  };
+  const stopAudio = () => {
+    if (isPlaying) {
+      audio.pause();
+      audio.currentTime = 0;
+    }
+  };
+  useEffect(() => {
+    setAudio(new Audio());
+  }, []);
+
+  const playContext = profileAudio ? (
+    // eslint-disable-next-line jsx-a11y/no-static-element-interactions
+    <small
+      className={'cursor-pointer'}
+      onClick={() => {
+        stopAudio();
+        playAudio(profileAudio.publicURL);
+      }}
+      onKeyPress={() => {
+        // eslint-disable-next-line no-console
+        // console.log('play');
+      }}
+    >
+      (
+      <FontAwesomeIcon icon={faVolumeUp} size="sm" className={'mr-1 ml-1'} />
+      Listen)
+    </small>
+  ) : (
+    ''
+  );
+
   return (
     <Layout
       crumbs={crumbs}
@@ -83,7 +129,7 @@ const Person = ({
           {!!profileImage && (
             <>
               <div className="person-description lg:hidden w-full my-auto">
-                <h1 className="inline">{personName}</h1>
+                <h1 className="inline">{personName}</h1> {playContext}
                 <h4 className="mb-0">{frontmatter.role}</h4>
                 {!!crmData.location && (
                   <h4 className="mb-0">
@@ -209,7 +255,7 @@ const Person = ({
         </div>
         <div className="sm:w-full lg:w-3/4 xl:w-5/6">
           <div className="person-description md:pl-4">
-            <h1 className="hidden lg:inline">{personName}</h1>
+            <h1 className="hidden lg:inline">{personName}</h1> {playContext}
             <h4 className="hidden lg:block mb-0">
               {frontmatter.role}
               {!!crmData.location && (
@@ -252,7 +298,6 @@ const Person = ({
                 <hr />
               </>
             )}
-
             <div
               className="profile-content"
               dangerouslySetInnerHTML={{
@@ -289,7 +334,7 @@ Person.propTypes = {
 export default Person;
 
 export const query = graphql`
-  query($slug: String!, $squareImage: String!) {
+  query($slug: String!, $squareImage: String!, $audio: String!) {
     people: file(sourceInstanceName: { eq: "people" }, name: { eq: $slug }) {
       name
       childMarkdownRemark {
@@ -329,6 +374,14 @@ export const query = graphql`
             width
           }
         }
+      }
+    }
+    profileAudio: allFile(
+      filter: { sourceInstanceName: { eq: "people" }, name: { glob: $audio } }
+    ) {
+      nodes {
+        name
+        publicURL
       }
     }
     crmData: crmDataCollection(slug: { eq: $slug }) {

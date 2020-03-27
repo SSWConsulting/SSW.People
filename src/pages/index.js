@@ -160,7 +160,7 @@ function buildPeople(data) {
   });
 
   data.profile_audios.nodes.forEach(n =>
-    audioMap.set(n.name.replace('-Audio-Name', ''), n.publicURL)
+    audioMap.set(n.name.replace('-Audio', ''), n.publicURL)
   );
 
   return data.people.nodes.map(node => {
@@ -241,7 +241,7 @@ const IndexWithQuery = props => (
         profile_audios: allFile(
           filter: {
             sourceInstanceName: { eq: "people" }
-            name: { glob: "*-Audio-Name" }
+            name: { glob: "*-Audio" }
           }
         ) {
           nodes {

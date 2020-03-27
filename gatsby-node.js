@@ -122,6 +122,7 @@ exports.createPages = async function({ actions, graphql }) {
       nicknamePath: nickname
         ? prefix + nickname.replace(/ /g, '-').toLowerCase()
         : '',
+      audio: slug + '-Audio',
     };
   });
 
@@ -134,6 +135,7 @@ exports.createPages = async function({ actions, graphql }) {
         squareImage: person.squareImage,
         originalPath: person.path,
         nicknamePath: person.nicknamePath,
+        audio: person.audio,
       },
     });
   });
