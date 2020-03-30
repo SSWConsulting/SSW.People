@@ -1,6 +1,6 @@
 import React,{Component,useEffect,useState} from 'react';
-import * as menu from'ssw.megamenu/dist/megamenu';
-import 'ssw.megamenu/dist/megamenu.css';
+import * as menu from '../../../libs/ssw.megamenu/megamenu';
+import '../../../libs/ssw.megamenu/megamenu.css';
 
 
 
