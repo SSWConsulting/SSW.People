@@ -18,6 +18,7 @@ import 'array-flat-polyfill';
 import { config } from '@fortawesome/fontawesome-svg-core';
 import '@fortawesome/fontawesome-svg-core/styles.css';
 import ProfileSort from '../helpers/profileSort';
+import MobileMenu from '../components/megamenu/mobile-menu';
 
 config.autoAddCss = false;
 
@@ -81,49 +82,53 @@ const Index = ({
   }, [selectedLocation, selectedSkills]);
 
   return (
-    <Layout crumbs={crumbs} displayActions={false}>
-      <div
-        className="hero-para mx-6"
-        dangerouslySetInnerHTML={{
-          __html: data.homeJson.content.childMarkdownRemark.html,
-        }}
-      />
-      <div className="my-8 mx-0 xl:mx-6">
-        <LocationFilter
-          locations={allLocations}
-          selectedLocation={selectedLocation}
-          onLocationChange={setSelectedLocation}
+    <>
+      <MobileMenu></MobileMenu>
+      <Layout crumbs={crumbs} displayActions={false}>
+        <div
+          className="hero-para mx-6"
+          dangerouslySetInnerHTML={{
+            __html: data.homeJson.content.childMarkdownRemark.html,
+          }}
         />
-      </div>
-      <div className="mx-6 flex flex-col lg:flex-row">
-        <div className="lg:w-1/4">
-          <div className="mx-auto flex flex-col sm:flex-row lg:flex-col lg:w-5/6">
-            <div className="w-full sm:w-1/2 lg:w-full">
-              <RoleFilter
-                allRoles={allRoles}
-                selectedRoles={selectedRoles}
-                onRoleChange={setSelectedRoles}
-                filteredPeople={filteredPeople}
-              />
-            </div>
-            <div className="w-full sm:w-1/2 lg:w-full mt-0 lg:mt-4">
-              <SkillsFilter
-                allSkills={allSkills}
-                selectedSkills={selectedSkills}
-                onSkillChange={setSelectedSkills}
-              />
-            </div>
-          </div>
-        </div>
-        <div className="lg:w-3/4">
-          <ProfileList
-            filteredPeople={filteredPeople.filter(
-              p => selectedRoles.length === 0 || selectedRoles.includes(p.role)
-            )}
+        <div className="my-8 mx-0 xl:mx-6">
+          <LocationFilter
+            locations={allLocations}
+            selectedLocation={selectedLocation}
+            onLocationChange={setSelectedLocation}
           />
         </div>
-      </div>
-    </Layout>
+        <div className="mx-6 flex flex-col lg:flex-row">
+          <div className="lg:w-1/4">
+            <div className="mx-auto flex flex-col sm:flex-row lg:flex-col lg:w-5/6">
+              <div className="w-full sm:w-1/2 lg:w-full">
+                <RoleFilter
+                  allRoles={allRoles}
+                  selectedRoles={selectedRoles}
+                  onRoleChange={setSelectedRoles}
+                  filteredPeople={filteredPeople}
+                />
+              </div>
+              <div className="w-full sm:w-1/2 lg:w-full mt-0 lg:mt-4">
+                <SkillsFilter
+                  allSkills={allSkills}
+                  selectedSkills={selectedSkills}
+                  onSkillChange={setSelectedSkills}
+                />
+              </div>
+            </div>
+          </div>
+          <div className="lg:w-3/4">
+            <ProfileList
+              filteredPeople={filteredPeople.filter(
+                p =>
+                  selectedRoles.length === 0 || selectedRoles.includes(p.role)
+              )}
+            />
+          </div>
+        </div>
+      </Layout>
+    </>
   );
 };
 
