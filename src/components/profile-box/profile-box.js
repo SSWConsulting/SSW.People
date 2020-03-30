@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'gatsby';
 import Img from 'gatsby-image';
 import PropTypes from 'prop-types';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faVolumeUp } from '@fortawesome/free-solid-svg-icons';
 
 const ProfileBox = ({
   profile,
@@ -11,19 +13,29 @@ const ProfileBox = ({
   profileAudio,
 }) => {
   const [hover, setHover] = useState(false);
+  const [hoverAudio, setHoverAudio] = useState(false);
   const tileName = profile.nickname
     ? profile.nickname
     : profile.name.split(' ')[0];
   const [audio, setAudio] = useState({});
+  const [isPlaying, setIsPlaying] = useState(false);
 
   const playAudio = srcAudio => {
     audio.src = srcAudio;
     audio.load();
     audio.play();
+    setIsPlaying(
+      audio.currentTime > 0 &&
+        !audio.paused &&
+        !audio.ended &&
+        audio.readyState > 2
+    );
   };
   const stopAudio = () => {
-    audio.pause();
-    audio.currentTime = 0;
+    if (isPlaying) {
+      audio.pause();
+      audio.currentTime = 0;
+    }
   };
   useEffect(() => {
     setAudio(new Audio());
@@ -32,18 +44,6 @@ const ProfileBox = ({
     <div
       className="relative shadow-lg profile-image"
       style={{ height: '242px' }}
-      onMouseEnter={() => {
-        setHover(true);
-        if (profileAudio) {
-          playAudio(profileAudio);
-        }
-      }}
-      onMouseLeave={() => {
-        setHover(false);
-        if (profileAudio) {
-          stopAudio();
-        }
-      }}
     >
       <Img
         alt={`${profile.name} profile image`}
@@ -68,13 +68,8 @@ const ProfileBox = ({
     </div>
   );
 
-  return profile.alternativeUrl ? (
-    <a
-      href={profile.alternativeUrl}
-      className="w-full flex-profile-box unstyled"
-    >
-      {content}
-    </a>
+  const linkContext = profile.alternativeUrl ? (
+    <a href={profile.alternativeUrl}>{content}</a>
   ) : (
     <Link
       to={`/${
@@ -82,10 +77,49 @@ const ProfileBox = ({
           ? sanitisedNickname.toLowerCase()
           : sanitisedName.toLowerCase()
       }`}
-      className="w-full flex-profile-box unstyled"
     >
       {content}
     </Link>
+  );
+
+  return (
+    <div
+      className="w-full flex-profile-box unstyled relative"
+      onMouseEnter={() => {
+        setHover(true);
+      }}
+      onMouseLeave={() => {
+        setHover(false);
+      }}
+    >
+      {linkContext}
+      <div
+        style={profileAudio ? {} : { display: 'none' }}
+        className={
+          hoverAudio
+            ? 'absolute top-0 right-0 p-1 hovered'
+            : 'absolute top-0 right-0 p-1 bg-ssw-dark-grey'
+        }
+      >
+        <FontAwesomeIcon
+          icon={faVolumeUp}
+          size="sm"
+          className={'mr-1 ml-1 cursor-pointer'}
+          onClick={() => {
+            if (profileAudio) {
+              stopAudio();
+              playAudio(profileAudio);
+            }
+          }}
+          onMouseEnter={() => {
+            setHoverAudio(true);
+          }}
+          onMouseLeave={() => {
+            setHoverAudio(false);
+          }}
+        />
+      </div>
+    </div>
   );
 };
 
