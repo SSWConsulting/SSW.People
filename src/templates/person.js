@@ -119,213 +119,216 @@ const Person = ({
 
   return (
     <>
-     <MobileMenu></MobileMenu>
-    <Layout
-      crumbs={crumbs}
-      crumbLabel={personName}
-      pageTitle={childMarkdownRemark.frontmatter && personName}
-      displayActions={true}
-      profileId={person.name}
-    >
-      <div className="flex flex-wrap mb-5 md:mx-2 person-content">
-        <div className="sm:w-full lg:w-1/4 xl:w-1/6">
-          {!!profileImage && (
-            <>
-              <div className="person-description lg:hidden w-full my-auto">
-                <h1 className="inline">{personName}</h1> {playContext}
-                <h4 className="mb-0">{frontmatter.role}</h4>
-                {!!crmData.location && (
-                  <h4 className="mb-0">
-                    <FontAwesomeIcon icon={faMapMarkerAlt} /> {crmData.location}
-                  </h4>
-                )}
-                {!!frontmatter.qualifications && (
-                  <strong>{frontmatter.qualifications}</strong>
-                )}
-              </div>
-              <div className="flex profile-image-quote">
-                <div className="image-bg text-center">
-                  <img
-                    className="profile-image relative bg-cover mx-auto"
-                    src={profileImage.childImageSharp.original.src}
-                    alt="Profile"
-                  />
+      <MobileMenu></MobileMenu>
+      <Layout
+        crumbs={crumbs}
+        crumbLabel={personName}
+        pageTitle={childMarkdownRemark.frontmatter && personName}
+        displayActions={true}
+        profileId={person.name}
+      >
+        <div className="flex flex-wrap mb-5 md:mx-2 person-content">
+          <div className="sm:w-full lg:w-1/4 xl:w-1/6">
+            {!!profileImage && (
+              <>
+                <div className="person-description lg:hidden w-full my-auto">
+                  <h1 className="inline">{personName}</h1> {playContext}
+                  <h4 className="mb-0">{frontmatter.role}</h4>
+                  {!!crmData.location && (
+                    <h4 className="mb-0">
+                      <FontAwesomeIcon icon={faMapMarkerAlt} />
+                      {crmData.location}
+                    </h4>
+                  )}
+                  {!!frontmatter.qualifications && (
+                    <strong>{frontmatter.qualifications}</strong>
+                  )}
                 </div>
-                {frontmatter.quote && (
-                  <div className="w-full pr-2 lg:hidden quoteblock">
-                    <div className="person-quote">{frontmatter.quote}</div>
-                    <div className="person-quote-name">
-                      {frontmatter.quoteAuthor
-                        ? frontmatter.quoteAuthor
-                        : frontmatter.name}
-                    </div>
+                <div className="flex profile-image-quote">
+                  <div className="image-bg text-center">
+                    <img
+                      className="profile-image relative bg-cover mx-auto"
+                      src={profileImage.childImageSharp.original.src}
+                      alt="Profile"
+                    />
                   </div>
-                )}
-              </div>
-            </>
-          )}
-          <div className="flex person-favor flex-row lg:flex-col">
-            {frontmatter.quote && (
-              <div className="hidden w-1/2 pr-2 lg:pr-0 lg:w-full lg:block quoteblock">
-                <div className="person-quote">{frontmatter.quote}</div>
-                <div className="person-quote-name">
-                  {frontmatter.quoteAuthor
-                    ? frontmatter.quoteAuthor
-                    : frontmatter.name}
+                  {frontmatter.quote && (
+                    <div className="w-full pr-2 lg:hidden quoteblock">
+                      <div className="person-quote">{frontmatter.quote}</div>
+                      <div className="person-quote-name">
+                        {frontmatter.quoteAuthor
+                          ? frontmatter.quoteAuthor
+                          : frontmatter.name}
+                      </div>
+                    </div>
+                  )}
                 </div>
-              </div>
+              </>
             )}
-            <div className="favor-content w-full">
-              <ul className="favor-list">
-                {crmData.emailAddress != '' && (
-                  <li id="email" className="social">
-                    <a
-                      href={'#0'}
-                      onClick={event => {
-                        sendEmail(event);
-                      }}
-                    >
-                      {' '}
-                      Email{' '}
-                    </a>
-                  </li>
+            <div className="flex person-favor flex-row lg:flex-col">
+              {frontmatter.quote && (
+                <div className="hidden w-1/2 pr-2 lg:pr-0 lg:w-full lg:block quoteblock">
+                  <div className="person-quote">{frontmatter.quote}</div>
+                  <div className="person-quote-name">
+                    {frontmatter.quoteAuthor
+                      ? frontmatter.quoteAuthor
+                      : frontmatter.name}
+                  </div>
+                </div>
+              )}
+              <div className="favor-content w-full">
+                <ul className="favor-list">
+                  {crmData.emailAddress != '' && (
+                    <li id="email" className="social">
+                      <a
+                        href={'#0'}
+                        onClick={event => {
+                          sendEmail(event);
+                        }}
+                      >
+                        {' '}
+                        Email{' '}
+                      </a>
+                    </li>
+                  )}
+                  {frontmatter.blog != '' && (
+                    <li id="blog" className="social">
+                      <a
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        href={frontmatter.blog}
+                      >
+                        Blog
+                      </a>
+                    </li>
+                  )}
+                  {frontmatter.facebook != '' && (
+                    <li id="facebook" className="social">
+                      <a
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        href={
+                          'https://www.facebook.com/' + frontmatter.facebook
+                        }
+                      >
+                        Facebook
+                      </a>
+                    </li>
+                  )}
+                  {frontmatter.skype != '' && (
+                    <li id="skype" className="social">
+                      <a href={'skype:' + frontmatter.skype + '?call'}>Skype</a>
+                    </li>
+                  )}
+                  {frontmatter.linkedin != '' && (
+                    <li id="linkedin" className="social">
+                      <a
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        href={
+                          'https://www.linkedin.com/in/' + frontmatter.linkedin
+                        }
+                      >
+                        LinkedIn
+                      </a>
+                    </li>
+                  )}
+                  {frontmatter.twitter != '' && (
+                    <li id="twitter" className="social">
+                      <a
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        href={'https://www.twitter.com/' + frontmatter.twitter}
+                      >
+                        Twitter
+                      </a>
+                    </li>
+                  )}
+                  {frontmatter.github && frontmatter.github != '' && (
+                    <li id="github" className="social">
+                      <a
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        href={'https://www.github.com/' + frontmatter.github}
+                      >
+                        GitHub
+                      </a>
+                    </li>
+                  )}
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div className="sm:w-full lg:w-3/4 xl:w-5/6">
+            <div className="person-description md:pl-4">
+              <h1 className="hidden lg:inline">{personName}</h1> {playContext}
+              <h4 className="hidden lg:block mb-0">
+                {frontmatter.role}
+                {!!crmData.location && (
+                  <span className="ml-2">
+                    <FontAwesomeIcon icon={faMapMarkerAlt} /> {crmData.location}
+                  </span>
                 )}
-                {frontmatter.blog != '' && (
-                  <li id="blog" className="social">
-                    <a
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      href={frontmatter.blog}
-                    >
-                      Blog
-                    </a>
-                  </li>
-                )}
-                {frontmatter.facebook != '' && (
-                  <li id="facebook" className="social">
-                    <a
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      href={'https://www.facebook.com/' + frontmatter.facebook}
-                    >
-                      Facebook
-                    </a>
-                  </li>
-                )}
-                {frontmatter.skype != '' && (
-                  <li id="skype" className="social">
-                    <a href={'skype:' + frontmatter.skype + '?call'}>Skype</a>
-                  </li>
-                )}
-                {frontmatter.linkedin != '' && (
-                  <li id="linkedin" className="social">
-                    <a
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      href={
-                        'https://www.linkedin.com/in/' + frontmatter.linkedin
-                      }
-                    >
-                      LinkedIn
-                    </a>
-                  </li>
-                )}
-                {frontmatter.twitter != '' && (
-                  <li id="twitter" className="social">
-                    <a
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      href={'https://www.twitter.com/' + frontmatter.twitter}
-                    >
-                      Twitter
-                    </a>
-                  </li>
-                )}
-                {frontmatter.github && frontmatter.github != '' && (
-                  <li id="github" className="social">
-                    <a
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      href={'https://www.github.com/' + frontmatter.github}
-                    >
-                      GitHub
-                    </a>
-                  </li>
-                )}
-              </ul>
+              </h4>
+              {!!frontmatter.qualifications && (
+                <strong className="hidden lg:block">
+                  {frontmatter.qualifications}
+                </strong>
+              )}
+              {((advancedSkills && !!advancedSkills.length) ||
+                (intermediateSkills && !!intermediateSkills.length)) && (
+                <>
+                  <hr />
+
+                  <h4 className="text-ssw-red mb-0">Skills:</h4>
+                  <span>
+                    {advancedSkills.map((skill, i, arr) => (
+                      <strong key={`advancedSkill-${i}`}>
+                        {skill}
+                        {(i !== arr.length - 1 ||
+                          (i === arr.length - 1 &&
+                            intermediateSkills.length > 0)) && (
+                          <span className="skill-separator"> | </span>
+                        )}
+                      </strong>
+                    ))}
+                    {intermediateSkills.map((skill, i, arr) => (
+                      <span key={`intermediateSkill-${i}`}>
+                        {skill}
+                        {i !== arr.length - 1 && (
+                          <span className="skill-separator"> | </span>
+                        )}
+                      </span>
+                    ))}
+                  </span>
+                  <hr />
+                </>
+              )}
+              <div
+                className="profile-content"
+                dangerouslySetInnerHTML={{
+                  __html: profileHtml,
+                }}
+              />
+              <hr />
+              <Contact
+                onClick={() => onContactButtonClick()}
+                profileName={frontmatter.nickname}
+              />
+              <Modal
+                isOpen={displayContactForm}
+                contentLabel="Contact Form"
+                className="modal"
+              >
+                <ContactForm
+                  profileName={frontmatter.name}
+                  onClose={() => setdisplayContactForm(false)}
+                />
+              </Modal>
             </div>
           </div>
         </div>
-        <div className="sm:w-full lg:w-3/4 xl:w-5/6">
-          <div className="person-description md:pl-4">
-            <h1 className="hidden lg:inline">{personName}</h1> {playContext}
-            <h4 className="hidden lg:block mb-0">
-              {frontmatter.role}
-              {!!crmData.location && (
-                <span className="ml-2">
-                  <FontAwesomeIcon icon={faMapMarkerAlt} /> {crmData.location}
-                </span>
-              )}
-            </h4>
-            {!!frontmatter.qualifications && (
-              <strong className="hidden lg:block">
-                {frontmatter.qualifications}
-              </strong>
-            )}
-            {((advancedSkills && !!advancedSkills.length) ||
-              (intermediateSkills && !!intermediateSkills.length)) && (
-              <>
-                <hr />
-
-                <h4 className="text-ssw-red mb-0">Skills:</h4>
-                <span>
-                  {advancedSkills.map((skill, i, arr) => (
-                    <strong key={`advancedSkill-${i}`}>
-                      {skill}
-                      {(i !== arr.length - 1 ||
-                        (i === arr.length - 1 &&
-                          intermediateSkills.length > 0)) && (
-                        <span className="skill-separator"> | </span>
-                      )}
-                    </strong>
-                  ))}
-                  {intermediateSkills.map((skill, i, arr) => (
-                    <span key={`intermediateSkill-${i}`}>
-                      {skill}
-                      {i !== arr.length - 1 && (
-                        <span className="skill-separator"> | </span>
-                      )}
-                    </span>
-                  ))}
-                </span>
-                <hr />
-              </>
-            )}
-            <div
-              className="profile-content"
-              dangerouslySetInnerHTML={{
-                __html: profileHtml,
-              }}
-            />
-            <hr />
-            <Contact
-              onClick={() => onContactButtonClick()}
-              profileName={frontmatter.nickname}
-            />
-            <Modal
-              isOpen={displayContactForm}
-              contentLabel="Contact Form"
-              className="modal"
-            >
-              <ContactForm
-                profileName={frontmatter.name}
-                onClose={() => setdisplayContactForm(false)}
-              />
-            </Modal>
-          </div>
-        </div>
-      </div>
-    </Layout>
+      </Layout>
     </>
   );
 };
