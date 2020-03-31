@@ -6,6 +6,7 @@ import { faMapMarkerAlt, faVolumeUp } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { config } from '@fortawesome/fontawesome-svg-core';
 import '@fortawesome/fontawesome-svg-core/styles.css';
+import YoutubePlaylist from '../components/profile-youtube-playlist/profile-youtube-playlist';
 import Contact from '../components/contact/contact';
 import ContactForm from '../components/contact-form/contact-form';
 import Modal from 'react-modal';
@@ -33,6 +34,9 @@ const Person = ({
     : frontmatter.name;
   const [displayContactForm, setdisplayContactForm] = useState(false);
   const profileAudio = data.profileAudio.nodes[0];
+
+  //TODO: Fix crmData value
+  const youtubePlayListVideos = ['KCSyRO0KotA', 'LG1DHMNT0TA', 'SdXj-2IHhiA', '6nYefHkKby8', 'JicAk7zDcSA'];
 
   const onContactButtonClick = () => {
     setdisplayContactForm(!displayContactForm);
@@ -309,6 +313,9 @@ const Person = ({
                 dangerouslySetInnerHTML={{
                   __html: profileHtml,
                 }}
+              />
+              <YoutubePlaylist
+                playListIds={youtubePlayListVideos}
               />
               <hr />
               <Contact
