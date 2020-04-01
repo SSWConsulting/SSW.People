@@ -34,9 +34,7 @@ const Person = ({
     : frontmatter.name;
   const [displayContactForm, setdisplayContactForm] = useState(false);
   const profileAudio = data.profileAudio.nodes[0];
-
-  //TODO: Fix crmData value
-  const youtubePlayListVideos = ['KCSyRO0KotA', 'LG1DHMNT0TA', 'SdXj-2IHhiA', '6nYefHkKby8', 'JicAk7zDcSA'];
+  const youtubePlayListId = crmData.youtubePlayListId;
 
   const onContactButtonClick = () => {
     setdisplayContactForm(!displayContactForm);
@@ -315,7 +313,7 @@ const Person = ({
                 }}
               />
               <YoutubePlaylist
-                playListIds={youtubePlayListVideos}
+                youtubePlayListId={youtubePlayListId}
               />
               <hr />
               <Contact
@@ -405,6 +403,7 @@ export const query = graphql`
       }
       location: location
       emailAddress: emailAddress
+      youtubePlayListId: youtubePlayListId
     }
   }
 `;

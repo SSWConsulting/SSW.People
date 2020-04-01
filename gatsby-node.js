@@ -48,8 +48,6 @@ exports.sourceNodes = async ({ actions }) => {
     },
   });
 
- 
-
   crmDataResult.data.map(user => {
     const userNode = {
       id: user.userId,
@@ -72,24 +70,8 @@ exports.sourceNodes = async ({ actions }) => {
           .filter(s => s.experienceLevel === 'Advanced')
           .map(s => s.technology),
       },
-
-      //TODO: Fix crm value
-      youtubePlayListId: 'PLO0Fq_pphtfEHluXtyaX-IYy4vV2QxYeS',
-      youtubePlayListVideos: ['KCSyRO0KotA', 'LG1DHMNT0TA', 'SdXj-2IHhiA', '6nYefHkKby8', 'JicAk7zDcSA'],
+      youtubePlayListId: 'PLO0Fq_pphtfEHluXtyaX-IYy4vV2QxYeS', //TODO: integrate with CRM data
     };
-
-    //Get youTube Playlist for User
-    /*
-    const youtubeDataResult = await axios({
-      method: 'get',
-      url: 'https://www.googleapis.com/youtube/v3/playlistItems?part=contentDetails&maxResults=50&playlistId=PLO0Fq_pphtfEHluXtyaX-IYy4vV2QxYeS&key={Access_Key}}',
-      data: {},
-      headers: {},
-    });
-*/
-
-    //Add youtubePlaylist to user data
-    //userNode.youtubePlayListVideos = ['KCSyRO0KotA', 'LG1DHMNT0TA', 'SdXj-2IHhiA', '6nYefHkKby8', 'JicAk7zDcSA'];
 
     // Get content digest of node. (Required field)
     const contentDigest = crypto
