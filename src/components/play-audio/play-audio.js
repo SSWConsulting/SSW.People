@@ -33,10 +33,9 @@ const PlayAudio = ({ hasAnimation, audioSrc }) => {
       lottie.play();
     }
   };
-  const stopAudio = () => {
+  const pauseAudio = () => {
     setIsPlaying(false);
     audio.pause();
-    audio.currentTime = 0;
     if (hasAnimation) {
       lottie.stop();
     }
@@ -67,7 +66,7 @@ const PlayAudio = ({ hasAnimation, audioSrc }) => {
               aria-label="pause audio"
               className={'cursor-pointer mr-2'}
               onClick={() => {
-                stopAudio();
+                pauseAudio();
               }}
             />
           )}
@@ -110,7 +109,7 @@ const PlayAudio = ({ hasAnimation, audioSrc }) => {
               aria-label="pause audio"
               className={'cursor-pointer h-3'}
               onClick={() => {
-                stopAudio();
+                pauseAudio();
               }}
             />
           )}
