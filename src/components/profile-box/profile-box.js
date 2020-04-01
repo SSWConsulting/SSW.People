@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'gatsby';
 import Img from 'gatsby-image';
 import PropTypes from 'prop-types';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faVolumeUp } from '@fortawesome/free-solid-svg-icons';
+import PlayIcon from '-!svg-react-loader!../../images/SSWPlay2x.svg';
+import PauseIcon from '-!svg-react-loader!../../images/SSWPause2x.svg';
 
 const ProfileBox = ({
   profile,
@@ -18,28 +18,28 @@ const ProfileBox = ({
     ? profile.nickname
     : profile.name.split(' ')[0];
   const [audio, setAudio] = useState({});
-  const [isPlaying, setIsPlaying] = useState(false);
 
-  const playAudio = srcAudio => {
-    audio.src = srcAudio;
-    audio.load();
-    audio.play();
-    setIsPlaying(
-      audio.currentTime > 0 &&
-        !audio.paused &&
-        !audio.ended &&
-        audio.readyState > 2
-    );
-  };
-  const stopAudio = () => {
-    if (isPlaying) {
-      audio.pause();
-      audio.currentTime = 0;
-    }
-  };
   useEffect(() => {
     setAudio(new Audio());
   }, []);
+
+  const [isPlaying, setIsPlaying] = useState(false);
+
+  const playAudio = srcAudio => {
+    setIsPlaying(true);
+    audio.src = srcAudio;
+    audio.play();
+  };
+  const stopAudio = () => {
+    setIsPlaying(false);
+    audio.pause();
+    audio.currentTime = 0;
+  };
+
+  audio.onended = () => {
+    setIsPlaying(false);
+  };
+
   const content = profileImages.profileImage !== undefined && (
     <div
       className="relative shadow-lg profile-image"
@@ -97,27 +97,34 @@ const ProfileBox = ({
         style={profileAudio ? {} : { display: 'none' }}
         className={
           hoverAudio
-            ? 'absolute top-0 right-0 p-1 hovered'
-            : 'absolute top-0 right-0 p-1 bg-ssw-dark-grey'
+            ? 'absolute top-0 right-0 p-2 hovered'
+            : 'absolute top-0 right-0 p-2 audio-div-dark-translucent'
         }
+        onMouseEnter={() => {
+          setHoverAudio(true);
+        }}
+        onMouseLeave={() => {
+          setHoverAudio(false);
+        }}
       >
-        <FontAwesomeIcon
-          icon={faVolumeUp}
-          size="sm"
-          className={'mr-1 ml-1 cursor-pointer'}
-          onClick={() => {
-            if (profileAudio) {
-              stopAudio();
+        {!isPlaying && (
+          <PlayIcon
+            aria-label="play audio"
+            className={'cursor-pointer h-3'}
+            onClick={() => {
               playAudio(profileAudio);
-            }
-          }}
-          onMouseEnter={() => {
-            setHoverAudio(true);
-          }}
-          onMouseLeave={() => {
-            setHoverAudio(false);
-          }}
-        />
+            }}
+          />
+        )}
+        {isPlaying && (
+          <PauseIcon
+            aria-label="pause audio"
+            className={'cursor-pointer h-3'}
+            onClick={() => {
+              stopAudio();
+            }}
+          />
+        )}
       </div>
     </div>
   );
