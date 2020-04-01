@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'gatsby';
 import Img from 'gatsby-image';
 import PropTypes from 'prop-types';
-import PlayIcon from '-!svg-react-loader!../../images/SSWPlay2x.svg';
-import PauseIcon from '-!svg-react-loader!../../images/SSWPause2x.svg';
+import PlayAudio from '../play-audio/play-audio';
 
 const ProfileBox = ({
   profile,
@@ -13,32 +12,9 @@ const ProfileBox = ({
   profileAudio,
 }) => {
   const [hover, setHover] = useState(false);
-  const [hoverAudio, setHoverAudio] = useState(false);
   const tileName = profile.nickname
     ? profile.nickname
     : profile.name.split(' ')[0];
-  const [audio, setAudio] = useState({});
-
-  useEffect(() => {
-    setAudio(new Audio());
-  }, []);
-
-  const [isPlaying, setIsPlaying] = useState(false);
-
-  const playAudio = srcAudio => {
-    setIsPlaying(true);
-    audio.src = srcAudio;
-    audio.play();
-  };
-  const stopAudio = () => {
-    setIsPlaying(false);
-    audio.pause();
-    audio.currentTime = 0;
-  };
-
-  audio.onended = () => {
-    setIsPlaying(false);
-  };
 
   const content = profileImages.profileImage !== undefined && (
     <div
@@ -68,20 +44,6 @@ const ProfileBox = ({
     </div>
   );
 
-  const linkContext = profile.alternativeUrl ? (
-    <a href={profile.alternativeUrl}>{content}</a>
-  ) : (
-    <Link
-      to={`/${
-        profile.nickname
-          ? sanitisedNickname.toLowerCase()
-          : sanitisedName.toLowerCase()
-      }`}
-    >
-      {content}
-    </Link>
-  );
-
   return (
     <div
       className="w-full flex-profile-box unstyled relative"
@@ -92,40 +54,24 @@ const ProfileBox = ({
         setHover(false);
       }}
     >
-      {linkContext}
-      <div
-        style={profileAudio ? {} : { display: 'none' }}
-        className={
-          hoverAudio
-            ? 'absolute top-0 right-0 p-2 hovered'
-            : 'absolute top-0 right-0 p-2 audio-div-dark-translucent'
-        }
-        onMouseEnter={() => {
-          setHoverAudio(true);
-        }}
-        onMouseLeave={() => {
-          setHoverAudio(false);
-        }}
-      >
-        {!isPlaying && (
-          <PlayIcon
-            aria-label="play audio"
-            className={'cursor-pointer h-3'}
-            onClick={() => {
-              playAudio(profileAudio);
-            }}
-          />
-        )}
-        {isPlaying && (
-          <PauseIcon
-            aria-label="pause audio"
-            className={'cursor-pointer h-3'}
-            onClick={() => {
-              stopAudio();
-            }}
-          />
-        )}
-      </div>
+      {profile.alternativeUrl ? (
+        <a href={profile.alternativeUrl}>{content}</a>
+      ) : (
+        <Link
+          to={`/${
+            profile.nickname
+              ? sanitisedNickname.toLowerCase()
+              : sanitisedName.toLowerCase()
+          }`}
+        >
+          {content}
+        </Link>
+      )}
+      {profileAudio ? (
+        <PlayAudio hasAnimation={false} audioSrc={profileAudio} />
+      ) : (
+        ''
+      )}
     </div>
   );
 };
