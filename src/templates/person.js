@@ -11,10 +11,6 @@ import ContactForm from '../components/contact-form/contact-form';
 import Modal from 'react-modal';
 import MobileMenu from '../components/megamenu/mobile-menu';
 import PlayAudio from '../components/play-audio/play-audio';
-// import PlayIcon from '-!svg-react-loader!../images/SSWPlay2x.svg';
-// import PauseIcon from '-!svg-react-loader!../images/SSWPause2x.svg';
-// import lottie from 'lottie-web';
-// import animation from '../animations/lf30_editor_DirdRw.json';
 
 config.autoAddCss = false;
 
@@ -76,70 +72,6 @@ const Person = ({
     e.preventDefault();
     window.location.href = 'mailTo:' + decodeEmail(encodedEmailAddress);
   };
-
-  // const animationContainer = createRef();
-  // const [audio, setAudio] = useState({});
-
-  // useEffect(() => {
-  //   setAudio(new Audio());
-  //   lottie.loadAnimation({
-  //     container: animationContainer.current,
-  //     render: 'svg',
-  //     loop: true,
-  //     animationData: animation,
-  //   });
-  //   lottie.stop();
-  //   return () => lottie.destroy();
-  // }, []);
-
-  // const [isPlaying, setIsPlaying] = useState(false);
-
-  // const playAudio = srcAudio => {
-  //   setIsPlaying(true);
-  //   audio.src = srcAudio;
-  //   audio.play();
-  //   lottie.play();
-  // };
-  // const stopAudio = () => {
-  //   setIsPlaying(false);
-  //   audio.pause();
-  //   audio.currentTime = 0;
-  //   lottie.stop();
-  // };
-
-  // audio.onended = () => {
-  //   setIsPlaying(false);
-  //   lottie.stop();
-  // };
-
-  // const playContext = profileAudio ? (
-  //   <div className={'pt-1 pl-2 flex'}>
-  //     {!isPlaying && (
-  //       <PlayIcon
-  //         aria-label="play audio"
-  //         className={'cursor-pointer mr-2'}
-  //         onClick={() => {
-  //           playAudio(profileAudio.publicURL);
-  //         }}
-  //       />
-  //     )}
-  //     {isPlaying && (
-  //       <PauseIcon
-  //         aria-label="pause audio"
-  //         className={'cursor-pointer mr-2'}
-  //         onClick={() => {
-  //           stopAudio();
-  //         }}
-  //       />
-  //     )}
-  //     <div className={'overflow-hidden relative'} style={{height:'20px', width: '70%'}}>
-  //       <div ref={animationContainer} className={'absolute'}style={{top: '-54px'}}></div>
-  //     </div>
-  //   </div>
-
-  // ) : (
-  //   ''
-  // );
 
   return (
     <>
