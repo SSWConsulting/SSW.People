@@ -234,7 +234,8 @@ ul.favor-list li {
 
 .breadcrumb-container{
   font-size: 0.8rem;
-  color: "#5b5656";
+  color: #5b5656;
+  margin-top: 1rem;
 }
 
 .breadcrumb {
