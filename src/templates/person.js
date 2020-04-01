@@ -1,6 +1,6 @@
 import { graphql } from 'gatsby';
 import PropTypes from 'prop-types';
-import React, { useState, useEffect, createRef } from 'react';
+import React, { useState } from 'react';
 import Layout from '../components/layout';
 import { faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -9,7 +9,6 @@ import '@fortawesome/fontawesome-svg-core/styles.css';
 import Contact from '../components/contact/contact';
 import ContactForm from '../components/contact-form/contact-form';
 import Modal from 'react-modal';
-import MobileMenu from '../components/megamenu/mobile-menu';
 import PlayAudio from '../components/play-audio/play-audio';
 
 config.autoAddCss = false;
@@ -75,7 +74,6 @@ const Person = ({
 
   return (
     <>
-      <MobileMenu></MobileMenu>
       <Layout
         crumbs={crumbs}
         crumbLabel={personName}
@@ -108,7 +106,10 @@ const Person = ({
                       alt="Profile"
                     />
                     {profileAudio ? (
-                      <PlayAudio hasAnimation={true} audioSrc={profileAudio.publicURL} />
+                      <PlayAudio
+                        hasAnimation={true}
+                        audioSrc={profileAudio.publicURL}
+                      />
                     ) : (
                       ''
                     )}

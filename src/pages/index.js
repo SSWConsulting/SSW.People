@@ -18,7 +18,6 @@ import 'array-flat-polyfill';
 import { config } from '@fortawesome/fontawesome-svg-core';
 import '@fortawesome/fontawesome-svg-core/styles.css';
 import ProfileSort from '../helpers/profileSort';
-import MobileMenu from '../components/megamenu/mobile-menu';
 
 config.autoAddCss = false;
 
@@ -83,7 +82,6 @@ const Index = ({
 
   return (
     <>
-      <MobileMenu></MobileMenu>
       <Layout crumbs={crumbs} displayActions={false}>
         <div
           className="hero-para mx-6"
