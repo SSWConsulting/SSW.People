@@ -7,7 +7,15 @@ const Menu = () => {
   const registerEvents = () => {
     if (!registered) {
       setRegistered(true);
-      menu.registerEvents();
+      menu.registerEvents('content', mobileMenuOpeningCallBack);
+    }
+  };
+
+  const mobileMenuOpeningCallBack = open => {
+    if (open) {
+      document.getElementById('mobilescroll').style.overflow = 'hidden';
+    } else {
+      document.getElementById('mobilescroll').style.overflow = 'auto';
     }
   };
 
