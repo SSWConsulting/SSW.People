@@ -7,7 +7,7 @@ const initFilter = (
   selectedVaules,
   onFilterChange
 ) => {
-  if (!urlFilter){
+  if (!urlFilter) {
     return;
   }
   let filterArray = urlFilter ? urlFilter : [];
