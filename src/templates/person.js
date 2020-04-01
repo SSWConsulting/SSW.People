@@ -10,7 +10,6 @@ import YoutubePlaylist from '../components/profile-youtube-playlist/profile-yout
 import Contact from '../components/contact/contact';
 import ContactForm from '../components/contact-form/contact-form';
 import Modal from 'react-modal';
-import MobileMenu from '../components/megamenu/mobile-menu';
 
 config.autoAddCss = false;
 
@@ -121,7 +120,6 @@ const Person = ({
 
   return (
     <>
-      <MobileMenu></MobileMenu>
       <Layout
         crumbs={crumbs}
         crumbLabel={personName}

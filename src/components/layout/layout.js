@@ -8,6 +8,7 @@ import '../../style.css';
 import Breadcrumbs from '../breadcrumb/breadcrumb';
 import GoogleAnalytics from '../google-analytics/google-analytics';
 import Menu from '../megamenu/menu';
+import MobileMenu from '../megamenu/mobile-menu';
 
 const Layout = ({
   children,
@@ -17,21 +18,24 @@ const Layout = ({
   crumbs,
   crumbLabel,
 }) => (
-  <>
-    <div className="flex flex-col min-h-screen main-container">
-      <Head pageTitle={pageTitle} />
-      <Header displayActions={displayActions} profileId={profileId} />
-      <GoogleAnalytics pageTitle={pageTitle}></GoogleAnalytics>
-      <Menu></Menu>
-      {crumbs ? (
-        <Breadcrumbs crumbs={crumbs} crumbLabel={crumbLabel} />
-      ) : (
-        <div></div>
-      )}
-      <main className="flex-1 mx-auto">{children}</main>
+  <div id="mobilescroll">
+    <div id="content">
+      <div className="flex flex-col min-h-screen main-container">
+        <Head pageTitle={pageTitle} />
+        <Header displayActions={displayActions} profileId={profileId} />
+        <GoogleAnalytics pageTitle={pageTitle}></GoogleAnalytics>
+        <Menu></Menu>
+        {crumbs ? (
+          <Breadcrumbs crumbs={crumbs} crumbLabel={crumbLabel} />
+        ) : (
+          <div></div>
+        )}
+        <main className="flex-1 mx-auto">{children}</main>
+      </div>
+      <Footer />
     </div>
-    <Footer />
-  </>
+    <MobileMenu></MobileMenu>
+  </div>
 );
 
 Layout.propTypes = {

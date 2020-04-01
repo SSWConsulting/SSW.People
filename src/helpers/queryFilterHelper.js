@@ -7,6 +7,9 @@ const initFilter = (
   selectedVaules,
   onFilterChange
 ) => {
+  if (!urlFilter) {
+    return;
+  }
   let filterArray = urlFilter ? urlFilter : [];
   if (typeof filterArray == 'string') filterArray = [filterArray];
   filterArray.forEach(sk => {
