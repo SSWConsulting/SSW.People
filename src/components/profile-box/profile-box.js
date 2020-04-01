@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'gatsby';
 import Img from 'gatsby-image';
 import PropTypes from 'prop-types';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faVolumeUp } from '@fortawesome/free-solid-svg-icons';
+import PlayAudio from '../play-audio/play-audio';
 
 const ProfileBox = ({
   profile,
@@ -13,33 +12,10 @@ const ProfileBox = ({
   profileAudio,
 }) => {
   const [hover, setHover] = useState(false);
-  const [hoverAudio, setHoverAudio] = useState(false);
   const tileName = profile.nickname
     ? profile.nickname
     : profile.name.split(' ')[0];
-  const [audio, setAudio] = useState({});
-  const [isPlaying, setIsPlaying] = useState(false);
 
-  const playAudio = srcAudio => {
-    audio.src = srcAudio;
-    audio.load();
-    audio.play();
-    setIsPlaying(
-      audio.currentTime > 0 &&
-        !audio.paused &&
-        !audio.ended &&
-        audio.readyState > 2
-    );
-  };
-  const stopAudio = () => {
-    if (isPlaying) {
-      audio.pause();
-      audio.currentTime = 0;
-    }
-  };
-  useEffect(() => {
-    setAudio(new Audio());
-  }, []);
   const content = profileImages.profileImage !== undefined && (
     <div
       className="relative shadow-lg profile-image"
@@ -68,20 +44,6 @@ const ProfileBox = ({
     </div>
   );
 
-  const linkContext = profile.alternativeUrl ? (
-    <a href={profile.alternativeUrl}>{content}</a>
-  ) : (
-    <Link
-      to={`/${
-        profile.nickname
-          ? sanitisedNickname.toLowerCase()
-          : sanitisedName.toLowerCase()
-      }`}
-    >
-      {content}
-    </Link>
-  );
-
   return (
     <div
       className="w-full flex-profile-box unstyled relative"
@@ -92,33 +54,24 @@ const ProfileBox = ({
         setHover(false);
       }}
     >
-      {linkContext}
-      <div
-        style={profileAudio ? {} : { display: 'none' }}
-        className={
-          hoverAudio
-            ? 'absolute top-0 right-0 p-1 hovered'
-            : 'absolute top-0 right-0 p-1 bg-ssw-dark-grey'
-        }
-      >
-        <FontAwesomeIcon
-          icon={faVolumeUp}
-          size="sm"
-          className={'mr-1 ml-1 cursor-pointer'}
-          onClick={() => {
-            if (profileAudio) {
-              stopAudio();
-              playAudio(profileAudio);
-            }
-          }}
-          onMouseEnter={() => {
-            setHoverAudio(true);
-          }}
-          onMouseLeave={() => {
-            setHoverAudio(false);
-          }}
-        />
-      </div>
+      {profile.alternativeUrl ? (
+        <a href={profile.alternativeUrl}>{content}</a>
+      ) : (
+        <Link
+          to={`/${
+            profile.nickname
+              ? sanitisedNickname.toLowerCase()
+              : sanitisedName.toLowerCase()
+          }`}
+        >
+          {content}
+        </Link>
+      )}
+      {profileAudio ? (
+        <PlayAudio hasAnimation={false} audioSrc={profileAudio} />
+      ) : (
+        ''
+      )}
     </div>
   );
 };
