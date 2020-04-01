@@ -310,9 +310,7 @@ const Person = ({
                   __html: profileHtml,
                 }}
               />
-              <YoutubePlaylist
-                youtubePlayListId={youtubePlayListId}
-              />
+              <YoutubePlaylist youtubePlayListId={youtubePlayListId} />
               <hr />
               <Contact
                 onClick={() => onContactButtonClick()}
