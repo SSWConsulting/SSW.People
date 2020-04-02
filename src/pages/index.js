@@ -6,7 +6,6 @@ import PropTypes from 'prop-types';
 import { StaticQuery, graphql } from 'gatsby';
 import { Location } from '@reach/router';
 import queryString from 'query-string';
-//import { createBrowserHistory } from 'history';
 import Layout from 'components/layout';
 import ProfileList from 'components/profile-list';
 import LocationFilter from '../components/location-filter/location-filter';
