@@ -28,11 +28,13 @@ const Person = ({
   const intermediateSkills = skills.intermediateSkills || [];
   const advancedSkills = skills.advancedSkills || [];
   const profileImage = data.profileImage.nodes[0];
+  const sketchImage = data.sketchImage.nodes[0];
   const personName = frontmatter.nickname
     ? `${frontmatter.name} (${frontmatter.nickname})`
     : frontmatter.name;
   const [displayContactForm, setdisplayContactForm] = useState(false);
   const profileAudio = data.profileAudio.nodes[0];
+  const [hover, setHover] = useState(false);
 
   const onContactButtonClick = () => {
     setdisplayContactForm(!displayContactForm);
@@ -83,7 +85,7 @@ const Person = ({
       >
         <div className="flex flex-wrap mb-5 md:mx-2 person-content">
           <div className="sm:w-full lg:w-1/4 xl:w-1/6">
-            {!!profileImage && (
+            {!!profileImage && !!sketchImage && (
               <>
                 <div className="person-description lg:hidden w-full my-auto">
                   <h1 className="inline">{personName}</h1>
@@ -99,10 +101,22 @@ const Person = ({
                   )}
                 </div>
                 <div className="flex profile-image-quote">
-                  <div className="image-bg text-center">
+                  <div
+                    className="image-bg text-center"
+                    onMouseEnter={() => {
+                      setHover(true);
+                    }}
+                    onMouseLeave={() => {
+                      setHover(false);
+                    }}
+                  >
                     <img
                       className="profile-image relative bg-cover mx-auto"
-                      src={profileImage.childImageSharp.original.src}
+                      src={
+                        hover
+                          ? sketchImage.childImageSharp.original.src
+                          : profileImage.childImageSharp.original.src
+                      }
                       alt="Profile"
                     />
                     {profileAudio ? (
@@ -303,7 +317,12 @@ Person.propTypes = {
 export default Person;
 
 export const query = graphql`
-  query($slug: String!, $squareImage: String!, $audio: String!) {
+  query(
+    $slug: String!
+    $profileImage: String!
+    $sketchImage: String!
+    $audio: String!
+  ) {
     people: file(sourceInstanceName: { eq: "people" }, name: { eq: $slug }) {
       name
       childMarkdownRemark {
@@ -328,10 +347,27 @@ export const query = graphql`
         html
       }
     }
+    sketchImage: allFile(
+      filter: {
+        sourceInstanceName: { eq: "people" }
+        name: { glob: $sketchImage }
+      }
+    ) {
+      nodes {
+        name
+        childImageSharp {
+          original {
+            height
+            src
+            width
+          }
+        }
+      }
+    }
     profileImage: allFile(
       filter: {
         sourceInstanceName: { eq: "people" }
-        name: { glob: $squareImage }
+        name: { glob: $profileImage }
       }
     ) {
       nodes {
