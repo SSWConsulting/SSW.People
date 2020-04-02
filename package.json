@@ -55,6 +55,7 @@
     "gatsby-transformer-sharp": "^2.4.3",
     "history": "^4.10.1",
     "intersection-observer": "^0.7.0",
+    "lottie-web": "^5.6.7",
     "postcss-import": "^12.0.1",
     "postcss-nested": "^4.2.1",
     "preval.macro": "^4.0.0",

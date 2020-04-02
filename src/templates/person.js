@@ -1,8 +1,8 @@
 import { graphql } from 'gatsby';
 import PropTypes from 'prop-types';
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Layout from '../components/layout';
-import { faMapMarkerAlt, faVolumeUp } from '@fortawesome/free-solid-svg-icons';
+import { faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { config } from '@fortawesome/fontawesome-svg-core';
 import '@fortawesome/fontawesome-svg-core/styles.css';
@@ -10,6 +10,7 @@ import YoutubePlaylist from '../components/profile-youtube-playlist/profile-yout
 import Contact from '../components/contact/contact';
 import ContactForm from '../components/contact-form/contact-form';
 import Modal from 'react-modal';
+import PlayAudio from '../components/play-audio/play-audio';
 
 config.autoAddCss = false;
 
@@ -73,51 +74,6 @@ const Person = ({
     window.location.href = 'mailTo:' + decodeEmail(encodedEmailAddress);
   };
 
-  const [audio, setAudio] = useState({});
-  const [isPlaying, setIsPlaying] = useState(false);
-
-  const playAudio = srcAudio => {
-    audio.src = srcAudio;
-    audio.load();
-    audio.play();
-    setIsPlaying(
-      audio.currentTime > 0 &&
-        !audio.paused &&
-        !audio.ended &&
-        audio.readyState > 2
-    );
-  };
-  const stopAudio = () => {
-    if (isPlaying) {
-      audio.pause();
-      audio.currentTime = 0;
-    }
-  };
-  useEffect(() => {
-    setAudio(new Audio());
-  }, []);
-
-  const playContext = profileAudio ? (
-    // eslint-disable-next-line jsx-a11y/no-static-element-interactions
-    <small
-      className={'cursor-pointer'}
-      onClick={() => {
-        stopAudio();
-        playAudio(profileAudio.publicURL);
-      }}
-      onKeyPress={() => {
-        // eslint-disable-next-line no-console
-        // console.log('play');
-      }}
-    >
-      (
-      <FontAwesomeIcon icon={faVolumeUp} size="sm" className={'mr-1 ml-1'} />
-      Listen)
-    </small>
-  ) : (
-    ''
-  );
-
   return (
     <>
       <Layout
@@ -132,7 +88,7 @@ const Person = ({
             {!!profileImage && (
               <>
                 <div className="person-description lg:hidden w-full my-auto">
-                  <h1 className="inline">{personName}</h1> {playContext}
+                  <h1 className="inline">{personName}</h1>
                   <h4 className="mb-0">{frontmatter.role}</h4>
                   {!!crmData.location && (
                     <h4 className="mb-0">
@@ -151,6 +107,14 @@ const Person = ({
                       src={profileImage.childImageSharp.original.src}
                       alt="Profile"
                     />
+                    {profileAudio ? (
+                      <PlayAudio
+                        hasAnimation={true}
+                        audioSrc={profileAudio.publicURL}
+                      />
+                    ) : (
+                      ''
+                    )}
                   </div>
                   {frontmatter.quote && (
                     <div className="w-full pr-2 lg:hidden quoteblock">
@@ -261,7 +225,7 @@ const Person = ({
           </div>
           <div className="sm:w-full lg:w-3/4 xl:w-5/6">
             <div className="person-description md:pl-4">
-              <h1 className="hidden lg:inline">{personName}</h1> {playContext}
+              <h1 className="hidden lg:inline">{personName}</h1>
               <h4 className="hidden lg:block mb-0">
                 {frontmatter.role}
                 {!!crmData.location && (
