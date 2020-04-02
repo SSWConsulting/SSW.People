@@ -277,6 +277,7 @@ ul.favor-list li {
 .hovered {
   @apply bg-ssw-red;
   color: #fff;
+  fill: #fff;
 }
 
 button:focus {
@@ -297,6 +298,11 @@ button:focus {
 
 .bg-ssw-dark-grey {
   background-color: #CCCCCC;
+}
+
+.audio-div-dark-translucent {
+  background-color: rgba(102, 102, 102, 0.2);
+  height: 30px;
 }
 
 .border-ssw-grey {
