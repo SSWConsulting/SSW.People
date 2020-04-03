@@ -1,22 +1,16 @@
 import { Helmet } from 'react-helmet';
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import Carousel from '@brainhubeu/react-carousel';
 import '@brainhubeu/react-carousel/lib/style.css';
 import PropTypes from 'prop-types';
 
-export default class YoutubePlaylist extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      error: null,
-      isLoaded: false,
-      items: [],
-    };
-  }
+const YoutubePlaylist = ({ youtubePlayListId }) => {
+  const [error, setError] = useState(null);
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [items, setItems] = useState([]);
 
-  componentDidMount() {
+  useEffect(() => {
     const youtubeApiKey = process.env.YOUTUBE_API_KEY;
-    const youtubePlayListId = this.props.youtubePlayListId;
 
     if (youtubePlayListId == '') {
       return null;
@@ -31,72 +25,67 @@ export default class YoutubePlaylist extends Component {
       .then(res => res.json())
       .then(
         result => {
-          this.setState({
-            isLoaded: true,
-            items: result.items,
-          });
+          setIsLoaded(true);
+          setItems(result.items);
         },
         error => {
-          this.setState({
-            isLoaded: true,
-            error,
-          });
+          setIsLoaded(true);
+          setError(error);
         }
       );
+  }, []);
+
+  if (error) {
+    return null;
+  } else if (!isLoaded) {
+    return <div></div>;
+  } else if (items == null) {
+    return null;
+  } else {
+    return (
+      <div className="container text-center my-3">
+        <Helmet
+          style={[
+            {
+              cssText: `
+              .BrainhubCarousel__arrows{
+                      background-color: #CC4141;
+              }
+
+              .BrainhubCarousel__arrows:hover{
+                      background-color: #CC4141;
+              }
+
+              .BrainhubCarousel__arrows:hover:enabled{
+                      background-color:#CC4141
+              }
+            `,
+            },
+          ]}
+        />
+        <Carousel slidesPerPage={3} slidesPerScroll={3} arrows infinite>
+          {items.map(item => (
+            <iframe
+              key={item.contentDetails.videoId}
+              title="1"
+              src={
+                'https://www.youtube-nocookie.com/embed/' +
+                item.contentDetails.videoId +
+                '?rel=0'
+              }
+              className="embedVideo-iframe"
+              allowFullScreen="allowfullscreen"
+              frameBorder="0"
+            ></iframe>
+          ))}
+        </Carousel>
+      </div>
+    );
   }
-
-  render() {
-    const { error, isLoaded, items } = this.state;
-    if (error) {
-      return null;
-    } else if (!isLoaded) {
-      return <div></div>;
-    } else if (items == null) {
-      return null;
-    } else {
-      return (
-        <div className="container text-center my-3">
-          <Helmet
-            style={[
-              {
-                cssText: `
-                .BrainhubCarousel__arrows{
-                        background-color: #CC4141;
-                }
-
-                .BrainhubCarousel__arrows:hover{
-                        background-color: #CC4141;
-                }
-
-                .BrainhubCarousel__arrows:hover:enabled{
-                        background-color:#CC4141
-                    }
-                `,
-              },
-            ]}
-          />
-          <Carousel slidesPerPage={3} slidesPerScroll={3} arrows infinite>
-            {items.map(item => (
-              <iframe
-                key={item.contentDetails.videoId}
-                title="1"
-                src={
-                  'https://www.youtube-nocookie.com/embed/' +
-                  item.contentDetails.videoId +
-                  '?rel=0'
-                }
-                className="embedVideo-iframe"
-                allowFullScreen="allowfullscreen"
-                frameBorder="0"
-              ></iframe>
-            ))}
-          </Carousel>
-        </div>
-      );
-    }
-  }
-}
+};
 
 YoutubePlaylist.propTypes = {
   youtubePlayListId: PropTypes.string.isRequired,
 };
+
+export default YoutubePlaylist;
