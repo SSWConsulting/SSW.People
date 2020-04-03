@@ -23,11 +23,19 @@ const Layout = ({
     <div id="content">
       <div className="flex flex-col min-h-screen main-container">
         <Head pageTitle={pageTitle} />
-        <Header displayActions={displayActions} profileId={profileId} locationOrigin={locationOrigin} />
+        <Header
+          displayActions={displayActions}
+          profileId={profileId}
+          locationOrigin={locationOrigin}
+        />
         <GoogleAnalytics pageTitle={pageTitle}></GoogleAnalytics>
         <Menu></Menu>
         {crumbs ? (
-          <Breadcrumbs crumbs={crumbs} crumbLabel={crumbLabel} locationOrigin={locationOrigin} />
+          <Breadcrumbs
+            crumbs={crumbs}
+            crumbLabel={crumbLabel}
+            locationOrigin={locationOrigin}
+          />
         ) : (
           <div></div>
         )}
