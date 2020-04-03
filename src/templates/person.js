@@ -18,6 +18,7 @@ const Person = ({
   pageContext: {
     breadcrumb: { crumbs },
   },
+  location: { origin },
 }) => {
   const person = data.people;
   const childMarkdownRemark = person.childMarkdownRemark || {};
@@ -80,6 +81,7 @@ const Person = ({
         pageTitle={childMarkdownRemark.frontmatter && personName}
         displayActions={true}
         profileId={person.name}
+        locationOrigin={origin}
       >
         <div className="flex flex-wrap mb-5 md:mx-2 person-content">
           <div className="sm:w-full lg:w-1/4 xl:w-1/6">
@@ -295,6 +297,7 @@ const Person = ({
 Person.propTypes = {
   data: PropTypes.object.isRequired,
   pageContext: PropTypes.object.isRequired,
+  location: PropTypes.object.isRequired,
 };
 
 export default Person;
