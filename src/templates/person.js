@@ -273,10 +273,7 @@ const Person = ({
                 }}
               />
               <hr />
-              <Contact
-                onClick={() => onContactButtonClick()}
-                profileName={frontmatter.nickname}
-              />
+              <Contact onClick={() => onContactButtonClick()} />
               <Modal
                 isOpen={displayContactForm}
                 contentLabel="Contact Form"
