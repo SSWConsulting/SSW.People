@@ -85,7 +85,7 @@ const Person = ({
       >
         <div className="flex flex-wrap mb-5 md:mx-2 person-content">
           <div className="sm:w-full lg:w-1/4 xl:w-1/6">
-            {!!profileImage && !!sketchImage && (
+            {!!profileImage && (
               <>
                 <div className="person-description lg:hidden w-full my-auto">
                   <h1 className="inline">{personName}</h1>
@@ -113,7 +113,7 @@ const Person = ({
                     <img
                       className="profile-image relative bg-cover mx-auto"
                       src={
-                        hover
+                        hover && !!sketchImage
                           ? sketchImage.childImageSharp.original.src
                           : profileImage.childImageSharp.original.src
                       }
