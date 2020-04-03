@@ -117,12 +117,13 @@ exports.createPages = async function({ actions, graphql }) {
     const prefix = isCurrent ? '' : 'previous-employees/';
     return {
       slug: slug,
-      squareImage: slug + '-Profile-Square',
       path: prefix + slug.toLowerCase(),
       nicknamePath: nickname
         ? prefix + nickname.replace(/ /g, '-').toLowerCase()
         : '',
       audio: slug + '-Audio',
+      profileImage: slug + '-Profile',
+      sketchImage: slug + '-Sketch',
     };
   });
 
@@ -132,10 +133,11 @@ exports.createPages = async function({ actions, graphql }) {
       component: require.resolve('./src/templates/person.js'),
       context: {
         slug: person.slug,
-        squareImage: person.squareImage,
         originalPath: person.path,
         nicknamePath: person.nicknamePath,
         audio: person.audio,
+        profileImage: person.profileImage,
+        sketchImage: person.sketchImage,
       },
     });
   });
