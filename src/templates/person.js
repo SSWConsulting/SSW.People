@@ -6,7 +6,7 @@ import { faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { config } from '@fortawesome/fontawesome-svg-core';
 import '@fortawesome/fontawesome-svg-core/styles.css';
-import YoutubePlaylist from '../components/profile-youtube-playlist/profile-youtube-playlist';
+import YoutubePlaylist from '../components/youtube-playlist/youtube-playlist';
 import Contact from '../components/contact/contact';
 import ContactForm from '../components/contact-form/contact-form';
 import Modal from 'react-modal';

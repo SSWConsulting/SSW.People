@@ -17,10 +17,7 @@ const YoutubePlaylist = ({ youtubePlayListId }) => {
     }
 
     fetch(
-      'https://www.googleapis.com/youtube/v3/playlistItems?part=contentDetails&maxResults=50&playlistId=' +
-        youtubePlayListId +
-        '&key=' +
-        youtubeApiKey
+      `https://www.googleapis.com/youtube/v3/playlistItems?part=contentDetails&maxResults=50&playlistId=${youtubePlayListId}&key=${youtubeApiKey}`
     )
       .then(res => res.json())
       .then(
@@ -68,11 +65,7 @@ const YoutubePlaylist = ({ youtubePlayListId }) => {
             <iframe
               key={item.contentDetails.videoId}
               title="1"
-              src={
-                'https://www.youtube-nocookie.com/embed/' +
-                item.contentDetails.videoId +
-                '?rel=0'
-              }
+              src={`https://www.youtube-nocookie.com/embed/${item.contentDetails.videoId}?rel=0`}
               className="embedVideo-iframe"
               allowFullScreen="allowfullscreen"
               frameBorder="0"
