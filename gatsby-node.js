@@ -70,7 +70,6 @@ exports.sourceNodes = async ({ actions }) => {
           .filter(s => s.experienceLevel === 'Advanced')
           .map(s => s.technology),
       },
-      youtubePlayListId: 'PLO0Fq_pphtfEHluXtyaX-IYy4vV2QxYeS', //TODO: integrate with CRM data
     };
 
     // Get content digest of node. (Required field)

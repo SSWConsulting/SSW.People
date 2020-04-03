@@ -34,7 +34,6 @@ const Person = ({
     : frontmatter.name;
   const [displayContactForm, setdisplayContactForm] = useState(false);
   const profileAudio = data.profileAudio.nodes[0];
-  const youtubePlayListId = crmData.youtubePlayListId;
 
   const onContactButtonClick = () => {
     setdisplayContactForm(!displayContactForm);
@@ -274,7 +273,9 @@ const Person = ({
                   __html: profileHtml,
                 }}
               />
-              <YoutubePlaylist youtubePlayListId={youtubePlayListId} />
+              <YoutubePlaylist
+                youtubePlayListId={frontmatter.youtubePlayListId}
+              />
               <hr />
               <Contact
                 onClick={() => onContactButtonClick()}
@@ -327,6 +328,7 @@ export const query = graphql`
           twitter
           website
           github
+          youtubePlayListId
         }
         html
       }
@@ -363,7 +365,6 @@ export const query = graphql`
       }
       location: location
       emailAddress: emailAddress
-      youtubePlayListId: youtubePlayListId
     }
   }
 `;

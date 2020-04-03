@@ -48,9 +48,11 @@ export default class YoutubePlaylist extends Component {
   render() {
     const { error, isLoaded, items } = this.state;
     if (error) {
-      return <div>Error: {error.message}</div>;
+      return null;
     } else if (!isLoaded) {
       return <div></div>;
+    } else if (items == null) {
+      return null;
     } else {
       return (
         <div className="container text-center my-3">
