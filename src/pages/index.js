@@ -25,6 +25,7 @@ const Index = ({
   pageContext: {
     breadcrumb: { crumbs },
   },
+  location: { origin },
 }) => {
   //const history = typeof window !== 'undefined' ? createBrowserHistory() : null;
   const allPeople = useMemo(() => buildPeople(data), [data]);
@@ -81,7 +82,7 @@ const Index = ({
 
   return (
     <>
-      <Layout crumbs={crumbs} displayActions={false}>
+      <Layout crumbs={crumbs} displayActions={false} locationOrigin={origin}>
         <div
           className="hero-para mx-6"
           dangerouslySetInnerHTML={{
@@ -133,6 +134,7 @@ Index.propTypes = {
   data: PropTypes.object.isRequired,
   search: PropTypes.object.isRequired,
   pageContext: PropTypes.object.isRequired,
+  location: PropTypes.object.isRequired,
 };
 
 function buildPeople(data) {

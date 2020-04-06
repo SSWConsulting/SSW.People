@@ -17,16 +17,25 @@ const Layout = ({
   pageTitle,
   crumbs,
   crumbLabel,
+  locationOrigin,
 }) => (
   <div id="mobilescroll">
     <div id="content">
       <div className="flex flex-col min-h-screen main-container">
         <Head pageTitle={pageTitle} />
-        <Header displayActions={displayActions} profileId={profileId} />
+        <Header
+          displayActions={displayActions}
+          profileId={profileId}
+          locationOrigin={locationOrigin}
+        />
         <GoogleAnalytics pageTitle={pageTitle}></GoogleAnalytics>
         <Menu></Menu>
         {crumbs ? (
-          <Breadcrumbs crumbs={crumbs} crumbLabel={crumbLabel} />
+          <Breadcrumbs
+            crumbs={crumbs}
+            crumbLabel={crumbLabel}
+            locationOrigin={locationOrigin}
+          />
         ) : (
           <div></div>
         )}
@@ -46,6 +55,7 @@ Layout.propTypes = {
   pageTitle: PropTypes.string,
   crumbs: PropTypes.array,
   crumbLabel: PropTypes.string,
+  locationOrigin: PropTypes.string.isRequired,
 };
 
 const LayoutWithQuery = props => (

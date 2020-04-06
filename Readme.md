@@ -20,6 +20,7 @@ This is a Gatsby generated site pulling data from:
 SOPHIE_API_URL=
 SOPHIE_AUTHORIZATION=
 SOPHIE_TENANT=
+YOUTUBE_API_KEY=
 VERSION_DEPLOYED=
 ```
 
