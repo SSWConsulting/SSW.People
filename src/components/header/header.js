@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'gatsby';
 import posed from 'react-pose';
 import SSWLogo from '-!svg-react-loader!../../images/SSWLogo.svg';
 import GitHubIcon from '-!svg-react-loader!../../images/github.svg';
@@ -22,15 +21,15 @@ const AnimatedContainer = posed.div({
   },
 });
 
-const Header = ({ displayActions, profileId }) => {
+const Header = ({ displayActions, profileId, locationOrigin }) => {
   return (
     <AnimatedContainer>
       <header>
         <div className="flex mx-6 mt-4 mb-6">
           <div className="flex items-center">
-            <Link to="/" className="unstyled">
+            <a href={locationOrigin} className="unstyled cursor-pointer">
               <SSWLogo aria-label="logo" />
-            </Link>
+            </a>
             <h1 className="title ml-2">Our People</h1>
           </div>
           {displayActions ? (
@@ -66,6 +65,7 @@ const Header = ({ displayActions, profileId }) => {
 Header.propTypes = {
   displayActions: PropTypes.bool.isRequired,
   profileId: PropTypes.string,
+  locationOrigin: PropTypes.string.isRequired,
 };
 
 export default Header;
