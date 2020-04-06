@@ -293,7 +293,10 @@ const Person = ({
                 youtubePlayListId={frontmatter.youtubePlayListId}
               />
               <hr />
-              <Contact onClick={() => onContactButtonClick()} />
+              <Contact
+                onClick={() => onContactButtonClick()}
+                profileName={frontmatter.nickname}
+              />
               <Modal
                 isOpen={displayContactForm}
                 contentLabel="Contact Form"
