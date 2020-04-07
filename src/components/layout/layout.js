@@ -9,6 +9,7 @@ import Breadcrumbs from '../breadcrumb/breadcrumb';
 import GoogleAnalytics from '../google-analytics/google-analytics';
 import Menu from '../megamenu/menu';
 import MobileMenu from '../megamenu/mobile-menu';
+import { parentSiteUrl } from '../../../site-config';
 
 const Layout = ({
   children,
@@ -22,11 +23,19 @@ const Layout = ({
     <div id="content">
       <div className="flex flex-col min-h-screen main-container">
         <Head pageTitle={pageTitle} />
-        <Header displayActions={displayActions} profileId={profileId} />
+        <Header
+          displayActions={displayActions}
+          profileId={profileId}
+          parentSiteUrl={parentSiteUrl}
+        />
         <GoogleAnalytics pageTitle={pageTitle}></GoogleAnalytics>
         <Menu></Menu>
         {crumbs ? (
-          <Breadcrumbs crumbs={crumbs} crumbLabel={crumbLabel} />
+          <Breadcrumbs
+            crumbs={crumbs}
+            crumbLabel={crumbLabel}
+            parentSiteUrl={parentSiteUrl}
+          />
         ) : (
           <div></div>
         )}

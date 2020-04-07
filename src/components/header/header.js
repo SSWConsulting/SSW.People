@@ -21,15 +21,13 @@ const AnimatedContainer = posed.div({
   },
 });
 
-const mainSiteUrl = process.env.SITE_URL || 'https://ssw.com.au';
-
-const Header = ({ displayActions, profileId }) => {
+const Header = ({ displayActions, profileId, parentSiteUrl }) => {
   return (
     <AnimatedContainer>
       <header>
         <div className="flex mx-6 mt-4 mb-6">
           <div className="flex items-center">
-            <a href={mainSiteUrl} className="unstyled cursor-pointer">
+            <a href={parentSiteUrl} className="unstyled cursor-pointer">
               <SSWLogo aria-label="logo" />
             </a>
             <h1 className="title ml-2">Our People</h1>
@@ -67,6 +65,7 @@ const Header = ({ displayActions, profileId }) => {
 Header.propTypes = {
   displayActions: PropTypes.bool.isRequired,
   profileId: PropTypes.string,
+  parentSiteUrl: PropTypes.string,
 };
 
 export default Header;
