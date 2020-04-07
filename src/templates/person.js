@@ -289,6 +289,7 @@ const Person = ({
                   __html: profileHtml,
                 }}
               />
+              <hr />
               <YoutubePlaylist
                 youtubePlayListId={frontmatter.youtubePlayListId}
               />
