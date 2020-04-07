@@ -60,49 +60,56 @@ const YoutubePlaylist = ({ youtubePlayListId }) => {
             },
           ]}
         />
-        <Carousel slidesPerPage={3} slidesPerScroll={3} arrows infinite
-        breakpoints={{
-          470: {
-            slidesPerPage: 1,
-            slidesPerScroll: 1,
-            arrows: false
-          },
-          770: {
-            slidesPerPage: 1,
-            slidesPerScroll: 1,
-            arrows: true
-          },
-          830: {
-            slidesPerPage: 2,
-            slidesPerScroll: 2,
-            arrows: false
-          },
-          1290: {
-            slidesPerPage: 2,
-            slidesPerScroll: 2,
-            arrows: true
-          },
-          1430: {
-            slidesPerPage: 3,
-            slidesPerScroll: 3,
-            arrows: false
-          }
-        }}
+        <Carousel
+          slidesPerPage={3}
+          slidesPerScroll={3}
+          arrows
+          infinite
+          breakpoints={{
+            470: {
+              slidesPerPage: 1,
+              slidesPerScroll: 1,
+              arrows: false,
+            },
+            770: {
+              slidesPerPage: 1,
+              slidesPerScroll: 1,
+              arrows: true,
+            },
+            830: {
+              slidesPerPage: 2,
+              slidesPerScroll: 2,
+              arrows: false,
+            },
+            1290: {
+              slidesPerPage: 2,
+              slidesPerScroll: 2,
+              arrows: true,
+            },
+            1430: {
+              slidesPerPage: 3,
+              slidesPerScroll: 3,
+              arrows: false,
+            },
+          }}
         >
           {items.map(item => (
-            <div key={item.contentDetails.videoId + 1} className="gatsby-resp-iframe-wrapper">
-            <div className="embedVideo-container"> 
-            <iframe
-              key={item.contentDetails.videoId}
-              title="1"
-              src={`https://www.youtube-nocookie.com/embed/${item.contentDetails.videoId}?rel=0`}
-              allowFullScreen="allowfullscreen"
-              frameBorder="0"
-              width="321"
-              height="180"
-              className="embedVideo-iframe"
-            ></iframe>
-            </div>
+            <div
+              key={item.contentDetails.videoId + 1}
+              className="gatsby-resp-iframe-wrapper"
+            >
+              <div className="embedVideo-container">
+                <iframe
+                  key={item.contentDetails.videoId}
+                  title="1"
+                  src={`https://www.youtube-nocookie.com/embed/${item.contentDetails.videoId}?rel=0`}
+                  allowFullScreen="allowfullscreen"
+                  frameBorder="0"
+                  width="321"
+                  height="180"
+                  className="embedVideo-iframe"
+                ></iframe>
+              </div>
             </div>
           ))}
         </Carousel>
