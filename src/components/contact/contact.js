@@ -1,10 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const Contact = ({ onClick }) => {
+const Contact = ({ onClick, profileName }) => {
   return (
     <div className="contact">
-      <h3 className="text-ssw-red">Interested in what we can do for you?</h3>
+      <h3 className="text-ssw-red">
+        Interested in what {profileName ? profileName : 'we'} can do for you?
+      </h3>
       <p>Contact an Account Manager to discuss your project</p>
       <button className="btn btn-red" onClick={() => onClick()}>
         Book a Free Initial Meeting

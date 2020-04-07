@@ -383,6 +383,12 @@ figure figcaption:before {
     margin-top: 1rem;
     margin-bottom: 1rem;
   }
+
+  max-width: 90vw;
+}
+
+div.youtube-playlist li {
+  background: none;
 }
 
 blockquote {
