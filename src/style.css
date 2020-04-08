@@ -391,6 +391,11 @@ div.youtube-playlist li {
   background: none;
 }
 
+.youtube-playlist-arrows{
+  display: flex;
+  justify-content: space-between
+}
+
 blockquote {
   font-style: italic;
   padding: .5rem 1rem;
