@@ -1,12 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Breadcrumb } from 'gatsby-plugin-breadcrumb';
+import { parentSiteUrl } from '../../../site-config';
 
-const Breadcrumbs = ({ crumbs, crumbLabel, locationOrigin }) => {
+const Breadcrumbs = ({ crumbs, crumbLabel }) => {
   return (
     <div className="breadcrumb-container">
       <div className="mx-6 mb-3 breadcrumb">
-        <a href={locationOrigin}>SSW Consulting</a>
+        <a href={parentSiteUrl}>SSW Consulting</a>
         <span> &gt; </span>
         <Breadcrumb
           crumbs={crumbs}
@@ -21,7 +22,6 @@ const Breadcrumbs = ({ crumbs, crumbLabel, locationOrigin }) => {
 Breadcrumbs.propTypes = {
   crumbs: PropTypes.array,
   crumbLabel: PropTypes.string,
-  locationOrigin: PropTypes.string.isRequired,
 };
 
 export default Breadcrumbs;

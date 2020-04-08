@@ -16,4 +16,5 @@ module.exports = {
     twitter: `SSW_TV`,
     fbAppId: `120920301257947`,
   },
+  parentSiteUrl: `https://ssw.com.au`,
 };

@@ -4,6 +4,7 @@ import posed from 'react-pose';
 import SSWLogo from '-!svg-react-loader!../../images/SSWLogo.svg';
 import GitHubIcon from '-!svg-react-loader!../../images/github.svg';
 import InfoIcon from '-!svg-react-loader!../../images/info.svg';
+import { parentSiteUrl } from '../../../site-config';
 
 // Example of a component-specific page transition
 const AnimatedContainer = posed.div({
@@ -21,13 +22,13 @@ const AnimatedContainer = posed.div({
   },
 });
 
-const Header = ({ displayActions, profileId, locationOrigin }) => {
+const Header = ({ displayActions, profileId }) => {
   return (
     <AnimatedContainer>
       <header>
         <div className="flex mx-6 mt-4 mb-6">
           <div className="flex items-center">
-            <a href={locationOrigin} className="unstyled cursor-pointer">
+            <a href={parentSiteUrl} className="unstyled cursor-pointer">
               <SSWLogo aria-label="logo" />
             </a>
             <h1 className="title ml-2">Our People</h1>
@@ -65,7 +66,6 @@ const Header = ({ displayActions, profileId, locationOrigin }) => {
 Header.propTypes = {
   displayActions: PropTypes.bool.isRequired,
   profileId: PropTypes.string,
-  locationOrigin: PropTypes.string.isRequired,
 };
 
 export default Header;
