@@ -8,6 +8,10 @@ const YoutubePlaylist = ({ youtubePlayListId }) => {
   const [error, setError] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
   const [items, setItems] = useState([]);
+  const [currentSlide, setCurrentSlide] = useState(0);
+
+  const nextSlide = () => setCurrentSlide(currentSlide + 1);
+  const previousSlide = () => setCurrentSlide(currentSlide - 1);
 
   useEffect(() => {
     const youtubeApiKey = process.env.YOUTUBE_API_KEY;
@@ -61,20 +65,18 @@ const YoutubePlaylist = ({ youtubePlayListId }) => {
           ]}
         />
         <Carousel
+          value={currentSlide}
           slidesPerPage={3}
           slidesPerScroll={3}
-          arrows
           infinite
           breakpoints={{
             770: {
               slidesPerPage: 1,
               slidesPerScroll: 1,
-              arrows: true,
             },
             1290: {
               slidesPerPage: 2,
               slidesPerScroll: 2,
-              arrows: true,
             },
           }}
         >
@@ -98,6 +100,20 @@ const YoutubePlaylist = ({ youtubePlayListId }) => {
             </div>
           ))}
         </Carousel>
+        <div className="youtube-playlist-arrows">
+          <button
+            className="BrainhubCarousel__arrows BrainhubCarousel__arrowLeft"
+            onClick={previousSlide}
+          >
+            <span>pre</span>
+          </button>
+          <button
+            className="BrainhubCarousel__arrows BrainhubCarousel__arrowRight"
+            onClick={nextSlide}
+          >
+            <span>next</span>
+          </button>
+        </div>
       </div>
     );
   }
