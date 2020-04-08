@@ -28,6 +28,7 @@ const ProfileBox = ({
         }
         style={{ position: 'static' }}
         fadeIn={false}
+        loading={'auto'}
       />
       <div
         className={
