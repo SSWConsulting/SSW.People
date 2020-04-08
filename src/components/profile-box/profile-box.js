@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Link } from 'gatsby';
 import Img from 'gatsby-image';
 import PropTypes from 'prop-types';
@@ -11,6 +11,7 @@ const ProfileBox = ({
   sanitisedNickname,
   profileAudio,
 }) => {
+  const linkRef = useRef();
   const [hover, setHover] = useState(false);
   const tileName = profile.nickname
     ? profile.nickname
@@ -23,12 +24,17 @@ const ProfileBox = ({
     >
       <Img
         alt={`${profile.name} profile image`}
-        fluid={
-          hover ? profileImages.profileImage : profileImages.sketchProfileImage
-        }
+        fluid={profileImages.profileImage}
         style={{ position: 'static' }}
         fadeIn={false}
-        loading={'auto'}
+        className={!hover ? 'hidden' : ''}
+      />
+      <Img
+        alt={`${profile.name} profile image`}
+        fluid={profileImages.sketchProfileImage}
+        style={{ position: 'static' }}
+        fadeIn={false}
+        className={hover ? 'hidden' : ''}
       />
       <div
         className={
@@ -45,6 +51,11 @@ const ProfileBox = ({
     </div>
   );
 
+  useEffect(() => {
+    if (hover && linkRef.current && linkRef.current.matches(':hover') === false)
+      setHover(false);
+  });
+
   return (
     <div
       className="w-full flex-profile-box unstyled relative"
@@ -56,9 +67,12 @@ const ProfileBox = ({
       }}
     >
       {profile.alternativeUrl ? (
-        <a href={profile.alternativeUrl}>{content}</a>
+        <a ref={linkRef} href={profile.alternativeUrl}>
+          {content}
+        </a>
       ) : (
         <Link
+          ref={linkRef}
           to={`/${
             profile.nickname
               ? sanitisedNickname.toLowerCase()
