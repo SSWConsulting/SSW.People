@@ -4,6 +4,7 @@ import posed from 'react-pose';
 import SSWLogo from '-!svg-react-loader!../../images/SSWLogo.svg';
 import GitHubIcon from '-!svg-react-loader!../../images/github.svg';
 import InfoIcon from '-!svg-react-loader!../../images/info.svg';
+import { parentSiteUrl } from '../../../site-config';
 
 // Example of a component-specific page transition
 const AnimatedContainer = posed.div({
@@ -21,7 +22,7 @@ const AnimatedContainer = posed.div({
   },
 });
 
-const Header = ({ displayActions, profileId, parentSiteUrl }) => {
+const Header = ({ displayActions, profileId }) => {
   return (
     <AnimatedContainer>
       <header>
@@ -65,7 +66,6 @@ const Header = ({ displayActions, profileId, parentSiteUrl }) => {
 Header.propTypes = {
   displayActions: PropTypes.bool.isRequired,
   profileId: PropTypes.string,
-  parentSiteUrl: PropTypes.string,
 };
 
 export default Header;
