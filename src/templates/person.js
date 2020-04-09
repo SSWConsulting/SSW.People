@@ -102,24 +102,26 @@ const Person = ({
                   )}
                 </div>
                 <div className="flex profile-image-quote">
-                  <div
-                    className="image-bg text-center"
-                    onMouseEnter={() => {
-                      setHover(true);
-                    }}
-                    onMouseLeave={() => {
-                      setHover(false);
-                    }}
-                  >
-                    <img
-                      className="profile-image relative bg-cover mx-auto"
-                      src={
-                        hover && !!sketchImage
-                          ? sketchImage.childImageSharp.original.src
-                          : profileImage.childImageSharp.original.src
-                      }
-                      alt="Profile"
-                    />
+                  <div>
+                    <div
+                      className="image-bg text-center"
+                      onMouseEnter={() => {
+                        setHover(true);
+                      }}
+                      onMouseLeave={() => {
+                        setHover(false);
+                      }}
+                    >
+                      <img
+                        className="profile-image relative bg-cover mx-auto"
+                        src={
+                          hover && !!sketchImage
+                            ? sketchImage.childImageSharp.original.src
+                            : profileImage.childImageSharp.original.src
+                        }
+                        alt="Profile"
+                      />
+                    </div>
                     {profileAudio ? (
                       <PlayAudio
                         hasAnimation={true}

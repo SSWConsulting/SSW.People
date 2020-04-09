@@ -11,23 +11,8 @@ const PlayAudio = ({ hasAnimation, audioSrc }) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [hoverAudio, setHoverAudio] = useState(false);
 
-  useEffect(() => {
-    setAudio(new Audio());
-    if (hasAnimation) {
-      lottie.loadAnimation({
-        container: animationContainer.current,
-        render: 'svg',
-        loop: true,
-        animationData: animation,
-      });
-      lottie.stop();
-      return () => lottie.destroy();
-    }
-  }, []);
-
   const playAudio = () => {
     setIsPlaying(true);
-    audio.src = audioSrc;
     audio.play();
     if (hasAnimation) {
       lottie.play();
@@ -41,6 +26,16 @@ const PlayAudio = ({ hasAnimation, audioSrc }) => {
     }
   };
 
+  const handleClick = e => {
+    if (!isPlaying) {
+      playAudio();
+    } else {
+      pauseAudio();
+    }
+    // outside click
+    e.preventDefault();
+  };
+
   audio.onended = () => {
     setIsPlaying(false);
     if (hasAnimation) {
@@ -48,45 +43,63 @@ const PlayAudio = ({ hasAnimation, audioSrc }) => {
     }
   };
 
+  useEffect(() => {
+    setAudio(new Audio(audioSrc));
+
+    if (hasAnimation) {
+      lottie.loadAnimation({
+        container: animationContainer.current,
+        render: 'svg',
+        loop: true,
+        animationData: animation,
+      });
+      lottie.stop();
+
+      return () => lottie.destroy();
+    }
+  }, []);
+
   return (
     <>
       {hasAnimation ? (
-        <div className={'pt-1 pl-2 flex'}>
-          {!isPlaying && (
-            <PlayIcon
-              aria-label="play audio"
-              className={'cursor-pointer mr-2'}
-              onClick={() => {
-                playAudio();
-              }}
-            />
-          )}
-          {isPlaying && (
-            <PauseIcon
-              aria-label="pause audio"
-              className={'cursor-pointer mr-2'}
-              onClick={() => {
-                pauseAudio();
-              }}
-            />
-          )}
+        // eslint-disable-next-line jsx-a11y/no-static-element-interactions
+        <div
+          style={{ height: '30px' }}
+          className={'cursor-pointer flex mr-1 ml-1 audio-div-dark-translucent'}
+          onMouseEnter={() => {
+            setHoverAudio(true);
+          }}
+          onMouseLeave={() => {
+            setHoverAudio(false);
+          }}
+          onClick={e => handleClick(e)}
+          onKeyPress={handleClick}
+        >
+          <div className={'pt-2 pl-2' + (hoverAudio ? ' hovered' : '')}>
+            {!isPlaying && (
+              <PlayIcon aria-label="play audio" className={'mr-2'} />
+            )}
+            {isPlaying && (
+              <PauseIcon aria-label="pause audio" className={'mr-2'} />
+            )}
+          </div>
           <div
             className={'overflow-hidden relative'}
-            style={{ height: '20px', width: '70%' }}
+            style={{ height: '30px', width: '70%' }}
           >
             <div
               ref={animationContainer}
               className={'absolute'}
-              style={{ top: '-54px' }}
+              style={{ top: '-48px' }}
             ></div>
           </div>
         </div>
       ) : (
         <div
+          style={{ height: '30px' }}
           className={
-            hoverAudio
-              ? 'absolute top-0 right-0 p-2 hovered'
-              : 'absolute top-0 right-0 p-2 audio-div-dark-translucent'
+            'absolute top-0 right-0 p-2' +
+            (hoverAudio ? ' hovered' : ' audio-div-dark-translucent')
           }
           onMouseEnter={() => {
             setHoverAudio(true);
