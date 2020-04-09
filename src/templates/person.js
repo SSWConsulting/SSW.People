@@ -93,7 +93,7 @@ const Person = ({
                   <h4 className="mb-0">{frontmatter.role}</h4>
                   {!!crmData.location && (
                     <h4 className="mb-0">
-                      <FontAwesomeIcon icon={faMapMarkerAlt} />
+                      <FontAwesomeIcon icon={faMapMarkerAlt} className="mr-2" />
                       {crmData.location}
                     </h4>
                   )}
