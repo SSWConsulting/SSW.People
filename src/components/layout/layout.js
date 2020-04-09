@@ -47,20 +47,11 @@ const Layout = ({
         }}
       >
         <div className="flex flex-col min-h-screen main-container">
-          <Head pageTitle={pageTitle} />
-          <Header
-            displayActions={displayActions}
-            profileId={profileId}
-            locationOrigin={locationOrigin}
-          />
+          <Header displayActions={displayActions} profileId={profileId} />
           <GoogleAnalytics pageTitle={pageTitle}></GoogleAnalytics>
           <Menu onClickToggle={() => actionOnToggleClick()}></Menu>
           {crumbs ? (
-            <Breadcrumbs
-              crumbs={crumbs}
-              crumbLabel={crumbLabel}
-              locationOrigin={locationOrigin}
-            />
+            <Breadcrumbs crumbs={crumbs} crumbLabel={crumbLabel} />
           ) : (
             <div></div>
           )}
