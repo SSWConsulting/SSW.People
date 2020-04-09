@@ -8,6 +8,10 @@ const YoutubePlaylist = ({ youtubePlayListId }) => {
   const [error, setError] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
   const [items, setItems] = useState([]);
+  const [currentSlide, setCurrentSlide] = useState(0);
+
+  const nextSlide = () => setCurrentSlide(currentSlide + 1);
+  const previousSlide = () => setCurrentSlide(currentSlide - 1);
 
   useEffect(() => {
     const youtubeApiKey = process.env.YOUTUBE_API_KEY;
@@ -17,7 +21,7 @@ const YoutubePlaylist = ({ youtubePlayListId }) => {
     }
 
     fetch(
-      `https://www.googleapis.com/youtube/v3/playlistItems?part=contentDetails&maxResults=50&playlistId=${youtubePlayListId}&key=${youtubeApiKey}`
+      `https://www.googleapis.com/youtube/v3/playlistItems?part=contentDetails&maxResults=10&playlistId=${youtubePlayListId}&key=${youtubeApiKey}`
     )
       .then(res => res.json())
       .then(
@@ -40,7 +44,7 @@ const YoutubePlaylist = ({ youtubePlayListId }) => {
     return null;
   } else {
     return (
-      <div className="container text-center my-3">
+      <div className="youtube-playlist container">
         <Helmet
           style={[
             {
@@ -60,18 +64,56 @@ const YoutubePlaylist = ({ youtubePlayListId }) => {
             },
           ]}
         />
-        <Carousel slidesPerPage={3} slidesPerScroll={3} arrows infinite>
+        <Carousel
+          value={currentSlide}
+          slidesPerPage={3}
+          slidesPerScroll={3}
+          infinite
+          breakpoints={{
+            770: {
+              slidesPerPage: 1,
+              slidesPerScroll: 1,
+            },
+            1290: {
+              slidesPerPage: 2,
+              slidesPerScroll: 2,
+            },
+          }}
+        >
           {items.map(item => (
-            <iframe
-              key={item.contentDetails.videoId}
-              title="1"
-              src={`https://www.youtube-nocookie.com/embed/${item.contentDetails.videoId}?rel=0`}
-              className="embedVideo-iframe"
-              allowFullScreen="allowfullscreen"
-              frameBorder="0"
-            ></iframe>
+            <div
+              key={item.contentDetails.videoId + 1}
+              className="gatsby-resp-iframe-wrapper"
+            >
+              <div className="embedVideo-container">
+                <iframe
+                  key={item.contentDetails.videoId}
+                  title="1"
+                  src={`https://www.youtube-nocookie.com/embed/${item.contentDetails.videoId}?rel=0`}
+                  allowFullScreen="allowfullscreen"
+                  frameBorder="0"
+                  width="321"
+                  height="180"
+                  className="embedVideo-iframe"
+                ></iframe>
+              </div>
+            </div>
           ))}
         </Carousel>
+        <div className="youtube-playlist-arrows">
+          <button
+            className="BrainhubCarousel__arrows BrainhubCarousel__arrowLeft"
+            onClick={previousSlide}
+          >
+            <span>pre</span>
+          </button>
+          <button
+            className="BrainhubCarousel__arrows BrainhubCarousel__arrowRight"
+            onClick={nextSlide}
+          >
+            <span>next</span>
+          </button>
+        </div>
       </div>
     );
   }

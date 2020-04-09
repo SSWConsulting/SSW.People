@@ -81,7 +81,6 @@ Layout.propTypes = {
   pageTitle: PropTypes.string,
   crumbs: PropTypes.array,
   crumbLabel: PropTypes.string,
-  locationOrigin: PropTypes.string.isRequired,
 };
 
 const LayoutWithQuery = props => (
