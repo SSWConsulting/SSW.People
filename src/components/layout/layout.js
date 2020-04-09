@@ -17,7 +17,6 @@ const Layout = ({
   pageTitle,
   crumbs,
   crumbLabel,
-  locationOrigin,
 }) => {
   const node = useRef();
   const [isMenuOpened, setIsMenuOpened] = useState(false);
@@ -47,6 +46,7 @@ const Layout = ({
         }}
       >
         <div className="flex flex-col min-h-screen main-container">
+          <Head pageTitle={pageTitle} />
           <Header displayActions={displayActions} profileId={profileId} />
           <GoogleAnalytics pageTitle={pageTitle}></GoogleAnalytics>
           <Menu onClickToggle={() => actionOnToggleClick()}></Menu>
