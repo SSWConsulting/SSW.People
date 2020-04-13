@@ -301,8 +301,7 @@ button:focus {
 }
 
 .audio-div-dark-translucent {
-  background-color: rgba(102, 102, 102, 0.2);
-  height: 30px;
+  background-color: rgba(102, 102, 102, 0.1);
 }
 
 .border-ssw-grey {

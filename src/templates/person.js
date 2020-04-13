@@ -93,7 +93,7 @@ const Person = ({
                   <h4 className="mb-0">{frontmatter.role}</h4>
                   {!!crmData.location && (
                     <h4 className="mb-0">
-                      <FontAwesomeIcon icon={faMapMarkerAlt} />
+                      <FontAwesomeIcon icon={faMapMarkerAlt} className="mr-2" />
                       {crmData.location}
                     </h4>
                   )}
@@ -102,24 +102,26 @@ const Person = ({
                   )}
                 </div>
                 <div className="flex profile-image-quote">
-                  <div
-                    className="image-bg text-center"
-                    onMouseEnter={() => {
-                      setHover(true);
-                    }}
-                    onMouseLeave={() => {
-                      setHover(false);
-                    }}
-                  >
-                    <img
-                      className="profile-image relative bg-cover mx-auto"
-                      src={
-                        hover && !!sketchImage
-                          ? sketchImage.childImageSharp.original.src
-                          : profileImage.childImageSharp.original.src
-                      }
-                      alt="Profile"
-                    />
+                  <div>
+                    <div
+                      className="image-bg text-center"
+                      onMouseEnter={() => {
+                        setHover(true);
+                      }}
+                      onMouseLeave={() => {
+                        setHover(false);
+                      }}
+                    >
+                      <img
+                        className="profile-image relative bg-cover mx-auto"
+                        src={
+                          hover && !!sketchImage
+                            ? sketchImage.childImageSharp.original.src
+                            : profileImage.childImageSharp.original.src
+                        }
+                        alt="Profile"
+                      />
+                    </div>
                     {profileAudio ? (
                       <PlayAudio
                         hasAnimation={true}
