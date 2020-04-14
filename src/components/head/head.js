@@ -86,7 +86,7 @@ const Head = ({
       name="msapplication-square310x310"
     />
 
-    <link href="/manifest.json" rel="manifest" />
+    <link href="/people/manifest.json" rel="manifest" />
 
     <link
       href="/ssw/include/pigeon/img/apple-touch-icon-57x57.png"
@@ -127,11 +127,6 @@ const Head = ({
       href="/ssw/include/pigeon/img/apple-touch-icon-152x152.png"
       rel="apple-touch-icon"
       sizes="152x152"
-    />
-    <link
-      href="/ssw/include/pigeon/img/apple-touch-icon-167x167.png"
-      rel="apple-touch-icon"
-      sizes="167x167"
     />
     <link
       href="/ssw/include/pigeon/img/apple-touch-icon-180x180.png"
