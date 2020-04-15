@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import moment from 'moment';
 
 const InternalEvent = ({ properties }) => {
@@ -103,6 +104,10 @@ const InternalEvent = ({ properties }) => {
       </div>
     </div>
   );
+};
+
+InternalEvent.propTypes = {
+  properties: PropTypes.node.isRequired,
 };
 
 export default InternalEvent;
