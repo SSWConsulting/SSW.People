@@ -10,10 +10,7 @@ const buildTimestamp = preval`module.exports = new Date().getTime();`;
 const Footer = () => {
   return (
     <>
-      <div
-        className="py-2 md:py-4 text-center bg-grey-translucent"
-        style={{ fontSize: '.9rem' }}
-      >
+      <div className="py-2 md:py-4 text-center bg-grey-translucent text-sm">
         <section className="main-container">
           We <FontAwesomeIcon icon={faHeart} className="text-ssw-red" /> open
           source. This page is on{' '}
