@@ -832,6 +832,37 @@ label {
   border-radius: 3px;
   font-weight: bold;
 }
+
+.btn-filter{
+  color: #fff;
+  cursor: pointer;
+  font-size: 1rem;
+  line-height: 18px;
+  font-weight: normal;
+  display: inline-block;
+  text-decoration: none;
+  padding: 8px 15px;
+  text-align: center;
+  vertical-align: middle;
+  touch-action: manipulation;
+}
+
+.btn-filter-active{
+background-color: #cc4141;
+}
+
+.btn-filter-active:hover{
+background-color: #cc2121;
+}
+
+.btn-filter-inactive{
+  background-color: #999;
+  }
+
+  .btn-filter-inactive:hover{
+  background-color: #888;
+  }
+
 /**
 * This injects Tailwind's component classes and any component classes
 * registered by plugins.

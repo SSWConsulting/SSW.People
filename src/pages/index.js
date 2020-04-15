@@ -18,8 +18,7 @@ import { config } from '@fortawesome/fontawesome-svg-core';
 import '@fortawesome/fontawesome-svg-core/styles.css';
 import ProfileSort from '../helpers/profileSort';
 import { getEventsPresenters } from '../helpers/eventHelper';
-import { faCheck } from '@fortawesome/free-solid-svg-icons';
-import Checkbox from '../components/checkbox/checkbox';
+import Button from '../components/button/button';
 
 config.autoAddCss = false;
 
@@ -130,14 +129,14 @@ const Index = ({
             <div className="mx-auto flex flex-col sm:flex-row lg:flex-col lg:w-5/6">
               <div className="w-full sm:w-1/2 lg:w-full">
                 <div className="w-full whitespace-no-wrap">
-                  <Checkbox
+                  <Button
                     labelText="Incoming speakers"
-                    checkboxValue="Incoming speakers"
-                    isChecked={isSpeakingSelected}
-                    onChange={() => SetSpeakingSelected(!isSpeakingSelected)}
-                    checkedIcon={faCheck}
-                    checkedClassName="font-bold"
-                    checkboxColor={isSpeakingSelected ? '#cc4141' : ''}
+                    isActive={isSpeakingSelected}
+                    onClick={() => SetSpeakingSelected(!isSpeakingSelected)}
+                    activeIcon=""
+                    inActiveIcon=""
+                    activeClassName="btn-filter-active btn-filter"
+                    inActiveClassName="btn-filter-inactive btn-filter"
                   />
                 </div>
               </div>

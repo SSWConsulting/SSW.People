@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import { getEventsForPresenter } from '../../helpers/eventHelper';
 import InternalEvent from '../internal-event/internal-event';
 
@@ -30,5 +31,8 @@ const InternalEvents = ({ presenterName, presenterNickname }) => {
     </>
   );
 };
-
+InternalEvents.propTypes = {
+  presenterName: PropTypes.string.isRequired,
+  presenterNickname: PropTypes.string.isRequired,
+};
 export default InternalEvents;
