@@ -17,7 +17,8 @@ const Button = ({
       className={isActive ? activeClassName : inActiveClassName}
       onClick={onClick}
     >
-      <FontAwesomeIcon icon={isActive ? activeIcon : inActiveIcon} /> {labelText}
+      <FontAwesomeIcon icon={isActive ? activeIcon : inActiveIcon} />
+      {labelText}
     </button>
   );
 };
