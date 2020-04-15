@@ -28,6 +28,7 @@ const ProfileBox = ({
         style={{ position: 'static' }}
         fadeIn={false}
         className={!hover ? 'hidden' : ''}
+        loading="eager"
       />
       <Img
         alt={`${profile.name} profile image`}
@@ -35,6 +36,7 @@ const ProfileBox = ({
         style={{ position: 'static' }}
         fadeIn={false}
         className={hover ? 'hidden' : ''}
+        loading="eager"
       />
       <div
         className={
