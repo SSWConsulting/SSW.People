@@ -9,13 +9,14 @@ const Head = ({
   siteTitle,
   siteDescription,
   siteUrl,
+  parentSiteUrl,
   pageTitle,
   pageTitleFull = pageTitle ? `${pageTitle} | ${siteTitle}` : siteTitle,
   themeColor,
   social,
   imageUrl,
   location,
-  canonical = siteUrl + (location.pathname || ''),
+  canonical = parentSiteUrl + (location.pathname || ''),
 }) => (
   <Helmet>
     <html lang="en" />
@@ -168,6 +169,7 @@ Head.propTypes = {
   siteTitleShort: PropTypes.string,
   siteDescription: PropTypes.string,
   siteUrl: PropTypes.string,
+  parentSiteUrl: PropTypes.string,
   themeColor: PropTypes.string,
   social: PropTypes.objectOf(PropTypes.string),
   imageUrl: PropTypes.string,
@@ -187,6 +189,7 @@ const HeadWithQuery = props => (
             siteTitleShort
             siteDescription
             siteUrl
+            parentSiteUrl
             themeColor
             social {
               twitter
