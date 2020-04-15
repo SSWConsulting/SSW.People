@@ -65,7 +65,7 @@ const PlayAudio = ({ hasAnimation, audioSrc }) => {
         // eslint-disable-next-line jsx-a11y/no-static-element-interactions
         <div
           style={{ height: '30px' }}
-          className={'cursor-pointer flex mr-1 ml-1 audio-div-dark-translucent'}
+          className={'cursor-pointer flex mr-1 ml-1 bg-grey-translucent'}
           onMouseEnter={() => {
             setHoverAudio(true);
           }}
@@ -99,7 +99,7 @@ const PlayAudio = ({ hasAnimation, audioSrc }) => {
           style={{ height: '30px' }}
           className={
             'absolute top-0 right-0 p-2' +
-            (hoverAudio ? ' hovered' : ' audio-div-dark-translucent')
+            (hoverAudio ? ' hovered' : ' bg-grey-translucent')
           }
           onMouseEnter={() => {
             setHoverAudio(true);
