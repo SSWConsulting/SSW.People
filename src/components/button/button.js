@@ -10,11 +10,14 @@ const Button = ({
   activeIcon,
   inActiveIcon,
   activeClassName,
-  inActiveClassName
+  inActiveClassName,
 }) => {
   return (
-    <button className = {isActive?activeClassName:inActiveClassName} onClick={onClick}>
-      <FontAwesomeIcon icon={isActive?activeIcon:inActiveIcon} /> {labelText}
+    <button
+      className={isActive ? activeClassName : inActiveClassName}
+      onClick={onClick}
+    >
+      <FontAwesomeIcon icon={isActive ? activeIcon : inActiveIcon} /> {labelText}
     </button>
   );
 };
@@ -22,7 +25,7 @@ const Button = ({
 Button.propTypes = {
   labelText: PropTypes.string.isRequired,
   isActive: PropTypes.bool.isRequired,
-  onChange: PropTypes.func.isRequired,
+  onClick: PropTypes.func.isRequired,
   activeIcon: PropTypes.object.isRequired,
   inActiveIcon: PropTypes.object,
   activeClassName: PropTypes.string,
