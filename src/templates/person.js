@@ -11,6 +11,7 @@ import Contact from '../components/contact/contact';
 import ContactForm from '../components/contact-form/contact-form';
 import Modal from 'react-modal';
 import PlayAudio from '../components/play-audio/play-audio';
+import InternalEvents from '../components/internal-events/internal-events';
 
 config.autoAddCss = false;
 
@@ -289,14 +290,27 @@ const Person = ({
                   __html: profileHtml,
                 }}
               />
-              <hr />
-              <YoutubePlaylist
-                youtubePlayListId={frontmatter.youtubePlayListId}
+              {frontmatter.youtubePlayListId && (
+                <>
+                  <hr />
+                  <YoutubePlaylist
+                    youtubePlayListId={frontmatter.youtubePlayListId}
+                  />
+                  <hr />
+                </>
+              )}
+
+              <InternalEvents
+                presenterName={frontmatter.name}
+                presenterNickname={frontmatter.nickname}
               />
-              <hr />
               <Contact
                 onClick={() => onContactButtonClick()}
-                profileName={frontmatter.nickname}
+                profileName={
+                  frontmatter.nickname
+                    ? frontmatter.nickname
+                    : frontmatter.name.split(' ')[0]
+                }
               />
               <Modal
                 isOpen={displayContactForm}

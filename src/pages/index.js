@@ -17,6 +17,9 @@ import 'array-flat-polyfill';
 import { config } from '@fortawesome/fontawesome-svg-core';
 import '@fortawesome/fontawesome-svg-core/styles.css';
 import ProfileSort from '../helpers/profileSort';
+import { getEventsPresenters } from '../helpers/eventHelper';
+import { faCheck } from '@fortawesome/free-solid-svg-icons';
+import Checkbox from '../components/checkbox/checkbox';
 
 config.autoAddCss = false;
 
@@ -59,12 +62,23 @@ const Index = ({
     [allPeople]
   );
 
+  const [isSpeakingSelected, SetSpeakingSelected] = useState(false);
   const [selectedLocation, setSelectedLocation] = useState(allLocations[0]);
   const [selectedSkills, setSelectedSkills] = useState([]);
   const [selectedRoles, setSelectedRoles] = useState([]);
   const [filteredPeople, setFilteredPeople] = useState(allPeople);
+  const [presenters, setPresenters] = useState(null);
+  async function loadEventsPresenters() {
+    var presentersList = await getEventsPresenters();
+    setPresenters(presentersList);
+  }
+  //loadEventsPresenters();
 
   useEffect(() => {
+    if (!presenters) {
+      loadEventsPresenters();
+    }
+
     const people = allPeople
       .filter(
         p => selectedLocation === 'All' || p.location === selectedLocation
@@ -74,10 +88,26 @@ const Index = ({
           selectedSkills.length === 0 ||
           selectedSkills.filter(s => p.skills.includes(s)).length > 0
       )
+      .filter(
+        p =>
+          !isSpeakingSelected ||
+          (presenters &&
+            Array.prototype.filter.call(
+              presenters,
+              pr =>
+                (p.nickname.length > 0 &&
+                  pr.textContent
+                    .toLowerCase()
+                    .indexOf(p.nickname.toLowerCase()) >= 0) ||
+                pr.textContent
+                  .toLowerCase()
+                  .indexOf(p.fullName.toLowerCase()) >= 0
+            ).length > 0)
+      )
       .sort(ProfileSort);
 
     setFilteredPeople(people);
-  }, [selectedLocation, selectedSkills]);
+  }, [selectedLocation, selectedSkills, isSpeakingSelected, presenters]);
 
   return (
     <>
@@ -98,6 +128,19 @@ const Index = ({
         <div className="mx-6 flex flex-col lg:flex-row">
           <div className="lg:w-1/4">
             <div className="mx-auto flex flex-col sm:flex-row lg:flex-col lg:w-5/6">
+              <div className="w-full sm:w-1/2 lg:w-full">
+                <div className="w-full whitespace-no-wrap">
+                  <Checkbox
+                    labelText="Who's speaking soon?"
+                    checkboxValue="Who's speaking soon?"
+                    isChecked={isSpeakingSelected}
+                    onChange={() => SetSpeakingSelected(!isSpeakingSelected)}
+                    checkedIcon={faCheck}
+                    checkedClassName="font-bold"
+                    checkboxColor={isSpeakingSelected ? '#cc4141' : ''}
+                  />
+                </div>
+              </div>
               <div className="w-full sm:w-1/2 lg:w-full">
                 <RoleFilter
                   allRoles={allRoles}
