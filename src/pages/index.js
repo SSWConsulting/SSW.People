@@ -131,8 +131,8 @@ const Index = ({
               <div className="w-full sm:w-1/2 lg:w-full">
                 <div className="w-full whitespace-no-wrap">
                   <Checkbox
-                    labelText="Who's speaking soon?"
-                    checkboxValue="Who's speaking soon?"
+                    labelText="Incoming speakers"
+                    checkboxValue="Incoming speakers"
                     isChecked={isSpeakingSelected}
                     onChange={() => SetSpeakingSelected(!isSpeakingSelected)}
                     checkedIcon={faCheck}
