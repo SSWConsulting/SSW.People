@@ -11,6 +11,7 @@ import Contact from '../components/contact/contact';
 import ContactForm from '../components/contact-form/contact-form';
 import Modal from 'react-modal';
 import PlayAudio from '../components/play-audio/play-audio';
+import GitHubContributionCalendar from '../components/github-contribution-calendar/github-contribution-calendar';
 
 config.autoAddCss = false;
 
@@ -289,10 +290,19 @@ const Person = ({
                   __html: profileHtml,
                 }}
               />
-              <hr />
-              <YoutubePlaylist
-                youtubePlayListId={frontmatter.youtubePlayListId}
-              />
+              {frontmatter.youtubePlayListId && (
+                <>
+                  <hr />
+                  <YoutubePlaylist
+                    youtubePlayListId={frontmatter.youtubePlayListId}
+                  />
+                </>
+              )}
+              {frontmatter.github && frontmatter.github != '' && (
+                <GitHubContributionCalendar
+                  githubUserName={frontmatter.github}
+                />
+              )}
               <hr />
               <Contact
                 onClick={() => onContactButtonClick()}
