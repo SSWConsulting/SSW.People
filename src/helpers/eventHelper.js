@@ -38,7 +38,8 @@ async function getEventsForPresenter(name, nickname) {
           moment(b.startdatetime, 'DD MMM YYYY')
         )
       );
-    });
+    })
+    .catch(() => (events = []));
   return events;
 }
 function mapXmlToEventObj(properties) {
