@@ -33,7 +33,6 @@ async function getEventsForPresenter(name, nickname) {
       events = Array.prototype.map.call(eventsXml, element =>
         mapXmlToEventObj(element)
       );
-
       events = events.sort((a, b) =>
         moment(a.startdatetime, 'DD MMM YYYY').diff(
           moment(b.startdatetime, 'DD MMM YYYY')
@@ -50,11 +49,9 @@ function mapXmlToEventObj(properties) {
     .textContent;
   const startdatetimeXml = properties.getElementsByTagName('StartDateTime')[0]
     .textContent;
-
   const startdatetime = moment(startdatetimeXml)
     .local()
     .format('DD MMM YYYY');
-
   const endDateTime = moment(endDateTimeXml)
     .local()
     .format('DD MMM YYYY');
@@ -69,14 +66,10 @@ function mapXmlToEventObj(properties) {
     title: properties
       .getElementsByTagName('Url')[0]
       .getElementsByTagName('Description')[0].textContent,
-
     startdatetime: startdatetime,
-
     endDateTime: endDateTime,
     isSameDay: startdatetime === endDateTime,
-
     daysToGo: moment(startdatetime).diff(moment(today), 'days'),
-
     technologycategory: properties.getElementsByTagName('Category')[0]
       .textContent,
     eventtype: properties.getElementsByTagName('CalendarType')[0].textContent,
