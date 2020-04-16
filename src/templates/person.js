@@ -11,6 +11,7 @@ import Contact from '../components/contact/contact';
 import ContactForm from '../components/contact-form/contact-form';
 import Modal from 'react-modal';
 import PlayAudio from '../components/play-audio/play-audio';
+import EventList from '../components/event-list/event-list';
 
 config.autoAddCss = false;
 
@@ -33,6 +34,11 @@ const Person = ({
   const personName = frontmatter.nickname
     ? `${frontmatter.name} (${frontmatter.nickname})`
     : frontmatter.name;
+  const firstNameOrNickname = frontmatter.nickname
+    ? frontmatter.nickname
+    : frontmatter.name
+    ? frontmatter.name.split(' ')[0]
+    : '';
   const [displayContactForm, setdisplayContactForm] = useState(false);
   const profileAudio = data.profileAudio.nodes[0];
   const [hover, setHover] = useState(false);
@@ -289,14 +295,23 @@ const Person = ({
                   __html: profileHtml,
                 }}
               />
-              <hr />
-              <YoutubePlaylist
-                youtubePlayListId={frontmatter.youtubePlayListId}
+              {frontmatter.youtubePlayListId && (
+                <>
+                  <hr />
+                  <YoutubePlaylist
+                    youtubePlayListId={frontmatter.youtubePlayListId}
+                  />
+                  <hr />
+                </>
+              )}
+
+              <EventList
+                presenterName={frontmatter.name}
+                presenterNickname={frontmatter.nickname}
               />
-              <hr />
               <Contact
                 onClick={() => onContactButtonClick()}
-                profileName={frontmatter.nickname}
+                profileName={firstNameOrNickname}
               />
               <Modal
                 isOpen={displayContactForm}
