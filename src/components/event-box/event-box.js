@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const InternalEvent = ({ event }) => {
+const EventBox = ({ event }) => {
   return (
     <div>
       <div className="event-item">
@@ -73,8 +73,8 @@ const InternalEvent = ({ event }) => {
   );
 };
 
-InternalEvent.propTypes = {
+EventBox.propTypes = {
   event: PropTypes.object.isRequired,
 };
 
-export default InternalEvent;
+export default EventBox;

@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { getEventsForPresenter } from '../../helpers/eventHelper';
-import InternalEvent from '../internal-event/internal-event';
+import EventBox from '../event-box/event-box';
 
-const InternalEvents = ({ presenterName, presenterNickname }) => {
+const EventList = ({ presenterName, presenterNickname }) => {
   const [events, setEvents] = useState(null);
   async function loadEventsPresenters() {
     var events = await getEventsForPresenter(presenterName, presenterNickname);
@@ -24,15 +24,15 @@ const InternalEvents = ({ presenterName, presenterNickname }) => {
             <h2>Next talks</h2>
           </div>
           {events.map((event, index) => (
-            <InternalEvent key={index} event={event}></InternalEvent>
+            <EventBox key={index} event={event}></EventBox>
           ))}
         </div>
       )}
     </>
   );
 };
-InternalEvents.propTypes = {
+EventList.propTypes = {
   presenterName: PropTypes.string.isRequired,
   presenterNickname: PropTypes.string.isRequired,
 };
-export default InternalEvents;
+export default EventList;
