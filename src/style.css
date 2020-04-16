@@ -428,6 +428,19 @@ pre {
   line-height: initial;
 }
 
+/*GitHub Calendar Styling */
+.styles_title__HcRKb{
+  display:none;
+}
+
+.styles_calendar__1PAia{
+  width: 100%;
+
+  text {
+    font-size: .5rem !important;
+  }
+}
+
 @media screen and (max-width: 1024px) {
   img {
     height: auto;

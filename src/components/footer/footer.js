@@ -10,7 +10,7 @@ const buildTimestamp = preval`module.exports = new Date().getTime();`;
 const Footer = () => {
   return (
     <>
-      <div className="py-2 md:py-4 text-center bg-grey-translucent text-sm">
+      <div className="py-2 text-center bg-grey-translucent text-sm">
         <section className="main-container">
           We <FontAwesomeIcon icon={faHeart} className="text-ssw-red" /> open
           source. This page is on{' '}
@@ -18,7 +18,7 @@ const Footer = () => {
             className="action-button-label"
             href="https://github.com/SSWConsulting/people.ssw.com.au"
           >
-            Github <FontAwesomeIcon icon={faGithub} />
+            GitHub <FontAwesomeIcon icon={faGithub} />
           </a>
         </section>
       </div>
