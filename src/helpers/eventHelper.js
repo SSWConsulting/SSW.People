@@ -18,7 +18,7 @@ async function getEventsPresenters() {
 
 async function getEventsForPresenter(name, nickname) {
   var dateFilter = new Date().toISOString();
-  var oDataFilterOngoing = `$filter=(substringof('${name}',Presenter) or substringof('${nickname}',Presenter)) and Enabled ne false and EndDateTime ge datetime'${dateFilter}'%26$select=StartDateTime,EndDateTime,Category,CalendarType,Title,Url,Thumbnail,Presenter,EventShortDescription%26$orderby=StartDateTime asc%26$top=10`;
+  var oDataFilterOngoing = `$filter=(substringof('${name}',Presenter) or substringof('${nickname}',Presenter)) and Enabled ne false and EndDateTime ge datetime'${dateFilter}'%26$select=StartDateTime,EndDateTime,Category,CalendarType,Title,Url,Thumbnail,Presenter,EventShortDescription%26$orderby=StartDateTime asc%26$top=50`;
   var events;
   await fetch(
     `https://www.ssw.com.au/ssw/SharePointEventsService.aspx?odataFilter=${encodeURI(
