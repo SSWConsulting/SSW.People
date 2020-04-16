@@ -34,6 +34,11 @@ const Person = ({
   const personName = frontmatter.nickname
     ? `${frontmatter.name} (${frontmatter.nickname})`
     : frontmatter.name;
+  const firstNameOrNickname = frontmatter.nickname
+    ? frontmatter.nickname
+    : frontmatter.name
+    ? frontmatter.name.split(' ')[0]
+    : '';
   const [displayContactForm, setdisplayContactForm] = useState(false);
   const profileAudio = data.profileAudio.nodes[0];
   const [hover, setHover] = useState(false);
@@ -306,11 +311,7 @@ const Person = ({
               />
               <Contact
                 onClick={() => onContactButtonClick()}
-                profileName={
-                  frontmatter.nickname
-                    ? frontmatter.nickname
-                    : frontmatter.name.split(' ')[0]
-                }
+                profileName={firstNameOrNickname}
               />
               <Modal
                 isOpen={displayContactForm}

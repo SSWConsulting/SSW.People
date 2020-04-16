@@ -23,8 +23,8 @@ const InternalEvents = ({ presenterName, presenterNickname }) => {
           <div>
             <h2>Next talks</h2>
           </div>
-          {Array.prototype.map.call(events, event => (
-            <InternalEvent properties={event}></InternalEvent>
+          {events.map((event, index) => (
+            <InternalEvent key={index} event={event}></InternalEvent>
           ))}
         </div>
       )}
