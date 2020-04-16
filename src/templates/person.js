@@ -11,6 +11,7 @@ import Contact from '../components/contact/contact';
 import ContactForm from '../components/contact-form/contact-form';
 import Modal from 'react-modal';
 import PlayAudio from '../components/play-audio/play-audio';
+import GitHubContributionCalendar from '../components/github-contribution-calendar/github-contribution-calendar';
 import EventList from '../components/event-list/event-list';
 
 config.autoAddCss = false;
@@ -301,10 +302,14 @@ const Person = ({
                   <YoutubePlaylist
                     youtubePlayListId={frontmatter.youtubePlayListId}
                   />
-                  <hr />
                 </>
               )}
-
+              {frontmatter.github && frontmatter.github != '' && (
+                <GitHubContributionCalendar
+                  githubUserName={frontmatter.github}
+                />
+              )}
+              <hr />
               <EventList
                 presenterName={frontmatter.name}
                 presenterNickname={frontmatter.nickname}
