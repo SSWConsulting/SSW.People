@@ -90,7 +90,7 @@ exports.sourceNodes = async ({ actions }) => {
 exports.createPages = async function({ actions, graphql }) {
   const { data } = await graphql(`
     query {
-      people: allFile(filter: { sourceInstanceName: { eq: "people" } }) {
+      people: allFile(filter: {extension: { eq: "md" }, sourceInstanceName: { eq: "people" } }) {
         edges {
           node {
             name
