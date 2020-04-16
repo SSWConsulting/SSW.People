@@ -7,7 +7,7 @@ const GitHubContributionCalendar = ({ githubUserName }) => {
   return (
     <>
       <hr />
-      <h4 className="text-ssw-red mb-0">GitHub Contributions</h4>
+      <h2>GitHub contributions</h2>
       <div className="mx-3">
         <GitHubCalendar
           username={githubUserName}
