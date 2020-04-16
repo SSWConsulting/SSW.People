@@ -789,6 +789,93 @@ label {
   margin-bottom: 1em;
 }
 
+.event-item{
+  padding: 15px 0 10px;
+  border-bottom: 1px solid #eee;
+  margin-bottom: 10px;
+  width: 100%;
+  font-family: 'Open Sans',sans-serif;
+  font-weight: 300;
+  line-height: inherit;
+}
+.event-item a {
+  color: #333;
+  border-bottom: 1px dotted #9e9e9e;
+}
+.event-item .thumbnail {
+  float: left;
+  width: 115px;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  position: relative;
+  font-size: 12px;
+  margin-right: 10px;
+  border: 1px solid #ccc;
+}
+.event-item .ourHolder-text .key_type,
+.event-item .ourHolder-text .key_technology,
+.event-item .ourHolder-text .key_presenter,
+.event-item .ourHolder-text .key_video {
+  display: inline;
+}
+.event-item .ourHolder-text .key_technology_title,
+.event-item .ourHolder-text .key_type_title,
+.event-item .ourHolder-text .key_presenter_title,
+.event-item .ourHolder-text .key_video_title {
+  font-weight: bold;
+  padding-right: 5px;
+}
+.event-item .ourHolder-text .key_datetime {
+  color: #cc4141;
+  text-transform: uppercase;
+  display: block;
+}
+.event-item .ourHolder-text a h3 {
+  margin: 0 0 10px 0;
+  font-size: 1.6rem;
+}
+.daystogo {
+  background: #414141;
+  color: #fff;
+  font-size: .8em;
+  margin-left: 5px;
+  padding: 0 5px;
+  display: inline-block;
+  border-radius: 3px;
+  font-weight: bold;
+}
+
+.btn-filter{
+  color: #fff;
+  cursor: pointer;
+  font-size: 1rem;
+  line-height: 18px;
+  font-weight: normal;
+  display: inline-block;
+  text-decoration: none;
+  padding: 8px 15px;
+  text-align: center;
+  vertical-align: middle;
+  touch-action: manipulation;
+}
+
+.btn-filter-active{
+background-color: #cc4141;
+}
+
+.btn-filter-active:hover{
+background-color: #cc2121;
+}
+
+.btn-filter-inactive{
+  background-color: #999;
+  }
+
+  .btn-filter-inactive:hover{
+  background-color: #888;
+  }
+
 /**
 * This injects Tailwind's component classes and any component classes
 * registered by plugins.

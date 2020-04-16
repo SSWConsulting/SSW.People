@@ -9,13 +9,14 @@ const Head = ({
   siteTitle,
   siteDescription,
   siteUrl,
+  parentSiteUrl,
   pageTitle,
   pageTitleFull = pageTitle ? `${pageTitle} | ${siteTitle}` : siteTitle,
   themeColor,
   social,
   imageUrl,
   location,
-  canonical = siteUrl + (location.pathname || ''),
+  canonical = parentSiteUrl + (location.pathname || ''),
 }) => (
   <Helmet>
     <html lang="en" />
@@ -86,7 +87,7 @@ const Head = ({
       name="msapplication-square310x310"
     />
 
-    <link href="/manifest.json" rel="manifest" />
+    <link href="/people/manifest.json" rel="manifest" />
 
     <link
       href="/ssw/include/pigeon/img/apple-touch-icon-57x57.png"
@@ -129,11 +130,6 @@ const Head = ({
       sizes="152x152"
     />
     <link
-      href="/ssw/include/pigeon/img/apple-touch-icon-167x167.png"
-      rel="apple-touch-icon"
-      sizes="167x167"
-    />
-    <link
       href="/ssw/include/pigeon/img/apple-touch-icon-180x180.png"
       rel="icon"
       sizes="180x180"
@@ -173,6 +169,7 @@ Head.propTypes = {
   siteTitleShort: PropTypes.string,
   siteDescription: PropTypes.string,
   siteUrl: PropTypes.string,
+  parentSiteUrl: PropTypes.string,
   themeColor: PropTypes.string,
   social: PropTypes.objectOf(PropTypes.string),
   imageUrl: PropTypes.string,
@@ -192,6 +189,7 @@ const HeadWithQuery = props => (
             siteTitleShort
             siteDescription
             siteUrl
+            parentSiteUrl
             themeColor
             social {
               twitter
