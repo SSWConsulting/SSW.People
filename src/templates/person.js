@@ -11,7 +11,7 @@ import Contact from '../components/contact/contact';
 import ContactForm from '../components/contact-form/contact-form';
 import Modal from 'react-modal';
 import PlayAudio from '../components/play-audio/play-audio';
-import InternalEvents from '../components/internal-events/internal-events';
+import EventList from '../components/event-list/event-list';
 
 config.autoAddCss = false;
 
@@ -305,7 +305,7 @@ const Person = ({
                 </>
               )}
 
-              <InternalEvents
+              <EventList
                 presenterName={frontmatter.name}
                 presenterNickname={frontmatter.nickname}
               />
