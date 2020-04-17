@@ -2,8 +2,8 @@ import moment from 'moment';
 
 async function getEventsPresenters() {
   var dateFilter = new Date().toISOString();
-  var oDataFilterOngoing = `$filter=Enabled ne false and EndDateTime ge datetime'${dateFilter}'%26$select=StartDateTime,Presenter%26$orderby=StartDateTime asc%26$top=50`;
-  var presenters;
+  var oDataFilterOngoing = `$filter=Enabled ne false and EndDateTime ge datetime'${dateFilter}'%26$select=StartDateTime,Presenter,CalendarType%26$orderby=StartDateTime asc%26$top=50`;
+  var presentersEvents;
   await fetch(
     `https://www.ssw.com.au/ssw/SharePointEventsService.aspx?odataFilter=${oDataFilterOngoing}`
   )
@@ -11,9 +11,18 @@ async function getEventsPresenters() {
     .then(result => {
       var parser = new DOMParser();
       var xmlDoc = parser.parseFromString(result, 'application/xml');
-      presenters = xmlDoc.getElementsByTagName('Presenter');
+      var presentersEventsXml = xmlDoc.getElementsByTagName('properties');
+
+      presentersEvents = Array.prototype.map.call(presentersEventsXml, element => {
+        return {
+          eventType: element.getElementsByTagName('CalendarType')[0]
+            .textContent,
+          presenter: element.getElementsByTagName('Presenter')[0].textContent,
+        };
+      });
+      presentersEvents = presentersEvents.sort((a, b) => a.eventtype - b.eventtype);
     });
-  return presenters;
+  return presentersEvents;
 }
 
 async function getEventsForPresenter(name, nickname) {

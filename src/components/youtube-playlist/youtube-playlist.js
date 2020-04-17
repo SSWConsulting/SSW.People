@@ -44,11 +44,15 @@ const YoutubePlaylist = ({ youtubePlayListId }) => {
     return null;
   } else {
     return (
-      <div className="youtube-playlist container">
-        <Helmet
-          style={[
-            {
-              cssText: `
+      <>
+        <div>
+          <h2>Videos</h2>
+        </div>
+        <div className="youtube-playlist container">
+          <Helmet
+            style={[
+              {
+                cssText: `
               .BrainhubCarousel__arrows{
                       background-color: #CC4141;
               }
@@ -61,60 +65,61 @@ const YoutubePlaylist = ({ youtubePlayListId }) => {
                       background-color:#CC4141
               }
             `,
-            },
-          ]}
-        />
-        <Carousel
-          value={currentSlide}
-          slidesPerPage={3}
-          slidesPerScroll={3}
-          infinite
-          breakpoints={{
-            770: {
-              slidesPerPage: 1,
-              slidesPerScroll: 1,
-            },
-            1290: {
-              slidesPerPage: 2,
-              slidesPerScroll: 2,
-            },
-          }}
-        >
-          {items.map(item => (
-            <div
-              key={item.contentDetails.videoId + 1}
-              className="gatsby-resp-iframe-wrapper"
-            >
-              <div className="embedVideo-container">
-                <iframe
-                  key={item.contentDetails.videoId}
-                  title="1"
-                  src={`https://www.youtube-nocookie.com/embed/${item.contentDetails.videoId}?rel=0`}
-                  allowFullScreen="allowfullscreen"
-                  frameBorder="0"
-                  width="321"
-                  height="180"
-                  className="embedVideo-iframe"
-                ></iframe>
+              },
+            ]}
+          />
+          <Carousel
+            value={currentSlide}
+            slidesPerPage={3}
+            slidesPerScroll={3}
+            infinite
+            breakpoints={{
+              770: {
+                slidesPerPage: 1,
+                slidesPerScroll: 1,
+              },
+              1290: {
+                slidesPerPage: 2,
+                slidesPerScroll: 2,
+              },
+            }}
+          >
+            {items.map(item => (
+              <div
+                key={item.contentDetails.videoId + 1}
+                className="gatsby-resp-iframe-wrapper"
+              >
+                <div className="embedVideo-container">
+                  <iframe
+                    key={item.contentDetails.videoId}
+                    title="1"
+                    src={`https://www.youtube-nocookie.com/embed/${item.contentDetails.videoId}?rel=0`}
+                    allowFullScreen="allowfullscreen"
+                    frameBorder="0"
+                    width="321"
+                    height="180"
+                    className="embedVideo-iframe"
+                  ></iframe>
+                </div>
               </div>
-            </div>
-          ))}
-        </Carousel>
-        <div className="youtube-playlist-arrows">
-          <button
-            className="BrainhubCarousel__arrows BrainhubCarousel__arrowLeft"
-            onClick={previousSlide}
-          >
-            <span>pre</span>
-          </button>
-          <button
-            className="BrainhubCarousel__arrows BrainhubCarousel__arrowRight"
-            onClick={nextSlide}
-          >
-            <span>next</span>
-          </button>
+            ))}
+          </Carousel>
+          <div className="youtube-playlist-arrows">
+            <button
+              className="BrainhubCarousel__arrows BrainhubCarousel__arrowLeft"
+              onClick={previousSlide}
+            >
+              <span>pre</span>
+            </button>
+            <button
+              className="BrainhubCarousel__arrows BrainhubCarousel__arrowRight"
+              onClick={nextSlide}
+            >
+              <span>next</span>
+            </button>
+          </div>
         </div>
-      </div>
+      </>
     );
   }
 };
