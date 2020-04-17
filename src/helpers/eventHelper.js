@@ -13,14 +13,19 @@ async function getEventsPresenters() {
       var xmlDoc = parser.parseFromString(result, 'application/xml');
       var presentersEventsXml = xmlDoc.getElementsByTagName('properties');
 
-      presentersEvents = Array.prototype.map.call(presentersEventsXml, element => {
-        return {
-          eventType: element.getElementsByTagName('CalendarType')[0]
-            .textContent,
-          presenter: element.getElementsByTagName('Presenter')[0].textContent,
-        };
-      });
-      presentersEvents = presentersEvents.sort((a, b) => a.eventtype - b.eventtype);
+      presentersEvents = Array.prototype.map.call(
+        presentersEventsXml,
+        element => {
+          return {
+            eventType: element.getElementsByTagName('CalendarType')[0]
+              .textContent,
+            presenter: element.getElementsByTagName('Presenter')[0].textContent,
+          };
+        }
+      );
+      presentersEvents = presentersEvents.sort(
+        (a, b) => a.eventtype - b.eventtype
+      );
     });
   return presentersEvents;
 }
