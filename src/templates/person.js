@@ -177,7 +177,7 @@ const Person = ({
                       </a>
                     </li>
                   )}
-                  {frontmatter.blog != '' && (
+                  {frontmatter.blog && frontmatter.blog != '' && (
                     <li id="blog" className="social">
                       <a
                         target="_blank"
@@ -188,7 +188,7 @@ const Person = ({
                       </a>
                     </li>
                   )}
-                  {frontmatter.facebook != '' && (
+                  {frontmatter.facebook && frontmatter.facebook != '' && (
                     <li id="facebook" className="social">
                       <a
                         target="_blank"
@@ -201,12 +201,12 @@ const Person = ({
                       </a>
                     </li>
                   )}
-                  {frontmatter.skype != '' && (
+                  {frontmatter.skype && frontmatter.skype != '' && (
                     <li id="skype" className="social">
                       <a href={'skype:' + frontmatter.skype + '?call'}>Skype</a>
                     </li>
                   )}
-                  {frontmatter.linkedin != '' && (
+                  {frontmatter.linkedin && frontmatter.linkedin != '' && (
                     <li id="linkedin" className="social">
                       <a
                         target="_blank"
@@ -219,7 +219,7 @@ const Person = ({
                       </a>
                     </li>
                   )}
-                  {frontmatter.twitter != '' && (
+                  {frontmatter.twitter && frontmatter.twitter != '' && (
                     <li id="twitter" className="social">
                       <a
                         target="_blank"
