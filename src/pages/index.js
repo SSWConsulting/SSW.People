@@ -18,7 +18,7 @@ import { config } from '@fortawesome/fontawesome-svg-core';
 import '@fortawesome/fontawesome-svg-core/styles.css';
 import ProfileSort from '../helpers/profileSort';
 import { getEventsPresenters } from '../helpers/eventHelper';
-import Button from '../components/button/button';
+import EventFilter from '../components/event-filter/event-filter';
 
 config.autoAddCss = false;
 
@@ -61,20 +61,37 @@ const Index = ({
     [allPeople]
   );
 
-  const [isSpeakingSelected, SetSpeakingSelected] = useState(false);
   const [selectedLocation, setSelectedLocation] = useState(allLocations[0]);
   const [selectedSkills, setSelectedSkills] = useState([]);
   const [selectedRoles, setSelectedRoles] = useState([]);
   const [filteredPeople, setFilteredPeople] = useState(allPeople);
-  const [presenters, setPresenters] = useState(null);
+  const [events, setEvents] = useState(null);
+  const [allEventsType, setAllEventsType] = useState([]);
+  const [selectedEvents, setSelectedEvents] = useState([]);
+
   async function loadEventsPresenters() {
     var presentersList = await getEventsPresenters();
-    setPresenters(presentersList);
+    setEvents(presentersList);
+    setAllEventsType([
+      ...new Set(presentersList.map(event => event.eventType)),
+    ]);
   }
-  //loadEventsPresenters();
 
+  const isPresenter = (p, pr) => {
+    return (
+      (p.nickname.length > 0 &&
+        pr.presenter.toLowerCase().indexOf(p.nickname.toLowerCase()) >= 0) ||
+      pr.presenter.toLowerCase().indexOf(p.fullName.toLowerCase()) >= 0
+    );
+  };
+  const isPresenterOfEventType = (p, pr) => {
+    return (
+      selectedEvents.filter(e => pr.eventType === e).length > 0 &&
+      isPresenter(p, pr)
+    );
+  };
   useEffect(() => {
-    if (!presenters) {
+    if (!events) {
       loadEventsPresenters();
     }
 
@@ -89,24 +106,16 @@ const Index = ({
       )
       .filter(
         p =>
-          !isSpeakingSelected ||
-          (presenters &&
-            Array.prototype.filter.call(
-              presenters,
-              pr =>
-                (p.nickname.length > 0 &&
-                  pr.textContent
-                    .toLowerCase()
-                    .indexOf(p.nickname.toLowerCase()) >= 0) ||
-                pr.textContent
-                  .toLowerCase()
-                  .indexOf(p.fullName.toLowerCase()) >= 0
+          selectedEvents.length === 0 ||
+          (events &&
+            Array.prototype.filter.call(events, pr =>
+              isPresenterOfEventType(p, pr)
             ).length > 0)
       )
       .sort(ProfileSort);
 
     setFilteredPeople(people);
-  }, [selectedLocation, selectedSkills, isSpeakingSelected, presenters]);
+  }, [selectedLocation, selectedSkills, selectedEvents, events]);
 
   return (
     <>
@@ -128,24 +137,18 @@ const Index = ({
           <div className="lg:w-1/4">
             <div className="mx-auto flex flex-col sm:flex-row lg:flex-col lg:w-5/6">
               <div className="w-full sm:w-1/2 lg:w-full">
-                <div className="w-full whitespace-no-wrap">
-                  <Button
-                    labelText="Incoming speakers"
-                    isActive={isSpeakingSelected}
-                    onClick={() => SetSpeakingSelected(!isSpeakingSelected)}
-                    activeIcon=""
-                    inActiveIcon=""
-                    activeClassName="btn-filter-active btn-filter"
-                    inActiveClassName="btn-filter-inactive btn-filter"
-                  />
-                </div>
-              </div>
-              <div className="w-full sm:w-1/2 lg:w-full">
                 <RoleFilter
                   allRoles={allRoles}
                   selectedRoles={selectedRoles}
                   onRoleChange={setSelectedRoles}
                   filteredPeople={filteredPeople}
+                />
+              </div>
+              <div className="w-full sm:w-1/2 lg:w-full mt-0 lg:mt-4">
+                <EventFilter
+                  allEvents={allEventsType}
+                  selectedEvents={selectedEvents}
+                  onEventChange={setSelectedEvents}
                 />
               </div>
               <div className="w-full sm:w-1/2 lg:w-full mt-0 lg:mt-4">

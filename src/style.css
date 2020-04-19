@@ -107,7 +107,8 @@ ul li {
 }
 
 .filter-role li,
-.filter-skills li {
+.filter-skills li,
+.filter-event li {
   background: none;
   padding: 0.5rem 0.25rem;
 }
@@ -845,7 +846,9 @@ label {
   border-radius: 3px;
   font-weight: bold;
 }
-
+.key-more{
+  padding-top: 20px;
+}
 .btn-filter{
   color: #fff;
   cursor: pointer;
@@ -861,20 +864,28 @@ label {
 }
 
 .btn-filter-active{
-background-color: #cc4141;
+  background-color: #cc4141;
+  font-weight: bold;
 }
 
 .btn-filter-active:hover{
-background-color: #cc2121;
+  background-color: #cc2121;
 }
 
 .btn-filter-inactive{
-  background-color: #999;
-  }
+  background-color: white;
+  color: #cc2121;
+  font-weight: bold;
+  border-style: solid;
+  border-width: 1px;
+}
 
-  .btn-filter-inactive:hover{
-  background-color: #888;
-  }
+.btn-filter-inactive:hover{
+  background-color: rgb(238, 238, 238);
+}
+.btn-more:hover {
+  color: #cc2121;
+}
 
 /**
 * This injects Tailwind's component classes and any component classes
