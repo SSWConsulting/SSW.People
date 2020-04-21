@@ -100,9 +100,9 @@
     "mkdirp": "^0.5.1",
     "node-gyp": "^6.0.0",
     "prettier": "^1.16.0",
+    "@ssw/ssw.megamenu": "^2.0.0",
     "tailwindcss": "^1.1.3",
-    "typescript": "^3.6.4",
-    "ssw.megamenu":"^2.0.0"
+    "typescript": "^3.6.4"
   },
   "alias": {
     "react-dom": "@hot-loader/react-dom"
