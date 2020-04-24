@@ -119,7 +119,7 @@ exports.createPages = async function({ actions, graphql }) {
       ? edge.node.childMarkdownRemark.frontmatter.nickname
       : null;
     const slug = edge.node.name;
-    const prefix = isCurrent ? '' : 'previous-employees/';
+    const prefix = '';
     return {
       slug: slug,
       path: prefix + slug.toLowerCase(),
