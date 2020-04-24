@@ -10,6 +10,9 @@ const YoutubePlaylist = ({ youtubePlayListId }) => {
   const [items, setItems] = useState([]);
   const [currentSlide, setCurrentSlide] = useState(0);
 
+  var numVideosDesktop = 0;
+  var numVideosTablet = 0;
+
   const nextSlide = () => setCurrentSlide(currentSlide + 1);
   const previousSlide = () => setCurrentSlide(currentSlide - 1);
 
@@ -43,6 +46,17 @@ const YoutubePlaylist = ({ youtubePlayListId }) => {
   } else if (items == null) {
     return null;
   } else {
+    if (items.length >= 3) {
+      numVideosDesktop = 3;
+      numVideosTablet = 2;
+    } else if (items.length == 2) {
+      numVideosDesktop = 2;
+      numVideosTablet = 2;
+    } else {
+      numVideosDesktop = 1;
+      numVideosTablet = 1;
+    }
+
     return (
       <>
         <div>
@@ -70,8 +84,8 @@ const YoutubePlaylist = ({ youtubePlayListId }) => {
           />
           <Carousel
             value={currentSlide}
-            slidesPerPage={3}
-            slidesPerScroll={3}
+            slidesPerPage={numVideosDesktop}
+            slidesPerScroll={numVideosDesktop}
             infinite
             breakpoints={{
               770: {
@@ -79,8 +93,8 @@ const YoutubePlaylist = ({ youtubePlayListId }) => {
                 slidesPerScroll: 1,
               },
               1290: {
-                slidesPerPage: 2,
-                slidesPerScroll: 2,
+                slidesPerPage: numVideosTablet,
+                slidesPerScroll: numVideosTablet,
               },
             }}
           >
