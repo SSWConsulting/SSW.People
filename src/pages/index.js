@@ -198,7 +198,7 @@ function buildPeople(data) {
       n.childImageSharp.fixed
     )
   );
-  data.allSkills.nodes.forEach(n => {
+  data.allCRMData.nodes.forEach(n => {
     skillsMap.set(
       n.fullName,
       [n.skills.advancedSkills, n.skills.intermediateSkills].flat()
@@ -305,7 +305,7 @@ const IndexWithQuery = props => (
             }
           }
         }
-        allSkills: allCrmDataCollection(filter: { id: {} }) {
+        allCRMData: allCrmDataCollection(filter: { id: {} }) {
           nodes {
             skills {
               advancedSkills

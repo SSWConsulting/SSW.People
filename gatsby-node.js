@@ -61,7 +61,7 @@ exports.sourceNodes = async ({ actions }) => {
       fullName: `${user.firstName} ${user.lastName}`,
       emailAddress: user.emailAddress,
       location: user.defaultSite.name,
-      billingRate: 0, //TODO: integrate with CRM data
+      billingRate: user.billableRate || 0, //TODO: integrate with CRM data
       skills: {
         intermediateSkills: user.skills
           .filter(s => s.experienceLevel === 'Intermediate')
@@ -70,6 +70,15 @@ exports.sourceNodes = async ({ actions }) => {
           .filter(s => s.experienceLevel === 'Advanced')
           .map(s => s.technology),
       },
+      isActive: user.isActive,
+      nickname: user.nickname || '', //TODO: integrate with CRM data
+      blogUrl: user.blogUrl || '', //TODO: integrate with CRM data
+      facebookUrl: user.facebookUrl || '', //TODO: integrate with CRM data
+      skypeUsername: user.skypeUsername || '', //TODO: integrate with CRM data
+      linkedInUrl: user.linkedInUrl || '', //TODO: integrate with CRM data
+      twitterUsername: user.twitterUsername || '', //TODO: integrate with CRM data
+      gitHubUrl: user.gitHubUrl || '', //TODO: integrate with CRM data
+      youTubePlayListId: user.youTubePlayListId || '', //TODO: integrate with CRM data
     };
 
     // Get content digest of node. (Required field)
@@ -101,6 +110,7 @@ exports.createPages = async function({ actions, graphql }) {
             name
             childMarkdownRemark {
               frontmatter {
+                id
                 nickname
                 currentEmployee
               }
@@ -108,15 +118,36 @@ exports.createPages = async function({ actions, graphql }) {
           }
         }
       }
+      peopleCRM: allCrmDataCollection {
+        edges {
+          node {
+            id
+            isActive
+            nickname
+          }
+        }
+      }
     }
   `);
 
+  const peopleCRM = data.peopleCRM.edges.map(edge => {
+    return {
+      id: edge.node.id,
+      isActive: edge.node.isActive,
+      nickname: edge.node.nickname || null,
+    };
+  });
+
   const people = data.people.edges.map(edge => {
-    const isCurrent = edge.node.childMarkdownRemark
-      ? edge.node.childMarkdownRemark.frontmatter.currentEmployee
-      : false;
+    const crmData = peopleCRM.filter(
+      x => x.id === edge.node.childMarkdownRemark.frontmatter.id
+    );
+
+    const isCurrent = crmData.length > 0 ? crmData.isActive : false;
     const nickname = edge.node.childMarkdownRemark
       ? edge.node.childMarkdownRemark.frontmatter.nickname
+      : crmData.length > 0
+      ? crmData.nickname
       : null;
     const slug = edge.node.name;
     const prefix = isCurrent ? '' : 'previous-employees/';
