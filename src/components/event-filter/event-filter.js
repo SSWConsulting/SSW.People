@@ -93,7 +93,7 @@ const EventFilter = ({ allEvents, selectedEvents, onEventChange, search }) => {
             }}
           >
             <FontAwesomeIcon icon={faTimes} className="mr-1" />
-            Clear filter
+            Clear
           </small>
         </div>
         <ul
