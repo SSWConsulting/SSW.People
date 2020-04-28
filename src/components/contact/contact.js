@@ -7,7 +7,10 @@ const Contact = ({ onClick, profileName }) => {
       <h3 className="text-ssw-red">
         Interested in what {profileName ? profileName : 'we'} can do for you?
       </h3>
-      <p>Contact an Account Manager to discuss your project</p>
+      <p>
+        Contact {profileName ? `${profileName}'s` : 'an'} Account Manager to
+        discuss your project
+      </p>
       <button className="btn btn-red" onClick={() => onClick()}>
         Book a Free Initial Meeting
       </button>
