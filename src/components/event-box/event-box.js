@@ -29,44 +29,11 @@ const EventBox = ({ event }) => {
               <span className="daystogo">{event.daysToGo} Days to go</span>
             )}
           </span>
-          {event.technologycategory && (
-            <p className="key_technology">
-              <span className="key_technology_title"> Technology:</span>
-              {event.technologycategory}
-            </p>
-          )}
-          {event.eventtype && (
-            <p className="key_type">
-              <span className="key_type_title"> Type:</span>
-              {event.eventtype}
-            </p>
-          )}
-          {event.presenter && (
-            <p className="key_presenter">
-              <span className="key_presenter_title"> Presenter:</span>
-              {event.presenterprofileurl && (
-                <a
-                  target="_blank"
-                  href={event.presenterprofileurl}
-                  rel="noopener noreferrer"
-                >
-                  {event.presenter}
-                </a>
-              )}
-              {!event.presenterprofileurl && event.presenter}
-            </p>
-          )}
-
-          <div
-            className="key-description"
-            dangerouslySetInnerHTML={{
-              __html: event.description,
-            }}
-          ></div>
-
-          <a href={event.url} className="key-more ignore">
-            Find out more...
-          </a>
+          <p className="key-more">
+            <a href={event.url} className="ignore">
+              Find out more...
+            </a>
+          </p>
         </div>
       </div>
     </div>
