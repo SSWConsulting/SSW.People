@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { getEventsForPresenter } from '../../helpers/eventHelper';
+import {
+  getEventsForPresenter,
+  getPastEventsForPresenter,
+} from '../../helpers/eventHelper';
 import EventBox from '../event-box/event-box';
 import Button from '../button/button';
 import { faPlus, faMinus } from '@fortawesome/free-solid-svg-icons';
@@ -9,6 +12,9 @@ const EventList = ({ presenterName, presenterNickname }) => {
   const [showMoreActive, setShowMoreActive] = useState(false);
   const [events, setEvents] = useState(null);
   const [allEvents, setAllEvents] = useState(null);
+  const [allPastEvents, setAllPastEvents] = useState(null);
+  const [showPastTalksActive, setShowPastTalksActive] = useState(false);
+
   async function loadEventsPresenters() {
     var allEvents = await getEventsForPresenter(
       presenterName,
@@ -18,6 +24,12 @@ const EventList = ({ presenterName, presenterNickname }) => {
     if (allEvents.length > 3) {
       setEvents(allEvents.slice(0, 3));
     }
+
+    var allPastEvents = await getPastEventsForPresenter(
+      presenterName,
+      presenterNickname
+    );
+    setAllPastEvents(allPastEvents);
   }
 
   useEffect(() => {
@@ -56,6 +68,27 @@ const EventList = ({ presenterName, presenterNickname }) => {
           activeClassName="btn-more"
           inActiveClassName="btn-more"
         />
+      )}
+
+      {allPastEvents && allPastEvents.length > 0 && (
+        <div>
+          <div>
+            <Button
+              labelText=" Show past talks"
+              isActive={showPastTalksActive}
+              onClick={() => setShowPastTalksActive(!showPastTalksActive)}
+              activeIcon={faMinus}
+              inActiveIcon={faPlus}
+              activeClassName="btn-more"
+              inActiveClassName="btn-more"
+            />
+          </div>
+          {allPastEvents &&
+            showPastTalksActive &&
+            allPastEvents.map((event, index) => (
+              <EventBox key={index} event={event}></EventBox>
+            ))}
+        </div>
       )}
     </>
   );
