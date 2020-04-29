@@ -155,14 +155,19 @@ exports.onPostBuild = async ({ store, pathPrefix }) => {
   const rewrites = Array.from(pages.values())
     .filter(
       page =>
-        (page.context.nicknamePath &&
-        page.context.originalPath !== page.context.nicknamePath)
+        page.context.nicknamePath &&
+        page.context.originalPath !== page.context.nicknamePath
     )
     .map(page => {
-      if(page.path.startsWith(alumniPrefix))
-      {
+      if (page.path.startsWith(alumniPrefix)) {
         return {
-          fromPath: pathPrefix + '/' + page.context.originalPath.replace(alumniPrefix.substring(1) + '/',""), 
+          fromPath:
+            pathPrefix +
+            '/' +
+            page.context.originalPath.replace(
+              alumniPrefix.substring(1) + '/',
+              ''
+            ),
           toPath: pathPrefix + page.path,
         };
       } else {
@@ -174,15 +179,12 @@ exports.onPostBuild = async ({ store, pathPrefix }) => {
     });
 
   const alumniRewrites = Array.from(pages.values())
-  .filter(
-    page =>
-      page.path.startsWith(alumniPrefix)
-  )
-  .map(page => {
+    .filter(page => page.path.startsWith(alumniPrefix))
+    .map(page => {
       return {
-        fromPath: pathPrefix + '/' + page.path.replace(alumniPrefix + '/',""), 
+        fromPath: pathPrefix + '/' + page.path.replace(alumniPrefix + '/', ''),
         toPath: pathPrefix + page.path,
       };
-  });
+    });
   await createRewriteMapsFile(pluginData, rewrites.concat(alumniRewrites));
 };
