@@ -27,19 +27,16 @@ const Person = ({
   const frontmatter = childMarkdownRemark.frontmatter || {};
   const profileHtml = childMarkdownRemark.html || {};
   const crmData = data.crmData || {};
-  const skills = crmData.skills || {};
-  const intermediateSkills = skills.intermediateSkills || [];
-  const advancedSkills = skills.advancedSkills || [];
+  const intermediateSkills = crmData.skills.intermediateSkills || [];
+  const advancedSkills = crmData.skills.advancedSkills || [];
   const profileImage = data.profileImage.nodes[0];
   const sketchImage = data.sketchImage.nodes[0];
-  const personName = frontmatter.nickname
-    ? `${frontmatter.name} (${frontmatter.nickname})`
-    : frontmatter.name;
-  const firstNameOrNickname = frontmatter.nickname
-    ? frontmatter.nickname
-    : frontmatter.name
-    ? frontmatter.name.split(' ')[0]
-    : '';
+  const personName = crmData.nickname
+    ? `${crmData.fullName} (${crmData.nickname})`
+    : crmData.fullName;
+  const firstNameOrNickname = crmData.nickname
+    ? crmData.nickname
+    : crmData.fullName.split(' ')[0];
   const [displayContactForm, setdisplayContactForm] = useState(false);
   const profileAudio = data.profileAudio.nodes[0];
   const [hover, setHover] = useState(false);
@@ -61,7 +58,6 @@ const Person = ({
     : '';
 
   const decodeEmail = encodedEmail => {
-    // holds the decoded email address
     let email = '';
 
     if (encodedEmail !== undefined) {
@@ -87,9 +83,9 @@ const Person = ({
       <Layout
         crumbs={crumbs}
         crumbLabel={personName}
-        pageTitle={childMarkdownRemark.frontmatter && personName}
+        pageTitle={crmData && personName}
         displayActions={true}
-        profileId={person.name}
+        profileId={crmData.id}
       >
         <div className="flex flex-wrap mb-5 md:mx-2 person-content">
           <div className="sm:w-full lg:w-1/4 xl:w-1/6">
@@ -144,7 +140,7 @@ const Person = ({
                       <div className="person-quote-name">
                         {frontmatter.quoteAuthor
                           ? frontmatter.quoteAuthor
-                          : frontmatter.name}
+                          : personName}
                       </div>
                     </div>
                   )}
@@ -158,13 +154,13 @@ const Person = ({
                   <div className="person-quote-name">
                     {frontmatter.quoteAuthor
                       ? frontmatter.quoteAuthor
-                      : frontmatter.name}
+                      : personName}
                   </div>
                 </div>
               )}
               <div className="favor-content w-full">
                 <ul className="favor-list">
-                  {crmData.emailAddress != '' && (
+                  {crmData.emailAddress && (
                     <li id="email" className="social">
                       <a
                         href={'#0'}
@@ -177,65 +173,61 @@ const Person = ({
                       </a>
                     </li>
                   )}
-                  {frontmatter.blog && frontmatter.blog != '' && (
+                  {crmData.blogUrl && (
                     <li id="blog" className="social">
                       <a
                         target="_blank"
                         rel="noopener noreferrer"
-                        href={frontmatter.blog}
+                        href={crmData.blogUrl}
                       >
                         Blog
                       </a>
                     </li>
                   )}
-                  {frontmatter.facebook && frontmatter.facebook != '' && (
+                  {crmData.facebookUrl && (
                     <li id="facebook" className="social">
                       <a
                         target="_blank"
                         rel="noopener noreferrer"
-                        href={
-                          'https://www.facebook.com/' + frontmatter.facebook
-                        }
+                        href={crmData.facebookUrl}
                       >
                         Facebook
                       </a>
                     </li>
                   )}
-                  {frontmatter.skype && frontmatter.skype != '' && (
+                  {crmData.skypeUsername && (
                     <li id="skype" className="social">
-                      <a href={'skype:' + frontmatter.skype + '?call'}>Skype</a>
+                      <a href={`skype:${crmData.skypeUsername}?call`}>Skype</a>
                     </li>
                   )}
-                  {frontmatter.linkedin && frontmatter.linkedin != '' && (
+                  {crmData.linkedInUrl && (
                     <li id="linkedin" className="social">
                       <a
                         target="_blank"
                         rel="noopener noreferrer"
-                        href={
-                          'https://www.linkedin.com/in/' + frontmatter.linkedin
-                        }
+                        href={crmData.linkedInUrl}
                       >
                         LinkedIn
                       </a>
                     </li>
                   )}
-                  {frontmatter.twitter && frontmatter.twitter != '' && (
+                  {crmData.twitterUsername && (
                     <li id="twitter" className="social">
                       <a
                         target="_blank"
                         rel="noopener noreferrer"
-                        href={'https://www.twitter.com/' + frontmatter.twitter}
+                        href={`https://www.twitter.com/${crmData.twitterUsername}`}
                       >
                         Twitter
                       </a>
                     </li>
                   )}
-                  {frontmatter.github && frontmatter.github != '' && (
+                  {crmData.gitHubUrl && (
                     <li id="github" className="social">
                       <a
                         target="_blank"
                         rel="noopener noreferrer"
-                        href={'https://www.github.com/' + frontmatter.github}
+                        href={crmData.gitHubUrl}
                       >
                         GitHub
                       </a>
@@ -261,11 +253,10 @@ const Person = ({
                   {frontmatter.qualifications}
                 </strong>
               )}
+              <hr />
               {((advancedSkills && !!advancedSkills.length) ||
                 (intermediateSkills && !!intermediateSkills.length)) && (
                 <>
-                  <hr />
-
                   <h4 className="text-ssw-red mb-0">Skills:</h4>
                   <span>
                     {advancedSkills.map((skill, i, arr) => (
@@ -296,23 +287,23 @@ const Person = ({
                   __html: profileHtml,
                 }}
               />
-              {frontmatter.youtubePlayListId && (
+              {crmData.youtubePlayListId && (
                 <>
                   <hr />
                   <YoutubePlaylist
-                    youtubePlayListId={frontmatter.youtubePlayListId}
+                    youtubePlayListId={crmData.youtubePlayListId}
                   />
                 </>
               )}
-              {frontmatter.github && frontmatter.github != '' && (
+              {crmData.githubUrl && (
                 <GitHubContributionCalendar
-                  githubUserName={frontmatter.github}
+                  githubUserName={crmData.githubUrl.split('/')[1]}
                 />
               )}
               <hr />
               <EventList
-                presenterName={frontmatter.name}
-                presenterNickname={frontmatter.nickname}
+                presenterName={crmData.fullName}
+                presenterNickname={crmData.nickname}
               />
               <Contact
                 onClick={() => onContactButtonClick()}
@@ -324,7 +315,7 @@ const Person = ({
                 className="modal"
               >
                 <ContactForm
-                  profileName={frontmatter.name}
+                  profileName={crmData.fullName}
                   onClose={() => setdisplayContactForm(false)}
                 />
               </Modal>
@@ -346,32 +337,24 @@ export default Person;
 
 export const query = graphql`
   query(
-    $slug: String!
+    $id: String!
     $profileImage: String!
     $sketchImage: String!
     $audio: String!
   ) {
-    people: file(sourceInstanceName: { eq: "people" }, name: { eq: $slug }) {
+    people: file(
+      sourceInstanceName: { eq: "people" }
+      childMarkdownRemark: { frontmatter: { id: { eq: $id } } }
+    ) {
       name
       childMarkdownRemark {
         frontmatter {
-          name
-          nickname
+          id
           role
           category
-          currentEmployee
-          blog
-          facebook
-          linkedin
-          location
           qualifications
           quote
           quoteAuthor
-          skype
-          twitter
-          website
-          github
-          youtubePlayListId
         }
         html
       }
@@ -418,13 +401,23 @@ export const query = graphql`
         publicURL
       }
     }
-    crmData: crmDataCollection(slug: { eq: $slug }) {
+    crmData: crmDataCollection(id: { eq: $id }) {
       skills {
         intermediateSkills
         advancedSkills
       }
-      location: location
-      emailAddress: emailAddress
+      location
+      emailAddress
+      skypeUsername
+      twitterUsername
+      gitHubUrl
+      youTubePlayListId
+      isActive
+      blogUrl
+      facebookUrl
+      linkedInUrl
+      id
+      fullName
     }
   }
 `;

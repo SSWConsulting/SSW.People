@@ -139,27 +139,23 @@ exports.createPages = async function({ actions, graphql }) {
   });
 
   const people = data.people.edges.map(edge => {
-    const crmData = peopleCRM.filter(
+    const crmData = peopleCRM.find(
       x => x.id === edge.node.childMarkdownRemark.frontmatter.id
     );
 
-    const isCurrent = crmData.length > 0 ? crmData.isActive : false;
-    const nickname = edge.node.childMarkdownRemark
-      ? edge.node.childMarkdownRemark.frontmatter.nickname
-      : crmData.length > 0
-      ? crmData.nickname
-      : null;
-    const slug = edge.node.name;
+    const isCurrent = crmData ? crmData.isActive : false;
+    const nickname = crmData ? crmData.nickname : null;
     const prefix = isCurrent ? '' : 'previous-employees/';
     return {
-      slug: slug,
-      path: prefix + slug.toLowerCase(),
+      id: crmData.id,
+      slug: edge.node.name,
+      path: prefix + edge.node.name.toLowerCase(),
       nicknamePath: nickname
         ? prefix + nickname.replace(/ /g, '-').toLowerCase()
         : '',
-      audio: slug + '-Audio',
-      profileImage: slug + '-Profile',
-      sketchImage: slug + '-Sketch',
+      audio: edge.node.name + '-Audio',
+      profileImage: edge.node.name + '-Profile',
+      sketchImage: edge.node.name + '-Sketch',
     };
   });
 
@@ -168,6 +164,7 @@ exports.createPages = async function({ actions, graphql }) {
       path: person.nicknamePath ? person.nicknamePath : person.path,
       component: require.resolve('./src/templates/person.js'),
       context: {
+        id: person.id,
         slug: person.slug,
         originalPath: person.path,
         nicknamePath: person.nicknamePath,
