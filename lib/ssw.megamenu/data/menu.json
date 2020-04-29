@@ -311,13 +311,13 @@
                             "navigateUrl": "https://sswsophie.com/sophiebot/",
                             "target": "_blank",
                             "text": "SophieBot",
-                            "cssClass": "ignore Popular"
+                            "cssClass": "Popular"
                         },
                         {
                             "navigateUrl": "https://sswsophie.com",
                             "target": "_blank",
                             "text": "SophieHub",
-                            "cssClass": "ignore Popular"
+                            "cssClass": "Popular"
                         }
                     ]
                 },
@@ -331,19 +331,19 @@
                             "navigateUrl": "https://sugarlearning.com/",
                             "target": "_blank",
                             "text": "SugarLearning",
-                            "cssClass": "ignore Popular"
+                            "cssClass": "Popular"
                         },
                         {
                             "navigateUrl": "https://sswtimepro.com/",
                             "target": "_blank",
                             "text": "TimePro",
-                            "cssClass": "ignore Popular"
+                            "cssClass": "Popular"
                         },
                         {
                             "navigateUrl": "https://sswlinkauditor.com/",
                             "target": "_blank",
                             "text": "LinkAuditor",
-                            "cssClass": "ignore Popular"
+                            "cssClass": "Popular"
                         },
                         {
                             "navigateUrl": "https://sswhealthcheck.com/",
