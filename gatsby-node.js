@@ -112,7 +112,6 @@ exports.createPages = async function({ actions, graphql }) {
               frontmatter {
                 id
                 nickname
-                currentEmployee
               }
             }
           }
@@ -147,7 +146,7 @@ exports.createPages = async function({ actions, graphql }) {
     const nickname = crmData ? crmData.nickname : null;
     const prefix = isCurrent ? '' : 'previous-employees/';
     return {
-      id: crmData.id,
+      id: edge.node.childMarkdownRemark.frontmatter.id,
       slug: edge.node.name,
       path: prefix + edge.node.name.toLowerCase(),
       nicknamePath: nickname

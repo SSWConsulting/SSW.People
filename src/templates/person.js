@@ -26,24 +26,18 @@ const Person = ({
   const childMarkdownRemark = person.childMarkdownRemark || {};
   const frontmatter = childMarkdownRemark.frontmatter || {};
   const profileHtml = childMarkdownRemark.html || {};
-  const crmData = data.crmData || {};
-  const intermediateSkills = crmData.skills.intermediateSkills || [];
-  const advancedSkills = crmData.skills.advancedSkills || [];
   const profileImage = data.profileImage.nodes[0];
   const sketchImage = data.sketchImage.nodes[0];
-  const personName = crmData.nickname
-    ? `${crmData.fullName} (${crmData.nickname})`
-    : crmData.fullName;
-  const firstNameOrNickname = crmData.nickname
-    ? crmData.nickname
-    : crmData.fullName.split(' ')[0];
-  const [displayContactForm, setdisplayContactForm] = useState(false);
   const profileAudio = data.profileAudio.nodes[0];
+  const [displayContactForm, setdisplayContactForm] = useState(false);
   const [hover, setHover] = useState(false);
+  const crmData = data.crmData || null;
 
-  const onContactButtonClick = () => {
-    setdisplayContactForm(!displayContactForm);
-  };
+  let intermediateSkills = [];
+  let advancedSkills = [];
+  let personName = '';
+  let firstNameOrNickname = '';
+  let encodedEmailAddress = '';
 
   const encodeEmail = emailAddress => {
     let encodedString = '';
@@ -53,9 +47,24 @@ const Person = ({
     }
     return encodedString;
   };
-  const encodedEmailAddress = crmData.emailAddress
-    ? encodeEmail(crmData.emailAddress)
-    : '';
+
+  if (crmData) {
+    intermediateSkills = crmData.skills
+      ? crmData.skills.intermediateSkills
+      : [];
+    advancedSkills = crmData.skills ? crmData.skills.advancedSkills : [];
+    personName = crmData.nickname
+      ? `${crmData.fullName} (${crmData.nickname})`
+      : crmData.fullName;
+    firstNameOrNickname = crmData.nickname
+      ? crmData.nickname
+      : crmData.fullName.split(' ')[0];
+    encodedEmailAddress = encodeEmail(crmData.emailAddress);
+  }
+
+  const onContactButtonClick = () => {
+    setdisplayContactForm(!displayContactForm);
+  };
 
   const decodeEmail = encodedEmail => {
     let email = '';
@@ -85,7 +94,7 @@ const Person = ({
         crumbLabel={personName}
         pageTitle={crmData && personName}
         displayActions={true}
-        profileId={crmData.id}
+        profileId={crmData && crmData.id}
       >
         <div className="flex flex-wrap mb-5 md:mx-2 person-content">
           <div className="sm:w-full lg:w-1/4 xl:w-1/6">
@@ -94,7 +103,7 @@ const Person = ({
                 <div className="person-description lg:hidden w-full my-auto">
                   <h1 className="inline">{personName}</h1>
                   <h4 className="mb-0">{frontmatter.role}</h4>
-                  {!!crmData.location && (
+                  {!!crmData && crmData.location && (
                     <h4 className="mb-0">
                       <FontAwesomeIcon icon={faMapMarkerAlt} className="mr-2" />
                       {crmData.location}
@@ -160,7 +169,7 @@ const Person = ({
               )}
               <div className="favor-content w-full">
                 <ul className="favor-list">
-                  {crmData.emailAddress && (
+                  {crmData && crmData.emailAddress && (
                     <li id="email" className="social">
                       <a
                         href={'#0'}
@@ -173,7 +182,7 @@ const Person = ({
                       </a>
                     </li>
                   )}
-                  {crmData.blogUrl && (
+                  {crmData && crmData.blogUrl && (
                     <li id="blog" className="social">
                       <a
                         target="_blank"
@@ -184,7 +193,7 @@ const Person = ({
                       </a>
                     </li>
                   )}
-                  {crmData.facebookUrl && (
+                  {crmData && crmData.facebookUrl && (
                     <li id="facebook" className="social">
                       <a
                         target="_blank"
@@ -195,12 +204,12 @@ const Person = ({
                       </a>
                     </li>
                   )}
-                  {crmData.skypeUsername && (
+                  {crmData && crmData.skypeUsername && (
                     <li id="skype" className="social">
                       <a href={`skype:${crmData.skypeUsername}?call`}>Skype</a>
                     </li>
                   )}
-                  {crmData.linkedInUrl && (
+                  {crmData && crmData.linkedInUrl && (
                     <li id="linkedin" className="social">
                       <a
                         target="_blank"
@@ -211,7 +220,7 @@ const Person = ({
                       </a>
                     </li>
                   )}
-                  {crmData.twitterUsername && (
+                  {crmData && crmData.twitterUsername && (
                     <li id="twitter" className="social">
                       <a
                         target="_blank"
@@ -222,7 +231,7 @@ const Person = ({
                       </a>
                     </li>
                   )}
-                  {crmData.gitHubUrl && (
+                  {crmData && crmData.gitHubUrl && (
                     <li id="github" className="social">
                       <a
                         target="_blank"
@@ -242,7 +251,7 @@ const Person = ({
               <h1 className="hidden lg:inline">{personName}</h1>
               <h4 className="hidden lg:block mb-0">
                 {frontmatter.role}
-                {!!crmData.location && (
+                {!!crmData && crmData.location && (
                   <span className="ml-2">
                     <FontAwesomeIcon icon={faMapMarkerAlt} /> {crmData.location}
                   </span>
@@ -287,7 +296,7 @@ const Person = ({
                   __html: profileHtml,
                 }}
               />
-              {crmData.youtubePlayListId && (
+              {crmData && crmData.youtubePlayListId && (
                 <>
                   <hr />
                   <YoutubePlaylist
@@ -295,16 +304,20 @@ const Person = ({
                   />
                 </>
               )}
-              {crmData.githubUrl && (
+              {crmData && crmData.githubUrl && (
                 <GitHubContributionCalendar
                   githubUserName={crmData.githubUrl.split('/')[1]}
                 />
               )}
-              <hr />
-              <EventList
-                presenterName={crmData.fullName}
-                presenterNickname={crmData.nickname}
-              />
+              {crmData && (
+                <>
+                  <hr />
+                  <EventList
+                    presenterName={crmData.fullName}
+                    presenterNickname={crmData.nickname}
+                  />
+                </>
+              )}
               <Contact
                 onClick={() => onContactButtonClick()}
                 profileName={firstNameOrNickname}
@@ -315,7 +328,7 @@ const Person = ({
                 className="modal"
               >
                 <ContactForm
-                  profileName={crmData.fullName}
+                  profileName={crmData && crmData.fullName}
                   onClose={() => setdisplayContactForm(false)}
                 />
               </Modal>
