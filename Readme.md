@@ -68,5 +68,5 @@ VERSION_DEPLOYED=
   - Production: https://www.ssw.com.au/people/bob-northwind
 
 Merging changes to **master** on this repo will trigger:
-- a build/release of the **master** branch in Staging (https://sydiisp01.sydney.ssw.com.au/people/)
+- a build/release of the **master** branch in Staging (https://sydiisp01.sydney.ssw.com.au/people/).
 - a build/release of the **release** branch Production (https://www.ssw.com.au/people)
