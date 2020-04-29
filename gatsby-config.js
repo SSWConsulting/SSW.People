@@ -5,7 +5,7 @@ require('dotenv').config({
 });
 
 module.exports = {
-  pathPrefix: '/people',
+  pathPrefix: `/people${process.env.CHINABUILD && process.env.CHINABUILD ==='TRUE'?'cn':''}`,
   siteMetadata: {
     ...siteConfig,
   },
