@@ -308,15 +308,15 @@
                     "text": "AI",
                     "children": [
                         {
-                            "navigateUrl": "https://sswsophie.com/sophie-ai/",
+                            "navigateUrl": "https://sswsophie.com/sophiebot/",
                             "target": "_blank",
-                            "text": "Sophie AI",
+                            "text": "SophieBot",
                             "cssClass": "ignore Popular"
                         },
                         {
                             "navigateUrl": "https://sswsophie.com",
                             "target": "_blank",
-                            "text": "Sophie Hub",
+                            "text": "SophieHub",
                             "cssClass": "ignore Popular"
                         }
                     ]
