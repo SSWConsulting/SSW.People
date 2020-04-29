@@ -11,6 +11,8 @@ import Contact from '../components/contact/contact';
 import ContactForm from '../components/contact-form/contact-form';
 import Modal from 'react-modal';
 import PlayAudio from '../components/play-audio/play-audio';
+import GitHubContributionCalendar from '../components/github-contribution-calendar/github-contribution-calendar';
+import EventList from '../components/event-list/event-list';
 
 config.autoAddCss = false;
 
@@ -33,6 +35,11 @@ const Person = ({
   const personName = frontmatter.nickname
     ? `${frontmatter.name} (${frontmatter.nickname})`
     : frontmatter.name;
+  const firstNameOrNickname = frontmatter.nickname
+    ? frontmatter.nickname
+    : frontmatter.name
+    ? frontmatter.name.split(' ')[0]
+    : '';
   const [displayContactForm, setdisplayContactForm] = useState(false);
   const profileAudio = data.profileAudio.nodes[0];
   const [hover, setHover] = useState(false);
@@ -93,7 +100,7 @@ const Person = ({
                   <h4 className="mb-0">{frontmatter.role}</h4>
                   {!!crmData.location && (
                     <h4 className="mb-0">
-                      <FontAwesomeIcon icon={faMapMarkerAlt} />
+                      <FontAwesomeIcon icon={faMapMarkerAlt} className="mr-2" />
                       {crmData.location}
                     </h4>
                   )}
@@ -102,24 +109,26 @@ const Person = ({
                   )}
                 </div>
                 <div className="flex profile-image-quote">
-                  <div
-                    className="image-bg text-center"
-                    onMouseEnter={() => {
-                      setHover(true);
-                    }}
-                    onMouseLeave={() => {
-                      setHover(false);
-                    }}
-                  >
-                    <img
-                      className="profile-image relative bg-cover mx-auto"
-                      src={
-                        hover && !!sketchImage
-                          ? sketchImage.childImageSharp.original.src
-                          : profileImage.childImageSharp.original.src
-                      }
-                      alt="Profile"
-                    />
+                  <div>
+                    <div
+                      className="image-bg text-center"
+                      onMouseEnter={() => {
+                        setHover(true);
+                      }}
+                      onMouseLeave={() => {
+                        setHover(false);
+                      }}
+                    >
+                      <img
+                        className="profile-image relative bg-cover mx-auto"
+                        src={
+                          hover && !!sketchImage
+                            ? sketchImage.childImageSharp.original.src
+                            : profileImage.childImageSharp.original.src
+                        }
+                        alt="Profile"
+                      />
+                    </div>
                     {profileAudio ? (
                       <PlayAudio
                         hasAnimation={true}
@@ -168,7 +177,7 @@ const Person = ({
                       </a>
                     </li>
                   )}
-                  {frontmatter.blog != '' && (
+                  {frontmatter.blog && frontmatter.blog != '' && (
                     <li id="blog" className="social">
                       <a
                         target="_blank"
@@ -179,7 +188,7 @@ const Person = ({
                       </a>
                     </li>
                   )}
-                  {frontmatter.facebook != '' && (
+                  {frontmatter.facebook && frontmatter.facebook != '' && (
                     <li id="facebook" className="social">
                       <a
                         target="_blank"
@@ -192,12 +201,12 @@ const Person = ({
                       </a>
                     </li>
                   )}
-                  {frontmatter.skype != '' && (
+                  {frontmatter.skype && frontmatter.skype != '' && (
                     <li id="skype" className="social">
                       <a href={'skype:' + frontmatter.skype + '?call'}>Skype</a>
                     </li>
                   )}
-                  {frontmatter.linkedin != '' && (
+                  {frontmatter.linkedin && frontmatter.linkedin != '' && (
                     <li id="linkedin" className="social">
                       <a
                         target="_blank"
@@ -210,7 +219,7 @@ const Person = ({
                       </a>
                     </li>
                   )}
-                  {frontmatter.twitter != '' && (
+                  {frontmatter.twitter && frontmatter.twitter != '' && (
                     <li id="twitter" className="social">
                       <a
                         target="_blank"
@@ -287,14 +296,27 @@ const Person = ({
                   __html: profileHtml,
                 }}
               />
+              {frontmatter.youtubePlayListId && (
+                <>
+                  <hr />
+                  <YoutubePlaylist
+                    youtubePlayListId={frontmatter.youtubePlayListId}
+                  />
+                </>
+              )}
+              {frontmatter.github && frontmatter.github != '' && (
+                <GitHubContributionCalendar
+                  githubUserName={frontmatter.github}
+                />
+              )}
               <hr />
-              <YoutubePlaylist
-                youtubePlayListId={frontmatter.youtubePlayListId}
+              <EventList
+                presenterName={frontmatter.name}
+                presenterNickname={frontmatter.nickname}
               />
-              <hr />
               <Contact
                 onClick={() => onContactButtonClick()}
-                profileName={frontmatter.nickname}
+                profileName={firstNameOrNickname}
               />
               <Modal
                 isOpen={displayContactForm}

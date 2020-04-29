@@ -107,7 +107,8 @@ ul li {
 }
 
 .filter-role li,
-.filter-skills li {
+.filter-skills li,
+.filter-event li {
   background: none;
   padding: 0.5rem 0.25rem;
 }
@@ -300,9 +301,8 @@ button:focus {
   background-color: #CCCCCC;
 }
 
-.audio-div-dark-translucent {
-  background-color: rgba(102, 102, 102, 0.2);
-  height: 30px;
+.bg-grey-translucent {
+  background-color: rgba(102, 102, 102, 0.1);
 }
 
 .border-ssw-grey {
@@ -427,6 +427,19 @@ pre {
 .footer-link {
   display: inline-block;
   line-height: initial;
+}
+
+/*GitHub Calendar Styling */
+.styles_title__HcRKb{
+  display:none;
+}
+
+.styles_calendar__1PAia{
+  width: 100%;
+
+  text {
+    font-size: .5rem !important;
+  }
 }
 
 @media screen and (max-width: 1024px) {
@@ -775,6 +788,103 @@ label {
   width: 304px;
   height: 78px;
   margin-bottom: 1em;
+}
+
+.event-item{
+  padding: 15px 0 10px;
+  border-bottom: 1px solid #eee;
+  margin-bottom: 10px;
+  width: 100%;
+  font-family: 'Open Sans',sans-serif;
+  font-weight: 300;
+  line-height: inherit;
+}
+.event-item a {
+  color: #333;
+  border-bottom: 1px dotted #9e9e9e;
+}
+.event-item .thumbnail {
+  float: left;
+  width: 115px;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  position: relative;
+  font-size: 12px;
+  margin-right: 10px;
+  border: 1px solid #ccc;
+}
+.event-item .ourHolder-text .key_type,
+.event-item .ourHolder-text .key_technology,
+.event-item .ourHolder-text .key_presenter,
+.event-item .ourHolder-text .key_video {
+  display: inline;
+}
+.event-item .ourHolder-text .key_technology_title,
+.event-item .ourHolder-text .key_type_title,
+.event-item .ourHolder-text .key_presenter_title,
+.event-item .ourHolder-text .key_video_title {
+  font-weight: bold;
+  padding-right: 5px;
+}
+.event-item .ourHolder-text .key_datetime {
+  color: #cc4141;
+  text-transform: uppercase;
+  display: block;
+}
+.event-item .ourHolder-text a h3 {
+  margin: 0 0 10px 0;
+  font-size: 1.6rem;
+}
+.daystogo {
+  background: #414141;
+  color: #fff;
+  font-size: .8em;
+  margin-left: 5px;
+  padding: 0 5px;
+  display: inline-block;
+  border-radius: 3px;
+  font-weight: bold;
+}
+.key-more{
+  padding-top: 20px;
+}
+.btn-filter{
+  color: #fff;
+  cursor: pointer;
+  font-size: 1rem;
+  line-height: 18px;
+  font-weight: normal;
+  display: inline-block;
+  text-decoration: none;
+  padding: 8px 15px;
+  text-align: center;
+  vertical-align: middle;
+  touch-action: manipulation;
+}
+
+.btn-filter-active{
+  background-color: #cc4141;
+  font-weight: bold;
+}
+
+.btn-filter-active:hover{
+  background-color: #cc2121;
+}
+
+.btn-filter-inactive{
+  background-color: white;
+  color: #cc2121;
+  font-weight: bold;
+  border-style: solid;
+  border-width: 1px;
+}
+
+.btn-filter-inactive:hover{
+  background-color: rgb(238, 238, 238);
+}
+.btn-more:hover {
+  color: #cc2121;
 }
 
 /**

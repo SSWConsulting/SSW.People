@@ -9,7 +9,6 @@ import {
   faCheck,
   faTimes,
 } from '@fortawesome/free-solid-svg-icons';
-import RoleSort from '../../helpers/roleSort';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import '../../style.css';
 import withURLLocation from '../withLocation/withURLLocation';
@@ -19,31 +18,25 @@ import {
   clearUrlFilter,
 } from '../../helpers/queryFilterHelper';
 
-const RoleFilter = ({
-  allRoles,
-  selectedRoles,
-  onRoleChange,
-  filteredPeople,
-  search,
-}) => {
+const EventFilter = ({ allEvents, selectedEvents, onEventChange, search }) => {
   const node = useRef();
   const [listOpen, setListOpen] = useState(false);
 
-  const onRoleClicked = role => {
-    const previouslySelected = isRoleSelected(role);
+  const onEventClicked = event => {
+    const previouslySelected = isEventSelected(event);
     if (previouslySelected) {
-      onRoleChange(selectedRoles.filter(s => s !== role));
-      updateUrlFilter('role', search, role, false);
+      onEventChange(selectedEvents.filter(s => s !== event));
+      updateUrlFilter('event', search, event, false);
     } else {
-      onRoleChange([role, ...selectedRoles]);
-      updateUrlFilter('role', search, role, true);
+      onEventChange([event, ...selectedEvents]);
+      updateUrlFilter('event', search, event, true);
     }
   };
 
   const clearFilter = () => {
-    onRoleChange([]);
+    onEventChange([]);
     setListOpen(false);
-    clearUrlFilter('role', search);
+    clearUrlFilter('event', search);
   };
 
   const handleClick = e => {
@@ -55,8 +48,8 @@ const RoleFilter = ({
     setListOpen(false);
   };
 
-  const isRoleSelected = role => {
-    return selectedRoles.indexOf(role) !== -1;
+  const isEventSelected = event => {
+    return selectedEvents.indexOf(event) !== -1;
   };
 
   useEffect(() => {
@@ -67,8 +60,8 @@ const RoleFilter = ({
     };
   }, []);
 
-  const { role } = search;
-  initFilter(role, allRoles, isRoleSelected, selectedRoles, onRoleChange);
+  const { event } = search;
+  initFilter(event, allEvents, isEventSelected, selectedEvents, onEventChange);
 
   return (
     <>
@@ -79,19 +72,19 @@ const RoleFilter = ({
               className="cursor-pointer font-bold whitespace-no-wrap"
               onClick={() => setListOpen(!listOpen)}
             >
-              Roles{' '}
+              Upcoming speakers{' '}
               <FontAwesomeIcon icon={listOpen ? faAngleUp : faAngleDown} />
             </h4>
           </div>
           <div className="hidden lg:block ">
             <h4 className="cursor-pointer font-bold whitespace-no-wrap">
-              Roles
+              Upcoming speakers
             </h4>
           </div>
           {/* eslint-disable-next-line jsx-a11y/no-static-element-interactions */}
           <small
             className={
-              selectedRoles.length > 0
+              selectedEvents.length > 0
                 ? 'text-ssw-red cursor-pointer mb-1 mr-2'
                 : 'hidden'
             }
@@ -106,42 +99,37 @@ const RoleFilter = ({
         <ul
           className={
             listOpen
-              ? 'filter-role mr-1 lg:border-0 border border-ssw-grey absolute bg-white  lg:static w-full z-50 lg:z.0'
-              : 'filter-role hidden lg:inline'
+              ? 'filter-event mr-1 lg:border-0 border border-ssw-grey absolute bg-white  lg:static w-full z-50 lg:z.0'
+              : 'filter-event hidden lg:inline'
           }
         >
-          {allRoles.sort(RoleSort).map(role => (
-            <li key={role} className="flex category w-full">
+          {allEvents.map(event => (
+            <li key={event} className="flex category w-full">
               <div className="w-full whitespace-no-wrap">
                 <Checkbox
-                  labelText={role}
-                  checkboxValue={role}
-                  checkboxCount={
-                    filteredPeople.filter(p => p.role === role).length
-                  }
-                  isChecked={isRoleSelected(role)}
-                  onChange={() => onRoleClicked(role)}
+                  labelText={event}
+                  checkboxValue={event}
+                  isChecked={isEventSelected(event)}
+                  onChange={() => onEventClicked(event)}
                   checkedIcon={faCheck}
                   checkedClassName="font-bold"
-                  checkboxColor={isRoleSelected(role) ? '#cc4141' : ''}
+                  checkboxColor={isEventSelected(event) ? '#cc4141' : ''}
                 />
               </div>
             </li>
           ))}
         </ul>
       </div>
-
-      <div className="filter-role"></div>
+      <div className="filter-event"></div>
     </>
   );
 };
 
-RoleFilter.propTypes = {
-  allRoles: PropTypes.array.isRequired,
-  selectedRoles: PropTypes.array.isRequired,
-  onRoleChange: PropTypes.func.isRequired,
-  filteredPeople: PropTypes.array.isRequired,
+EventFilter.propTypes = {
+  allEvents: PropTypes.array.isRequired,
+  selectedEvents: PropTypes.array.isRequired,
+  onEventChange: PropTypes.func.isRequired,
   search: PropTypes.object,
 };
 
-export default withURLLocation(RoleFilter);
+export default withURLLocation(EventFilter);

@@ -17,6 +17,8 @@ import 'array-flat-polyfill';
 import { config } from '@fortawesome/fontawesome-svg-core';
 import '@fortawesome/fontawesome-svg-core/styles.css';
 import ProfileSort from '../helpers/profileSort';
+import { getEventsPresenters } from '../helpers/eventHelper';
+import EventFilter from '../components/event-filter/event-filter';
 
 config.autoAddCss = false;
 
@@ -63,8 +65,36 @@ const Index = ({
   const [selectedSkills, setSelectedSkills] = useState([]);
   const [selectedRoles, setSelectedRoles] = useState([]);
   const [filteredPeople, setFilteredPeople] = useState(allPeople);
+  const [events, setEvents] = useState(null);
+  const [allEventsType, setAllEventsType] = useState([]);
+  const [selectedEvents, setSelectedEvents] = useState([]);
 
+  async function loadEventsPresenters() {
+    var presentersList = await getEventsPresenters();
+    setEvents(presentersList);
+    setAllEventsType([
+      ...new Set(presentersList.map(event => event.eventType)),
+    ]);
+  }
+
+  const isPresenter = (p, pr) => {
+    return (
+      (p.nickname.length > 0 &&
+        pr.presenter.toLowerCase().indexOf(p.nickname.toLowerCase()) >= 0) ||
+      pr.presenter.toLowerCase().indexOf(p.fullName.toLowerCase()) >= 0
+    );
+  };
+  const isPresenterOfEventType = (p, pr) => {
+    return (
+      selectedEvents.filter(e => pr.eventType === e).length > 0 &&
+      isPresenter(p, pr)
+    );
+  };
   useEffect(() => {
+    if (!events) {
+      loadEventsPresenters();
+    }
+
     const people = allPeople
       .filter(
         p => selectedLocation === 'All' || p.location === selectedLocation
@@ -74,10 +104,18 @@ const Index = ({
           selectedSkills.length === 0 ||
           selectedSkills.filter(s => p.skills.includes(s)).length > 0
       )
+      .filter(
+        p =>
+          selectedEvents.length === 0 ||
+          (events &&
+            Array.prototype.filter.call(events, pr =>
+              isPresenterOfEventType(p, pr)
+            ).length > 0)
+      )
       .sort(ProfileSort);
 
     setFilteredPeople(people);
-  }, [selectedLocation, selectedSkills]);
+  }, [selectedLocation, selectedSkills, selectedEvents, events]);
 
   return (
     <>
@@ -104,6 +142,13 @@ const Index = ({
                   selectedRoles={selectedRoles}
                   onRoleChange={setSelectedRoles}
                   filteredPeople={filteredPeople}
+                />
+              </div>
+              <div className="w-full sm:w-1/2 lg:w-full mt-0 lg:mt-4">
+                <EventFilter
+                  allEvents={allEventsType}
+                  selectedEvents={selectedEvents}
+                  onEventChange={setSelectedEvents}
                 />
               </div>
               <div className="w-full sm:w-1/2 lg:w-full mt-0 lg:mt-4">
