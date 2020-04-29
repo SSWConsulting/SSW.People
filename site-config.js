@@ -8,7 +8,7 @@ module.exports = {
     `We work together to form an amazing collective brain - SSW is made up of a great team of staff that are passionate about technology and how it meets business needs!` +
     `We're enthusiastic and have a "Make it happen" culture.`,
   siteUrl: `https://ssw.com.au/people${
-    process.env.CHINA_BUILD && process.env.CHINA_BUILD === 'TRUE' ? 'cn' : ''
+    process.env.CHINA_BUILD && process.env.CHINA_BUILD === `TRUE` ? `cn` : ``
   }`,
   themeColor: `#cc4141`,
   backgroundColor: `#fff`,
@@ -19,6 +19,6 @@ module.exports = {
     fbAppId: `120920301257947`,
   },
   parentSiteUrl: `https://ssw.com.au${
-    process.env.CHINA_BUILD && process.env.CHINA_BUILD === 'TRUE' ? 'cn' : ''
+    process.env.CHINA_BUILD && process.env.CHINA_BUILD === `TRUE` ? `cn` : ``
   }`,
 };
