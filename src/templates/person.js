@@ -22,13 +22,18 @@ const Person = ({
     breadcrumb: { crumbs },
   },
 }) => {
-  const chinabuild = process.env.CHINA_BUILD? process.env.CHINA_BUILD==='TRUE':false;
+  const chinabuild = process.env.CHINA_BUILD
+    ? process.env.CHINA_BUILD === 'TRUE'
+    : false;
   const person = data.people;
   const childMarkdownRemark = person.childMarkdownRemark || {};
   const frontmatter = childMarkdownRemark.frontmatter || {};
-  const profileHtml = process.env.CHINA_BUILD && process.env.CHINA_BUILD==='TRUE'?
-      childMarkdownRemark.html.replace( /<div class="gatsby-resp-iframe-wrapper"(.*?)<\/div>/ , ''):
-      childMarkdownRemark.html || {};
+  const profileHtml = chinabuild
+    ? childMarkdownRemark.html.replace(
+        /<div class="gatsby-resp-iframe-wrapper"(.*?)<\/div>/,
+        ''
+      )
+    : childMarkdownRemark.html || {};
   const crmData = data.crmData || {};
   const skills = crmData.skills || {};
   const intermediateSkills = skills.intermediateSkills || [];
