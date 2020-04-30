@@ -40,7 +40,8 @@ const EventList = ({ presenterName, presenterNickname }) => {
 
   return (
     <>
-      {((allEvents && allEvents.length > 0) || (allPastEvents && allPastEvents.length > 0)) && (
+      {((allEvents && allEvents.length > 0) ||
+        (allPastEvents && allPastEvents.length > 0)) && (
         <div>
           <div>
             <h2>Next talks</h2>
