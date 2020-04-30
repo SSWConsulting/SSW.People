@@ -296,18 +296,16 @@ const Person = ({
                   __html: profileHtml,
                 }}
               />
-              {crmData && crmData.youtubePlayListId && (
+              {crmData && crmData.youTubePlayListId && (
                 <>
                   <hr />
                   <YoutubePlaylist
-                    youtubePlayListId={crmData.youtubePlayListId}
+                    youtubePlayListId={crmData.youTubePlayListId}
                   />
                 </>
               )}
-              {crmData && crmData.githubUrl && (
-                <GitHubContributionCalendar
-                  githubUserName={crmData.githubUrl.split('/')[1]}
-                />
+              {crmData && crmData.gitHubUrl && (
+                <GitHubContributionCalendar githubUrl={crmData.gitHubUrl} />
               )}
               {crmData && (
                 <>
@@ -431,6 +429,7 @@ export const query = graphql`
       linkedInUrl
       id
       fullName
+      nickname
     }
   }
 `;

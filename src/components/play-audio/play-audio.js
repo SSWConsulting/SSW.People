@@ -13,6 +13,7 @@ const PlayAudio = ({ hasAnimation, audioSrc }) => {
 
   const playAudio = () => {
     setIsPlaying(true);
+    audio.src = audioSrc;
     audio.play();
     if (hasAnimation) {
       lottie.play();
@@ -44,7 +45,7 @@ const PlayAudio = ({ hasAnimation, audioSrc }) => {
   };
 
   useEffect(() => {
-    setAudio(new Audio(audioSrc));
+    setAudio(new Audio());
 
     if (hasAnimation) {
       lottie.loadAnimation({

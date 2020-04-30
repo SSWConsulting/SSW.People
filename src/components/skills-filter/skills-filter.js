@@ -18,7 +18,13 @@ import {
   clearUrlFilter,
 } from '../../helpers/queryFilterHelper';
 
-const SkillsFilter = ({ allSkills, selectedSkills, onSkillChange, search }) => {
+const SkillsFilter = ({
+  allSkills,
+  selectedSkills,
+  onSkillChange,
+  search,
+  filteredPeople,
+}) => {
   const node = useRef();
   const [listOpen, setListOpen] = useState(false);
 
@@ -113,6 +119,10 @@ const SkillsFilter = ({ allSkills, selectedSkills, onSkillChange, search }) => {
                 checkedIcon={faCheck}
                 checkedClassName="font-bold"
                 checkboxColor={isSkillSelected(skill) ? '#cc4141' : ''}
+                checkboxCount={
+                  filteredPeople.filter(p => p.skills.find(s => s === skill))
+                    .length
+                }
               />
             </li>
           ))}
@@ -127,6 +137,7 @@ SkillsFilter.propTypes = {
   selectedSkills: PropTypes.array.isRequired,
   onSkillChange: PropTypes.func.isRequired,
   search: PropTypes.object,
+  filteredPeople: PropTypes.array.isRequired,
 };
 
 export default withURLLocation(SkillsFilter);

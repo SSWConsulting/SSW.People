@@ -60,7 +60,7 @@ exports.sourceNodes = async ({ actions }) => {
       slug: `${user.firstName}-${user.lastName}`,
       fullName: `${user.firstName} ${user.lastName}`,
       emailAddress: user.emailAddress,
-      location: user.defaultSite.name,
+      location: user.defaultSite ? user.defaultSite.name : 'Others',
       billingRate: user.billableRate || 0, //TODO: integrate with CRM data
       skills: {
         intermediateSkills: user.skills
@@ -145,8 +145,9 @@ exports.createPages = async function({ actions, graphql }) {
     const isCurrent = crmData ? crmData.isActive : false;
     const nickname = crmData ? crmData.nickname : null;
     const prefix = isCurrent ? '' : 'previous-employees/';
+    const id = crmData ? crmData.id : '';
     return {
-      id: edge.node.childMarkdownRemark.frontmatter.id,
+      id: id,
       slug: edge.node.name,
       path: prefix + edge.node.name.toLowerCase(),
       nicknamePath: nickname

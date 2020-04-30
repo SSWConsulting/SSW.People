@@ -78,9 +78,10 @@ const Index = ({
 
   const isPresenter = (p, pr) => {
     return (
-      (p.nickname.length > 0 &&
-        pr.presenter.toLowerCase().indexOf(p.nickname.toLowerCase()) >= 0) ||
-      pr.presenter.toLowerCase().indexOf(p.fullName.toLowerCase()) >= 0
+      (p.profile.nickname.length > 0 &&
+        pr.presenter.toLowerCase().indexOf(p.profile.nickname.toLowerCase()) >=
+          0) ||
+      pr.presenter.toLowerCase().indexOf(p.profile.fullName.toLowerCase()) >= 0
     );
   };
   const isPresenterOfEventType = (p, pr) => {
@@ -155,6 +156,7 @@ const Index = ({
                   allSkills={allSkills}
                   selectedSkills={selectedSkills}
                   onSkillChange={setSelectedSkills}
+                  filteredPeople={filteredPeople}
                 />
               </div>
             </div>
@@ -213,7 +215,7 @@ function buildPeople(data) {
           profile: {
             ...node.frontmatter,
             fullName: !isFixedTile ? dataCRM.fullName : node.frontmatter.name,
-            nickname: !isFixedTile ? dataCRM.nickname : node.frontmatter.nickname,
+            nickname: !isFixedTile ? dataCRM.nickname : node.frontmatter.name,
           },
           location: LocationSanitiser(
             !isFixedTile ? dataCRM.location : 'Others'
