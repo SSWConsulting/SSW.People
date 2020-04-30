@@ -99,7 +99,7 @@ const SkillsFilter = ({
             }}
           >
             <FontAwesomeIcon icon={faTimes} className="mr-1" />
-            Clear filter
+            Clear
           </small>
         </div>
         <ul
