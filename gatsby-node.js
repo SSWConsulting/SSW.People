@@ -61,7 +61,7 @@ exports.sourceNodes = async ({ actions }) => {
       fullName: `${user.firstName} ${user.lastName}`,
       emailAddress: user.emailAddress,
       location: user.defaultSite ? user.defaultSite.name : 'Others',
-      billingRate: user.billableRate || 0, //TODO: integrate with CRM data
+      billingRate: user.billableRate,
       skills: {
         intermediateSkills: user.skills
           .filter(s => s.experienceLevel === 'Intermediate')
@@ -71,14 +71,14 @@ exports.sourceNodes = async ({ actions }) => {
           .map(s => s.technology),
       },
       isActive: user.isActive,
-      nickname: user.nickname || '', //TODO: integrate with CRM data
-      blogUrl: user.blogUrl || '', //TODO: integrate with CRM data
-      facebookUrl: user.facebookUrl || '', //TODO: integrate with CRM data
-      skypeUsername: user.skypeUsername || '', //TODO: integrate with CRM data
-      linkedInUrl: user.linkedInUrl || '', //TODO: integrate with CRM data
-      twitterUsername: user.twitterUsername || '', //TODO: integrate with CRM data
-      gitHubUrl: user.gitHubUrl || '', //TODO: integrate with CRM data
-      youTubePlayListId: user.youTubePlayListId || '', //TODO: integrate with CRM data
+      nickname: user.nickname || '',
+      blogUrl: user.blogUrl,
+      facebookUrl: user.facebookUrl,
+      skypeUsername: user.skypeUsername,
+      linkedInUrl: user.linkedInUrl,
+      twitterUsername: user.twitterUsername,
+      gitHubUrl: user.gitHubUrl,
+      youTubePlayListId: user.youTubePlayListId,
     };
 
     // Get content digest of node. (Required field)
@@ -111,7 +111,6 @@ exports.createPages = async function({ actions, graphql }) {
             childMarkdownRemark {
               frontmatter {
                 id
-                nickname
               }
             }
           }

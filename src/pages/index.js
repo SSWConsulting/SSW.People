@@ -236,7 +236,7 @@ function buildPeople(data) {
             : [],
           sanitisedNickname: !isFixedTile
             ? dataCRM.nickname.replace(/\s+/g, '-')
-            : node.frontmatter.nickname.replace(/\s+/g, '-'),
+            : node.parent.name,
         };
       }
     })
@@ -253,7 +253,6 @@ const IndexWithQuery = props => (
               id
               category
               name
-              nickname
               role
               alternativeUrl
             }
