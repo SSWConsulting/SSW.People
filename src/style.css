@@ -887,6 +887,18 @@ label {
   color: #cc2121;
 }
 
+.btn-archive {
+  float: right;
+  color: #b7b7b7;
+}
+
+.btn-archive:hover {
+  color: #cc2121;
+}
+
+.archive-list{
+ background-color: #efefef;
+}
 /**
 * This injects Tailwind's component classes and any component classes
 * registered by plugins.
