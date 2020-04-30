@@ -40,7 +40,7 @@ const EventList = ({ presenterName, presenterNickname }) => {
 
   return (
     <>
-      {allEvents && allEvents.length > 0 && (
+      {((allEvents && allEvents.length > 0) || (allPastEvents && allPastEvents.length > 0)) && (
         <div>
           <div>
             <h2>Next talks</h2>
@@ -60,8 +60,8 @@ const EventList = ({ presenterName, presenterNickname }) => {
       )}
 
       <div className="flex">
-        {allEvents && allEvents.length > 3 && (
-          <div className="w-1/2">
+        <div className="w-1/2">
+          {allEvents && allEvents.length > 3 && (
             <Button
               labelText={
                 !showMoreActive ? ' Show more talks' : ' Show less talks'
@@ -73,10 +73,10 @@ const EventList = ({ presenterName, presenterNickname }) => {
               activeClassName="btn-more"
               inActiveClassName="btn-more"
             />
-          </div>
-        )}
-        {allPastEvents && allPastEvents.length > 0 && (
-          <div className="w-1/2">
+          )}
+        </div>
+        <div className="w-1/2">
+          {allPastEvents && allPastEvents.length > 0 && (
             <Button
               labelText=" Show past talks"
               isActive={showPastTalksActive}
@@ -86,8 +86,8 @@ const EventList = ({ presenterName, presenterNickname }) => {
               activeClassName="btn-archive"
               inActiveClassName="btn-archive"
             />
-          </div>
-        )}
+          )}
+        </div>
       </div>
       {allPastEvents && allPastEvents.length > 0 && (
         <div className="archive-list">
