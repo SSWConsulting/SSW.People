@@ -7,6 +7,7 @@ const makePluginData = require('./src/helpers/plugin-data');
 const createRewriteMapsFile = require('./src/helpers/createRewriteMap');
 
 let assetsManifest = {};
+const alumniPrefix = '/alumni';
 
 exports.onCreateWebpackConfig = ({ stage, getConfig, actions }) => {
   const config = getConfig();
@@ -119,7 +120,7 @@ exports.createPages = async function({ actions, graphql }) {
       ? edge.node.childMarkdownRemark.frontmatter.nickname
       : null;
     const slug = edge.node.name;
-    const prefix = isCurrent ? '' : 'previous-employees/';
+    const prefix = isCurrent ? '' : alumniPrefix.substring(1) + '/';
     return {
       slug: slug,
       path: prefix + slug.toLowerCase(),
@@ -158,10 +159,32 @@ exports.onPostBuild = async ({ store, pathPrefix }) => {
         page.context.originalPath !== page.context.nicknamePath
     )
     .map(page => {
+      if (page.path.startsWith(alumniPrefix)) {
+        return {
+          fromPath:
+            pathPrefix +
+            '/' +
+            page.context.originalPath.replace(
+              alumniPrefix.substring(1) + '/',
+              ''
+            ),
+          toPath: pathPrefix + page.path,
+        };
+      } else {
+        return {
+          fromPath: pathPrefix + '/' + page.context.originalPath,
+          toPath: pathPrefix + page.path,
+        };
+      }
+    });
+
+  const alumniRewrites = Array.from(pages.values())
+    .filter(page => page.path.startsWith(alumniPrefix))
+    .map(page => {
       return {
-        fromPath: pathPrefix + '/' + page.context.originalPath,
+        fromPath: pathPrefix + '/' + page.path.replace(alumniPrefix + '/', ''),
         toPath: pathPrefix + page.path,
       };
     });
-  await createRewriteMapsFile(pluginData, rewrites);
+  await createRewriteMapsFile(pluginData, rewrites.concat(alumniRewrites));
 };
