@@ -31,8 +31,18 @@ async function getEventsPresenters() {
 }
 
 async function getEventsForPresenter(name, nickname) {
-  var dateFilter = new Date().toISOString();
-  var oDataFilterOngoing = `$filter=(substringof('${name}',Presenter) or substringof('${nickname}',Presenter)) and Enabled ne false and EndDateTime ge datetime'${dateFilter}'%26$select=StartDateTime,EndDateTime,Category,CalendarType,Title,Url,Thumbnail,Presenter,EventShortDescription%26$orderby=StartDateTime asc%26$top=50`;
+  const dateFilter = new Date().toISOString();
+  const oDataFilterOngoing = `$filter=(substringof('${name}',Presenter) or substringof('${nickname}',Presenter)) and Enabled ne false and EndDateTime ge datetime'${dateFilter}'%26$select=StartDateTime,EndDateTime,Category,CalendarType,Title,Url,Thumbnail,Presenter,EventShortDescription%26$orderby=StartDateTime asc%26$top=50`;
+  return await fetchFromSharepoint(oDataFilterOngoing, 'asc');
+}
+
+async function getPastEventsForPresenter(name, nickname) {
+  const dateFilter = new Date().toISOString();
+  const oDataFilterOngoing = `$filter=(substringof('${name}',Presenter) or substringof('${nickname}',Presenter)) and Enabled ne false and EndDateTime lt datetime'${dateFilter}'%26$select=StartDateTime,EndDateTime,Category,CalendarType,Title,Url,Thumbnail,Presenter,EventShortDescription%26$orderby=StartDateTime desc%26$top=50`;
+  return await fetchFromSharepoint(oDataFilterOngoing, 'desc');
+}
+
+async function fetchFromSharepoint(oDataFilterOngoing, sort) {
   var events;
   await fetch(
     `https://www.ssw.com.au/ssw/SharePointEventsService.aspx?odataFilter=${encodeURI(
@@ -47,15 +57,24 @@ async function getEventsForPresenter(name, nickname) {
       events = Array.prototype.map.call(eventsXml, element =>
         mapXmlToEventObj(element)
       );
-      events = events.sort((a, b) =>
-        moment(a.startdatetime, 'DD MMM YYYY').diff(
-          moment(b.startdatetime, 'DD MMM YYYY')
-        )
-      );
+      if (sort === 'asc') {
+        events = events.sort((a, b) =>
+          moment(a.startdatetime, 'DD MMM YYYY').diff(
+            moment(b.startdatetime, 'DD MMM YYYY')
+          )
+        );
+      } else if (sort === 'desc') {
+        events = events.sort((a, b) =>
+          moment(b.startdatetime, 'DD MMM YYYY').diff(
+            moment(a.startdatetime, 'DD MMM YYYY')
+          )
+        );
+      }
     })
     .catch(() => (events = []));
   return events;
 }
+
 function mapXmlToEventObj(properties) {
   const today = moment()
     .local()
@@ -95,4 +114,8 @@ function mapXmlToEventObj(properties) {
   };
 }
 
-export { getEventsPresenters, getEventsForPresenter };
+export {
+  getEventsPresenters,
+  getEventsForPresenter,
+  getPastEventsForPresenter,
+};
