@@ -217,7 +217,7 @@ exports.createPages = async function({ actions, graphql }) {
     const crmData = peopleCRM.find(x => x.id === node.frontmatter.id);
     const isCurrent = crmData ? crmData.isActive : false;
     const nickname = crmData ? crmData.nickname : null;
-    const prefix = isCurrent ? '' : 'previous-employees/';
+    const prefix = isCurrent ? '' : alumniPrefix.replace('/', '') + '/';
 
     return {
       slug: node.parent.name,
