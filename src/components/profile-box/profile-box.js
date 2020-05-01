@@ -15,7 +15,7 @@ const ProfileBox = ({
   const [hover, setHover] = useState(false);
   const tileName = profile.nickname
     ? profile.nickname
-    : profile.name.split(' ')[0];
+    : profile.fullName.split(' ')[0];
 
   const content = profileImages.profileImage !== undefined && (
     <div
@@ -23,7 +23,7 @@ const ProfileBox = ({
       style={{ height: '242px' }}
     >
       <Img
-        alt={`${profile.name} profile image`}
+        alt={`${profile.fullName} profile image`}
         fluid={profileImages.profileImage}
         style={{ position: 'static' }}
         fadeIn={false}
@@ -31,7 +31,7 @@ const ProfileBox = ({
         loading="eager"
       />
       <Img
-        alt={`${profile.name} profile image`}
+        alt={`${profile.fullName} profile image`}
         fluid={profileImages.sketchProfileImage}
         style={{ position: 'static' }}
         fadeIn={false}
@@ -46,7 +46,7 @@ const ProfileBox = ({
         }
       >
         <div className="font-bold text-sm">
-          {hover ? profile.name : tileName}
+          {hover ? profile.fullName : tileName}
         </div>
         <div className="text-xs leading-none">{profile.role}</div>
       </div>

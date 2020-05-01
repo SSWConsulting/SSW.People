@@ -28,7 +28,6 @@ const Index = ({
     breadcrumb: { crumbs },
   },
 }) => {
-  //const history = typeof window !== 'undefined' ? createBrowserHistory() : null;
   const allPeople = useMemo(() => buildPeople(data), [data]);
 
   const allLocations = useMemo(
@@ -79,9 +78,10 @@ const Index = ({
 
   const isPresenter = (p, pr) => {
     return (
-      (p.nickname.length > 0 &&
-        pr.presenter.toLowerCase().indexOf(p.nickname.toLowerCase()) >= 0) ||
-      pr.presenter.toLowerCase().indexOf(p.fullName.toLowerCase()) >= 0
+      (p.profile.nickname.length > 0 &&
+        pr.presenter.toLowerCase().indexOf(p.profile.nickname.toLowerCase()) >=
+          0) ||
+      pr.presenter.toLowerCase().indexOf(p.profile.fullName.toLowerCase()) >= 0
     );
   };
   const isPresenterOfEventType = (p, pr) => {
@@ -156,6 +156,7 @@ const Index = ({
                   allSkills={allSkills}
                   selectedSkills={selectedSkills}
                   onSkillChange={setSelectedSkills}
+                  filteredPeople={filteredPeople}
                 />
               </div>
             </div>
@@ -184,9 +185,6 @@ Index.propTypes = {
 function buildPeople(data) {
   const profileImageMap = new Map();
   const sketchProfileImageMap = new Map();
-  const skillsMap = new Map();
-  const locationsMap = new Map();
-  const billingRatesMap = new Map();
   const audioMap = new Map();
 
   data.profile_images.nodes.forEach(n =>
@@ -198,54 +196,63 @@ function buildPeople(data) {
       n.childImageSharp.fixed
     )
   );
-  data.allSkills.nodes.forEach(n => {
-    skillsMap.set(
-      n.fullName,
-      [n.skills.advancedSkills, n.skills.intermediateSkills].flat()
-    );
-    locationsMap.set(n.fullName, n.location);
-    billingRatesMap.set(n.fullName, n.billingRate);
-  });
-
   data.profile_audios.nodes.forEach(n =>
     audioMap.set(n.name.replace('-Audio', ''), n.publicURL)
   );
 
-  return data.people.nodes.map(node => {
-    return {
-      fullName: node.frontmatter.name,
-      profile: node.frontmatter,
-      location: LocationSanitiser(
-        locationsMap.get(node.frontmatter.name) || node.frontmatter.location
-      ),
-      billingRate: billingRatesMap.get(node.frontmatter.name) || 0,
-      sanitisedName: node.parent.name,
-      role: node.frontmatter.category,
-      profileImages: {
-        profileImage: profileImageMap.get(node.parent.name),
-        sketchProfileImage: sketchProfileImageMap.get(node.parent.name),
-      },
-      profileAudio: audioMap.get(node.parent.name),
-      skills: skillsMap.get(node.frontmatter.name) || [],
-      nickname: node.frontmatter.nickname,
-      sanitisedNickname: node.frontmatter.nickname.replace(/\s+/g, '-'),
-    };
-  });
+  const allDataCRM = data.allCRMData.nodes
+    .filter(x => x.isActive)
+    .map(n => {
+      return n;
+    });
+
+  return data.people.nodes
+    .map(node => {
+      const dataCRM = allDataCRM.find(x => x.id === node.frontmatter.id);
+      const isFixedTile = node.parent.name === 'We-are-hiring';
+      if ((dataCRM && dataCRM.isActive) || isFixedTile) {
+        return {
+          profile: {
+            ...node.frontmatter,
+            fullName: !isFixedTile ? dataCRM.fullName : node.frontmatter.name,
+            nickname: !isFixedTile ? dataCRM.nickname : node.frontmatter.name,
+          },
+          location: LocationSanitiser(
+            !isFixedTile ? dataCRM.location : 'Others'
+          ),
+          billingRate: !isFixedTile ? dataCRM.billingRate : 0,
+          sanitisedName: node.parent.name,
+          role: node.frontmatter.category,
+          profileImages: {
+            profileImage: profileImageMap.get(node.parent.name),
+            sketchProfileImage: sketchProfileImageMap.get(node.parent.name),
+          },
+          profileAudio: audioMap.get(node.parent.name),
+          skills: !isFixedTile
+            ? [
+                dataCRM.skills.advancedSkills,
+                dataCRM.skills.intermediateSkills,
+              ].flat()
+            : [],
+          sanitisedNickname: !isFixedTile
+            ? dataCRM.nickname.replace(/\s+/g, '-')
+            : node.parent.name,
+        };
+      }
+    })
+    .filter(x => x !== undefined);
 }
 
 const IndexWithQuery = props => (
   <StaticQuery
     query={graphql`
       query HomepageQuery {
-        people: allMarkdownRemark(
-          filter: { frontmatter: { currentEmployee: { eq: true } } }
-        ) {
+        people: allMarkdownRemark {
           nodes {
             frontmatter {
+              id
               category
-              currentEmployee
               name
-              nickname
               role
               alternativeUrl
             }
@@ -305,7 +312,7 @@ const IndexWithQuery = props => (
             }
           }
         }
-        allSkills: allCrmDataCollection(filter: { id: {} }) {
+        allCRMData: allCrmDataCollection {
           nodes {
             skills {
               advancedSkills
@@ -314,6 +321,9 @@ const IndexWithQuery = props => (
             fullName
             location
             billingRate
+            nickname
+            isActive
+            id
           }
         }
       }
