@@ -167,83 +167,87 @@ const Person = ({
                   </div>
                 </div>
               )}
-              <div className="favor-content w-full">
-                <ul className="favor-list">
-                  {crmData && crmData.emailAddress && (
-                    <li id="email" className="social">
-                      <a
-                        href={'#0'}
-                        onClick={event => {
-                          sendEmail(event);
-                        }}
-                      >
-                        {' '}
-                        Email{' '}
-                      </a>
-                    </li>
-                  )}
-                  {crmData && crmData.blogUrl && (
-                    <li id="blog" className="social">
-                      <a
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        href={crmData.blogUrl}
-                      >
-                        Blog
-                      </a>
-                    </li>
-                  )}
-                  {crmData && crmData.facebookUrl && (
-                    <li id="facebook" className="social">
-                      <a
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        href={crmData.facebookUrl}
-                      >
-                        Facebook
-                      </a>
-                    </li>
-                  )}
-                  {crmData && crmData.skypeUsername && (
-                    <li id="skype" className="social">
-                      <a href={`skype:${crmData.skypeUsername}?call`}>Skype</a>
-                    </li>
-                  )}
-                  {crmData && crmData.linkedInUrl && (
-                    <li id="linkedin" className="social">
-                      <a
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        href={crmData.linkedInUrl}
-                      >
-                        LinkedIn
-                      </a>
-                    </li>
-                  )}
-                  {crmData && crmData.twitterUsername && (
-                    <li id="twitter" className="social">
-                      <a
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        href={`https://www.twitter.com/${crmData.twitterUsername}`}
-                      >
-                        Twitter
-                      </a>
-                    </li>
-                  )}
-                  {crmData && crmData.gitHubUrl && (
-                    <li id="github" className="social">
-                      <a
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        href={crmData.gitHubUrl}
-                      >
-                        GitHub
-                      </a>
-                    </li>
-                  )}
-                </ul>
-              </div>
+              {crmData && (
+                <div className="favor-content w-full">
+                  <ul className="favor-list">
+                    {crmData.emailAddress && (
+                      <li id="email" className="social">
+                        <a
+                          href={'#0'}
+                          onClick={event => {
+                            sendEmail(event);
+                          }}
+                        >
+                          {' '}
+                          Email{' '}
+                        </a>
+                      </li>
+                    )}
+                    {crmData.blogUrl && (
+                      <li id="blog" className="social">
+                        <a
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          href={crmData.blogUrl}
+                        >
+                          Blog
+                        </a>
+                      </li>
+                    )}
+                    {crmData.facebookUrl && (
+                      <li id="facebook" className="social">
+                        <a
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          href={crmData.facebookUrl}
+                        >
+                          Facebook
+                        </a>
+                      </li>
+                    )}
+                    {crmData.skypeUsername && (
+                      <li id="skype" className="social">
+                        <a href={`skype:${crmData.skypeUsername}?call`}>
+                          Skype
+                        </a>
+                      </li>
+                    )}
+                    {crmData.linkedInUrl && (
+                      <li id="linkedin" className="social">
+                        <a
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          href={crmData.linkedInUrl}
+                        >
+                          LinkedIn
+                        </a>
+                      </li>
+                    )}
+                    {crmData.twitterUsername && (
+                      <li id="twitter" className="social">
+                        <a
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          href={`https://www.twitter.com/${crmData.twitterUsername}`}
+                        >
+                          Twitter
+                        </a>
+                      </li>
+                    )}
+                    {crmData.gitHubUrl && (
+                      <li id="github" className="social">
+                        <a
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          href={crmData.gitHubUrl}
+                        >
+                          GitHub
+                        </a>
+                      </li>
+                    )}
+                  </ul>
+                </div>
+              )}
             </div>
           </div>
           <div className="sm:w-full lg:w-3/4 xl:w-5/6">

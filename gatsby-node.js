@@ -144,7 +144,9 @@ exports.createPages = async function({ actions, graphql }) {
     const isCurrent = crmData ? crmData.isActive : false;
     const nickname = crmData ? crmData.nickname : null;
     const prefix = isCurrent ? '' : 'previous-employees/';
-    const id = crmData ? crmData.id : '';
+    const id = crmData
+      ? crmData.id
+      : edge.node.childMarkdownRemark.frontmatter.id;
     return {
       id: id,
       slug: edge.node.name,
