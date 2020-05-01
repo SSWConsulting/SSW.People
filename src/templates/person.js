@@ -1,4 +1,3 @@
-import { graphql } from 'gatsby';
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 import Layout from '../components/layout';
@@ -17,21 +16,19 @@ import EventList from '../components/event-list/event-list';
 config.autoAddCss = false;
 
 const Person = ({
-  data,
+  pageContext,
   pageContext: {
     breadcrumb: { crumbs },
   },
 }) => {
-  const person = data.people;
-  const childMarkdownRemark = person.childMarkdownRemark || {};
-  const frontmatter = childMarkdownRemark.frontmatter || {};
-  const profileHtml = childMarkdownRemark.html || {};
-  const profileImage = data.profileImage.nodes[0];
-  const sketchImage = data.sketchImage.nodes[0];
-  const profileAudio = data.profileAudio.nodes[0];
-  const [displayContactForm, setdisplayContactForm] = useState(false);
+  const frontmatter = pageContext.data.frontmatter || {};
+  const profileHtml = pageContext.data.html || {};
+  const profileImage = pageContext.data.profileImage;
+  const sketchImage = pageContext.data.sketchImage;
+  const profileAudio = pageContext.data.audio;
+  const [displayContactForm, setDisplayContactForm] = useState(false);
   const [hover, setHover] = useState(false);
-  const crmData = data.crmData || null;
+  const crmData = pageContext.data.dataCRM || null;
 
   let intermediateSkills = [];
   let advancedSkills = [];
@@ -63,7 +60,7 @@ const Person = ({
   }
 
   const onContactButtonClick = () => {
-    setdisplayContactForm(!displayContactForm);
+    setDisplayContactForm(!displayContactForm);
   };
 
   const decodeEmail = encodedEmail => {
@@ -94,7 +91,7 @@ const Person = ({
         crumbLabel={personName}
         pageTitle={crmData && personName}
         displayActions={true}
-        profileId={crmData && crmData.id}
+        profileId={pageContext.slug}
       >
         <div className="flex flex-wrap mb-5 md:mx-2 person-content">
           <div className="sm:w-full lg:w-1/4 xl:w-1/6">
@@ -128,8 +125,8 @@ const Person = ({
                         className="profile-image relative bg-cover mx-auto"
                         src={
                           hover && !!sketchImage
-                            ? sketchImage.childImageSharp.original.src
-                            : profileImage.childImageSharp.original.src
+                            ? sketchImage.src
+                            : profileImage.src
                         }
                         alt="Profile"
                       />
@@ -137,7 +134,7 @@ const Person = ({
                     {profileAudio ? (
                       <PlayAudio
                         hasAnimation={true}
-                        audioSrc={profileAudio.publicURL}
+                        audioSrc={profileAudio.src}
                       />
                     ) : (
                       ''
@@ -331,7 +328,7 @@ const Person = ({
               >
                 <ContactForm
                   profileName={crmData && crmData.fullName}
-                  onClose={() => setdisplayContactForm(false)}
+                  onClose={() => setDisplayContactForm(false)}
                 />
               </Modal>
             </div>
@@ -343,97 +340,9 @@ const Person = ({
 };
 
 Person.propTypes = {
-  data: PropTypes.object.isRequired,
+  data: PropTypes.object,
   pageContext: PropTypes.object.isRequired,
   location: PropTypes.object.isRequired,
 };
 
 export default Person;
-
-export const query = graphql`
-  query(
-    $id: String!
-    $profileImage: String!
-    $sketchImage: String!
-    $audio: String!
-  ) {
-    people: file(
-      sourceInstanceName: { eq: "people" }
-      childMarkdownRemark: { frontmatter: { id: { eq: $id } } }
-    ) {
-      name
-      childMarkdownRemark {
-        frontmatter {
-          id
-          role
-          category
-          qualifications
-          quote
-          quoteAuthor
-        }
-        html
-      }
-    }
-    sketchImage: allFile(
-      filter: {
-        sourceInstanceName: { eq: "people" }
-        name: { glob: $sketchImage }
-      }
-    ) {
-      nodes {
-        name
-        childImageSharp {
-          original {
-            height
-            src
-            width
-          }
-        }
-      }
-    }
-    profileImage: allFile(
-      filter: {
-        sourceInstanceName: { eq: "people" }
-        name: { glob: $profileImage }
-      }
-    ) {
-      nodes {
-        name
-        childImageSharp {
-          original {
-            height
-            src
-            width
-          }
-        }
-      }
-    }
-    profileAudio: allFile(
-      filter: { sourceInstanceName: { eq: "people" }, name: { glob: $audio } }
-    ) {
-      nodes {
-        name
-        publicURL
-      }
-    }
-    crmData: crmDataCollection(id: { eq: $id }) {
-      skills {
-        intermediateSkills
-        advancedSkills
-      }
-      location
-      emailAddress
-      skypeUsername
-      twitterUsername
-      gitHubUrl
-      youTubePlayListId
-      isActive
-      blogUrl
-      facebookUrl
-      linkedInUrl
-      id
-      fullName
-      nickname
-    }
-  }
-`;
