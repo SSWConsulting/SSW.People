@@ -222,7 +222,13 @@ exports.createPages = async function({ actions, graphql }) {
         ? crmData.isActive
         : false;
 
-    const nickname = crmData ? crmData.nickname : null;
+    const nickname =
+      node.frontmatter.role === 'Sample Profile'
+        ? 'Sample'
+        : crmData
+        ? crmData.nickname
+        : null;
+
     const prefix = isCurrent ? '' : alumniPrefix.replace('/', '') + '/';
 
     return {
