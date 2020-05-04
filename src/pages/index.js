@@ -255,7 +255,7 @@ function buildPeople(data) {
           },
           profileAudio: audioMap.get(node.parent.name),
           skills: [],
-          sanitisedNickname: node.parent.name,
+          sanitisedNickname: 'Sample',
         };
       }
     })
