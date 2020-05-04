@@ -238,6 +238,25 @@ function buildPeople(data) {
             ? dataCRM.nickname.replace(/\s+/g, '-')
             : node.parent.name,
         };
+      } else if (node.frontmatter.role === 'Sample Profile') {
+        return {
+          profile: {
+            ...node.frontmatter,
+            fullName: 'Bob Northwind',
+            nickname: 'Sample',
+          },
+          location: LocationSanitiser('Others'),
+          billingRate: -1,
+          sanitisedName: node.parent.name,
+          role: node.frontmatter.category,
+          profileImages: {
+            profileImage: profileImageMap.get(node.parent.name),
+            sketchProfileImage: sketchProfileImageMap.get(node.parent.name),
+          },
+          profileAudio: audioMap.get(node.parent.name),
+          skills: [],
+          sanitisedNickname: node.parent.name,
+        };
       }
     })
     .filter(x => x !== undefined);

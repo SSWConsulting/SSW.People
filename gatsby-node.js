@@ -215,7 +215,13 @@ exports.createPages = async function({ actions, graphql }) {
   });
   const people = data.people.nodes.map(node => {
     const crmData = peopleCRM.find(x => x.id === node.frontmatter.id);
-    const isCurrent = crmData ? crmData.isActive : false;
+    const isCurrent =
+      node.frontmatter.role === 'Sample Profile'
+        ? true
+        : crmData
+        ? crmData.isActive
+        : false;
+
     const nickname = crmData ? crmData.nickname : null;
     const prefix = isCurrent ? '' : alumniPrefix.replace('/', '') + '/';
 
