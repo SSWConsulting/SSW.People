@@ -79,7 +79,9 @@ const EventList = ({ presenterName, presenterNickname }) => {
         <div className="w-1/2">
           {allPastEvents && allPastEvents.length > 0 && (
             <Button
-              labelText=" Show past talks"
+              labelText={
+                !showPastTalksActive ? ' Show past talks' : ' Hide past talks'
+              }
               isActive={showPastTalksActive}
               onClick={() => setShowPastTalksActive(!showPastTalksActive)}
               activeIcon={faArchive}
