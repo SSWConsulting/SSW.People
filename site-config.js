@@ -10,7 +10,7 @@ module.exports = {
   siteUrl: `https://ssw.com.au`,
   themeColor: `#cc4141`,
   backgroundColor: `#fff`,
-  pathPrefix: '',
+  pathPrefix: null,
   logo: path.resolve(__dirname, `src/images/icon.png`),
   social: {
     twitter: `SSW_TV`,
