@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Helmet } from 'react-helmet';
-import { StaticQuery, graphql } from 'gatsby';
+import { StaticQuery, graphql, withPrefix } from 'gatsby';
 import { Location } from '@reach/router';
+
 import schemaGenerator from 'helpers/schemaGenerator';
 
 const Head = ({
@@ -17,6 +18,7 @@ const Head = ({
   imageUrl,
   location,
   canonical = parentSiteUrl + (location.pathname || ''),
+  siteUrlWithPrefix = siteUrl + withPrefix('/'),
 }) => (
   <Helmet>
     <html lang="en" />
@@ -55,13 +57,22 @@ const Head = ({
     <meta content={canonical} name="twitter:url" />
     <link rel="canonical" href={canonical} />
 
-    <meta content={imageUrl || `${canonical}social.png`} property="og:image" />
+    <meta
+      content={imageUrl || `${siteUrlWithPrefix}social.png`}
+      property="og:image"
+    />
     <meta content="1024" property="og:image:width" />
     <meta content="512" property="og:image:height" />
-    <meta content={imageUrl || `${canonical}social.png`} name="twitter:image" />
+    <meta
+      content={imageUrl || `${siteUrlWithPrefix}social.png`}
+      name="twitter:image"
+    />
     <meta content="1024" name="twitter:image:width" />
     <meta content="512" name="twitter:image:height" />
-    <meta content={imageUrl || `${canonical}social.png`} property="og:image" />
+    <meta
+      content={imageUrl || `${siteUrlWithPrefix}social.png`}
+      property="og:image"
+    />
     <meta content="1024" property="og:image:width" />
     <meta content="512" property="og:image:height" />
 
@@ -177,6 +188,7 @@ Head.propTypes = {
   pageTitle: PropTypes.string,
   pageTitleFull: PropTypes.string,
   location: PropTypes.object.isRequired,
+  siteUrlWithPrefix: PropTypes.string,
 };
 
 const HeadWithQuery = props => (
