@@ -57,13 +57,22 @@ const Head = ({
     <meta content={canonical} name="twitter:url" />
     <link rel="canonical" href={canonical} />
 
-    <meta content={imageUrl || `${siteUrlWithPrefix}social.png`} property="og:image" />
+    <meta
+      content={imageUrl || `${siteUrlWithPrefix}social.png`}
+      property="og:image"
+    />
     <meta content="1024" property="og:image:width" />
     <meta content="512" property="og:image:height" />
-    <meta content={imageUrl || `${siteUrlWithPrefix}social.png`} name="twitter:image" />
+    <meta
+      content={imageUrl || `${siteUrlWithPrefix}social.png`}
+      name="twitter:image"
+    />
     <meta content="1024" name="twitter:image:width" />
     <meta content="512" name="twitter:image:height" />
-    <meta content={imageUrl || `${siteUrlWithPrefix}social.png`} property="og:image" />
+    <meta
+      content={imageUrl || `${siteUrlWithPrefix}social.png`}
+      property="og:image"
+    />
     <meta content="1024" property="og:image:width" />
     <meta content="512" property="og:image:height" />
 
@@ -179,6 +188,7 @@ Head.propTypes = {
   pageTitle: PropTypes.string,
   pageTitleFull: PropTypes.string,
   location: PropTypes.object.isRequired,
+  siteUrlWithPrefix: PropTypes.string,
 };
 
 const HeadWithQuery = props => (
