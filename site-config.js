@@ -16,7 +16,5 @@ module.exports = {
     twitter: `SSW_TV`,
     fbAppId: `120920301257947`,
   },
-  parentSiteUrl: `https://ssw.com.au${
-    process.env.CHINA_BUILD && process.env.CHINA_BUILD === `TRUE` ? `cn` : ``
-  }`,
+  parentSiteUrl: `https://ssw.com.au`,
 };
