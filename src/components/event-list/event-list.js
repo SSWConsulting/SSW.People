@@ -6,9 +6,9 @@ import {
 } from '../../helpers/eventHelper';
 import EventBox from '../event-box/event-box';
 import Button from '../button/button';
-import { faPlus, faMinus, faArchive } from '@fortawesome/free-solid-svg-icons';
 
 const EventList = ({ presenterName, presenterNickname }) => {
+  const visibleTalks = 5;
   const [showMoreActive, setShowMoreActive] = useState(false);
   const [events, setEvents] = useState(null);
   const [allEvents, setAllEvents] = useState(null);
@@ -21,8 +21,8 @@ const EventList = ({ presenterName, presenterNickname }) => {
       presenterNickname
     );
     setAllEvents(allEvents);
-    if (allEvents.length > 3) {
-      setEvents(allEvents.slice(0, 3));
+    if (allEvents.length > visibleTalks) {
+      setEvents(allEvents.slice(0, visibleTalks));
     }
 
     var allPastEvents = await getPastEventsForPresenter(
@@ -44,11 +44,16 @@ const EventList = ({ presenterName, presenterNickname }) => {
         (allPastEvents && allPastEvents.length > 0)) && (
         <div>
           <div>
-            <h2>Next talks</h2>
+            <h2>
+              <span role="img" aria-label="Speaker">
+                🔊
+              </span>
+              Next talks
+            </h2>
           </div>
           {allEvents &&
-            (allEvents.length <= 3 ||
-              (allEvents.length > 3 && showMoreActive)) &&
+            (allEvents.length <= visibleTalks ||
+              (allEvents.length > visibleTalks && showMoreActive)) &&
             allEvents.map((event, index) => (
               <EventBox key={index} event={event}></EventBox>
             ))}
@@ -60,32 +65,28 @@ const EventList = ({ presenterName, presenterNickname }) => {
         </div>
       )}
 
-      <div className="flex">
-        <div className="w-1/2">
-          {allEvents && allEvents.length > 3 && (
+      <div className="flex flex-col">
+        <div className="w-full">
+          {allEvents && allEvents.length > visibleTalks && (
             <Button
               labelText={
-                !showMoreActive ? ' Show more talks' : ' Show less talks'
+                !showMoreActive ? '(Show more talks >)' : ' (< Show less talks)'
               }
               isActive={showMoreActive}
               onClick={() => setShowMoreActive(!showMoreActive)}
-              activeIcon={faMinus}
-              inActiveIcon={faPlus}
               activeClassName="btn-more"
               inActiveClassName="btn-more"
             />
           )}
         </div>
-        <div className="w-1/2">
+        <div className="w-full">
           {allPastEvents && allPastEvents.length > 0 && (
             <Button
               labelText={
-                !showPastTalksActive ? ' Show past talks' : ' Hide past talks'
+                !showPastTalksActive ? 'Show past talks >' : '< Hide past talks'
               }
               isActive={showPastTalksActive}
               onClick={() => setShowPastTalksActive(!showPastTalksActive)}
-              activeIcon={faArchive}
-              inActiveIcon={faArchive}
               activeClassName="btn-archive"
               inActiveClassName="btn-archive"
             />
