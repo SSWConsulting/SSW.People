@@ -308,16 +308,16 @@
                     "text": "AI",
                     "children": [
                         {
-                            "navigateUrl": "https://sswsophie.com/sophie-ai/",
+                            "navigateUrl": "https://sswsophie.com/sophiebot/",
                             "target": "_blank",
-                            "text": "Sophie AI",
-                            "cssClass": "ignore Popular"
+                            "text": "SophieBot",
+                            "cssClass": "Popular"
                         },
                         {
                             "navigateUrl": "https://sswsophie.com",
                             "target": "_blank",
-                            "text": "Sophie Hub",
-                            "cssClass": "ignore Popular"
+                            "text": "SophieHub",
+                            "cssClass": "Popular"
                         }
                     ]
                 },
@@ -331,19 +331,19 @@
                             "navigateUrl": "https://sugarlearning.com/",
                             "target": "_blank",
                             "text": "SugarLearning",
-                            "cssClass": "ignore Popular"
+                            "cssClass": "Popular"
                         },
                         {
                             "navigateUrl": "https://sswtimepro.com/",
                             "target": "_blank",
                             "text": "TimePro",
-                            "cssClass": "ignore Popular"
+                            "cssClass": "Popular"
                         },
                         {
                             "navigateUrl": "https://sswlinkauditor.com/",
                             "target": "_blank",
                             "text": "LinkAuditor",
-                            "cssClass": "ignore Popular"
+                            "cssClass": "Popular"
                         },
                         {
                             "navigateUrl": "https://sswhealthcheck.com/",

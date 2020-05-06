@@ -3,14 +3,15 @@ import GitHubCalendar from 'react-github-calendar';
 import PropTypes from 'prop-types';
 import ReactTooltip from 'react-tooltip';
 
-const GitHubContributionCalendar = ({ githubUserName }) => {
+const GitHubContributionCalendar = ({ githubUrl }) => {
+  let userName = githubUrl.split('/');
   return (
     <>
       <hr />
       <h2>GitHub contributions</h2>
       <div className="mx-3">
         <GitHubCalendar
-          username={githubUserName}
+          username={userName[userName.length - 1]}
           blockSize={9}
           blockMargin={3}
           fontSize={10}
@@ -23,7 +24,7 @@ const GitHubContributionCalendar = ({ githubUserName }) => {
 };
 
 GitHubContributionCalendar.propTypes = {
-  githubUserName: PropTypes.string.isRequired,
+  githubUrl: PropTypes.string.isRequired,
 };
 
 export default GitHubContributionCalendar;

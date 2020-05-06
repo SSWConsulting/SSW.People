@@ -3,8 +3,6 @@ const fs = require('fs-extra');
 const writeRewriteMapsFile = (pluginData, rewrites) => {
   const { publicFolder } = pluginData;
 
-  if (!rewrites.length && !rewrites.length) return null;
-
   const FILE_PATH = publicFolder('rewritemaps.xml');
 
   rewrites = rewrites.map(
