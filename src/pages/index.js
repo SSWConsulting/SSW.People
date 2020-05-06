@@ -97,7 +97,7 @@ const Index = ({
 
     const people = allPeople
       .filter(
-        p => selectedLocation === 'All' || p.location === selectedLocation
+        p => selectedLocation === 'All' || p.location === selectedLocation || p.sanitisedName === 'We-are-hiring'
       )
       .filter(
         p =>
