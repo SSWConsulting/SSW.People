@@ -5,6 +5,7 @@ const DirectoryNamedWebpackPlugin = require('directory-named-webpack-plugin');
 const WebpackAssetsManifest = require('webpack-assets-manifest');
 const makePluginData = require('./src/helpers/plugin-data');
 const createRewriteMapsFile = require('./src/helpers/createRewriteMap');
+const chinaHelper = require('./src/helpers/chinaHelper');
 
 let assetsManifest = {};
 const alumniPrefix = '/alumni';
@@ -260,7 +261,9 @@ exports.createPages = async function({ actions, graphql }) {
           sketchImage: person.sketchImage,
           frontmatter: person.frontmatter,
           dataCRM: person.dataCRM,
-          html: person.html,
+          html:chinaHelper.isChinaBuild
+          ? chinaHelper.cleanHtml(person.html)
+          : person.html,
         },
       },
     });
