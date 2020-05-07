@@ -261,9 +261,9 @@ exports.createPages = async function({ actions, graphql }) {
           sketchImage: person.sketchImage,
           frontmatter: person.frontmatter,
           dataCRM: person.dataCRM,
-          html:chinaHelper.isChinaBuild
-          ? chinaHelper.cleanHtml(person.html)
-          : person.html,
+          html: chinaHelper.isChinaBuild
+            ? chinaHelper.cleanHtml(person.html)
+            : person.html,
         },
       },
     });
