@@ -7,7 +7,7 @@ const ProfileSort = (a, b) => {
 
   let sorting = b.billingRate - a.billingRate;
 
-  if (sorting === 0){
+  if (sorting === 0) {
     //must be equal
     sorting =
       a.profile.role.toLowerCase() < b.profile.role.toLowerCase()
