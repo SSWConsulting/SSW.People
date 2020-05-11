@@ -6,9 +6,10 @@ import {
 } from '../../helpers/eventHelper';
 import EventBox from '../event-box/event-box';
 import Button from '../button/button';
+import { faPlus, faMinus, faArchive } from '@fortawesome/free-solid-svg-icons';
 
 const EventList = ({ presenterName, presenterNickname }) => {
-  const visibleTalks = 5;
+  const visibleTalks = 3;
   const [showMoreActive, setShowMoreActive] = useState(false);
   const [events, setEvents] = useState(null);
   const [allEvents, setAllEvents] = useState(null);
@@ -44,12 +45,7 @@ const EventList = ({ presenterName, presenterNickname }) => {
         (allPastEvents && allPastEvents.length > 0)) && (
         <div>
           <div>
-            <h2>
-              <span role="img" aria-label="Speaker">
-                🔊
-              </span>
-              Next talks
-            </h2>
+            <h2>Next talks</h2>
           </div>
           {allEvents &&
             (allEvents.length <= visibleTalks ||
@@ -64,29 +60,32 @@ const EventList = ({ presenterName, presenterNickname }) => {
             ))}
         </div>
       )}
-
-      <div className="flex flex-col">
-        <div className="w-full">
+      <div className="flex">
+        <div className="w-1/2">
           {allEvents && allEvents.length > visibleTalks && (
             <Button
               labelText={
-                !showMoreActive ? '(Show more talks >)' : ' (< Show less talks)'
+                !showMoreActive ? ' Show more talks' : ' Show less talks'
               }
               isActive={showMoreActive}
               onClick={() => setShowMoreActive(!showMoreActive)}
+              activeIcon={faMinus}
+              inActiveIcon={faPlus}
               activeClassName="btn-more"
               inActiveClassName="btn-more"
             />
           )}
         </div>
-        <div className="w-full">
+        <div className="w-1/2">
           {allPastEvents && allPastEvents.length > 0 && (
             <Button
               labelText={
-                !showPastTalksActive ? 'Show past talks >' : '< Hide past talks'
+                !showPastTalksActive ? ' Show past talks' : ' Hide past talks'
               }
               isActive={showPastTalksActive}
               onClick={() => setShowPastTalksActive(!showPastTalksActive)}
+              activeIcon={faArchive}
+              inActiveIcon={faArchive}
               activeClassName="btn-archive"
               inActiveClassName="btn-archive"
             />

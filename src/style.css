@@ -888,8 +888,8 @@ label {
 }
 
 .btn-archive {
-  @apply text-ssw-red;
-  font-size: 1.25rem;
+  color: #a0aec0;
+  float: right;
 }
 
 .btn-archive:hover {
