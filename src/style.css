@@ -888,8 +888,8 @@ label {
 }
 
 .btn-archive {
+  color: #a0aec0;
   float: right;
-  color: #b7b7b7;
 }
 
 .btn-archive:hover {

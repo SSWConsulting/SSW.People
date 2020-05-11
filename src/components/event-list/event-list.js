@@ -9,6 +9,7 @@ import Button from '../button/button';
 import { faPlus, faMinus, faArchive } from '@fortawesome/free-solid-svg-icons';
 
 const EventList = ({ presenterName, presenterNickname }) => {
+  const visibleTalks = 3;
   const [showMoreActive, setShowMoreActive] = useState(false);
   const [events, setEvents] = useState(null);
   const [allEvents, setAllEvents] = useState(null);
@@ -21,8 +22,8 @@ const EventList = ({ presenterName, presenterNickname }) => {
       presenterNickname
     );
     setAllEvents(allEvents);
-    if (allEvents.length > 3) {
-      setEvents(allEvents.slice(0, 3));
+    if (allEvents.length > visibleTalks) {
+      setEvents(allEvents.slice(0, visibleTalks));
     }
 
     var allPastEvents = await getPastEventsForPresenter(
@@ -47,8 +48,8 @@ const EventList = ({ presenterName, presenterNickname }) => {
             <h2>Next talks</h2>
           </div>
           {allEvents &&
-            (allEvents.length <= 3 ||
-              (allEvents.length > 3 && showMoreActive)) &&
+            (allEvents.length <= visibleTalks ||
+              (allEvents.length > visibleTalks && showMoreActive)) &&
             allEvents.map((event, index) => (
               <EventBox key={index} event={event}></EventBox>
             ))}
@@ -59,10 +60,9 @@ const EventList = ({ presenterName, presenterNickname }) => {
             ))}
         </div>
       )}
-
       <div className="flex">
         <div className="w-1/2">
-          {allEvents && allEvents.length > 3 && (
+          {allEvents && allEvents.length > visibleTalks && (
             <Button
               labelText={
                 !showMoreActive ? ' Show more talks' : ' Show less talks'
