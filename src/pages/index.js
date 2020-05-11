@@ -17,7 +17,7 @@ import 'array-flat-polyfill';
 import { config } from '@fortawesome/fontawesome-svg-core';
 import '@fortawesome/fontawesome-svg-core/styles.css';
 import ProfileSort from '../helpers/profileSort';
-import { getEventsPresenters } from '../helpers/eventHelper';
+import { getEventsPresenters, isPresenterOfEventType } from '../helpers/eventHelper';
 import EventFilter from '../components/event-filter/event-filter';
 
 config.autoAddCss = false;
@@ -76,20 +76,6 @@ const Index = ({
     ]);
   }
 
-  const isPresenter = (p, pr) => {
-    return (
-      (p.profile.nickname.length > 0 &&
-        pr.presenter.toLowerCase().indexOf(p.profile.nickname.toLowerCase()) >=
-          0) ||
-      pr.presenter.toLowerCase().indexOf(p.profile.fullName.toLowerCase()) >= 0
-    );
-  };
-  const isPresenterOfEventType = (p, pr) => {
-    return (
-      selectedEvents.filter(e => pr.eventType === e).length > 0 &&
-      isPresenter(p, pr)
-    );
-  };
   useEffect(() => {
     if (!events) {
       loadEventsPresenters();
@@ -110,10 +96,7 @@ const Index = ({
       .filter(
         p =>
           selectedEvents.length === 0 ||
-          (events &&
-            Array.prototype.filter.call(events, pr =>
-              isPresenterOfEventType(p, pr)
-            ).length > 0)
+          selectedEvents.filter(e => isPresenterOfEventType(e, p.profile, events)).length > 0
       )
       .sort(ProfileSort);
 
@@ -149,9 +132,11 @@ const Index = ({
               </div>
               <div className="w-full sm:w-1/2 lg:w-full mt-0 lg:mt-4">
                 <EventFilter
-                  allEvents={allEventsType}
+                  allEvents={events}
+                  allEventsType={allEventsType}
                   selectedEvents={selectedEvents}
                   onEventChange={setSelectedEvents}
+                  filteredPeople={filteredPeople}
                 />
               </div>
               <div className="w-full sm:w-1/2 lg:w-full mt-0 lg:mt-4">

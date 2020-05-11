@@ -17,8 +17,16 @@ import {
   updateUrlFilter,
   clearUrlFilter,
 } from '../../helpers/queryFilterHelper';
+import { isInPresenters, getPresentersOfEventType } from '../../helpers/eventHelper';
 
-const EventFilter = ({ allEvents, selectedEvents, onEventChange, search }) => {
+const EventFilter = ({
+  allEvents,
+  allEventsType,
+  selectedEvents,
+  onEventChange,
+  search,
+  filteredPeople,
+}) => {
   const node = useRef();
   const [listOpen, setListOpen] = useState(false);
 
@@ -61,7 +69,13 @@ const EventFilter = ({ allEvents, selectedEvents, onEventChange, search }) => {
   }, []);
 
   const { event } = search;
-  initFilter(event, allEvents, isEventSelected, selectedEvents, onEventChange);
+  initFilter(
+    event,
+    allEventsType,
+    isEventSelected,
+    selectedEvents,
+    onEventChange
+  );
 
   return (
     <>
@@ -103,7 +117,7 @@ const EventFilter = ({ allEvents, selectedEvents, onEventChange, search }) => {
               : 'filter-event hidden lg:inline'
           }
         >
-          {allEvents.map(event => (
+          {allEventsType.map(event => (
             <li key={event} className="flex category w-full">
               <div className="w-full whitespace-no-wrap">
                 <Checkbox
@@ -114,6 +128,7 @@ const EventFilter = ({ allEvents, selectedEvents, onEventChange, search }) => {
                   checkedIcon={faCheck}
                   checkedClassName="font-bold"
                   checkboxColor={isEventSelected(event) ? '#cc4141' : ''}
+                  checkboxCount={getPresentersOfEventType(event, allEvents, filteredPeople).length}
                 />
               </div>
             </li>
@@ -127,9 +142,11 @@ const EventFilter = ({ allEvents, selectedEvents, onEventChange, search }) => {
 
 EventFilter.propTypes = {
   allEvents: PropTypes.array.isRequired,
+  allEventsType: PropTypes.array.isRequired,
   selectedEvents: PropTypes.array.isRequired,
   onEventChange: PropTypes.func.isRequired,
   search: PropTypes.object,
+  filteredPeople: PropTypes.array.isRequired,
 };
 
 export default withURLLocation(EventFilter);
