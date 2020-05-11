@@ -133,6 +133,10 @@ ul li {
   }
 }
 
+.profile-image-height{
+  height: 242px;
+}
+
 .person-favor,
 .profile-image-quote {
   margin: 1rem;
@@ -898,6 +902,22 @@ label {
 
 .archive-list{
  background-color: #efefef;
+}
+
+.transformX0{
+  transform: translateX(0px);
+}
+
+.transformX84{
+  transform: translateX(84%);
+}
+
+.h-30px{
+  height: 30px;
+}
+
+.w-70pc{
+  width: 70%;
 }
 /**
 * This injects Tailwind's component classes and any component classes
