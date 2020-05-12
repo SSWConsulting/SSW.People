@@ -116,13 +116,14 @@ function mapXmlToEventObj(properties) {
 
 const isInPresenters = (profile, presenters) => {
   return (
-    (profile.nickname && profile.nickname.length > 0 &&
+    (profile.nickname &&
+      profile.nickname.length > 0 &&
       presenters.toLowerCase().indexOf(profile.nickname.toLowerCase()) >= 0) ||
-      presenters.toLowerCase().indexOf(profile.fullName.toLowerCase()) >= 0
+    presenters.toLowerCase().indexOf(profile.fullName.toLowerCase()) >= 0
   );
 };
 
-const getPresentersOfEventType = (eventType, allEvents, people ) => {
+const getPresentersOfEventType = (eventType, allEvents, people) => {
   return people.filter(
     p =>
       allEvents &&
@@ -135,8 +136,15 @@ const getPresentersOfEventType = (eventType, allEvents, people ) => {
 };
 
 const isPresenterOfEventType = (eventType, profile, events) => {
-  const eventsOfType = Array.prototype.filter.call(events, e => e.eventType === eventType);
-  return Array.prototype.filter.call(eventsOfType, e => isInPresenters(profile, e.presenter)).length>0;
+  const eventsOfType = Array.prototype.filter.call(
+    events,
+    e => e.eventType === eventType
+  );
+  return (
+    Array.prototype.filter.call(eventsOfType, e =>
+      isInPresenters(profile, e.presenter)
+    ).length > 0
+  );
 };
 
 export {
@@ -145,5 +153,5 @@ export {
   getPastEventsForPresenter,
   isInPresenters,
   getPresentersOfEventType,
-  isPresenterOfEventType
+  isPresenterOfEventType,
 };

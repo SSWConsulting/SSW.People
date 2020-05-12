@@ -12,6 +12,9 @@ import Modal from 'react-modal';
 import PlayAudio from '../components/play-audio/play-audio';
 import GitHubContributionCalendar from '../components/github-contribution-calendar/github-contribution-calendar';
 import EventList from '../components/event-list/event-list';
+import Quote from '../components/quote/quote';
+import SocialLinks from '../components/social-links/social-links';
+import SkillsList from '../components/skills-list/skills-list';
 
 config.autoAddCss = false;
 
@@ -30,58 +33,19 @@ const Person = ({
   const [hover, setHover] = useState(false);
   const crmData = pageContext.data.dataCRM || null;
 
-  let intermediateSkills = [];
-  let advancedSkills = [];
   let personName = '';
   let firstNameOrNickname = '';
-  let encodedEmailAddress = '';
-
-  const encodeEmail = emailAddress => {
-    let encodedString = '';
-
-    for (var i = 0; i < emailAddress.length; i++) {
-      encodedString += emailAddress.charCodeAt(i).toString(16);
-    }
-    return encodedString;
-  };
-
   if (crmData) {
-    intermediateSkills = crmData.skills
-      ? crmData.skills.intermediateSkills
-      : [];
-    advancedSkills = crmData.skills ? crmData.skills.advancedSkills : [];
     personName = crmData.nickname
       ? `${crmData.fullName} (${crmData.nickname})`
       : crmData.fullName;
     firstNameOrNickname = crmData.nickname
       ? crmData.nickname
       : crmData.fullName.split(' ')[0];
-    encodedEmailAddress = encodeEmail(crmData.emailAddress);
   }
 
   const onContactButtonClick = () => {
     setDisplayContactForm(!displayContactForm);
-  };
-
-  const decodeEmail = encodedEmail => {
-    let email = '';
-
-    if (encodedEmail !== undefined) {
-      // go through and decode the email address
-      for (var i = 0; i < encodedEmail.length; i += 2) {
-        // holds each letter (2 digits)
-        const letter = encodedEmail.charAt(i) + encodedEmail.charAt(i + 1);
-
-        // build the real email address
-        email += String.fromCharCode(parseInt(letter, 16));
-      }
-    }
-    return email;
-  };
-
-  const sendEmail = e => {
-    e.preventDefault();
-    window.location.href = 'mailTo:' + decodeEmail(encodedEmailAddress);
   };
 
   return (
@@ -142,12 +106,14 @@ const Person = ({
                   </div>
                   {frontmatter.quote && (
                     <div className="w-full pr-2 lg:hidden quoteblock">
-                      <div className="person-quote">{frontmatter.quote}</div>
-                      <div className="person-quote-name">
-                        {frontmatter.quoteAuthor
-                          ? frontmatter.quoteAuthor
-                          : personName}
-                      </div>
+                      <Quote
+                        quote={frontmatter.quote}
+                        author={
+                          frontmatter.quoteAuthor
+                            ? frontmatter.quoteAuthor
+                            : personName
+                        }
+                      />
                     </div>
                   )}
                 </div>
@@ -156,95 +122,17 @@ const Person = ({
             <div className="flex person-favor flex-row lg:flex-col">
               {frontmatter.quote && (
                 <div className="hidden w-1/2 pr-2 lg:pr-0 lg:w-full lg:block quoteblock">
-                  <div className="person-quote">{frontmatter.quote}</div>
-                  <div className="person-quote-name">
-                    {frontmatter.quoteAuthor
-                      ? frontmatter.quoteAuthor
-                      : personName}
-                  </div>
+                  <Quote
+                    quote={frontmatter.quote}
+                    author={
+                      frontmatter.quoteAuthor
+                        ? frontmatter.quoteAuthor
+                        : personName
+                    }
+                  />
                 </div>
               )}
-              {crmData && (
-                <div className="favor-content w-full">
-                  <ul className="favor-list">
-                    {crmData.emailAddress && (
-                      <li id="email" className="social">
-                        <a
-                          href={'#0'}
-                          onClick={event => {
-                            sendEmail(event);
-                          }}
-                        >
-                          {' '}
-                          Email{' '}
-                        </a>
-                      </li>
-                    )}
-                    {crmData.blogUrl && (
-                      <li id="blog" className="social">
-                        <a
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          href={crmData.blogUrl}
-                        >
-                          Blog
-                        </a>
-                      </li>
-                    )}
-                    {crmData.facebookUrl && (
-                      <li id="facebook" className="social">
-                        <a
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          href={crmData.facebookUrl}
-                        >
-                          Facebook
-                        </a>
-                      </li>
-                    )}
-                    {crmData.skypeUsername && (
-                      <li id="skype" className="social">
-                        <a href={`skype:${crmData.skypeUsername}?call`}>
-                          Skype
-                        </a>
-                      </li>
-                    )}
-                    {crmData.linkedInUrl && (
-                      <li id="linkedin" className="social">
-                        <a
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          href={crmData.linkedInUrl}
-                        >
-                          LinkedIn
-                        </a>
-                      </li>
-                    )}
-                    {crmData.twitterUsername && (
-                      <li id="twitter" className="social">
-                        <a
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          href={`https://www.twitter.com/${crmData.twitterUsername}`}
-                        >
-                          Twitter
-                        </a>
-                      </li>
-                    )}
-                    {crmData.gitHubUrl && (
-                      <li id="github" className="social">
-                        <a
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          href={crmData.gitHubUrl}
-                        >
-                          GitHub
-                        </a>
-                      </li>
-                    )}
-                  </ul>
-                </div>
-              )}
+              <SocialLinks crmData={crmData} />
             </div>
           </div>
           <div className="sm:w-full lg:w-3/4 xl:w-5/6">
@@ -264,33 +152,7 @@ const Person = ({
                 </strong>
               )}
               <hr />
-              {((advancedSkills && !!advancedSkills.length) ||
-                (intermediateSkills && !!intermediateSkills.length)) && (
-                <>
-                  <h4 className="text-ssw-red mb-0">Skills:</h4>
-                  <span>
-                    {advancedSkills.map((skill, i, arr) => (
-                      <strong key={`advancedSkill-${i}`}>
-                        {skill}
-                        {(i !== arr.length - 1 ||
-                          (i === arr.length - 1 &&
-                            intermediateSkills.length > 0)) && (
-                          <span className="skill-separator"> | </span>
-                        )}
-                      </strong>
-                    ))}
-                    {intermediateSkills.map((skill, i, arr) => (
-                      <span key={`intermediateSkill-${i}`}>
-                        {skill}
-                        {i !== arr.length - 1 && (
-                          <span className="skill-separator"> | </span>
-                        )}
-                      </span>
-                    ))}
-                  </span>
-                  <hr />
-                </>
-              )}
+              <SkillsList crmData={crmData} />
               <div
                 className="profile-content"
                 dangerouslySetInnerHTML={{

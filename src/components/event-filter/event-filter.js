@@ -17,7 +17,7 @@ import {
   updateUrlFilter,
   clearUrlFilter,
 } from '../../helpers/queryFilterHelper';
-import { isInPresenters, getPresentersOfEventType } from '../../helpers/eventHelper';
+import { getPresentersOfEventType } from '../../helpers/eventHelper';
 
 const EventFilter = ({
   allEvents,
@@ -128,7 +128,10 @@ const EventFilter = ({
                   checkedIcon={faCheck}
                   checkedClassName="font-bold"
                   checkboxColor={isEventSelected(event) ? '#cc4141' : ''}
-                  checkboxCount={getPresentersOfEventType(event, allEvents, filteredPeople).length}
+                  checkboxCount={
+                    getPresentersOfEventType(event, allEvents, filteredPeople)
+                      .length
+                  }
                 />
               </div>
             </li>

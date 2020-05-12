@@ -65,7 +65,7 @@ const PlayAudio = ({ hasAnimation, audioSrc }) => {
       {hasAnimation ? (
         // eslint-disable-next-line jsx-a11y/no-static-element-interactions
         <div
-          className='cursor-pointer flex mr-1 ml-1 bg-grey-translucent h-30px'
+          className="cursor-pointer flex mr-1 ml-1 bg-grey-translucent h-30px"
           onMouseEnter={() => {
             setHoverAudio(true);
           }}
@@ -83,9 +83,7 @@ const PlayAudio = ({ hasAnimation, audioSrc }) => {
               <PauseIcon aria-label="pause audio" className={'mr-2'} />
             )}
           </div>
-          <div
-            className='overflow-hidden relative h-30px w-70pc'
-          >
+          <div className="overflow-hidden relative h-30px w-70pc">
             <div
               ref={animationContainer}
               className={'absolute'}

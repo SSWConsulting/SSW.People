@@ -7,6 +7,7 @@ import {
 import EventBox from '../event-box/event-box';
 import Button from '../button/button';
 import { faSquare, faCheckSquare } from '@fortawesome/free-regular-svg-icons';
+import { faPlus, faMinus } from '@fortawesome/free-solid-svg-icons';
 
 const EventList = ({ presenterName, presenterNickname }) => {
   const visibleTalks = 5;
@@ -70,8 +71,10 @@ const EventList = ({ presenterName, presenterNickname }) => {
           {allEvents && allEvents.length > visibleTalks && (
             <Button
               labelText={
-                !showMoreActive ? '(Show more Talks >)' : ' (< Show less Talks)'
+                !showMoreActive ? ' Show more Talks' : ' Show less Talks)'
               }
+              activeIcon={faPlus}
+              inActiveIcon={faMinus}
               isActive={showMoreActive}
               onClick={() => setShowMoreActive(!showMoreActive)}
               activeClassName="btn-more"

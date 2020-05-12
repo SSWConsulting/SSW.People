@@ -17,7 +17,10 @@ import 'array-flat-polyfill';
 import { config } from '@fortawesome/fontawesome-svg-core';
 import '@fortawesome/fontawesome-svg-core/styles.css';
 import ProfileSort from '../helpers/profileSort';
-import { getEventsPresenters, isPresenterOfEventType } from '../helpers/eventHelper';
+import {
+  getEventsPresenters,
+  isPresenterOfEventType,
+} from '../helpers/eventHelper';
 import EventFilter from '../components/event-filter/event-filter';
 
 config.autoAddCss = false;
@@ -96,7 +99,9 @@ const Index = ({
       .filter(
         p =>
           selectedEvents.length === 0 ||
-          selectedEvents.filter(e => isPresenterOfEventType(e, p.profile, events)).length > 0
+          selectedEvents.filter(e =>
+            isPresenterOfEventType(e, p.profile, events)
+          ).length > 0
       )
       .sort(ProfileSort);
 
