@@ -7,8 +7,6 @@ import { config } from '@fortawesome/fontawesome-svg-core';
 import '@fortawesome/fontawesome-svg-core/styles.css';
 import YoutubePlaylist from '../components/youtube-playlist/youtube-playlist';
 import Contact from '../components/contact/contact';
-import ContactForm from '../components/contact-form/contact-form';
-import Modal from 'react-modal';
 import PlayAudio from '../components/play-audio/play-audio';
 import GitHubContributionCalendar from '../components/github-contribution-calendar/github-contribution-calendar';
 import EventList from '../components/event-list/event-list';
@@ -29,7 +27,6 @@ const Person = ({
   const profileImage = pageContext.data.profileImage;
   const sketchImage = pageContext.data.sketchImage;
   const profileAudio = pageContext.data.audio;
-  const [displayContactForm, setDisplayContactForm] = useState(false);
   const [hover, setHover] = useState(false);
   const crmData = pageContext.data.dataCRM || null;
 
@@ -43,10 +40,6 @@ const Person = ({
       ? crmData.nickname
       : crmData.fullName.split(' ')[0];
   }
-
-  const onContactButtonClick = () => {
-    setDisplayContactForm(!displayContactForm);
-  };
 
   return (
     <>
@@ -180,19 +173,9 @@ const Person = ({
                 </>
               )}
               <Contact
-                onClick={() => onContactButtonClick()}
-                profileName={firstNameOrNickname}
+                firstNameOrNickname={firstNameOrNickname}
+                fullName={crmData && crmData.fullName}
               />
-              <Modal
-                isOpen={displayContactForm}
-                contentLabel="Contact Form"
-                className="modal"
-              >
-                <ContactForm
-                  profileName={crmData && crmData.fullName}
-                  onClose={() => setDisplayContactForm(false)}
-                />
-              </Modal>
             </div>
           </div>
         </div>
