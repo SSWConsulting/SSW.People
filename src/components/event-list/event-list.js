@@ -50,7 +50,7 @@ const EventList = ({ presenterName, presenterNickname }) => {
               <span role="img" aria-label="Speaker">
                 🎙️
               </span>
-              &nbsp;Next talks
+              &nbsp;Upcoming talks
             </h2>
           </div>
           {allEvents &&
@@ -66,15 +66,15 @@ const EventList = ({ presenterName, presenterNickname }) => {
             ))}
         </div>
       )}
-      <div className="flex">
+      <div className="flex more-talks-buttons-list">
         <div className="w-1/2">
           {allEvents && allEvents.length > visibleTalks && (
             <Button
               labelText={
-                !showMoreActive ? ' Show more Talks' : ' Show less Talks)'
+                !showMoreActive ? ' Show More Talks' : ' Show Less Talks'
               }
-              activeIcon={faPlus}
-              inActiveIcon={faMinus}
+              inActiveIcon={faPlus}
+              activeIcon={faMinus}
               isActive={showMoreActive}
               onClick={() => setShowMoreActive(!showMoreActive)}
               activeClassName="btn-more"
@@ -94,14 +94,14 @@ const EventList = ({ presenterName, presenterNickname }) => {
               inActiveIcon={faSquare}
               isActive={showPastTalksActive}
               onClick={() => setShowPastTalksActive(!showPastTalksActive)}
-              activeClassName="btn-archive"
+              activeClassName="btn-archive-active"
               inActiveClassName="btn-archive"
             />
           )}
         </div>
       </div>
       {allPastEvents && allPastEvents.length > 0 && (
-        <div className="archive-list">
+        <div className="archive-list grid grid-cols-2">
           {allPastEvents &&
             showPastTalksActive &&
             allPastEvents.map((event, index) => (

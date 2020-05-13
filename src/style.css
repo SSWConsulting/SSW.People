@@ -818,6 +818,37 @@ label {
   margin-right: 10px;
   border: 1px solid #ccc;
 }
+
+.more-talks-buttons-list{
+  padding: 10px 0;
+}
+
+.archive-list .event-item{
+  padding-right: 40px;
+  padding-left: 15px;
+}
+
+.archive-list .event-item .thumbnail {
+  width: 55px;
+}
+
+.archive-list .event-item .ourHolder-text h3{
+text-overflow: ellipsis;
+
+/* Required for text-overflow to do anything */
+white-space: nowrap;
+overflow: hidden;
+font-size: 0.8rem;
+}
+
+
+.archive-list .event-item .key_datetime,
+.archive-list .event-item .key-more {
+  font-size: 0.8rem;
+}
+.archive-list .event-item .key-more {
+  display: none;
+}
 .event-item .ourHolder-text .key_type,
 .event-item .ourHolder-text .key_technology,
 .event-item .ourHolder-text .key_presenter,
@@ -896,7 +927,13 @@ label {
   float: right;
 }
 
-.btn-archive:hover {
+.btn-archive-active{
+  color: black;
+  float: right;
+}
+
+.btn-archive:hover,
+.btn-archive-active:hover {
   color: #cc2121;
 }
 
