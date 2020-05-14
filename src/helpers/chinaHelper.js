@@ -1,4 +1,5 @@
-const isChinaBuild = process.env.CHINA_BUILD && process.env.CHINA_BUILD;
+const isChinaBuild =
+  process.env.CHINA_BUILD && process.env.CHINA_BUILD === 'TRUE';
 
 const cleanHtml = html => {
   var cleaned = html;
