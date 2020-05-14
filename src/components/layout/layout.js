@@ -9,6 +9,7 @@ import Breadcrumbs from '../breadcrumb/breadcrumb';
 import GoogleAnalytics from '../google-analytics/google-analytics';
 import Menu from '../../../lib/ssw.megamenu/menu/menu';
 import MobileMenu from '../../../lib/ssw.megamenu/mobile-menu/mobile-menu';
+import { isChinaBuild } from '../../helpers/chinaHelper';
 
 const Layout = ({
   children,
@@ -48,7 +49,9 @@ const Layout = ({
         <div className="flex flex-col min-h-screen main-container">
           <Head pageTitle={pageTitle} />
           <Header displayActions={displayActions} profileId={profileId} />
-          <GoogleAnalytics pageTitle={pageTitle}></GoogleAnalytics>
+          {!isChinaBuild && (
+            <GoogleAnalytics pageTitle={pageTitle}></GoogleAnalytics>
+          )}
           <Menu onClickToggle={() => actionOnToggleClick()}></Menu>
           {crumbs ? (
             <Breadcrumbs crumbs={crumbs} crumbLabel={crumbLabel} />

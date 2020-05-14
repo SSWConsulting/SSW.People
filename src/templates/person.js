@@ -12,6 +12,7 @@ import Modal from 'react-modal';
 import PlayAudio from '../components/play-audio/play-audio';
 import GitHubContributionCalendar from '../components/github-contribution-calendar/github-contribution-calendar';
 import EventList from '../components/event-list/event-list';
+import { isChinaBuild } from '../helpers/chinaHelper';
 
 config.autoAddCss = false;
 
@@ -22,6 +23,7 @@ const Person = ({
   },
 }) => {
   const frontmatter = pageContext.data.frontmatter || {};
+  // If Build for China, clean the html of blocked resources
   const profileHtml = pageContext.data.html || {};
   const profileImage = pageContext.data.profileImage;
   const sketchImage = pageContext.data.sketchImage;
@@ -297,7 +299,7 @@ const Person = ({
                   __html: profileHtml,
                 }}
               />
-              {crmData && crmData.youTubePlayListId && (
+              {!isChinaBuild && crmData && crmData.youTubePlayListId && (
                 <>
                   <hr />
                   <YoutubePlaylist
