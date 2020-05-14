@@ -391,13 +391,35 @@ figure figcaption:before {
   max-width: 90vw;
 }
 
-div.youtube-playlist li {
+.youtube-playlist .container li {
   background: none;
 }
 
 .youtube-playlist-arrows{
-  display: flex;
-  justify-content: space-between
+  position: relative;
+  top: -120px;
+  height: 0px;
+}
+
+.arrow-previous{
+  float: left;
+}
+
+.arrow-next{
+  float: right;
+}
+@media(max-width: 770px) {
+  .show-button{
+    visibility: visible;
+    opacity: 1;
+    transition: opacity 600ms, visibility 600ms;
+  }
+
+  .hide-button{
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 600ms, visibility 600ms;
+  }
 }
 
 blockquote {
@@ -821,6 +843,11 @@ label {
 
 .more-talks-buttons-list{
   padding: 10px 0;
+}
+
+.archive-list h2{
+  padding-top: 15px;
+  padding-left: 15px;
 }
 
 .archive-list .event-item{
