@@ -100,13 +100,22 @@ const EventList = ({ presenterName, presenterNickname }) => {
           )}
         </div>
       </div>
-      {allPastEvents && allPastEvents.length > 0 && (
-        <div className="archive-list grid grid-cols-2">
-          {allPastEvents &&
-            showPastTalksActive &&
-            allPastEvents.map((event, index) => (
-              <EventBox key={index} event={event}></EventBox>
-            ))}
+      {allPastEvents && allPastEvents.length > 0 && showPastTalksActive && (
+        <div className="archive-list">
+          <div>
+            <h2>
+              <span role="img" aria-label="Speaker">
+                🎙️
+              </span>
+              &nbsp;Past talks
+            </h2>
+          </div>
+          <div className=" grid grid-cols-2">
+            {allPastEvents &&
+              allPastEvents.map((event, index) => (
+                <EventBox key={index} event={event}></EventBox>
+              ))}
+          </div>
         </div>
       )}
     </>
