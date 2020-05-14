@@ -13,6 +13,8 @@ import EventList from '../components/event-list/event-list';
 import Quote from '../components/quote/quote';
 import SocialLinks from '../components/social-links/social-links';
 import SkillsList from '../components/skills-list/skills-list';
+import { isChinaBuild } from '../helpers/chinaHelper';
+
 
 config.autoAddCss = false;
 
@@ -23,6 +25,7 @@ const Person = ({
   },
 }) => {
   const frontmatter = pageContext.data.frontmatter || {};
+  // If Build for China, clean the html of blocked resources
   const profileHtml = pageContext.data.html || {};
   const profileImage = pageContext.data.profileImage;
   const sketchImage = pageContext.data.sketchImage;
@@ -152,7 +155,7 @@ const Person = ({
                   __html: profileHtml,
                 }}
               />
-              {crmData && crmData.youTubePlayListId && (
+              {!isChinaBuild && crmData && crmData.youTubePlayListId && (
                 <>
                   <hr />
                   <YoutubePlaylist
