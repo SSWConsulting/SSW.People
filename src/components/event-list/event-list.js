@@ -10,7 +10,6 @@ import { faSquare, faCheckSquare } from '@fortawesome/free-regular-svg-icons';
 import { faPlus, faMinus } from '@fortawesome/free-solid-svg-icons';
 
 const EventList = ({ presenterName, presenterNickname }) => {
-
   const visibleTalks = 5;
   const [showMoreActive, setShowMoreActive] = useState(false);
   const [events, setEvents] = useState(null);

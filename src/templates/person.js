@@ -15,7 +15,6 @@ import SocialLinks from '../components/social-links/social-links';
 import SkillsList from '../components/skills-list/skills-list';
 import { isChinaBuild } from '../helpers/chinaHelper';
 
-
 config.autoAddCss = false;
 
 const Person = ({
