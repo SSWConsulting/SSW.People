@@ -110,7 +110,7 @@ const EventList = ({ presenterName, presenterNickname }) => {
               &nbsp;Past talks
             </h2>
           </div>
-          <div className=" grid grid-cols-2">
+          <div className="grid sm:grid-cols-1 md:grid-cols-2">
             {allPastEvents &&
               allPastEvents.map((event, index) => (
                 <EventBox key={index} event={event}></EventBox>
