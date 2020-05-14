@@ -133,6 +133,10 @@ ul li {
   }
 }
 
+.profile-image-height{
+  height: 242px;
+}
+
 .person-favor,
 .profile-image-quote {
   margin: 1rem;
@@ -387,13 +391,35 @@ figure figcaption:before {
   max-width: 90vw;
 }
 
-div.youtube-playlist li {
+.youtube-playlist .container li {
   background: none;
 }
 
 .youtube-playlist-arrows{
-  display: flex;
-  justify-content: space-between
+  position: relative;
+  top: -120px;
+  height: 0px;
+}
+
+.arrow-previous{
+  float: left;
+}
+
+.arrow-next{
+  float: right;
+}
+@media(max-width: 770px) {
+  .show-button{
+    visibility: visible;
+    opacity: 1;
+    transition: opacity 600ms, visibility 600ms;
+  }
+
+  .hide-button{
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 600ms, visibility 600ms;
+  }
 }
 
 blockquote {
@@ -814,6 +840,42 @@ label {
   margin-right: 10px;
   border: 1px solid #ccc;
 }
+
+.more-talks-buttons-list{
+  padding: 10px 0;
+}
+
+.archive-list h2{
+  padding-top: 15px;
+  padding-left: 15px;
+}
+
+.archive-list .event-item{
+  padding-right: 40px;
+  padding-left: 15px;
+}
+
+.archive-list .event-item .thumbnail {
+  width: 55px;
+}
+
+.archive-list .event-item .ourHolder-text h3{
+text-overflow: ellipsis;
+
+/* Required for text-overflow to do anything */
+white-space: nowrap;
+overflow: hidden;
+font-size: 0.8rem;
+}
+
+
+.archive-list .event-item .key_datetime,
+.archive-list .event-item .key-more {
+  font-size: 0.8rem;
+}
+.archive-list .event-item .key-more {
+  display: none;
+}
 .event-item .ourHolder-text .key_type,
 .event-item .ourHolder-text .key_technology,
 .event-item .ourHolder-text .key_presenter,
@@ -892,12 +954,34 @@ label {
   float: right;
 }
 
-.btn-archive:hover {
+.btn-archive-active{
+  color: black;
+  float: right;
+}
+
+.btn-archive:hover,
+.btn-archive-active:hover {
   color: #cc2121;
 }
 
 .archive-list{
  background-color: #efefef;
+}
+
+.transformX0{
+  transform: translateX(0px);
+}
+
+.transformX84{
+  transform: translateX(84%);
+}
+
+.h-30px{
+  height: 30px;
+}
+
+.w-70pc{
+  width: 70%;
 }
 /**
 * This injects Tailwind's component classes and any component classes

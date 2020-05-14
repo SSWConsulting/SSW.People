@@ -24,6 +24,7 @@ const initFilter = (
 
 const updateUrlFilter = (filtername, search, filterToAdd, add) => {
   let filterArray = search[filtername] ? search[filtername] : [];
+  if (typeof filterArray == 'string') filterArray = [filterArray];
   if (add) {
     filterArray.push(sanitizeFilter(filterToAdd));
   } else {

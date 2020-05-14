@@ -3,18 +3,38 @@ import React, { useState, useEffect } from 'react';
 import Carousel from '@brainhubeu/react-carousel';
 import '@brainhubeu/react-carousel/lib/style.css';
 import PropTypes from 'prop-types';
+import Icon from '../../images/icon.png';
+import YouTube from 'react-youtube';
 
 const YoutubePlaylist = ({ youtubePlayListId }) => {
   const [error, setError] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
   const [items, setItems] = useState([]);
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [showButtons, setShowButtons] = useState(true);
 
   var numVideosDesktop = 0;
   var numVideosTablet = 0;
 
   const nextSlide = () => setCurrentSlide(currentSlide + 1);
   const previousSlide = () => setCurrentSlide(currentSlide - 1);
+  const opts = {
+    height: '180',
+    width: '321',
+    playerVars: {
+      // https://developers.google.com/youtube/player_parameters
+      autoplay: 0,
+    },
+  };
+
+  const PLAYING = 1;
+  const HideShowArrows = e => {
+    if (e.data == PLAYING) {
+      setShowButtons(false);
+    } else {
+      setShowButtons(true);
+    }
+  };
 
   useEffect(() => {
     const youtubeApiKey = process.env.YOUTUBE_API_KEY;
@@ -58,11 +78,11 @@ const YoutubePlaylist = ({ youtubePlayListId }) => {
     }
 
     return (
-      <>
+      <div className="youtube-playlist clearfix">
         <div>
           <h2>Videos</h2>
         </div>
-        <div className="youtube-playlist container">
+        <div className="container">
           <Helmet
             style={[
               {
@@ -97,34 +117,45 @@ const YoutubePlaylist = ({ youtubePlayListId }) => {
                 slidesPerScroll: numVideosTablet,
               },
             }}
-          >
-            {items.map(item => (
-              <div
-                key={item.contentDetails.videoId + 1}
-                className="gatsby-resp-iframe-wrapper"
-              >
-                <div className="embedVideo-container">
-                  <iframe
-                    key={item.contentDetails.videoId}
-                    title="1"
-                    src={`https://www.youtube-nocookie.com/embed/${item.contentDetails.videoId}?rel=0`}
-                    allowFullScreen="allowfullscreen"
-                    frameBorder="0"
-                    width="321"
-                    height="180"
-                    className="embedVideo-iframe"
-                  ></iframe>
+            slides={[
+              ...items.map(item => (
+                <div
+                  key={item.contentDetails.videoId + 1}
+                  className="gatsby-resp-iframe-wrapper"
+                >
+                  <div className="embedVideo-container">
+                    <YouTube
+                      videoId={item.contentDetails.videoId} // defaults -> null
+                      className={'embedVideo-iframe'} // defaults -> null
+                      containerClassName={'embedVideo-container'} // defaults -> ''
+                      opts={opts} // defaults -> {}
+                      onStateChange={HideShowArrows} // defaults -> noop
+                    />
+                  </div>
                 </div>
-              </div>
-            ))}
-          </Carousel>
-          <div className="youtube-playlist-arrows">
+              )),
+              <div key="0" className="m-auto">
+                <img alt={'Separator'} src={Icon} width="96px" />
+              </div>,
+            ]}
+          />
+          <div
+            className={`youtube-playlist-arrows arrow-previous clearfix ${
+              showButtons ? 'show-button' : 'hide-button'
+            }`}
+          >
             <button
               className="BrainhubCarousel__arrows BrainhubCarousel__arrowLeft"
               onClick={previousSlide}
             >
               <span>pre</span>
             </button>
+          </div>
+          <div
+            className={`youtube-playlist-arrows arrow-next clearfix ${
+              showButtons ? 'show-button' : 'hide-button'
+            }`}
+          >
             <button
               className="BrainhubCarousel__arrows BrainhubCarousel__arrowRight"
               onClick={nextSlide}
@@ -133,7 +164,7 @@ const YoutubePlaylist = ({ youtubePlayListId }) => {
             </button>
           </div>
         </div>
-      </>
+      </div>
     );
   }
 };

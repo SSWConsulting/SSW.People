@@ -18,10 +18,7 @@ const ProfileBox = ({
     : profile.fullName.split(' ')[0];
 
   const content = profileImages.profileImage !== undefined && (
-    <div
-      className="relative shadow-lg profile-image"
-      style={{ height: '242px' }}
-    >
+    <div className="relative shadow-lg profile-image profile-image-height">
       <Img
         alt={`${profile.fullName} profile image`}
         fluid={profileImages.profileImage}

@@ -114,8 +114,44 @@ function mapXmlToEventObj(properties) {
   };
 }
 
+const isInPresenters = (profile, presenters) => {
+  return (
+    (profile.nickname &&
+      profile.nickname.length > 0 &&
+      presenters.toLowerCase().indexOf(profile.nickname.toLowerCase()) >= 0) ||
+    presenters.toLowerCase().indexOf(profile.fullName.toLowerCase()) >= 0
+  );
+};
+
+const getPresentersOfEventType = (eventType, allEvents, people) => {
+  return people.filter(
+    p =>
+      allEvents &&
+      Array.prototype.filter.call(
+        allEvents,
+        pr =>
+          pr.eventType === eventType && isInPresenters(p.profile, pr.presenter)
+      ).length > 0
+  );
+};
+
+const isPresenterOfEventType = (eventType, profile, events) => {
+  const eventsOfType = Array.prototype.filter.call(
+    events,
+    e => e.eventType === eventType
+  );
+  return (
+    Array.prototype.filter.call(eventsOfType, e =>
+      isInPresenters(profile, e.presenter)
+    ).length > 0
+  );
+};
+
 export {
   getEventsPresenters,
   getEventsForPresenter,
   getPastEventsForPresenter,
+  isInPresenters,
+  getPresentersOfEventType,
+  isPresenterOfEventType,
 };

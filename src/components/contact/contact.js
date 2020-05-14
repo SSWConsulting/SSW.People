@@ -1,29 +1,38 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import ContactInfo from '../contact-info/contact-info';
+import ContactForm from '../contact-form/contact-form';
+import Modal from 'react-modal';
 
-const Contact = ({ onClick, profileName }) => {
+const Contact = ({ firstNameOrNickname, fullName }) => {
+  const [displayContactForm, setDisplayContactForm] = useState(false);
+
+  const onContactButtonClick = () => {
+    setDisplayContactForm(!displayContactForm);
+  };
   return (
-    <div className="contact">
-      <h3 className="text-ssw-red">
-        Interested in what {profileName ? profileName : 'we'} can do for you?
-      </h3>
-      <p>
-        Contact {profileName ? `${profileName}'s` : 'an'} Account Manager to
-        discuss your project
-      </p>
-      <button className="btn btn-red" onClick={() => onClick()}>
-        Book a Free Initial Meeting
-      </button>
-      <p>
-        or call on <span className="font-semibold">+61 2 9953 3000</span>
-      </p>
-    </div>
+    <>
+      <ContactInfo
+        onClick={() => onContactButtonClick()}
+        profileName={firstNameOrNickname}
+      />
+      <Modal
+        isOpen={displayContactForm}
+        contentLabel="Contact Form"
+        className="modal"
+      >
+        <ContactForm
+          profileName={fullName}
+          onClose={() => setDisplayContactForm(false)}
+        />
+      </Modal>
+    </>
   );
 };
 
 Contact.propTypes = {
-  profileName: PropTypes.string.isRequired,
-  onClick: PropTypes.func.isRequired,
+  firstNameOrNickname: PropTypes.string.isRequired,
+  fullName: PropTypes.string.isRequired,
 };
 
 export default Contact;

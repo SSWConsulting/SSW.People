@@ -33,18 +33,12 @@ const Layout = ({
   };
 
   return (
-    <div
-      style={{
-        overflow: isMenuOpened ? 'hidden' : 'auto',
-      }}
-    >
+    <div className={isMenuOpened ? 'overflow-hidden' : 'overflow-auto'}>
       {/* eslint-disable-next-line jsx-a11y/no-static-element-interactions */}
       <div
         ref={node}
         onMouseDown={isMenuOpened ? event => handleClick(event) : null}
-        style={{
-          transform: isMenuOpened ? 'translateX(84%)' : 'translateX(0px)',
-        }}
+        className={isMenuOpened ? 'translateX84' : 'translateX0'}
       >
         <div className="flex flex-col min-h-screen main-container">
           <Head pageTitle={pageTitle} />
