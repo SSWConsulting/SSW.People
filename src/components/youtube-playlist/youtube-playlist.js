@@ -36,6 +36,38 @@ const YoutubePlaylist = ({ youtubePlayListId }) => {
     }
   };
 
+  const getVideosElements = () => {
+    return items.map(item => (
+      <div
+        key={item.contentDetails.videoId + 1}
+        className="gatsby-resp-iframe-wrapper"
+      >
+        <div className="embedVideo-container">
+          <YouTube
+            videoId={item.contentDetails.videoId} // defaults -> null
+            className={'embedVideo-iframe'} // defaults -> null
+            containerClassName={'embedVideo-container'} // defaults -> ''
+            opts={opts} // defaults -> {}
+            onStateChange={HideShowArrows} // defaults -> noop
+          />
+        </div>
+      </div>
+    ));
+  };
+
+  const getVideosElementsWithSeparator = () => {
+    if (items.length === 1) {
+      return getVideosElements();
+    } else {
+      return [
+        ...getVideosElements(),
+        <div key="0" className="m-auto">
+          <img alt={'Separator'} src={Icon} width="96px" />
+        </div>,
+      ];
+    }
+  };
+
   useEffect(() => {
     const youtubeApiKey = process.env.YOUTUBE_API_KEY;
 
@@ -108,61 +140,51 @@ const YoutubePlaylist = ({ youtubePlayListId }) => {
             slidesPerScroll={numVideosDesktop}
             infinite
             breakpoints={{
-              770: {
+              768: {
                 slidesPerPage: 1,
                 slidesPerScroll: 1,
               },
-              1290: {
+              1280: {
                 slidesPerPage: numVideosTablet,
                 slidesPerScroll: numVideosTablet,
               },
             }}
-            slides={[
-              ...items.map(item => (
-                <div
-                  key={item.contentDetails.videoId + 1}
-                  className="gatsby-resp-iframe-wrapper"
-                >
-                  <div className="embedVideo-container">
-                    <YouTube
-                      videoId={item.contentDetails.videoId} // defaults -> null
-                      className={'embedVideo-iframe'} // defaults -> null
-                      containerClassName={'embedVideo-container'} // defaults -> ''
-                      opts={opts} // defaults -> {}
-                      onStateChange={HideShowArrows} // defaults -> noop
-                    />
-                  </div>
-                </div>
-              )),
-              <div key="0" className="m-auto">
-                <img alt={'Separator'} src={Icon} width="96px" />
-              </div>,
-            ]}
+            slides={getVideosElementsWithSeparator()}
           />
-          <div
-            className={`youtube-playlist-arrows arrow-previous clearfix ${
-              showButtons ? 'show-button' : 'hide-button'
-            }`}
-          >
-            <button
-              className="BrainhubCarousel__arrows BrainhubCarousel__arrowLeft"
-              onClick={previousSlide}
-            >
-              <span>pre</span>
-            </button>
-          </div>
-          <div
-            className={`youtube-playlist-arrows arrow-next clearfix ${
-              showButtons ? 'show-button' : 'hide-button'
-            }`}
-          >
-            <button
-              className="BrainhubCarousel__arrows BrainhubCarousel__arrowRight"
-              onClick={nextSlide}
-            >
-              <span>next</span>
-            </button>
-          </div>
+          {items.length > 1 && (
+            <>
+              <div
+                className={`youtube-playlist-arrows arrow-previous clearfix ${(items.length <=
+                numVideosTablet
+                  ? 'md:hidden '
+                  : '') +
+                  (items.length <= numVideosDesktop ? 'xl:hidden ' : '') +
+                  (showButtons ? 'show-button' : 'hide-button')}`}
+              >
+                <button
+                  className="BrainhubCarousel__arrows BrainhubCarousel__arrowLeft"
+                  onClick={previousSlide}
+                >
+                  <span>pre</span>
+                </button>
+              </div>
+              <div
+                className={`youtube-playlist-arrows arrow-next clearfix ${(items.length <=
+                numVideosTablet
+                  ? 'md:hidden '
+                  : '') +
+                  (items.length <= numVideosDesktop ? 'xl:hidden ' : '') +
+                  (showButtons ? 'show-button' : 'hide-button')}`}
+              >
+                <button
+                  className="BrainhubCarousel__arrows BrainhubCarousel__arrowRight"
+                  onClick={nextSlide}
+                >
+                  <span>next</span>
+                </button>
+              </div>
+            </>
+          )}
         </div>
       </div>
     );
