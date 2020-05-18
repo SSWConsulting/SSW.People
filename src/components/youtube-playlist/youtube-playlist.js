@@ -120,6 +120,7 @@ const YoutubePlaylist = ({ youtubePlayListId }) => {
               {
                 cssText: `
               .BrainhubCarousel__arrows{
+                      padding: 17px;
                       background-color: #CC4141;
               }
 
