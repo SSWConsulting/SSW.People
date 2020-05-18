@@ -120,6 +120,7 @@ const YoutubePlaylist = ({ youtubePlayListId }) => {
               {
                 cssText: `
               .BrainhubCarousel__arrows{
+                      padding: 17px;
                       background-color: #CC4141;
               }
 
@@ -154,15 +155,12 @@ const YoutubePlaylist = ({ youtubePlayListId }) => {
           {items.length > 1 && (
             <>
               <div
-                className={`youtube-playlist-arrows arrow-previous clearfix ${
-                  items.length <= numVideosTablet
-                    ? 'md:hidden '
-                    : '' + items.length <= numVideosDesktop
-                    ? 'xl:hidden '
-                    : '' + showButtons
-                    ? 'show-button'
-                    : 'hide-button'
-                }`}
+                className={`youtube-playlist-arrows arrow-previous clearfix ${(items.length <=
+                numVideosTablet
+                  ? 'md:hidden '
+                  : '') +
+                  (items.length <= numVideosDesktop ? 'xl:hidden ' : '') +
+                  (showButtons ? 'show-button' : 'hide-button')}`}
               >
                 <button
                   className="BrainhubCarousel__arrows BrainhubCarousel__arrowLeft"
@@ -172,15 +170,12 @@ const YoutubePlaylist = ({ youtubePlayListId }) => {
                 </button>
               </div>
               <div
-                className={`youtube-playlist-arrows arrow-next clearfix ${
-                  items.length <= numVideosTablet
-                    ? 'md:hidden '
-                    : '' + items.length <= numVideosDesktop
-                    ? 'xl:hidden '
-                    : '' + showButtons
-                    ? 'show-button'
-                    : 'hide-button'
-                }`}
+                className={`youtube-playlist-arrows arrow-next clearfix ${(items.length <=
+                numVideosTablet
+                  ? 'md:hidden '
+                  : '') +
+                  (items.length <= numVideosDesktop ? 'xl:hidden ' : '') +
+                  (showButtons ? 'show-button' : 'hide-button')}`}
               >
                 <button
                   className="BrainhubCarousel__arrows BrainhubCarousel__arrowRight"
