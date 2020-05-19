@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import posed from 'react-pose';
-import SSWLogo from '-!svg-react-loader!../../images/SSWLogo.svg';
+import CompanyLogo from '-!svg-react-loader!../../images/branding/Logo.svg';
 import GitHubIcon from '-!svg-react-loader!../../images/github.svg';
 import InfoIcon from '-!svg-react-loader!../../images/info.svg';
 import { parentSiteUrl } from '../../../site-config';
@@ -29,7 +29,7 @@ const Header = ({ displayActions, profileId }) => {
         <div className="flex mx-6 mt-4 mb-6">
           <div className="flex items-center">
             <a href={parentSiteUrl} className="unstyled cursor-pointer">
-              <SSWLogo aria-label="logo" />
+              <CompanyLogo aria-label="logo" />
             </a>
             <h1 className="title ml-2">Our People</h1>
           </div>

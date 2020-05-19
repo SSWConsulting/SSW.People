@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import Carousel from '@brainhubeu/react-carousel';
 import '@brainhubeu/react-carousel/lib/style.css';
 import PropTypes from 'prop-types';
-import Icon from '../../images/icon.png';
+import Icon from '../../images/branding/icon.png';
 import YouTube from 'react-youtube';
 
 const YoutubePlaylist = ({ youtubePlayListId }) => {
