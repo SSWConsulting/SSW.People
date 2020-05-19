@@ -2,6 +2,8 @@
 const path = require(`path`);
 
 module.exports = {
+  companyName: `SSW Consulting`,
+  companyShortName: `SSW`,
   siteTitle: `SSW.People | Australia's Leading .NET and Azure Consultants`,
   siteTitleShort: `SSW.People | Australia's Leading .NET and Azure Consultants`,
   siteDescription:
@@ -11,10 +13,11 @@ module.exports = {
   themeColor: `#cc4141`,
   backgroundColor: `#fff`,
   pathPrefix: null,
-  logo: path.resolve(__dirname, `src/images/icon.png`),
+  logo: path.resolve(__dirname, `src/images/branding/icon.png`),
   social: {
     twitter: `SSW_TV`,
     fbAppId: `120920301257947`,
+    fbPage: `https://www.facebook.com/SSW.page`,
   },
   parentSiteUrl: `https://ssw.com.au`,
 };
