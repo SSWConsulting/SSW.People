@@ -9,7 +9,7 @@
 /* purgecss end ignore */
 
 html {
-  font-family: "Helvetica", "SegoeUILight", "sans-serif"
+  font-family: "Segoe UI",SegoeUI,"Helvetica Neue",Helvetica,Arial,sans-serif;
 }
 
 h1 {
@@ -18,10 +18,13 @@ h1 {
   @apply text-ssw-red;
 }
 
-h1.title {
+.title {
+  font-weight: 600;
   font-size: 2em;
-  color: #414141;
   margin-bottom: 0.1em;
+  font-family: "Segoe UI";
+  color: #747273;
+  line-height: 1.5em;
 }
 
 h2 {
@@ -53,7 +56,8 @@ a:link {
 
     &:hover {
       @apply text-ssw-red;
-      border-bottom: 2px dotted #cc4141;
+      @apply border-ssw-red;
+      border-bottom: 2px dotted;
     }
   }
 }
@@ -271,7 +275,8 @@ ul.favor-list li {
 .breadcrumb a:hover{
   &:not(.breadcrumb__link__active){
     @apply text-ssw-red;
-    border-bottom: 1px dotted #cc4141;
+    @apply border-ssw-red;
+    border-bottom: 1px dotted;
   }
 }
 
@@ -290,11 +295,27 @@ button:focus {
 }
 
 .text-ssw-red {
-  color: #cc4141;
+  color: #0067b8;
 }
 
 .bg-ssw-red {
-  background-color: #cc4141;
+  background-color: #0067b8;
+}
+
+.border-ssw-red {
+  border-color: #0067b8;
+}
+
+.color-ssw-red {
+  color: #0067b8;
+}
+
+.bg-button-hover{
+    background-color: #0067b8;
+}
+
+.color-hover{
+  color: #0067b8;
 }
 
 .bg-ssw-grey {
@@ -426,7 +447,8 @@ blockquote {
   font-style: italic;
   padding: .5rem 1rem;
   background-color: #eee;
-  border-left: 4px solid #cc4141;
+  border-left: 4px solid;
+  @apply border-ssw-red;
   border-radius: 0 .25rem .25rem 0;
   margin: 1rem 0;
 }
@@ -635,11 +657,11 @@ pre {
 }
 
 .btn-red{
-  background-color: #cc4141;
+  @apply bg-ssw-red;
 }
 
 .btn-red:hover{
-  background-color: #cc2121;
+  @apply bg-button-hover;
 }
 
 .modal{
@@ -720,7 +742,8 @@ pre {
 }
 
 .form-group input.form-control:focus, .form-group select.form-control:focus, .form-group textarea.form-control:focus {
-  border-bottom: 2px solid #cc4141;
+  @apply border-ssw-red;
+  border-bottom: 2px solid;
   outline: 0px;
 }
 
@@ -906,7 +929,7 @@ font-size: 0.8rem;
   padding-right: 5px;
 }
 .event-item .ourHolder-text .key_datetime {
-  color: #cc4141;
+  @apply color-ssw-red;
   text-transform: uppercase;
   display: block;
 }
@@ -942,17 +965,17 @@ font-size: 0.8rem;
 }
 
 .btn-filter-active{
-  background-color: #cc4141;
+ @apply bg-ssw-red;
   font-weight: bold;
 }
 
 .btn-filter-active:hover{
-  background-color: #cc2121;
+  @apply bg-button-hover;
 }
 
 .btn-filter-inactive{
   background-color: white;
-  color: #cc2121;
+  @apply color-hover;
   font-weight: bold;
   border-style: solid;
   border-width: 1px;
@@ -962,7 +985,7 @@ font-size: 0.8rem;
   background-color: rgb(238, 238, 238);
 }
 .btn-more:hover {
-  color: #cc2121;
+  @apply color-hover;
 }
 
 .btn-archive {
@@ -977,7 +1000,7 @@ font-size: 0.8rem;
 
 .btn-archive:hover,
 .btn-archive-active:hover {
-  color: #cc2121;
+  @apply color-hover;
 }
 
 .archive-list{
@@ -998,6 +1021,22 @@ font-size: 0.8rem;
 
 .w-70pc{
   width: 70%;
+}
+
+.logo{
+  margin-left: 1.7em !important;
+  position: relative;
+}
+
+.logo::before {
+  content: '\2006';
+  position: absolute;
+  left: -1.7em;
+  height: 0.095em;
+  box-shadow: 0.35em 0.35em 0 0.25em #f8510c, 
+              1.05em 0.35em 0 0.25em #7eba00, 
+              0.35em 0.97em 0 0.25em #00a3f4, 
+              1.05em 0.97em 0 0.25em #ffba00;     
 }
 /**
 * This injects Tailwind's component classes and any component classes

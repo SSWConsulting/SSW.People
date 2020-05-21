@@ -118,7 +118,7 @@ const SkillsFilter = ({
                 onChange={() => onSkillClicked(skill)}
                 checkedIcon={faCheck}
                 checkedClassName="font-bold"
-                checkboxColor={isSkillSelected(skill) ? '#cc4141' : ''}
+                checkboxColor={isSkillSelected(skill) ? '#0067b8' : ''}
                 checkboxCount={
                   filteredPeople.filter(p => p.skills.find(s => s === skill))
                     .length

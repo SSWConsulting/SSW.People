@@ -123,7 +123,7 @@ const RoleFilter = ({
                   onChange={() => onRoleClicked(role)}
                   checkedIcon={faCheck}
                   checkedClassName="font-bold"
-                  checkboxColor={isRoleSelected(role) ? '#cc4141' : ''}
+                  checkboxColor={isRoleSelected(role) ? '#0067b8' : ''}
                 />
               </div>
             </li>

@@ -121,15 +121,15 @@ const YoutubePlaylist = ({ youtubePlayListId }) => {
                 cssText: `
               .BrainhubCarousel__arrows{
                       padding: 17px;
-                      background-color: #CC4141;
+                      background-color: #0067b8;
               }
 
               .BrainhubCarousel__arrows:hover{
-                      background-color: #CC4141;
+                      background-color: #0067b8;
               }
 
               .BrainhubCarousel__arrows:hover:enabled{
-                      background-color:#CC4141
+                      background-color:#0067b8
               }
             `,
               },

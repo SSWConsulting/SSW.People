@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import posed from 'react-pose';
-import CompanyLogo from '-!svg-react-loader!../../images/branding/Logo.svg';
+//import Logo from '-!svg-react-loader!../../images/branding/Logo.svg';
 import GitHubIcon from '-!svg-react-loader!../../images/github.svg';
 import InfoIcon from '-!svg-react-loader!../../images/info.svg';
 import { parentSiteUrl } from '../../../site-config';
@@ -29,9 +29,9 @@ const Header = ({ displayActions, profileId }) => {
         <div className="flex mx-6 mt-4 mb-6">
           <div className="flex items-center">
             <a href={parentSiteUrl} className="unstyled cursor-pointer">
-              <CompanyLogo aria-label="logo" />
+              <div className="logo title ml-2">Microsoft</div>
             </a>
-            <h1 className="title ml-2">Our People</h1>
+            <h1 className="title ml-2">- Our People</h1>
           </div>
           {displayActions ? (
             <div className="action-btn-container">
