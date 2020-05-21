@@ -28,7 +28,16 @@ jobs:
         api_location: 'api' # Api source code path - optional
         app_artifact_location: 'public' # Built app content directory - optional
         ###### End of Repository/Build Configurations ######
-
+    env:
+      GOOGLE_ANALYTICS: ${{ secrets.GOOGLE_ANALYTICS }}
+      RECAPTCHA_KEY: ${{ secrets.RECAPTCHA_KEY }}
+      SOPHIE_API_URL: ${{ secrets.SOPHIE_API_URL }}
+      SOPHIE_TENANT: ${{ secrets.SOPHIE_TENANT }}
+      SOPHIE_AUTHORIZATION: ${{ secrets.SOPHIE_AUTHORIZATION }}
+      YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
+      VERSION_DEPLOYED: '1.0.0'
+      CHINA_BUILD: 'FALSE'
+      
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
     runs-on: ubuntu-latest
