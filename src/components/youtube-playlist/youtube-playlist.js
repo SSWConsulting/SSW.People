@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import Carousel from '@brainhubeu/react-carousel';
 import '@brainhubeu/react-carousel/lib/style.css';
 import PropTypes from 'prop-types';
-import Icon from '../../images/icon.png';
+import Icon from '../../images/branding/icon.png';
 import YouTube from 'react-youtube';
 
 const YoutubePlaylist = ({ youtubePlayListId }) => {
@@ -121,15 +121,16 @@ const YoutubePlaylist = ({ youtubePlayListId }) => {
                 cssText: `
               .BrainhubCarousel__arrows{
                       padding: 17px;
+                      background-color: #0067b8;
                       background-color: #CC4141;
               }
 
               .BrainhubCarousel__arrows:hover{
-                      background-color: #CC4141;
+                      background-color: #0067b8;
               }
 
               .BrainhubCarousel__arrows:hover:enabled{
-                      background-color:#CC4141
+                      background-color:#0067b8
               }
             `,
               },
