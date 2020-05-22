@@ -6,7 +6,6 @@
  */
 
 @tailwind base;
-/* purgecss end ignore */
 
 html {
   font-family: "Segoe UI",SegoeUI,"Helvetica Neue",Helvetica,Arial,sans-serif;
@@ -1048,6 +1047,7 @@ font-size: 0.8rem;
 * This injects Tailwind's utility classes and any utility classes registered
 * by plugins.
 */
+/* purgecss end ignore */
 
 @tailwind utilities;
 /**
