@@ -20,7 +20,7 @@ jobs:
         sudo apt install -y git
         git --version
         git --exec-path
-        PATH=$PATH:/usr/bin/git export PATH
+        PATH=$PATH:/usr/lib/git-core export PATH
     - uses: actions/checkout@v1
     - name: Build And Deploy
       id: builddeploy
