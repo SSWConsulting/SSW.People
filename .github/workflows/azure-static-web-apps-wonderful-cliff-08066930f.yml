@@ -19,6 +19,7 @@ jobs:
       run: | 
         sudo apt install -y git
         git --version
+        git --exec-path
         PATH=$PATH:/usr/bin/git export PATH
     - uses: actions/checkout@v1
     - name: Build And Deploy
