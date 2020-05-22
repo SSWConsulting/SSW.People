@@ -18,6 +18,8 @@ jobs:
     - name: Install Git
       run: | 
         sudo apt install -y git
+        git --version
+        PATH=$PATH:/usr/bin/git export PATH
     - uses: actions/checkout@v1
     - name: Build And Deploy
       id: builddeploy
