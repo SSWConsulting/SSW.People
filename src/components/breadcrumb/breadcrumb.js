@@ -1,13 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Breadcrumb } from 'gatsby-plugin-breadcrumb';
-import { parentSiteUrl } from '../../../site-config';
+import { parentSiteUrl, companyName } from '../../../site-config';
 
 const Breadcrumbs = ({ crumbs, crumbLabel }) => {
   return (
     <div className="breadcrumb-container">
       <div className="mx-6 mb-3 breadcrumb">
-        <a href={parentSiteUrl}>SSW Consulting</a>
+        <a href={parentSiteUrl}>{companyName}</a>
         <span> &gt; </span>
         <Breadcrumb
           crumbs={crumbs}
