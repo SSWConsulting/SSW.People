@@ -40,7 +40,12 @@ exports.onCreateWebpackConfig = ({ stage, getConfig, actions }) => {
 exports.sourceNodes = async ({ actions }) => {
   const { createNode } = actions;
 
-  const crmDataResult = await axios({
+  const crmDataResult = process.env.SOPHIE_AUTHORIZATION==='FALSE'?
+  await axios({
+    method: 'get',
+    url: process.env.SOPHIE_API_URL,
+    data: {}})
+  : await axios({
     method: 'get',
     url: process.env.SOPHIE_API_URL,
     data: {},
