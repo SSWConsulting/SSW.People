@@ -36,7 +36,8 @@ jobs:
       SOPHIE_AUTHORIZATION: ${{ secrets.SOPHIE_AUTHORIZATION }}
       YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
       VERSION_DEPLOYED: '1.0.0'
-      CHINA_BUILD: 'FALSE'
+      CHINA_BUILD: 'FALSE',
+      EVENTS_API: ${{ secrets.EVENTS_API }}
       
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
