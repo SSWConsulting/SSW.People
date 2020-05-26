@@ -135,7 +135,7 @@ const Index = ({
                   filteredPeople={filteredPeople}
                 />
               </div>
-           {process.env.EVENTS_API && process.env.EVENTS_API.length>4 && <div className="w-full sm:w-1/2 lg:w-full mt-0 lg:mt-4">
+           {process.env.EVENTS_API && process.env.EVENTS_API.length>5 && <div className="w-full sm:w-1/2 lg:w-full mt-0 lg:mt-4">
                <EventFilter
                   allEvents={events}
                   allEventsType={allEventsType}
