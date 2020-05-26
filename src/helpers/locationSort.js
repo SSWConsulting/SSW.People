@@ -1,4 +1,4 @@
-const locationOrdering = ['All', 'Sydney', 'Melbourne', 'Brisbane', 'Others'];
+const locationOrdering = ['All', 'Seattle', 'London', 'Others'];
 
 const LocationSort = (a, b) => {
   return (

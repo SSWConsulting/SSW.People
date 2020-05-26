@@ -1,12 +1,11 @@
 const LocationSanitiser = value => {
-  switch ((value || '').toLowerCase()) {
-    case 'sydney':
-    case 'melbourne':
-    case 'brisbane':
+  return value;
+  /*switch ((value || '').toLowerCase()) {
+    case !'Others':
       return value;
     default:
       return 'Others';
-  }
+  }*/
 };
 
 export default LocationSanitiser;
