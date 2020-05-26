@@ -135,15 +135,15 @@ const Index = ({
                   filteredPeople={filteredPeople}
                 />
               </div>
-              <div className="w-full sm:w-1/2 lg:w-full mt-0 lg:mt-4">
-                <EventFilter
+           {process.env.EVENTS_API && process.env.EVENTS_API.length>4 && <div className="w-full sm:w-1/2 lg:w-full mt-0 lg:mt-4">
+               <EventFilter
                   allEvents={events}
                   allEventsType={allEventsType}
                   selectedEvents={selectedEvents}
                   onEventChange={setSelectedEvents}
                   filteredPeople={filteredPeople}
                 />
-              </div>
+              </div>}
               <div className="w-full sm:w-1/2 lg:w-full mt-0 lg:mt-4">
                 <SkillsFilter
                   allSkills={allSkills}
