@@ -1,12 +1,11 @@
 import moment from 'moment';
 
+const EventsApi = process.env.EVENTS_API;
 async function getEventsPresenters() {
   var dateFilter = new Date().toISOString();
   var oDataFilterOngoing = `$filter=Enabled ne false and EndDateTime ge datetime'${dateFilter}'%26$select=StartDateTime,Presenter,CalendarType%26$orderby=StartDateTime asc%26$top=50`;
   var presentersEvents;
-  await fetch(
-    `https://www.ssw.com.au/ssw/SharePointEventsService.aspx?odataFilter=${oDataFilterOngoing}`
-  )
+  await fetch(`${EventsApi}?odataFilter=${oDataFilterOngoing}`)
     .then(response => response.text())
     .then(result => {
       var parser = new DOMParser();
@@ -44,11 +43,7 @@ async function getPastEventsForPresenter(name, nickname) {
 
 async function fetchFromSharepoint(oDataFilterOngoing, sort) {
   var events;
-  await fetch(
-    `https://www.ssw.com.au/ssw/SharePointEventsService.aspx?odataFilter=${encodeURI(
-      oDataFilterOngoing
-    )}`
-  )
+  await fetch(`${EventsApi}?odataFilter=${encodeURI(oDataFilterOngoing)}`)
     .then(response => response.text())
     .then(result => {
       var parser = new DOMParser();
