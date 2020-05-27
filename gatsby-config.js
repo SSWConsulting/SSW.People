@@ -19,7 +19,7 @@ module.exports = {
       resolve: 'gatsby-source-git',
       options: {
         name: 'people',
-        remote: 'https://github.com/SebastienBoissiere/People.git',
+        remote: 'https://github.com/SSWConsulting/Northwind.People.git',
         // Optionally supply a branch. If none supplied, you'll get the default branch.
         branch: 'master',
         // Tailor which files get imported eg. import the docs folder from a codebase.
@@ -30,7 +30,7 @@ module.exports = {
       resolve: 'gatsby-source-git',
       options: {
         name: 'people',
-        remote: 'https://github.com/SebastienBoissiere/People.git',
+        remote: 'https://github.com/SSWConsulting/Northwind.People.git',
         // Optionally supply a branch. If none supplied, you'll get the default branch.
         branch: 'master',
         // Tailor which files get imported eg. import the docs folder from a codebase.

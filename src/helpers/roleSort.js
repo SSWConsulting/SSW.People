@@ -1,7 +1,6 @@
 const roleOrdering = [
-  'Vice Presidents',
-  'Sales Managers',
-  'Coordinators',
+  'Vice President',
+  'Sales Manager',
   'Sales Representatives',
   'Developers',
 ];

@@ -2,4 +2,4 @@
 
 Our mission is to empower every person and every organization on the planet to achieve more.
 
-_Note: This is sample page_ 
+**Note: This is a sample page**

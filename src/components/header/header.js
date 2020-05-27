@@ -35,12 +35,11 @@ const Header = ({ displayActions, profileId }) => {
                   src={Logo}
                   alt="logo"
                   style={{ height: '60px', display: 'Inline' }}
-                ></img>{' '}
-                {companyName}
+                ></img>
               </h1>
             </a>
             <h1 className="title ml-2" style={{ height: '60px' }}>
-              - Our People
+                {companyName} - Our People
             </h1>
           </div>
           {displayActions ? (
