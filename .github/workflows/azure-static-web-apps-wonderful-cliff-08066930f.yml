@@ -26,10 +26,10 @@ jobs:
         repo_token: ${{ secrets.GITHUB_TOKEN }} # Used for Github integrations (i.e. PR comments)
         action: 'upload'
         TEST: 'aaa'
-        app_build_command: 'apt install -y git && yarn build && mkdir -p build/people && mv public/* build/people'
+        app_build_command: 'apt install -y git && yarn build && mkdir -p dist/people && mv public/* dist/people'
         ###### Repository/Build Configurations - These values can be configured to match you app requirements. ######
         app_location: '/' # App source code path
-        app_artifact_location: 'build' # Built app content directory - optional
+        app_artifact_location: 'dist' # Built app content directory - optional
         ###### End of Repository/Build Configurations ######
     env:
       GOOGLE_ANALYTICS: ${{ secrets.GOOGLE_ANALYTICS }}
