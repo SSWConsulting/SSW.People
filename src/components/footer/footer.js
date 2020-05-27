@@ -13,7 +13,7 @@ const Footer = () => {
     <>
       <div className="py-2 text-center bg-grey-translucent text-sm">
         <section className="main-container">
-          We <FontAwesomeIcon icon={faHeart} className="text-ssw-red" /> open
+          We <FontAwesomeIcon icon={faHeart} className="text-red-600" /> open
           source. This page is on{' '}
           <a
             className="action-button-label"

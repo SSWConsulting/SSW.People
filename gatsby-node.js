@@ -40,20 +40,22 @@ exports.onCreateWebpackConfig = ({ stage, getConfig, actions }) => {
 exports.sourceNodes = async ({ actions }) => {
   const { createNode } = actions;
 
-  const crmDataResult = process.env.SOPHIE_AUTHORIZATION==='FALSE'?
-  await axios({
-    method: 'get',
-    url: process.env.SOPHIE_API_URL,
-    data: {}})
-  : await axios({
-    method: 'get',
-    url: process.env.SOPHIE_API_URL,
-    data: {},
-    headers: {
-      Authorization: process.env.SOPHIE_AUTHORIZATION,
-      Tenant: process.env.SOPHIE_TENANT,
-    },
-  });
+  const crmDataResult =
+    process.env.SOPHIE_AUTHORIZATION === 'FALSE'
+      ? await axios({
+          method: 'get',
+          url: process.env.SOPHIE_API_URL,
+          data: {},
+        })
+      : await axios({
+          method: 'get',
+          url: process.env.SOPHIE_API_URL,
+          data: {},
+          headers: {
+            Authorization: process.env.SOPHIE_AUTHORIZATION,
+            Tenant: process.env.SOPHIE_TENANT,
+          },
+        });
 
   crmDataResult.data.map(user => {
     const userNode = {

@@ -1,9 +1,9 @@
 const roleOrdering = [
-  'Managers',
+  'Vice Presidents',
+  'Sales Managers',
+  'Coordinators',
+  'Sales Representatives',
   'Developers',
-  'Designers',
-  'Marketing & Video',
-  'Admin',
 ];
 
 const RoleSort = (a, b) => {
