@@ -36,35 +36,37 @@ const ContactForm = ({ onClose }) => {
     body = body + 'Email:   ' + contactFormEmail + '<br/>';
     body = body + 'Note:    ' + contactFormNote + '<br/><br/>';
     event.preventDefault();
-    await axios
-      .post(
-        '/ssw/api/crm/createlead',
-        {
-          Name: contactFormName,
-          Topic: subject,
-          Company: contactFormCompanyName,
-          Note: contactFormNote,
-          Country: contactFormCountry,
-          State: contactFormState,
-          Email: contactFormEmail,
-          Phone: contactFormPhone,
-          Recaptcha: contactReCaptcha,
-          EmailSubject: subject,
-          EmailBody: body + 'The associated CRM lead is ',
-        },
-        { headers: { 'Content-Type': 'application/json' } }
-      )
-      .then(() => {
-        setContactSuccess(true);
-        setTimeout(function() {
-          setContactSuccess(false);
-          //redirect to thank you page
-          window.location = '/ssw/Thankyou.aspx';
-        }, 2000);
-      })
-      .catch(() => {
-        alert('Failed to create lead in CRM');
-      });
+    if (process.env.CONTACT_API){
+      await axios
+        .post(
+          process.env.CONTACT_API,
+          {
+            Name: contactFormName,
+            Topic: subject,
+            Company: contactFormCompanyName,
+            Note: contactFormNote,
+            Country: contactFormCountry,
+            State: contactFormState,
+            Email: contactFormEmail,
+            Phone: contactFormPhone,
+            Recaptcha: contactReCaptcha,
+            EmailSubject: subject,
+            EmailBody: body + 'The associated CRM lead is ',
+          },
+          { headers: { 'Content-Type': 'application/json' } }
+        )
+        .then(() => {
+          setContactSuccess(true);
+          setTimeout(function() {
+            setContactSuccess(false);
+            //redirect to thank you page
+            window.location = '/ssw/Thankyou.aspx';
+          }, 2000);
+        })
+        .catch(() => {
+          alert('Failed to create lead in CRM');
+        });
+      }
   };
 
   const handleClick = e => {
@@ -245,10 +247,12 @@ const ContactForm = ({ onClose }) => {
           <small>Maximium 2000 characters.</small>
         </div>
         <div className="form-group recaptcha">
-          <ReCAPTCHA
+        { process.env.RECAPTCHA_KEY != 'FALSE' &&
+         <ReCAPTCHA
             sitekey={process.env.RECAPTCHA_KEY}
             onChange={value => setContactReCaptcha(value)}
           />
+        }
         </div>
         <div className="form-group">
           <button id="contactFormSubmit" className="btn btn-red submit">
