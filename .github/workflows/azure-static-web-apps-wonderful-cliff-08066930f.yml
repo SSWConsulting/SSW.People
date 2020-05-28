@@ -40,6 +40,7 @@ jobs:
       VERSION_DEPLOYED: '1.0.0'
       CHINA_BUILD: 'FALSE'
       EVENTS_API: ${{ secrets.EVENTS_API }}
+      CONTACT_API: ${{ secrets.CONTACT_API }}
       
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'

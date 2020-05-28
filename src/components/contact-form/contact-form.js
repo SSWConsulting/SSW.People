@@ -36,7 +36,7 @@ const ContactForm = ({ onClose }) => {
     body = body + 'Email:   ' + contactFormEmail + '<br/>';
     body = body + 'Note:    ' + contactFormNote + '<br/><br/>';
     event.preventDefault();
-    if (process.env.CONTACT_API){
+    if (process.env.CONTACT_API!='FALSE'){
       await axios
         .post(
           process.env.CONTACT_API,
