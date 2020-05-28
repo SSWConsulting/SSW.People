@@ -246,7 +246,6 @@ const ContactForm = ({ onClose }) => {
           </div>
           <small>Maximium 2000 characters.</small>
         </div>
-        {process.env.RECAPTCHA_KEY}
         <div className="form-group recaptcha">
         { process.env.RECAPTCHA_KEY !== 'FALSE' &&
          <ReCAPTCHA
