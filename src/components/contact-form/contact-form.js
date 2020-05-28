@@ -36,7 +36,7 @@ const ContactForm = ({ onClose }) => {
     body = body + 'Email:   ' + contactFormEmail + '<br/>';
     body = body + 'Note:    ' + contactFormNote + '<br/><br/>';
     event.preventDefault();
-    if (process.env.CONTACT_API!='FALSE'){
+    if (process.env.CONTACT_API!=='FALSE'){
       await axios
         .post(
           process.env.CONTACT_API,
@@ -247,7 +247,7 @@ const ContactForm = ({ onClose }) => {
           <small>Maximium 2000 characters.</small>
         </div>
         <div className="form-group recaptcha">
-        { process.env.RECAPTCHA_KEY != 'FALSE' &&
+        { process.env.RECAPTCHA_KEY !== 'FALSE' &&
          <ReCAPTCHA
             sitekey={process.env.RECAPTCHA_KEY}
             onChange={value => setContactReCaptcha(value)}
