@@ -8,7 +8,7 @@
 @tailwind base;
 
 html {
-  font-family: 'Open Sans',"Helvetica Neue",Arial,sans-serif;
+  font-family: "Open Sans","Helvetica Neue",Arial,sans-serif;
 }
 
 h1 {
@@ -21,7 +21,7 @@ h1 {
   font-weight: 600;
   font-size: 2em;
   margin-bottom: 0.1em;
-  font-family: 'Open Sans',"Helvetica Neue",Arial,sans-serif;
+  font-family: "Open Sans","Helvetica Neue",Arial,sans-serif;
   color: #747273;
   line-height: 1.5em;
 }
@@ -310,11 +310,11 @@ button:focus {
 }
 
 .bg-button-hover{
-    background-color: #0067b8;
+    background-color: #005291;
 }
 
 .color-hover{
-  color: #0060aa;
+  color: #005291;
 }
 
 .bg-ssw-grey {
