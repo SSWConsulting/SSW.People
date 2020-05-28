@@ -8,7 +8,7 @@
 @tailwind base;
 
 html {
-  font-family: -apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  font-family: 'Open Sans',"Helvetica Neue",Arial,sans-serif;
 }
 
 h1 {
@@ -21,7 +21,7 @@ h1 {
   font-weight: 600;
   font-size: 2em;
   margin-bottom: 0.1em;
-  font-family: "Segoe UI";
+  font-family: 'Open Sans',"Helvetica Neue",Arial,sans-serif;
   color: #747273;
   line-height: 1.5em;
 }
@@ -314,7 +314,7 @@ button:focus {
 }
 
 .color-hover{
-  color: #0067b8;
+  color: #0060aa;
 }
 
 .bg-ssw-grey {
