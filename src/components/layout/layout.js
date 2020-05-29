@@ -46,13 +46,15 @@ const Layout = ({
           {!isChinaBuild && (
             <GoogleAnalytics pageTitle={pageTitle}></GoogleAnalytics>
           )}
-          <Menu onClickToggle={() => actionOnToggleClick()}></Menu>
+          <div className="mx-6">
+            <Menu onClickToggle={() => actionOnToggleClick()}></Menu>
+          </div>
           {crumbs ? (
             <Breadcrumbs crumbs={crumbs} crumbLabel={crumbLabel} />
           ) : (
             <div></div>
           )}
-          <main className="flex-1 mx-auto">{children}</main>
+          <main className="flex-1 sm:mx-auto lg:w-full">{children}</main>
         </div>
         <Footer />
       </div>

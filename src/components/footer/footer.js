@@ -4,6 +4,7 @@ import moment from 'moment';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
+import { companyShortName, fbPage } from '../../../site-config';
 
 const buildTimestamp = preval`module.exports = new Date().getTime();`;
 
@@ -27,15 +28,15 @@ const Footer = () => {
           <div className="xl:mx-6">
             <div className="mx-6 flex flex-col-reverse md:flex-row justify-between">
               <div className="py-2">
-                Copyright © SSW 1990 - {new Date().getFullYear()}. All Rights
-                Reserved.
+                Copyright © {companyShortName} 1990 - {new Date().getFullYear()}
+                . All Rights Reserved.
               </div>
               <div className="w-full md:w-3/6 md:text-right py-2">
                 <a
                   className="footer-link"
                   href="https://github.com/SSWConsulting/people.ssw.com.au/issues"
                 >
-                  FEEDBACK TO SSW
+                  FEEDBACK TO {companyShortName}
                 </a>
                 <span className="px-2">|</span>
                 <a
@@ -45,10 +46,7 @@ const Footer = () => {
                   TERMS AND CONDITIONS
                 </a>
                 <span className="px-2">|</span>
-                <a
-                  className="footer-link footer-facebook"
-                  href="https://www.facebook.com/SSW.page"
-                >
+                <a className="footer-link footer-facebook" href={fbPage}>
                   FIND US ON
                 </a>
                 <span className="px-2">|</span>

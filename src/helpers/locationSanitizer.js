@@ -1,11 +1,14 @@
+import { locationsListForOrdering } from '../../site-config';
+
 const LocationSanitiser = value => {
-  switch ((value || '').toLowerCase()) {
-    case 'sydney':
-    case 'melbourne':
-    case 'brisbane':
-      return value;
-    default:
-      return 'Others';
+  if (
+    locationsListForOrdering.filter(
+      x => x.toLowerCase() === (value || '').toLowerCase()
+    ).length > 0
+  ) {
+    return value;
+  } else {
+    return 'Others';
   }
 };
 

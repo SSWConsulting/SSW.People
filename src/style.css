@@ -6,7 +6,46 @@
  */
 
 @tailwind base;
-/* purgecss end ignore */
+
+.text-ssw-red {
+  color: #cc4141;
+}
+
+.bg-ssw-red {
+  background-color: #cc4141;
+}
+
+.border-ssw-red {
+  border-color: #cc4141;
+}
+
+.color-ssw-red {
+  color: #cc4141;
+}
+
+.bg-button-hover{
+    background-color: #cc2121;
+}
+
+.color-hover{
+  color: #cc2121;
+}
+
+.bg-ssw-grey {
+  background-color: rgb(238, 238, 238);
+}
+
+.bg-ssw-dark-grey {
+  background-color: #CCCCCC;
+}
+
+.bg-grey-translucent {
+  background-color: rgba(102, 102, 102, 0.1);
+}
+
+.border-ssw-grey {
+  border-color:rgb(238, 238, 238);
+}
 
 html {
   font-family: "Helvetica", "SegoeUILight", "sans-serif"
@@ -52,8 +91,9 @@ a:link {
     }
 
     &:hover {
-      @apply text-ssw-red;
-      border-bottom: 2px dotted #cc4141;
+      @apply text-ssw-red;     
+      border-bottom: 2px dotted;
+      @apply border-ssw-red;
     }
   }
 }
@@ -270,8 +310,9 @@ ul.favor-list li {
 
 .breadcrumb a:hover{
   &:not(.breadcrumb__link__active){
-    @apply text-ssw-red;
-    border-bottom: 1px dotted #cc4141;
+    @apply text-ssw-red;    
+    border-bottom: 1px dotted;
+    @apply border-ssw-red;
   }
 }
 
@@ -287,30 +328,6 @@ ul.favor-list li {
 
 button:focus {
   outline: 0;
-}
-
-.text-ssw-red {
-  color: #cc4141;
-}
-
-.bg-ssw-red {
-  background-color: #cc4141;
-}
-
-.bg-ssw-grey {
-  background-color: rgb(238, 238, 238);
-}
-
-.bg-ssw-dark-grey {
-  background-color: #CCCCCC;
-}
-
-.bg-grey-translucent {
-  background-color: rgba(102, 102, 102, 0.1);
-}
-
-.border-ssw-grey {
-  border-color:rgb(238, 238, 238);
 }
 
 .flex-profile-box {
@@ -426,7 +443,8 @@ blockquote {
   font-style: italic;
   padding: .5rem 1rem;
   background-color: #eee;
-  border-left: 4px solid #cc4141;
+  border-left: 4px solid;
+  @apply border-ssw-red;
   border-radius: 0 .25rem .25rem 0;
   margin: 1rem 0;
 }
@@ -635,11 +653,11 @@ pre {
 }
 
 .btn-red{
-  background-color: #cc4141;
+  @apply bg-ssw-red;
 }
 
 .btn-red:hover{
-  background-color: #cc2121;
+  @apply bg-button-hover;
 }
 
 .modal{
@@ -720,7 +738,8 @@ pre {
 }
 
 .form-group input.form-control:focus, .form-group select.form-control:focus, .form-group textarea.form-control:focus {
-  border-bottom: 2px solid #cc4141;
+  border-bottom: 2px solid;
+  @apply border-ssw-red;
   outline: 0px;
 }
 
@@ -906,7 +925,7 @@ font-size: 0.8rem;
   padding-right: 5px;
 }
 .event-item .ourHolder-text .key_datetime {
-  color: #cc4141;
+  @apply color-ssw-red;
   text-transform: uppercase;
   display: block;
 }
@@ -942,17 +961,17 @@ font-size: 0.8rem;
 }
 
 .btn-filter-active{
-  background-color: #cc4141;
+  @apply bg-ssw-red;
   font-weight: bold;
 }
 
 .btn-filter-active:hover{
-  background-color: #cc2121;
+  @apply bg-button-hover;
 }
 
 .btn-filter-inactive{
   background-color: white;
-  color: #cc2121;
+  @apply color-hover;
   font-weight: bold;
   border-style: solid;
   border-width: 1px;
@@ -962,6 +981,7 @@ font-size: 0.8rem;
   background-color: rgb(238, 238, 238);
 }
 .btn-more:hover {
+  @apply color-hover;
   color: #cc2121;
 }
 
@@ -1009,7 +1029,7 @@ font-size: 0.8rem;
 * This injects Tailwind's utility classes and any utility classes registered
 * by plugins.
 */
-
+/* purgecss end ignore */
 @tailwind utilities;
 /**
 * Use this directive to control where Tailwind injects the responsive
