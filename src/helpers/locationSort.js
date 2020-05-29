@@ -1,4 +1,5 @@
-const locationOrdering = ['All', 'Sydney', 'Melbourne', 'Brisbane', 'Others'];
+import { locationsListForOrdering } from '../../site-config';
+const locationOrdering = ['All', ...locationsListForOrdering, 'Others'];
 
 const LocationSort = (a, b) => {
   return (

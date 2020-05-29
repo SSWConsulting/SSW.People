@@ -1,14 +1,9 @@
-const roleOrdering = [
-  'Managers',
-  'Developers',
-  'Designers',
-  'Marketing & Video',
-  'Admin',
-];
+import { roleListOrdering } from '../../site-config';
 
 const RoleSort = (a, b) => {
   return (
-    roleOrdering.indexOf(a) - roleOrdering.indexOf(b) || a.localeCompare(b)
+    roleListOrdering.indexOf(a) - roleListOrdering.indexOf(b) ||
+    a.localeCompare(b)
   );
 };
 

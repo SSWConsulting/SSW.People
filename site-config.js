@@ -20,4 +20,13 @@ module.exports = {
     fbPage: `https://www.facebook.com/SSW.page`,
   },
   parentSiteUrl: `https://ssw.com.au`,
+  locationsListForOrdering: [`Sydney`, `Melbourne`, `Brisbane`],
+  roleListOrdering: [
+    `Managers`,
+    `Developers`,
+    `Designers`,
+    `Marketing & Video`,
+    `Admin`,
+  ],
+  profilesRepo: `https://github.com/SSWConsulting/People`,
 };
