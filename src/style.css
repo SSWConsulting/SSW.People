@@ -7,6 +7,46 @@
 
 @tailwind base;
 
+.text-ssw-red {
+  color: #cc4141;
+}
+
+.bg-ssw-red {
+  background-color: #cc4141;
+}
+
+.border-ssw-red {
+  border-color: #cc4141;
+}
+
+.color-ssw-red {
+  color: #cc4141;
+}
+
+.bg-button-hover{
+    background-color: #cc2121;
+}
+
+.color-hover{
+  color: #cc2121;
+}
+
+.bg-ssw-grey {
+  background-color: rgb(238, 238, 238);
+}
+
+.bg-ssw-dark-grey {
+  background-color: #CCCCCC;
+}
+
+.bg-grey-translucent {
+  background-color: rgba(102, 102, 102, 0.1);
+}
+
+.border-ssw-grey {
+  border-color:rgb(238, 238, 238);
+}
+
 html {
   font-family: "Helvetica", "SegoeUILight", "sans-serif"
 }
@@ -288,46 +328,6 @@ ul.favor-list li {
 
 button:focus {
   outline: 0;
-}
-
-.text-ssw-red {
-  color: #cc4141;
-}
-
-.bg-ssw-red {
-  background-color: #cc4141;
-}
-
-.border-ssw-red {
-  border-color: #cc4141;
-}
-
-.color-ssw-red {
-  color: #cc4141;
-}
-
-.bg-button-hover{
-    background-color: #cc2121;
-}
-
-.color-hover{
-  color: #cc2121;
-}
-
-.bg-ssw-grey {
-  background-color: rgb(238, 238, 238);
-}
-
-.bg-ssw-dark-grey {
-  background-color: #CCCCCC;
-}
-
-.bg-grey-translucent {
-  background-color: rgba(102, 102, 102, 0.1);
-}
-
-.border-ssw-grey {
-  border-color:rgb(238, 238, 238);
 }
 
 .flex-profile-box {
