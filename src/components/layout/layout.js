@@ -54,7 +54,7 @@ const Layout = ({
           ) : (
             <div></div>
           )}
-          <main className="flex-1 mx-auto w-full">{children}</main>
+          <main className="flex-1 sm:mx-auto lg:w-full">{children}</main>
         </div>
         <Footer />
       </div>
