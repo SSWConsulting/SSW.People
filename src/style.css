@@ -408,6 +408,10 @@ figure figcaption:before {
   max-width: 90vw;
 }
 
+.person-content-wrap{
+  max-width: 90vw;
+}
+
 .youtube-playlist .container li {
   background: none;
 }
@@ -492,8 +496,7 @@ pre {
     max-width: 100%;
   }
   .person-description {
-    padding-left: 10px;
-    margin: 15px 20px 15px 11px
+    margin: 15px 20px;
   }
   .favor-content {
     background-color: #efefef;
@@ -1019,6 +1022,13 @@ font-size: 0.8rem;
 .w-70pc{
   width: 70%;
 }
+
+@media print {
+  .no-print{
+    display: none;
+  }
+}
+
 /**
 * This injects Tailwind's component classes and any component classes
 * registered by plugins.

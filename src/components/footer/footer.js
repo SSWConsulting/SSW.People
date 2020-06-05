@@ -25,13 +25,13 @@ const Footer = () => {
       </div>
       <footer className="bg-black py-6 md:py-4 lg:py-2">
         <section className="main-container">
-          <div className="xl:mx-6">
-            <div className="mx-6 flex flex-col-reverse md:flex-row justify-between">
+          <div>
+            <div className="mx-2 md:mx-6 flex flex-col-reverse lg:flex-row justify-between">
               <div className="py-2">
                 Copyright © {companyShortName} 1990 - {new Date().getFullYear()}
                 . All Rights Reserved.
               </div>
-              <div className="w-full md:w-3/6 md:text-right py-2">
+              <div className="w-full lg:w-3/6 lg:text-right py-2">
                 <a
                   className="footer-link"
                   href="https://github.com/SSWConsulting/people.ssw.com.au/issues"
@@ -60,7 +60,7 @@ const Footer = () => {
               {/* Copyright © SSW 1990 - {new Date().getFullYear()}. All Rights Reserved. */}
             </div>
             <hr className="border-gray-800 my-2"></hr>
-            <div className="flex flex-col md:flex-row justify-between mx-6">
+            <div className="flex flex-col lg:flex-row justify-between mx-2 md:mx-6">
               <div className="py-2">
                 Our website is under{' '}
                 <a
@@ -72,7 +72,7 @@ const Footer = () => {
                 . Last deployed {getLastDeployTime()} ago (Build #{' '}
                 {process.env.VERSION_DEPLOYED})
               </div>
-              <div className="md:text-right py-2">
+              <div className="lg:text-right py-2">
                 Powered by{' '}
                 <a
                   className="footer-link"

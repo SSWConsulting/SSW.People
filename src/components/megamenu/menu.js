@@ -24,7 +24,7 @@ const Menu = () => {
   };
 
   return (
-    <div className="mx-6">
+    <div className="mx-2 md:mx-6">
       <div
         id="sswmegamenu"
         onMouseOver={() => registerEvents()}

@@ -52,7 +52,7 @@ const Person = ({
         displayActions={true}
         profileId={pageContext.slug}
       >
-        <div className="flex flex-wrap mb-5 md:mx-2 person-content">
+        <div className="flex flex-wrap mb-5 person-content">
           <div className="sm:w-full lg:w-1/4 xl:w-1/6">
             {!!profileImage && (
               <>
@@ -131,7 +131,7 @@ const Person = ({
             </div>
           </div>
           <div className="sm:w-full lg:w-3/4 xl:w-5/6">
-            <div className="person-description md:pl-4">
+            <div className="person-content-wrap md:pl-4">
               <h1 className="hidden lg:inline">{personName}</h1>
               <h4 className="hidden lg:block mb-0">
                 {frontmatter.role}
