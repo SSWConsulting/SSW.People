@@ -162,6 +162,10 @@ ul li {
 }
 
 .person-content {
+  hr {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
   .image-bg{
     min-width: 182px;
     width: 182px;
@@ -342,9 +346,9 @@ button:focus {
   margin-bottom: 20px;
   display: inline-block;
   vertical-align: middle;
-  min-width: 135px;
+  min-width: 100px;
   width: auto;
-  max-height: 135px;
+  max-height: 100px;
 
   a {
     border-bottom: none !important;
@@ -410,6 +414,10 @@ figure figcaption:before {
 
 .person-content-wrap{
   max-width: 90vw;
+  hr {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
 }
 
 .youtube-playlist .container li {
