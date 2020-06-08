@@ -256,28 +256,28 @@ ul.favor-list li {
 .social {
   padding: 0px 0px 0px 20px;
 }
-#blog {
+.blog {
   background: url(./images/website.png) 0 4px no-repeat;
 }
-#facebook {
+.facebook {
   background: url(./images/facebook.png) 0 4px no-repeat;
 }
 
-#linkedin {
+.linkedin {
   background: url(./images/linkedin.png) 0 4px no-repeat;
 }
 
-#skype {
+.skype {
   background: url(./images/skype.png) 0 4px no-repeat;
 }
 
-#twitter {
+.twitter {
   background: url(./images/twitter.png) 0 4px no-repeat;
 }
-#github {
+.github {
   background: url(./images/github.png) 0 4px no-repeat;
 }
-#email {
+.email {
   background: url(./images/favor_email.gif) 0 6px no-repeat;
 }
 
