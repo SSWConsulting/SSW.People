@@ -46,7 +46,7 @@ const Layout = ({
           {!isChinaBuild && (
             <GoogleAnalytics pageTitle={pageTitle}></GoogleAnalytics>
           )}
-          <div className="mx-6">
+          <div className="mx-2 md:mx-6">
             <Menu onClickToggle={() => actionOnToggleClick()}></Menu>
           </div>
           {crumbs ? (

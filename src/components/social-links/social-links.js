@@ -41,10 +41,10 @@ const SocialLinks = ({ crmData }) => {
   return (
     <>
       {crmData && (
-        <div className="favor-content w-full">
+        <div className="favor-content w-full no-print">
           <ul className="favor-list">
             {crmData.emailAddress && (
-              <li id="email" className="social">
+              <li className="social email">
                 <a
                   href={'#0'}
                   onClick={event => {
@@ -57,7 +57,7 @@ const SocialLinks = ({ crmData }) => {
               </li>
             )}
             {crmData.blogUrl && (
-              <li id="blog" className="social">
+              <li className="social blog">
                 <a
                   target="_blank"
                   rel="noopener noreferrer"
@@ -68,7 +68,7 @@ const SocialLinks = ({ crmData }) => {
               </li>
             )}
             {crmData.facebookUrl && (
-              <li id="facebook" className="social">
+              <li className="social facebook">
                 <a
                   target="_blank"
                   rel="noopener noreferrer"
@@ -79,12 +79,12 @@ const SocialLinks = ({ crmData }) => {
               </li>
             )}
             {crmData.skypeUsername && (
-              <li id="skype" className="social">
+              <li className="social skype">
                 <a href={`skype:${crmData.skypeUsername}?call`}>Skype</a>
               </li>
             )}
             {crmData.linkedInUrl && (
-              <li id="linkedin" className="social">
+              <li className="social linkedin">
                 <a
                   target="_blank"
                   rel="noopener noreferrer"
@@ -95,7 +95,7 @@ const SocialLinks = ({ crmData }) => {
               </li>
             )}
             {crmData.twitterUsername && (
-              <li id="twitter" className="social">
+              <li className="social twitter">
                 <a
                   target="_blank"
                   rel="noopener noreferrer"
@@ -106,7 +106,7 @@ const SocialLinks = ({ crmData }) => {
               </li>
             )}
             {crmData.gitHubUrl && (
-              <li id="github" className="social">
+              <li className="social github">
                 <a
                   target="_blank"
                   rel="noopener noreferrer"

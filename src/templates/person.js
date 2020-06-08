@@ -52,11 +52,11 @@ const Person = ({
         displayActions={true}
         profileId={pageContext.slug}
       >
-        <div className="flex flex-wrap mb-5 md:mx-2 person-content">
+        <div className="flex flex-wrap mb-5 person-content">
           <div className="sm:w-full lg:w-1/4 xl:w-1/6">
             {!!profileImage && (
               <>
-                <div className="person-description lg:hidden w-full my-auto">
+                <div className="person-description md:hidden w-full my-auto">
                   <h1 className="inline">{personName}</h1>
                   <h4 className="mb-0">{frontmatter.role}</h4>
                   {!!crmData && crmData.location && (
@@ -98,19 +98,48 @@ const Person = ({
                     ) : (
                       ''
                     )}
-                  </div>
-                  {frontmatter.quote && (
-                    <div className="w-full pr-2 lg:hidden quoteblock">
-                      <Quote
-                        quote={frontmatter.quote}
-                        author={
-                          frontmatter.quoteAuthor
-                            ? frontmatter.quoteAuthor
-                            : personName
-                        }
-                      />
+                    <div className="mt-4 hidden md:block lg:hidden w-full">
+                      <SocialLinks crmData={crmData} />
                     </div>
-                  )}
+                  </div>
+                  <div className="w-full p-2 lg:hidden">
+                    <div className="mb-4 w-full hidden md:block lg:hidden">
+                      <h1 className="inline">{personName}</h1>
+                      <h4 className="mb-0">
+                        {frontmatter.role}
+                        {!!crmData && crmData.location && (
+                          <span className="ml-2">
+                            <FontAwesomeIcon icon={faMapMarkerAlt} />{' '}
+                            {crmData.location}
+                          </span>
+                        )}
+                      </h4>
+
+                      {!!frontmatter.qualifications && (
+                        <div>
+                          <strong>{frontmatter.qualifications}</strong>
+                        </div>
+                      )}
+
+                      <hr />
+                      <div>
+                        <SkillsList crmData={crmData} />
+                      </div>
+                    </div>
+
+                    {frontmatter.quote && (
+                      <div className="w-full quoteblock">
+                        <Quote
+                          quote={frontmatter.quote}
+                          author={
+                            frontmatter.quoteAuthor
+                              ? frontmatter.quoteAuthor
+                              : personName
+                          }
+                        />
+                      </div>
+                    )}
+                  </div>
                 </div>
               </>
             )}
@@ -127,11 +156,13 @@ const Person = ({
                   />
                 </div>
               )}
-              <SocialLinks crmData={crmData} />
+              <div className="block md:hidden lg:block w-full">
+                <SocialLinks crmData={crmData} />
+              </div>
             </div>
           </div>
           <div className="sm:w-full lg:w-3/4 xl:w-5/6">
-            <div className="person-description md:pl-4">
+            <div className="person-content-wrap ml-4">
               <h1 className="hidden lg:inline">{personName}</h1>
               <h4 className="hidden lg:block mb-0">
                 {frontmatter.role}
@@ -147,7 +178,9 @@ const Person = ({
                 </strong>
               )}
               <hr />
-              <SkillsList crmData={crmData} />
+              <div className="block md:hidden lg:block">
+                <SkillsList crmData={crmData} />
+              </div>
               <div
                 className="profile-content"
                 dangerouslySetInnerHTML={{
