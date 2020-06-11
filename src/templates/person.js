@@ -56,7 +56,7 @@ const Person = ({
           <div className="sm:w-full lg:w-1/4 xl:w-1/6">
             {!!profileImage && (
               <>
-                <div className="person-description md:hidden w-full my-auto">
+                <div className="person-description md:hidden w-full my-auto print-hidden">
                   <h1 className="inline">{personName}</h1>
                   <h4 className="mb-0">{frontmatter.role}</h4>
                   {!!crmData && crmData.location && (
@@ -102,8 +102,8 @@ const Person = ({
                       <SocialLinks crmData={crmData} />
                     </div>
                   </div>
-                  <div className="w-full p-2 lg:hidden">
-                    <div className="mb-4 w-full hidden md:block lg:hidden">
+                  <div className="w-full p-2 lg:hidden print-show">
+                    <div className="mb-4 w-full hidden md:block lg:hidden print-show">
                       <h1 className="inline">{personName}</h1>
                       <h4 className="mb-0">
                         {frontmatter.role}
@@ -143,9 +143,9 @@ const Person = ({
                 </div>
               </>
             )}
-            <div className="flex person-favor flex-row lg:flex-col">
+            <div className="flex person-favor flex-row lg:flex-col print-hidden">
               {frontmatter.quote && (
-                <div className="hidden w-1/2 pr-2 lg:pr-0 lg:w-full lg:block quoteblock">
+                <div className="hidden print-hidden w-1/2 pr-2 lg:pr-0 lg:w-full lg:block quoteblock">
                   <Quote
                     quote={frontmatter.quote}
                     author={
@@ -156,15 +156,15 @@ const Person = ({
                   />
                 </div>
               )}
-              <div className="block md:hidden lg:block w-full">
+              <div className="block md:hidden lg:block w-full print-hidden">
                 <SocialLinks crmData={crmData} />
               </div>
             </div>
           </div>
-          <div className="sm:w-full lg:w-3/4 xl:w-5/6">
+          <div className="sm:w-full lg:w-3/4 xl:w-5/6 print-full-width">
             <div className="person-content-wrap ml-4">
-              <h1 className="hidden lg:inline">{personName}</h1>
-              <h4 className="hidden lg:block mb-0">
+              <h1 className="hidden print-hidden lg:inline">{personName}</h1>
+              <h4 className="hidden print-hidden lg:block mb-0">
                 {frontmatter.role}
                 {!!crmData && crmData.location && (
                   <span className="ml-2">
@@ -173,12 +173,12 @@ const Person = ({
                 )}
               </h4>
               {!!frontmatter.qualifications && (
-                <strong className="hidden lg:block">
+                <strong className="hidden print-hidden lg:block">
                   {frontmatter.qualifications}
                 </strong>
               )}
               <hr />
-              <div className="block md:hidden lg:block">
+              <div className="block md:hidden print-hidden lg:block">
                 <SkillsList crmData={crmData} />
               </div>
               <div

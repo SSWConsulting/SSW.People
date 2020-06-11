@@ -5,7 +5,7 @@ import { parentSiteUrl, companyName } from '../../../site-config';
 
 const Breadcrumbs = ({ crumbs, crumbLabel }) => {
   return (
-    <div className="breadcrumb-container">
+    <div className="breadcrumb-container print-hidden">
       <div className="mx-2 md:mx-6 mb-3 breadcrumb">
         <a href={parentSiteUrl}>{companyName}</a>
         <span> &gt; </span>

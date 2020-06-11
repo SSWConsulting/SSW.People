@@ -1032,8 +1032,14 @@ font-size: 0.8rem;
 }
 
 @media print {
-  .no-print{
-    display: none;
+  .print-hidden{
+    display: none !important;
+  }
+  .print-show{
+    display: block !important;
+  }
+  .print-full-width{
+    width: 100% !important;
   }
 }
 
