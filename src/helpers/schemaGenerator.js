@@ -13,7 +13,7 @@ export default ({
 
   let schema = [
     {
-      '@context': 'http://schema.org',
+      '@context': 'https://schema.org',
       '@type': 'WebSite',
       url: canonical,
       name: pageTitle || siteTitle,
@@ -23,7 +23,7 @@ export default ({
 
   if (isSubPage) {
     schema.push({
-      '@context': 'http://schema.org',
+      '@context': 'https://schema.org',
       '@type': 'BreadcrumbList',
       itemListElement: [
         {
