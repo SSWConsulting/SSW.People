@@ -41,7 +41,7 @@ const SocialLinks = ({ crmData }) => {
   return (
     <>
       {crmData && (
-        <div className="favor-content w-full no-print">
+        <div className="favor-content w-full print-hidden">
           <ul className="favor-list">
             {crmData.emailAddress && (
               <li className="social email">
