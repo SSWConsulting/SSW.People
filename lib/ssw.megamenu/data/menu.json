@@ -474,7 +474,7 @@
                             "text": "Video Recording / Live Streaming"
                         },
                         {
-                            "navigateUrl": "http://sswchapel.com.au/",
+                            "navigateUrl": "https://sswchapel.com.au/",
                             "target": "_blank",
                             "text": "Conference Room for Hire",
                             "cssClass": "ignore"
@@ -722,7 +722,7 @@
         {
             "text": "SSW TV",
             "cssClass": "ignore no-dropdown menu-ssw-tv",
-            "navigateUrl": "http://tv.ssw.com",
+            "navigateUrl": "https://tv.ssw.com",
             "target": "_blank"
         }
     ]
