@@ -1032,6 +1032,12 @@ font-size: 0.8rem;
 }
 
 @media print {
+  @page {
+    margin: 0.5cm;
+  }
+  p a:not(.gatsby-resp-image-link)::after{
+    content: " (" attr(href) ") ";
+  }
   .print-hidden{
     display: none !important;
   }
@@ -1040,6 +1046,12 @@ font-size: 0.8rem;
   }
   .print-full-width{
     width: 100% !important;
+  }
+  .more-talks-buttons-list{
+    display: none !important;
+  }
+  .youtube-playlist{
+    display: none !important;
   }
 }
 
