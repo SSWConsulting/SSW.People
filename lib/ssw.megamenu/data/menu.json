@@ -66,6 +66,10 @@
                     "navigateUrlOnMobileOnly": true,
                     "children": [
                         {
+                            "navigateUrl": "https://www.ssw.com.au/ssw/Consulting/Product-Design.aspx",
+                            "text": "Product Design"
+                        },
+                        {
                             "navigateUrl": "https://www.ssw.com.au/ssw/Consulting/UI-UX-Design.aspx",
                             "text": "UI & UX Design Showcase"
                         },
@@ -206,6 +210,10 @@
                         {
                             "navigateUrl": "https://www.ssw.com.au/ssw/Consulting/Sitecore.aspx",
                             "text": "Sitecore"
+                        },
+                        {
+                            "navigateUrl": "https://www.ssw.com.au/ssw/Consulting/Jamstack.aspx",
+                            "text": "Jamstack"
                         },
                         {
                             "navigateUrl": "https://www.ssw.com.au/ssw/Consulting/Umbraco.aspx",
@@ -474,7 +482,7 @@
                             "text": "Video Recording / Live Streaming"
                         },
                         {
-                            "navigateUrl": "http://sswchapel.com.au/",
+                            "navigateUrl": "https://sswchapel.com.au/",
                             "target": "_blank",
                             "text": "Conference Room for Hire",
                             "cssClass": "ignore"
@@ -722,7 +730,7 @@
         {
             "text": "SSW TV",
             "cssClass": "ignore no-dropdown menu-ssw-tv",
-            "navigateUrl": "http://tv.ssw.com",
+            "navigateUrl": "https://tv.ssw.com",
             "target": "_blank"
         }
     ]

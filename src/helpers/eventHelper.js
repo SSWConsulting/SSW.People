@@ -88,10 +88,12 @@ function mapXmlToEventObj(properties) {
   return {
     url: properties
       .getElementsByTagName('Url')[0]
-      .getElementsByTagName('Url')[0].textContent,
+      .getElementsByTagName('Url')[0]
+      .textContent.replace('http:', 'https:'),
     image: properties
       .getElementsByTagName('Thumbnail')[0]
-      .getElementsByTagName('Url')[0].textContent,
+      .getElementsByTagName('Url')[0]
+      .textContent.replace('http:', 'https:'),
     title: properties
       .getElementsByTagName('Url')[0]
       .getElementsByTagName('Description')[0].textContent,

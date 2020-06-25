@@ -162,6 +162,10 @@ ul li {
 }
 
 .person-content {
+  hr {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
   .image-bg{
     min-width: 182px;
     width: 182px;
@@ -196,7 +200,6 @@ ul li {
 .person-quote-name {
   text-align: right;
   margin-top: 0.5em;
-  margin-bottom: 1em;
 }
 
 .profile-content {
@@ -252,28 +255,28 @@ ul.favor-list li {
 .social {
   padding: 0px 0px 0px 20px;
 }
-#blog {
+.blog {
   background: url(./images/website.png) 0 4px no-repeat;
 }
-#facebook {
+.facebook {
   background: url(./images/facebook.png) 0 4px no-repeat;
 }
 
-#linkedin {
+.linkedin {
   background: url(./images/linkedin.png) 0 4px no-repeat;
 }
 
-#skype {
+.skype {
   background: url(./images/skype.png) 0 4px no-repeat;
 }
 
-#twitter {
+.twitter {
   background: url(./images/twitter.png) 0 4px no-repeat;
 }
-#github {
+.github {
   background: url(./images/github.png) 0 4px no-repeat;
 }
-#email {
+.email {
   background: url(./images/favor_email.gif) 0 6px no-repeat;
 }
 
@@ -285,19 +288,21 @@ ul.favor-list li {
 
 .breadcrumb {
   display: inline-flex;
-  color: "#5b5656";
   text-align: center;
   flex-wrap: wrap;
+  align-items: center;
 
   span {
     min-width: 1.5rem;
+    opacity: .5; 
+    font-weight: 100;
   }
 }
 
 .breadcrumb a{
   &:not(.breadcrumb__link__active){
     color: #999;
-    border-bottom: 1px dotted #9e9e9e;
+    border-bottom: 0px dotted #9e9e9e;
   }
   &.breadcrumb__link__active{
     color:black ;
@@ -311,7 +316,7 @@ ul.favor-list li {
 .breadcrumb a:hover{
   &:not(.breadcrumb__link__active){
     @apply text-ssw-red;    
-    border-bottom: 1px dotted;
+    border-bottom: 0px;
     @apply border-ssw-red;
   }
 }
@@ -342,9 +347,9 @@ button:focus {
   margin-bottom: 20px;
   display: inline-block;
   vertical-align: middle;
-  min-width: 135px;
+  min-width: 100px;
   width: auto;
-  max-height: 135px;
+  max-height: 100px;
 
   a {
     border-bottom: none !important;
@@ -406,6 +411,14 @@ figure figcaption:before {
   }
 
   max-width: 90vw;
+}
+
+.person-content-wrap{
+  max-width: 90vw;
+  hr {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
 }
 
 .youtube-playlist .container li {
@@ -492,8 +505,7 @@ pre {
     max-width: 100%;
   }
   .person-description {
-    padding-left: 10px;
-    margin: 15px 20px 15px 11px
+    margin: 15px 20px;
   }
   .favor-content {
     background-color: #efefef;
@@ -505,7 +517,12 @@ pre {
   .filter-role-opener{
     display: inline;
   }
-
+  .quoteblock{
+    font: large;
+    padding-top: 1rem;
+    padding-left: 1rem;
+    padding-right: 1rem
+  }
   .filter-role li,
   .filter-skills li {
     &:not(:last-child) {
@@ -799,11 +816,9 @@ pre {
 }
 
 label {
-  font-weight: normal;
   color: #666;
   display: inline-block;
   max-width: 100%;
-  margin-bottom: 5px;
   font-weight: bold;
 }
 
@@ -1019,6 +1034,31 @@ font-size: 0.8rem;
 .w-70pc{
   width: 70%;
 }
+
+@media print {
+  @page {
+    margin: 0.5cm;
+  }
+  p a:not(.gatsby-resp-image-link)::after{
+    content: " (" attr(href) ") ";
+  }
+  .print-hidden{
+    display: none !important;
+  }
+  .print-show{
+    display: block !important;
+  }
+  .print-full-width{
+    width: 100% !important;
+  }
+  .more-talks-buttons-list{
+    display: none !important;
+  }
+  .youtube-playlist{
+    display: none !important;
+  }
+}
+
 /**
 * This injects Tailwind's component classes and any component classes
 * registered by plugins.

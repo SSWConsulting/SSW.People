@@ -26,7 +26,7 @@ const Header = ({ displayActions, profileId }) => {
   return (
     <AnimatedContainer>
       <header>
-        <div className="flex mx-6 mt-4 mb-6">
+        <div className="flex mx-2 md:mx-6 mt-4 mb-6">
           <div className="flex items-center">
             <a href={parentSiteUrl} className="unstyled cursor-pointer">
               <CompanyLogo aria-label="logo" />
@@ -34,7 +34,7 @@ const Header = ({ displayActions, profileId }) => {
             <h1 className="title ml-2">Our People</h1>
           </div>
           {displayActions ? (
-            <div className="action-btn-container">
+            <div className="action-btn-container print-hidden">
               <a
                 target="_blank"
                 rel="noopener noreferrer"
