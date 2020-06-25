@@ -200,7 +200,6 @@ ul li {
 .person-quote-name {
   text-align: right;
   margin-top: 0.5em;
-  margin-bottom: 1em;
 }
 
 .profile-content {
@@ -518,7 +517,12 @@ pre {
   .filter-role-opener{
     display: inline;
   }
-
+  .quoteblock{
+    font: large;
+    padding-top: 1rem;
+    padding-left: 1rem;
+    padding-right: 1rem
+  }
   .filter-role li,
   .filter-skills li {
     &:not(:last-child) {

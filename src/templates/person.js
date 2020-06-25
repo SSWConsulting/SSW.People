@@ -143,7 +143,7 @@ const Person = ({
                 </div>
               </>
             )}
-            <div className="flex person-favor flex-row lg:flex-col print-hidden">
+            <div className="flex person-favor flex-row lg:flex-col md:hidden lg:block print-hidden">
               {frontmatter.quote && (
                 <div className="hidden print-hidden w-1/2 pr-2 lg:pr-0 lg:w-full lg:block quoteblock">
                   <Quote
