@@ -200,7 +200,6 @@ ul li {
 .person-quote-name {
   text-align: right;
   margin-top: 0.5em;
-  margin-bottom: 1em;
 }
 
 .profile-content {
@@ -289,19 +288,21 @@ ul.favor-list li {
 
 .breadcrumb {
   display: inline-flex;
-  color: "#5b5656";
   text-align: center;
   flex-wrap: wrap;
+  align-items: center;
 
   span {
     min-width: 1.5rem;
+    opacity: .5; 
+    font-weight: 100;
   }
 }
 
 .breadcrumb a{
   &:not(.breadcrumb__link__active){
     color: #999;
-    border-bottom: 1px dotted #9e9e9e;
+    border-bottom: 0px dotted #9e9e9e;
   }
   &.breadcrumb__link__active{
     color:black ;
@@ -315,7 +316,7 @@ ul.favor-list li {
 .breadcrumb a:hover{
   &:not(.breadcrumb__link__active){
     @apply text-ssw-red;    
-    border-bottom: 1px dotted;
+    border-bottom: 0px;
     @apply border-ssw-red;
   }
 }
@@ -516,7 +517,12 @@ pre {
   .filter-role-opener{
     display: inline;
   }
-
+  .quoteblock{
+    font: large;
+    padding-top: 1rem;
+    padding-left: 1rem;
+    padding-right: 1rem
+  }
   .filter-role li,
   .filter-skills li {
     &:not(:last-child) {
@@ -810,11 +816,9 @@ pre {
 }
 
 label {
-  font-weight: normal;
   color: #666;
   display: inline-block;
   max-width: 100%;
-  margin-bottom: 5px;
   font-weight: bold;
 }
 
