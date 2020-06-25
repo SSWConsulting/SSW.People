@@ -10,6 +10,7 @@ import GoogleAnalytics from '../google-analytics/google-analytics';
 import Menu from '../../../lib/ssw.megamenu/menu/menu';
 import MobileMenu from '../../../lib/ssw.megamenu/mobile-menu/mobile-menu';
 import { isChinaBuild } from '../../helpers/chinaHelper';
+import CountrySelect from '../country-select/country-select';
 
 const Layout = ({
   children,
@@ -49,11 +50,20 @@ const Layout = ({
           <div className="mx-2 md:mx-6 print-hidden">
             <Menu onClickToggle={() => actionOnToggleClick()}></Menu>
           </div>
-          {crumbs ? (
-            <Breadcrumbs crumbs={crumbs} crumbLabel={crumbLabel} />
-          ) : (
-            <div></div>
-          )}
+          <div className="flex flex-row">
+            <div className="w-3/4">
+              {crumbs ? (
+                <Breadcrumbs crumbs={crumbs} crumbLabel={crumbLabel} />
+              ) : (
+                <></>
+              )}
+            </div>
+            <div className="w-1/4 mt-4 mx-2 md:mx-6 mb-3">
+              <div className="float-right">
+                <CountrySelect></CountrySelect>
+              </div>
+            </div>
+          </div>
           <main className="flex-1 sm:mx-auto lg:w-full">{children}</main>
         </div>
         <Footer />

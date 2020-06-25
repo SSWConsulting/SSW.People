@@ -33,6 +33,7 @@ const Header = ({ displayActions, profileId }) => {
             </a>
             <h1 className="title ml-2">Our People</h1>
           </div>
+          <div></div>
           {displayActions ? (
             <div className="action-btn-container print-hidden">
               <a
