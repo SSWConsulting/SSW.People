@@ -10,7 +10,9 @@ import GoogleAnalytics from '../google-analytics/google-analytics';
 import Menu from '../../../lib/ssw.megamenu/menu/menu';
 import MobileMenu from '../../../lib/ssw.megamenu/mobile-menu/mobile-menu';
 import { isChinaBuild } from '../../helpers/chinaHelper';
-import CountrySelect from '../country-select/country-select';
+import GitHubIcon from '-!svg-react-loader!../../images/github.svg';
+import InfoIcon from '-!svg-react-loader!../../images/info.svg';
+import { profilesRepo } from '../../../site-config';
 
 const Layout = ({
   children,
@@ -60,7 +62,33 @@ const Layout = ({
             </div>
             <div className="w-1/4 mt-4 mx-2 md:mx-6 mb-3">
               <div className="float-right">
-                <CountrySelect></CountrySelect>
+                {displayActions ? (
+                  <div className="action-btn-container print-hidden">
+                    <a
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      href={`${profilesRepo}/blob/master/${profileId}/${profileId}.md`}
+                      className="action-btn-link"
+                    >
+                      <div className="action-btn-label">Edit</div>
+                      <GitHubIcon
+                        aria-label="logo"
+                        className="action-btn-icon"
+                      />
+                    </a>
+                    <a
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      href="https://rules.ssw.com.au/make-your-site-easy-to-maintain"
+                      className="action-btn-link"
+                    >
+                      <div className="action-btn-label">Info</div>
+                      <InfoIcon aria-label="logo" className="action-btn-icon" />
+                    </a>
+                  </div>
+                ) : (
+                  <div></div>
+                )}
               </div>
             </div>
           </div>

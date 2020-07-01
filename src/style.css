@@ -1059,6 +1059,9 @@ font-size: 0.8rem;
   }
 }
 
+.country-select{
+  padding: 0.5rem 0.25rem;
+}
 .flags li{
   background-image: none;
   background-color: white;

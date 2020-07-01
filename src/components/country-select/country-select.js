@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import Australia from '../../images/australia.png';
 import China from '../../images/china.png';
 import { isChinaBuild } from '../../helpers/chinaHelper';
@@ -11,7 +12,7 @@ const CountrySelect = ({ location }) => {
   return (
     <>
       <div>
-        <button onClick={() => setIsOpen(!isOpen)}>
+        <button onClick={() => setIsOpen(!isOpen)} className="country-select">
           {isChinaBuild && (
             <>
               <img src={China} alt="Chinese flag" className="inline pr-1" />
@@ -24,7 +25,7 @@ const CountrySelect = ({ location }) => {
               English
             </>
           )}
-          <FontAwesomeIcon icon={faAngleDown} />
+          <FontAwesomeIcon icon={faAngleDown} className="pl-1" />
         </button>
         <ul
           className={
@@ -47,7 +48,8 @@ const CountrySelect = ({ location }) => {
           </li>
           <li>
             <a
-              href={`https://ssw.com.au/people-cn${location.pathname || ''}`}
+              href={`https://peoplecn.ssw.com.au/people-cn/${location.pathname ||
+                ''}`}
               className="unstyled"
             >
               <img src={China} alt="Chinese flag" className="inline pr-1" />
@@ -64,9 +66,14 @@ const CountrySelect = ({ location }) => {
 };
 
 //export default CountrySelect;
+CountrySelect.propTypes = {
+  location: PropTypes.object,
+};
 
 const CountrySelectWithLocation = props => (
-  <Location>{({ location }) => <CountrySelect location={location} />}</Location>
+  <Location>
+    {({ location }) => <CountrySelect {...props} location={location} />}
+  </Location>
 );
 
 export default CountrySelectWithLocation;
