@@ -48,7 +48,7 @@ const CountrySelect = ({ location }) => {
           </li>
           <li>
             <a
-              href={`https://peoplecn.ssw.com.au/${location.pathname.replace(
+              href={`https://peoplecn.ssw.com.au${location.pathname.replace(
                 '/people/',
                 '/people-cn/'
               ) || ''}`}
