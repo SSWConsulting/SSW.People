@@ -48,8 +48,10 @@ const CountrySelect = ({ location }) => {
           </li>
           <li>
             <a
-              href={`https://peoplecn.ssw.com.au/people-cn/${location.pathname ||
-                ''}`}
+              href={`https://peoplecn.ssw.com.au/${location.pathname.replace(
+                '/people/',
+                '/people-cn/'
+              ) || ''}`}
               className="unstyled"
             >
               <img src={China} alt="Chinese flag" className="inline pr-1" />
@@ -65,7 +67,6 @@ const CountrySelect = ({ location }) => {
   );
 };
 
-//export default CountrySelect;
 CountrySelect.propTypes = {
   location: PropTypes.object,
 };
