@@ -6,7 +6,6 @@ import PropTypes from 'prop-types';
 import { StaticQuery, graphql } from 'gatsby';
 import { Location } from '@reach/router';
 import queryString from 'query-string';
-import Layout from 'components/layout';
 import ProfileList from 'components/profile-list';
 import LocationFilter from '../components/location-filter/location-filter';
 import SkillsFilter from '../components/skills-filter/skills-filter';
@@ -25,12 +24,7 @@ import EventFilter from '../components/event-filter/event-filter';
 
 config.autoAddCss = false;
 
-const Index = ({
-  data,
-  pageContext: {
-    breadcrumb: { crumbs },
-  },
-}) => {
+const Index = ({ data }) => {
   const allPeople = useMemo(() => buildPeople(data), [data]);
 
   const allLocations = useMemo(
@@ -71,15 +65,15 @@ const Index = ({
   const [allEventsType, setAllEventsType] = useState([]);
   const [selectedEvents, setSelectedEvents] = useState([]);
 
-  async function loadEventsPresenters() {
-    var presentersList = await getEventsPresenters();
-    setEvents(presentersList);
-    setAllEventsType([
-      ...new Set(presentersList.map(event => event.eventType)),
-    ]);
-  }
-
   useEffect(() => {
+    async function loadEventsPresenters() {
+      var presentersList = await getEventsPresenters();
+      setEvents(presentersList);
+      setAllEventsType([
+        ...new Set(presentersList.map(event => event.eventType)),
+      ]);
+    }
+
     if (!events) {
       loadEventsPresenters();
     }
@@ -106,66 +100,63 @@ const Index = ({
       .sort(ProfileSort);
 
     setFilteredPeople(people);
-  }, [selectedLocation, selectedSkills, selectedEvents, events]);
+  }, [selectedLocation, selectedSkills, selectedEvents]);
 
   return (
     <>
-      <Layout crumbs={crumbs} displayActions={false}>
-        <div
-          className="hero-para mx-2 md:mx-6"
-          dangerouslySetInnerHTML={{
-            __html: data.homeJson.content.childMarkdownRemark.html,
-          }}
+      <div
+        className="hero-para mx-2 md:mx-6"
+        dangerouslySetInnerHTML={{
+          __html: data.homeJson.content.childMarkdownRemark.html,
+        }}
+      />
+      <div className="my-8 mx-0 xl:mx-6">
+        <LocationFilter
+          locations={allLocations}
+          selectedLocation={selectedLocation}
+          onLocationChange={setSelectedLocation}
         />
-        <div className="my-8 mx-0 xl:mx-6">
-          <LocationFilter
-            locations={allLocations}
-            selectedLocation={selectedLocation}
-            onLocationChange={setSelectedLocation}
-          />
-        </div>
-        <div className="mx-2 md:mx-6 flex flex-col lg:flex-row">
-          <div className="lg:w-1/4">
-            <div className="mx-auto flex flex-col sm:flex-row lg:flex-col lg:w-5/6">
-              <div className="w-full sm:w-1/2 lg:w-full">
-                <RoleFilter
-                  allRoles={allRoles}
-                  selectedRoles={selectedRoles}
-                  onRoleChange={setSelectedRoles}
-                  filteredPeople={filteredPeople}
-                />
-              </div>
-              {process.env.EVENTS_API && process.env.EVENTS_API.length > 4 && (
-                <div className="w-full sm:w-1/2 lg:w-full mt-0 lg:mt-4">
-                  <EventFilter
-                    allEvents={events}
-                    allEventsType={allEventsType}
-                    selectedEvents={selectedEvents}
-                    onEventChange={setSelectedEvents}
-                    filteredPeople={filteredPeople}
-                  />
-                </div>
-              )}
+      </div>
+      <div className="mx-2 md:mx-6 flex flex-col lg:flex-row">
+        <div className="lg:w-1/4">
+          <div className="mx-auto flex flex-col sm:flex-row lg:flex-col lg:w-5/6">
+            <div className="w-full sm:w-1/2 lg:w-full">
+              <RoleFilter
+                allRoles={allRoles}
+                selectedRoles={selectedRoles}
+                onRoleChange={setSelectedRoles}
+                filteredPeople={filteredPeople}
+              />
+            </div>
+            {process.env.EVENTS_API && process.env.EVENTS_API.length > 4 && (
               <div className="w-full sm:w-1/2 lg:w-full mt-0 lg:mt-4">
-                <SkillsFilter
-                  allSkills={allSkills}
-                  selectedSkills={selectedSkills}
-                  onSkillChange={setSelectedSkills}
+                <EventFilter
+                  allEvents={events}
+                  allEventsType={allEventsType}
+                  selectedEvents={selectedEvents}
+                  onEventChange={setSelectedEvents}
                   filteredPeople={filteredPeople}
                 />
               </div>
+            )}
+            <div className="w-full sm:w-1/2 lg:w-full mt-0 lg:mt-4">
+              <SkillsFilter
+                allSkills={allSkills}
+                selectedSkills={selectedSkills}
+                onSkillChange={setSelectedSkills}
+                filteredPeople={filteredPeople}
+              />
             </div>
           </div>
-          <div className="lg:w-3/4">
-            <ProfileList
-              filteredPeople={filteredPeople.filter(
-                p =>
-                  selectedRoles.length === 0 || selectedRoles.includes(p.role)
-              )}
-            />
-          </div>
         </div>
-      </Layout>
+        <div className="lg:w-3/4">
+          <ProfileList
+            filteredPeople={filteredPeople.filter(
+              p => selectedRoles.length === 0 || selectedRoles.includes(p.role)
+            )}
+          />
+        </div>
+      </div>
     </>
   );
 };
