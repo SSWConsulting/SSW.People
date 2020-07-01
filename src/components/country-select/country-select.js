@@ -36,7 +36,10 @@ const CountrySelect = ({ location }) => {
         >
           <li>
             <a
-              href={`https://ssw.com.au${location.pathname || ''}`}
+              href={`https://ssw.com.au${location.pathname.replace(
+                '/people-cn/',
+                '/people/'
+              ) || ''}`}
               className="unstyled"
             >
               <img src={Australia} alt="Aussie flag" className="inline pr-1" />
