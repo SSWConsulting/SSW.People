@@ -17,7 +17,7 @@ const Footer = () => {
           source. This page is on{' '}
           <a
             className="action-button-label"
-            href="https://github.com/SSWConsulting/people.ssw.com.au"
+            href="https://github.com/SSWConsulting/SSW.People"
           >
             GitHub <FontAwesomeIcon icon={faGithub} />
           </a>
@@ -34,7 +34,7 @@ const Footer = () => {
               <div className="w-full lg:w-3/6 lg:text-right py-2">
                 <a
                   className="footer-link"
-                  href="https://github.com/SSWConsulting/people.ssw.com.au/issues"
+                  href="https://github.com/SSWConsulting/SSW.People/issues"
                 >
                   FEEDBACK TO {companyShortName}
                 </a>

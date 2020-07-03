@@ -3,7 +3,7 @@
 v2 of the EmployeePages. No more SharePoint, idea is to prove the implementation for Rules v2
 
 This is a Gatsby generated site pulling data from:
-- [SSW Profile Repo](https://github.com/SSWConsulting/People)
+- [SSW Profile Repo](https://github.com/SSWConsulting/SSW.People.Profiles)
 - [Sophie Bot's API](https://sswsophie.com)
 
 ## Getting Started
@@ -13,7 +13,7 @@ This is a Gatsby generated site pulling data from:
 - Install yarn via https://yarnpkg.com/lang/en/docs/install/ (Optional)
 
 ### Getting ready for development
-- Clone the repo from https://github.com/SSWConsulting/people.ssw.com.au
+- Clone the repo from https://github.com/SSWConsulting/SSW.People
 - Run *yarn* (or *npm install*) to install packages
 - Create environment files (.env.development and .env.production) and fill out the values for the following keys:
 ```
@@ -52,7 +52,7 @@ VERSION_DEPLOYED=
 - Always delete your branch once your PR has been merged
 
 ### Builds
-- Changes made to http://github.com/SSWConsulting/People (i.e. profile changes) trigger builds that deploy:
+- Changes made to http://github.com/SSWConsulting/SSW.People.Profiles (i.e. profile changes) trigger builds that deploy:
   - **master** to the **staging** site: https://sydiisp01.sydney.ssw.com.au/people/
   - latest **release/xx** to the **production** site: https://www.ssw.com.au/people
   
@@ -62,7 +62,7 @@ VERSION_DEPLOYED=
 
 ### People profiles repository
 
-> People profiles repository lives here: https://github.com/SSWConsulting/People
+> People profiles repository lives here: https://github.com/SSWConsulting/SSW.People.Profiles
 - Sample Profile: 
   - Staging: https://sydiisp01.sydney.ssw.com.au/people/bob-northwind
   - Production: https://www.ssw.com.au/people/bob-northwind
