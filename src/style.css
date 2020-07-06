@@ -206,6 +206,10 @@ ul li {
   margin-top: 14px;
 }
 
+.profile-content h2 {
+  margin-top: 2rem;
+}
+
 .profile-content p {
   margin-bottom: 10px;
 }
@@ -1057,6 +1061,22 @@ font-size: 0.8rem;
   .youtube-playlist{
     display: none !important;
   }
+}
+
+.country-select{
+  padding: 0.5rem 1rem;
+}
+.flags li{
+  background-image: none;
+  background-color: white;
+  padding: 0.5rem 1rem;
+}
+.flags li a{
+  text-decoration: none;
+  border-bottom: 0px
+}
+.flags li:hover{
+  background-color: rgb(238, 238, 238);
 }
 
 /**

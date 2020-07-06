@@ -17,7 +17,7 @@ const SkillsList = ({ crmData }) => {
       {((advancedSkills && !!advancedSkills.length) ||
         (intermediateSkills && !!intermediateSkills.length)) && (
         <>
-          <h2 className="text-ssw-red mb-0">Skills:</h2>
+          <h2 className="text-ssw-red mb-0">Skills</h2>
           <span>
             {advancedSkills.map((skill, i, arr) => (
               <strong key={`advancedSkill-${i}`}>
