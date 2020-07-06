@@ -206,6 +206,10 @@ ul li {
   margin-top: 14px;
 }
 
+.profile-content h2 {
+  margin-top: 2rem;
+}
+
 .profile-content p {
   margin-bottom: 10px;
 }
