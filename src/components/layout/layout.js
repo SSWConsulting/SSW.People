@@ -67,7 +67,7 @@ const Layout = ({
                     <a
                       target="_blank"
                       rel="noopener noreferrer"
-                      href={`${profilesRepo}/blob/master/${profileId}/${profileId}.md`}
+                      href={`${profilesRepo}/blob/main/${profileId}/${profileId}.md`}
                       className="action-btn-link"
                     >
                       <div className="action-btn-label">Edit</div>
