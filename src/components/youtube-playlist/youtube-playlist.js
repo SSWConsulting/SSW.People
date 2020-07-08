@@ -24,6 +24,7 @@ const YoutubePlaylist = ({ youtubePlayListId }) => {
     playerVars: {
       // https://developers.google.com/youtube/player_parameters
       autoplay: 0,
+      origin: window.location.origin,
     },
   };
 
