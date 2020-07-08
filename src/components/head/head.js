@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Helmet } from 'react-helmet';
 import { StaticQuery, graphql, withPrefix } from 'gatsby';
 import { Location } from '@reach/router';
-
+import { isChinaBuild } from '../../helpers/chinaHelper';
 import schemaGenerator from 'helpers/schemaGenerator';
 
 const Head = ({
@@ -98,7 +98,10 @@ const Head = ({
       name="msapplication-square310x310"
     />
 
-    <link href="/people/manifest.json" rel="manifest" />
+    <link
+      href={`/${isChinaBuild ? 'people-cn' : 'people'}/manifest.json`}
+      rel="manifest"
+    />
 
     <link
       href={`${parentSiteUrl}/ssw/include/pigeon/img/apple-touch-icon-57x57.png`}
