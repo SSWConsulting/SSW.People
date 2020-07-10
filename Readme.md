@@ -3,7 +3,7 @@
 v2 of the EmployeePages. No more SharePoint, idea is to prove the implementation for Rules v2
 
 This is a Gatsby generated site pulling data from:
-- [SSW Profile Repo](https://github.com/SSWConsulting/SSW.People.Profiles)
+- [SSW Profiles GitHub Repository](https://github.com/SSWConsulting/SSW.People.Profiles)
 - [Sophie Bot's API](https://sswsophie.com)
 
 ## Getting Started
@@ -58,7 +58,7 @@ VERSION_DEPLOYED=
   
 - Branching off **main** to **release/xx**, or making changes to **release/xx** will build and deploy to the **production** site: https://www.ssw.com.au/people
 
-> Note: people.ssw.com.au is the old URL for the production site and redirects to https://www.ssw.com.au/people
+> Note: people.ssw.com.au redirects to https://www.ssw.com.au/people
 
 ### People profiles repository
 
@@ -68,5 +68,5 @@ VERSION_DEPLOYED=
   - Production: https://www.ssw.com.au/people/bob-northwind
 
 Merging changes to **main** on this repo will trigger:
-- a build/release of the **main** branch in Staging (https://sydiisp01.sydney.ssw.com.au/people/).
+- a build/release of the **main** branch in Staging (https://sydiisp01.sydney.ssw.com.au/people/)
 - a build/release of the **release** branch Production (https://www.ssw.com.au/people)
