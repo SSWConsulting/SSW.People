@@ -85,7 +85,8 @@ const Footer = () => {
                     alt="Chinese flag"
                     className="flag inline px-1"
                   />
-                </a>{' '}
+                </a>
+                <span className="px-2">|</span>
                 Powered by{' '}
                 <a
                   className="footer-link"
