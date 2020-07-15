@@ -71,6 +71,8 @@ Merging changes to **main** on this repo will trigger:
 - a build/release of the **main** branch in Staging (https://sydiisp01.sydney.ssw.com.au/people/)
 - a build/release of the **release** branch Production (https://www.ssw.com.au/people)
 
+[Next Step: Wiki >](https://github.com/SSWConsulting/SSW.People/wiki)
+
 ---
 <img align="left" width="32" height="22" src="https://github.com/SSWConsulting/SSW.People/raw/main/_wiki/images/youtube_social_icon_red.png">
 
