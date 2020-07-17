@@ -1084,6 +1084,11 @@ font-size: 0.8rem;
   background-color: rgb(238, 238, 238);
 }
 
+.profile-placeholder{
+  width: 172px;
+  height: 242px;
+}
+
 /**
 * This injects Tailwind's component classes and any component classes
 * registered by plugins.
