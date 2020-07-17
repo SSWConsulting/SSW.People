@@ -13,6 +13,8 @@ import Quote from '../components/quote/quote';
 import SocialLinks from '../components/social-links/social-links';
 import SkillsList from '../components/skills-list/skills-list';
 import { isChinaBuild } from '../helpers/chinaHelper';
+import SketchPlaceholder from '../images/ssw-employee-profile-placeholder-sketch.jpg';
+import ProfilePlaceholder from '../images/ssw-employee-profile-placeholder-profile.jpg';
 
 config.autoAddCss = false;
 
@@ -41,7 +43,7 @@ const Person = ({ pageContext }) => {
     <>
       <div className="flex flex-wrap mb-5 person-content">
         <div className="sm:w-full lg:w-1/4 xl:w-1/6">
-          {!!profileImage && (
+          {
             <>
               <div className="person-description md:hidden w-full my-auto print-hidden">
                 <h1 className="inline">{personName}</h1>
@@ -70,9 +72,13 @@ const Person = ({ pageContext }) => {
                     <img
                       className="profile-image relative bg-cover mx-auto"
                       src={
-                        hover && !!sketchImage
-                          ? sketchImage.src
-                          : profileImage.src
+                        hover
+                          ? sketchImage
+                            ? sketchImage.src
+                            : SketchPlaceholder
+                          : profileImage
+                          ? profileImage.src
+                          : ProfilePlaceholder
                       }
                       alt="Profile"
                     />
@@ -129,7 +135,7 @@ const Person = ({ pageContext }) => {
                 </div>
               </div>
             </>
-          )}
+          }
           <div className="flex person-favor flex-row lg:flex-col md:hidden lg:block print-hidden">
             {frontmatter.quote && (
               <div className="hidden print-hidden w-1/2 pr-2 lg:pr-0 lg:w-full lg:block quoteblock">
