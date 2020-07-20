@@ -6,6 +6,7 @@ const WebpackAssetsManifest = require('webpack-assets-manifest');
 const makePluginData = require('./src/helpers/plugin-data');
 const createRewriteMapsFile = require('./src/helpers/createRewriteMap');
 const chinaHelper = require('./src/helpers/chinaHelper');
+const { SkillSort } = require('./src/helpers/skillSort');
 
 let assetsManifest = {};
 const alumniPrefix = '/alumni';
@@ -74,9 +75,11 @@ exports.sourceNodes = async ({ actions }) => {
       skills: {
         intermediateSkills: user.skills
           .filter(s => s.experienceLevel === 'Intermediate')
+          .sort(SkillSort)
           .map(s => s.technology),
         advancedSkills: user.skills
           .filter(s => s.experienceLevel === 'Advanced')
+          .sort(SkillSort)
           .map(s => s.technology),
       },
       isActive: user.isActive,
