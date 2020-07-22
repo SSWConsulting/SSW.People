@@ -1089,6 +1089,15 @@ font-size: 0.8rem;
   height: 242px;
 }
 
+.download-image:hover{
+  text-decoration: none;
+  border-bottom: none !important;
+}
+
+.download-image{
+  border-bottom: none !important;
+}
+
 /**
 * This injects Tailwind's component classes and any component classes
 * registered by plugins.
