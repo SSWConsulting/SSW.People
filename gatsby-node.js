@@ -7,6 +7,7 @@ const makePluginData = require('./src/helpers/plugin-data');
 const createRewriteMapsFile = require('./src/helpers/createRewriteMap');
 const chinaHelper = require('./src/helpers/chinaHelper');
 const { SkillSort } = require('./src/helpers/skillSort');
+const { getViewDataFromCRM } = require('./src/helpers/CRMApi');
 
 let assetsManifest = {};
 const alumniPrefix = '/alumni';
@@ -40,25 +41,30 @@ exports.onCreateWebpackConfig = ({ stage, getConfig, actions }) => {
 
 exports.sourceNodes = async ({ actions }) => {
   const { createNode } = actions;
+  let crmDataResult;
 
-  const crmDataResult =
-    process.env.SOPHIE_AUTHORIZATION === 'FALSE'
-      ? await axios({
-          method: 'get',
-          url: process.env.SOPHIE_API_URL,
-          data: {},
-        })
-      : await axios({
-          method: 'get',
-          url: process.env.SOPHIE_API_URL,
-          data: {},
-          headers: {
-            Authorization: process.env.SOPHIE_AUTHORIZATION,
-            Tenant: process.env.SOPHIE_TENANT,
-          },
-        });
+  // if DATA_API_URL == FALSE then we load data from CRM
+  if (process.env.DATA_API_URL !== 'FALSE') {
+    var headers =
+      process.env.DATA_API_AUTHORIZATION === 'FALSE'
+        ? {}
+        : {
+            Authorization: process.env.DATA_API_AUTHORIZATION,
+            Tenant: process.env.DATA_API_TENANT,
+          };
 
-  crmDataResult.data.map(user => {
+    crmDataResult = await axios({
+      method: 'get',
+      url: process.env.DATA_API_URL,
+      data: {},
+      headers: headers,
+    });
+    crmDataResult = crmDataResult.data;
+  } else {
+    crmDataResult = await getViewDataFromCRM();
+  }
+
+  crmDataResult.map(user => {
     const userNode = {
       id: user.userId,
       parent: '__SOURCE__',
@@ -67,8 +73,11 @@ exports.sourceNodes = async ({ actions }) => {
       },
       children: [],
 
-      slug: `${user.firstName}-${user.lastName}`,
-      fullName: `${user.firstName} ${user.lastName}`,
+      slug: user.fullName
+      ? user.fullName.replace(' ','-'):`${user.firstName}-${user.lastName}`,
+      fullName: user.fullName
+        ? user.fullName
+        : `${user.firstName} ${user.lastName}`,
       emailAddress: user.emailAddress,
       location: user.defaultSite ? user.defaultSite.name : 'Others',
       billingRate: user.billableRate,
