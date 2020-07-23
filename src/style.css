@@ -262,8 +262,13 @@ ul.favor-list li {
 }
 
 .social {
-  padding: 0px 0px 0px 20px;
+  padding: 0px 0px 0px 20px;  
 }
+.gallery{
+  background: url(./images/gallery.svg) 0 4px no-repeat;
+  background-size: 16px 16px;
+}
+
 .blog {
   background: url(./images/website.png) 0 4px no-repeat;
 }
