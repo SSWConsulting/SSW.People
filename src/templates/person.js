@@ -15,7 +15,6 @@ import SkillsList from '../components/skills-list/skills-list';
 import { isChinaBuild } from '../helpers/chinaHelper';
 import SketchPlaceholder from '../images/ssw-employee-profile-placeholder-sketch.jpg';
 import ProfilePlaceholder from '../images/ssw-employee-profile-placeholder-profile.jpg';
-import { profilesRepo } from '../../site-config';
 
 config.autoAddCss = false;
 
@@ -62,7 +61,7 @@ const Person = ({ pageContext }) => {
               <div className="flex profile-image-quote">
                 <div>
                   <div
-                    className="image-bg relative text-center"
+                    className="image-bg text-center"
                     onMouseEnter={() => {
                       setHover(true);
                     }}
@@ -71,7 +70,7 @@ const Person = ({ pageContext }) => {
                     }}
                   >
                     <img
-                      className="profile-image bg-cover mx-auto"
+                      className="profile-image relative bg-cover mx-auto"
                       src={
                         hover
                           ? sketchImage
@@ -83,25 +82,6 @@ const Person = ({ pageContext }) => {
                       }
                       alt="Profile"
                     />
-                    {hover && (
-                      <div className="absolute bottom-0 left-0">
-                        <a
-                          className="download-image"
-                          href={`${profilesRepo.replace(
-                            'github',
-                            'raw.githubusercontent'
-                          )}/main/${crmData.fullName.replace(
-                            ' ',
-                            '-'
-                          )}/Images/${crmData.fullName.replace(
-                            ' ',
-                            '-'
-                          )}-Profile.jpg`}
-                        >
-                          <FontAwesomeIcon icon={faDownload} className="m-4" />
-                        </a>
-                      </div>
-                    )}
                   </div>
                   {profileAudio ? (
                     <PlayAudio
