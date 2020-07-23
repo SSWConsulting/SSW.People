@@ -91,6 +91,7 @@ exports.sourceNodes = async ({ actions }) => {
       twitterUsername: user.twitterUsername,
       gitHubUrl: user.gitHubUrl,
       youTubePlayListId: user.youTubePlayListId,
+      publicPhotoAlbumUrl: user.publicPhotoAlbumUrl,
     };
 
     // Get content digest of node. (Required field)
@@ -148,6 +149,7 @@ exports.createPages = async function({ actions, graphql }) {
           facebookUrl
           linkedInUrl
           fullName
+          publicPhotoAlbumUrl
         }
       }
       peopleAudios: allFile(

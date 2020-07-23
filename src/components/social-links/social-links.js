@@ -116,6 +116,17 @@ const SocialLinks = ({ crmData }) => {
                 </a>
               </li>
             )}
+            {crmData.publicPhotoAlbumUrl && (
+              <li className="social gallery">
+                <a
+                  href={crmData.publicPhotoAlbumUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Photos
+                </a>
+              </li>
+            )}
           </ul>
         </div>
       )}
