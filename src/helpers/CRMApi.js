@@ -94,8 +94,8 @@ const convertToSimpleFormat = (data, sites, usersSkills, current) => {
       userId: user.systemuserid,
       fullName: user.fullname,
       emailAddress: user.internalemailaddress,
-      location: user._siteid_value
-        ? sites.find(s => s.siteid === user._siteid_value).name
+      defaultSite: user._siteid_value
+        ? sites.find(s => s.siteid === user._siteid_value)
         : null,
       billableRate: user.ssw_defaultrate.toString(),
       isActive: current,
