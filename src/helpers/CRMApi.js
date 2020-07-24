@@ -26,8 +26,10 @@ const getViewDataFromCRM = async () => {
 
   let accessToken;
 
-
-  const responsePost = await axios.post(TOKEN_ENDPOINT, qs.stringify(tokenPostData));
+  const responsePost = await axios.post(
+    TOKEN_ENDPOINT,
+    qs.stringify(tokenPostData)
+  );
 
   accessToken = responsePost.data.access_token;
 
@@ -38,27 +40,48 @@ const getViewDataFromCRM = async () => {
 
   axios.defaults.headers.get['Authorization'] = `Bearer ${accessToken}`;
 
-  let response = await axios.get(userQuery);
+  //get skills
+  const responseSkills = await axios.get(`${crmUrl}/ssw_skills`);
+  const skills = responseSkills.data.value;
+  //get users skilss
+  const responseUsersSkills = await axios.get(`${crmUrl}/ssw_userskills`);
+  const usersSkills = responseUsersSkills.data.value.map(us => {
+    let skill = skills.find(s => s.ssw_skillid === us._ssw_skillid_value);
+    return {
+      userId: us._ssw_systemuserid_value,
+      experienceLevel: us.ssw_experiencelevel ? 'Advanced' : 'Intermediate',
+      sortOrder: us.ssw_sortorder || null,
+      technology: skill ? skill.ssw_name : '',
+    };
+  });
+  //get sites
+  const responseSites = await axios.get(`${crmUrl}/sites`);
+  const sites = responseSites.data.value;
+
+  const response = await axios.get(userQuery);
   return response.data.value.map(user => {
     return {
       userId: user.systemuserid,
-      fullName: user.fullName,
+      fullName: user.fullname,
       emailAddress: user.internalemailaddress,
-      location: 'Others',
+      location: user._siteid_value
+        ? sites.find(s => s.siteid === user._siteid_value).name
+        : null,
       billingRate: user.ssw_defaultrate,
       isActive: true,
       nickname: user.nickname || '',
-      blogUrl: user.ssw_blogUrl,
-      facebookUrl: user.ssw_facebookurl,
-      skypeUsername: user.ssw_skypeusername,
-      linkedInUrl: user.ssw_linkedInUrl,
-      twitterUsername: user.ssw_twitterUsername,
-      gitHubUrl: user.ssw_gitHubUrl,
-      youTubePlayListId: user.ssw_youTubePlayListId,
-      skills: []
-    }
+      blogUrl: user.ssw_blogurl || '',
+      facebookUrl: user.ssw_facebookurl || '',
+      skypeUsername: user.ssw_skypeusername || '',
+      linkedInUrl: user.ssw_linkedinurl || '',
+      twitterUsername: user.ssw_twitterusername || '',
+      gitHubUrl: user.ssw_githuburl || '',
+      youTubePlayListId: user.ssw_youtubeplaylistid || '',
+      publicPhotoAlbumUrl: user.ssw_publicphotoalbumurl || '',
+      skills: usersSkills.filter(us => us.userId === user.systemuserid),
+    };
   });
-/*
+  /*
   axios
     .post(TOKEN_ENDPOINT, qs.stringify(tokenPostData))
     .then(response => {

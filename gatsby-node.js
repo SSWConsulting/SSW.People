@@ -74,13 +74,14 @@ exports.sourceNodes = async ({ actions }) => {
       children: [],
 
       slug: user.fullName
-      ? user.fullName.replace(' ','-'):`${user.firstName}-${user.lastName}`,
+        ? user.fullName.replace(' ', '-')
+        : `${user.firstName}-${user.lastName}`,
       fullName: user.fullName
         ? user.fullName
         : `${user.firstName} ${user.lastName}`,
-      emailAddress: user.emailAddress,
+      emailAddress: user.emailAddress || '',
       location: user.defaultSite ? user.defaultSite.name : 'Others',
-      billingRate: user.billableRate,
+      billingRate: user.billableRate || '',
       skills: {
         intermediateSkills: user.skills
           .filter(s => s.experienceLevel === 'Intermediate')
@@ -93,13 +94,14 @@ exports.sourceNodes = async ({ actions }) => {
       },
       isActive: user.isActive,
       nickname: user.nickname || '',
-      blogUrl: user.blogUrl,
-      facebookUrl: user.facebookUrl,
-      skypeUsername: user.skypeUsername,
-      linkedInUrl: user.linkedInUrl,
-      twitterUsername: user.twitterUsername,
-      gitHubUrl: user.gitHubUrl,
-      youTubePlayListId: user.youTubePlayListId,
+      blogUrl: user.blogUrl || '',
+      facebookUrl: user.facebookUrl || '',
+      skypeUsername: user.skypeUsername || '',
+      linkedInUrl: user.linkedInUrl || '',
+      twitterUsername: user.twitterUsername || '',
+      gitHubUrl: user.gitHubUrl || '',
+      youTubePlayListId: user.youTubePlayListId || '',
+      publicPhotoAlbumUrl: user.publicPhotoAlbumUrl || '',
     };
 
     // Get content digest of node. (Required field)
@@ -157,6 +159,7 @@ exports.createPages = async function({ actions, graphql }) {
           facebookUrl
           linkedInUrl
           fullName
+          publicPhotoAlbumUrl
         }
       }
       peopleAudios: allFile(
