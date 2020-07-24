@@ -97,11 +97,7 @@ const convertToSimpleFormat = (data, sites, usersSkills, current) => {
       location: user._siteid_value
         ? sites.find(s => s.siteid === user._siteid_value).name
         : null,
-<<<<<<< HEAD
       billableRate: user.ssw_defaultrate.toString(),
-=======
-      billableRate: user.ssw_defaultrate,
->>>>>>> d877a623281ed9df2978db77c9b234e248d7ba60
       isActive: current,
       nickname: user.nickname || '',
       blogUrl: user.ssw_blogurl || '',
