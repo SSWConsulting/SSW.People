@@ -264,6 +264,9 @@ ul.favor-list li {
 .social {
   padding: 0px 0px 0px 20px;
 }
+.gallery{
+  background: url(./images/gallery.png) 0 4px no-repeat;
+}
 .blog {
   background: url(./images/website.png) 0 4px no-repeat;
 }
@@ -1087,6 +1090,15 @@ font-size: 0.8rem;
 .profile-placeholder{
   width: 172px;
   height: 242px;
+}
+
+.download-image:hover{
+  text-decoration: none;
+  border-bottom: none !important;
+}
+
+.download-image{
+  border-bottom: none !important;
 }
 
 /**
