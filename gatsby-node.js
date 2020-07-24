@@ -50,7 +50,6 @@ exports.sourceNodes = async ({ actions }) => {
         ? {}
         : {
             Authorization: process.env.DATA_API_AUTHORIZATION,
-            Tenant: process.env.DATA_API_TENANT,
           };
 
     crmDataResult = await axios({
