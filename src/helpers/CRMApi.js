@@ -108,6 +108,7 @@ const convertToSimpleFormat = (data, sites, usersSkills, current) => {
       gitHubUrl: user.ssw_githuburl || '',
       youTubePlayListId: user.ssw_youtubeplaylistid || '',
       publicPhotoAlbumUrl: user.ssw_publicphotoalbumurl || '',
+      aboutMeAudioUrl: user.ssw_aboutmeaudiourl || '',
       skills: usersSkills.filter(us => us.userId === user.systemuserid),
     };
   });

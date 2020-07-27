@@ -101,6 +101,7 @@ exports.sourceNodes = async ({ actions }) => {
       gitHubUrl: user.gitHubUrl || '',
       youTubePlayListId: user.youTubePlayListId || '',
       publicPhotoAlbumUrl: user.publicPhotoAlbumUrl || '',
+      aboutMeAudioUrl: user.aboutMeAudioUrl || '',
     };
 
     // Get content digest of node. (Required field)
@@ -159,17 +160,7 @@ exports.createPages = async function({ actions, graphql }) {
           linkedInUrl
           fullName
           publicPhotoAlbumUrl
-        }
-      }
-      peopleAudios: allFile(
-        filter: {
-          sourceInstanceName: { eq: "people" }
-          name: { glob: "*-Audio" }
-        }
-      ) {
-        nodes {
-          name
-          publicURL
+          aboutMeAudioUrl
         }
       }
       peopleProfileImages: allFile(
@@ -217,12 +208,6 @@ exports.createPages = async function({ actions, graphql }) {
     return node;
   });
 
-  const peopleAudios = data.peopleAudios.nodes.map(node => {
-    return {
-      src: node.publicURL,
-      name: node.name.replace('-Audio', ''),
-    };
-  });
   const peopleProfileImages = data.peopleProfileImages.nodes.map(node => {
     return {
       src: node.childImageSharp.original.src,
@@ -261,7 +246,7 @@ exports.createPages = async function({ actions, graphql }) {
         : '',
       frontmatter: node.frontmatter,
       dataCRM: crmData,
-      audio: peopleAudios.find(x => x.name === node.parent.name),
+      audio: crmData ? crmData.aboutMeAudioUrl : null,
       profileImage: peopleProfileImages.find(x => x.name === node.parent.name),
       sketchImage: peopleSketchImages.find(x => x.name === node.parent.name),
       html: node.html,
@@ -277,7 +262,7 @@ exports.createPages = async function({ actions, graphql }) {
         originalPath: person.path,
         nicknamePath: person.nicknamePath,
         data: {
-          audio: person.audio,
+          audio: person.dataCRM ? person.dataCRM.aboutMeAudioUrl : null,
           profileImage: person.profileImage,
           sketchImage: person.sketchImage,
           frontmatter: person.frontmatter,
