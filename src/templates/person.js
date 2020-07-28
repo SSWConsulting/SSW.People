@@ -104,10 +104,7 @@ const Person = ({ pageContext }) => {
                     )}
                   </div>
                   {profileAudio ? (
-                    <PlayAudio
-                      hasAnimation={true}
-                      audioSrc={profileAudio.src}
-                    />
+                    <PlayAudio hasAnimation={true} audioSrc={profileAudio} />
                   ) : (
                     ''
                   )}
