@@ -5,7 +5,6 @@ import { StaticQuery, graphql, withPrefix } from 'gatsby';
 import { Location } from '@reach/router';
 import { isChinaBuild } from '../../helpers/chinaHelper';
 import schemaGenerator from 'helpers/schemaGenerator';
-import axios from 'axios';
 
 const Head = ({
   siteTitle,
@@ -21,24 +20,6 @@ const Head = ({
   canonical = parentSiteUrl + (location.pathname || ''),
   siteUrlWithPrefix = siteUrl + withPrefix('/'),
 }) => {
-  const IP_DETECT_URL = 'https://api.userinfo.io/userinfos';
-
-  const DetectCountry = async () => {
-    const ipInfo = await axios.get(IP_DETECT_URL);
-    if (ipInfo.status === 200) {
-      if (ipInfo.data.country.code === 'CN') {
-        window.location = `https://peoplecn.ssw.com.au${location.pathname.replace(
-          '/people/',
-          '/people-cn/'
-        )}`;
-      }
-    }
-  };
-
-  if (!isChinaBuild) {
-    DetectCountry();
-  }
-
   return (
     <Helmet>
       <html lang="en" />
