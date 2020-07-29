@@ -79,7 +79,7 @@ exports.sourceNodes = async ({ actions }) => {
         ? user.fullName
         : `${user.firstName} ${user.lastName}`,
       emailAddress: user.emailAddress || '',
-      location: user.defaultSite ? user.defaultSite.name : 'Others',
+      location: user.defaultSite ? user.defaultSite : 'Others',
       billingRate: user.billableRate || '',
       skills: {
         intermediateSkills: user.skills
