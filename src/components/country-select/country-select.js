@@ -7,7 +7,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck, faAngleDown } from '@fortawesome/free-solid-svg-icons';
 import { Location } from '@reach/router';
 
+const IP_DETECT_URL = 'http://ip-api.com/json';
+const axios = require('axios');
+
 const CountrySelect = ({ location }) => {
+  DetectCountry({ location });
   const [isOpen, setIsOpen] = useState(false);
   return (
     <>
@@ -72,6 +76,18 @@ const CountrySelect = ({ location }) => {
 
 CountrySelect.propTypes = {
   location: PropTypes.object,
+};
+
+const DetectCountry = async ({ location }) => {
+  const ipInfo = await axios.get(IP_DETECT_URL);
+  if (ipInfo.data.status === 'success') {
+    if (ipInfo.data.countryCode === 'CN') {
+      window.location = `https://peoplecn.ssw.com.au${location.pathname.replace(
+        '/people/',
+        '/people-cn/'
+      )}`;
+    }
+  }
 };
 
 const CountrySelectWithLocation = props => (
