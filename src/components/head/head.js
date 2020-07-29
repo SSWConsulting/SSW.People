@@ -5,6 +5,7 @@ import { StaticQuery, graphql, withPrefix } from 'gatsby';
 import { Location } from '@reach/router';
 import { isChinaBuild } from '../../helpers/chinaHelper';
 import schemaGenerator from 'helpers/schemaGenerator';
+import axios from 'axios';
 
 const Head = ({
   siteTitle,
