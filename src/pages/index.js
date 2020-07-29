@@ -171,6 +171,7 @@ Index.propTypes = {
 function buildPeople(data) {
   const profileImageMap = new Map();
   const sketchProfileImageMap = new Map();
+  const audioMap = new Map();
 
   data.profile_images.nodes.forEach(n =>
     profileImageMap.set(n.name.replace('-Profile', ''), n.childImageSharp.fixed)
@@ -180,6 +181,9 @@ function buildPeople(data) {
       n.name.replace('-Sketch', ''),
       n.childImageSharp.fixed
     )
+  );
+  data.profile_audios.nodes.forEach(n =>
+    audioMap.set(n.name.replace('-Audio', ''), n.publicURL)
   );
 
   const allDataCRM = data.allCRMData.nodes
@@ -209,7 +213,7 @@ function buildPeople(data) {
             profileImage: profileImageMap.get(node.parent.name),
             sketchProfileImage: sketchProfileImageMap.get(node.parent.name),
           },
-          profileAudio: !isFixedTile ? dataCRM.aboutMeAudioUrl : null,
+          profileAudio: audioMap.get(node.parent.name),
           skills: !isFixedTile
             ? [
                 dataCRM.skills.advancedSkills,
@@ -235,6 +239,7 @@ function buildPeople(data) {
             profileImage: profileImageMap.get(node.parent.name),
             sketchProfileImage: sketchProfileImageMap.get(node.parent.name),
           },
+          profileAudio: audioMap.get(node.parent.name),
           skills: [],
           sanitisedNickname: 'Sample',
         };
@@ -293,6 +298,17 @@ const IndexWithQuery = props => (
             }
           }
         }
+        profile_audios: allFile(
+          filter: {
+            sourceInstanceName: { eq: "people" }
+            name: { glob: "*-Audio" }
+          }
+        ) {
+          nodes {
+            name
+            publicURL
+          }
+        }
         homeJson {
           title
           content {
@@ -313,7 +329,6 @@ const IndexWithQuery = props => (
             nickname
             isActive
             id
-            aboutMeAudioUrl
           }
         }
       }
