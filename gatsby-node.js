@@ -332,14 +332,28 @@ exports.onPostBuild = async ({ store, pathPrefix }) => {
   //Fetch existing URL redirects for previous Nicknames
   const existingRewrites = await createRewriteMap.getExistingRewrites();
   const additionalRewrites = Array.from(existingRewrites).map(rewrite => {
-    return {
-      fromPath: pathPrefix + '/' + rewrite.nickName,
-      toPath: pathPrefix + '/' + rewrite.fullName,
-    };
+    let existingRedirect = rewrites.find(
+      r => r.fromPath === pathPrefix + '/' + rewrite.fullName
+    );
+    if (existingRedirect) {
+      return {
+        fromPath: pathPrefix + '/' + rewrite.nickName,
+        toPath: existingRedirect.toPath,
+      };
+    } else {
+      return {
+        fromPath: pathPrefix + '/' + rewrite.nickName,
+        toPath: pathPrefix + '/' + rewrite.fullName,
+      };
+    }
   });
 
-  await createRewriteMap.writeRewriteMapsFile(
-    pluginData,
-    rewrites.concat(alumniRewrites).concat(additionalRewrites)
-  );
+  const allRewrites = rewrites
+    .concat(alumniRewrites)
+    .concat(additionalRewrites);
+
+  const allRewritesUnique = [
+    ...new Map(allRewrites.map(item => [item.fromPath, item])).values(),
+  ];
+  await createRewriteMap.writeRewriteMapsFile(pluginData, allRewritesUnique);
 };
