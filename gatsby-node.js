@@ -4,7 +4,7 @@ const path = require('path');
 const DirectoryNamedWebpackPlugin = require('directory-named-webpack-plugin');
 const WebpackAssetsManifest = require('webpack-assets-manifest');
 const makePluginData = require('./src/helpers/plugin-data');
-const createRewriteMapsFile = require('./src/helpers/createRewriteMap');
+const createRewriteMap = require('./src/helpers/createRewriteMap');
 const chinaHelper = require('./src/helpers/chinaHelper');
 const { SkillSort } = require('./src/helpers/skillSort');
 const { getViewDataFromCRM } = require('./src/helpers/CRMApi');
@@ -328,5 +328,32 @@ exports.onPostBuild = async ({ store, pathPrefix }) => {
         toPath: pathPrefix + page.path,
       };
     });
-  await createRewriteMapsFile(pluginData, rewrites.concat(alumniRewrites));
+
+  //Fetch existing URL redirects for previous Nicknames
+  const existingRewrites = await createRewriteMap.getExistingRewrites();
+  const additionalRewrites = Array.from(existingRewrites).map(rewrite => {
+    let existingRedirect = rewrites.find(
+      r => r.fromPath === pathPrefix + '/' + rewrite.fullName
+    );
+    if (existingRedirect) {
+      return {
+        fromPath: pathPrefix + '/' + rewrite.nickName,
+        toPath: existingRedirect.toPath,
+      };
+    } else {
+      return {
+        fromPath: pathPrefix + '/' + rewrite.nickName,
+        toPath: pathPrefix + '/' + rewrite.fullName,
+      };
+    }
+  });
+
+  const allRewrites = rewrites
+    .concat(alumniRewrites)
+    .concat(additionalRewrites);
+
+  const allRewritesUnique = [
+    ...new Map(allRewrites.map(item => [item.fromPath, item])).values(),
+  ];
+  await createRewriteMap.writeRewriteMapsFile(pluginData, allRewritesUnique);
 };
