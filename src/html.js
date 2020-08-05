@@ -4,7 +4,7 @@ import { isChinaBuild } from 'helpers/chinaHelper';
 
 export default function HTML(props) {
   return (
-    <html {...props.htmlAttributes}>
+    <html lang="en" {...props.htmlAttributes}>
       <head>
         <meta charSet="utf-8" />
         <meta httpEquiv="x-ua-compatible" content="ie=edge" />
@@ -39,7 +39,7 @@ export default function HTML(props) {
       <body {...props.bodyAttributes}>
         {props.preBodyComponents}
         <div
-          key={`body`}
+          key={'body'}
           id="___gatsby"
           dangerouslySetInnerHTML={{ __html: props.body }}
         />
