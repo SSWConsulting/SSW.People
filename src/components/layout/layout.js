@@ -14,6 +14,8 @@ import GitHubIcon from '-!svg-react-loader!../../images/github.svg';
 import InfoIcon from '-!svg-react-loader!../../images/info.svg';
 import { profilesRepo } from '../../../site-config';
 
+const profileChineseTag = '-Chinese';
+
 const Layout = ({
   children,
   displayActions,
@@ -67,7 +69,10 @@ const Layout = ({
                     <a
                       target="_blank"
                       rel="noopener noreferrer"
-                      href={`${profilesRepo}/blob/main/${profileId}/${profileId}.md`}
+                      href={`${profilesRepo}/blob/main/${profileId.replace(
+                        profileChineseTag,
+                        ''
+                      )}/${profileId}.md`}
                       className="action-btn-link"
                     >
                       <div className="action-btn-label">Edit</div>

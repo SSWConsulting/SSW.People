@@ -11,6 +11,7 @@ const { getViewDataFromCRM } = require('./src/helpers/CRMApi');
 
 let assetsManifest = {};
 const alumniPrefix = '/alumni';
+const profileChineseTag = '-Chinese';
 
 exports.onCreateWebpackConfig = ({ stage, getConfig, actions }) => {
   const config = getConfig();
@@ -261,9 +262,15 @@ exports.createPages = async function({ actions, graphql }) {
         : '',
       frontmatter: node.frontmatter,
       dataCRM: crmData,
-      audio: peopleAudios.find(x => x.name === node.parent.name),
-      profileImage: peopleProfileImages.find(x => x.name === node.parent.name),
-      sketchImage: peopleSketchImages.find(x => x.name === node.parent.name),
+      audio: peopleAudios.find(
+        x => x.name === node.parent.name.replace(profileChineseTag, '')
+      ),
+      profileImage: peopleProfileImages.find(
+        x => x.name === node.parent.name.replace(profileChineseTag, '')
+      ),
+      sketchImage: peopleSketchImages.find(
+        x => x.name === node.parent.name.replace(profileChineseTag, '')
+      ),
       html: node.html,
     };
   });
