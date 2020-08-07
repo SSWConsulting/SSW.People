@@ -24,6 +24,8 @@ import EventFilter from '../components/event-filter/event-filter';
 
 config.autoAddCss = false;
 
+const profileChineseTag = '-Chinese';
+
 const Index = ({ data }) => {
   const allPeople = useMemo(() => buildPeople(data), [data]);
 
@@ -210,10 +212,16 @@ function buildPeople(data) {
           sanitisedName: node.parent.name,
           role: node.frontmatter.category,
           profileImages: {
-            profileImage: profileImageMap.get(node.parent.name),
-            sketchProfileImage: sketchProfileImageMap.get(node.parent.name),
+            profileImage: profileImageMap.get(
+              node.parent.name.replace(profileChineseTag, '')
+            ),
+            sketchProfileImage: sketchProfileImageMap.get(
+              node.parent.name.replace(profileChineseTag, '')
+            ),
           },
-          profileAudio: audioMap.get(node.parent.name),
+          profileAudio: audioMap.get(
+            node.parent.name.replace(profileChineseTag, '')
+          ),
           skills: !isFixedTile
             ? [
                 dataCRM.skills.advancedSkills,
@@ -245,7 +253,8 @@ function buildPeople(data) {
         };
       }
     })
-    .filter(x => x !== undefined);
+    .filter(x => x !== undefined)
+    .filter(x => !x.sanitisedName.endsWith(profileChineseTag));
 }
 
 const IndexWithQuery = props => (

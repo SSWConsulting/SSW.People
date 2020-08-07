@@ -28,5 +28,5 @@ module.exports = {
     `Marketing & Video`,
     `Admin`,
   ],
-  profilesRepo: `https://github.com/SSWConsulting/SSW.People.Profiles`,
+  profilesRepo: `https://github.com/christianmorfordwaitessw/SSW.People.Profiles`,
 };
