@@ -8,6 +8,10 @@ const createRewriteMap = require('./src/helpers/createRewriteMap');
 const chinaHelper = require('./src/helpers/chinaHelper');
 const { SkillSort } = require('./src/helpers/skillSort');
 const { getViewDataFromCRM } = require('./src/helpers/CRMApi');
+const appInsights = require('applicationinsights');
+
+// Log build time stats to appInsights
+appInsights.setup().start();
 
 let assetsManifest = {};
 const alumniPrefix = '/alumni';

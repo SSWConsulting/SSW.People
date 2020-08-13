@@ -83,6 +83,7 @@
     "@fortawesome/free-solid-svg-icons": "^5.12.0",
     "@fortawesome/react-fontawesome": "^0.1.8",
     "@hot-loader/react-dom": "^16.8.6",
+    "applicationinsights": "^1.8.5",
     "array-flat-polyfill": "^1.0.1",
     "ava": "^2.4.0",
     "babel-eslint": "^10.0.1",
