@@ -14,7 +14,7 @@ if (process.env.APPINSIGHTS_INSTRUMENTATIONKEY) {
   // Log build time stats to appInsights
   appInsights
     .setup()
-    .setAutoCollectConsole(true, true)
+    .setAutoCollectConsole(true, true) // Enable logging of console.xxx
     .start();
 } else {
   // eslint-disable-next-line no-console
