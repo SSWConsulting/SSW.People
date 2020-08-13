@@ -11,7 +11,10 @@ const { getViewDataFromCRM } = require('./src/helpers/CRMApi');
 const appInsights = require('applicationinsights');
 
 // Log build time stats to appInsights
-appInsights.setup().start();
+appInsights
+  .setup()
+  .setAutoCollectConsole(true, true)
+  .start();
 
 let assetsManifest = {};
 const alumniPrefix = '/alumni';
