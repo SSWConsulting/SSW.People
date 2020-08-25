@@ -78,6 +78,35 @@ exports.sourceNodes = async ({ actions }) => {
     crmDataResult = await getViewDataFromCRM();
   }
 
+  //Inject Sample Profile Here
+  crmDataResult.push({
+    userId: '456ebf0e-fb42-ea11-967a-00155d012cc0',
+    firstName: 'Bob',
+    lastName: 'Northwind',
+    emailAddress: 'JohnDoe@ssw.com.au',
+    defaultSite: 'Other',
+    jobTitle: 'Sample Profile',
+    role: 'Developers',
+    billableRate: '-1',
+    isActive: true,
+    nickname: 'Sample',
+    blogUrl: 'https://www.ssw.com.au',
+    facebookUrl: 'https://www.facebook.com/SSW.page',
+    skypeUsername: '',
+    linkedInUrl: 'https://www.linkedin.com/company/ssw',
+    twitterUsername: '@SSW_TV',
+    gitHubUrl: 'https://github.com/SSWConsulting',
+    youTubePlayListId: 'PLpiOR7CBNvlpBS1S_OiECOhN-vSSU-COK',
+    publicPhotoAlbumUrl: '',
+    skills: [
+      {
+        technology: 'Markdown',
+        experienceLevel: 'Intermediate',
+        sortOrder: '1',
+      },
+    ],
+  });
+
   crmDataResult.map(user => {
     const userNode = {
       id: user.userId,
@@ -95,6 +124,8 @@ exports.sourceNodes = async ({ actions }) => {
         : `${user.firstName} ${user.lastName}`,
       emailAddress: user.emailAddress || '',
       location: user.defaultSite ? user.defaultSite : 'Others',
+      jobTitle: user.jobTitle || '',
+      role: user.role || '',
       billingRate: user.billableRate || '',
       skills: {
         intermediateSkills: user.skills
@@ -148,8 +179,6 @@ exports.createPages = async function({ actions, graphql }) {
             qualifications
             quote
             quoteAuthor
-            role
-            category
           }
           html
         }
@@ -164,6 +193,8 @@ exports.createPages = async function({ actions, graphql }) {
             intermediateSkills
           }
           location
+          jobTitle
+          role
           emailAddress
           skypeUsername
           twitterUsername
@@ -252,19 +283,9 @@ exports.createPages = async function({ actions, graphql }) {
   });
   const people = data.people.nodes.map(node => {
     const crmData = peopleCRM.find(x => x.id === node.frontmatter.id);
-    const isCurrent =
-      node.frontmatter.role === 'Sample Profile'
-        ? true
-        : crmData
-        ? crmData.isActive
-        : false;
+    const isCurrent = crmData ? crmData.isActive : false;
 
-    const nickname =
-      node.frontmatter.role === 'Sample Profile'
-        ? 'Sample'
-        : crmData
-        ? crmData.nickname
-        : null;
+    const nickname = crmData ? crmData.nickname : null;
 
     const prefix = isCurrent ? '' : alumniPrefix.replace('/', '') + '/';
 

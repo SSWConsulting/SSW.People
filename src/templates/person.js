@@ -29,15 +29,19 @@ const Person = ({ pageContext }) => {
   const [hover, setHover] = useState(false);
   const crmData = pageContext.data.dataCRM || null;
 
-  let personName = '';
+  let personName = frontmatter.name;
+  let fullName = '';
   let firstNameOrNickname = '';
+  let jobTitle = frontmatter.role;
   if (crmData) {
     personName = crmData.nickname
       ? `${crmData.fullName} (${crmData.nickname})`
       : crmData.fullName;
+    fullName = crmData.fullName;
     firstNameOrNickname = crmData.nickname
       ? crmData.nickname
       : crmData.fullName.split(' ')[0];
+    jobTitle = crmData.jobTitle ? crmData.jobTitle : frontmatter.role;
   }
 
   return (
@@ -48,7 +52,7 @@ const Person = ({ pageContext }) => {
             <>
               <div className="person-description md:hidden w-full my-auto print-hidden">
                 <h1 className="inline">{personName}</h1>
-                <h4 className="mb-0">{frontmatter.role}</h4>
+                <h4 className="mb-0">{jobTitle}</h4>
                 {!!crmData && crmData.location && (
                   <h4 className="mb-0">
                     <FontAwesomeIcon icon={faMapMarkerAlt} className="mr-2" />
@@ -90,13 +94,10 @@ const Person = ({ pageContext }) => {
                           href={`${profilesRepo.replace(
                             'github',
                             'raw.githubusercontent'
-                          )}/main/${crmData.fullName.replace(
+                          )}/main/${fullName.replace(
                             ' ',
                             '-'
-                          )}/Images/${crmData.fullName.replace(
-                            ' ',
-                            '-'
-                          )}-Profile.jpg`}
+                          )}/Images/${fullName.replace(' ', '-')}-Profile.jpg`}
                         >
                           <FontAwesomeIcon icon={faDownload} className="m-4" />
                         </a>
@@ -119,7 +120,7 @@ const Person = ({ pageContext }) => {
                   <div className="mb-4 w-full hidden md:block lg:hidden print-show">
                     <h1 className="inline">{personName}</h1>
                     <h4 className="mb-0">
-                      {frontmatter.role}
+                      {jobTitle}
                       {!!crmData && crmData.location && (
                         <span className="ml-2">
                           <FontAwesomeIcon icon={faMapMarkerAlt} />{' '}
@@ -178,7 +179,7 @@ const Person = ({ pageContext }) => {
           <div className="person-content-wrap ml-4">
             <h1 className="hidden print-hidden lg:inline">{personName}</h1>
             <h4 className="hidden print-hidden lg:block mb-0">
-              {frontmatter.role}
+              {jobTitle}
               {!!crmData && crmData.location && (
                 <span className="ml-2">
                   <FontAwesomeIcon icon={faMapMarkerAlt} /> {crmData.location}
@@ -215,14 +216,14 @@ const Person = ({ pageContext }) => {
               <>
                 <hr />
                 <EventList
-                  presenterName={crmData.fullName}
+                  presenterName={fullName}
                   presenterNickname={crmData.nickname}
                 />
               </>
             )}
             <Contact
               firstNameOrNickname={firstNameOrNickname}
-              fullName={crmData && crmData.fullName}
+              fullName={fullName}
             />
           </div>
         </div>
