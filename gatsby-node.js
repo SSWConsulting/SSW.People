@@ -79,7 +79,7 @@ exports.sourceNodes = async ({ actions }) => {
     crmDataResult = await getViewDataFromCRM();
   }
 
-  // load data for the sample profile 
+  // load data for the sample profile
   let rawdata = fs.readFileSync('SampleProfileCRMData.json');
   let sampleData = JSON.parse(rawdata);
   crmDataResult.push(sampleData);
