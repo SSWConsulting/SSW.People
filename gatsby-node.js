@@ -9,6 +9,7 @@ const chinaHelper = require('./src/helpers/chinaHelper');
 const { SkillSort } = require('./src/helpers/skillSort');
 const { getViewDataFromCRM } = require('./src/helpers/CRMApi');
 const appInsights = require('applicationinsights');
+const fs = require('fs');
 
 if (process.env.APPINSIGHTS_INSTRUMENTATIONKEY) {
   // Log build time stats to appInsights
@@ -77,6 +78,11 @@ exports.sourceNodes = async ({ actions }) => {
   } else {
     crmDataResult = await getViewDataFromCRM();
   }
+
+  // load data for the sample profile 
+  let rawdata = fs.readFileSync('SampleProfileCRMData.json');
+  let sampleData = JSON.parse(rawdata);
+  crmDataResult.push(sampleData);
 
   crmDataResult.map(user => {
     const userNode = {
