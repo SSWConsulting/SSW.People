@@ -37,7 +37,7 @@ const SkillsList = ({ crmData }) => {
               </span>
             ))}
           </span>
-          <hr />
+          <hr className="print-hidden" />
         </>
       )}
     </>
