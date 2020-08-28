@@ -55,6 +55,18 @@ exports.onCreateWebpackConfig = ({ stage, getConfig, actions }) => {
   });
 };
 
+const loadSampleData = crmData => {
+  try {
+    let rawdata = fs.readFileSync('SampleProfileCRMData.json');
+    let sampleData = JSON.parse(rawdata);
+    if (sampleData.userId) {
+      crmData.push(sampleData);
+    }
+  } catch (err) {
+    // if error, then we don't add anything
+  }
+};
+
 exports.sourceNodes = async ({ actions }) => {
   const { createNode } = actions;
   let crmDataResult;
@@ -80,9 +92,7 @@ exports.sourceNodes = async ({ actions }) => {
   }
 
   // load data for the sample profile
-  let rawdata = fs.readFileSync('SampleProfileCRMData.json');
-  let sampleData = JSON.parse(rawdata);
-  crmDataResult.push(sampleData);
+  loadSampleData(crmDataResult);
 
   crmDataResult.map(user => {
     const userNode = {
