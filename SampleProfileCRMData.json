@@ -1,0 +1,27 @@
+{
+  "userId" : "456ebf0e-fb42-ea11-967a-00155d012cc0",
+  "firstName": "Bob",
+  "lastName": "Northwind",
+  "emailAddress": "JohnDoe@ssw.com.au",
+  "defaultSite": "Other",
+  "jobTitle": "Sample Profile",
+  "role": "Developers",
+  "billableRate": "-1",
+  "isActive": true,
+  "nickname": "Sample",
+  "blogUrl": "https://www.ssw.com.au",
+  "facebookUrl": "https://www.facebook.com/SSW.page",
+  "skypeUsername": "",
+  "linkedInUrl": "https://www.linkedin.com/company/ssw",
+  "twitterUsername": "@SSW_TV",
+  "gitHubUrl": "https://github.com/SSWConsulting",
+  "youTubePlayListId": "PLpiOR7CBNvlpBS1S_OiECOhN-vSSU-COK",
+  "publicPhotoAlbumUrl": "",
+  "skills": [
+    {
+      "technology": "Markdown",
+      "experienceLevel": "Intermediate",
+      "sortOrder": "1"
+    }
+  ]
+}
