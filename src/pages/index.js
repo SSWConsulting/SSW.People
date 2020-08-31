@@ -204,22 +204,14 @@ function buildPeople(data) {
             ...node.frontmatter,
             fullName: !isFixedTile ? dataCRM.fullName : node.frontmatter.name,
             nickname: !isFixedTile ? dataCRM.nickname : node.frontmatter.name,
-            role: !isFixedTile
-              ? dataCRM.jobTitle == ''
-                ? node.frontmatter.role
-                : dataCRM.jobTitle
-              : 'enthusiastic People',
+            jobTitle: !isFixedTile ? dataCRM.jobTitle : 'enthusiastic People',
           },
           location: LocationSanitiser(
             !isFixedTile ? dataCRM.location : 'Others'
           ),
           billingRate: !isFixedTile ? dataCRM.billingRate : 0,
           sanitisedName: node.parent.name,
-          jobTitle: !isFixedTile
-            ? dataCRM.jobTitle == ''
-              ? node.frontmatter.role
-              : dataCRM.jobTitle
-            : 'enthusiastic People',
+          jobTitle: !isFixedTile ? dataCRM.jobTitle : 'enthusiastic People',
           role: !isFixedTile ? dataCRM.role : 'Developers',
           profileImages: {
             profileImage: profileImageMap.get(
