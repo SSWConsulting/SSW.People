@@ -115,7 +115,7 @@ const Person = ({ pageContext }) => {
                     <SocialLinks crmData={crmData} />
                   </div>
                 </div>
-                <div className="w-full p-2 lg:hidden print-show">
+                <div className="w-full lg:hidden print-show px-2 md:p-2">
                   <div className="mb-4 w-full hidden md:block lg:hidden print-show">
                     <h1 className="inline">{personName}</h1>
                     <h4 className="mb-0">
@@ -140,25 +140,30 @@ const Person = ({ pageContext }) => {
                     </div>
                   </div>
 
+                  <div className="w-full md:hidden">
+                    <SocialLinks crmData={crmData} />
+                  </div>
                   {frontmatter.quote && (
-                    <div className="w-full quoteblock">
-                      <Quote
-                        quote={frontmatter.quote}
-                        author={
-                          frontmatter.quoteAuthor
-                            ? frontmatter.quoteAuthor
-                            : personName
-                        }
-                      />
+                    <div className="hidden w-full md:block quoteblock">
+                      <div className="object-center">
+                        <Quote
+                          quote={frontmatter.quote}
+                          author={
+                            frontmatter.quoteAuthor
+                              ? frontmatter.quoteAuthor
+                              : personName
+                          }
+                        />
+                      </div>
                     </div>
                   )}
                 </div>
               </div>
             </>
           }
-          <div className="flex person-favor flex-row lg:flex-col md:hidden lg:block print-hidden">
+          <div className="flex person-favor flex-row lg:flex-col md:hidden lg:block ">
             {frontmatter.quote && (
-              <div className="hidden print-hidden w-1/2 pr-2 lg:pr-0 lg:w-full lg:block quoteblock">
+              <div className="hidden print-hidden w-1/2 pr-2 lg:pr-0 lg:w-full lg:block quoteblock print-hidden">
                 <Quote
                   quote={frontmatter.quote}
                   author={
@@ -169,8 +174,16 @@ const Person = ({ pageContext }) => {
                 />
               </div>
             )}
-            <div className="block md:hidden lg:block w-full print-hidden">
+            <div className="block md:hidden lg:block hidden print-hidden">
               <SocialLinks crmData={crmData} />
+            </div>
+            <div className="block md:hidden w-full print-show">
+              <Quote
+                quote={frontmatter.quote}
+                author={
+                  frontmatter.quoteAuthor ? frontmatter.quoteAuthor : personName
+                }
+              />
             </div>
           </div>
         </div>
@@ -190,7 +203,7 @@ const Person = ({ pageContext }) => {
                 {frontmatter.qualifications}
               </strong>
             )}
-            <hr />
+            <hr className="print-hidden" />
             <div className="block md:hidden print-hidden lg:block">
               <SkillsList crmData={crmData} />
             </div>
