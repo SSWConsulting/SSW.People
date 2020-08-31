@@ -59,9 +59,11 @@ const loadSampleData = crmData => {
   try {
     let rawdata = fs.readFileSync('SampleProfileCRMData.json');
     let sampleData = JSON.parse(rawdata);
-    if (sampleData.userId) {
-      crmData.push(sampleData);
-    }
+    sampleData.forEach(user => {
+      if (user.userId) {
+        crmData.push(user);
+      }
+    });
   } catch (err) {
     // if error, then we don't add anything
   }
