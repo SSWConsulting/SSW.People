@@ -99,8 +99,7 @@ const convertToSimpleFormat = (data, sites, usersSkills, current) => {
       defaultSite: user._siteid_value
         ? sites.find(s => s.siteid === user._siteid_value).name
         : null,
-      jobTitle:
-        user['ssw_jobtitle@OData.Community.Display.V1.FormattedValue'] || '',
+      jobTitle: user.title || '',
       role:
         user['ssw_profilecategory@OData.Community.Display.V1.FormattedValue'] ||
         '',

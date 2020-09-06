@@ -124,7 +124,7 @@ exports.sourceNodes = async ({ actions }) => {
         : `${user.firstName} ${user.lastName}`,
       emailAddress: user.emailAddress || '',
       location: user.defaultSite ? user.defaultSite : 'Others',
-      jobTitle: user.jobTitle || '',
+      jobTitle: user.jobTitle.replace(/(SSW)(?! TV)/g, '') || '',
       role: user.role || '',
       billingRate: user.billableRate || '',
       skills: {
