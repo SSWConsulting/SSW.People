@@ -54,6 +54,21 @@ exports.onCreateWebpackConfig = ({ stage, getConfig, actions }) => {
   });
 };
 
+exports.createSchemaCustomization = ({ actions }) => {
+  const { createTypes } = actions;
+  const typeDefs = `
+    type MarkdownRemark implements Node {
+      frontmatter: Frontmatter
+    }
+    type Frontmatter {
+      name: String
+      role: String
+      jobTitle: String
+    }
+  `;
+  createTypes(typeDefs);
+};
+
 exports.sourceNodes = async ({ actions }) => {
   const { createNode } = actions;
   let crmDataResult;
@@ -176,9 +191,12 @@ exports.createPages = async function({ actions, graphql }) {
           }
           frontmatter {
             id
+            name
             qualifications
             quote
             quoteAuthor
+            role
+            jobTitle
           }
           html
         }

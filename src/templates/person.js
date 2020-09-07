@@ -15,7 +15,6 @@ import SkillsList from '../components/skills-list/skills-list';
 import { isChinaBuild } from '../helpers/chinaHelper';
 import SketchPlaceholder from '../images/ssw-employee-profile-placeholder-sketch.jpg';
 import ProfilePlaceholder from '../images/ssw-employee-profile-placeholder-profile.jpg';
-import { profilesRepo } from '../../site-config';
 
 config.autoAddCss = false;
 
@@ -41,7 +40,12 @@ const Person = ({ pageContext }) => {
     firstNameOrNickname = crmData.nickname
       ? crmData.nickname
       : crmData.fullName.split(' ')[0];
-    jobTitle = crmData.jobTitle ? crmData.jobTitle : frontmatter.role;
+    jobTitle = crmData.jobTitle ? crmData.jobTitle : frontmatter.jobTitle;
+  } else {
+    personName = frontmatter.name;
+    fullName = frontmatter.name;
+    firstNameOrNickname = frontmatter.name.split(' ')[0];
+    jobTitle = frontmatter.jobTitle;
   }
 
   return (
@@ -74,35 +78,30 @@ const Person = ({ pageContext }) => {
                       setHover(false);
                     }}
                   >
-                    <img
-                      className="profile-image bg-cover mx-auto"
-                      src={
-                        hover
-                          ? sketchImage
-                            ? sketchImage.src
-                            : SketchPlaceholder
-                          : profileImage
-                          ? profileImage.src
-                          : ProfilePlaceholder
+                    <a
+                      className="download-image"
+                      href={
+                        profileImage ? profileImage.src : ProfilePlaceholder
                       }
-                      alt="Profile"
-                    />
-                    {hover && (
+                      download={`${fullName.replace(' ', '-')}-Profile`}
+                    >
+                      <img
+                        className="profile-image bg-cover mx-auto"
+                        src={
+                          hover
+                            ? sketchImage
+                              ? sketchImage.src
+                              : SketchPlaceholder
+                            : profileImage
+                            ? profileImage.src
+                            : ProfilePlaceholder
+                        }
+                        alt="Profile"
+                      />
                       <div className="absolute bottom-0 left-0">
-                        <a
-                          className="download-image"
-                          href={`${profilesRepo.replace(
-                            'github',
-                            'raw.githubusercontent'
-                          )}/main/${fullName.replace(
-                            ' ',
-                            '-'
-                          )}/Images/${fullName.replace(' ', '-')}-Profile.jpg`}
-                        >
-                          <FontAwesomeIcon icon={faDownload} className="m-4" />
-                        </a>
+                        <FontAwesomeIcon icon={faDownload} className="m-4" />
                       </div>
-                    )}
+                    </a>
                   </div>
                   {profileAudio ? (
                     <PlayAudio
