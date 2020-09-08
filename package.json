@@ -1,7 +1,7 @@
 {
   "name": "ssw-people",
   "license": "MIT",
-  "author": "Fabian Schultz <desk@fabianschultz.com>",
+  "author": "SSWDevelopers <SSWDevelopers@ssw.com.au>",
   "scripts": {
     "develop": "gatsby develop",
     "serve": "gatsby serve",
@@ -9,7 +9,7 @@
     "format": "prettier --config ./.prettierrc --write src/**/*.js",
     "build:dir": "mkdirp ./public/icons/",
     "build:favicons": "node scripts/favicons",
-    "build": "gatsby clean && npm run build:dir && npm run build:favicons && gatsby build --prefix-paths",
+    "build": "npm run build:dir && npm run build:favicons && gatsby build --prefix-paths  --log-pages",
     "devbuild": "npm run build:dir && npm run build:favicons && gatsby build",
     "test": "ava **/*.test.js --verbose",
     "lint": "eslint --max-warnings=0 . --ext ts --ext tsx --ext js --ext jsx"
