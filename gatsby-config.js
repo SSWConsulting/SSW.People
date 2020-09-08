@@ -15,7 +15,7 @@ const getPlugins = () => {
         name: 'people',
         remote: `${siteConfig.profilesRepo}.git`,
         // Optionally supply a branch. If none supplied, you'll get the default branch.
-        branch: '55874-move-frontmatter-to-crm',
+        branch: 'main',
         // Tailor which files get imported eg. import the docs folder from a codebase.
         patterns: '*-*/**',
       },
@@ -26,7 +26,7 @@ const getPlugins = () => {
         name: 'people',
         remote: `${siteConfig.profilesRepo}.git`,
         // Optionally supply a branch. If none supplied, you'll get the default branch.
-        branch: '55874-move-frontmatter-to-crm',
+        branch: 'main',
         // Tailor which files get imported eg. import the docs folder from a codebase.
         patterns: 'badges/**',
       },
