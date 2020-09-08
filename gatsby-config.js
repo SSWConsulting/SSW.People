@@ -4,14 +4,8 @@ require('dotenv').config({
   path: `.env.${process.env.NODE_ENV}`,
 });
 
-module.exports = {
-  pathPrefix: `/people${
-    process.env.CHINA_BUILD && process.env.CHINA_BUILD === 'TRUE' ? '-cn' : ''
-  }`,
-  siteMetadata: {
-    ...siteConfig,
-  },
-  plugins: [
+const getPlugins = () => {
+  let plugins = [
     'gatsby-plugin-react-helmet',
     'gatsby-plugin-sitemap',
     'gatsby-transformer-json',
@@ -21,7 +15,7 @@ module.exports = {
         name: 'people',
         remote: `${siteConfig.profilesRepo}.git`,
         // Optionally supply a branch. If none supplied, you'll get the default branch.
-        branch: 'main',
+        branch: '55874-move-frontmatter-to-crm',
         // Tailor which files get imported eg. import the docs folder from a codebase.
         patterns: '*-*/**',
       },
@@ -32,7 +26,7 @@ module.exports = {
         name: 'people',
         remote: `${siteConfig.profilesRepo}.git`,
         // Optionally supply a branch. If none supplied, you'll get the default branch.
-        branch: 'main',
+        branch: '55874-move-frontmatter-to-crm',
         // Tailor which files get imported eg. import the docs folder from a codebase.
         patterns: 'badges/**',
       },
@@ -127,5 +121,26 @@ module.exports = {
         useClassNames: true,
       },
     },
-  ],
+  ];
+
+  if (process.env.CHINA_BUILD && process.env.CHINA_BUILD === 'FALSE') {
+    plugins.push({
+      resolve: 'gatsby-plugin-google-analytics',
+      options: {
+        // replace "UA-XXXXXXXXX-X" with your own Tracking ID
+        trackingId: process.env.GOOGLE_ANALYTICS,
+      },
+    });
+  }
+  return plugins;
+};
+
+module.exports = {
+  pathPrefix: `/people${
+    process.env.CHINA_BUILD && process.env.CHINA_BUILD === 'TRUE' ? '-cn' : ''
+  }`,
+  siteMetadata: {
+    ...siteConfig,
+  },
+  plugins: getPlugins(),
 };
