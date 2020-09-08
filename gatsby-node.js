@@ -9,6 +9,7 @@ const chinaHelper = require('./src/helpers/chinaHelper');
 const { SkillSort } = require('./src/helpers/skillSort');
 const { getViewDataFromCRM } = require('./src/helpers/CRMApi');
 const appInsights = require('applicationinsights');
+const fs = require('fs');
 
 if (process.env.APPINSIGHTS_INSTRUMENTATIONKEY) {
   // Log build time stats to appInsights
@@ -69,6 +70,20 @@ exports.createSchemaCustomization = ({ actions }) => {
   createTypes(typeDefs);
 };
 
+const loadSampleData = crmData => {
+  try {
+    let rawdata = fs.readFileSync('SampleProfileCRMData.json');
+    let sampleData = JSON.parse(rawdata);
+    sampleData.forEach(user => {
+      if (user.userId) {
+        crmData.push(user);
+      }
+    });
+  } catch (err) {
+    // if error, then we don't add anything
+  }
+};
+
 exports.sourceNodes = async ({ actions }) => {
   const { createNode } = actions;
   let crmDataResult;
@@ -93,34 +108,8 @@ exports.sourceNodes = async ({ actions }) => {
     crmDataResult = await getViewDataFromCRM();
   }
 
-  //Inject Sample Profile Here
-  crmDataResult.push({
-    userId: '456ebf0e-fb42-ea11-967a-00155d012cc0',
-    firstName: 'Bob',
-    lastName: 'Northwind',
-    emailAddress: 'JohnDoe@ssw.com.au',
-    defaultSite: 'Other',
-    jobTitle: 'Sample Profile',
-    role: 'Developers',
-    billableRate: '-1',
-    isActive: true,
-    nickname: 'Sample',
-    blogUrl: 'https://www.ssw.com.au',
-    facebookUrl: 'https://www.facebook.com/SSW.page',
-    skypeUsername: '',
-    linkedInUrl: 'https://www.linkedin.com/company/ssw',
-    twitterUsername: '@SSW_TV',
-    gitHubUrl: 'https://github.com/SSWConsulting',
-    youTubePlayListId: 'PLpiOR7CBNvlpBS1S_OiECOhN-vSSU-COK',
-    publicPhotoAlbumUrl: '',
-    skills: [
-      {
-        technology: 'Markdown',
-        experienceLevel: 'Intermediate',
-        sortOrder: '1',
-      },
-    ],
-  });
+  // load data for the sample profile
+  loadSampleData(crmDataResult);
 
   crmDataResult.map(user => {
     const userNode = {
