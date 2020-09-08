@@ -288,34 +288,36 @@ exports.createPages = async function({ actions, graphql }) {
       name: node.childImageSharp.parent.name.replace('-Sketch', ''),
     };
   });
-  const people = data.people.nodes.map(node => {
-    const crmData = peopleCRM.find(x => x.id === node.frontmatter.id);
-    const isCurrent = crmData ? crmData.isActive : false;
+  const people = data.people.nodes
+    .filter(node => node.frontmatter.id)
+    .map(node => {
+      const crmData = peopleCRM.find(x => x.id === node.frontmatter.id);
+      const isCurrent = crmData ? crmData.isActive : false;
 
-    const nickname = crmData ? crmData.nickname : null;
+      const nickname = crmData ? crmData.nickname : null;
 
-    const prefix = isCurrent ? '' : alumniPrefix.replace('/', '') + '/';
+      const prefix = isCurrent ? '' : alumniPrefix.replace('/', '') + '/';
 
-    return {
-      slug: node.parent.name,
-      path: prefix + node.parent.name.toLowerCase(),
-      nicknamePath: nickname
-        ? prefix + nickname.replace(/ /g, '-').toLowerCase()
-        : '',
-      frontmatter: node.frontmatter,
-      dataCRM: crmData,
-      audio: peopleAudios.find(
-        x => x.name === node.parent.name.replace(profileChineseTag, '')
-      ),
-      profileImage: peopleProfileImages.find(
-        x => x.name === node.parent.name.replace(profileChineseTag, '')
-      ),
-      sketchImage: peopleSketchImages.find(
-        x => x.name === node.parent.name.replace(profileChineseTag, '')
-      ),
-      html: node.html,
-    };
-  });
+      return {
+        slug: node.parent.name,
+        path: prefix + node.parent.name.toLowerCase(),
+        nicknamePath: nickname
+          ? prefix + nickname.replace(/ /g, '-').toLowerCase()
+          : '',
+        frontmatter: node.frontmatter,
+        dataCRM: crmData,
+        audio: peopleAudios.find(
+          x => x.name === node.parent.name.replace(profileChineseTag, '')
+        ),
+        profileImage: peopleProfileImages.find(
+          x => x.name === node.parent.name.replace(profileChineseTag, '')
+        ),
+        sketchImage: peopleSketchImages.find(
+          x => x.name === node.parent.name.replace(profileChineseTag, '')
+        ),
+        html: node.html,
+      };
+    });
 
   people.forEach(person => {
     actions.createPage({
