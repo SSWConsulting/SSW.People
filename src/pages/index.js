@@ -199,18 +199,29 @@ function buildPeople(data) {
       const dataCRM = allDataCRM.find(x => x.id === node.frontmatter.id);
       const isFixedTile = node.parent.name === 'We-are-hiring';
       if ((dataCRM && dataCRM.isActive) || isFixedTile) {
+        const jobTitle = !isFixedTile
+          ? dataCRM.jobTitle
+            ? dataCRM.jobTitle
+            : node.frontmatter.jobTitle
+          : 'enthusiastic People';
         return {
           profile: {
             ...node.frontmatter,
             fullName: !isFixedTile ? dataCRM.fullName : node.frontmatter.name,
             nickname: !isFixedTile ? dataCRM.nickname : node.frontmatter.name,
+            jobTitle: jobTitle,
           },
           location: LocationSanitiser(
             !isFixedTile ? dataCRM.location : 'Others'
           ),
           billingRate: !isFixedTile ? dataCRM.billingRate : 0,
           sanitisedName: node.parent.name,
-          role: node.frontmatter.category,
+          jobTitle: jobTitle,
+          role: !isFixedTile
+            ? dataCRM.role
+              ? dataCRM.role
+              : node.frontmatter.role
+            : 'Developers',
           profileImages: {
             profileImage: profileImageMap.get(
               node.parent.name.replace(profileChineseTag, '')
@@ -232,25 +243,6 @@ function buildPeople(data) {
             ? dataCRM.nickname.replace(/\s+/g, '-')
             : node.parent.name,
         };
-      } else if (node.frontmatter.role === 'Sample Profile') {
-        return {
-          profile: {
-            ...node.frontmatter,
-            fullName: 'Bob Northwind',
-            nickname: 'Sample',
-          },
-          location: LocationSanitiser('Others'),
-          billingRate: -1,
-          sanitisedName: node.parent.name,
-          role: node.frontmatter.category,
-          profileImages: {
-            profileImage: profileImageMap.get(node.parent.name),
-            sketchProfileImage: sketchProfileImageMap.get(node.parent.name),
-          },
-          profileAudio: audioMap.get(node.parent.name),
-          skills: [],
-          sanitisedNickname: 'Sample',
-        };
       }
     })
     .filter(x => x !== undefined)
@@ -265,10 +257,10 @@ const IndexWithQuery = props => (
           nodes {
             frontmatter {
               id
-              category
               name
-              role
               alternativeUrl
+              role
+              jobTitle
             }
             parent {
               ... on File {
@@ -334,6 +326,8 @@ const IndexWithQuery = props => (
             }
             fullName
             location
+            jobTitle
+            role
             billingRate
             nickname
             isActive

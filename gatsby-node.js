@@ -55,6 +55,21 @@ exports.onCreateWebpackConfig = ({ stage, getConfig, actions }) => {
   });
 };
 
+exports.createSchemaCustomization = ({ actions }) => {
+  const { createTypes } = actions;
+  const typeDefs = `
+    type MarkdownRemark implements Node {
+      frontmatter: Frontmatter
+    }
+    type Frontmatter {
+      name: String
+      role: String
+      jobTitle: String
+    }
+  `;
+  createTypes(typeDefs);
+};
+
 const loadSampleData = crmData => {
   try {
     let rawdata = fs.readFileSync('SampleProfileCRMData.json');
@@ -113,6 +128,8 @@ exports.sourceNodes = async ({ actions }) => {
         : `${user.firstName} ${user.lastName}`,
       emailAddress: user.emailAddress || '',
       location: user.defaultSite ? user.defaultSite : 'Others',
+      jobTitle: user.jobTitle.replace(/(SSW)(?! TV)/g, '') || '',
+      role: user.role || '',
       billingRate: user.billableRate || '',
       skills: {
         intermediateSkills: user.skills
@@ -163,11 +180,12 @@ exports.createPages = async function({ actions, graphql }) {
           }
           frontmatter {
             id
+            name
             qualifications
             quote
             quoteAuthor
             role
-            category
+            jobTitle
           }
           html
         }
@@ -182,6 +200,8 @@ exports.createPages = async function({ actions, graphql }) {
             intermediateSkills
           }
           location
+          jobTitle
+          role
           emailAddress
           skypeUsername
           twitterUsername
@@ -268,44 +288,36 @@ exports.createPages = async function({ actions, graphql }) {
       name: node.childImageSharp.parent.name.replace('-Sketch', ''),
     };
   });
-  const people = data.people.nodes.map(node => {
-    const crmData = peopleCRM.find(x => x.id === node.frontmatter.id);
-    const isCurrent =
-      node.frontmatter.role === 'Sample Profile'
-        ? true
-        : crmData
-        ? crmData.isActive
-        : false;
+  const people = data.people.nodes
+    .filter(node => node.frontmatter.id)
+    .map(node => {
+      const crmData = peopleCRM.find(x => x.id === node.frontmatter.id);
+      const isCurrent = crmData ? crmData.isActive : false;
 
-    const nickname =
-      node.frontmatter.role === 'Sample Profile'
-        ? 'Sample'
-        : crmData
-        ? crmData.nickname
-        : null;
+      const nickname = crmData ? crmData.nickname : null;
 
-    const prefix = isCurrent ? '' : alumniPrefix.replace('/', '') + '/';
+      const prefix = isCurrent ? '' : alumniPrefix.replace('/', '') + '/';
 
-    return {
-      slug: node.parent.name,
-      path: prefix + node.parent.name.toLowerCase(),
-      nicknamePath: nickname
-        ? prefix + nickname.replace(/ /g, '-').toLowerCase()
-        : '',
-      frontmatter: node.frontmatter,
-      dataCRM: crmData,
-      audio: peopleAudios.find(
-        x => x.name === node.parent.name.replace(profileChineseTag, '')
-      ),
-      profileImage: peopleProfileImages.find(
-        x => x.name === node.parent.name.replace(profileChineseTag, '')
-      ),
-      sketchImage: peopleSketchImages.find(
-        x => x.name === node.parent.name.replace(profileChineseTag, '')
-      ),
-      html: node.html,
-    };
-  });
+      return {
+        slug: node.parent.name,
+        path: prefix + node.parent.name.toLowerCase(),
+        nicknamePath: nickname
+          ? prefix + nickname.replace(/ /g, '-').toLowerCase()
+          : '',
+        frontmatter: node.frontmatter,
+        dataCRM: crmData,
+        audio: peopleAudios.find(
+          x => x.name === node.parent.name.replace(profileChineseTag, '')
+        ),
+        profileImage: peopleProfileImages.find(
+          x => x.name === node.parent.name.replace(profileChineseTag, '')
+        ),
+        sketchImage: peopleSketchImages.find(
+          x => x.name === node.parent.name.replace(profileChineseTag, '')
+        ),
+        html: node.html,
+      };
+    });
 
   people.forEach(person => {
     actions.createPage({
