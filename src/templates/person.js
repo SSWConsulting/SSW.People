@@ -15,7 +15,6 @@ import SkillsList from '../components/skills-list/skills-list';
 import { isChinaBuild } from '../helpers/chinaHelper';
 import SketchPlaceholder from '../images/ssw-employee-profile-placeholder-sketch.jpg';
 import ProfilePlaceholder from '../images/ssw-employee-profile-placeholder-profile.jpg';
-import { profilesRepo } from '../../site-config';
 
 config.autoAddCss = false;
 
@@ -29,15 +28,24 @@ const Person = ({ pageContext }) => {
   const [hover, setHover] = useState(false);
   const crmData = pageContext.data.dataCRM || null;
 
-  let personName = '';
+  let personName = frontmatter.name;
+  let fullName = '';
   let firstNameOrNickname = '';
+  let jobTitle = frontmatter.role;
   if (crmData) {
     personName = crmData.nickname
       ? `${crmData.fullName} (${crmData.nickname})`
       : crmData.fullName;
+    fullName = crmData.fullName;
     firstNameOrNickname = crmData.nickname
       ? crmData.nickname
       : crmData.fullName.split(' ')[0];
+    jobTitle = crmData.jobTitle ? crmData.jobTitle : frontmatter.jobTitle;
+  } else {
+    personName = frontmatter.name;
+    fullName = frontmatter.name;
+    firstNameOrNickname = frontmatter.name.split(' ')[0];
+    jobTitle = frontmatter.jobTitle;
   }
 
   return (
@@ -48,7 +56,7 @@ const Person = ({ pageContext }) => {
             <>
               <div className="person-description md:hidden w-full my-auto print-hidden">
                 <h1 className="inline">{personName}</h1>
-                <h4 className="mb-0">{frontmatter.role}</h4>
+                <h4 className="mb-0">{jobTitle}</h4>
                 {!!crmData && crmData.location && (
                   <h4 className="mb-0">
                     <FontAwesomeIcon icon={faMapMarkerAlt} className="mr-2" />
@@ -70,38 +78,30 @@ const Person = ({ pageContext }) => {
                       setHover(false);
                     }}
                   >
-                    <img
-                      className="profile-image bg-cover mx-auto"
-                      src={
-                        hover
-                          ? sketchImage
-                            ? sketchImage.src
-                            : SketchPlaceholder
-                          : profileImage
-                          ? profileImage.src
-                          : ProfilePlaceholder
+                    <a
+                      className="download-image"
+                      href={
+                        profileImage ? profileImage.src : ProfilePlaceholder
                       }
-                      alt="Profile"
-                    />
-                    {hover && (
+                      download={`${fullName.replace(' ', '-')}-Profile`}
+                    >
+                      <img
+                        className="profile-image bg-cover mx-auto"
+                        src={
+                          hover
+                            ? sketchImage
+                              ? sketchImage.src
+                              : SketchPlaceholder
+                            : profileImage
+                            ? profileImage.src
+                            : ProfilePlaceholder
+                        }
+                        alt="Profile"
+                      />
                       <div className="absolute bottom-0 left-0">
-                        <a
-                          className="download-image"
-                          href={`${profilesRepo.replace(
-                            'github',
-                            'raw.githubusercontent'
-                          )}/main/${crmData.fullName.replace(
-                            ' ',
-                            '-'
-                          )}/Images/${crmData.fullName.replace(
-                            ' ',
-                            '-'
-                          )}-Profile.jpg`}
-                        >
-                          <FontAwesomeIcon icon={faDownload} className="m-4" />
-                        </a>
+                        <FontAwesomeIcon icon={faDownload} className="m-4" />
                       </div>
-                    )}
+                    </a>
                   </div>
                   {profileAudio ? (
                     <PlayAudio
@@ -119,7 +119,7 @@ const Person = ({ pageContext }) => {
                   <div className="mb-4 w-full hidden md:block lg:hidden print-show">
                     <h1 className="inline">{personName}</h1>
                     <h4 className="mb-0">
-                      {frontmatter.role}
+                      {jobTitle}
                       {!!crmData && crmData.location && (
                         <span className="ml-2">
                           <FontAwesomeIcon icon={faMapMarkerAlt} />{' '}
@@ -191,7 +191,7 @@ const Person = ({ pageContext }) => {
           <div className="person-content-wrap ml-4">
             <h1 className="hidden print-hidden lg:inline">{personName}</h1>
             <h4 className="hidden print-hidden lg:block mb-0">
-              {frontmatter.role}
+              {jobTitle}
               {!!crmData && crmData.location && (
                 <span className="ml-2">
                   <FontAwesomeIcon icon={faMapMarkerAlt} /> {crmData.location}
@@ -228,14 +228,14 @@ const Person = ({ pageContext }) => {
               <>
                 <hr />
                 <EventList
-                  presenterName={crmData.fullName}
+                  presenterName={fullName}
                   presenterNickname={crmData.nickname}
                 />
               </>
             )}
             <Contact
               firstNameOrNickname={firstNameOrNickname}
-              fullName={crmData && crmData.fullName}
+              fullName={fullName}
             />
           </div>
         </div>

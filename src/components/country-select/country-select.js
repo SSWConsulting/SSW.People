@@ -6,6 +6,7 @@ import { isChinaBuild } from '../../helpers/chinaHelper';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck, faAngleDown } from '@fortawesome/free-solid-svg-icons';
 import { Location } from '@reach/router';
+import { siteUrl, siteUrlCn } from '../../../site-config';
 
 const CountrySelect = ({ location }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -36,7 +37,7 @@ const CountrySelect = ({ location }) => {
         >
           <li>
             <a
-              href={`https://ssw.com.au${location.pathname.replace(
+              href={`${siteUrl}${location.pathname.replace(
                 '/people-cn/',
                 '/people/'
               ) || ''}`}
@@ -51,7 +52,7 @@ const CountrySelect = ({ location }) => {
           </li>
           <li>
             <a
-              href={`https://peoplecn.ssw.com.au${location.pathname.replace(
+              href={`${siteUrlCn}${location.pathname.replace(
                 '/people/',
                 '/people-cn/'
               ) || ''}`}
