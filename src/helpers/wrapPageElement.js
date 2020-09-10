@@ -17,15 +17,12 @@ const wrapPageElement = ({ element, props }) => {
       ? `${crmData.fullName} (${crmData.nickname})`
       : crmData.fullName
     : null;
-  const slug = props && props.pageContext ? props.pageContext.slug : null;
 
   return (
     <Layout
       crumbs={crumbs}
       crumbLabel={personName}
       pageTitle={crmData && personName}
-      displayActions={personName}
-      profileId={slug}
     >
       <Transition {...props}>{element}</Transition>
     </Layout>
