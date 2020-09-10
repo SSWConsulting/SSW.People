@@ -40,7 +40,7 @@ const Layout = ({ children, pageTitle, crumbs, crumbLabel }) => {
             <GoogleAnalytics pageTitle={pageTitle}></GoogleAnalytics>
           )}
           <div className="mx-2 md:mx-6 print-hidden">
-            <Menu onClickToggle={() => actionOnToggleClick()}/>
+            <Menu onClickToggle={() => actionOnToggleClick()} />
           </div>
           <div className="flex flex-row">
             <div className="w-3/4">
