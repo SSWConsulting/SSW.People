@@ -28,6 +28,7 @@ module.exports = {
     `Designers`,
     `Marketing & Video`,
     `Admin`,
+    `Others`,
   ],
   profilesRepo: `https://github.com/SSWConsulting/SSW.People.Profiles`,
 };
