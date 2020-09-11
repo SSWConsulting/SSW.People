@@ -51,7 +51,7 @@ const Person = ({ pageContext }) => {
   return (
     <>
       <div className="flex flex-wrap mb-5 person-content">
-        <div className="sm:w-full lg:w-1/4 xl:w-1/6">
+        <div className="sm:w-full lg:w-1/4 xl:w-1/6 print-full-width">
           {
             <>
               <div className="person-description md:hidden w-full my-auto print-hidden">
@@ -145,7 +145,7 @@ const Person = ({ pageContext }) => {
                   </div>
                   {frontmatter.quote && (
                     <div className="hidden w-full md:block quoteblock">
-                      <div className="object-center">
+                      <div className="object-center print-hidden">
                         <Quote
                           quote={frontmatter.quote}
                           author={
@@ -161,7 +161,7 @@ const Person = ({ pageContext }) => {
               </div>
             </>
           }
-          <div className="flex person-favor flex-row lg:flex-col md:hidden lg:block ">
+          <div className="flex person-favor flex-row lg:flex-col md:hidden lg:block print-show">
             {frontmatter.quote && (
               <div className="hidden print-hidden w-1/2 pr-2 lg:pr-0 lg:w-full lg:block quoteblock print-hidden">
                 <Quote
@@ -188,7 +188,7 @@ const Person = ({ pageContext }) => {
           </div>
         </div>
         <div className="sm:w-full lg:w-3/4 xl:w-5/6 print-full-width">
-          <div className="person-content-wrap ml-4">
+          <div className="person-content-wrap ml-4 print-full-width">
             <h1 className="hidden print-hidden lg:inline">{personName}</h1>
             <h4 className="hidden print-hidden lg:block mb-0">
               {jobTitle}
@@ -208,7 +208,7 @@ const Person = ({ pageContext }) => {
               <SkillsList crmData={crmData} />
             </div>
             <div
-              className="profile-content"
+              className="profile-content print-full-width"
               dangerouslySetInnerHTML={{
                 __html: profileHtml,
               }}

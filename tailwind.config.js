@@ -1,7 +1,11 @@
 module.exports = {
   purge: ['./src/**/*.js'],
   theme: {
-    extend: {},
+    extend: {
+      screens: {
+        print: { raw: 'print' },
+      },
+    },
   },
   variants: {},
   plugins: [],
