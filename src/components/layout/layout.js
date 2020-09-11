@@ -6,10 +6,8 @@ import Header from 'components/header';
 import Footer from 'components/footer';
 import '../../style.css';
 import Breadcrumbs from '../breadcrumb/breadcrumb';
-import GoogleAnalytics from '../google-analytics/google-analytics';
 import Menu from '../../../lib/ssw.megamenu/menu/menu';
 import MobileMenu from '../../../lib/ssw.megamenu/mobile-menu/mobile-menu';
-import { isChinaBuild } from '../../helpers/chinaHelper';
 import GitHubIcon from '-!svg-react-loader!../../images/github.svg';
 import InfoIcon from '-!svg-react-loader!../../images/info.svg';
 import { profilesRepo } from '../../../site-config';
@@ -48,9 +46,6 @@ const Layout = ({
         <div className="flex flex-col min-h-screen main-container">
           <Head pageTitle={pageTitle} />
           <Header displayActions={displayActions} profileId={profileId} />
-          {!isChinaBuild && (
-            <GoogleAnalytics pageTitle={pageTitle}></GoogleAnalytics>
-          )}
           <div className="mx-2 md:mx-6 print-hidden">
             <Menu onClickToggle={() => actionOnToggleClick()}></Menu>
           </div>
