@@ -8,7 +8,6 @@ import '../../style.css';
 import Breadcrumbs from '../breadcrumb/breadcrumb';
 import Menu from '../../../lib/ssw.megamenu/menu/menu';
 import MobileMenu from '../../../lib/ssw.megamenu/mobile-menu/mobile-menu';
-import { isChinaBuild } from '../../helpers/chinaHelper';
 
 const Layout = ({ children, pageTitle, crumbs, crumbLabel }) => {
   const node = useRef();
