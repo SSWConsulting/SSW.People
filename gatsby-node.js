@@ -289,7 +289,12 @@ exports.createPages = async function({ actions, graphql }) {
     };
   });
   const people = data.people.nodes
-    .filter(node => node.frontmatter.id)
+    .filter(
+      node =>
+        node.frontmatter.id &&
+        (peopleCRM.find(x => x.id === node.frontmatter.id) ||
+          node.frontmatter.id.indexOf('-') < 0)
+    )
     .map(node => {
       const crmData = peopleCRM.find(x => x.id === node.frontmatter.id);
       const isCurrent = crmData ? crmData.isActive : false;
