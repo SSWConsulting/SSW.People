@@ -6,7 +6,6 @@ import Header from 'components/header';
 import Footer from 'components/footer';
 import '../../style.css';
 import Breadcrumbs from '../breadcrumb/breadcrumb';
-import GoogleAnalytics from '../google-analytics/google-analytics';
 import Menu from '../../../lib/ssw.megamenu/menu/menu';
 import MobileMenu from '../../../lib/ssw.megamenu/mobile-menu/mobile-menu';
 import { isChinaBuild } from '../../helpers/chinaHelper';
@@ -36,9 +35,6 @@ const Layout = ({ children, pageTitle, crumbs, crumbLabel }) => {
         <div className="flex flex-col min-h-screen main-container">
           <Head pageTitle={pageTitle} />
           <Header />
-          {!isChinaBuild && (
-            <GoogleAnalytics pageTitle={pageTitle}></GoogleAnalytics>
-          )}
           <div className="mx-2 md:mx-6 print-hidden">
             <Menu onClickToggle={() => actionOnToggleClick()} />
           </div>
