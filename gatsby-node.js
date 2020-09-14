@@ -62,9 +62,14 @@ exports.createSchemaCustomization = ({ actions }) => {
       frontmatter: Frontmatter
     }
     type Frontmatter {
+      id: String
       name: String
+      qualifications: String
+      quote: String
+      quoteAuthor: String
       role: String
       jobTitle: String
+      alternativeUrl: String
     }
   `;
   createTypes(typeDefs);
