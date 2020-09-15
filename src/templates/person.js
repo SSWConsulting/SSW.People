@@ -61,7 +61,7 @@ const Person = ({ pageContext }) => {
       <ProfileDescription
         personName={personName}
         jobTitle={jobTitle}
-        location={crmData.location}
+        location={crmData?.location}
         qualifications={frontmatter.qualifications}
       />
     </>

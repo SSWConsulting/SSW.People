@@ -21,7 +21,7 @@ const ProfilePhoto = ({ profileImage, sketchImage }) => {
       <a
         className="download-image"
         href={profileImage ? profileImage.src : ProfilePlaceholder}
-        download={profileImage.name}
+        download={profileImage?.name}
       >
         <img
           className="profile-image bg-cover mx-auto"

@@ -35,16 +35,18 @@ const YoutubePlaylist = ({ youtubePlayListId }) => {
         className="gatsby-resp-iframe-wrapper"
       >
         <div className="embedVideo-container">
-          <Player
-            id={item.contentDetails.videoId}
-            imageSize="mqdefault"
-            className={'embedVideo-iframe'}
-            onStateChange={HideShowArrows}
-            styles={{
-              width: '321px',
-              height: '180px',
-            }}
-          />
+          {typeof window !== 'undefined' && (
+            <Player
+              id={item.contentDetails.videoId}
+              imageSize="mqdefault"
+              className={'embedVideo-iframe'}
+              onStateChange={HideShowArrows}
+              styles={{
+                width: '321px',
+                height: '180px',
+              }}
+            />
+          )}
         </div>
       </div>
     ));

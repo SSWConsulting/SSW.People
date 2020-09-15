@@ -28,8 +28,21 @@ let assetsManifest = {};
 const alumniPrefix = '/alumni';
 const profileChineseTag = '-Chinese';
 
-exports.onCreateWebpackConfig = ({ stage, getConfig, actions }) => {
+exports.onCreateWebpackConfig = ({ stage, loaders, getConfig, actions }) => {
   const config = getConfig();
+  if (stage === 'build-html') {
+    actions.setWebpackConfig({
+      module: {
+        rules: [
+          {
+            test: /react-lazy-youtube/,
+            use: loaders.null(),
+          },
+        ],
+      },
+    });
+  }
+
   if (stage.startsWith('develop') && config.resolve) {
     config.resolve.alias = {
       ...config.resolve.alias,
