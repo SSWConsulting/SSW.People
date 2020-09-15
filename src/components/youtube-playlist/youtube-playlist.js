@@ -4,7 +4,6 @@ import Carousel from '@brainhubeu/react-carousel';
 import '@brainhubeu/react-carousel/lib/style.css';
 import PropTypes from 'prop-types';
 import Icon from '../../images/branding/icon.png';
-import YouTube from 'react-youtube';
 import Player from 'react-lazy-youtube';
 
 const YoutubePlaylist = ({ youtubePlayListId }) => {
@@ -19,15 +18,6 @@ const YoutubePlaylist = ({ youtubePlayListId }) => {
 
   const nextSlide = () => setCurrentSlide(currentSlide + 1);
   const previousSlide = () => setCurrentSlide(currentSlide - 1);
-  const opts = {
-    height: '180',
-    width: '321',
-    playerVars: {
-      // https://developers.google.com/youtube/player_parameters
-      autoplay: 0,
-      origin: typeof window !== 'undefined' ? window.location.origin : '',
-    },
-  };
 
   const PLAYING = 1;
   const HideShowArrows = e => {
@@ -45,17 +35,15 @@ const YoutubePlaylist = ({ youtubePlayListId }) => {
         className="gatsby-resp-iframe-wrapper"
       >
         <div className="embedVideo-container">
-        <Player id={item.contentDetails.videoId}  
-        className={'embedVideo-iframe'}
-        onStateChange={HideShowArrows} 
-        />
-          
-          <YouTube
-            videoId={item.contentDetails.videoId} // defaults -> null
-            className={'embedVideo-iframe'} // defaults -> null
-            containerClassName={'embedVideo-container'} // defaults -> ''
-            opts={opts} // defaults -> {}
-            onStateChange={HideShowArrows} // defaults -> noop
+          <Player
+            id={item.contentDetails.videoId}
+            imageSize="maxresdefault"
+            className={'embedVideo-iframe'}
+            onStateChange={HideShowArrows}
+            styles={{
+              width: '321px',
+              height: '180px',
+            }}
           />
         </div>
       </div>
@@ -135,17 +123,18 @@ const YoutubePlaylist = ({ youtubePlayListId }) => {
               {
                 cssText: `
               .BrainhubCarousel__arrows{
-                      padding: 17px;
-                      background-color: #CC4141;
+                padding: 17px;
+                background-color: #CC4141;
               }
 
               .BrainhubCarousel__arrows:hover{
-                      background-color: #CC4141;
+                background-color: #CC4141;
               }
 
               .BrainhubCarousel__arrows:hover:enabled{
-                      background-color:#CC4141
+                background-color:#CC4141
               }
+              
             `,
               },
             ]}

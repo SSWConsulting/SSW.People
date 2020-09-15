@@ -54,21 +54,23 @@ const Person = ({ pageContext }) => {
   );
 
   const profileDescription = (
-    <ProfileDescription
-      personName={personName}
-      jobTitle={jobTitle}
-      location={crmData.location}
-      qualifications={frontmatter.qualifications}
-    />
+    <>
+      <div className="float-right mx-2 md:mx-6 print-hidden">
+        <ActionButtons profileId={pageContext.slug}></ActionButtons>
+      </div>
+      <ProfileDescription
+        personName={personName}
+        jobTitle={jobTitle}
+        location={crmData.location}
+        qualifications={frontmatter.qualifications}
+      />
+    </>
   );
 
   const skillsList = <SkillsList crmData={crmData} />;
   const socialLinks = <SocialLinks crmData={crmData} />;
   return (
     <>
-      <div className="mx-2 md:mx-6 print-hidden">
-        <ActionButtons profileId={pageContext.slug}></ActionButtons>
-      </div>
       <div className="flex flex-wrap mb-5 person-content">
         <div className="sm:w-full lg:w-1/4 xl:w-1/6">
           <div className="person-description md:hidden w-full my-auto print-hidden">
