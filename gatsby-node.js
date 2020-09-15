@@ -30,6 +30,7 @@ const profileChineseTag = '-Chinese';
 
 exports.onCreateWebpackConfig = ({ stage, loaders, getConfig, actions }) => {
   const config = getConfig();
+  //Fix thrid party module needing window as per https://www.gatsbyjs.com/docs/debugging-html-builds/#fixing-third-party-modules
   if (stage === 'build-html') {
     actions.setWebpackConfig({
       module: {
