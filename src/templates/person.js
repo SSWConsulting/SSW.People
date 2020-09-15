@@ -72,7 +72,7 @@ const Person = ({ pageContext }) => {
   return (
     <>
       <div className="flex flex-wrap mb-5 person-content">
-        <div className="sm:w-full lg:w-1/4 xl:w-1/6">
+        <div className="sm:w-full lg:w-1/4 xl:w-1/6 print-full-width">
           <div className="person-description md:hidden w-full my-auto print-hidden">
             {profileDescription}
           </div>
@@ -126,7 +126,7 @@ const Person = ({ pageContext }) => {
               {skillsList}
             </div>
             <div
-              className="profile-content"
+              className="profile-content print-full-width"
               dangerouslySetInnerHTML={{
                 __html: profileHtml,
               }}
