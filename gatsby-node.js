@@ -28,8 +28,22 @@ let assetsManifest = {};
 const alumniPrefix = '/alumni';
 const profileChineseTag = '-Chinese';
 
-exports.onCreateWebpackConfig = ({ stage, getConfig, actions }) => {
+exports.onCreateWebpackConfig = ({ stage, loaders, getConfig, actions }) => {
   const config = getConfig();
+  //Fix thrid party module needing window as per https://www.gatsbyjs.com/docs/debugging-html-builds/#fixing-third-party-modules
+  if (stage === 'build-html') {
+    actions.setWebpackConfig({
+      module: {
+        rules: [
+          {
+            test: /react-lazy-youtube/,
+            use: loaders.null(),
+          },
+        ],
+      },
+    });
+  }
+
   if (stage.startsWith('develop') && config.resolve) {
     config.resolve.alias = {
       ...config.resolve.alias,
