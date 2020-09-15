@@ -1,7 +1,5 @@
 import PropTypes from 'prop-types';
-import React, { useState } from 'react';
-import { faMapMarkerAlt, faDownload } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import React from 'react';
 import { config } from '@fortawesome/fontawesome-svg-core';
 import '@fortawesome/fontawesome-svg-core/styles.css';
 import YoutubePlaylist from '../components/youtube-playlist/youtube-playlist';
@@ -13,8 +11,9 @@ import Quote from '../components/quote/quote';
 import SocialLinks from '../components/social-links/social-links';
 import SkillsList from '../components/skills-list/skills-list';
 import { isChinaBuild } from '../helpers/chinaHelper';
-import SketchPlaceholder from '../images/ssw-employee-profile-placeholder-sketch.jpg';
-import ProfilePlaceholder from '../images/ssw-employee-profile-placeholder-profile.jpg';
+import ActionButtons from '../components/action-buttons/action-buttons';
+import ProfilePhoto from '../components/profile-photo/profile-photo';
+import ProfileDescription from '../components/profile-description/profile-description';
 
 config.autoAddCss = false;
 
@@ -25,7 +24,6 @@ const Person = ({ pageContext }) => {
   const profileImage = pageContext.data.profileImage;
   const sketchImage = pageContext.data.sketchImage;
   const profileAudio = pageContext.data.audio;
-  const [hover, setHover] = useState(false);
   const crmData = pageContext.data.dataCRM || null;
 
   let personName = frontmatter.name;
@@ -50,167 +48,89 @@ const Person = ({ pageContext }) => {
     jobTitle = frontmatter.jobTitle;
   }
 
+  const quote = (
+    <Quote
+      quote={frontmatter.quote}
+      author={frontmatter.quoteAuthor ? frontmatter.quoteAuthor : personName}
+    />
+  );
+
+  const profileDescription = (
+    <>
+      <div className="float-right mx-2 md:mx-6 print-hidden">
+        <ActionButtons profileId={pageContext.slug}></ActionButtons>
+      </div>
+      <ProfileDescription
+        personName={personName}
+        jobTitle={jobTitle}
+        location={crmData?.location}
+        qualifications={frontmatter.qualifications}
+      />
+    </>
+  );
+
+  const skillsList = <SkillsList crmData={crmData} />;
+  const socialLinks = <SocialLinks crmData={crmData} />;
   return (
     <>
       <div className="flex flex-wrap mb-5 person-content">
-        <div className="sm:w-full lg:w-1/4 xl:w-1/6">
-          {
-            <>
-              <div className="person-description md:hidden w-full my-auto print-hidden">
-                <h1 className="inline">{personName}</h1>
-                <h4 className="mb-0">{jobTitle}</h4>
-                {!!crmData && crmData.location && (
-                  <h4 className="mb-0">
-                    <FontAwesomeIcon icon={faMapMarkerAlt} className="mr-2" />
-                    {crmData.location}
-                  </h4>
-                )}
-                {!!frontmatter.qualifications && (
-                  <strong>{frontmatter.qualifications}</strong>
-                )}
+        <div className="sm:w-full lg:w-1/4 xl:w-1/6 print-full-width">
+          <div className="person-description md:hidden w-full my-auto print-hidden">
+            {profileDescription}
+          </div>
+          <div className="flex profile-image-quote">
+            <div>
+              <ProfilePhoto
+                profileImage={profileImage}
+                sketchImage={sketchImage}
+              />
+              {profileAudio ? (
+                <PlayAudio hasAnimation={true} audioSrc={profileAudio.src} />
+              ) : (
+                ''
+              )}
+              <div className="mt-4 hidden md:block lg:hidden w-full">
+                <SocialLinks crmData={crmData} />
               </div>
-              <div className="flex profile-image-quote">
-                <div>
-                  <div
-                    className="image-bg relative text-center"
-                    onMouseEnter={() => {
-                      setHover(true);
-                    }}
-                    onMouseLeave={() => {
-                      setHover(false);
-                    }}
-                  >
-                    <a
-                      className="download-image"
-                      href={
-                        profileImage ? profileImage.src : ProfilePlaceholder
-                      }
-                      download={`${fullName.replace(' ', '-')}-Profile`}
-                    >
-                      <img
-                        className="profile-image bg-cover mx-auto"
-                        src={
-                          hover
-                            ? sketchImage
-                              ? sketchImage.src
-                              : SketchPlaceholder
-                            : profileImage
-                            ? profileImage.src
-                            : ProfilePlaceholder
-                        }
-                        alt="Profile"
-                      />
-                      <div className="absolute bottom-0 left-0">
-                        <FontAwesomeIcon icon={faDownload} className="m-4" />
-                      </div>
-                    </a>
-                  </div>
-                  {profileAudio ? (
-                    <PlayAudio
-                      hasAnimation={true}
-                      audioSrc={profileAudio.src}
-                    />
-                  ) : (
-                    ''
-                  )}
-                  <div className="mt-4 hidden md:block lg:hidden w-full">
-                    <SocialLinks crmData={crmData} />
-                  </div>
-                </div>
-                <div className="w-full lg:hidden print-show px-2 md:p-2">
-                  <div className="mb-4 w-full hidden md:block lg:hidden print-show">
-                    <h1 className="inline">{personName}</h1>
-                    <h4 className="mb-0">
-                      {jobTitle}
-                      {!!crmData && crmData.location && (
-                        <span className="ml-2">
-                          <FontAwesomeIcon icon={faMapMarkerAlt} />{' '}
-                          {crmData.location}
-                        </span>
-                      )}
-                    </h4>
-
-                    {!!frontmatter.qualifications && (
-                      <div>
-                        <strong>{frontmatter.qualifications}</strong>
-                      </div>
-                    )}
-
-                    <hr />
-                    <div>
-                      <SkillsList crmData={crmData} />
-                    </div>
-                  </div>
-
-                  <div className="w-full md:hidden">
-                    <SocialLinks crmData={crmData} />
-                  </div>
-                  {frontmatter.quote && (
-                    <div className="hidden w-full md:block quoteblock">
-                      <div className="object-center">
-                        <Quote
-                          quote={frontmatter.quote}
-                          author={
-                            frontmatter.quoteAuthor
-                              ? frontmatter.quoteAuthor
-                              : personName
-                          }
-                        />
-                      </div>
-                    </div>
-                  )}
-                </div>
+            </div>
+            <div className="w-full lg:hidden print-show px-2 md:p-2">
+              <div className="mb-4 w-full hidden md:block lg:hidden print-show">
+                {profileDescription}
+                <hr />
+                <div>{skillsList}</div>
               </div>
-            </>
-          }
-          <div className="flex person-favor flex-row lg:flex-col md:hidden lg:block ">
+
+              <div className="w-full md:hidden">{socialLinks}</div>
+              {frontmatter.quote && (
+                <div className="hidden w-full md:block quoteblock print-hidden">
+                  <div className="object-center">{quote}</div>
+                </div>
+              )}
+            </div>
+          </div>
+          <div className="flex person-favor flex-row lg:flex-col md:hidden lg:block print-show">
             {frontmatter.quote && (
-              <div className="hidden print-hidden w-1/2 pr-2 lg:pr-0 lg:w-full lg:block quoteblock print-hidden">
-                <Quote
-                  quote={frontmatter.quote}
-                  author={
-                    frontmatter.quoteAuthor
-                      ? frontmatter.quoteAuthor
-                      : personName
-                  }
-                />
+              <div className="hidden w-1/2 pr-2 lg:pr-0 lg:w-full lg:block quoteblock print-hidden">
+                {quote}
               </div>
             )}
             <div className="block md:hidden lg:block hidden print-hidden">
-              <SocialLinks crmData={crmData} />
+              {socialLinks}
             </div>
-            <div className="block md:hidden w-full print-show">
-              <Quote
-                quote={frontmatter.quote}
-                author={
-                  frontmatter.quoteAuthor ? frontmatter.quoteAuthor : personName
-                }
-              />
-            </div>
+            <div className="block md:hidden w-full print-show">{quote}</div>
           </div>
         </div>
         <div className="sm:w-full lg:w-3/4 xl:w-5/6 print-full-width">
           <div className="person-content-wrap ml-4">
-            <h1 className="hidden print-hidden lg:inline">{personName}</h1>
-            <h4 className="hidden print-hidden lg:block mb-0">
-              {jobTitle}
-              {!!crmData && crmData.location && (
-                <span className="ml-2">
-                  <FontAwesomeIcon icon={faMapMarkerAlt} /> {crmData.location}
-                </span>
-              )}
-            </h4>
-            {!!frontmatter.qualifications && (
-              <strong className="hidden print-hidden lg:block">
-                {frontmatter.qualifications}
-              </strong>
-            )}
+            <div className="hidden lg:block print-hidden">
+              {profileDescription}
+            </div>
             <hr className="print-hidden" />
             <div className="block md:hidden print-hidden lg:block">
-              <SkillsList crmData={crmData} />
+              {skillsList}
             </div>
             <div
-              className="profile-content"
+              className="profile-content print-full-width"
               dangerouslySetInnerHTML={{
                 __html: profileHtml,
               }}
