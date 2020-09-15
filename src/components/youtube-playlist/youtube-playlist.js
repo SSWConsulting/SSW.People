@@ -5,6 +5,7 @@ import '@brainhubeu/react-carousel/lib/style.css';
 import PropTypes from 'prop-types';
 import Icon from '../../images/branding/icon.png';
 import YouTube from 'react-youtube';
+import Player from 'react-lazy-youtube';
 
 const YoutubePlaylist = ({ youtubePlayListId }) => {
   const [error, setError] = useState(null);
@@ -44,6 +45,11 @@ const YoutubePlaylist = ({ youtubePlayListId }) => {
         className="gatsby-resp-iframe-wrapper"
       >
         <div className="embedVideo-container">
+        <Player id={item.contentDetails.videoId}  
+        className={'embedVideo-iframe'}
+        onStateChange={HideShowArrows} 
+        />
+          
           <YouTube
             videoId={item.contentDetails.videoId} // defaults -> null
             className={'embedVideo-iframe'} // defaults -> null

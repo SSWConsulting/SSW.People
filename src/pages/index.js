@@ -8,8 +8,6 @@ import { Location } from '@reach/router';
 import queryString from 'query-string';
 import ProfileList from 'components/profile-list';
 import LocationFilter from '../components/location-filter/location-filter';
-import SkillsFilter from '../components/skills-filter/skills-filter';
-import RoleFilter from '../components/role-filter/role-filter';
 import Distinct from '../helpers/arrayHelpers';
 import LocationSanitiser from '../helpers/locationSanitizer';
 import 'array-flat-polyfill';
@@ -20,7 +18,9 @@ import {
   getEventsPresenters,
   isPresenterOfEventType,
 } from '../helpers/eventHelper';
-import EventFilter from '../components/event-filter/event-filter';
+import { getPresentersOfEventType } from '../helpers/eventHelper';
+import RoleSort from '../helpers/roleSort';
+import PeopleFilters from '../components/people-filters/people-filters';
 
 config.autoAddCss = false;
 
@@ -49,60 +49,100 @@ const Index = ({ data }) => {
         .sort(),
     [allPeople]
   );
-
   const allRoles = useMemo(
     () =>
       allPeople
         .map(d => d.role)
         .filter(Distinct)
-        .sort(),
+        .sort(RoleSort),
     [allPeople]
   );
 
+  const countPerRole = () => {
+    return allRoles.map(r => {
+      return {
+        item: r,
+        count: filteredPeople.filter(p => p.role === r).length,
+      };
+    });
+  };
+  const countPerEvent = () => {
+    return allEventsType.map(r => {
+      return {
+        item: r,
+        count: getPresentersOfEventType(r, eventsPresenters, filteredPeople)
+          .length,
+      };
+    });
+  };
+  const countPerSkill = () => {
+    return allSkills.map(r => {
+      return {
+        item: r,
+        count: filteredPeople.filter(p => p.skills.find(s => s === r)).length,
+      };
+    });
+  };
+
   const [selectedLocation, setSelectedLocation] = useState(allLocations[0]);
-  const [selectedSkills, setSelectedSkills] = useState([]);
-  const [selectedRoles, setSelectedRoles] = useState([]);
   const [filteredPeople, setFilteredPeople] = useState(allPeople);
-  const [events, setEvents] = useState(null);
+  const [eventsPresenters, setEventsPresenters] = useState(null);
   const [allEventsType, setAllEventsType] = useState([]);
-  const [selectedEvents, setSelectedEvents] = useState([]);
+  const [selectedFilters, setSelectedFilters] = useState([
+    { name: 'roles', selected: [] },
+    { name: 'skills', selected: [] },
+    { name: 'events', selected: [] },
+  ]);
 
   useEffect(() => {
+    function filterPeople() {
+      const selectedRoles = selectedFilters.find(f => f.name === 'roles')
+        ?.selected;
+      const selectedSkills = selectedFilters.find(f => f.name === 'skills')
+        ?.selected;
+      const selectedEvents = selectedFilters.find(f => f.name === 'events')
+        ?.selected;
+
+      const people = allPeople
+        .filter(
+          p =>
+            selectedLocation === 'All' ||
+            p.location === selectedLocation ||
+            p.sanitisedName === 'We-are-hiring'
+        )
+        .filter(
+          p => selectedRoles.length === 0 || selectedRoles.includes(p.role)
+        )
+        .filter(
+          p =>
+            selectedSkills.length === 0 ||
+            selectedSkills.filter(s => p.skills.includes(s)).length > 0
+        )
+        .filter(
+          p =>
+            selectedEvents.length === 0 ||
+            selectedEvents.filter(e =>
+              isPresenterOfEventType(e, p.profile, eventsPresenters)
+            ).length > 0
+        );
+      return people;
+    }
+
     async function loadEventsPresenters() {
       var presentersList = await getEventsPresenters();
-      setEvents(presentersList);
+      setEventsPresenters(presentersList);
       setAllEventsType([
         ...new Set(presentersList.map(event => event.eventType)),
       ]);
     }
 
-    if (!events) {
+    if (!eventsPresenters) {
       loadEventsPresenters();
     }
 
-    const people = allPeople
-      .filter(
-        p =>
-          selectedLocation === 'All' ||
-          p.location === selectedLocation ||
-          p.sanitisedName === 'We-are-hiring'
-      )
-      .filter(
-        p =>
-          selectedSkills.length === 0 ||
-          selectedSkills.filter(s => p.skills.includes(s)).length > 0
-      )
-      .filter(
-        p =>
-          selectedEvents.length === 0 ||
-          selectedEvents.filter(e =>
-            isPresenterOfEventType(e, p.profile, events)
-          ).length > 0
-      )
-      .sort(ProfileSort);
-
+    const people = filterPeople().sort(ProfileSort);
     setFilteredPeople(people);
-  }, [selectedLocation, selectedSkills, selectedEvents]);
+  }, [selectedLocation, selectedFilters]);
 
   return (
     <>
@@ -122,41 +162,19 @@ const Index = ({ data }) => {
       <div className="mx-2 md:mx-6 flex flex-col lg:flex-row">
         <div className="lg:w-1/4">
           <div className="mx-auto flex flex-col sm:flex-row lg:flex-col lg:w-5/6">
-            <div className="w-full sm:w-1/2 lg:w-full">
-              <RoleFilter
-                allRoles={allRoles}
-                selectedRoles={selectedRoles}
-                onRoleChange={setSelectedRoles}
-                filteredPeople={filteredPeople}
-              />
-            </div>
-            {process.env.EVENTS_API && process.env.EVENTS_API.length > 4 && (
-              <div className="w-full sm:w-1/2 lg:w-full mt-0 lg:mt-4">
-                <EventFilter
-                  allEvents={events}
-                  allEventsType={allEventsType}
-                  selectedEvents={selectedEvents}
-                  onEventChange={setSelectedEvents}
-                  filteredPeople={filteredPeople}
-                />
-              </div>
-            )}
-            <div className="w-full sm:w-1/2 lg:w-full mt-0 lg:mt-4">
-              <SkillsFilter
-                allSkills={allSkills}
-                selectedSkills={selectedSkills}
-                onSkillChange={setSelectedSkills}
-                filteredPeople={filteredPeople}
-              />
-            </div>
+            <PeopleFilters
+              allRoles={allRoles}
+              rolesCount={countPerRole()}
+              allSkills={allSkills}
+              skillsCount={countPerSkill()}
+              allEvents={allEventsType}
+              eventsCount={countPerEvent()}
+              onFilterChange={setSelectedFilters}
+            />
           </div>
         </div>
         <div className="lg:w-3/4">
-          <ProfileList
-            filteredPeople={filteredPeople.filter(
-              p => selectedRoles.length === 0 || selectedRoles.includes(p.role)
-            )}
-          />
+          <ProfileList filteredPeople={filteredPeople} />
         </div>
       </div>
     </>
