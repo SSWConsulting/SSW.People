@@ -100,15 +100,15 @@ const Person = ({ pageContext }) => {
 
               <div className="w-full md:hidden">{socialLinks}</div>
               {frontmatter.quote && (
-                <div className="hidden w-full md:block quoteblock">
+                <div className="hidden w-full md:block quoteblock print-hidden">
                   <div className="object-center">{quote}</div>
                 </div>
               )}
             </div>
           </div>
-          <div className="flex person-favor flex-row lg:flex-col md:hidden lg:block ">
+          <div className="flex person-favor flex-row lg:flex-col md:hidden lg:block print-show">
             {frontmatter.quote && (
-              <div className="hidden print-hidden w-1/2 pr-2 lg:pr-0 lg:w-full lg:block quoteblock print-hidden">
+              <div className="hidden w-1/2 pr-2 lg:pr-0 lg:w-full lg:block quoteblock print-hidden">
                 {quote}
               </div>
             )}
@@ -120,7 +120,9 @@ const Person = ({ pageContext }) => {
         </div>
         <div className="sm:w-full lg:w-3/4 xl:w-5/6 print-full-width">
           <div className="person-content-wrap ml-4">
-            <div className="hidden lg:block">{profileDescription}</div>
+            <div className="hidden lg:block print-hidden">
+              {profileDescription}
+            </div>
             <hr className="print-hidden" />
             <div className="block md:hidden print-hidden lg:block">
               {skillsList}
