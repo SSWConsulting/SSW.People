@@ -37,7 +37,7 @@ const YoutubePlaylist = ({ youtubePlayListId }) => {
         <div className="embedVideo-container">
           <Player
             id={item.contentDetails.videoId}
-            imageSize="maxresdefault"
+            imageSize="mqdefault"
             className={'embedVideo-iframe'}
             onStateChange={HideShowArrows}
             styles={{
