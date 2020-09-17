@@ -38,7 +38,9 @@ const Person = ({ pageContext }) => {
     firstNameOrNickname = crmData.nickname
       ? crmData.nickname
       : crmData.fullName.split(' ')[0];
-    jobTitle = crmData.jobTitle ? crmData.jobTitle : frontmatter.jobTitle;
+    jobTitle = crmData.jobTitle.replace(/Mr/, '').replace(/Ms/, '')
+      ? crmData.jobTitle
+      : frontmatter.jobTitle;
   } else {
     personName = frontmatter.name ? frontmatter.name : '';
     fullName = frontmatter.name ? frontmatter.name : '';

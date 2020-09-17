@@ -10,9 +10,9 @@ const ProfileSort = (a, b) => {
   if (sorting === 0) {
     //must be equal
     sorting =
-      a.profile.jobTitle.toLowerCase() < b.profile.jobTitle.toLowerCase()
+      a.profile.jobTitle?.toLowerCase() < b.profile.jobTitle?.toLowerCase()
         ? -1
-        : a.profile.jobTitle.toLowerCase() > b.profile.jobTitle.toLowerCase()
+        : a.profile.jobTitle?.toLowerCase() > b.profile.jobTitle?.toLowerCase()
         ? 1
         : 0;
   }

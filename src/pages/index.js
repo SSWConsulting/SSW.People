@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
 // Fix weird build error on some machines
 import 'array-flat-polyfill';
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useMemo, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { StaticQuery, graphql } from 'gatsby';
 import { Location } from '@reach/router';
@@ -21,12 +21,13 @@ import {
 import { getPresentersOfEventType } from '../helpers/eventHelper';
 import RoleSort from '../helpers/roleSort';
 import PeopleFilters from '../components/people-filters/people-filters';
+import { Link } from 'gatsby';
 
 config.autoAddCss = false;
-
 const profileChineseTag = '-Chinese';
 
 const Index = ({ data }) => {
+  const linkRef = useRef();
   const allPeople = useMemo(() => buildPeople(data), [data]);
 
   const allLocations = useMemo(
@@ -175,6 +176,12 @@ const Index = ({ data }) => {
         </div>
         <div className="lg:w-3/4">
           <ProfileList filteredPeople={filteredPeople} />
+          <div className="text-left">
+          <Link
+          ref={linkRef}
+          to={`/alumni`}
+        > View our alumni</Link>
+          </div>
         </div>
       </div>
     </>
