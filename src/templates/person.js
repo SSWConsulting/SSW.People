@@ -38,11 +38,15 @@ const Person = ({ pageContext }) => {
     firstNameOrNickname = crmData.nickname
       ? crmData.nickname
       : crmData.fullName.split(' ')[0];
-    jobTitle = crmData.jobTitle ? crmData.jobTitle : frontmatter.jobTitle;
+    jobTitle = crmData.jobTitle.replace(/Mr/, '').replace(/Ms/, '')
+      ? crmData.jobTitle
+      : frontmatter.jobTitle;
   } else {
-    personName = frontmatter.name;
-    fullName = frontmatter.name;
-    firstNameOrNickname = frontmatter.name.split(' ')[0];
+    personName = frontmatter.name ? frontmatter.name : '';
+    fullName = frontmatter.name ? frontmatter.name : '';
+    firstNameOrNickname = frontmatter.name
+      ? frontmatter.name?.split(' ')[0]
+      : '';
     jobTitle = frontmatter.jobTitle;
   }
 

@@ -4,24 +4,16 @@ import 'array-flat-polyfill';
 import React, { useState, useEffect, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { StaticQuery, graphql } from 'gatsby';
-import { Location } from '@reach/router';
-import queryString from 'query-string';
-import ProfileList from 'components/profile-list';
-import LocationFilter from '../components/location-filter/location-filter';
-import Distinct from '../helpers/arrayHelpers';
-import LocationSanitiser from '../helpers/locationSanitizer';
 import 'array-flat-polyfill';
 import { config } from '@fortawesome/fontawesome-svg-core';
-import '@fortawesome/fontawesome-svg-core/styles.css';
-import ProfileSort from '../helpers/profileSort';
-import {
-  getEventsPresenters,
-  isPresenterOfEventType,
-} from '../helpers/eventHelper';
-import { getPresentersOfEventType } from '../helpers/eventHelper';
-import RoleSort from '../helpers/roleSort';
-import PeopleFilters from '../components/people-filters/people-filters';
-import LinkAlumni from '../components/link-alumni/link-alumni';
+import { Location } from '@reach/router';
+import Filter from '../../components/filter/filter';
+import RoleSort from '../../helpers/roleSort';
+import ProfileSort from '../../helpers/profileSort';
+import LocationFilter from '../../components/location-filter/location-filter';
+import LocationSanitiser from '../../helpers/locationSanitizer';
+import Distinct from '../../helpers/arrayHelpers';
+import ProfileList from 'components/profile-list';
 
 config.autoAddCss = false;
 const profileChineseTag = '-Chinese';
@@ -40,15 +32,6 @@ const Index = ({ data }) => {
     [allPeople]
   );
 
-  const allSkills = useMemo(
-    () =>
-      allPeople
-        .map(d => d.skills)
-        .flat()
-        .filter(Distinct)
-        .sort(),
-    [allPeople]
-  );
   const allRoles = useMemo(
     () =>
       allPeople
@@ -57,7 +40,6 @@ const Index = ({ data }) => {
         .sort(RoleSort),
     [allPeople]
   );
-
   const countPerRole = () => {
     return allRoles.map(r => {
       return {
@@ -66,92 +48,30 @@ const Index = ({ data }) => {
       };
     });
   };
-  const countPerEvent = () => {
-    return allEventsType.map(r => {
-      return {
-        item: r,
-        count: getPresentersOfEventType(r, eventsPresenters, filteredPeople)
-          .length,
-      };
-    });
-  };
-  const countPerSkill = () => {
-    return allSkills.map(r => {
-      return {
-        item: r,
-        count: filteredPeople.filter(p => p.skills.find(s => s === r)).length,
-      };
-    });
-  };
-
   const [selectedLocation, setSelectedLocation] = useState(allLocations[0]);
   const [filteredPeople, setFilteredPeople] = useState(allPeople);
-  const [eventsPresenters, setEventsPresenters] = useState(null);
-  const [allEventsType, setAllEventsType] = useState([]);
-  const [selectedFilters, setSelectedFilters] = useState([
-    { name: 'roles', selected: [] },
-    { name: 'skills', selected: [] },
-    { name: 'events', selected: [] },
-  ]);
+  const [selectedRoles, setSelectedRoles] = useState([]);
 
   useEffect(() => {
-    function filterPeople() {
-      const selectedRoles = selectedFilters.find(f => f.name === 'roles')
-        ?.selected;
-      const selectedSkills = selectedFilters.find(f => f.name === 'skills')
-        ?.selected;
-      const selectedEvents = selectedFilters.find(f => f.name === 'events')
-        ?.selected;
+    const people = allPeople
+      .filter(
+        p =>
+          selectedLocation === 'All' ||
+          p.location === selectedLocation ||
+          p.sanitisedName === 'We-are-hiring'
+      )
+      .filter(p => selectedRoles.length === 0 || selectedRoles.includes(p.role))
+      .sort(ProfileSort);
 
-      const people = allPeople
-        .filter(
-          p =>
-            selectedLocation === 'All' ||
-            p.location === selectedLocation ||
-            p.sanitisedName === 'We-are-hiring'
-        )
-        .filter(
-          p => selectedRoles.length === 0 || selectedRoles.includes(p.role)
-        )
-        .filter(
-          p =>
-            selectedSkills.length === 0 ||
-            selectedSkills.filter(s => p.skills.includes(s)).length > 0
-        )
-        .filter(
-          p =>
-            selectedEvents.length === 0 ||
-            selectedEvents.filter(e =>
-              isPresenterOfEventType(e, p.profile, eventsPresenters)
-            ).length > 0
-        );
-      return people;
-    }
-
-    async function loadEventsPresenters() {
-      var presentersList = await getEventsPresenters();
-      setEventsPresenters(presentersList);
-      setAllEventsType([
-        ...new Set(presentersList.map(event => event.eventType)),
-      ]);
-    }
-
-    if (!eventsPresenters) {
-      loadEventsPresenters();
-    }
-
-    const people = filterPeople().sort(ProfileSort);
     setFilteredPeople(people);
-  }, [selectedLocation, selectedFilters]);
+  }, [selectedLocation, selectedRoles]);
 
   return (
     <>
-      <div
-        className="hero-para mx-2 md:mx-6"
-        dangerouslySetInnerHTML={{
-          __html: data.homeJson.content.childMarkdownRemark.html,
-        }}
-      />
+      <div className="hero-para mx-2 md:mx-6">
+        <h1>SSW Alumni</h1>
+        Employees that have graced the rooms and corridors of SSW in the past.
+      </div>
       <div className="my-8 mx-0 xl:mx-6">
         <LocationFilter
           locations={allLocations}
@@ -162,23 +82,20 @@ const Index = ({ data }) => {
       <div className="mx-2 md:mx-6 flex flex-col lg:flex-row">
         <div className="lg:w-1/4">
           <div className="mx-auto flex flex-col sm:flex-row lg:flex-col lg:w-5/6">
-            <PeopleFilters
-              allRoles={allRoles}
-              rolesCount={countPerRole()}
-              allSkills={allSkills}
-              skillsCount={countPerSkill()}
-              allEvents={allEventsType}
-              eventsCount={countPerEvent()}
-              onFilterChange={setSelectedFilters}
-            />
+            <div className="w-full sm:w-1/2 lg:w-full">
+              <Filter
+                filterTitle="Roles"
+                filterUrlTitle="role"
+                allFilterItems={allRoles}
+                selectedItems={selectedRoles}
+                onItemChange={setSelectedRoles}
+                filterCounts={countPerRole()}
+              />
+            </div>
           </div>
         </div>
-        <div className="relative lg:w-3/4 overflow-hidden">
+        <div className="lg:w-3/4">
           <ProfileList filteredPeople={filteredPeople} />
-
-          <div className="absolute bottom-0 right-0 alumniLink h-16">
-            <LinkAlumni />
-          </div>
         </div>
       </div>
     </>
@@ -211,20 +128,28 @@ function buildPeople(data) {
   );
 
   const allDataCRM = data.allCRMData.nodes
-    .filter(x => x.isActive)
+    .filter(x => !x.isActive)
     .map(n => {
       return n;
     });
 
-  return data.people.nodes
+  const people = data.people.nodes.filter(
+    node =>
+      allDataCRM.find(x => x.id === node.frontmatter.id && !x.isActive) ||
+      (node.frontmatter.id && node.frontmatter.id.indexOf('-') < 0)
+  );
+
+  return people
     .map(node => {
       const dataCRM = allDataCRM.find(x => x.id === node.frontmatter.id);
       const isFixedTile = node.parent.name === 'We-are-hiring';
-      if ((dataCRM && dataCRM.isActive) || isFixedTile) {
+      if (dataCRM || isFixedTile) {
         const jobTitle = !isFixedTile
-          ? dataCRM.jobTitle
+          ? dataCRM.jobTitle.replace(/Mr/, '').replace(/Ms/, '')
             ? dataCRM.jobTitle
             : node.frontmatter.jobTitle
+            ? node.frontmatter.jobTitle
+            : ''
           : 'enthusiastic People';
         return {
           profile: {
@@ -236,13 +161,15 @@ function buildPeople(data) {
           location: LocationSanitiser(
             !isFixedTile ? dataCRM.location : 'Others'
           ),
-          billingRate: !isFixedTile ? dataCRM.billingRate : 0,
-          sanitisedName: node.parent.name,
+          billingRate: !isFixedTile ? dataCRM.billingRate : -100,
+          sanitisedName: 'alumni/' + node.parent.name,
           jobTitle: jobTitle,
           role: !isFixedTile
             ? dataCRM.role
               ? dataCRM.role
               : node.frontmatter.role
+              ? node.frontmatter.role
+              : 'Others'
             : 'Developers',
           profileImages: {
             profileImage: profileImageMap.get(
@@ -262,9 +189,39 @@ function buildPeople(data) {
               ].flat()
             : [],
           sanitisedNickname: !isFixedTile
-            ? dataCRM.nickname.replace(/\s+/g, '-')
+            ? 'alumni/' + dataCRM.nickname.replace(/\s+/g, '-')
             : node.parent.name,
         };
+      } else {
+        const jobTitle = node.frontmatter.jobTitle;
+        if (node.frontmatter.name) {
+          return {
+            profile: {
+              ...node.frontmatter,
+              fullName: node.frontmatter.name || ' ',
+              nickname: node.frontmatter.name,
+              jobTitle: jobTitle,
+            },
+            location: 'Others',
+            billingRate: 0,
+            sanitisedName: 'alumni/' + node.parent.name,
+            jobTitle: jobTitle,
+            role: node.frontmatter.role,
+            profileImages: {
+              profileImage: profileImageMap.get(
+                node.parent.name.replace(profileChineseTag, '')
+              ),
+              sketchProfileImage: sketchProfileImageMap.get(
+                node.parent.name.replace(profileChineseTag, '')
+              ),
+            },
+            profileAudio: audioMap.get(
+              node.parent.name.replace(profileChineseTag, '')
+            ),
+            skills: [],
+            sanitisedNickname: 'alumni/' + node.parent.name,
+          };
+        }
       }
     })
     .filter(x => x !== undefined)
@@ -274,7 +231,7 @@ function buildPeople(data) {
 const IndexWithQuery = props => (
   <StaticQuery
     query={graphql`
-      query HomepageQuery {
+      query AlumnipageQuery {
         people: allMarkdownRemark {
           nodes {
             frontmatter {
@@ -332,14 +289,6 @@ const IndexWithQuery = props => (
             publicURL
           }
         }
-        homeJson {
-          title
-          content {
-            childMarkdownRemark {
-              html
-            }
-          }
-        }
         allCRMData: allCrmDataCollection {
           nodes {
             skills {
@@ -362,7 +311,7 @@ const IndexWithQuery = props => (
       <Location>
         {({ location }) => (
           <Index
-            {...data.HomepageQuery}
+            {...data.AlumnipageQuery}
             {...props}
             search={location.search ? queryString.parse(location.search) : {}}
           />
