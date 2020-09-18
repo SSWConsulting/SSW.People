@@ -15,6 +15,8 @@ const getViewDataFromCRM = async () => {
   const accessToken = await getToken();
 
   axios.defaults.headers.get['Authorization'] = `Bearer ${accessToken}`;
+  axios.defaults.headers.common['Prefer'] =
+    'odata.include-annotations=OData.Community.Display.V1.FormattedValue';
 
   const usersSkills = await getUsersSkills();
 
@@ -97,6 +99,10 @@ const convertToSimpleFormat = (data, sites, usersSkills, current) => {
       defaultSite: user._siteid_value
         ? sites.find(s => s.siteid === user._siteid_value).name
         : null,
+      jobTitle: user.title || '',
+      role:
+        user['ssw_profilecategory@OData.Community.Display.V1.FormattedValue'] ||
+        '',
       billableRate: user.ssw_defaultrate.toString(),
       isActive: current,
       nickname: user.nickname || '',

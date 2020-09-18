@@ -66,7 +66,7 @@ const ProfileBox = ({
         <div className="font-bold text-sm">
           {hover ? profile.fullName : tileName}
         </div>
-        <div className="text-xs leading-none">{profile.role}</div>
+        <div className="text-xs leading-none">{profile.jobTitle}</div>
       </div>
     </div>
   );

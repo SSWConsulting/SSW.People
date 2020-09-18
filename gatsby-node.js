@@ -28,8 +28,22 @@ let assetsManifest = {};
 const alumniPrefix = '/alumni';
 const profileChineseTag = '-Chinese';
 
-exports.onCreateWebpackConfig = ({ stage, getConfig, actions }) => {
+exports.onCreateWebpackConfig = ({ stage, loaders, getConfig, actions }) => {
   const config = getConfig();
+  //Fix thrid party module needing window as per https://www.gatsbyjs.com/docs/debugging-html-builds/#fixing-third-party-modules
+  if (stage === 'build-html') {
+    actions.setWebpackConfig({
+      module: {
+        rules: [
+          {
+            test: /react-lazy-youtube/,
+            use: loaders.null(),
+          },
+        ],
+      },
+    });
+  }
+
   if (stage.startsWith('develop') && config.resolve) {
     config.resolve.alias = {
       ...config.resolve.alias,
@@ -53,6 +67,26 @@ exports.onCreateWebpackConfig = ({ stage, getConfig, actions }) => {
       ],
     },
   });
+};
+
+exports.createSchemaCustomization = ({ actions }) => {
+  const { createTypes } = actions;
+  const typeDefs = `
+    type MarkdownRemark implements Node {
+      frontmatter: Frontmatter
+    }
+    type Frontmatter {
+      id: String
+      name: String
+      qualifications: String
+      quote: String
+      quoteAuthor: String
+      role: String
+      jobTitle: String
+      alternativeUrl: String
+    }
+  `;
+  createTypes(typeDefs);
 };
 
 const loadSampleData = crmData => {
@@ -113,6 +147,8 @@ exports.sourceNodes = async ({ actions }) => {
         : `${user.firstName} ${user.lastName}`,
       emailAddress: user.emailAddress || '',
       location: user.defaultSite ? user.defaultSite : 'Others',
+      jobTitle: user.jobTitle.replace(/(SSW)(?! TV)/g, '') || '',
+      role: user.role || '',
       billingRate: user.billableRate || '',
       skills: {
         intermediateSkills: user.skills
@@ -163,11 +199,12 @@ exports.createPages = async function({ actions, graphql }) {
           }
           frontmatter {
             id
+            name
             qualifications
             quote
             quoteAuthor
             role
-            category
+            jobTitle
           }
           html
         }
@@ -182,6 +219,8 @@ exports.createPages = async function({ actions, graphql }) {
             intermediateSkills
           }
           location
+          jobTitle
+          role
           emailAddress
           skypeUsername
           twitterUsername
@@ -268,44 +307,41 @@ exports.createPages = async function({ actions, graphql }) {
       name: node.childImageSharp.parent.name.replace('-Sketch', ''),
     };
   });
-  const people = data.people.nodes.map(node => {
-    const crmData = peopleCRM.find(x => x.id === node.frontmatter.id);
-    const isCurrent =
-      node.frontmatter.role === 'Sample Profile'
-        ? true
-        : crmData
-        ? crmData.isActive
-        : false;
+  const people = data.people.nodes
+    .filter(
+      node =>
+        node.frontmatter.id &&
+        (peopleCRM.find(x => x.id === node.frontmatter.id) ||
+          node.frontmatter.id.indexOf('-') < 0)
+    )
+    .map(node => {
+      const crmData = peopleCRM.find(x => x.id === node.frontmatter.id);
+      const isCurrent = crmData ? crmData.isActive : false;
 
-    const nickname =
-      node.frontmatter.role === 'Sample Profile'
-        ? 'Sample'
-        : crmData
-        ? crmData.nickname
-        : null;
+      const nickname = crmData ? crmData.nickname : null;
 
-    const prefix = isCurrent ? '' : alumniPrefix.replace('/', '') + '/';
+      const prefix = isCurrent ? '' : alumniPrefix.replace('/', '') + '/';
 
-    return {
-      slug: node.parent.name,
-      path: prefix + node.parent.name.toLowerCase(),
-      nicknamePath: nickname
-        ? prefix + nickname.replace(/ /g, '-').toLowerCase()
-        : '',
-      frontmatter: node.frontmatter,
-      dataCRM: crmData,
-      audio: peopleAudios.find(
-        x => x.name === node.parent.name.replace(profileChineseTag, '')
-      ),
-      profileImage: peopleProfileImages.find(
-        x => x.name === node.parent.name.replace(profileChineseTag, '')
-      ),
-      sketchImage: peopleSketchImages.find(
-        x => x.name === node.parent.name.replace(profileChineseTag, '')
-      ),
-      html: node.html,
-    };
-  });
+      return {
+        slug: node.parent.name,
+        path: prefix + node.parent.name.toLowerCase(),
+        nicknamePath: nickname
+          ? prefix + nickname.replace(/ /g, '-').toLowerCase()
+          : '',
+        frontmatter: node.frontmatter,
+        dataCRM: crmData,
+        audio: peopleAudios.find(
+          x => x.name === node.parent.name.replace(profileChineseTag, '')
+        ),
+        profileImage: peopleProfileImages.find(
+          x => x.name === node.parent.name.replace(profileChineseTag, '')
+        ),
+        sketchImage: peopleSketchImages.find(
+          x => x.name === node.parent.name.replace(profileChineseTag, '')
+        ),
+        html: node.html,
+      };
+    });
 
   people.forEach(person => {
     actions.createPage({

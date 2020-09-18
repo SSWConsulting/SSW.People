@@ -4,6 +4,7 @@ import wrapPageElementWithTransition from 'helpers/wrapPageElement';
 import { isChinaBuild } from 'helpers/chinaHelper';
 import axios from 'axios';
 import { ApplicationInsights } from '@microsoft/applicationinsights-web';
+import { siteUrlCn } from './site-config.js';
 
 const appInsights = new ApplicationInsights({
   config: {
@@ -30,7 +31,7 @@ const DetectCountry = async location => {
   const ipInfo = await axios.get(IP_DETECT_URL);
   if (ipInfo.status === 200) {
     if (ipInfo.data.country.code === 'CN') {
-      window.location = `https://peoplecn.ssw.com.au${location.pathname.replace(
+      window.location = `${siteUrlCn}${location.pathname.replace(
         '/people/',
         '/people-cn/'
       )}`;
