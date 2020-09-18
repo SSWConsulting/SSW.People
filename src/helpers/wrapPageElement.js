@@ -8,21 +8,38 @@ const wrapPageElement = ({ element, props }) => {
     props && props.pageContext && props.pageContext.data
       ? props.pageContext.data.dataCRM
       : null;
-  const crumbs =
+  let crumbs =
     props && props.pageContext && props.pageContext.breadcrumb
       ? props.pageContext.breadcrumb.crumbs
       : null;
+  if (crumbs)
+    crumbs = crumbs.map(c => {
+      return {
+        pathname: c.pathname,
+        crumbLabel:
+          c.crumbLabel.charAt(0).toUpperCase() + c.crumbLabel.slice(1),
+      };
+    });
   const personName = crmData
     ? crmData.nickname
       ? `${crmData.fullName} (${crmData.nickname})`
       : crmData.fullName
     : null;
 
+  const getCrumbLabel = () => {
+    // eslint-disable-next-line react/prop-types
+    if (props.path === '/alumni/' || props.path === '/alumni') {
+      return 'Alumni';
+    } else if (crmData) {
+      return personName;
+    } else return null;
+  };
+
   return (
     <Layout
       crumbs={crumbs}
-      crumbLabel={personName}
-      pageTitle={crmData && personName}
+      crumbLabel={getCrumbLabel()}
+      pageTitle={getCrumbLabel()}
     >
       <Transition {...props}>{element}</Transition>
     </Layout>
