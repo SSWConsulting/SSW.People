@@ -6,7 +6,7 @@ v2 of the EmployeePages. No more SharePoint, idea is to prove the implementation
 
 This is a Gatsby generated site pulling data from:
 - [SSW Profiles GitHub Repository](https://github.com/SSWConsulting/SSW.People.Profiles)
-- [Sophie Bot's API](https://sswsophie.com)
+- Dynamics CRM
 
 ## Getting Started
 

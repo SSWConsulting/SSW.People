@@ -1,8 +1,6 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import posed from 'react-pose';
 import CompanyLogo from '-!svg-react-loader!../../images/branding/Logo.svg';
-
 import CountrySelect from '../country-select/country-select';
 import { parentSiteUrl } from '../../../site-config';
 
@@ -42,9 +40,6 @@ const Header = () => {
   );
 };
 
-Header.propTypes = {
-  displayActions: PropTypes.bool.isRequired,
-  profileId: PropTypes.string,
-};
+Header.propTypes = {};
 
 export default Header;

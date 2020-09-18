@@ -40,7 +40,7 @@
 }
 
 .bg-grey-translucent {
-  background-color: rgba(102, 102, 102, 0.1);
+  background-color:#EFEFEF;
 }
 
 .border-ssw-grey {
@@ -883,7 +883,6 @@ label {
   border-bottom: 1px solid #eee;
   margin-bottom: 10px;
   width: 100%;
-  font-family: 'Open Sans',sans-serif;
   font-weight: 300;
   line-height: inherit;
 }
@@ -1050,10 +1049,18 @@ font-size: 0.8rem;
 @media print {
   @page {
     margin: 0.5cm;
+    size: A4;
   }
-  p a:not(.gatsby-resp-image-link .img-badge)::after{
+  p a::after{
     content: " (" attr(href) ") ";
   }
+
+  .gatsby-resp-image-link p a::after,
+  .img-badge p a::after,
+  .contact a::after{
+    content: none !important; 
+  }
+
   .print-hidden{
     display: none !important;
   }
@@ -1080,10 +1087,22 @@ font-size: 0.8rem;
     display: none;
   }
   .eventtitle h3{
-    font-size: 1.25rem;
+    @apply text-2xl;
+  }
+  .quote-container{
+    width: fit-content;
+  }
+  .main-container {
+    max-width: 100%;
+  }
+  .person-content-wrap {
+    max-width: 100%;
   }
 }
 
+.eventtitle h3{
+  @apply text-2xl;
+}
 .country-select{
   padding: 0.5rem 1rem;
 }
@@ -1112,6 +1131,15 @@ font-size: 0.8rem;
 
 .download-image{
   border-bottom: none !important;
+}
+
+.alumniLink img{
+  transform: rotate(-20deg) translateY(-15px);
+}
+.alumniLink a,
+.alumniLink a:hover
+{
+ border: none !important;
 }
 
 /**
