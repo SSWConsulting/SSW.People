@@ -10,7 +10,7 @@ const { SkillSort } = require('./src/helpers/skillSort');
 const { getViewDataFromCRM } = require('./src/helpers/CRMApi');
 const appInsights = require('applicationinsights');
 const fs = require('fs');
-const siteconfig = require('./site-config')
+const siteconfig = require('./site-config');
 
 if (process.env.APPINSIGHTS_INSTRUMENTATIONKEY) {
   // Log build time stats to appInsights
