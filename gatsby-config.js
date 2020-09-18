@@ -136,7 +136,7 @@ const getPlugins = () => {
 };
 
 module.exports = {
-  pathPrefix: `/people${
+  pathPrefix: `${siteConfig.pathPrefix}${
     process.env.CHINA_BUILD && process.env.CHINA_BUILD === 'TRUE' ? '-cn' : ''
   }`,
   siteMetadata: {

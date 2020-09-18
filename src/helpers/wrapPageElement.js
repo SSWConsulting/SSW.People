@@ -2,6 +2,7 @@ import React from 'react';
 import Transition from 'components/transition';
 import PropTypes from 'prop-types';
 import Layout from '../components/layout';
+import { alumniPrefix } from '../../site-config';
 
 const wrapPageElement = ({ element, props }) => {
   const crmData =
@@ -28,7 +29,7 @@ const wrapPageElement = ({ element, props }) => {
 
   const getCrumbLabel = () => {
     // eslint-disable-next-line react/prop-types
-    if (props.path === '/alumni/' || props.path === '/alumni') {
+    if (props.path === alumniPrefix) {
       return 'Alumni';
     } else if (crmData) {
       return personName;

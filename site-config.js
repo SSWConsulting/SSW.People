@@ -13,7 +13,8 @@ module.exports = {
   siteUrlCn: `https://peoplecn.ssw.com.au`,
   themeColor: `#cc4141`,
   backgroundColor: `#fff`,
-  pathPrefix: null,
+  pathPrefix: `/people`,
+  alumniPrefix: `/alumni`,
   logo: path.resolve(__dirname, `src/images/branding/icon.png`),
   social: {
     twitter: `SSW_TV`,
