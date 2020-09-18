@@ -12,14 +12,16 @@ const ProfileDescription = ({
   return (
     <div>
       <h1 className="inline">{personName}</h1>
-      <h4 className="mb-0">{jobTitle}</h4>
-      {location && (
-        <h4 className="mb-0">
-          <FontAwesomeIcon icon={faMapMarkerAlt} className="mr-2" />
-          {location}
-        </h4>
-      )}
-      {qualifications && <strong>{qualifications}</strong>}
+      <h4 className="mb-0">
+        <span className="block md:inline">{jobTitle}</span>
+        {location && (
+          <span className="mb-0 block md:inline md:ml-2">
+            <FontAwesomeIcon icon={faMapMarkerAlt} className="mr-2" />
+            {location}
+          </span>
+        )}
+      </h4>
+      <p>{qualifications && <strong>{qualifications}</strong>}</p>
     </div>
   );
 };
