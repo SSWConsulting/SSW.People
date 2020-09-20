@@ -40,7 +40,7 @@
 }
 
 .bg-grey-translucent {
-  background-color: rgba(102, 102, 102, 0.1);
+  background-color:#EFEFEF;
 }
 
 .border-ssw-grey {
@@ -1131,6 +1131,15 @@ font-size: 0.8rem;
 
 .download-image{
   border-bottom: none !important;
+}
+
+.alumniLink img{
+  transform: rotate(-20deg) translateY(-15px);
+}
+.alumniLink a,
+.alumniLink a:hover
+{
+ border: none !important;
 }
 
 /**
