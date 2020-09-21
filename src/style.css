@@ -1057,6 +1057,9 @@ font-size: 0.8rem;
 
   .gatsby-resp-image-link p a::after,
   .img-badge p a::after,
+  .img-small p a::after,
+  .img-medium p a::after,
+  .img-large p a::after,
   .contact a::after{
     content: none !important; 
   }
