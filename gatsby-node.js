@@ -397,7 +397,10 @@ exports.onPostBuild = async ({ store, pathPrefix }) => {
     });
 
   const alumniRewrites = Array.from(pages.values())
-    .filter(page => page.path.startsWith(alumniPrefix))
+    .filter(
+      page =>
+        page.path !== alumniPrefix + '/' && page.path.startsWith(alumniPrefix)
+    )
     .map(page => {
       return {
         fromPath: pathPrefix + '/' + page.path.replace(alumniPrefix + '/', ''),
