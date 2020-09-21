@@ -14,6 +14,7 @@ import LocationFilter from '../../components/location-filter/location-filter';
 import LocationSanitiser from '../../helpers/locationSanitizer';
 import Distinct from '../../helpers/arrayHelpers';
 import ProfileList from 'components/profile-list';
+import queryString from 'query-string';
 
 config.autoAddCss = false;
 const profileChineseTag = '-Chinese';
