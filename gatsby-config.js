@@ -56,6 +56,7 @@ const getPlugins = () => {
               // base for generating different widths of each image.
               maxWidth: 590,
               backgroundColor: 'transparent',
+              linkImagesToOriginal: false,
             },
           },
           'gatsby-remark-relative-images',
