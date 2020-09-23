@@ -80,6 +80,9 @@ const getPlugins = () => {
                 imgSm: {
                   classes: 'img-small',
                 },
+                imgLogo: {
+                  classes: 'img-logo',
+                },
               },
             },
           },
