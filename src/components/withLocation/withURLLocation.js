@@ -7,6 +7,7 @@ let search =
     ? queryString.parse(window.location.search)
     : {};
 
+// eslint-disable-next-line react/display-name
 const withURLLocation = ComponentToWrap => props => (
   <Location>
     {({ location, navigate }) => (
