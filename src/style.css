@@ -383,7 +383,8 @@ button:focus {
   margin-right: auto;
 }
 
-.img-banner figcaption {
+.img-banner figcaption,
+.img-logo figcaption{
   display: none;
 }
 
@@ -393,7 +394,7 @@ button:focus {
   max-width: 400px;
 }
 
-.img-small {
+.img-small, .img-logo {
   height: auto;
   max-width: 200px;
 }
