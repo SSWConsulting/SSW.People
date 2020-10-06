@@ -362,7 +362,7 @@ const IndexWithQuery = props => (
       <Location>
         {({ location }) => (
           <Index
-            {...data.HomepageQuery}
+            data={data}
             {...props}
             search={location.search ? queryString.parse(location.search) : {}}
           />
