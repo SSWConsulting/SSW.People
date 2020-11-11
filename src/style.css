@@ -155,7 +155,7 @@ ul li {
 .filter-skills li,
 .filter-event li {
   background: none;
-  padding: 0.5rem 0.25rem;
+  padding: .4rem 0rem;
 }
 
 .filter-role-opener {
@@ -832,7 +832,6 @@ label {
   color: #666;
   display: inline-block;
   max-width: 100%;
-  font-weight: bold;
 }
 
 .form-group .field-wrapper {
