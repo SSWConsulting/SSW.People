@@ -578,11 +578,6 @@ pre {
   order: 1;
 }
 
-.text-ident{
-  padding-left: 0.5em;
-  text-indent:-0.5em;
-}
-
 @media screen and (min-width: 600px) {
   .img-large,
   .img-banner img,

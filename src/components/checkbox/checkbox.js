@@ -37,7 +37,7 @@ const Checkbox = ({
         >
           <FontAwesomeIcon icon={checkedIcon} color={checkboxColor} />
         </div>
-        <div className="inline-block text-ident">
+        <div className="inline-block">
           {labelText} {checkboxCount != null ? ' (' + checkboxCount + ')' : ''}
         </div>
       </div>
