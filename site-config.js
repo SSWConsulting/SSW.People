@@ -22,7 +22,7 @@ module.exports = {
     fbPage: `https://www.facebook.com/SSW.page`,
   },
   parentSiteUrl: `https://ssw.com.au`,
-  locationsListForOrdering: [`Sydney`, `Melbourne`, `Brisbane`],
+  locationsListForOrdering: [`Sydney`, `Melbourne`, `Brisbane`, `Newcastle`],
   roleListOrdering: [
     `Managers`,
     `Developers`,
