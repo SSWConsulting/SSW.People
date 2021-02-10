@@ -74,7 +74,7 @@
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-ga": "^2.7.0",
-    "react-github-calendar": "^1.0.6",
+    "react-github-calendar": "^2.0.2",
     "react-google-recaptcha": "^2.1.0",
     "react-helmet": "^5.2.0",
     "react-lazy-youtube": "^1.0.1",
