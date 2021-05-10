@@ -140,6 +140,7 @@ const getPlugins = () => {
 };
 
 module.exports = {
+  flags: { PRESERVE_WEBPACK_CACHE: true },
   pathPrefix: `${siteConfig.pathPrefix}${
     process.env.CHINA_BUILD && process.env.CHINA_BUILD === 'TRUE' ? '-cn' : ''
   }`,

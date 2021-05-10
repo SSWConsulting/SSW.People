@@ -73,6 +73,9 @@ exports.onCreateWebpackConfig = ({ stage, loaders, getConfig, actions }) => {
 exports.createSchemaCustomization = ({ actions }) => {
   const { createTypes } = actions;
   const typeDefs = `
+    type SitePage implements Node @dontInfer {
+      path: String!
+    }
     type MarkdownRemark implements Node {
       frontmatter: Frontmatter
     }
