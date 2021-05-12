@@ -1,10 +1,12 @@
+<img src="https://github.com/SSWConsulting/SSW.People/raw/main/_wiki/images/ssw-banner.png">
+
 # SSW.People
 
 v2 of the EmployeePages. No more SharePoint, idea is to prove the implementation for Rules v2
 
 This is a Gatsby generated site pulling data from:
-- [SSW Profile Repo](https://github.com/SSWConsulting/SSW.People.Profiles)
-- [Sophie Bot's API](https://sswsophie.com)
+- [SSW Profiles GitHub Repository](https://github.com/SSWConsulting/SSW.People.Profiles)
+- Dynamics CRM
 
 ## Getting Started
 
@@ -25,7 +27,7 @@ VERSION_DEPLOYED=
 ```
 
 ### Development
-1. Branch off master for your PBI
+1. Branch off main for your PBI
 2. Run *yarn build* (or *npm run-script build*) (.env.production is required for this step)
 3. Do your work
 4. Run the site in development mode by *yarn develop* (or *npm run-script develop*) (.env.development is required for this step)
@@ -37,7 +39,7 @@ VERSION_DEPLOYED=
 
 - Code Compiles
 - Check the Acceptance Criteria.
-- Code is squash-merged to master via a pull request that was approved by a 2nd developer.
+- Code is squash-merged to main via a pull request that was approved by a 2nd developer.
 - Another team member agrees it’s ready for Production.
 - Pushed to Production.
 - Use @Mention (**OR** Send email) to notify Product Owner/PBI stakeholder that PBI is done (be sure to include screenshots/done video as proof) 
@@ -46,19 +48,19 @@ VERSION_DEPLOYED=
 
 ### Branches
 - Branching strategy is based off [Release Flow](https://docs.microsoft.com/en-us/azure/devops/learn/devops-at-microsoft/release-flow) 
-- **Master** is the main 'dev' branch
+- **Main** is the main 'dev' branch
 - **Release/xx** is the 'production' one (where xx is the Sprint number)
 - Always create a new branch for your PBIs 
 - Always delete your branch once your PR has been merged
 
 ### Builds
 - Changes made to http://github.com/SSWConsulting/SSW.People.Profiles (i.e. profile changes) trigger builds that deploy:
-  - **master** to the **staging** site: https://sydiisp01.sydney.ssw.com.au/people/
+  - **main** to the **staging** site: https://sydiisp01.sydney.ssw.com.au/people/
   - latest **release/xx** to the **production** site: https://www.ssw.com.au/people
   
-- Branching off **master** to **release/xx**, or making changes to **release/xx** will build and deploy to the **production** site: https://www.ssw.com.au/people
+- Branching off **main** to **release/xx**, or making changes to **release/xx** will build and deploy to the **production** site: https://www.ssw.com.au/people
 
-> Note: people.ssw.com.au is the old URL for the production site and redirects to https://www.ssw.com.au/people
+> Note: people.ssw.com.au redirects to https://www.ssw.com.au/people
 
 ### People profiles repository
 
@@ -67,6 +69,13 @@ VERSION_DEPLOYED=
   - Staging: https://sydiisp01.sydney.ssw.com.au/people/bob-northwind
   - Production: https://www.ssw.com.au/people/bob-northwind
 
-Merging changes to **master** on this repo will trigger:
-- a build/release of the **master** branch in Staging (https://sydiisp01.sydney.ssw.com.au/people/).
+Merging changes to **main** on this repo will trigger:
+- a build/release of the **main** branch in Staging (https://sydiisp01.sydney.ssw.com.au/people/)
 - a build/release of the **release** branch Production (https://www.ssw.com.au/people)
+
+[Next Step: Wiki >](https://github.com/SSWConsulting/SSW.People/wiki)
+
+---
+<img align="left" width="32" height="22" src="https://github.com/SSWConsulting/SSW.People/raw/main/_wiki/images/youtube_social_icon_red.png">
+
+[SSW.People YouTube Channel](https://www.youtube.com/channel/UCrr5pDDM5Fnvgk4fCXfsX-A)

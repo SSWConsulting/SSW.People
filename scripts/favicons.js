@@ -30,7 +30,7 @@ const configuration = {
   version: '1.0',
   logging: true,
   icons: {
-    android: true,
+    android: false,
     appleIcon: true,
     appleStartup: true,
     coast: false,

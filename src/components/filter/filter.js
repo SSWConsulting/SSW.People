@@ -4,12 +4,11 @@ import React, { useEffect, useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 import Checkbox from '../checkbox';
 import {
-  faAngleDown,
-  faAngleUp,
   faCheck,
+  faAngleUp,
+  faAngleDown,
   faTimes,
 } from '@fortawesome/free-solid-svg-icons';
-import RoleSort from '../../helpers/roleSort';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import '../../style.css';
 import withURLLocation from '../withLocation/withURLLocation';
@@ -19,31 +18,33 @@ import {
   clearUrlFilter,
 } from '../../helpers/queryFilterHelper';
 
-const RoleFilter = ({
-  allRoles,
-  selectedRoles,
-  onRoleChange,
-  filteredPeople,
+const Filter = ({
+  filterTitle,
+  filterUrlTitle,
+  allFilterItems,
+  selectedItems,
+  onItemChange,
   search,
+  filterCounts,
 }) => {
   const node = useRef();
   const [listOpen, setListOpen] = useState(false);
 
-  const onRoleClicked = role => {
-    const previouslySelected = isRoleSelected(role);
+  const onItemClicked = item => {
+    const previouslySelected = isItemSelected(item);
     if (previouslySelected) {
-      onRoleChange(selectedRoles.filter(s => s !== role));
-      updateUrlFilter('role', search, role, false);
+      onItemChange(selectedItems.filter(s => s !== item));
+      updateUrlFilter(filterUrlTitle, search, item, false);
     } else {
-      onRoleChange([role, ...selectedRoles]);
-      updateUrlFilter('role', search, role, true);
+      onItemChange([item, ...selectedItems]);
+      updateUrlFilter(filterUrlTitle, search, item, true);
     }
   };
 
   const clearFilter = () => {
-    onRoleChange([]);
+    onItemChange([]);
     setListOpen(false);
-    clearUrlFilter('role', search);
+    clearUrlFilter(filterUrlTitle, search);
   };
 
   const handleClick = e => {
@@ -55,8 +56,8 @@ const RoleFilter = ({
     setListOpen(false);
   };
 
-  const isRoleSelected = role => {
-    return selectedRoles.indexOf(role) !== -1;
+  const isItemSelected = skill => {
+    return selectedItems.indexOf(skill) !== -1;
   };
 
   useEffect(() => {
@@ -67,8 +68,14 @@ const RoleFilter = ({
     };
   }, []);
 
-  const { role } = search;
-  initFilter(role, allRoles, isRoleSelected, selectedRoles, onRoleChange);
+  const UrlFilter = search[filterUrlTitle];
+  initFilter(
+    UrlFilter,
+    allFilterItems,
+    isItemSelected,
+    selectedItems,
+    onItemChange
+  );
 
   return (
     <>
@@ -79,19 +86,19 @@ const RoleFilter = ({
               className="cursor-pointer font-bold whitespace-no-wrap"
               onClick={() => setListOpen(!listOpen)}
             >
-              Roles{' '}
+              {filterTitle + ' '}
               <FontAwesomeIcon icon={listOpen ? faAngleUp : faAngleDown} />
             </h4>
           </div>
-          <div className="hidden lg:block ">
+          <div className="hidden lg:block">
             <h4 className="cursor-pointer font-bold whitespace-no-wrap">
-              Roles
+              {filterTitle}
             </h4>
           </div>
           {/* eslint-disable-next-line jsx-a11y/no-static-element-interactions */}
           <small
             className={
-              selectedRoles.length > 0
+              selectedItems.length > 0
                 ? 'text-ssw-red cursor-pointer mb-1 mr-2'
                 : 'hidden'
             }
@@ -106,42 +113,38 @@ const RoleFilter = ({
         <ul
           className={
             listOpen
-              ? 'filter-role mr-1 lg:border-0 border border-ssw-grey absolute bg-white  lg:static w-full z-50 lg:z.0'
-              : 'filter-role hidden lg:inline'
+              ? 'filter-skills lg:ml-0 absolute lg:border-0 border border-ssw-grey lg:static w-full z-50 lg:z.0 bg-white'
+              : 'filter-skills hidden lg:inline'
           }
         >
-          {allRoles.sort(RoleSort).map(role => (
-            <li key={role} className="flex category w-full">
-              <div className="w-full whitespace-no-wrap">
-                <Checkbox
-                  labelText={role}
-                  checkboxValue={role}
-                  checkboxCount={
-                    filteredPeople.filter(p => p.role === role).length
-                  }
-                  isChecked={isRoleSelected(role)}
-                  onChange={() => onRoleClicked(role)}
-                  checkedIcon={faCheck}
-                  checkedClassName="font-bold"
-                  checkboxColor={isRoleSelected(role) ? '#cc4141' : ''}
-                />
-              </div>
+          {allFilterItems.map((item, i) => (
+            <li key={i} className="category w-full">
+              <Checkbox
+                labelText={item}
+                checkboxValue={item}
+                isChecked={isItemSelected(item)}
+                onChange={() => onItemClicked(item)}
+                checkedIcon={faCheck}
+                checkedClassName="font-bold"
+                checkboxColor={isItemSelected(item) ? '#cc4141' : ''}
+                checkboxCount={filterCounts.find(i => i.item === item).count}
+              />
             </li>
           ))}
         </ul>
       </div>
-
-      <div className="filter-role"></div>
     </>
   );
 };
 
-RoleFilter.propTypes = {
-  allRoles: PropTypes.array.isRequired,
-  selectedRoles: PropTypes.array.isRequired,
-  onRoleChange: PropTypes.func.isRequired,
-  filteredPeople: PropTypes.array.isRequired,
+Filter.propTypes = {
+  filterTitle: PropTypes.string.isRequired,
+  filterUrlTitle: PropTypes.string.isRequired,
+  allFilterItems: PropTypes.array.isRequired,
+  selectedItems: PropTypes.array.isRequired,
+  onItemChange: PropTypes.func.isRequired,
   search: PropTypes.object,
+  filterCounts: PropTypes.array.isRequired,
 };
 
-export default withURLLocation(RoleFilter);
+export default withURLLocation(Filter);

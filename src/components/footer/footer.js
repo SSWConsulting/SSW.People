@@ -4,7 +4,8 @@ import moment from 'moment';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
-import { companyShortName, fbPage } from '../../../site-config';
+import { companyShortName, social } from '../../../site-config';
+import China from '../../images/china.png';
 
 const buildTimestamp = preval`module.exports = new Date().getTime();`;
 
@@ -14,13 +15,14 @@ const Footer = () => {
       <div className="py-2 text-center bg-grey-translucent text-sm">
         <section className="main-container">
           We <FontAwesomeIcon icon={faHeart} className="text-ssw-red" /> open
-          source. This page is on{' '}
+          source. Fork this on{' '}
           <a
             className="action-button-label"
             href="https://github.com/SSWConsulting/SSW.People"
           >
             GitHub <FontAwesomeIcon icon={faGithub} />
-          </a>
+          </a>{' '}
+          and start using it for yourself.
         </section>
       </div>
       <footer className="bg-black py-6 md:py-4 lg:py-2">
@@ -46,7 +48,7 @@ const Footer = () => {
                   TERMS AND CONDITIONS
                 </a>
                 <span className="px-2">|</span>
-                <a className="footer-link footer-facebook" href={fbPage}>
+                <a className="footer-link footer-facebook" href={social.fbPage}>
                   FIND US ON
                 </a>
                 <span className="px-2">|</span>
@@ -73,6 +75,18 @@ const Footer = () => {
                 {process.env.VERSION_DEPLOYED})
               </div>
               <div className="lg:text-right py-2">
+                <a
+                  className="footer-link"
+                  href="https://rules.ssw.com.au/rules-to-better-internationalization"
+                >
+                  Chinafied
+                  <img
+                    src={China}
+                    alt="Chinese flag"
+                    className="flag inline px-1"
+                  />
+                </a>
+                <span className="px-2">|</span>
                 Powered by{' '}
                 <a
                   className="footer-link"
@@ -83,7 +97,7 @@ const Footer = () => {
                 and{' '}
                 <a
                   className="footer-link"
-                  href="https://rules.ssw.com.au/static-site-generator"
+                  href="https://rules.ssw.com.au/rules-to-better-github"
                 >
                   {' '}
                   GitHub

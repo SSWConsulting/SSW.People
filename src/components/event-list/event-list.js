@@ -42,8 +42,7 @@ const EventList = ({ presenterName, presenterNickname }) => {
 
   return (
     <>
-      {((allEvents && allEvents.length > 0) ||
-        (allPastEvents && allPastEvents.length > 0)) && (
+      {allEvents && allEvents.length > 0 && (
         <div>
           <div>
             <h2>
@@ -83,41 +82,46 @@ const EventList = ({ presenterName, presenterNickname }) => {
           )}
         </div>
         <div className="w-1/2">
-          {allPastEvents && allPastEvents.length > 0 && (
-            <Button
-              labelText={
-                !showPastTalksActive
-                  ? ' Include Past Talks'
-                  : ' Include Past Talks'
-              }
-              activeIcon={faCheckSquare}
-              inActiveIcon={faSquare}
-              isActive={showPastTalksActive}
-              onClick={() => setShowPastTalksActive(!showPastTalksActive)}
-              activeClassName="btn-archive-active"
-              inActiveClassName="btn-archive"
-            />
-          )}
+          {allPastEvents &&
+            allPastEvents.length > 0 &&
+            allEvents &&
+            allEvents.length > 0 && (
+              <Button
+                labelText={
+                  !showPastTalksActive
+                    ? ' Include Past Talks'
+                    : ' Include Past Talks'
+                }
+                activeIcon={faCheckSquare}
+                inActiveIcon={faSquare}
+                isActive={showPastTalksActive}
+                onClick={() => setShowPastTalksActive(!showPastTalksActive)}
+                activeClassName="btn-archive-active"
+                inActiveClassName="btn-archive"
+              />
+            )}
         </div>
       </div>
-      {allPastEvents && allPastEvents.length > 0 && showPastTalksActive && (
-        <div className="archive-list">
-          <div>
-            <h2>
-              <span role="img" aria-label="Speaker">
-                🎙️
-              </span>
-              &nbsp;Past talks
-            </h2>
+      {allPastEvents &&
+        allPastEvents.length > 0 &&
+        (showPastTalksActive || !(allEvents && allEvents.length > 0)) && (
+          <div className="archive-list">
+            <div>
+              <h2>
+                <span role="img" aria-label="Speaker">
+                  🎙️
+                </span>
+                &nbsp;Past talks
+              </h2>
+            </div>
+            <div className="past-talks-grid">
+              {allPastEvents &&
+                allPastEvents.map((event, index) => (
+                  <EventBox key={index} event={event}></EventBox>
+                ))}
+            </div>
           </div>
-          <div className="past-talks-grid">
-            {allPastEvents &&
-              allPastEvents.map((event, index) => (
-                <EventBox key={index} event={event}></EventBox>
-              ))}
-          </div>
-        </div>
-      )}
+        )}
     </>
   );
 };

@@ -3,6 +3,8 @@ import { Link } from 'gatsby';
 import Img from 'gatsby-image';
 import PropTypes from 'prop-types';
 import PlayAudio from '../play-audio/play-audio';
+import SketchPlaceholder from '../../images/ssw-employee-profile-placeholder-sketch.jpg';
+import ProfilePlaceholder from '../../images/ssw-employee-profile-placeholder-profile.jpg';
 
 const ProfileBox = ({
   profile,
@@ -17,24 +19,43 @@ const ProfileBox = ({
     ? profile.nickname
     : profile.fullName.split(' ')[0];
 
-  const content = profileImages.profileImage !== undefined && (
+  const content = (
     <div className="relative shadow-lg profile-image profile-image-height">
-      <Img
-        alt={`${profile.fullName} profile image`}
-        fluid={profileImages.profileImage}
-        style={{ position: 'static' }}
-        fadeIn={false}
-        className={!hover ? 'hidden' : ''}
-        loading="eager"
-      />
-      <Img
-        alt={`${profile.fullName} profile image`}
-        fluid={profileImages.sketchProfileImage}
-        style={{ position: 'static' }}
-        fadeIn={false}
-        className={hover ? 'hidden' : ''}
-        loading="eager"
-      />
+      {profileImages.profileImage && (
+        <Img
+          alt={`${profile.fullName} profile image`}
+          fluid={profileImages.profileImage}
+          style={{ position: 'static' }}
+          fadeIn={false}
+          className={!hover ? 'hidden' : ''}
+          loading="eager"
+        />
+      )}
+      {!profileImages.profileImage && (
+        <img
+          src={ProfilePlaceholder}
+          alt=""
+          className={`${!hover ? 'hidden' : ''} profile-placeholder`}
+        ></img>
+      )}
+
+      {profileImages.sketchProfileImage && (
+        <Img
+          alt={`${profile.fullName} profile image`}
+          fluid={profileImages.sketchProfileImage}
+          style={{ position: 'static' }}
+          fadeIn={false}
+          className={hover ? 'hidden' : ''}
+          loading="eager"
+        />
+      )}
+      {!profileImages.sketchProfileImage && (
+        <img
+          src={SketchPlaceholder}
+          alt=""
+          className={`${hover ? 'hidden' : ''} profile-placeholder`}
+        ></img>
+      )}
       <div
         className={
           hover
@@ -45,7 +66,7 @@ const ProfileBox = ({
         <div className="font-bold text-sm">
           {hover ? profile.fullName : tileName}
         </div>
-        <div className="text-xs leading-none">{profile.role}</div>
+        <div className="text-xs leading-none">{profile.jobTitle}</div>
       </div>
     </div>
   );
