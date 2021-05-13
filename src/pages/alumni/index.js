@@ -165,13 +165,8 @@ function buildPeople(data) {
           billingRate: !isFixedTile ? dataCRM.billingRate : -100,
           sanitisedName: 'alumni/' + node.parent.name,
           jobTitle: jobTitle,
-          role: !isFixedTile
-            ? dataCRM.role
-              ? dataCRM.role
-              : node.frontmatter.role
-              ? node.frontmatter.role
-              : 'Others'
-            : 'Developers',
+          role:
+            !isFixedTile && dataCRM.role ? dataCRM.role : node.frontmatter.role,
           profileImages: {
             profileImage: profileImageMap.get(
               node.parent.name.replace(profileChineseTag, '')
