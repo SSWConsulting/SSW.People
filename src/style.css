@@ -91,7 +91,7 @@ a:link {
     }
 
     &:hover {
-      @apply text-ssw-red;     
+      @apply text-ssw-red;
       border-bottom: 2px dotted;
       @apply border-ssw-red;
     }
@@ -133,6 +133,70 @@ a.footer-html:hover {
 footer {
   color: #9e9e9e;
   font-size: 0.75rem;
+}
+
+.social-media-icon {
+  color: #fff;
+  display: block;
+  float: right;
+  height: 25px;
+  text-decoration: none;
+  text-align: center;
+  width: 25px;
+  margin-left: 8px;
+  line-height: 25px;
+}
+
+#youtube-icon {
+  background-color: #b31217;
+}
+
+#linkedin-icon {
+  background-color: #0077b5;
+}
+
+#twitter-icon {
+  background-color: #55acee;
+}
+
+#instagram-icon {
+  background: linear-gradient(
+    45deg
+    ,#f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%);;
+}
+
+#facebook-icon {
+  background-color: #3b5998;
+}
+
+#wechat-icon {
+  background-color: #62b900;
+}
+
+#wechat-icon:hover #ORCode {
+  display: block;
+}
+
+#ORCode {
+  width: 100px;
+  position: relative;
+  z-index: 999;
+  top: -126px;
+  left: -36px;
+  padding: 4px;
+  display: none;
+}
+
+#ORCode:after {
+  content: "";
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  right: 46px;
+  position: absolute;
+  bottom: -2px;
+  border-top: 6px solid rgb(255, 255, 255);
 }
 
 ul li {
@@ -306,7 +370,7 @@ ul.favor-list li {
 
   span {
     min-width: 1.5rem;
-    opacity: .5; 
+    opacity: .5;
     font-weight: 100;
   }
 }
@@ -327,7 +391,7 @@ ul.favor-list li {
 
 .breadcrumb a:hover{
   &:not(.breadcrumb__link__active){
-    @apply text-ssw-red;    
+    @apply text-ssw-red;
     border-bottom: 0px;
     @apply border-ssw-red;
   }
@@ -1053,7 +1117,7 @@ font-size: 0.8rem;
   .gatsby-resp-image-link p a::after,
   .img-badge p a::after,
   .contact a::after{
-    content: none !important; 
+    content: none !important;
   }
 
   .print-hidden{
