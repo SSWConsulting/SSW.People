@@ -91,7 +91,7 @@ const Filter = ({
             </h4>
           </div>
           <div className="hidden lg:block">
-            <h4 className="cursor-pointer font-bold whitespace-no-wrap">
+            <h4 className="font-bold whitespace-no-wrap">
               {filterTitle}
             </h4>
           </div>
