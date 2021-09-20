@@ -206,7 +206,7 @@ footer {
 }
 
 ul li {
-  background: url(./images/bullet_square.gif) 0 7px no-repeat;
+  background: url(./images/bullet_square.gif) 0 10px no-repeat;
   padding: 0 0 10px 15px;
   line-height: 1.5em;
 }
