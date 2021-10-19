@@ -48,7 +48,8 @@
 }
 
 html {
-  font-family: "Helvetica", "SegoeUILight", "sans-serif"
+  font-family: Open Sans,Helvetica Neue,Helvetica,Arial,sans-serif;
+  color:#333;
 }
 
 h1 {
@@ -59,7 +60,7 @@ h1 {
 
 h1.title {
   font-size: 2em;
-  color: #414141;
+  color: #333333;
   margin-bottom: 0.1em;
 }
 
@@ -79,21 +80,24 @@ h4 {
   @apply mb-2;
 }
 
+hr {
+  border-color:#eee;
+}
+
 a,
 a:link {
   &:not(.unstyled)    {
-    border-bottom: 2px dotted #9e9e9e;
+    text-decoration:underline;
 
     &.footer-link  {
       @apply text-gray-300;
       font-weight: bolder;
-      transition: all 0.3s ease-in-out;
     }
 
     &:hover {
       @apply text-ssw-red;
-      border-bottom: 2px dotted;
       @apply border-ssw-red;
+      transition: all 0.3s ease-in-out;
     }
   }
 }
@@ -101,9 +105,11 @@ a:link {
 a.gatsby-resp-image-link,
 a:link.gatsby-resp-image-link {
   border-bottom: none;
+  text-decoration:none;
 
   &:hover {
     border-bottom: none;
+    text-decoration:none;
   }
 }
 
@@ -200,7 +206,7 @@ footer {
 }
 
 ul li {
-  background: url(./images/bullet_square.gif) 0 7px no-repeat;
+  background: url(./images/bullet_square.gif) 0 10px no-repeat;
   padding: 0 0 10px 15px;
   line-height: 1.5em;
 }
@@ -212,7 +218,7 @@ ul li {
 .hero-para h1 {
   @apply text-2xl;
   @apply mb-2;
-  @apply text-black;
+  color: #333;
 }
 
 .filter-role li,
@@ -272,7 +278,7 @@ ul li {
 }
 
 .profile-content {
-  margin-top: 14px;
+  margin-top: 20px;
 }
 
 .profile-content h2 {
@@ -280,10 +286,16 @@ ul li {
 }
 
 .profile-content p {
-  margin-bottom: 10px;
+  margin-bottom: 15px;
+}
+.profile-content p:first-child {
+  margin-top: 30px;
+}
+.profile-content p:last-child {
+  margin-bottom: 30px;
 }
 .profile-content ul, .profile-content ol {
-  margin-bottom: 10px;
+  margin-bottom: 15px;
  }
 
 .profile-content ol {
@@ -293,7 +305,7 @@ ul li {
 
 .profile-content ol li{
   line-height: 1.5em;
-  padding-bottom: 10px;
+  padding-bottom: 15px;
 }
 
 .profile-content ol li li, .profile-content li ul{
@@ -301,9 +313,8 @@ ul li {
 }
 
 .favor-content {
-  background-color: #efefef;
-  border: 1px solid #dddddd;
-  border-radius: 4px;
+  background-color: #eeeeee;
+  border: 1px solid #cccccc;
   margin: 20px 0;
 }
 
@@ -312,11 +323,12 @@ ul li {
 }
 
 ul.favor-list li {
-  line-height: 1.75em;
+  line-height: 2em;
 
   a,
   a:link {
     border-bottom:none;
+    text-decoration:none;
   }
 }
 
@@ -358,7 +370,7 @@ ul.favor-list li {
 
 .breadcrumb-container{
   font-size: 0.8rem;
-  color: #5b5656;
+  color: #333333;
   margin-top: 1rem;
 }
 
@@ -376,12 +388,8 @@ ul.favor-list li {
 }
 
 .breadcrumb a{
-  &:not(.breadcrumb__link__active){
-    color: #999;
-    border-bottom: 0px dotted #9e9e9e;
-  }
   &.breadcrumb__link__active{
-    color:black ;
+    color: #333;
     text-decoration: none;
     border-bottom: 0px ;
     cursor: default;
@@ -398,7 +406,7 @@ ul.favor-list li {
 }
 
 .breadcrumb__link__active:hover{
-  color:black ;
+  color: #333;
 }
 
 .hovered {
@@ -429,6 +437,7 @@ button:focus {
 
   a {
     border-bottom: none !important;
+    text-decoration: none !important;
   }
 
   img {
@@ -540,8 +549,8 @@ blockquote {
 }
 
 blockquote p {
-  margin-top: .5rem;
-  margin-bottom: .5rem;
+  margin-top: .5rem !important;
+  margin-bottom: .5rem !important;
 }
 
 pre {
@@ -947,7 +956,6 @@ label {
 }
 .event-item a {
   color: #333;
-  border-bottom: 1px dotted #9e9e9e;
 }
 .event-item .thumbnail {
   float: left;
@@ -1184,12 +1192,13 @@ font-size: 0.8rem;
 }
 
 .download-image:hover{
-  text-decoration: none;
+  text-decoration: none !important;
   border-bottom: none !important;
 }
 
 .download-image{
   border-bottom: none !important;
+  text-decoration: none !important;
 }
 
 .alumniLink img{
