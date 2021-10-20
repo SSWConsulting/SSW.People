@@ -288,9 +288,6 @@ ul li {
 .profile-content p {
   margin-bottom: 15px;
 }
-.profile-content p:first-child {
-  margin-top: 30px;
-}
 .profile-content p:last-child {
   margin-bottom: 30px;
 }
