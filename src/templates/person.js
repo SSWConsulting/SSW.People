@@ -14,6 +14,7 @@ import { isChinaBuild } from '../helpers/chinaHelper';
 import ActionButtons from '../components/action-buttons/action-buttons';
 import ProfilePhoto from '../components/profile-photo/profile-photo';
 import ProfileDescription from '../components/profile-description/profile-description';
+import { Widget } from 'ssw.rules.widget';
 
 config.autoAddCss = false;
 
@@ -30,6 +31,7 @@ const Person = ({ pageContext }) => {
   let fullName = '';
   let firstNameOrNickname = '';
   let jobTitle = frontmatter.role;
+  let githubUsername = '';
   if (crmData) {
     personName = crmData.nickname
       ? `${crmData.fullName} (${crmData.nickname})`
@@ -41,6 +43,10 @@ const Person = ({ pageContext }) => {
     jobTitle = crmData.jobTitle.replace(/Mr/, '').replace(/Ms/, '')
       ? crmData.jobTitle
       : frontmatter.jobTitle;
+    githubUsername = crmData.gitHubUrl
+      ? crmData.gitHubUrl.split('/').pop()
+      : '';
+    console.log(githubUsername);
   } else {
     personName = frontmatter.name ? frontmatter.name : '';
     fullName = frontmatter.name ? frontmatter.name : '';
@@ -120,6 +126,13 @@ const Person = ({ pageContext }) => {
               {socialLinks}
             </div>
             <div className="block md:hidden w-full print-show">{quote}</div>
+            {githubUsername && (
+              <Widget
+                token={process.env.GITHUB_API_PAT}
+                author="jakebayliss"
+                numberOfRules={10}
+              />
+            )}
           </div>
         </div>
         <div className="sm:w-full lg:w-3/4 xl:w-5/6 print-full-width">

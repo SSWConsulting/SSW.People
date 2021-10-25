@@ -271,6 +271,23 @@ ul li {
   margin-top: 0.5em;
 }
 
+.rw-rules-container{
+  padding: 0 !important;
+}
+
+.rw-rules-container div {
+  flex-direction: column;
+  padding: 12px !important;
+}
+
+.rw-rule-title {
+  overflow-wrap: anywhere;
+}
+
+.rw-rule-title a {
+  border-bottom: none !important;
+}
+
 .profile-content {
   margin-top: 14px;
 }
