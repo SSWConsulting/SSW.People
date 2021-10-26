@@ -79,23 +79,20 @@ h4 {
   @apply mb-2;
 }
 
-a,
-a:link {
-  &:not(.unstyled)    {
-    border-bottom: 2px dotted #9e9e9e;
+a.action-btn-link, .favor-list a, .footer-link {
+  border-bottom: 2px dotted #9e9e9e;
 
-    &.footer-link  {
-      @apply text-gray-300;
-      font-weight: bolder;
-      transition: all 0.3s ease-in-out;
-    }
-
-    &:hover {
-      @apply text-ssw-red;
-      border-bottom: 2px dotted;
-      @apply border-ssw-red;
-    }
+  &:hover {
+    @apply text-ssw-red;
+    border-bottom: 2px dotted;
+    @apply border-ssw-red;
   }
+}
+
+.footer-link  {
+  @apply text-gray-300;
+  font-weight: bolder;
+  transition: all 0.3s ease-in-out;
 }
 
 a.gatsby-resp-image-link,
@@ -271,22 +268,9 @@ ul li {
   margin-top: 0.5em;
 }
 
-.rw-rules-container{
-  padding: 0 !important;
-}
-
-.rw-rules-container div {
-  flex-direction: column;
-  padding: 12px !important;
-}
-
-.rw-rule-title {
-  overflow-wrap: anywhere;
-}
-
-.rw-rule-title a {
-  border-bottom: none !important;
-}
+/* .rw-title {
+  flex-direction: column !important;
+} */
 
 .profile-content {
   margin-top: 14px;
