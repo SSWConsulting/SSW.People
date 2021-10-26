@@ -129,7 +129,7 @@ const Person = ({ pageContext }) => {
             {githubUsername && (
               <Widget
                 token={process.env.GITHUB_API_PAT}
-                author="jakebayliss"
+                author={githubUsername}
                 numberOfRules={10}
               />
             )}
