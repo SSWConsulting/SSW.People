@@ -46,7 +46,6 @@ const Person = ({ pageContext }) => {
     githubUsername = crmData.gitHubUrl
       ? crmData.gitHubUrl.split('/').pop()
       : '';
-    console.log(githubUsername);
   } else {
     personName = frontmatter.name ? frontmatter.name : '';
     fullName = frontmatter.name ? frontmatter.name : '';
