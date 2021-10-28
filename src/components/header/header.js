@@ -29,7 +29,7 @@ const Header = () => {
             <a href={parentSiteUrl} className="unstyled cursor-pointer">
               <CompanyLogo aria-label="logo" />
             </a>
-            <h1 className="title ml-2">Our People</h1>
+            <h1 className="title ml-2">People</h1>
           </div>
           <div className="action-btn-container print-hidden">
             <CountrySelect />
