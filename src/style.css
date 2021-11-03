@@ -80,26 +80,20 @@ h4 {
   @apply mb-2;
 }
 
-hr {
-  border-color:#eee;
+a.action-btn-link, .favor-list a, .footer-link {
+  border-bottom: 2px dotted #9e9e9e;
+
+  &:hover {
+    @apply text-ssw-red;
+    border-bottom: 2px dotted;
+    @apply border-ssw-red;
+  }
 }
 
-a,
-a:link {
-  &:not(.unstyled)    {
-    text-decoration:underline;
-
-    &.footer-link  {
-      @apply text-gray-300;
-      font-weight: bolder;
-    }
-
-    &:hover {
-      @apply text-ssw-red;
-      @apply border-ssw-red;
-      transition: all 0.3s ease-in-out;
-    }
-  }
+.footer-link  {
+  @apply text-gray-300;
+  font-weight: bolder;
+  transition: all 0.3s ease-in-out;
 }
 
 a.gatsby-resp-image-link,
@@ -276,6 +270,10 @@ ul li {
   text-align: right;
   margin-top: 0.5em;
 }
+
+/* .rw-title {
+  flex-direction: column !important;
+} */
 
 .profile-content {
   margin-top: 20px;
