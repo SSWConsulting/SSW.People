@@ -127,7 +127,7 @@ const Person = ({ pageContext }) => {
             <div className="block md:hidden w-full print-show">{quote}</div>
             {githubUsername && (
               <Widget
-                token={process.env.GITHUB_API_PAT}
+                token={process.env.WIDGET_GITHUB_PAT}
                 author={githubUsername}
                 numberOfRules={10}
               />
