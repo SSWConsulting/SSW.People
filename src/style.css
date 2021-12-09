@@ -336,31 +336,31 @@ ul.favor-list li {
   padding: 0px 0px 0px 20px;
 }
 .gallery{
-  background: url(./images/gallery.png) 0 4px no-repeat;
+  background: url(./images/gallery.png) 0 center no-repeat;
 }
 .blog {
-  background: url(./images/website.png) 0 4px no-repeat;
+  background: url(./images/website.png) 0 center no-repeat;
 }
 .facebook {
-  background: url(./images/facebook.png) 0 4px no-repeat;
+  background: url(./images/facebook.png) 0 center no-repeat;
 }
 
 .linkedin {
-  background: url(./images/linkedin.png) 0 4px no-repeat;
+  background: url(./images/linkedin.png) 0 center no-repeat;
 }
 
 .skype {
-  background: url(./images/skype.png) 0 4px no-repeat;
+  background: url(./images/skype.png) 0 center no-repeat;
 }
 
 .twitter {
-  background: url(./images/twitter.png) 0 4px no-repeat;
+  background: url(./images/twitter.png) 0 center no-repeat;
 }
 .github {
-  background: url(./images/github.png) 0 4px no-repeat;
+  background: url(./images/github.png) 0 center no-repeat;
 }
 .email {
-  background: url(./images/favor_email.gif) 0 6px no-repeat;
+  background: url(./images/favor_email.gif) 0 center no-repeat;
 }
 
 .breadcrumb-container{
