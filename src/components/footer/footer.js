@@ -51,7 +51,7 @@ const Footer = () => {
                 <span className="px-2">|</span>
                 <a
                   className="footer-link"
-                  href="https://www.ssw.com.au/ssw/Standards/Forms/ConsultingOrderTermsConditions.aspx"
+                  href="https://www.ssw.com.au/ssw/Consulting/Terms-and-Conditions/"
                 >
                   TERMS AND CONDITIONS
                 </a>
@@ -136,7 +136,7 @@ const Footer = () => {
                 Our website is under{' '}
                 <a
                   className="footer-link"
-                  href="https://rules.ssw.com.au/WebSites/RulestoBetterWebsites-Deployment/Pages/Do-your-developers-deploy-manually.aspx"
+                  href="https://ssw.com.au/rules/do-you-continuously-deploy"
                 >
                   CONSTANT CONTINUOUS DEPLOYMENT
                 </a>
