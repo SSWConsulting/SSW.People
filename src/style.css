@@ -419,6 +419,16 @@ button:focus {
   flex-basis: 172px;
 }
 
+a {
+  border-bottom: none !important;
+  text-decoration: underline;
+}
+
+a:hover {
+  @apply .text-ssw-red;
+  transition: all 0.2s ease-in-out;
+}
+
 /** Custom blocks images handling **/
 
 .img-badge {
