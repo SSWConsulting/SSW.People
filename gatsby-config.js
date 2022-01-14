@@ -143,7 +143,7 @@ const getPlugins = () => {
 
   if (process.env.CHINA_BUILD && process.env.CHINA_BUILD === 'FALSE') {
     plugins.push({
-      resolve: `gatsby-plugin-google-gtag`,
+      resolve: 'gatsby-plugin-google-gtag',
       options: {
         trackingIds: [
           process.env.GOOGLE_ANALYTICS, // Tracking Id: UA-111111111-1
