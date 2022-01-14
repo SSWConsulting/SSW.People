@@ -55,7 +55,7 @@ VERSION_DEPLOYED=
 
 ### Builds
 - Changes made to http://github.com/SSWConsulting/SSW.People.Profiles (i.e. profile changes) trigger builds that deploy:
-  - **main** to the **staging** site: https://sydiisp01.sydney.ssw.com.au/people/
+  - **main** to the **staging** site: https://staging.ssw.com.au/people/
   - latest **release/xx** to the **production** site: https://www.ssw.com.au/people
   
 - Branching off **main** to **release/xx**, or making changes to **release/xx** will build and deploy to the **production** site: https://www.ssw.com.au/people
@@ -66,11 +66,11 @@ VERSION_DEPLOYED=
 
 > People profiles repository lives here: https://github.com/SSWConsulting/SSW.People.Profiles
 - Sample Profile: 
-  - Staging: https://sydiisp01.sydney.ssw.com.au/people/bob-northwind
+  - Staging: https://staging.ssw.com.au/people/bob-northwind
   - Production: https://www.ssw.com.au/people/bob-northwind
 
 Merging changes to **main** on this repo will trigger:
-- a build/release of the **main** branch in Staging (https://sydiisp01.sydney.ssw.com.au/people/)
+- a build/release of the **main** branch in Staging (https://staging.ssw.com.au/people/)
 - a build/release of the **release** branch Production (https://www.ssw.com.au/people)
 
 [Next Step: Wiki >](https://github.com/SSWConsulting/SSW.People/wiki)
