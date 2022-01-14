@@ -143,10 +143,15 @@ const getPlugins = () => {
 
   if (process.env.CHINA_BUILD && process.env.CHINA_BUILD === 'FALSE') {
     plugins.push({
-      resolve: 'gatsby-plugin-google-analytics',
+      resolve: `gatsby-plugin-google-gtag`,
       options: {
-        // replace "UA-XXXXXXXXX-X" with your own Tracking ID
-        trackingId: process.env.GOOGLE_ANALYTICS,
+        trackingIds: [
+          process.env.GOOGLE_ANALYTICS, // Tracking Id: UA-111111111-1
+          process.env.GA_MEASUREMENT_ID, // Measurement Id: G-AB123AB12A
+        ],
+        pluginConfig: {
+          head: true,
+        },
       },
     });
   }
