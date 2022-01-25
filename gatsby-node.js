@@ -107,7 +107,11 @@ const loadSampleData = crmData => {
   }
 };
 
-exports.sourceNodes = async ({ actions }) => {
+exports.sourceNodes = async ({
+  actions,
+  createNodeId,
+  createContentDigest,
+}) => {
   const { createNode } = actions;
   let crmDataResult;
 
@@ -188,12 +192,31 @@ exports.sourceNodes = async ({ actions }) => {
     createNode(userNode);
   });
 
-  return;
+  let rawdata = fs.readFileSync('ConsultingServicesData.json');
+  let servicesData = JSON.parse(rawdata);
+  servicesData.map(service =>
+    createNode({
+      ...service,
+      id: createNodeId(service.pageName),
+      internal: {
+        type: 'Services',
+        contentDigest: createContentDigest(service),
+      },
+    })
+  );
 };
 
 exports.createPages = async function({ actions, graphql }) {
   const { data } = await graphql(`
     query {
+      allServices {
+        nodes {
+          id
+          pageName
+          skills
+          keyWord
+        }
+      }
       people: allMarkdownRemark {
         nodes {
           parent {
@@ -289,6 +312,10 @@ exports.createPages = async function({ actions, graphql }) {
     }
   `);
 
+  const services = data.allServices.nodes.map(node => {
+    return node;
+  });
+
   const peopleCRM = data.peopleCRM.nodes.map(node => {
     return node;
   });
@@ -334,6 +361,7 @@ exports.createPages = async function({ actions, graphql }) {
           : '',
         frontmatter: node.frontmatter,
         dataCRM: crmData,
+        dataServices: services,
         audio: peopleAudios.find(
           x => x.name === node.parent.name.replace(profileChineseTag, '')
         ),
@@ -361,6 +389,7 @@ exports.createPages = async function({ actions, graphql }) {
           sketchImage: person.sketchImage,
           frontmatter: person.frontmatter,
           dataCRM: person.dataCRM,
+          dataServices: person.dataServices,
           html: chinaHelper.isChinaBuild
             ? chinaHelper.cleanHtml(person.html)
             : person.html,

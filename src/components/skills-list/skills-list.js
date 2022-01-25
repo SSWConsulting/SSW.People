@@ -1,9 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import SkillToUrl from '../../helpers/skillToUrl';
 
-const SkillsList = ({ crmData }) => {
+const SkillsList = ({ crmData, servicesData }) => {
   let intermediateSkills = [];
   let advancedSkills = [];
+  let services = [];
+
+  if (servicesData) {
+    services = servicesData;
+  }
 
   if (crmData) {
     intermediateSkills = crmData.skills
@@ -21,7 +27,11 @@ const SkillsList = ({ crmData }) => {
           <span>
             {advancedSkills.map((skill, i, arr) => (
               <strong key={`advancedSkill-${i}`}>
-                {skill}
+                {SkillToUrl(skill, services) ? (
+                  <a href={SkillToUrl(skill, services)}>{skill}</a>
+                ) : (
+                  <>{skill}</>
+                )}
                 {(i !== arr.length - 1 ||
                   (i === arr.length - 1 && intermediateSkills.length > 0)) && (
                   <span className="skill-separator"> | </span>
@@ -30,7 +40,11 @@ const SkillsList = ({ crmData }) => {
             ))}
             {intermediateSkills.map((skill, i, arr) => (
               <span key={`intermediateSkill-${i}`}>
-                {skill}
+                {SkillToUrl(skill, services) ? (
+                  <a href={SkillToUrl(skill, services)}>{skill}</a>
+                ) : (
+                  <>{skill}</>
+                )}
                 {i !== arr.length - 1 && (
                   <span className="skill-separator"> | </span>
                 )}
@@ -46,6 +60,7 @@ const SkillsList = ({ crmData }) => {
 
 SkillsList.propTypes = {
   crmData: PropTypes.object.isRequired,
+  servicesData: PropTypes.array.isRequired,
 };
 
 export default SkillsList;
