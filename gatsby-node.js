@@ -107,7 +107,11 @@ const loadSampleData = crmData => {
   }
 };
 
-exports.sourceNodes = async ({ actions }) => {
+exports.sourceNodes = async ({
+  actions,
+  createNodeId,
+  createContentDigest,
+}) => {
   const { createNode } = actions;
   let crmDataResult;
 
@@ -188,12 +192,31 @@ exports.sourceNodes = async ({ actions }) => {
     createNode(userNode);
   });
 
-  return;
+  let rawdata = fs.readFileSync('SkillUrlData.json');
+  let skillUrlData = JSON.parse(rawdata);
+  skillUrlData.map(service =>
+    createNode({
+      ...service,
+      id: createNodeId(service.pageUrl),
+      internal: {
+        type: 'SkillUrls',
+        contentDigest: createContentDigest(service),
+      },
+    })
+  );
 };
 
 exports.createPages = async function({ actions, graphql }) {
   const { data } = await graphql(`
     query {
+      allSkillUrls {
+        nodes {
+          id
+          pageUrl
+          exactMatch
+          fuzzyMatch
+        }
+      }
       people: allMarkdownRemark {
         nodes {
           parent {
@@ -289,6 +312,10 @@ exports.createPages = async function({ actions, graphql }) {
     }
   `);
 
+  const skillUrls = data.allSkillUrls.nodes.map(node => {
+    return node;
+  });
+
   const peopleCRM = data.peopleCRM.nodes.map(node => {
     return node;
   });
@@ -334,6 +361,7 @@ exports.createPages = async function({ actions, graphql }) {
           : '',
         frontmatter: node.frontmatter,
         dataCRM: crmData,
+        dataSkillUrls: skillUrls,
         audio: peopleAudios.find(
           x => x.name === node.parent.name.replace(profileChineseTag, '')
         ),
@@ -361,6 +389,7 @@ exports.createPages = async function({ actions, graphql }) {
           sketchImage: person.sketchImage,
           frontmatter: person.frontmatter,
           dataCRM: person.dataCRM,
+          dataSkillUrls: person.dataSkillUrls,
           html: chinaHelper.isChinaBuild
             ? chinaHelper.cleanHtml(person.html)
             : person.html,
