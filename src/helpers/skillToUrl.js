@@ -1,24 +1,17 @@
-const SkillToUrl = (skill, services) => {
-  const skillResult = services.find(s => s.skills.includes(skill));
+const SkillToUrl = (skill, skills) => {
+  const skillResult = skills.find(s => s.exactMatch.includes(skill));
   if (skillResult) {
-    return serviceToUrlFormat(skillResult.pageName);
+    return skillResult.pageUrl;
   }
 
-  const keyWordResult = services.find(
-    s => s.keyWord.length > 0 && skill.indexOf(s.keyWord) != -1
+  const keyWordResult = skills.find(
+    s => s.fuzzyMatch.length > 0 && skill.indexOf(s.fuzzyMatch) != -1
   );
   if (keyWordResult) {
-    return serviceToUrlFormat(keyWordResult.pageName);
+    return keyWordResult.pageUrl;
   }
 
   return null;
-};
-
-const serviceToUrlFormat = page => {
-  if (page == 'Video-Production') {
-    return `https://www.ssw.com.au/ssw/Consulting/${page}/`;
-  }
-  return `https://www.ssw.com.au/ssw/Consulting/${page}.aspx`;
 };
 
 export default SkillToUrl;

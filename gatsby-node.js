@@ -192,14 +192,14 @@ exports.sourceNodes = async ({
     createNode(userNode);
   });
 
-  let rawdata = fs.readFileSync('ConsultingServicesData.json');
-  let servicesData = JSON.parse(rawdata);
-  servicesData.map(service =>
+  let rawdata = fs.readFileSync('SkillUrlData.json');
+  let skillUrlData = JSON.parse(rawdata);
+  skillUrlData.map(service =>
     createNode({
       ...service,
-      id: createNodeId(service.pageName),
+      id: createNodeId(service.pageUrl),
       internal: {
-        type: 'Services',
+        type: 'SkillUrls',
         contentDigest: createContentDigest(service),
       },
     })
@@ -209,12 +209,12 @@ exports.sourceNodes = async ({
 exports.createPages = async function({ actions, graphql }) {
   const { data } = await graphql(`
     query {
-      allServices {
+      allSkillUrls {
         nodes {
           id
-          pageName
-          skills
-          keyWord
+          pageUrl
+          exactMatch
+          fuzzyMatch
         }
       }
       people: allMarkdownRemark {
@@ -312,7 +312,7 @@ exports.createPages = async function({ actions, graphql }) {
     }
   `);
 
-  const services = data.allServices.nodes.map(node => {
+  const skillUrls = data.allSkillUrls.nodes.map(node => {
     return node;
   });
 
@@ -361,7 +361,7 @@ exports.createPages = async function({ actions, graphql }) {
           : '',
         frontmatter: node.frontmatter,
         dataCRM: crmData,
-        dataServices: services,
+        dataSkillUrls: skillUrls,
         audio: peopleAudios.find(
           x => x.name === node.parent.name.replace(profileChineseTag, '')
         ),
@@ -389,7 +389,7 @@ exports.createPages = async function({ actions, graphql }) {
           sketchImage: person.sketchImage,
           frontmatter: person.frontmatter,
           dataCRM: person.dataCRM,
-          dataServices: person.dataServices,
+          dataSkillUrls: person.dataSkillUrls,
           html: chinaHelper.isChinaBuild
             ? chinaHelper.cleanHtml(person.html)
             : person.html,

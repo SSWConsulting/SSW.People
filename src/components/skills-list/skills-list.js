@@ -2,13 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import SkillToUrl from '../../helpers/skillToUrl';
 
-const SkillsList = ({ crmData, servicesData }) => {
+const SkillsList = ({ crmData, skillUrlData }) => {
   let intermediateSkills = [];
   let advancedSkills = [];
-  let services = [];
+  let skills = [];
 
-  if (servicesData) {
-    services = servicesData;
+  if (skillUrlData) {
+    skills = skillUrlData;
   }
 
   if (crmData) {
@@ -27,8 +27,8 @@ const SkillsList = ({ crmData, servicesData }) => {
           <span>
             {advancedSkills.map((skill, i, arr) => (
               <strong key={`advancedSkill-${i}`}>
-                {SkillToUrl(skill, services) ? (
-                  <a href={SkillToUrl(skill, services)}>{skill}</a>
+                {SkillToUrl(skill, skills) ? (
+                  <a href={SkillToUrl(skill, skills)}>{skill}</a>
                 ) : (
                   <>{skill}</>
                 )}
@@ -40,8 +40,8 @@ const SkillsList = ({ crmData, servicesData }) => {
             ))}
             {intermediateSkills.map((skill, i, arr) => (
               <span key={`intermediateSkill-${i}`}>
-                {SkillToUrl(skill, services) ? (
-                  <a href={SkillToUrl(skill, services)}>{skill}</a>
+                {SkillToUrl(skill, skills) ? (
+                  <a href={SkillToUrl(skill, skills)}>{skill}</a>
                 ) : (
                   <>{skill}</>
                 )}
@@ -60,7 +60,7 @@ const SkillsList = ({ crmData, servicesData }) => {
 
 SkillsList.propTypes = {
   crmData: PropTypes.object.isRequired,
-  servicesData: PropTypes.array.isRequired,
+  skillUrlData: PropTypes.array.isRequired,
 };
 
 export default SkillsList;
