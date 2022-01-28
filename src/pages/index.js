@@ -116,7 +116,7 @@ const Index = ({ data }) => {
         .filter(
           p =>
             selectedSkills.length === 0 ||
-            selectedSkills.filter(s => p.skills.includes(s)).length > 0
+            selectedSkills.every(s => p.skills.includes(s))
         )
         .filter(
           p =>
