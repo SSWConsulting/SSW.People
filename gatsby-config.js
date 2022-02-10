@@ -142,7 +142,7 @@ const getPlugins = () => {
     {
       resolve: 'gatsby-plugin-google-tagmanager',
       options: {
-        id: 'GTM-NXDBVV',
+        id: process.env.GOOGLE_GTM_ID, // id: GTM-NXDBVV
         includeInDevelopment: true,
       },
     },
