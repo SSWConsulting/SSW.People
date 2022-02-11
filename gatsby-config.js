@@ -139,6 +139,13 @@ const getPlugins = () => {
         useClassNames: true,
       },
     },
+    {
+      resolve: 'gatsby-plugin-google-tagmanager',
+      options: {
+        id: process.env.GOOGLE_GTM_ID, // id: GTM-NXDBVV
+        includeInDevelopment: true,
+      },
+    },
   ];
 
   if (process.env.CHINA_BUILD && process.env.CHINA_BUILD === 'FALSE') {
