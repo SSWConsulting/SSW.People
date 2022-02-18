@@ -28,7 +28,7 @@ const profileChineseTag = '-Chinese';
 
 const Index = ({ data }) => {
   const allPeople = useMemo(() => buildPeople(data), [data]);
-
+  const skills = useMemo(() => data.allSkillUrls.nodes);
   const allLocations = useMemo(
     () => [
       'All',
@@ -46,7 +46,8 @@ const Index = ({ data }) => {
         .map(d => d.skills)
         .flat()
         .filter(Distinct)
-        .sort(),
+        .filter(FilterableSkill(skills))
+        .sort(Intl.Collator().compare),
     [allPeople]
   );
   const allRoles = useMemo(
@@ -268,6 +269,19 @@ function buildPeople(data) {
     .filter(x => !x.sanitisedName.endsWith(profileChineseTag));
 }
 
+const FilterableSkill = skills => skill => {
+  if (
+    skills.find(s => s.exactMatch.includes(skill)) ||
+    skills.find(
+      s => s.fuzzyMatch.length > 0 && skill.indexOf(s.fuzzyMatch) != -1
+    )
+  ) {
+    return true;
+  } else {
+    return false;
+  }
+};
+
 const IndexWithQuery = props => (
   <StaticQuery
     query={graphql`
@@ -351,6 +365,12 @@ const IndexWithQuery = props => (
             nickname
             isActive
             id
+          }
+        }
+        allSkillUrls {
+          nodes {
+            exactMatch
+            fuzzyMatch
           }
         }
       }
