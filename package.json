@@ -65,7 +65,7 @@
     "history": "^4.10.1",
     "intersection-observer": "^0.7.0",
     "lottie-web": "^5.7.3",
-    "minimist": "^1.2.5",
+    "minimist": "^1.2.6",
     "moment": "^2.29.0",
     "node-fetch": "^2.6.7",
     "postcss-import": "^12.0.1",
