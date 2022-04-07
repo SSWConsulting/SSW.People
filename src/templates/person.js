@@ -1,20 +1,22 @@
-import PropTypes from 'prop-types';
-import React from 'react';
-import { config } from '@fortawesome/fontawesome-svg-core';
 import '@fortawesome/fontawesome-svg-core/styles.css';
-import YoutubePlaylist from '../components/youtube-playlist/youtube-playlist';
-import Contact from '../components/contact/contact';
-import PlayAudio from '../components/play-audio/play-audio';
-import GitHubContributionCalendar from '../components/github-contribution-calendar/github-contribution-calendar';
-import EventList from '../components/event-list/event-list';
-import Quote from '../components/quote/quote';
-import SocialLinks from '../components/social-links/social-links';
-import SkillsList from '../components/skills-list/skills-list';
-import { isChinaBuild } from '../helpers/chinaHelper';
+
+import React, { useEffect, useState } from 'react';
+
 import ActionButtons from '../components/action-buttons/action-buttons';
-import ProfilePhoto from '../components/profile-photo/profile-photo';
+import Contact from '../components/contact/contact';
+import EventList from '../components/event-list/event-list';
+import GitHubContributionCalendar from '../components/github-contribution-calendar/github-contribution-calendar';
+import PlayAudio from '../components/play-audio/play-audio';
 import ProfileDescription from '../components/profile-description/profile-description';
+import ProfilePhoto from '../components/profile-photo/profile-photo';
+import PropTypes from 'prop-types';
+import Quote from '../components/quote/quote';
+import SkillsList from '../components/skills-list/skills-list';
+import SocialLinks from '../components/social-links/social-links';
 import { Widget } from 'ssw.rules.widget';
+import YoutubePlaylist from '../components/youtube-playlist/youtube-playlist';
+import { config } from '@fortawesome/fontawesome-svg-core';
+import { isChinaBuild } from '../helpers/chinaHelper';
 
 config.autoAddCss = false;
 
@@ -54,6 +56,22 @@ const Person = ({ pageContext }) => {
       : '';
     jobTitle = frontmatter.jobTitle;
   }
+
+  const [WidgetComponent, setWidgetComponent] = useState();
+
+  const initWidget = () => {
+    return (
+      <Widget
+        token={process.env.WIDGET_GITHUB_PAT}
+        author={githubUsername}
+        numberOfRules={10}
+      />
+    );
+  };
+
+  useEffect(() => {
+    githubUsername && setWidgetComponent(initWidget());
+  }, []);
 
   const quote = (
     <Quote
@@ -115,7 +133,7 @@ const Person = ({ pageContext }) => {
               )}
             </div>
           </div>
-          <div className="flex person-favor flex-row lg:flex-col md:hidden lg:block print-show">
+          <div className="flex person-favor flex-wrap lg:flex-col md:hidden lg:block print-show">
             {frontmatter.quote && (
               <div className="hidden w-1/2 pr-2 lg:pr-0 lg:w-full lg:block quoteblock print-hidden">
                 {quote}
@@ -125,13 +143,9 @@ const Person = ({ pageContext }) => {
               {socialLinks}
             </div>
             <div className="block md:hidden w-full print-show">{quote}</div>
-            {githubUsername && (
-              <Widget
-                token={process.env.WIDGET_GITHUB_PAT}
-                author={githubUsername}
-                numberOfRules={10}
-              />
-            )}
+            <div className="flex justify-center hidden md:block ">
+              {githubUsername && WidgetComponent}
+            </div>
           </div>
         </div>
         <div className="sm:w-full lg:w-3/4 xl:w-5/6 print-full-width">
@@ -160,6 +174,7 @@ const Person = ({ pageContext }) => {
             {crmData && crmData.gitHubUrl && (
               <GitHubContributionCalendar githubUrl={crmData.gitHubUrl} />
             )}
+            <div className="md:hidden">{githubUsername && WidgetComponent}</div>
             {crmData && (
               <>
                 <hr />
