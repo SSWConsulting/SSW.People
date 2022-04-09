@@ -66,7 +66,7 @@
     "intersection-observer": "^0.7.0",
     "lottie-web": "^5.7.3",
     "minimist": "^1.2.6",
-    "moment": "^2.29.0",
+    "moment": "^2.29.2",
     "node-fetch": "^2.6.7",
     "postcss-import": "^12.0.1",
     "postcss-nested": "^4.2.3",
