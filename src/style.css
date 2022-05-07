@@ -199,11 +199,17 @@ footer {
   border-top: 6px solid rgb(255, 255, 255);
 }
 
-ul li {
-  background: url(./images/bullet_square.gif) 0 10px no-repeat;
-  padding: 0 0 10px 15px;
-  line-height: 1.5em;
+ul li{
+    margin-bottom: 0.5rem;
 }
+
+ul li:before{
+	color: #cc4141;
+  content: "\25A0";
+  display: inline-block;
+  margin-left: -1rem;
+  width: 1rem;
+}	
 
 .clear-filter {
   @apply text-ssw-red;
@@ -290,7 +296,9 @@ ul li {
   margin-bottom: 30px;
 }
 .profile-content ul, .profile-content ol {
-  margin-bottom: 15px;
+  margin-bottom: 1rem;
+  -webkit-padding-start: 2rem; 
+  padding-inline-start: 2rem;
  }
 
 .profile-content ol {
