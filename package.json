@@ -101,6 +101,7 @@
     "chrome-launcher": "^0.13.4",
     "core-js": "^3.6.5",
     "directory-named-webpack-plugin": "^4.0.0",
+    "dotenv": "^16.0.0",
     "eslint": "^6.6.0",
     "eslint-config-prettier": "^6.12.0",
     "eslint-loader": "^3.0.4",

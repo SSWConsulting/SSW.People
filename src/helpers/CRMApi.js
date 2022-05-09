@@ -27,6 +27,18 @@ const getViewDataFromCRM = async () => {
   return currentEmployees.concat(pastEmployees);
 };
 
+const getExperienceLevel = level => {
+  switch (level)
+  {
+    case 100000000:
+      return 'Keen to learn';
+    case 100000001:
+      return 'Intermediate';
+    case 100000002:
+      return 'Advanced';
+  }
+}
+
 const getSites = async () => {
   //get sites
   const responseSites = await axios.get(`${crmUrl}/sites`);
@@ -38,15 +50,17 @@ const getUsersSkills = async () => {
   const skills = responseSkills.data.value;
   //get users skilss
   const responseUsersSkills = await axios.get(`${crmUrl}/ssw_userskills`);
-  const usersSkills = responseUsersSkills.data.value.map(us => {
-    let skill = skills.find(s => s.ssw_skillid === us._ssw_skillid_value);
-    return {
-      userId: us._ssw_systemuserid_value,
-      experienceLevel: us.ssw_experiencelevel ? 'Advanced' : 'Intermediate',
-      sortOrder: us.ssw_sortorder || null,
-      technology: skill ? skill.ssw_name : '',
-    };
-  });
+  const usersSkills = responseUsersSkills.data.value
+    .map(us => {
+      const skill = skills.find(s => s.ssw_skillid === us._ssw_skillid_value);
+
+      return {
+        userId: us._ssw_systemuserid_value,
+        experienceLevel: getExperienceLevel(us.ssw_level),
+        sortOrder: us.ssw_sortorder || null,
+        technology: skill ? skill.ssw_name : '',
+      };
+    });
   return usersSkills;
 };
 
