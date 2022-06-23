@@ -47,18 +47,20 @@ const getUsersSkills = async () => {
   //get skills
   const responseSkills = await axios.get(`${crmUrl}/ssw_skills`);
   const skills = responseSkills.data.value;
-  //get users skils
+  //get users skils (filtering out deactivated user skills with statecode)
   const responseUsersSkills = await axios.get(`${crmUrl}/ssw_userskills`);
-  const usersSkills = responseUsersSkills.data.value.map(us => {
-    const skill = skills.find(s => s.ssw_skillid === us._ssw_skillid_value);
+  const usersSkills = responseUsersSkills.data.value
+    .filter(us => us.statecode == 0)
+    .map(us => {
+      const skill = skills.find(s => s.ssw_skillid === us._ssw_skillid_value);
 
-    return {
-      userId: us._ssw_systemuserid_value,
-      experienceLevel: getExperienceLevel(us.ssw_level),
-      sortOrder: us.ssw_sortorder || null,
-      technology: skill ? skill.ssw_name : '',
-    };
-  });
+      return {
+        userId: us._ssw_systemuserid_value,
+        experienceLevel: getExperienceLevel(us.ssw_level),
+        sortOrder: us.ssw_sortorder || null,
+        technology: skill ? skill.ssw_name : '',
+      };
+    });
   return usersSkills;
 };
 
