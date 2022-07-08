@@ -285,8 +285,12 @@ footer {
 }
 .profile-content ul, .profile-content ol {
   margin-bottom: 1rem;
-  -webkit-padding-start: 2rem; 
+  -webkit-padding-start: 2rem;
   padding-inline-start: 2rem;
+ }
+
+ .profile-content ul p {
+  display: inline-block;
  }
 
 .profile-content ul li{
@@ -299,7 +303,7 @@ footer {
   display: inline-block;
   margin-left: -1rem;
   width: 1rem;
-}	
+}
 
 .profile-content ol {
   padding: 0 0 0 20px;
