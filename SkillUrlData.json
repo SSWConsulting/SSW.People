@@ -1,11 +1,8 @@
 [
 	{
 		"pageUrl": "https://www.ssw.com.au/ssw/Consulting/Web-Applications.aspx",
-		"exactMatch": [
-			".NET Web APIs",
-			".NET Webforms"
-		],
-		"fuzzyMatch": ""
+		"exactMatch": [],
+		"fuzzyMatch": ".NET"
 	},
 	{
 		"pageUrl": "https://www.ssw.com.au/ssw/Consulting/Mobile-Application-Development.aspx",
@@ -84,7 +81,9 @@
 	},
 	{
 		"pageUrl": "https://www.ssw.com.au/ssw/Consulting/Azure-Synapse.aspx",
-		"exactMatch": ["Azure Synapse"],
+		"exactMatch": [
+			"Azure Synapse"
+		],
 		"fuzzyMatch": ""
 	},
 	{
@@ -216,7 +215,7 @@
 		"pageUrl": "https://www.ssw.com.au/ssw/Consulting/Power-Platform.aspx",
 		"exactMatch": [
 			"Power Automate",
-      "PowerApps"
+			"PowerApps"
 		],
 		"fuzzyMatch": ""
 	},
@@ -232,7 +231,9 @@
 	},
 	{
 		"pageUrl": "https://www.ssw.com.au/ssw/Consulting/Office-365.aspx",
-		"exactMatch": ["Office 365"],
+		"exactMatch": [
+			"Office 365"
+		],
 		"fuzzyMatch": ""
 	},
 	{
@@ -305,7 +306,9 @@
 	},
 	{
 		"pageUrl": "https://www.ssw.com.au/ssw/Consulting/Data-Protection-Manager.aspx",
-		"exactMatch": ["Data Protection Manager"],
+		"exactMatch": [
+			"Data Protection Manager"
+		],
 		"fuzzyMatch": ""
 	},
 	{
@@ -332,7 +335,9 @@
 	},
 	{
 		"pageUrl": "https://www.ssw.com.au/ssw/Consulting/Skype-for-Business.aspx",
-		"exactMatch": ["Skype for Business"],
+		"exactMatch": [
+			"Skype for Business"
+		],
 		"fuzzyMatch": ""
 	},
 	{
