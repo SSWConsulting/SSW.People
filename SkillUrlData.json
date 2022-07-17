@@ -115,7 +115,8 @@
 	{
 		"pageUrl": "https://www.ssw.com.au/ssw/Consulting/DevOps.aspx",
 		"exactMatch": [
-			"DevOps"
+			"DevOps",
+      "Application Insights"
 		],
 		"fuzzyMatch": ""
 	},
