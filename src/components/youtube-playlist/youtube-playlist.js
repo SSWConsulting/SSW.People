@@ -110,14 +110,14 @@ const YoutubePlaylist = ({ youtubePlayListId }) => {
       <div className="youtube-playlist clearfix">
         <div>
           <h2 className="inline">Videos</h2>&nbsp;
-          <a className="View-All-Link"
+          <a
+            className="View-All-Link"
             target="_blank"
             rel="noopener noreferrer"
             href={`https://www.youtube.com/playlist?list=${youtubePlayListId}`}
           >
             View all
           </a>
-          
         </div>
         <div className="container">
           <Helmet
