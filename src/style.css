@@ -547,6 +547,9 @@ figure figcaption:before {
 .arrow-next{
   float: right;
 }
+a.arrow-next{
+  padding-top: 16px;
+}
 @media(max-width: 770px) {
   .show-button{
     visibility: visible;
