@@ -530,7 +530,8 @@ figure figcaption:before {
 
 .youtube-playlist-arrows{
   position: relative;
-  
+  top: -120px;
+  height: 0px;
 }
 
 .arrow-previous{
