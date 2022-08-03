@@ -51,7 +51,6 @@ const SkillsList = ({ crmData, skillUrlData }) => {
               </span>
             ))}
           </span>
-          <hr className="Extra-hr" />
           <hr className="print-hidden" />
         </>
       )}

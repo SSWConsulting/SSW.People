@@ -35,18 +35,18 @@ const Footer = () => {
       </div>
       <footer className="bg-black py-6 md:py-4 lg:py-2">
         <section className="main-container">
-          <div>
-            <div className="mx-2 md:mx-6 flex flex-col-reverse lg:flex-row justify-between align-middle leading-6">
+          <div className="xl:mx-6">
+            <div className="mx-6 flex flex-col-reverse md:flex-row justify-between align-middle leading-6">
               <div className="py-2">
                 Copyright © {companyShortName} 1990 - {new Date().getFullYear()}
                 . All Rights Reserved.
               </div>
-              <div className="w-full lg:w-3/6 lg:text-right py-2">
+              <div className="w-full md:w-3/6 md:text-right py-2">
                 <a
                   className="footer-link"
                   href="https://github.com/SSWConsulting/SSW.People/issues"
                 >
-                  FEEDBACK TO {companyShortName}
+                  FEEDBACK / SUGGEST A FEATURE
                 </a>
                 <span className="px-2">|</span>
                 <a
@@ -143,7 +143,7 @@ const Footer = () => {
                 . Last deployed {getLastDeployTime()} ago (Build #{' '}
                 {process.env.VERSION_DEPLOYED})
               </div>
-              <div className="lg:text-right py-2">
+              <div className="py-2">
                 <a
                   className="footer-link"
                   href="https://rules.ssw.com.au/rules-to-better-internationalization"

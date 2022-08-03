@@ -92,7 +92,8 @@ a.action-btn-link, .favor-list a, .footer-link {
 
 .footer-link  {
   @apply text-gray-300;
-  font-weight: bolder;
+  text-decoration: none;
+  color: rgba(255,255,255);
   transition: all 0.3s ease-in-out;
 }
 
@@ -248,9 +249,7 @@ footer {
 .profile-image-quote {
   margin: 1rem;
 }
-.Extra-hr{
-  visibility: hidden;
-}
+
 .quoteblock {
   font-family: Georgia;
 }
@@ -532,13 +531,7 @@ figure figcaption:before {
 
 .youtube-playlist-arrows{
   position: relative;
-  
 }
-.View-All-Link{
-  float: right;
-  padding-top: 16.8px;
-  padding-right: 20px;
-  }
 
 .arrow-previous{
   float: left;
