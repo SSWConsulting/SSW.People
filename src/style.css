@@ -531,6 +531,8 @@ figure figcaption:before {
 
 .youtube-playlist-arrows{
   position: relative;
+  top: -120px;
+  height: 0px;
 }
 
 .arrow-previous{
@@ -540,6 +542,7 @@ figure figcaption:before {
 .arrow-next{
   float: right;
 }
+
 @media(max-width: 770px) {
   .show-button{
     visibility: visible;
