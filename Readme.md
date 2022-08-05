@@ -19,6 +19,11 @@ This is a Gatsby generated site pulling data from:
   - Python 3
   - Node-gyp - see https://github.com/nodejs/node-gyp#on-windows
   - Install Visual Studio 2022 - Desktop Development with C++ in the Visual Studio Installer
+  
+  ![](https://user-images.githubusercontent.com/38869720/183000582-463e2fb8-7c8f-4636-81fb-5bdb95758d78.png)
+  **Figure: Desktop Development with C++ workload**
+
+
 
 ### Getting ready for development
 
