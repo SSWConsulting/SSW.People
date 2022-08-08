@@ -92,7 +92,8 @@ a.action-btn-link, .favor-list a, .footer-link {
 
 .footer-link  {
   @apply text-gray-300;
-  font-weight: bolder;
+  text-decoration: none;
+  color: rgba(255,255,255);
   transition: all 0.3s ease-in-out;
 }
 
