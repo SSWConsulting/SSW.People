@@ -111,7 +111,7 @@ const YoutubePlaylist = ({ youtubePlayListId }) => {
         <div>
           <h2 className="inline">Videos</h2>
           <a
-            className="float-right top-2"
+            className="float-right top-2 pt-4"
             target="_blank"
             rel="noopener noreferrer"
             href={`https://www.youtube.com/playlist?list=${youtubePlayListId}`}
