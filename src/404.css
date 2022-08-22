@@ -1,0 +1,79 @@
+.not-found-grid {
+    justify-content: center;
+    -moz-column-gap: 3rem;
+    column-gap: 3rem;
+    display: grid;
+    grid-template-columns: -webkit-min-content auto;
+    grid-template-columns: min-content auto;
+    grid-template-rows: 268px auto auto;
+  }
+  
+  .not-found-page {
+    background-position: bottom;
+    background-repeat: no-repeat;
+    height: 55rem;
+    background-image: url("images/404/Broken-Chain.png");
+  }
+  .not-found-page h1 {
+    color: #cc4141;
+    font-size: 224px;
+  
+    font-weight: 700;
+    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font: bolder;
+    line-height: 268.8px;
+    grid-column: 1;
+    margin: -0.3rem 0 -2rem;
+    margin-top: 16px;
+  }
+  h1 {
+    font-weight: 500;
+    line-height: 1.2;
+    margin-bottom: 1rem !important;
+    margin-top: 1rem !important;
+  }
+  
+  .unselectable {
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+  }
+  
+  .not-found-message {
+    padding-top: 28px;
+  }
+  .not-found-message h2 {
+    color: #666;
+    font-size: 3.1rem;
+    font-weight: 200;
+    
+  }
+  .not-found-message h2 span {
+    font-weight: 400;
+  }
+  
+  div.greybox{
+    display: block;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+    max-width: 95%;
+  }
+  .not-found-greybox {
+    margin: auto;
+    grid-column: 1;
+  }
+  .greybox {
+    background-color: #eee;
+    padding: 1rem 1.5rem;
+    width: 100%;
+  }
+  
+  .not-found-grid a,
+  .not-found-page button {
+    color: #cc4141 !important;
+    border: none;
+    text-decoration: none;
+    
+  }
+  
