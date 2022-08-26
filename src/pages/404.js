@@ -1,4 +1,6 @@
 import React from 'react';
+import { navigate } from 'gatsby';
+
 import '../404.css';
 
 const NotFound = () => {
@@ -23,7 +25,7 @@ const NotFound = () => {
               Visit <a href="https://www.ssw.com.au/ssw/">SSW homepage</a> for
               details on our Services, Staff and more or
               <span> </span>
-              <button>go back</button>
+              <button onClick={() => navigate(-1)}>go back</button>
               <span> </span>to the previous page.
             </div>
             <div className="not-found-greybox greybox">
