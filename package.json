@@ -76,7 +76,7 @@
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-ga": "^2.7.0",
-    "react-github-calendar": "^2.0.2",
+    "react-github-calendar": "^3.3.3",
     "react-google-recaptcha": "^2.1.0",
     "react-helmet": "^5.2.0",
     "react-lazy-youtube": "^1.0.1",
@@ -126,5 +126,8 @@
   },
   "optionalDependencies": {
     "webpack": "^4.41.2"
+  },
+  "resolutions": {
+    "acorn": "8.0.1"
   }
 }
