@@ -3,6 +3,10 @@ import GitHubCalendar from 'react-github-calendar';
 import PropTypes from 'prop-types';
 import ReactTooltip from 'react-tooltip';
 
+import replaceAllInserter from 'string.prototype.replaceall';
+
+replaceAllInserter.shim();
+
 const GitHubContributionCalendar = ({ githubUrl }) => {
   let userName = githubUrl.split('/');
   return (
