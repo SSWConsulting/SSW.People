@@ -16,7 +16,11 @@ const ProfileDescription = ({
         <span className="block md:inline">{jobTitle}</span>
         {location && (
           <span className="mb-0 block md:inline md:ml-2">
-            <FontAwesomeIcon icon={faMapMarkerAlt} className="mr-2" />
+            <FontAwesomeIcon
+              icon={faMapMarkerAlt}
+              className="mr-2"
+              fontSize={16}
+            />
             {location}
           </span>
         )}
