@@ -5376,7 +5376,7 @@ babel-plugin-remove-graphql-queries@^2.16.0:
   resolved "https://registry.npmjs.org/babel-plugin-remove-graphql-queries/-/babel-plugin-remove-graphql-queries-2.16.0.tgz"
   integrity sha512-sUmAjyA1JUHIWOzV7h1+sLAplNWUQlC6A1Cs2Xmpi/tHcHjHSpI4R5y5Um82WjiT7IHV2LfBKqL/qpyGeXky5w==
 
-"babel-plugin-styled-components@>= 1", babel-plugin-styled-components@^1.11.1:
+"babel-plugin-styled-components@>= 1":
   version "1.12.0"
   resolved "https://registry.npmjs.org/babel-plugin-styled-components/-/babel-plugin-styled-components-1.12.0.tgz"
   integrity sha512-FEiD7l5ZABdJPpLssKXjBUJMYqzbcNzBowfXDCdJhOpbhWiewapUaY+LZGT8R4Jg2TwOjGjG4RKeyrO5p9sBkA==
@@ -7338,11 +7338,6 @@ crypto-random-string@^2.0.0:
   version "2.0.0"
   resolved "https://registry.npmjs.org/crypto-random-string/-/crypto-random-string-2.0.0.tgz"
   integrity sha512-v1plID3y9r/lPhviJ1wrXpLeyUIGAZ2SHNYTEapm7/8A9nLPoyvVp3RK/EPFqn5kEznyWgYZNsRtYYIWbuG8KA==
-
-crypto@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.npmjs.org/crypto/-/crypto-1.0.1.tgz"
-  integrity sha512-VxBKmeNcqQdiUQUW2Tzq0t377b54N2bMtXO/qiLa+6eRRmmC4qT3D4OnTGoT/U6O9aklQ/jTwbOtRMTTY8G0Ig==
 
 css-blank-pseudo@^0.1.4:
   version "0.1.4"
@@ -10191,17 +10186,6 @@ gatsby-plugin-google-tagmanager@^4.7.0:
     "@babel/runtime" "^7.15.4"
     web-vitals "^1.1.2"
 
-gatsby-plugin-netlify@^2.3.16:
-  version "2.11.0"
-  resolved "https://registry.npmjs.org/gatsby-plugin-netlify/-/gatsby-plugin-netlify-2.11.0.tgz"
-  integrity sha512-L84m9sVZ7ZyF05QnuTPAfnr7tUS8lqg5PWN2hqXGSnf1g+9UFlIO3vxsGedQKqgkhjsnn8zVrmvvAtISZXT+bQ==
-  dependencies:
-    "@babel/runtime" "^7.12.5"
-    fs-extra "^8.1.0"
-    kebab-hash "^0.1.2"
-    lodash "^4.17.20"
-    webpack-assets-manifest "^3.1.1"
-
 gatsby-plugin-page-creator@^2.10.0:
   version "2.10.0"
   resolved "https://registry.npmjs.org/gatsby-plugin-page-creator/-/gatsby-plugin-page-creator-2.10.0.tgz"
@@ -10274,13 +10258,6 @@ gatsby-plugin-sitemap@^2.4.14:
     minimatch "^3.0.4"
     pify "^3.0.0"
     sitemap "^1.13.0"
-
-gatsby-plugin-styled-components@^3.3.12:
-  version "3.10.0"
-  resolved "https://registry.npmjs.org/gatsby-plugin-styled-components/-/gatsby-plugin-styled-components-3.10.0.tgz"
-  integrity sha512-CDNNvRxLS4dsQI2fv57T+0VUqapRtiDXm6SUsxyuVuEhJCyDGu1g9jg+9ty0HfUEDcW8JexlRJO5srkdYp1x1g==
-  dependencies:
-    "@babel/runtime" "^7.12.5"
 
 gatsby-plugin-typescript@^2.12.0:
   version "2.12.0"
@@ -12184,11 +12161,6 @@ internal-slot@^1.0.2, internal-slot@^1.0.3:
     has "^1.0.3"
     side-channel "^1.0.4"
 
-intersection-observer@^0.7.0:
-  version "0.7.0"
-  resolved "https://registry.npmjs.org/intersection-observer/-/intersection-observer-0.7.0.tgz"
-  integrity sha512-Id0Fij0HsB/vKWGeBe9PxeY45ttRiBmhFyyt/geBdDHBYNctMRTE3dC1U3ujzz3lap+hVXlEcVaB56kZP/eEUg==
-
 intl-messageformat-parser@^1.8.1:
   version "1.8.1"
   resolved "https://registry.npmjs.org/intl-messageformat-parser/-/intl-messageformat-parser-1.8.1.tgz"
@@ -13781,13 +13753,6 @@ junk@^3.1.0:
   resolved "https://registry.npmjs.org/junk/-/junk-3.1.0.tgz"
   integrity sha512-pBxcB3LFc8QVgdggvZWyeys+hnrNWg4OcZIU/1X59k5jQdLBlCsYGRQaz234SqoRLTCgMH00fY0xRJH+F9METQ==
 
-kebab-hash@^0.1.2:
-  version "0.1.2"
-  resolved "https://registry.npmjs.org/kebab-hash/-/kebab-hash-0.1.2.tgz"
-  integrity sha512-BTZpq3xgISmQmAVzkISy4eUutsUA7s4IEFlCwOBJjvSFOwyR7I+fza+tBc/rzYWK/NrmFHjfU1IhO3lu29Ib/w==
-  dependencies:
-    lodash.kebabcase "^4.1.1"
-
 keyv@3.0.0:
   version "3.0.0"
   resolved "https://registry.npmjs.org/keyv/-/keyv-3.0.0.tgz"
@@ -14153,11 +14118,6 @@ lodash.isplainobject@^4.0.6:
   version "4.0.6"
   resolved "https://registry.npmjs.org/lodash.isplainobject/-/lodash.isplainobject-4.0.6.tgz"
   integrity sha1-fFJqUtibRcRcxpC4gWO+BJf1UMs=
-
-lodash.kebabcase@^4.1.1:
-  version "4.1.1"
-  resolved "https://registry.npmjs.org/lodash.kebabcase/-/lodash.kebabcase-4.1.1.tgz"
-  integrity sha1-hImxyw0p/4gZXM7KRI/21swpXDY=
 
 lodash.map@^4.6.0:
   version "4.6.0"
@@ -17896,14 +17856,6 @@ react-ga@^2.7.0:
   resolved "https://registry.npmjs.org/react-ga/-/react-ga-2.7.0.tgz"
   integrity sha512-AjC7UOZMvygrWTc2hKxTDvlMXEtbmA0IgJjmkhgmQQ3RkXrWR11xEagLGFGaNyaPnmg24oaIiaNPnEoftUhfXA==
 
-react-github-calendar@^2.0.2:
-  version "2.0.2"
-  resolved "https://registry.npmjs.org/react-github-calendar/-/react-github-calendar-2.0.2.tgz"
-  integrity sha512-SkW4qWRGvNxzsAeukdbrIRWyEHSwkbnr+YdfHaXg/jE6KOHmZL0lxTty1kY0l62f9naeVHsmNxeLCPC748Fmtw==
-  dependencies:
-    date-fns "^2.14.0"
-    tinycolor2 "^1.4.0"
-
 react-google-recaptcha@^2.1.0:
   version "2.1.0"
   resolved "https://registry.npmjs.org/react-google-recaptcha/-/react-google-recaptcha-2.1.0.tgz"
@@ -20780,7 +20732,7 @@ tiny-warning@^1.0.0:
   resolved "https://registry.npmjs.org/tiny-warning/-/tiny-warning-1.0.3.tgz"
   integrity sha512-lBN9zLN/oAf68o3zNXYrdCt1kP8WsiGW8Oo2ka41b2IM5JL/S1CTyX1rW0mb/zSuJun0ZUrDxx4sqvYS2FWzPA==
 
-tinycolor2@^1.1.2, tinycolor2@^1.4.0, tinycolor2@^1.4.1:
+tinycolor2@^1.1.2, tinycolor2@^1.4.1:
   version "1.4.2"
   resolved "https://registry.npmjs.org/tinycolor2/-/tinycolor2-1.4.2.tgz"
   integrity sha512-vJhccZPs965sV/L2sU4oRQVAos0pQXwsvTLkWYdqJ+a8Q5kPFzJTuOFwy7UniPli44NKQGAglksjvOcpo95aZA==
