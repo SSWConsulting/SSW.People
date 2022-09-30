@@ -31,7 +31,6 @@ const getPlugins = () => {
         patterns: 'badges/**',
       },
     },
-    'gatsby-plugin-eslint',
     {
       resolve: 'gatsby-source-filesystem',
       options: {
