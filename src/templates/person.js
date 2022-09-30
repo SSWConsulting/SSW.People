@@ -13,7 +13,7 @@ import PropTypes from 'prop-types';
 import Quote from '../components/quote/quote';
 import SkillsList from '../components/skills-list/skills-list';
 import SocialLinks from '../components/social-links/social-links';
-import { Widget } from 'ssw.rules.widget';
+// import { Widget } from 'ssw.rules.widget';
 import YoutubePlaylist from '../components/youtube-playlist/youtube-playlist';
 import { config } from '@fortawesome/fontawesome-svg-core';
 import { isChinaBuild } from '../helpers/chinaHelper';
@@ -60,19 +60,19 @@ const Person = ({ pageContext }) => {
 
   const [WidgetComponent, setWidgetComponent] = useState();
 
-  const initWidget = () => {
-    return (
-      <Widget
-        token={process.env.WIDGET_GITHUB_PAT}
-        author={githubUsername}
-        numberOfRules={10}
-      />
-    );
-  };
+  // const initWidget = () => {
+  //   return (
+  //     <Widget
+  //       token={process.env.WIDGET_GITHUB_PAT}
+  //       author={githubUsername}
+  //       numberOfRules={10}
+  //     />
+  //   );
+  // };
 
-  useEffect(() => {
-    githubUsername && setWidgetComponent(initWidget());
-  }, []);
+  // useEffect(() => {
+  //   githubUsername && setWidgetComponent(initWidget());
+  // }, []);
 
   const quote = (
     <Quote
