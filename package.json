@@ -110,8 +110,5 @@
   },
   "alias": {
     "react-dom": "@hot-loader/react-dom"
-  },
-  "optionalDependencies": {
-    "webpack": "^4.41.2"
   }
 }
