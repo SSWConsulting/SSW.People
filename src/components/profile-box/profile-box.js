@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Link } from 'gatsby';
-import Img from 'gatsby-image';
+import { GatsbyImage } from 'gatsby-plugin-image';
 import PropTypes from 'prop-types';
 import PlayAudio from '../play-audio/play-audio';
 import SketchPlaceholder from '../../images/ssw-employee-profile-placeholder-sketch.jpg';
@@ -22,13 +22,12 @@ const ProfileBox = ({
   const content = (
     <div className="relative shadow-lg profile-image profile-image-height">
       {profileImages.profileImage && (
-        <Img
+        <GatsbyImage
           alt={`${profile.fullName} profile image`}
-          fluid={profileImages.profileImage}
-          style={{ position: 'static' }}
-          fadeIn={false}
-          className={!hover ? 'hidden' : ''}
-          loading="eager"
+          image={profileImages.profileImage}
+          // style={{ position: 'static' }}
+          // className={!hover ? 'hidden' : ''}
+          // loading="eager"
         />
       )}
       {!profileImages.profileImage && (
@@ -40,11 +39,10 @@ const ProfileBox = ({
       )}
 
       {profileImages.sketchProfileImage && (
-        <Img
+        <GatsbyImage
           alt={`${profile.fullName} profile image`}
-          fluid={profileImages.sketchProfileImage}
+          image={profileImages.profileImage}
           style={{ position: 'static' }}
-          fadeIn={false}
           className={hover ? 'hidden' : ''}
           loading="eager"
         />

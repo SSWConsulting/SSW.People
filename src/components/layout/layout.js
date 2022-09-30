@@ -6,8 +6,8 @@ import Header from 'components/header';
 import Footer from 'components/footer';
 import '../../style.css';
 import Breadcrumbs from '../breadcrumb/breadcrumb';
-import Menu from '../../../lib/ssw.megamenu/menu/menu';
-import MobileMenu from '../../../lib/ssw.megamenu/mobile-menu/mobile-menu';
+// import Menu from '../../../lib/ssw.megamenu/menu/menu';
+// import MobileMenu from '../../../lib/ssw.megamenu/mobile-menu/mobile-menu';
 
 const Layout = ({ children, pageTitle, crumbs, crumbLabel }) => {
   const node = useRef();
@@ -35,7 +35,7 @@ const Layout = ({ children, pageTitle, crumbs, crumbLabel }) => {
           <Head pageTitle={pageTitle} />
           <Header />
           <div className="mx-2 md:mx-6 print-hidden">
-            <Menu onClickToggle={() => actionOnToggleClick()} />
+            {/* <Menu onClickToggle={() => actionOnToggleClick()} /> */}
           </div>
           <div className="flex flex-row">
             <div className="w-3/4">
@@ -50,7 +50,7 @@ const Layout = ({ children, pageTitle, crumbs, crumbLabel }) => {
         </div>
         <Footer />
       </div>
-      <MobileMenu isMenuOpened={isMenuOpened} />
+      {/* <MobileMenu isMenuOpened={isMenuOpened} /> */}
     </div>
   );
 };

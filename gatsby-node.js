@@ -42,6 +42,14 @@ exports.onCreateWebpackConfig = ({ stage, loaders, getConfig, actions }) => {
           },
         ],
       },
+      resolve: {
+        alias: {
+          path: require.resolve('path-browserify'),
+        },
+        fallback: {
+          fs: false,
+        },
+      },
     });
   }
 
