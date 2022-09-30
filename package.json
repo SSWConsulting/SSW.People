@@ -87,7 +87,6 @@
     "applicationinsights": "^1.8.7",
     "array-flat-polyfill": "^1.0.1",
     "chrome-launcher": "^0.13.4",
-    "core-js": "^3.6.5",
     "directory-named-webpack-plugin": "^4.0.0",
     "dotenv": "^16.0.3",
     "favicons": "^5.3.0",
