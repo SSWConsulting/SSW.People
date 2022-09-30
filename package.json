@@ -44,7 +44,6 @@
     "gatsby-plugin-react-svg": "^2.0.0",
     "gatsby-plugin-sharp": "^2.6.38",
     "gatsby-plugin-sitemap": "^2.4.14",
-    "gatsby-plugin-webpack-size": "^1.0.0",
     "gatsby-remark-copy-linked-files": "^2.3.18",
     "gatsby-remark-custom-blocks": "^2.3.12",
     "gatsby-remark-embed-video": "^2.0.1",
