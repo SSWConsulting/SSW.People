@@ -174,9 +174,10 @@ const Person = ({ pageContext }) => {
                 />
               </>
             )}
-            {crmData && crmData.gitHubUrl && (
+            {/* TODO: Update packages - see https://github.com/SSWConsulting/SSW.People/issues/433 */}
+            {/* {crmData && crmData.gitHubUrl && (
               <GitHubContributionCalendar githubUrl={crmData.gitHubUrl} />
-            )}
+            )} */}
             <div className="md:hidden">{githubUsername && WidgetComponent}</div>
             {crmData && (
               <>
