@@ -33,9 +33,9 @@ const Index = ({ data }) => {
     () => [
       'All',
       ...allPeople
-        .map(d => d.location)
+        .map((d) => d.location)
         .filter(Distinct)
-        .filter(l => l.length > 0),
+        .filter((l) => l.length > 0),
     ],
     [allPeople]
   );
@@ -43,7 +43,7 @@ const Index = ({ data }) => {
   const allSkills = useMemo(
     () =>
       allPeople
-        .map(d => d.skills)
+        .map((d) => d.skills)
         .flat()
         .filter(Distinct)
         .filter(FilterableSkill(skills))
@@ -53,22 +53,22 @@ const Index = ({ data }) => {
   const allRoles = useMemo(
     () =>
       allPeople
-        .map(d => d.role)
+        .map((d) => d.role)
         .filter(Distinct)
         .sort(RoleSort),
     [allPeople]
   );
 
   const countPerRole = () => {
-    return allRoles.map(r => {
+    return allRoles.map((r) => {
       return {
         item: r,
-        count: filteredPeople.filter(p => p.role === r).length,
+        count: filteredPeople.filter((p) => p.role === r).length,
       };
     });
   };
   const countPerEvent = () => {
-    return allEventsType.map(r => {
+    return allEventsType.map((r) => {
       return {
         item: r,
         count: getPresentersOfEventType(r, eventsPresenters, filteredPeople)
@@ -77,10 +77,11 @@ const Index = ({ data }) => {
     });
   };
   const countPerSkill = () => {
-    return allSkills.map(r => {
+    return allSkills.map((r) => {
       return {
         item: r,
-        count: filteredPeople.filter(p => p.skills.find(s => s === r)).length,
+        count: filteredPeople.filter((p) => p.skills.find((s) => s === r))
+          .length,
       };
     });
   };
@@ -97,32 +98,35 @@ const Index = ({ data }) => {
 
   useEffect(() => {
     function filterPeople() {
-      const selectedRoles = selectedFilters.find(f => f.name === 'roles')
-        ?.selected;
-      const selectedSkills = selectedFilters.find(f => f.name === 'skills')
-        ?.selected;
-      const selectedEvents = selectedFilters.find(f => f.name === 'events')
-        ?.selected;
+      const selectedRoles = selectedFilters.find(
+        (f) => f.name === 'roles'
+      )?.selected;
+      const selectedSkills = selectedFilters.find(
+        (f) => f.name === 'skills'
+      )?.selected;
+      const selectedEvents = selectedFilters.find(
+        (f) => f.name === 'events'
+      )?.selected;
 
       const people = allPeople
         .filter(
-          p =>
+          (p) =>
             selectedLocation === 'All' ||
             p.location === selectedLocation ||
             p.sanitisedName === 'We-are-hiring'
         )
         .filter(
-          p => selectedRoles.length === 0 || selectedRoles.includes(p.role)
+          (p) => selectedRoles.length === 0 || selectedRoles.includes(p.role)
         )
         .filter(
-          p =>
+          (p) =>
             selectedSkills.length === 0 ||
-            selectedSkills.every(s => p.skills.includes(s))
+            selectedSkills.every((s) => p.skills.includes(s))
         )
         .filter(
-          p =>
+          (p) =>
             selectedEvents.length === 0 ||
-            selectedEvents.filter(e =>
+            selectedEvents.filter((e) =>
               isPresenterOfEventType(e, p.profile, eventsPresenters)
             ).length > 0
         );
@@ -133,7 +137,7 @@ const Index = ({ data }) => {
       var presentersList = await getEventsPresenters();
       setEventsPresenters(presentersList);
       setAllEventsType([
-        ...new Set(presentersList.map(event => event.eventType)),
+        ...new Set(presentersList.map((event) => event.eventType)),
       ]);
     }
 
@@ -198,28 +202,31 @@ function buildPeople(data) {
   const sketchProfileImageMap = new Map();
   const audioMap = new Map();
 
-  data.profile_images.nodes.forEach(n =>
-    profileImageMap.set(n.name.replace('-Profile', ''), n.childImageSharp.fixed)
-  );
-  data.sketch_profile_images.nodes.forEach(n =>
-    sketchProfileImageMap.set(
-      n.name.replace('-Sketch', ''),
-      n.childImageSharp.fixed
+  data.profile_images.nodes.forEach((n) =>
+    profileImageMap.set(
+      n.name.replace('-Profile', ''),
+      n.childImageSharp.gatsbyImageData
     )
   );
-  data.profile_audios.nodes.forEach(n =>
+  data.sketch_profile_images.nodes.forEach((n) =>
+    sketchProfileImageMap.set(
+      n.name.replace('-Sketch', ''),
+      n.childImageSharp.gatsbyImageData
+    )
+  );
+  data.profile_audios.nodes.forEach((n) =>
     audioMap.set(n.name.replace('-Audio', ''), n.publicURL)
   );
 
   const allDataCRM = data.allCRMData.nodes
-    .filter(x => x.isActive)
-    .map(n => {
+    .filter((x) => x.isActive)
+    .map((n) => {
       return n;
     });
 
   return data.people.nodes
-    .map(node => {
-      const dataCRM = allDataCRM.find(x => x.id === node.frontmatter.id);
+    .map((node) => {
+      const dataCRM = allDataCRM.find((x) => x.id === node.frontmatter.id);
       const isFixedTile = node.parent.name === 'We-are-hiring';
       if ((dataCRM && dataCRM.isActive) || isFixedTile) {
         const jobTitle = !isFixedTile
@@ -265,15 +272,15 @@ function buildPeople(data) {
         };
       }
     })
-    .filter(x => x !== undefined)
-    .filter(x => !x.sanitisedName.endsWith(profileChineseTag));
+    .filter((x) => x !== undefined)
+    .filter((x) => !x.sanitisedName.endsWith(profileChineseTag));
 }
 
-const FilterableSkill = skills => skill => {
+const FilterableSkill = (skills) => (skill) => {
   if (
-    skills.find(s => s.exactMatch.includes(skill)) ||
+    skills.find((s) => s.exactMatch.includes(skill)) ||
     skills.find(
-      s => s.fuzzyMatch.length > 0 && skill.indexOf(s.fuzzyMatch) != -1
+      (s) => s.fuzzyMatch.length > 0 && skill.indexOf(s.fuzzyMatch) != -1
     )
   ) {
     return true;
@@ -282,7 +289,7 @@ const FilterableSkill = skills => skill => {
   }
 };
 
-const IndexWithQuery = props => (
+const IndexWithQuery = (props) => (
   <StaticQuery
     query={graphql`
       query HomepageQuery {
@@ -311,9 +318,7 @@ const IndexWithQuery = props => (
           nodes {
             name
             childImageSharp {
-              fixed(height: 242) {
-                ...GatsbyImageSharpFixed_noBase64
-              }
+              gatsbyImageData(height: 242, placeholder: NONE, layout: FIXED)
             }
           }
         }
@@ -326,9 +331,7 @@ const IndexWithQuery = props => (
           nodes {
             name
             childImageSharp {
-              fixed(height: 242) {
-                ...GatsbyImageSharpFixed_noBase64
-              }
+              gatsbyImageData(height: 242, placeholder: NONE, layout: FIXED)
             }
           }
         }
@@ -375,7 +378,7 @@ const IndexWithQuery = props => (
         }
       }
     `}
-    render={data => (
+    render={(data) => (
       <Location>
         {({ location }) => (
           <Index
