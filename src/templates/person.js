@@ -5,7 +5,7 @@ import React, { useEffect, useState } from 'react';
 import ActionButtons from '../components/action-buttons/action-buttons';
 import Contact from '../components/contact/contact';
 import EventList from '../components/event-list/event-list';
-import GitHubContributionCalendar from '../components/github-contribution-calendar/github-contribution-calendar';
+// import GitHubContributionCalendar from '../components/github-contribution-calendar/github-contribution-calendar';
 import PlayAudio from '../components/play-audio/play-audio';
 import ProfileDescription from '../components/profile-description/profile-description';
 import ProfilePhoto from '../components/profile-photo/profile-photo';
@@ -174,9 +174,10 @@ const Person = ({ pageContext }) => {
                 />
               </>
             )}
-            {crmData && crmData.gitHubUrl && (
+            {/* TODO: Update packages - see https://github.com/SSWConsulting/SSW.People/issues/433 */}
+            {/* {crmData && crmData.gitHubUrl && (
               <GitHubContributionCalendar githubUrl={crmData.gitHubUrl} />
-            )}
+            )} */}
             <div className="md:hidden">{githubUsername && WidgetComponent}</div>
             {crmData && (
               <>
