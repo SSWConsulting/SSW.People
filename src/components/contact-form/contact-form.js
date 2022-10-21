@@ -240,7 +240,7 @@ const ContactForm = ({ onClose }) => {
               className="form-control"
               placeholder="Note"
               rows="4"
-              /* val="" */
+              val=""
               maxLength="2000"
             ></textarea>
           </div>
