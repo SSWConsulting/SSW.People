@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Link } from 'gatsby';
-import { GatsbyImage } from 'gatsby-plugin-image';
+import { GatsbyImage } from "gatsby-plugin-image";
 import PropTypes from 'prop-types';
 import PlayAudio from '../play-audio/play-audio';
 import SketchPlaceholder from '../../images/ssw-employee-profile-placeholder-sketch.jpg';
@@ -23,12 +23,11 @@ const ProfileBox = ({
     <div className="relative shadow-lg profile-image profile-image-height">
       {profileImages.profileImage && (
         <GatsbyImage
-          alt={`${profile.fullName} profile image`}
           image={profileImages.profileImage}
-          // style={{ position: 'static' }}
-          // className={!hover ? 'hidden' : ''}
-          // loading="eager"
-        />
+          alt={`${profile.fullName} profile image`}
+          style={{ position: 'static' }}
+          className={!hover ? 'hidden' : ''}
+          loading="eager" />
       )}
       {!profileImages.profileImage && (
         <img
@@ -40,17 +39,17 @@ const ProfileBox = ({
 
       {profileImages.sketchProfileImage && (
         <GatsbyImage
+          image={profileImages.sketchProfileImage}
           alt={`${profile.fullName} profile image`}
-          image={profileImages.profileImage}
           style={{ position: 'static' }}
+          layout="fullWidth"
           className={hover ? 'hidden' : ''}
-          loading="eager"
-        />
+          loading="eager" />
       )}
       {!profileImages.sketchProfileImage && (
         <img
           src={SketchPlaceholder}
-          alt=""
+          alt={`${profile.fullName} profile image`}
           className={`${hover ? 'hidden' : ''} profile-placeholder`}
         ></img>
       )}
