@@ -84,7 +84,7 @@ This is a Gatsby generated site pulling data from:
 
 ### Builds
 
-- Changes made to http://github.com/SSWConsulting/SSW.People.Profiles (i.e. profile changes) trigger builds that deploy:
+- Changes made to https://github.com/SSWConsulting/SSW.People.Profiles (i.e. profile changes) trigger builds that deploy:
   - **main** to the **staging** site: <https://staging.ssw.com.au/people/>
   - latest **release/xx** to the **production** site: <https://www.ssw.com.au/people>
   
