@@ -33,7 +33,7 @@
         {
             "text": "SSW TV",
             "cssClass": "ignore no-dropdown menu-ssw-tv",
-            "navigateUrl": "http://tv.ssw.com",
+            "navigateUrl": "https://tv.ssw.com",
             "target": "_blank"
         }
     ]
