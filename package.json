@@ -91,7 +91,7 @@
     "chrome-launcher": "^0.15.1",
     "directory-named-webpack-plugin": "^4.0.0",
     "dotenv": "^16.0.3",
-    "favicons": "^7.0.2",
+    "favicons": "^6.2.2",
     "gatsby-cli": "^4.24.0",
     "lighthouse": "^9.6.8",
     "mkdirp": "^1.0.4",
