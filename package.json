@@ -22,7 +22,7 @@
   },
   "dependencies": {
     "@babel/core": "^7.20.2",
-    "@brainhubeu/react-carousel": "^2.0.4",
+    "@brainhubeu/react-carousel": "^1.19.26",
     "@fortawesome/free-brands-svg-icons": "^6.2.0",
     "@fortawesome/free-regular-svg-icons": "^6.2.0",
     "@microsoft/applicationinsights-web": "^2.8.9",
