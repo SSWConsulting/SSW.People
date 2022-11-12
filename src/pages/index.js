@@ -318,7 +318,7 @@ const IndexWithQuery = (props) => (
           nodes {
             name
             childImageSharp {
-              gatsbyImageData(height: 242, placeholder: NONE, layout: FIXED)
+              gatsbyImageData(height: 242, placeholder: NONE, layout: CONSTRAINED)
             }
           }
         }
@@ -331,7 +331,7 @@ const IndexWithQuery = (props) => (
           nodes {
             name
             childImageSharp {
-              gatsbyImageData(height: 242, placeholder: NONE, layout: FIXED)
+              gatsbyImageData(height: 242, placeholder: NONE, layout: CONSTRAINED)
             }
           }
         }

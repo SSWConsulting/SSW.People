@@ -42,7 +42,6 @@ const ProfileBox = ({
           image={profileImages.sketchProfileImage}
           alt={`${profile.fullName} profile image`}
           style={{ position: 'static' }}
-          layout="fullWidth"
           className={hover ? 'hidden' : ''}
           loading="eager" />
       )}
