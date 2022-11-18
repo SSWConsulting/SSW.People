@@ -116,7 +116,7 @@
 		"pageUrl": "https://www.ssw.com.au/ssw/Consulting/DevOps.aspx",
 		"exactMatch": [
 			"DevOps",
-      "Application Insights"
+			"Application Insights"
 		],
 		"fuzzyMatch": ""
 	},
@@ -157,7 +157,7 @@
 	{
 		"pageUrl": "https://www.ssw.com.au/ssw/Consulting/Smart-Office-and-Smart-Home.aspx",
 		"exactMatch": [],
-		"fuzzyMatch": ""
+		"fuzzyMatch": "Home/Office Automation"
 	},
 	{
 		"pageUrl": "https://www.ssw.com.au/ssw/Consulting/Access-Database-Upsizing.aspx",
