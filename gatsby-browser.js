@@ -1,10 +1,10 @@
 import React from 'react';
 import AppProvider from 'store/provider';
 import wrapPageElementWithTransition from 'helpers/wrapPageElement';
-import { isChinaBuild } from 'helpers/chinaHelper';
-import axios from 'axios';
+// import { isChinaBuild } from 'helpers/chinaHelper';
+// import axios from 'axios';
 import { ApplicationInsights } from '@microsoft/applicationinsights-web';
-import { siteUrlCn } from './site-config.js';
+// import { siteUrlCn } from './site-config.js';
 
 const appInsights = new ApplicationInsights({
   config: {
