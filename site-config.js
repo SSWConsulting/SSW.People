@@ -1,5 +1,4 @@
 /*eslint quotes: ["warn", "backtick"]*/
-// const path = require(`path`);
 
 module.exports = {
   companyName: `SSW Consulting`,

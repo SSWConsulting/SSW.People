@@ -13,7 +13,7 @@ import PropTypes from 'prop-types';
 import Quote from '../components/quote/quote';
 import SkillsList from '../components/skills-list/skills-list';
 import SocialLinks from '../components/social-links/social-links';
-// import { Widget } from 'ssw.rules.widget';
+import { Widget } from 'ssw.rules.widget';
 import YoutubePlaylist from '../components/youtube-playlist/youtube-playlist';
 import { config } from '@fortawesome/fontawesome-svg-core';
 import { isChinaBuild } from '../helpers/chinaHelper';
@@ -34,7 +34,6 @@ const Person = ({ pageContext }) => {
   let fullName = '';
   let firstNameOrNickname = '';
   let jobTitle = frontmatter.role;
-  // eslint-disable-next-line no-unused-vars
   let githubUsername = '';
   if (crmData) {
     personName = crmData.nickname
@@ -59,21 +58,21 @@ const Person = ({ pageContext }) => {
     jobTitle = frontmatter.jobTitle;
   }
 
-  // const [WidgetComponent, setWidgetComponent] = useState();
+  const [WidgetComponent, setWidgetComponent] = useState();
 
-  // const initWidget = () => {
-  //   return (
-  //     <Widget
-  //       token={process.env.WIDGET_GITHUB_PAT}
-  //       author={githubUsername}
-  //       numberOfRules={10}
-  //     />
-  //   );
-  // };
+  const initWidget = () => {
+    return (
+      <Widget
+        token={process.env.WIDGET_GITHUB_PAT}
+        author={githubUsername}
+        numberOfRules={10}
+      />
+    );
+  };
 
-  // useEffect(() => {
-  //   githubUsername && setWidgetComponent(initWidget());
-  // }, []);
+  useEffect(() => {   
+    githubUsername && setWidgetComponent(initWidget());
+  }, []);
 
   const quote = (
     <Quote
@@ -147,9 +146,9 @@ const Person = ({ pageContext }) => {
               {socialLinks}
             </div>
             <div className="block md:hidden w-full print-show">{quote}</div>
-            {/* <div className="flex justify-center hidden md:block ">
+            <div className="flex justify-center hidden md:block ">
               {githubUsername && WidgetComponent}
-            </div> */}
+            </div>
           </div>
         </div>
         <div className="sm:w-full lg:w-3/4 xl:w-5/6 print-full-width">
@@ -178,7 +177,7 @@ const Person = ({ pageContext }) => {
             {crmData && crmData.gitHubUrl && (
               <GitHubContributionCalendar githubUrl={crmData.gitHubUrl} />
             )}
-            {/* <div className="md:hidden">{githubUsername && WidgetComponent}</div> */}
+            <div className="md:hidden">{githubUsername && WidgetComponent}</div>
             {crmData && (
               <>
                 <hr />
