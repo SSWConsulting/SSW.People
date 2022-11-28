@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Link } from 'gatsby';
-import { GatsbyImage } from "gatsby-plugin-image";
+import { GatsbyImage } from 'gatsby-plugin-image';
 import PropTypes from 'prop-types';
 import PlayAudio from '../play-audio/play-audio';
 import SketchPlaceholder from '../../images/ssw-employee-profile-placeholder-sketch.jpg';
@@ -27,7 +27,8 @@ const ProfileBox = ({
           alt={`${profile.fullName} profile image`}
           style={{ position: 'static' }}
           className={!hover ? 'hidden' : ''}
-          loading="eager" />
+          loading="eager"
+        />
       )}
       {!profileImages.profileImage && (
         <img
@@ -43,12 +44,13 @@ const ProfileBox = ({
           alt={`${profile.fullName} profile image`}
           style={{ position: 'static' }}
           className={hover ? 'hidden' : ''}
-          loading="eager" />
+          loading="eager"
+        />
       )}
       {!profileImages.sketchProfileImage && (
         <img
           src={SketchPlaceholder}
-          alt={`${profile.fullName} profile image`}
+          alt={`${profile.fullName} profile`}
           className={`${hover ? 'hidden' : ''} profile-placeholder`}
         ></img>
       )}

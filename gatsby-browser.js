@@ -12,7 +12,7 @@ const appInsights = new ApplicationInsights({
   },
 });
 appInsights.loadAppInsights();
-appInsights.addTelemetryInitializer(item => {
+appInsights.addTelemetryInitializer((item) => {
   item.tags['ai.cloud.role'] = 'SSW.People-StaticClientPage';
 });
 appInsights.trackPageView(); // Manually call trackPageView to establish the current user/session/pageview

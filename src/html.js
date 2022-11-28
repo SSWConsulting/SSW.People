@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { isChinaBuild } from 'helpers/chinaHelper';
-import { siteUrlCn } from '../site-config.js';
+/* import { isChinaBuild } from 'helpers/chinaHelper'; */
+/* import { siteUrlCn } from '../site-config.js'; */
 
 export default function HTML(props) {
   return (

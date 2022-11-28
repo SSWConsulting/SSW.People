@@ -37,10 +37,9 @@ const CountrySelect = ({ location }) => {
         >
           <li>
             <a
-              href={`${siteUrl}${location.pathname.replace(
-                '/people-cn/',
-                '/people/'
-              ) || ''}`}
+              href={`${siteUrl}${
+                location.pathname.replace('/people-cn/', '/people/') || ''
+              }`}
               className="unstyled"
             >
               <img src={Australia} alt="Aussie flag" className="inline pr-1" />
@@ -52,10 +51,9 @@ const CountrySelect = ({ location }) => {
           </li>
           <li>
             <a
-              href={`${siteUrlCn}${location.pathname.replace(
-                '/people/',
-                '/people-cn/'
-              ) || ''}`}
+              href={`${siteUrlCn}${
+                location.pathname.replace('/people/', '/people-cn/') || ''
+              }`}
               className="unstyled"
             >
               <img src={China} alt="Chinese flag" className="inline pr-1" />
@@ -75,7 +73,7 @@ CountrySelect.propTypes = {
   location: PropTypes.object,
 };
 
-const CountrySelectWithLocation = props => (
+const CountrySelectWithLocation = (props) => (
   <Location>
     {({ location }) => <CountrySelect {...props} location={location} />}
   </Location>

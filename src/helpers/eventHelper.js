@@ -6,18 +6,18 @@ async function getEventsPresenters() {
   var oDataFilterOngoing = `$filter=Enabled ne false and EndDateTime ge datetime'${dateFilter}'%26$select=StartDateTime,Presenter,CalendarType%26$orderby=StartDateTime asc%26$top=50`;
   var presentersEvents;
   await fetch(`${EventsApi}?odataFilter=${oDataFilterOngoing}`)
-    .then(response => response.text())
-    .then(result => {
+    .then((response) => response.text())
+    .then((result) => {
       var parser = new DOMParser();
       var xmlDoc = parser.parseFromString(result, 'application/xml');
       var presentersEventsXml = xmlDoc.getElementsByTagName('properties');
 
       presentersEvents = Array.prototype.map.call(
         presentersEventsXml,
-        element => {
+        (element) => {
           return {
-            eventType: element.getElementsByTagName('CalendarType')[0]
-              .textContent,
+            eventType:
+              element.getElementsByTagName('CalendarType')[0].textContent,
             presenter: element.getElementsByTagName('Presenter')[0].textContent,
           };
         }
@@ -44,12 +44,12 @@ async function getPastEventsForPresenter(name, nickname) {
 async function fetchFromSharepoint(oDataFilterOngoing, sort) {
   var events;
   await fetch(`${EventsApi}?odataFilter=${encodeURI(oDataFilterOngoing)}`)
-    .then(response => response.text())
-    .then(result => {
+    .then((response) => response.text())
+    .then((result) => {
       var parser = new DOMParser();
       var xmlDoc = parser.parseFromString(result, 'application/xml');
       var eventsXml = xmlDoc.getElementsByTagName('properties');
-      events = Array.prototype.map.call(eventsXml, element =>
+      events = Array.prototype.map.call(eventsXml, (element) =>
         mapXmlToEventObj(element)
       );
       if (sort === 'asc') {
@@ -71,19 +71,13 @@ async function fetchFromSharepoint(oDataFilterOngoing, sort) {
 }
 
 function mapXmlToEventObj(properties) {
-  const today = moment()
-    .local()
-    .format('DD MMM YYYY');
-  const endDateTimeXml = properties.getElementsByTagName('EndDateTime')[0]
-    .textContent;
-  const startdatetimeXml = properties.getElementsByTagName('StartDateTime')[0]
-    .textContent;
-  const startdatetime = moment(startdatetimeXml)
-    .local()
-    .format('DD MMM YYYY');
-  const endDateTime = moment(endDateTimeXml)
-    .local()
-    .format('DD MMM YYYY');
+  const today = moment().local().format('DD MMM YYYY');
+  const endDateTimeXml =
+    properties.getElementsByTagName('EndDateTime')[0].textContent;
+  const startdatetimeXml =
+    properties.getElementsByTagName('StartDateTime')[0].textContent;
+  const startdatetime = moment(startdatetimeXml).local().format('DD MMM YYYY');
+  const endDateTime = moment(endDateTimeXml).local().format('DD MMM YYYY');
 
   return {
     url: properties
@@ -101,8 +95,8 @@ function mapXmlToEventObj(properties) {
     endDateTime: endDateTime,
     isSameDay: startdatetime === endDateTime,
     daysToGo: moment(startdatetime).diff(moment(today), 'days'),
-    technologycategory: properties.getElementsByTagName('Category')[0]
-      .textContent,
+    technologycategory:
+      properties.getElementsByTagName('Category')[0].textContent,
     eventtype: properties.getElementsByTagName('CalendarType')[0].textContent,
     presenter: properties.getElementsByTagName('Presenter')[0].textContent,
     presenterprofileurl: null,
@@ -122,11 +116,11 @@ const isInPresenters = (profile, presenters) => {
 
 const getPresentersOfEventType = (eventType, allEvents, people) => {
   return people.filter(
-    p =>
+    (p) =>
       allEvents &&
       Array.prototype.filter.call(
         allEvents,
-        pr =>
+        (pr) =>
           pr.eventType === eventType && isInPresenters(p.profile, pr.presenter)
       ).length > 0
   );
@@ -135,10 +129,10 @@ const getPresentersOfEventType = (eventType, allEvents, people) => {
 const isPresenterOfEventType = (eventType, profile, events) => {
   const eventsOfType = Array.prototype.filter.call(
     events,
-    e => e.eventType === eventType
+    (e) => e.eventType === eventType
   );
   return (
-    Array.prototype.filter.call(eventsOfType, e =>
+    Array.prototype.filter.call(eventsOfType, (e) =>
       isInPresenters(profile, e.presenter)
     ).length > 0
   );

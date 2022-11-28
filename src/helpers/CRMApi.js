@@ -27,7 +27,7 @@ const getViewDataFromCRM = async () => {
   return currentEmployees.concat(pastEmployees);
 };
 
-const getExperienceLevel = level => {
+const getExperienceLevel = (level) => {
   switch (level) {
     case 100000000:
       return 'Keen to learn';
@@ -50,9 +50,9 @@ const getUsersSkills = async () => {
   //get users skils (filtering out deactivated user skills with statecode)
   const responseUsersSkills = await axios.get(`${crmUrl}/ssw_userskills`);
   const usersSkills = responseUsersSkills.data.value
-    .filter(us => us.statecode == 0)
-    .map(us => {
-      const skill = skills.find(s => s.ssw_skillid === us._ssw_skillid_value);
+    .filter((us) => us.statecode == 0)
+    .map((us) => {
+      const skill = skills.find((s) => s.ssw_skillid === us._ssw_skillid_value);
 
       return {
         userId: us._ssw_systemuserid_value,
@@ -105,13 +105,13 @@ const getEmployees = async (sites, usersSkills, current) => {
 };
 
 const convertToSimpleFormat = (data, sites, usersSkills, current) => {
-  return data.map(user => {
+  return data.map((user) => {
     return {
       userId: user.systemuserid,
       fullName: user.fullname,
       emailAddress: user.internalemailaddress,
       defaultSite: user._siteid_value
-        ? sites.find(s => s.siteid === user._siteid_value).name
+        ? sites.find((s) => s.siteid === user._siteid_value).name
         : null,
       jobTitle: user.title || '',
       role:
@@ -128,7 +128,7 @@ const convertToSimpleFormat = (data, sites, usersSkills, current) => {
       gitHubUrl: user.ssw_githuburl || '',
       youTubePlayListId: user.ssw_youtubeplaylistid || '',
       publicPhotoAlbumUrl: user.ssw_publicphotoalbumurl || '',
-      skills: usersSkills.filter(us => us.userId === user.systemuserid),
+      skills: usersSkills.filter((us) => us.userId === user.systemuserid),
     };
   });
 };

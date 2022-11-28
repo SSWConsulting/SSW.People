@@ -6,12 +6,12 @@ import RoleSort from '../../helpers/roleSort';
 
 const ProfileList = ({ filteredPeople }) => {
   const distinctRoles = filteredPeople
-    .map(p => p.role)
+    .map((p) => p.role)
     .filter(Distinct)
     .sort(RoleSort);
 
-  const getPeopleInRole = role => {
-    return filteredPeople.filter(p => p.role === role);
+  const getPeopleInRole = (role) => {
+    return filteredPeople.filter((p) => p.role === role);
   };
 
   return (

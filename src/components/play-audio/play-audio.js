@@ -27,7 +27,7 @@ const PlayAudio = ({ hasAnimation, audioSrc }) => {
     }
   };
 
-  const handleClick = e => {
+  const handleClick = (e) => {
     if (!isPlaying) {
       playAudio();
     } else {
@@ -72,7 +72,7 @@ const PlayAudio = ({ hasAnimation, audioSrc }) => {
           onMouseLeave={() => {
             setHoverAudio(false);
           }}
-          onClick={e => handleClick(e)}
+          onClick={(e) => handleClick(e)}
           onKeyPress={handleClick}
         >
           <div className={'pt-2 pl-2' + (hoverAudio ? ' hovered' : '')}>

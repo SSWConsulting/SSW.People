@@ -1,6 +1,6 @@
 import '@fortawesome/fontawesome-svg-core/styles.css';
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 import ActionButtons from '../components/action-buttons/action-buttons';
 import Contact from '../components/contact/contact';
@@ -70,7 +70,7 @@ const Person = ({ pageContext }) => {
     );
   };
 
-  useEffect(() => {   
+  useEffect(() => {
     githubUsername && setWidgetComponent(initWidget());
   }, []);
 

@@ -111,7 +111,7 @@ const getPlugins = () => {
               urlOverrides: [
                 {
                   id: 'youtube',
-                  embedURL: videoId =>
+                  embedURL: (videoId) =>
                     `https://www.youtube-nocookie.com/embed/${videoId}`,
                 },
               ], //Optional: Override URL of a service provider, e.g to enable youtube-nocookie support

@@ -16,7 +16,7 @@ const ContactForm = ({ onClose }) => {
   const [contactFormStateText, setContactFormStateText] = useState('');
   const [contactReCaptcha, setContactReCaptcha] = useState('');
 
-  const handleSubmit = async event => {
+  const handleSubmit = async (event) => {
     let subject =
       'Consulting enquiry - ' +
       contactFormCompanyName +
@@ -57,7 +57,7 @@ const ContactForm = ({ onClose }) => {
         )
         .then(() => {
           setContactSuccess(true);
-          setTimeout(function() {
+          setTimeout(function () {
             setContactSuccess(false);
             //redirect to thank you page
             window.location = '/ssw/Thankyou.aspx';
@@ -69,7 +69,7 @@ const ContactForm = ({ onClose }) => {
     }
   };
 
-  const handleClick = e => {
+  const handleClick = (e) => {
     if (node.current.contains(e.target)) {
       // inside click
       return;
@@ -90,7 +90,7 @@ const ContactForm = ({ onClose }) => {
     <form
       ref={node}
       className="contactUs-form w-full lg:w-1/2 object-center"
-      onSubmit={e => handleSubmit(e)}
+      onSubmit={(e) => handleSubmit(e)}
     >
       <div className="contactUs">
         <h2>Get your project started!</h2>
@@ -112,7 +112,7 @@ const ContactForm = ({ onClose }) => {
               id="contactFormName"
               type="text"
               value={contactFormName}
-              onChange={e => setContactFormName(e.target.value)}
+              onChange={(e) => setContactFormName(e.target.value)}
               className="form-control ng-untouched"
               required
               placeholder="Full Name *"
@@ -128,7 +128,7 @@ const ContactForm = ({ onClose }) => {
             <input
               id="contactFormEmail"
               value={contactFormEmail}
-              onChange={e => setContactFormEmail(e.target.value)}
+              onChange={(e) => setContactFormEmail(e.target.value)}
               type="email"
               className="form-control ng-untouched"
               required
@@ -145,7 +145,7 @@ const ContactForm = ({ onClose }) => {
             <input
               id="contactFormPhone"
               value={contactFormPhone}
-              onChange={e => setContactFormPhone(e.target.value)}
+              onChange={(e) => setContactFormPhone(e.target.value)}
               type="text"
               className="form-control"
               placeholder="Phone"
@@ -163,7 +163,7 @@ const ContactForm = ({ onClose }) => {
               id="contactFormCountry"
               className="form-control"
               value={contactFormCountry}
-              onChange={e => setContactFormCountry(e.target.value)}
+              onChange={(e) => setContactFormCountry(e.target.value)}
             >
               <option value="" disabled="" hidden="">
                 Location
@@ -220,7 +220,7 @@ const ContactForm = ({ onClose }) => {
             <input
               id="contactFormCompanyName"
               value={contactFormCompanyName}
-              onChange={e => setContactFormCompanyName(e.target.value)}
+              onChange={(e) => setContactFormCompanyName(e.target.value)}
               type="text"
               className="form-control"
               placeholder="Company"
@@ -236,11 +236,10 @@ const ContactForm = ({ onClose }) => {
             <textarea
               id="contactFormNote"
               value={contactFormNote}
-              onChange={e => setContactFormNote(e.target.value)}
+              onChange={(e) => setContactFormNote(e.target.value)}
               className="form-control"
               placeholder="Note"
               rows="4"
-              val=""
               maxLength="2000"
             ></textarea>
           </div>
@@ -250,7 +249,7 @@ const ContactForm = ({ onClose }) => {
           {process.env.RECAPTCHA_KEY !== 'FALSE' && (
             <ReCAPTCHA
               sitekey={process.env.RECAPTCHA_KEY}
-              onChange={value => setContactReCaptcha(value)}
+              onChange={(value) => setContactReCaptcha(value)}
             />
           )}
         </div>

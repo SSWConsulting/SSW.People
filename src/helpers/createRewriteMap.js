@@ -25,8 +25,8 @@ const getExistingRewrites = async () => {
   var newRewritesJson = [];
   if (process.env.REWRITES_JSON_URL !== 'FALSE') {
     await fetch(process.env.REWRITES_JSON_URL)
-      .then(response => response.json())
-      .then(data => {
+      .then((response) => response.json())
+      .then((data) => {
         newRewritesJson = data;
       });
   }
