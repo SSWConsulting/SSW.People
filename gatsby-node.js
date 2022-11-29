@@ -42,6 +42,14 @@ exports.onCreateWebpackConfig = ({ stage, loaders, getConfig, actions }) => {
           },
         ],
       },
+      resolve: {
+        alias: {
+          path: require.resolve('path-browserify'),
+        },
+        fallback: {
+          fs: false,
+        },
+      },
     });
   }
 
@@ -61,6 +69,18 @@ exports.onCreateWebpackConfig = ({ stage, loaders, getConfig, actions }) => {
     ],
     resolve: {
       modules: [path.resolve(__dirname, 'src'), 'node_modules'],
+      fallback: {
+        fs: false,
+        stream: require.resolve('stream-browserify'),
+        buffer: require.resolve('buffer/'),
+        util: require.resolve('util/'),
+        assert: require.resolve('assert/'),
+        http: require.resolve('stream-http/'),
+        url: require.resolve('url/'),
+        https: require.resolve('https-browserify/'),
+        os: require.resolve('os-browserify/'),
+        zlib: require.resolve('browserify-zlib'),
+      },
       plugins: [
         new DirectoryNamedWebpackPlugin({
           exclude: /node_modules/,
@@ -93,11 +113,11 @@ exports.createSchemaCustomization = ({ actions }) => {
   createTypes(typeDefs);
 };
 
-const loadSampleData = crmData => {
+const loadSampleData = (crmData) => {
   try {
     let rawdata = fs.readFileSync('SampleProfileCRMData.json');
     let sampleData = JSON.parse(rawdata);
-    sampleData.forEach(user => {
+    sampleData.forEach((user) => {
       if (user.userId) {
         crmData.push(user);
       }
@@ -138,7 +158,7 @@ exports.sourceNodes = async ({
   // load data for the sample profile
   loadSampleData(crmDataResult);
 
-  crmDataResult.map(user => {
+  crmDataResult.map((user) => {
     const userNode = {
       id: user.userId,
       parent: '__SOURCE__',
@@ -160,13 +180,13 @@ exports.sourceNodes = async ({
       billingRate: user.billableRate || '',
       skills: {
         intermediateSkills: user.skills
-          .filter(s => s.experienceLevel === 'Intermediate')
+          .filter((s) => s.experienceLevel === 'Intermediate')
           .sort(SkillSort)
-          .map(s => s.technology),
+          .map((s) => s.technology),
         advancedSkills: user.skills
-          .filter(s => s.experienceLevel === 'Advanced')
+          .filter((s) => s.experienceLevel === 'Advanced')
           .sort(SkillSort)
-          .map(s => s.technology),
+          .map((s) => s.technology),
       },
       isActive: user.isActive,
       nickname: user.nickname || '',
@@ -194,7 +214,7 @@ exports.sourceNodes = async ({
 
   let rawdata = fs.readFileSync('SkillUrlData.json');
   let skillUrlData = JSON.parse(rawdata);
-  skillUrlData.map(service =>
+  skillUrlData.map((service) =>
     createNode({
       ...service,
       id: createNodeId(service.pageUrl),
@@ -206,7 +226,7 @@ exports.sourceNodes = async ({
   );
 };
 
-exports.createPages = async function({ actions, graphql }) {
+exports.createPages = async function ({ actions, graphql }) {
   const { data } = await graphql(`
     query {
       allSkillUrls {
@@ -312,27 +332,27 @@ exports.createPages = async function({ actions, graphql }) {
     }
   `);
 
-  const skillUrls = data.allSkillUrls.nodes.map(node => {
+  const skillUrls = data.allSkillUrls.nodes.map((node) => {
     return node;
   });
 
-  const peopleCRM = data.peopleCRM.nodes.map(node => {
+  const peopleCRM = data.peopleCRM.nodes.map((node) => {
     return node;
   });
 
-  const peopleAudios = data.peopleAudios.nodes.map(node => {
+  const peopleAudios = data.peopleAudios.nodes.map((node) => {
     return {
       src: node.publicURL,
       name: node.name.replace('-Audio', ''),
     };
   });
-  const peopleProfileImages = data.peopleProfileImages.nodes.map(node => {
+  const peopleProfileImages = data.peopleProfileImages.nodes.map((node) => {
     return {
       src: node.childImageSharp.original.src,
       name: node.childImageSharp.parent.name.replace('-Profile', ''),
     };
   });
-  const peopleSketchImages = data.peopleSketchImages.nodes.map(node => {
+  const peopleSketchImages = data.peopleSketchImages.nodes.map((node) => {
     return {
       src: node.childImageSharp.original.src,
       name: node.childImageSharp.parent.name.replace('-Sketch', ''),
@@ -340,13 +360,13 @@ exports.createPages = async function({ actions, graphql }) {
   });
   const people = data.people.nodes
     .filter(
-      node =>
+      (node) =>
         node.frontmatter.id &&
-        (peopleCRM.find(x => x.id === node.frontmatter.id) ||
+        (peopleCRM.find((x) => x.id === node.frontmatter.id) ||
           node.frontmatter.id.indexOf('-') < 0)
     )
-    .map(node => {
-      const crmData = peopleCRM.find(x => x.id === node.frontmatter.id);
+    .map((node) => {
+      const crmData = peopleCRM.find((x) => x.id === node.frontmatter.id);
       const isCurrent = crmData ? crmData.isActive : false;
 
       const nickname = crmData ? crmData.nickname : null;
@@ -363,19 +383,19 @@ exports.createPages = async function({ actions, graphql }) {
         dataCRM: crmData,
         dataSkillUrls: skillUrls,
         audio: peopleAudios.find(
-          x => x.name === node.parent.name.replace(profileChineseTag, '')
+          (x) => x.name === node.parent.name.replace(profileChineseTag, '')
         ),
         profileImage: peopleProfileImages.find(
-          x => x.name === node.parent.name.replace(profileChineseTag, '')
+          (x) => x.name === node.parent.name.replace(profileChineseTag, '')
         ),
         sketchImage: peopleSketchImages.find(
-          x => x.name === node.parent.name.replace(profileChineseTag, '')
+          (x) => x.name === node.parent.name.replace(profileChineseTag, '')
         ),
         html: node.html,
       };
     });
 
-  people.forEach(person => {
+  people.forEach((person) => {
     actions.createPage({
       path: person.nicknamePath ? person.nicknamePath : person.path,
       component: require.resolve('./src/templates/person.js'),
@@ -404,11 +424,11 @@ exports.onPostBuild = async ({ store, pathPrefix }) => {
   const pluginData = makePluginData(store, assetsManifest, pathPrefix);
   const rewrites = Array.from(pages.values())
     .filter(
-      page =>
+      (page) =>
         page.context.nicknamePath &&
         page.context.originalPath !== page.context.nicknamePath
     )
-    .map(page => {
+    .map((page) => {
       if (page.path.startsWith(alumniPrefix)) {
         return {
           fromPath:
@@ -430,10 +450,10 @@ exports.onPostBuild = async ({ store, pathPrefix }) => {
 
   const alumniRewrites = Array.from(pages.values())
     .filter(
-      page =>
+      (page) =>
         page.path !== alumniPrefix + '/' && page.path.startsWith(alumniPrefix)
     )
-    .map(page => {
+    .map((page) => {
       return {
         fromPath: pathPrefix + '/' + page.path.replace(alumniPrefix + '/', ''),
         toPath: pathPrefix + page.path,
@@ -442,9 +462,9 @@ exports.onPostBuild = async ({ store, pathPrefix }) => {
 
   //Fetch existing URL redirects for previous Nicknames
   const existingRewrites = await createRewriteMap.getExistingRewrites();
-  const additionalRewrites = Array.from(existingRewrites).map(rewrite => {
+  const additionalRewrites = Array.from(existingRewrites).map((rewrite) => {
     let existingRedirect = rewrites.find(
-      r => r.fromPath === pathPrefix + '/' + rewrite.fullName
+      (r) => r.fromPath === pathPrefix + '/' + rewrite.fullName
     );
     if (existingRedirect) {
       return {
@@ -464,7 +484,7 @@ exports.onPostBuild = async ({ store, pathPrefix }) => {
     .concat(additionalRewrites);
 
   const allRewritesUnique = [
-    ...new Map(allRewrites.map(item => [item.fromPath, item])).values(),
+    ...new Map(allRewrites.map((item) => [item.fromPath, item])).values(),
   ];
   await createRewriteMap.writeRewriteMapsFile(pluginData, allRewritesUnique);
 };

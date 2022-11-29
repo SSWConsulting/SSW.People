@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 const SocialLinks = ({ crmData }) => {
   let encodedEmailAddress = '';
 
-  const encodeEmail = emailAddress => {
+  const encodeEmail = (emailAddress) => {
     let encodedString = '';
 
     for (var i = 0; i < emailAddress.length; i++) {
@@ -13,7 +13,7 @@ const SocialLinks = ({ crmData }) => {
     return encodedString;
   };
 
-  const decodeEmail = encodedEmail => {
+  const decodeEmail = (encodedEmail) => {
     let email = '';
 
     if (encodedEmail !== undefined) {
@@ -33,7 +33,7 @@ const SocialLinks = ({ crmData }) => {
     encodedEmailAddress = encodeEmail(crmData.emailAddress);
   }
 
-  const sendEmail = e => {
+  const sendEmail = (e) => {
     e.preventDefault();
     window.location.href = 'mailTo:' + decodeEmail(encodedEmailAddress);
   };
@@ -47,7 +47,7 @@ const SocialLinks = ({ crmData }) => {
               <li className="social email">
                 <a
                   href={'#0'}
-                  onClick={event => {
+                  onClick={(event) => {
                     sendEmail(event);
                   }}
                 >

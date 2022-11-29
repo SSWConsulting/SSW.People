@@ -11,7 +11,7 @@ const Menu = () => {
     }
   };
 
-  const mobileMenuOpeningCallBack = open => {
+  const mobileMenuOpeningCallBack = (open) => {
     if (open) {
       document.getElementById('mobilescroll').style.overflow = 'hidden';
     } else {

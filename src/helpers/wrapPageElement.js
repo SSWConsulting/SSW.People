@@ -14,7 +14,7 @@ const wrapPageElement = ({ element, props }) => {
       ? props.pageContext.breadcrumb.crumbs
       : null;
   if (crumbs)
-    crumbs = crumbs.map(c => {
+    crumbs = crumbs.map((c) => {
       return {
         pathname: c.pathname,
         crumbLabel:

@@ -16,7 +16,7 @@ const LocationFilter = ({
   const initLocation = () => {
     if (location) {
       const locationTxt = locations.filter(
-        l => l.toLowerCase() === location.toLowerCase()
+        (l) => l.toLowerCase() === location.toLowerCase()
       )[0];
       if (locationTxt && locationTxt !== selectedLocation) {
         onLocationChange(locationTxt);
@@ -24,7 +24,7 @@ const LocationFilter = ({
     }
   };
 
-  const onLocationClicked = location => {
+  const onLocationClicked = (location) => {
     onLocationChange(location);
     search.location = location;
     history.pushState(

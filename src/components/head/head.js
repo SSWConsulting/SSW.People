@@ -196,7 +196,7 @@ Head.propTypes = {
   siteUrlWithPrefix: PropTypes.string,
 };
 
-const HeadWithQuery = props => (
+const HeadWithQuery = (props) => (
   <StaticQuery
     query={graphql`
       query {
@@ -216,7 +216,7 @@ const HeadWithQuery = props => (
         }
       }
     `}
-    render={data => (
+    render={(data) => (
       <Location>
         {({ location }) => (
           <Head {...data.site.siteMetadata} {...props} location={location} />

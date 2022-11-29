@@ -1,10 +1,10 @@
 import React from 'react';
 import AppProvider from 'store/provider';
 import wrapPageElementWithTransition from 'helpers/wrapPageElement';
-import { isChinaBuild } from 'helpers/chinaHelper';
-import axios from 'axios';
+// import { isChinaBuild } from 'helpers/chinaHelper';
+// import axios from 'axios';
 import { ApplicationInsights } from '@microsoft/applicationinsights-web';
-import { siteUrlCn } from './site-config.js';
+// import { siteUrlCn } from './site-config.js';
 
 const appInsights = new ApplicationInsights({
   config: {
@@ -12,7 +12,7 @@ const appInsights = new ApplicationInsights({
   },
 });
 appInsights.loadAppInsights();
-appInsights.addTelemetryInitializer(item => {
+appInsights.addTelemetryInitializer((item) => {
   item.tags['ai.cloud.role'] = 'SSW.People-StaticClientPage';
 });
 appInsights.trackPageView(); // Manually call trackPageView to establish the current user/session/pageview
@@ -26,21 +26,23 @@ export const wrapRootElement = ({ element }) => {
 // Page Transitions
 export const wrapPageElement = wrapPageElementWithTransition;
 
-const DetectCountry = async location => {
-  const IP_DETECT_URL = 'https://api.userinfo.io/userinfos';
-  const ipInfo = await axios.get(IP_DETECT_URL);
-  if (ipInfo.status === 200) {
-    if (ipInfo.data.country.code === 'CN') {
-      window.location = `${siteUrlCn}${location.pathname.replace(
-        '/people/',
-        '/people-cn/'
-      )}`;
-    }
-  }
-};
+// const DetectCountry = async location => {
+//   const IP_DETECT_URL = 'https://api.userinfo.io/userinfos';
+//   const ipInfo = await axios.get(IP_DETECT_URL);
+//   if (ipInfo.status === 200) {
+//     if (ipInfo.data.country.code === 'CN') {
+//       window.location = `${siteUrlCn}${location.pathname.replace(
+//         '/people/',
+//         '/people-cn/'
+//       )}`;
+//     }
+//   }
+// };
+//  TODO: Might need new way to check if in china
+//             request failed for some reason on userinfos
 
-export const onRouteUpdate = ({ location }) => {
-  if (!isChinaBuild) {
-    DetectCountry(location);
-  }
-};
+// export const onRouteUpdate = ({ location }) => {
+//   if (!isChinaBuild) {
+//     DetectCountry(location);
+//   }
+// };

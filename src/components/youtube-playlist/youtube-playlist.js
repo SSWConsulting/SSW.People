@@ -20,7 +20,7 @@ const YoutubePlaylist = ({ youtubePlayListId }) => {
   const previousSlide = () => setCurrentSlide(currentSlide - 1);
 
   const PLAYING = 1;
-  const HideShowArrows = e => {
+  const HideShowArrows = (e) => {
     if (e.data == PLAYING) {
       setShowButtons(false);
     } else {
@@ -29,7 +29,7 @@ const YoutubePlaylist = ({ youtubePlayListId }) => {
   };
 
   const getVideosElements = () => {
-    return items.map(item => (
+    return items.map((item) => (
       <div
         key={item.contentDetails.videoId + 1}
         className="gatsby-resp-iframe-wrapper"
@@ -75,13 +75,13 @@ const YoutubePlaylist = ({ youtubePlayListId }) => {
     fetch(
       `https://www.googleapis.com/youtube/v3/playlistItems?part=contentDetails&maxResults=10&playlistId=${youtubePlayListId}&key=${youtubeApiKey}`
     )
-      .then(res => res.json())
+      .then((res) => res.json())
       .then(
-        result => {
+        (result) => {
           setIsLoaded(true);
           setItems(result.items);
         },
-        error => {
+        (error) => {
           setIsLoaded(true);
           setError(error);
         }
@@ -161,12 +161,11 @@ const YoutubePlaylist = ({ youtubePlayListId }) => {
           {items.length > 1 && (
             <>
               <div
-                className={`youtube-playlist-arrows arrow-previous clearfix ${(items.length <=
-                numVideosTablet
-                  ? 'md:hidden '
-                  : '') +
+                className={`youtube-playlist-arrows arrow-previous clearfix ${
+                  (items.length <= numVideosTablet ? 'md:hidden ' : '') +
                   (items.length <= numVideosDesktop ? 'xl:hidden ' : '') +
-                  (showButtons ? 'show-button' : 'hide-button')}`}
+                  (showButtons ? 'show-button' : 'hide-button')
+                }`}
               >
                 <button
                   className="BrainhubCarousel__arrows BrainhubCarousel__arrowLeft"
@@ -176,12 +175,11 @@ const YoutubePlaylist = ({ youtubePlayListId }) => {
                 </button>
               </div>
               <div
-                className={`youtube-playlist-arrows arrow-next clearfix ${(items.length <=
-                numVideosTablet
-                  ? 'md:hidden '
-                  : '') +
+                className={`youtube-playlist-arrows arrow-next clearfix ${
+                  (items.length <= numVideosTablet ? 'md:hidden ' : '') +
                   (items.length <= numVideosDesktop ? 'xl:hidden ' : '') +
-                  (showButtons ? 'show-button' : 'hide-button')}`}
+                  (showButtons ? 'show-button' : 'hide-button')
+                }`}
               >
                 <button
                   className="BrainhubCarousel__arrows BrainhubCarousel__arrowRight"

@@ -6,8 +6,7 @@ import Header from 'components/header';
 import Footer from 'components/footer';
 import '../../style.css';
 import Breadcrumbs from '../breadcrumb/breadcrumb';
-import Menu from '../../../lib/ssw.megamenu/menu/menu';
-import MobileMenu from '../../../lib/ssw.megamenu/mobile-menu/mobile-menu';
+import { Menu, MobileMenu } from 'ssw.megamenu';
 
 const Layout = ({ children, pageTitle, crumbs, crumbLabel }) => {
   const node = useRef();
@@ -17,7 +16,7 @@ const Layout = ({ children, pageTitle, crumbs, crumbLabel }) => {
     setIsMenuOpened(!isMenuOpened);
   };
 
-  const handleClick = e => {
+  const handleClick = (e) => {
     if (node.current.contains(e.target)) {
       setIsMenuOpened(false);
     }
@@ -28,7 +27,7 @@ const Layout = ({ children, pageTitle, crumbs, crumbLabel }) => {
       {/* eslint-disable-next-line jsx-a11y/no-static-element-interactions */}
       <div
         ref={node}
-        onMouseDown={isMenuOpened ? event => handleClick(event) : null}
+        onMouseDown={isMenuOpened ? (event) => handleClick(event) : null}
         className={isMenuOpened ? 'translateX84' : 'translateX0'}
       >
         <div className="flex flex-col min-h-screen main-container">
@@ -64,7 +63,7 @@ Layout.propTypes = {
   crumbLabel: PropTypes.string,
 };
 
-const LayoutWithQuery = props => (
+const LayoutWithQuery = (props) => (
   <StaticQuery
     query={graphql`
       query LayoutQuery {
@@ -75,7 +74,7 @@ const LayoutWithQuery = props => (
         }
       }
     `}
-    render={data => <Layout data={data} {...props} />}
+    render={(data) => <Layout data={data} {...props} />}
   />
 );
 

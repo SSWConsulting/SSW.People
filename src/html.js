@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { isChinaBuild } from 'helpers/chinaHelper';
-import { siteUrlCn } from '../site-config.js';
+/* import { isChinaBuild } from 'helpers/chinaHelper'; */
+/* import { siteUrlCn } from '../site-config.js'; */
 
 export default function HTML(props) {
   return (
@@ -14,8 +14,8 @@ export default function HTML(props) {
           content="width=device-width, initial-scale=1, shrink-to-fit=no"
         />
         {props.headComponents}
-        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-        <script
+        {/* <script src="https://unpkg.com/axios/dist/axios.min.js"></script> */}
+        {/* <script
           dangerouslySetInnerHTML={{
             __html: `
             if(!${isChinaBuild})
@@ -32,7 +32,9 @@ export default function HTML(props) {
             }
 `,
           }}
-        />
+        /> */}
+        {/* TODO: Might need new way to check if in china
+            request failed for some reason on userinfos  */}
       </head>
       <body {...props.bodyAttributes}>
         {props.preBodyComponents}

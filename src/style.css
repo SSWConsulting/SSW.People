@@ -395,6 +395,10 @@ ul.favor-list li {
   }
 }
 
+.breadcrumb .breadcrumb__list {
+  display: inherit;
+}
+
 .breadcrumb a{
   &.breadcrumb__link__active{
     color: #333;

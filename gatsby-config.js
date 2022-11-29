@@ -31,7 +31,6 @@ const getPlugins = () => {
         patterns: 'badges/**',
       },
     },
-    'gatsby-plugin-eslint',
     {
       resolve: 'gatsby-source-filesystem',
       options: {
@@ -40,6 +39,7 @@ const getPlugins = () => {
       },
     },
     'gatsby-plugin-postcss',
+    'gatsby-plugin-image',
     'gatsby-plugin-sharp',
     {
       resolve: 'gatsby-transformer-remark',
@@ -111,7 +111,7 @@ const getPlugins = () => {
               urlOverrides: [
                 {
                   id: 'youtube',
-                  embedURL: videoId =>
+                  embedURL: (videoId) =>
                     `https://www.youtube-nocookie.com/embed/${videoId}`,
                 },
               ], //Optional: Override URL of a service provider, e.g to enable youtube-nocookie support
@@ -122,7 +122,6 @@ const getPlugins = () => {
       },
     },
     'gatsby-transformer-sharp',
-    'gatsby-plugin-webpack-size',
     {
       resolve: 'gatsby-plugin-react-svg',
       options: {

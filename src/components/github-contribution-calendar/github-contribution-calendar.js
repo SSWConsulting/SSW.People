@@ -12,9 +12,10 @@ const GitHubContributionCalendar = ({ githubUrl }) => {
       <div className="mx-3">
         <GitHubCalendar
           username={userName[userName.length - 1]}
-          blockSize={9}
+          blockSize={20}
           blockMargin={3}
           fontSize={10}
+          hideColorLegend={true}
         >
           <ReactTooltip delayShow={50} html />
         </GitHubCalendar>

@@ -1,5 +1,4 @@
 /*eslint quotes: ["warn", "backtick"]*/
-const path = require(`path`);
 
 module.exports = {
   companyName: `SSW Consulting`,
@@ -15,7 +14,6 @@ module.exports = {
   backgroundColor: `#fff`,
   pathPrefix: `/people`,
   alumniPrefix: `/alumni`,
-  logo: path.resolve(__dirname, `src/images/branding/icon.png`),
   social: {
     twitter: `SSW_TV`,
     fbAppId: `120920301257947`,

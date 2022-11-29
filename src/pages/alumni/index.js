@@ -26,9 +26,9 @@ const Index = ({ data }) => {
     () => [
       'All',
       ...allPeople
-        .map(d => d.location)
+        .map((d) => d.location)
         .filter(Distinct)
-        .filter(l => l.length > 0),
+        .filter((l) => l.length > 0),
     ],
     [allPeople]
   );
@@ -36,16 +36,16 @@ const Index = ({ data }) => {
   const allRoles = useMemo(
     () =>
       allPeople
-        .map(d => d.role)
+        .map((d) => d.role)
         .filter(Distinct)
         .sort(RoleSort),
     [allPeople]
   );
   const countPerRole = () => {
-    return allRoles.map(r => {
+    return allRoles.map((r) => {
       return {
         item: r,
-        count: filteredPeople.filter(p => p.role === r).length,
+        count: filteredPeople.filter((p) => p.role === r).length,
       };
     });
   };
@@ -56,12 +56,14 @@ const Index = ({ data }) => {
   useEffect(() => {
     const people = allPeople
       .filter(
-        p =>
+        (p) =>
           selectedLocation === 'All' ||
           p.location === selectedLocation ||
           p.sanitisedName === 'We-are-hiring'
       )
-      .filter(p => selectedRoles.length === 0 || selectedRoles.includes(p.role))
+      .filter(
+        (p) => selectedRoles.length === 0 || selectedRoles.includes(p.role)
+      )
       .sort(ProfileSort);
 
     setFilteredPeople(people);
@@ -115,34 +117,37 @@ function buildPeople(data) {
   const sketchProfileImageMap = new Map();
   const audioMap = new Map();
 
-  data.profile_images.nodes.forEach(n =>
-    profileImageMap.set(n.name.replace('-Profile', ''), n.childImageSharp.fixed)
-  );
-  data.sketch_profile_images.nodes.forEach(n =>
-    sketchProfileImageMap.set(
-      n.name.replace('-Sketch', ''),
-      n.childImageSharp.fixed
+  data.profile_images.nodes.forEach((n) =>
+    profileImageMap.set(
+      n.name.replace('-Profile', ''),
+      n.childImageSharp.gatsbyImageData
     )
   );
-  data.profile_audios.nodes.forEach(n =>
+  data.sketch_profile_images.nodes.forEach((n) =>
+    sketchProfileImageMap.set(
+      n.name.replace('-Sketch', ''),
+      n.childImageSharp.gatsbyImageData
+    )
+  );
+  data.profile_audios.nodes.forEach((n) =>
     audioMap.set(n.name.replace('-Audio', ''), n.publicURL)
   );
 
   const allDataCRM = data.allCRMData.nodes
-    .filter(x => !x.isActive)
-    .map(n => {
+    .filter((x) => !x.isActive)
+    .map((n) => {
       return n;
     });
 
   const people = data.people.nodes.filter(
-    node =>
-      allDataCRM.find(x => x.id === node.frontmatter.id && !x.isActive) ||
+    (node) =>
+      allDataCRM.find((x) => x.id === node.frontmatter.id && !x.isActive) ||
       (node.frontmatter.id && node.frontmatter.id.indexOf('-') < 0)
   );
 
   return people
-    .map(node => {
-      const dataCRM = allDataCRM.find(x => x.id === node.frontmatter.id);
+    .map((node) => {
+      const dataCRM = allDataCRM.find((x) => x.id === node.frontmatter.id);
       const isFixedTile = node.parent.name === 'We-are-hiring';
       if (dataCRM || isFixedTile) {
         const jobTitle = !isFixedTile
@@ -220,11 +225,11 @@ function buildPeople(data) {
         }
       }
     })
-    .filter(x => x !== undefined)
-    .filter(x => !x.sanitisedName.endsWith(profileChineseTag));
+    .filter((x) => x !== undefined)
+    .filter((x) => !x.sanitisedName.endsWith(profileChineseTag));
 }
 
-const IndexWithQuery = props => (
+const IndexWithQuery = (props) => (
   <StaticQuery
     query={graphql`
       query AlumnipageQuery {
@@ -253,9 +258,7 @@ const IndexWithQuery = props => (
           nodes {
             name
             childImageSharp {
-              fixed(height: 242) {
-                ...GatsbyImageSharpFixed_noBase64
-              }
+              gatsbyImageData(aspectRatio: 0.5)
             }
           }
         }
@@ -268,9 +271,7 @@ const IndexWithQuery = props => (
           nodes {
             name
             childImageSharp {
-              fixed(height: 242) {
-                ...GatsbyImageSharpFixed_noBase64
-              }
+              gatsbyImageData(aspectRatio: 0.5)
             }
           }
         }
@@ -303,7 +304,7 @@ const IndexWithQuery = props => (
         }
       }
     `}
-    render={data => (
+    render={(data) => (
       <Location>
         {({ location }) => (
           <Index

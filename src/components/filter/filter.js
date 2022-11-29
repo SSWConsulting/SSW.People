@@ -30,10 +30,10 @@ const Filter = ({
   const node = useRef();
   const [listOpen, setListOpen] = useState(false);
 
-  const onItemClicked = item => {
+  const onItemClicked = (item) => {
     const previouslySelected = isItemSelected(item);
     if (previouslySelected) {
-      onItemChange(selectedItems.filter(s => s !== item));
+      onItemChange(selectedItems.filter((s) => s !== item));
       updateUrlFilter(filterUrlTitle, search, item, false);
     } else {
       onItemChange([item, ...selectedItems]);
@@ -47,7 +47,7 @@ const Filter = ({
     clearUrlFilter(filterUrlTitle, search);
   };
 
-  const handleClick = e => {
+  const handleClick = (e) => {
     if (node.current.contains(e.target)) {
       // inside click
       return;
@@ -56,7 +56,7 @@ const Filter = ({
     setListOpen(false);
   };
 
-  const isItemSelected = skill => {
+  const isItemSelected = (skill) => {
     return selectedItems.indexOf(skill) !== -1;
   };
 
@@ -125,7 +125,7 @@ const Filter = ({
                 checkedIcon={faCheck}
                 checkedClassName="font-bold"
                 checkboxColor={isItemSelected(item) ? '#cc4141' : ''}
-                checkboxCount={filterCounts.find(i => i.item === item).count}
+                checkboxCount={filterCounts.find((i) => i.item === item).count}
               />
             </li>
           ))}
