@@ -34,7 +34,9 @@ const ProfileBox = ({
         <img
           src={ProfilePlaceholder}
           alt=""
-          className={`${!hover ? 'gatsby-image-hidden' : ''} profile-placeholder`}
+          className={`${
+            !hover ? 'gatsby-image-hidden' : ''
+          } profile-placeholder`}
         ></img>
       )}
 
@@ -51,7 +53,9 @@ const ProfileBox = ({
         <img
           src={SketchPlaceholder}
           alt={`${profile.fullName} profile`}
-          className={`${hover ? 'gatsby-image-hidden' : ''} profile-placeholder`}
+          className={`${
+            hover ? 'gatsby-image-hidden' : ''
+          } profile-placeholder`}
         ></img>
       )}
       <div
