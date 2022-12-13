@@ -1233,6 +1233,10 @@ font-size: 0.8rem;
  border: none !important;
 }
 
+.gatsby-image-hidden {
+    display: none !important;
+}
+
 /**
 * This injects Tailwind's component classes and any component classes
 * registered by plugins.
