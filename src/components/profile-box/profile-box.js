@@ -26,7 +26,7 @@ const ProfileBox = ({
           image={profileImages.profileImage}
           alt={`${profile.fullName} profile image`}
           style={{ position: 'static' }}
-          className={!hover ? 'hidden' : ''}
+          className={!hover ? 'gatsby-image-hidden' : ''}
           loading="eager"
         />
       )}
@@ -34,7 +34,7 @@ const ProfileBox = ({
         <img
           src={ProfilePlaceholder}
           alt=""
-          className={`${!hover ? 'hidden' : ''} profile-placeholder`}
+          className={`${!hover ? 'gatsby-image-hidden' : ''} profile-placeholder`}
         ></img>
       )}
 
@@ -43,7 +43,7 @@ const ProfileBox = ({
           image={profileImages.sketchProfileImage}
           alt={`${profile.fullName} profile image`}
           style={{ position: 'static' }}
-          className={hover ? 'hidden' : ''}
+          className={hover ? 'gatsby-image-hidden' : ''}
           loading="eager"
         />
       )}
@@ -51,7 +51,7 @@ const ProfileBox = ({
         <img
           src={SketchPlaceholder}
           alt={`${profile.fullName} profile`}
-          className={`${hover ? 'hidden' : ''} profile-placeholder`}
+          className={`${hover ? 'gatsby-image-hidden' : ''} profile-placeholder`}
         ></img>
       )}
       <div
