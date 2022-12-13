@@ -26,6 +26,8 @@ export const wrapRootElement = ({ element }) => {
 // Page Transitions
 export const wrapPageElement = wrapPageElementWithTransition;
 
+// Issue https://github.com/SSWConsulting/SSW.People/issues/451
+
 // const DetectCountry = async location => {
 //   const IP_DETECT_URL = 'https://api.userinfo.io/userinfos';
 //   const ipInfo = await axios.get(IP_DETECT_URL);
