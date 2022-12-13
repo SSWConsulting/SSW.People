@@ -26,7 +26,7 @@ export const wrapRootElement = ({ element }) => {
 // Page Transitions
 export const wrapPageElement = wrapPageElementWithTransition;
 
-// Issue https://github.com/SSWConsulting/SSW.People/issues/451
+// See issue for context - https://github.com/SSWConsulting/SSW.People/issues/451
 
 // const DetectCountry = async location => {
 //   const IP_DETECT_URL = 'https://api.userinfo.io/userinfos';
@@ -40,8 +40,6 @@ export const wrapPageElement = wrapPageElementWithTransition;
 //     }
 //   }
 // };
-//  TODO: Might need new way to check if in china
-//             request failed for some reason on userinfos
 
 // export const onRouteUpdate = ({ location }) => {
 //   if (!isChinaBuild) {
