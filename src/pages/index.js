@@ -13,7 +13,7 @@ import LocationSanitiser from '../helpers/locationSanitizer';
 import 'array-flat-polyfill';
 import { config } from '@fortawesome/fontawesome-svg-core';
 import '@fortawesome/fontawesome-svg-core/styles.css';
-import ProfileSort from '../helpers/profileSort';
+/* import ProfileSort from '../helpers/profileSort'; */
 import {
   getEventsPresenters,
   isPresenterOfEventType,
@@ -145,7 +145,9 @@ const Index = ({ data }) => {
       loadEventsPresenters();
     }
 
-    const people = filterPeople().sort(ProfileSort);
+    // Extra sorting commented out as a temporary fix to this bug
+    // https://github.com/SSWConsulting/SSW.People/issues/456
+    const people = filterPeople(); //.sort(ProfileSort);
     setFilteredPeople(people);
   }, [selectedLocation, selectedFilters]);
 
