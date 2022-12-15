@@ -22,7 +22,6 @@
   },
   "dependencies": {
     "@babel/core": "^7.20.2",
-    "//⚠️ @brainhubeu/react-carousel": "Locked to 1.19.26 - New version doesn't support multiple slides per page (look at props table on different versions https://www.npmjs.com/package/@brainhubeu/react-carousel/v/1.19.26)",
     "@brainhubeu/react-carousel": "^1.19.26",
     "@fortawesome/free-brands-svg-icons": "^6.2.0",
     "@fortawesome/free-regular-svg-icons": "^6.2.0",
@@ -49,18 +48,15 @@
     "gatsby-plugin-sharp": "^4.24.0",
     "gatsby-plugin-sitemap": "^5.24.0",
     "gatsby-remark-copy-linked-files": "^5.24.0",
-    "//⚠️ gatsby-remark-custom-blocks": "Locked to ^3.2.0 - Updating breaks stuff",
     "gatsby-remark-custom-blocks": "^3.2.0",
     "gatsby-remark-embed-video": "^3.2.1",
     "gatsby-remark-figure-caption": "^2.0.0",
     "gatsby-remark-images": "^6.24.0",
-    "//⚠️ gatsby-remark-relative-images": "Locked to ^0.3.0 - Updating breaks stuff",
     "gatsby-remark-relative-images": "^0.3.0",
     "gatsby-remark-responsive-iframe": "^5.24.0",
     "gatsby-source-filesystem": "^4.24.0",
     "gatsby-source-git": "^1.1.0",
     "gatsby-transformer-json": "^4.24.0",
-    "//⚠️ gatsby-transformer-remark": "Locked to ^3.2.0 - Updating breaks stuff",
     "gatsby-transformer-remark": "^3.2.0",
     "gatsby-transformer-sharp": "^4.24.0",
     "history": "^5.3.0",
@@ -108,9 +104,7 @@
     "css-loader": "^6.7.2",
     "directory-named-webpack-plugin": "^4.0.0",
     "dotenv": "^16.0.3",
-    "//📦 mkdirp": "Added to have a simple cross-platform way of creating a directory",
     "mkdirp": "^1.0.4",
-    "//⚠️ favicons": "Locked to 6.2.2 - See jantimon/favicons-webpack-plugin#309 (comment) for more info", 
     "favicons": "^6.2.2",
     "gatsby-cli": "^4.24.0",
     "lighthouse": "^9.6.8",
@@ -119,6 +113,14 @@
     "babel-eslint": "^10.1.0",
     "eslint-plugin-prettier": "^4.2.1",
     "prettier": "^2.8.0"
+  },
+  "packageComments": {
+    "⚠️  @brainhubeu/react-carousel": "Locked to 1.19.26 - New version doesn't support multiple slides per page (look at props table on different versions https://www.npmjs.com/package/@brainhubeu/react-carousel/v/1.19.26)",
+    "⚠️  gatsby-remark-custom-blocks": "Locked to ^3.2.0 - Updating breaks stuff",
+    "⚠️  favicons": "Locked to 6.2.2 - See jantimon/favicons-webpack-plugin#309 (comment) for more info", 
+    "⚠️  gatsby-transformer-remark": "Locked to ^3.2.0 - Updating breaks stuff",
+    "⚠️  gatsby-remark-relative-images": "Locked to ^0.3.0 - Updating breaks stuff",
+    "📦 mkdirp": "Added to have a simple cross-platform way of creating a directory"
   },
   "alias": {
     "react-dom": "@hot-loader/react-dom"
