@@ -104,15 +104,23 @@
     "css-loader": "^6.7.2",
     "directory-named-webpack-plugin": "^4.0.0",
     "dotenv": "^16.0.3",
+    "mkdirp": "^1.0.4",
     "favicons": "^6.2.2",
     "gatsby-cli": "^4.24.0",
     "lighthouse": "^9.6.8",
-    "mkdirp": "^1.0.4",
     "tailwindcss": "^1.8.10",
     "typescript": "^4.8.4",
     "babel-eslint": "^10.1.0",
     "eslint-plugin-prettier": "^4.2.1",
     "prettier": "^2.8.0"
+  },
+  "packageComments": {
+    "⚠️  @brainhubeu/react-carousel": "Locked to 1.19.26 - New version doesn't support multiple slides per page (look at props table on different versions https://www.npmjs.com/package/@brainhubeu/react-carousel/v/1.19.26)",
+    "⚠️  gatsby-remark-custom-blocks": "Locked to ^3.2.0 - Updating breaks stuff",
+    "⚠️  favicons": "Locked to 6.2.2 - See jantimon/favicons-webpack-plugin#309 (comment) for more info", 
+    "⚠️  gatsby-transformer-remark": "Locked to ^3.2.0 - Updating breaks stuff",
+    "⚠️  gatsby-remark-relative-images": "Locked to ^0.3.0 - Updating breaks stuff",
+    "📦 mkdirp": "Added to have a simple cross-platform way of creating a directory"
   },
   "alias": {
     "react-dom": "@hot-loader/react-dom"
