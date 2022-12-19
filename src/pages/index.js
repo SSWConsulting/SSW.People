@@ -13,7 +13,12 @@ import LocationSanitiser from '../helpers/locationSanitizer';
 import 'array-flat-polyfill';
 import { config } from '@fortawesome/fontawesome-svg-core';
 import '@fortawesome/fontawesome-svg-core/styles.css';
-/* import ProfileSort from '../helpers/profileSort'; */
+import {
+  BillingRateSort,
+  JobSort,
+  AlphabeticalSort,
+  SampleProfileSort,
+} from '../helpers/profileSort';
 import {
   getEventsPresenters,
   isPresenterOfEventType,
@@ -87,7 +92,13 @@ const Index = ({ data }) => {
   };
 
   const [selectedLocation, setSelectedLocation] = useState(allLocations[0]);
-  const [filteredPeople, setFilteredPeople] = useState(allPeople);
+  const [filteredPeople, setFilteredPeople] = useState(
+      allPeople
+      .sort(AlphabeticalSort)
+      .sort(JobSort)
+      .sort(BillingRateSort)
+      .sort(SampleProfileSort)
+  );
   const [eventsPresenters, setEventsPresenters] = useState(null);
   const [allEventsType, setAllEventsType] = useState([]);
   const [selectedFilters, setSelectedFilters] = useState([
@@ -130,6 +141,7 @@ const Index = ({ data }) => {
               isPresenterOfEventType(e, p.profile, eventsPresenters)
             ).length > 0
         );
+
       return people;
     }
 
@@ -145,9 +157,8 @@ const Index = ({ data }) => {
       loadEventsPresenters();
     }
 
-    // Extra sorting commented out as a temporary fix to this bug
-    // https://github.com/SSWConsulting/SSW.People/issues/456
-    const people = filterPeople(); //.sort(ProfileSort);
+    const people = filterPeople()
+
     setFilteredPeople(people);
   }, [selectedLocation, selectedFilters]);
 
