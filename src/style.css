@@ -723,25 +723,70 @@ pre {
 .people-grid-container {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  grid-column-gap: 1.5rem;
-  grid-row-gap: 1.5rem;
+  gap: 1.5rem;
 }
 
 @media(max-width: 1200px) {
   .people-grid-container {
+    grid-template-columns: repeat(5, 1fr);
+    gap: 1.5rem;
+  }
+}
+
+@media(max-width: 1100px) {
+  .people-grid-container {
+    grid-template-columns: repeat(5, 1fr);
+    gap: 0.5rem;
+  }
+}
+
+
+@media(max-width: 1024px) {
+  .people-grid-container {
+    grid-template-columns: repeat(5, 1fr);
+    gap: 1rem;
+  }
+}
+
+@media(max-width: 850px) {
+  .people-grid-container {
     grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
   }
 }
 
 @media(max-width: 767px) {
   .people-grid-container {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
   }
 }
 
-@media(max-width: 520px) {
+@media(max-width: 690px) {
+  .people-grid-container {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+  }
+}
+
+@media(max-width: 600px) {
+  .people-grid-container {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+}
+
+@media(max-width: 550px) {
+  .people-grid-container {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+  }
+}
+
+@media(max-width: 450px) {
   .people-grid-container {
     grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
   }
 }
 
