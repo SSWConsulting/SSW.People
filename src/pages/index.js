@@ -93,7 +93,7 @@ const Index = ({ data }) => {
 
   const [selectedLocation, setSelectedLocation] = useState(allLocations[0]);
   const [filteredPeople, setFilteredPeople] = useState(
-      allPeople
+    allPeople
       .sort(AlphabeticalSort)
       .sort(JobSort)
       .sort(BillingRateSort)
@@ -157,7 +157,7 @@ const Index = ({ data }) => {
       loadEventsPresenters();
     }
 
-    const people = filterPeople()
+    const people = filterPeople();
 
     setFilteredPeople(people);
   }, [selectedLocation, selectedFilters]);
