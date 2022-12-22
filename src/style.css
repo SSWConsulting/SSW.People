@@ -442,7 +442,7 @@ a {
 }
 
 a:hover {
-  @apply .text-ssw-red;
+  @apply text-ssw-red;
   transition: all 0.2s ease-in-out;
 }
 
@@ -1302,4 +1302,4 @@ font-size: 0.8rem;
 * your stylesheet by default.
 */
 
-@tailwind screens;
+@tailwind variants;
