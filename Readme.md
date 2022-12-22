@@ -78,7 +78,7 @@ This is a Gatsby generated site pulling data from:
 
 - Branching strategy is based off [Release Flow](https://docs.microsoft.com/en-us/azure/devops/learn/devops-at-microsoft/release-flow)
 - **Main** is the main 'dev' branch
-- **Release/xx** is the 'production' one (where xx is the Sprint number)
+- **Release/xx** is the 'production' one (where xx is incremented from the previous release)
 - Always create a new branch for your PBIs
 - Always delete your branch once your PR has been merged
 
