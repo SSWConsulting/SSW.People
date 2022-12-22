@@ -1,6 +1,6 @@
 import { Helmet } from 'react-helmet';
 import React, { useState, useEffect } from 'react';
-import Carousel from '@brainhubeu/react-carousel';
+import Carousel, { slidesToShowPlugin, slidesToScrollPlugin } from '@brainhubeu/react-carousel';
 import '@brainhubeu/react-carousel/lib/style.css';
 import PropTypes from 'prop-types';
 import Icon from '../../images/branding/icon.png';
@@ -10,23 +10,9 @@ const YoutubePlaylist = ({ youtubePlayListId }) => {
   const [error, setError] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
   const [items, setItems] = useState([]);
-  const [currentSlide, setCurrentSlide] = useState(0);
-  const [showButtons, setShowButtons] = useState(true);
 
   var numVideosDesktop = 0;
   var numVideosTablet = 0;
-
-  const nextSlide = () => setCurrentSlide(currentSlide + 1);
-  const previousSlide = () => setCurrentSlide(currentSlide - 1);
-
-  const PLAYING = 1;
-  const HideShowArrows = (e) => {
-    if (e.data == PLAYING) {
-      setShowButtons(false);
-    } else {
-      setShowButtons(true);
-    }
-  };
 
   const getVideosElements = () => {
     return items.map((item) => (
@@ -40,7 +26,6 @@ const YoutubePlaylist = ({ youtubePlayListId }) => {
               id={item.contentDetails.videoId}
               imageSize="mqdefault"
               className={'embedVideo-iframe'}
-              onStateChange={HideShowArrows}
               styles={{
                 width: '321px',
                 height: '180px',
@@ -106,6 +91,28 @@ const YoutubePlaylist = ({ youtubePlayListId }) => {
       numVideosTablet = 1;
     }
 
+    const slidesPerPage = (slideAmount) => {
+        return {
+            resolve: slidesToShowPlugin,
+            options: {
+                numberOfSlides: slideAmount
+            }
+        }
+    }
+
+    const slidesPerScroll = (slideScrollAmount) => {
+        return {
+            resolve: slidesToScrollPlugin,
+            options: {
+                numberOfSlides: slideScrollAmount,
+            },
+        }
+    }
+
+    const renderArrows = () => {
+        return items.length > 1 ? ['arrows'] : [];
+    }
+
     return (
       <div className="youtube-playlist clearfix">
         <div>
@@ -141,55 +148,34 @@ const YoutubePlaylist = ({ youtubePlayListId }) => {
               },
             ]}
           />
+
           <Carousel
-            value={currentSlide}
-            slidesPerPage={numVideosDesktop}
-            slidesPerScroll={numVideosDesktop}
-            infinite
+            plugins={[
+                'infinite',
+                ...(renderArrows()),
+                slidesPerPage(numVideosDesktop),
+                slidesPerScroll(numVideosDesktop),
+            ]}
+            slides={getVideosElementsWithSeparator()}
             breakpoints={{
               768: {
-                slidesPerPage: 1,
-                slidesPerScroll: 1,
+                  plugins: [
+                      'infinite',
+                      ...(renderArrows()),
+                      slidesPerPage(1),
+                      slidesPerScroll(1),
+                  ],
               },
               1280: {
-                slidesPerPage: numVideosTablet,
-                slidesPerScroll: numVideosTablet,
+                plugins: [
+                    'infinite',
+                    ...(renderArrows()),
+                    slidesPerPage(numVideosTablet),
+                    slidesPerScroll(numVideosTablet),
+                  ],
               },
             }}
-            slides={getVideosElementsWithSeparator()}
           />
-          {items.length > 1 && (
-            <>
-              <div
-                className={`youtube-playlist-arrows arrow-previous clearfix ${
-                  (items.length <= numVideosTablet ? 'md:hidden ' : '') +
-                  (items.length <= numVideosDesktop ? 'xl:hidden ' : '') +
-                  (showButtons ? 'show-button' : 'hide-button')
-                }`}
-              >
-                <button
-                  className="BrainhubCarousel__arrows BrainhubCarousel__arrowLeft"
-                  onClick={previousSlide}
-                >
-                  <span>pre</span>
-                </button>
-              </div>
-              <div
-                className={`youtube-playlist-arrows arrow-next clearfix ${
-                  (items.length <= numVideosTablet ? 'md:hidden ' : '') +
-                  (items.length <= numVideosDesktop ? 'xl:hidden ' : '') +
-                  (showButtons ? 'show-button' : 'hide-button')
-                }`}
-              >
-                <button
-                  className="BrainhubCarousel__arrows BrainhubCarousel__arrowRight"
-                  onClick={nextSlide}
-                >
-                  <span>next</span>
-                </button>
-              </div>
-            </>
-          )}
         </div>
       </div>
     );
