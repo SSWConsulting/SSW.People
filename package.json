@@ -115,7 +115,6 @@
     "typescript": "^4.8.4"
   },
   "packageComments": {
-    "⚠️  @brainhubeu/react-carousel": "Locked to 1.19.26 - New version doesn't support multiple slides per page (look at props table on different versions https://www.npmjs.com/package/@brainhubeu/react-carousel/v/1.19.26)",
     "⚠️  gatsby-remark-custom-blocks": "Locked to ^3.2.0 - Higher versions are incompatible with gatsby-transformer-remark@^4.0.0 as per https://www.gatsbyjs.com/plugins/gatsby-remark-custom-blocks/",
     "⚠️  favicons": "Locked to 6.2.2 - See jantimon/favicons-webpack-plugin#309 (comment) for more info",
     "⚠️  gatsby-transformer-remark": "Locked to ^3.2.0 - Due to gatsby-remark-custom-blocks relying on the locked version",
