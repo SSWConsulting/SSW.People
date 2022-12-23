@@ -1,6 +1,9 @@
 import { Helmet } from 'react-helmet';
 import React, { useState, useEffect } from 'react';
-import Carousel, { slidesToShowPlugin, slidesToScrollPlugin } from '@brainhubeu/react-carousel';
+import Carousel, {
+  slidesToShowPlugin,
+  slidesToScrollPlugin,
+} from '@brainhubeu/react-carousel';
 import '@brainhubeu/react-carousel/lib/style.css';
 import PropTypes from 'prop-types';
 import Icon from '../../images/branding/icon.png';
@@ -92,26 +95,26 @@ const YoutubePlaylist = ({ youtubePlayListId }) => {
     }
 
     const slidesPerPage = (slideAmount) => {
-        return {
-            resolve: slidesToShowPlugin,
-            options: {
-                numberOfSlides: slideAmount
-            }
-        }
-    }
+      return {
+        resolve: slidesToShowPlugin,
+        options: {
+          numberOfSlides: slideAmount,
+        },
+      };
+    };
 
     const slidesPerScroll = (slideScrollAmount) => {
-        return {
-            resolve: slidesToScrollPlugin,
-            options: {
-                numberOfSlides: slideScrollAmount,
-            },
-        }
-    }
+      return {
+        resolve: slidesToScrollPlugin,
+        options: {
+          numberOfSlides: slideScrollAmount,
+        },
+      };
+    };
 
     const renderArrows = () => {
-        return items.length > 1 ? ['arrows'] : [];
-    }
+      return items.length > 1 ? ['arrows'] : [];
+    };
 
     return (
       <div className="youtube-playlist clearfix">
@@ -151,28 +154,28 @@ const YoutubePlaylist = ({ youtubePlayListId }) => {
 
           <Carousel
             plugins={[
-                'infinite',
-                ...(renderArrows()),
-                slidesPerPage(numVideosDesktop),
-                slidesPerScroll(numVideosDesktop),
+              'infinite',
+              ...renderArrows(),
+              slidesPerPage(numVideosDesktop),
+              slidesPerScroll(numVideosDesktop),
             ]}
             slides={getVideosElementsWithSeparator()}
             breakpoints={{
               768: {
-                  plugins: [
-                      'infinite',
-                      ...(renderArrows()),
-                      slidesPerPage(1),
-                      slidesPerScroll(1),
-                  ],
+                plugins: [
+                  'infinite',
+                  ...renderArrows(),
+                  slidesPerPage(1),
+                  slidesPerScroll(1),
+                ],
               },
               1280: {
                 plugins: [
-                    'infinite',
-                    ...(renderArrows()),
-                    slidesPerPage(numVideosTablet),
-                    slidesPerScroll(numVideosTablet),
-                  ],
+                  'infinite',
+                  ...renderArrows(),
+                  slidesPerPage(numVideosTablet),
+                  slidesPerScroll(numVideosTablet),
+                ],
               },
             }}
           />
