@@ -21,7 +21,7 @@
     ]
   },
   "dependencies": {
-    "@babel/core": "^7.20.2",
+    "@babel/core": "^7.20.7",
     "@brainhubeu/react-carousel": "^2.0.4",
     "@fortawesome/free-brands-svg-icons": "^6.2.0",
     "@fortawesome/free-regular-svg-icons": "^6.2.0",
@@ -82,7 +82,7 @@
     "react-pose": "^4.0.5",
     "react-tooltip": "^4.5.0",
     "react-youtube": "^10.0.0",
-    "rollup": "^3.2.5",
+    "rollup": "^3.8.0",
     "ssw.megamenu": "^2.2.8",
     "ssw.rules.widget": "^1.2.1",
     "stream-browserify": "^3.0.0",
@@ -120,6 +120,7 @@
     "⚠️  favicons": "Locked to 6.2.2 - See jantimon/favicons-webpack-plugin#309 (comment) for more info",
     "⚠️  gatsby-transformer-remark": "Locked to ^3.2.0 - Due to gatsby-remark-custom-blocks relying on the locked version",
     "⚠️  gatsby-remark-relative-images": "Locked to ^0.3.0 - Updating breaks stuff",
+    "⚠️  node-fetch": "Locked to ^2.6.7 - Higher versions require ESM syntax which we cannot use - https://github.com/node-fetch/node-fetch#commonjs",
     "📦 mkdirp": "Added to have a simple cross-platform way of creating a directory"
   },
   "alias": {
