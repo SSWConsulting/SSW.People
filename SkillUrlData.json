@@ -1,7 +1,9 @@
 [
 	{
 		"pageUrl": "https://www.ssw.com.au/ssw/Consulting/Web-Applications.aspx",
-		"exactMatch": [],
+		"exactMatch": [
+			"HTML5"
+		],
 		"fuzzyMatch": ".NET"
 	},
 	{
@@ -216,7 +218,7 @@
 		"pageUrl": "https://www.ssw.com.au/ssw/Consulting/Power-Platform.aspx",
 		"exactMatch": [
 			"Power Automate",
-			"PowerApps"
+			"Power Apps"
 		],
 		"fuzzyMatch": ""
 	},
