@@ -1,25 +1,47 @@
 [
 	{
 		"pageUrl": "https://www.ssw.com.au/ssw/Consulting/Web-Applications.aspx",
-		"exactMatch": [],
+		"exactMatch": [
+			"HTML5",
+      "PHP",
+      "Codeigniter 4",
+      "CSS",
+      "Tailwind",
+      "Bootstrap",
+      "JavaScript",
+      "jQuery",
+      "TypeScript",
+      "NestJS",
+      "Node.js",
+      "Kendo UI",
+      "Redux",
+      "Web Socket"
+		],
 		"fuzzyMatch": ".NET"
 	},
 	{
 		"pageUrl": "https://www.ssw.com.au/ssw/Consulting/Mobile-Application-Development.aspx",
-		"exactMatch": [],
+		"exactMatch": [
+			"Flutter",
+      "Android",
+      "Xamarin Forms",
+      "App Center"
+		],
 		"fuzzyMatch": "Mobile Apps"
 	},
 	{
 		"pageUrl": "https://www.ssw.com.au/ssw/Consulting/Angular.aspx",
 		"exactMatch": [
-			"Angular"
+			"Angular",
+      "AngularJs"
 		],
 		"fuzzyMatch": ""
 	},
 	{
 		"pageUrl": "https://www.ssw.com.au/ssw/Consulting/React.aspx",
 		"exactMatch": [
-			"React"
+			"React",
+      "Ant Design"
 		],
 		"fuzzyMatch": ""
 	},
@@ -38,7 +60,13 @@
 	{
 		"pageUrl": "https://www.ssw.com.au/ssw/Consulting/Jamstack.aspx",
 		"exactMatch": [
-			"Jamstack"
+			"Jamstack",
+			"Gatsby",
+			"Next.js",
+			"Static Site - Gatsby",
+			"Markdown",
+			"Contentful CMS",
+			"GraphQL"
 		],
 		"fuzzyMatch": ""
 	},
@@ -52,7 +80,9 @@
 	},
 	{
 		"pageUrl": "https://www.ssw.com.au/ssw/Consulting/Enterprise-Reporting.aspx",
-		"exactMatch": [],
+		"exactMatch": [
+			"BI"
+		],
 		"fuzzyMatch": ""
 	},
 	{
@@ -64,7 +94,9 @@
 	},
 	{
 		"pageUrl": "https://www.ssw.com.au/ssw/Consulting/Desktop-Development.aspx",
-		"exactMatch": [],
+		"exactMatch": [
+			"Universal Windows Platform (UWP built on XAML)"
+		],
 		"fuzzyMatch": ""
 	},
 	{
@@ -76,7 +108,9 @@
 	},
 	{
 		"pageUrl": "https://www.ssw.com.au/ssw/Consulting/Azure.aspx",
-		"exactMatch": [],
+		"exactMatch": [
+			"Cognitive Services"
+		],
 		"fuzzyMatch": "Azure"
 	},
 	{
@@ -89,7 +123,8 @@
 	{
 		"pageUrl": "https://www.ssw.com.au/ssw/Consulting/Chinafy-App.aspx",
 		"exactMatch": [
-			"Chinafy"
+			"Chinafy",
+      "WeChat Mini Programs"
 		],
 		"fuzzyMatch": ""
 	},
@@ -103,20 +138,31 @@
 	{
 		"pageUrl": "https://www.ssw.com.au/ssw/Consulting/Software-Audit.aspx",
 		"exactMatch": [
-			"Software auditing"
+			"Software auditing",
+      "Roslyn",
+      "Roslyn analyzers",
+      "Clean Architecture",
+      "Code Review"
 		],
 		"fuzzyMatch": ""
 	},
 	{
 		"pageUrl": "https://www.ssw.com.au/ssw/Consulting/ALM-Azure-DevOps.aspx",
-		"exactMatch": [],
+		"exactMatch": [
+			"Octopus Deploy",
+			"Bicep",
+      "Bitbucket",
+      "GitHub",
+      "GitHub Actions"
+		],
 		"fuzzyMatch": ""
 	},
 	{
 		"pageUrl": "https://www.ssw.com.au/ssw/Consulting/DevOps.aspx",
 		"exactMatch": [
 			"DevOps",
-			"Application Insights"
+			"Application Insights",
+      "Docker"
 		],
 		"fuzzyMatch": ""
 	},
@@ -167,19 +213,25 @@
 	{
 		"pageUrl": "https://www.ssw.com.au/ssw/Consulting/Zendesk.aspx",
 		"exactMatch": [
-			"Zendesk"
+			"Zendesk",
+      "Customer Service"
 		],
 		"fuzzyMatch": ""
 	},
 	{
 		"pageUrl": "https://www.ssw.com.au/ssw/Consulting/Mentoring.aspx",
-		"exactMatch": [],
+		"exactMatch": [
+			"Mentoring"
+		],
 		"fuzzyMatch": ""
 	},
 	{
 		"pageUrl": "https://www.ssw.com.au/ssw/Consulting/Security.aspx",
 		"exactMatch": [
-			"Security"
+			"Security",
+      "AD B2C",
+      "Auth0",
+      "IdentityServer"
 		],
 		"fuzzyMatch": ""
 	},
@@ -198,7 +250,16 @@
 		"exactMatch": [
 			"Graphic Design",
 			"UX",
-			"Product Design"
+			"Product Design",
+			"Adobe Illustrator",
+			"Adobe InDesign",
+			"Adobe Lightroom",
+			"Adobe Photoshop",
+			"Adobe XD",
+			"Figma",
+			"Web Design & UX",
+			"Sketch",
+			"Photography"
 		],
 		"fuzzyMatch": ""
 	},
@@ -208,7 +269,10 @@
 			"Videography",
 			"Adobe Premiere Pro",
 			"Premiere Pro",
-			"Final Cut Pro x"
+			"Final Cut Pro x",
+			"Adobe After Effects",
+			"DaVinci Resolve",
+			"Sound Design"
 		],
 		"fuzzyMatch": ""
 	},
@@ -216,7 +280,7 @@
 		"pageUrl": "https://www.ssw.com.au/ssw/Consulting/Power-Platform.aspx",
 		"exactMatch": [
 			"Power Automate",
-			"PowerApps"
+			"Power Apps"
 		],
 		"fuzzyMatch": ""
 	},
@@ -233,7 +297,11 @@
 	{
 		"pageUrl": "https://www.ssw.com.au/ssw/Consulting/Office-365.aspx",
 		"exactMatch": [
-			"Office 365"
+			"Office 365",
+      "Microsoft Excel",
+      "Microsoft Outlook",
+      "Microsoft PowerPoint",
+      "Microsoft Word"
 		],
 		"fuzzyMatch": ""
 	},
@@ -355,6 +423,34 @@
 		"pageUrl": "https://www.ssw.com.au/ssw/Consulting/Support-Plans.aspx",
 		"exactMatch": [
 			"Support"
+		],
+		"fuzzyMatch": ""
+	},
+  {
+		"pageUrl": "https://www.ssw.com.au/ssw/Events/Training/Training-Options.aspx",
+		"exactMatch": [
+			"Training"
+		],
+		"fuzzyMatch": ""
+	},
+  {
+		"pageUrl": "https://www.ssw.com.au/ssw/Consulting/ArtificialIntelligence.aspx",
+		"exactMatch": [
+			"Machine Learning"
+		],
+		"fuzzyMatch": ""
+	},
+	{
+		"pageUrl": "https://www.ssw.com.au/ssw/Consulting/Test-Practice.aspx",
+		"exactMatch": [
+			"Test management",
+      "Test strategy",
+      "Automated testing",
+      "Playwright",
+      "Exploratory testing",
+      "Selenium",
+      "NBomber",
+      "Cypress"
 		],
 		"fuzzyMatch": ""
 	}
