@@ -1,0 +1,17 @@
+name: Scheduled CodeAuditor Scan
+
+# Schedule Scan for SSW People at 1pm every Wednesday
+on: 
+  schedule:
+  - cron: "0 13 * * 3"
+
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 'SSW CodeAuditor - Check broken links and performance'
+        continue-on-error: true
+        run: 'docker run sswconsulting/codeauditor --token ${{ secrets.CODEAUDITOR_TOKEN }} --url https://www.ssw.com.au/people/ --debug'
