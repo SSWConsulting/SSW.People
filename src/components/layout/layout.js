@@ -6,50 +6,31 @@ import Header from 'components/header';
 import Footer from 'components/footer';
 import '../../style.css';
 import Breadcrumbs from '../breadcrumb/breadcrumb';
-import { Menu, MobileMenu } from 'ssw.megamenu';
+// import { Menu, MobileMenu } from 'ssw.megamenu';
+import { MenuBar } from 'ssw.megamenu';
+import 'ssw.megamenu/dist/style.css';
 
 const Layout = ({ children, pageTitle, crumbs, crumbLabel }) => {
-  const node = useRef();
-  const [isMenuOpened, setIsMenuOpened] = useState(false);
-
-  const actionOnToggleClick = () => {
-    setIsMenuOpened(!isMenuOpened);
-  };
-
-  const handleClick = (e) => {
-    if (node.current.contains(e.target)) {
-      setIsMenuOpened(false);
-    }
-  };
-
   return (
-    <div className={isMenuOpened ? 'overflow-hidden' : 'overflow-auto'}>
-      {/* eslint-disable-next-line jsx-a11y/no-static-element-interactions */}
-      <div
-        ref={node}
-        onMouseDown={isMenuOpened ? (event) => handleClick(event) : null}
-        className={isMenuOpened ? 'translateX84' : 'translateX0'}
-      >
-        <div className="flex flex-col min-h-screen main-container">
-          <Head pageTitle={pageTitle} />
-          <Header />
-          <div className="mx-2 md:mx-6 print-hidden">
-            <Menu onClickToggle={() => actionOnToggleClick()} />
-          </div>
-          <div className="flex flex-row">
-            <div className="w-3/4">
-              {crumbs ? (
-                <Breadcrumbs crumbs={crumbs} crumbLabel={crumbLabel} />
-              ) : (
-                <></>
-              )}
-            </div>
-          </div>
-          <main className="flex-1 sm:mx-auto lg:w-full">{children}</main>
+    <div>
+      <div className="flex flex-col min-h-screen main-container">
+        <Head pageTitle={pageTitle} />
+        <Header />
+        <div className="mx-2 md:mx-6 print-hidden">
+          <MenuBar />
         </div>
-        <Footer />
+        <div className="flex flex-row">
+          <div className="w-3/4">
+            {crumbs ? (
+              <Breadcrumbs crumbs={crumbs} crumbLabel={crumbLabel} />
+            ) : (
+              <></>
+            )}
+          </div>
+        </div>
+        <main className="flex-1 sm:mx-auto lg:w-full">{children}</main>
       </div>
-      <MobileMenu isMenuOpened={isMenuOpened} />
+      <Footer />
     </div>
   );
 };
