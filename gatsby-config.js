@@ -153,7 +153,6 @@ const getPlugins = () => {
       options: {
         trackingIds: [
           process.env.GOOGLE_ANALYTICS, // Tracking Id: UA-111111111-1
-          process.env.GA_MEASUREMENT_ID, // Measurement Id: G-AB123AB12A
         ],
         pluginConfig: {
           head: true,
