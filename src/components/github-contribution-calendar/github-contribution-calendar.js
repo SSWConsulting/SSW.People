@@ -16,6 +16,7 @@ const GitHubContributionCalendar = ({ githubUrl }) => {
           blockMargin={3}
           fontSize={10}
           hideColorLegend={true}
+          colorScheme="light"
         >
           <ReactTooltip delayShow={50} html />
         </GitHubCalendar>

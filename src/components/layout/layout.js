@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { StaticQuery, graphql } from 'gatsby';
 import Head from 'components/head';
@@ -6,7 +6,6 @@ import Header from 'components/header';
 import Footer from 'components/footer';
 import '../../style.css';
 import Breadcrumbs from '../breadcrumb/breadcrumb';
-// import { Menu, MobileMenu } from 'ssw.megamenu';
 import { MenuBar } from 'ssw.megamenu';
 import 'ssw.megamenu/dist/style.css';
 
