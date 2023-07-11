@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Helmet } from 'react-helmet';
-import { StaticQuery, graphql, withPrefix } from 'gatsby';
+import { StaticQuery, graphql } from 'gatsby';
 import { Location } from '@reach/router';
 import { isChinaBuild } from '../../helpers/chinaHelper';
 import schemaGenerator from 'helpers/schemaGenerator';
@@ -11,6 +11,7 @@ const Head = ({
   siteDescription,
   siteUrl,
   parentSiteUrl,
+  pathPrefix,
   pageTitle,
   pageTitleFull = pageTitle ? `${pageTitle} | ${siteTitle}` : siteTitle,
   themeColor,
@@ -18,7 +19,6 @@ const Head = ({
   imageUrl,
   location,
   canonical = parentSiteUrl + (location.pathname || ''),
-  siteUrlWithPrefix = siteUrl + withPrefix('/'),
 }) => {
   return (
     <Helmet>
@@ -59,19 +59,19 @@ const Head = ({
       <link rel="canonical" href={canonical} />
 
       <meta
-        content={imageUrl || `${siteUrlWithPrefix}social.png`}
+        content={imageUrl || `${pathPrefix}/social.png`}
         property="og:image"
       />
       <meta content="1024" property="og:image:width" />
       <meta content="512" property="og:image:height" />
       <meta
-        content={imageUrl || `${siteUrlWithPrefix}social.png`}
+        content={imageUrl || `${pathPrefix}/social.png`}
         name="twitter:image"
       />
       <meta content="1024" name="twitter:image:width" />
       <meta content="512" name="twitter:image:height" />
       <meta
-        content={imageUrl || `${siteUrlWithPrefix}social.png`}
+        content={imageUrl || `${pathPrefix}/social.png`}
         property="og:image"
       />
       <meta content="1024" property="og:image:width" />
@@ -185,6 +185,7 @@ Head.propTypes = {
   siteTitleShort: PropTypes.string,
   siteDescription: PropTypes.string,
   siteUrl: PropTypes.string,
+  pathPrefix: PropTypes.string,
   parentSiteUrl: PropTypes.string,
   themeColor: PropTypes.string,
   social: PropTypes.objectOf(PropTypes.string),
@@ -206,6 +207,7 @@ const HeadWithQuery = (props) => (
             siteTitleShort
             siteDescription
             siteUrl
+            pathPrefix
             parentSiteUrl
             themeColor
             social {
