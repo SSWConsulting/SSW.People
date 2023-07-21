@@ -124,5 +124,6 @@
   },
   "alias": {
     "react-dom": "@hot-loader/react-dom"
-  }
+  },
+  "packageManager": "yarn@1.22.19"
 }
