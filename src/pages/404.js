@@ -12,11 +12,11 @@ const NotFound = () => {
             <div className="not-found-message">
               <h2 className="unselectable mt-2">
                 <span>PAGE NOT FOUND!</span>
-                <h2 className="unselectable -mt-4">
+                <h2 className="unselectable mt-4">
                   Sorry, we couldn&apos;t find the
                 </h2>
 
-                <h2 className="unselectable -mt-6">
+                <h2 className="unselectable mt-6">
                   page you were looking for...
                 </h2>
               </h2>
