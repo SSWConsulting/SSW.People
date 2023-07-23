@@ -449,33 +449,20 @@ a:hover {
 /** Custom blocks images handling **/
 
 .img-badge {
-  margin: 5px;
-  margin-bottom: 20px;
   display: inline-block;
-  vertical-align: middle;
-  min-width: 100px;
-  width: auto;
-  max-height: 100px;
 
   a {
     border-bottom: none !important;
     text-decoration: none !important;
   }
 
-  img {
-    width: auto;
-    max-height: 135px;
+  p {
+    margin: 0 !important;
   }
 
   figcaption {
     display: none;
   }
-
-}
-
-.img-badge .gatsby-resp-image-wrapper{
-  margin-left: auto !important;
-  margin-right: auto;
 }
 
 .img-banner figcaption,

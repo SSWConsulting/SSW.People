@@ -62,6 +62,7 @@ const getPlugins = () => {
           {
             resolve: 'gatsby-remark-figure-caption',
           },
+          'gatsby-remark-relative-images', // must be before other image plugins
           {
             resolve: 'gatsby-remark-images',
             options: {
@@ -71,9 +72,14 @@ const getPlugins = () => {
               maxWidth: 590,
               backgroundColor: 'transparent',
               linkImagesToOriginal: false,
+              wrapperStyle: (fluidResult) =>
+                [
+                  `width:${fluidResult.presentationWidth}px`,
+                  `height:${fluidResult.presentationHeight}px`,
+                  `aspect-ratio:${fluidResult.aspectRatio}`,
+                ].join(';'),
             },
           },
-          'gatsby-remark-relative-images',
           'gatsby-remark-copy-linked-files',
           {
             resolve: 'gatsby-remark-custom-blocks',
