@@ -1,0 +1,12 @@
+{
+  "name": "SSW.People",
+  "short_name": "SSW.People",
+  "theme_color": "#cc4141",
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "type": "image/icon",
+      "sizes": "16x16"q
+    }
+  ]
+}
