@@ -72,7 +72,8 @@ const getPlugins = () => {
               maxWidth: 590,
               backgroundColor: 'transparent',
               linkImagesToOriginal: false,
-              wrapperStyle: fluidResult => [
+              wrapperStyle: (fluidResult) =>
+                [
                   `width:${fluidResult.presentationWidth}px`,
                   `height:${fluidResult.presentationHeight}px`,
                   `aspect-ratio:${fluidResult.aspectRatio}`,
