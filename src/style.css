@@ -456,6 +456,10 @@ a:hover {
     text-decoration: none !important;
   }
 
+  img {
+    height: 135px;
+  }
+
   p {
     margin: 0 !important;
   }
