@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { faCopy } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import copy from 'copy-to-clipboard';
 
 const CopyProfileInformation = ({
   fullName,
@@ -18,20 +19,15 @@ const CopyProfileInformation = ({
     }, 500);
   };
 
-  const textCopyToClipboard = async () => {
-    const textToCopy = `${fullName}\nProfile: https://ssw.com.au/people/${slug}\nStandard Hourly Rate: $${+billingRate}+GST\nPrepaid Hourly Rate: $${
-      +billingRate - 10
-    }+GST (minimum 40 hours per resource, subject to prepaid terms)
-      `;
-
-    await navigator.clipboard.writeText(textToCopy);
-    copiedProfile();
-  };
-
   const copyHtmlToClipboard = async () => {
     const response = await fetch(profileImage.src);
     const blob = await response.blob();
     const reader = new FileReader();
+
+    const textToCopy = `${fullName}\nProfile: https://ssw.com.au/people/${slug}\nStandard Hourly Rate: $${+billingRate}+GST\nPrepaid Hourly Rate: $${
+      +billingRate - 10
+    }+GST (minimum 40 hours per resource, subject to prepaid terms)
+        `;
 
     reader.onloadend = async () => {
       const base64data = reader.result;
@@ -45,12 +41,15 @@ const CopyProfileInformation = ({
           billingRate - 10
         }+GST (minimum 40 hours per resource, subject to prepaid terms)
       `;
-
-      const blob = new Blob([htmlToCopy], { type: 'text/html' });
-      const item = new ClipboardItem({ 'text/html': blob });
-
-      await navigator.clipboard.write([item]);
-      copiedProfile();
+      try {
+        copy(htmlToCopy, {
+          format: 'text/html',
+          debug: true,
+        });
+        copiedProfile();
+      } catch (e) {
+        console.error(e);
+      }
     };
 
     reader.readAsDataURL(blob);
