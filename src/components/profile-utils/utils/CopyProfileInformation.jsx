@@ -36,15 +36,12 @@ const CopyProfileInformation = ({
           billingRate - 10
         }+GST (minimum 40 hours per resource, subject to prepaid terms)
       `;
-      try {
-        copy(htmlToCopy, {
-          format: 'text/html',
-          debug: true,
-        });
-        copiedProfile();
-      } catch (e) {
-        console.error(e);
-      }
+
+      copy(htmlToCopy, {
+        format: 'text/html',
+        debug: true,
+      });
+      copiedProfile();
     };
 
     reader.readAsDataURL(blob);

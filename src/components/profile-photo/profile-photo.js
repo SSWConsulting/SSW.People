@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { faDownload } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import SketchPlaceholder from '../../images/ssw-employee-profile-placeholder-sketch.jpg';
 import ProfilePlaceholder from '../../images/ssw-employee-profile-placeholder-profile.jpg';
 
