@@ -24,11 +24,6 @@ const CopyProfileInformation = ({
     const blob = await response.blob();
     const reader = new FileReader();
 
-    const textToCopy = `${fullName}\nProfile: https://ssw.com.au/people/${slug}\nStandard Hourly Rate: $${+billingRate}+GST\nPrepaid Hourly Rate: $${
-      +billingRate - 10
-    }+GST (minimum 40 hours per resource, subject to prepaid terms)
-        `;
-
     reader.onloadend = async () => {
       const base64data = reader.result;
 
