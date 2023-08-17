@@ -1,52 +1,61 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { faDownload } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import SketchPlaceholder from '../../images/ssw-employee-profile-placeholder-sketch.jpg';
 import ProfilePlaceholder from '../../images/ssw-employee-profile-placeholder-profile.jpg';
 
-const ProfilePhoto = ({ profileImage, sketchImage }) => {
+const Image = ({ hover, profileImage, sketchImage }) => {
+  const src = hover
+    ? sketchImage
+      ? sketchImage.src
+      : SketchPlaceholder
+    : profileImage
+    ? profileImage.src
+    : ProfilePlaceholder;
+
+  return (
+    <img className="profile-image bg-cover mx-auto" src={src} alt="Profile" />
+  );
+};
+
+Image.propTypes = {
+  hover: PropTypes.bool.isRequired,
+  profileImage: PropTypes.shape({
+    src: PropTypes.string.isRequired,
+    name: PropTypes.string,
+  }).isRequired,
+  sketchImage: PropTypes.shape({
+    src: PropTypes.string.isRequired,
+  }).isRequired,
+};
+
+const ProfilePhoto = ({ profileImage, sketchImage, children }) => {
   const [hover, setHover] = useState(false);
 
   return (
     <div
       className="image-bg relative text-center"
-      onMouseEnter={() => {
-        setHover(true);
-      }}
-      onMouseLeave={() => {
-        setHover(false);
-      }}
+      onMouseEnter={() => setHover(true)}
+      onMouseLeave={() => setHover(false)}
     >
-      <a
-        className="download-image"
-        href={profileImage ? profileImage.src : ProfilePlaceholder}
-        download={profileImage?.name}
-      >
-        <img
-          className="profile-image bg-cover mx-auto"
-          src={
-            hover
-              ? sketchImage
-                ? sketchImage.src
-                : SketchPlaceholder
-              : profileImage
-              ? profileImage.src
-              : ProfilePlaceholder
-          }
-          alt="Profile"
-        />
-        <div className="absolute bottom-0 left-0">
-          <FontAwesomeIcon icon={faDownload} className="m-4" />
-        </div>
-      </a>
+      <Image
+        hover={hover}
+        profileImage={profileImage}
+        sketchImage={sketchImage}
+      />
+      {children ? children : null}
     </div>
   );
 };
 
 ProfilePhoto.propTypes = {
-  profileImage: PropTypes.object.isRequired,
-  sketchImage: PropTypes.object.isRequired,
+  profileImage: PropTypes.shape({
+    src: PropTypes.string.isRequired,
+    name: PropTypes.string,
+  }).isRequired,
+  sketchImage: PropTypes.shape({
+    src: PropTypes.string.isRequired,
+  }).isRequired,
+  children: PropTypes.arrayOf(PropTypes.element),
 };
 
 export default ProfilePhoto;

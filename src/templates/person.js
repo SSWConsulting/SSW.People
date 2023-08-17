@@ -17,6 +17,7 @@ import { RulesWidget } from 'ssw.rules.widget';
 import YoutubePlaylist from '../components/youtube-playlist/youtube-playlist';
 import { config } from '@fortawesome/fontawesome-svg-core';
 import { isChinaBuild } from '../helpers/chinaHelper';
+import ProfilePhotoUtils from '../components/profile-utils/profile-photo-utils';
 
 config.autoAddCss = false;
 
@@ -35,6 +36,10 @@ const Person = ({ pageContext }) => {
   let firstNameOrNickname = '';
   let jobTitle = frontmatter.role;
   let githubUsername = '';
+  let billingRate = 0;
+  let slug = pageContext.nicknamePath
+    ? pageContext.nicknamePath
+    : pageContext.originalPath;
   if (crmData) {
     personName = crmData.nickname
       ? `${crmData.fullName} (${crmData.nickname})`
@@ -49,6 +54,7 @@ const Person = ({ pageContext }) => {
     githubUsername = crmData.gitHubUrl
       ? crmData.gitHubUrl.split('/').pop()
       : '';
+    billingRate = crmData.billingRate;
   } else {
     personName = frontmatter.name ? frontmatter.name : '';
     fullName = frontmatter.name ? frontmatter.name : '';
@@ -63,7 +69,7 @@ const Person = ({ pageContext }) => {
   const initWidget = () => {
     return (
       <RulesWidget
-        token={process.env.WIDGET_GITHUB_PAT}
+        token={process.env?.WIDGET_GITHUB_PAT}
         ruleEditor={githubUsername}
         numberOfRules={10}
         rulesUrl="https://www.ssw.com.au/rules/"
@@ -99,7 +105,9 @@ const Person = ({ pageContext }) => {
   const skillsList = (
     <SkillsList crmData={crmData} skillUrlData={skillUrlData} />
   );
+
   const socialLinks = <SocialLinks crmData={crmData} />;
+
   return (
     <>
       <div className="flex flex-wrap mb-5 person-content">
@@ -112,7 +120,11 @@ const Person = ({ pageContext }) => {
               <ProfilePhoto
                 profileImage={profileImage}
                 sketchImage={sketchImage}
-              />
+              >
+                <ProfilePhotoUtils
+                  profile={{ profileImage, fullName, slug, billingRate }}
+                />
+              </ProfilePhoto>
               {profileAudio ? (
                 <PlayAudio hasAnimation={true} audioSrc={profileAudio.src} />
               ) : (
