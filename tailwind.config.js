@@ -7,7 +7,7 @@ module.exports = {
       },
       colors: {
         ssw: {
-          red: 'cc4141',
+          red: '#cc4141',
         },
       },
     },
