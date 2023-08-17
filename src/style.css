@@ -1269,6 +1269,10 @@ font-size: 0.8rem;
     display: none !important;
 }
 
+.profile-util-copy-left {
+  left: 30%;
+}
+
 /**
 * This injects Tailwind's component classes and any component classes
 * registered by plugins.

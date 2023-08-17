@@ -5,6 +5,11 @@ module.exports = {
       screens: {
         print: { raw: 'print' },
       },
+      colors: {
+        ssw: {
+          red: 'cc4141',
+        },
+      },
     },
   },
   variants: {},

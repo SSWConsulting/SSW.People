@@ -266,6 +266,7 @@ exports.createPages = async function ({ actions, graphql }) {
           }
           location
           jobTitle
+          billingRate
           role
           emailAddress
           skypeUsername
