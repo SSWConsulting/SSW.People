@@ -1273,6 +1273,11 @@ font-size: 0.8rem;
   left: 30%;
 }
 
+.profile-util-copy:hover {
+  color: #cc4141;
+  transition: all 0.2s ease-in-out;
+}
+
 /**
 * This injects Tailwind's component classes and any component classes
 * registered by plugins.
