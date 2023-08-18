@@ -78,6 +78,7 @@
     "react-github-calendar": "^4.0.0",
     "react-google-recaptcha": "^2.1.0",
     "react-helmet": "^6.1.0",
+    "react-hot-toast": "^2.4.1",
     "react-lazy-youtube": "^1.0.1",
     "react-modal": "^3.16.1",
     "react-pose": "^4.0.5",

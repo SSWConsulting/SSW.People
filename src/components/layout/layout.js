@@ -7,12 +7,14 @@ import Footer from 'components/footer';
 import '../../style.css';
 import Breadcrumbs from '../breadcrumb/breadcrumb';
 import { MenuBar } from 'ssw.megamenu';
+import { Toaster } from 'react-hot-toast';
 import 'ssw.megamenu/dist/style.css';
 
 const Layout = ({ children, pageTitle, crumbs, crumbLabel }) => {
   return (
     <div>
       <div className="flex flex-col min-h-screen main-container">
+        <Toaster position="top-center" reverseOrder={false} />
         <Head pageTitle={pageTitle} />
         <Header />
         <div className="mx-2 md:mx-6 print-hidden">

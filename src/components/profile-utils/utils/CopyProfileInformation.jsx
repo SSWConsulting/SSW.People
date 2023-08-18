@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { faCopy } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import copy from 'copy-to-clipboard';
+import toast from 'react-hot-toast';
 
 const CopyProfileInformation = ({
   fullName,
@@ -10,15 +11,6 @@ const CopyProfileInformation = ({
   billingRate,
   profileImage,
 }) => {
-  const [isCopied, setIsCopied] = useState(false);
-
-  const copiedProfile = () => {
-    setIsCopied(true);
-    setTimeout(() => {
-      setIsCopied(false);
-    }, 500);
-  };
-
   const copyHtmlToClipboard = async () => {
     const response = await fetch(profileImage.src);
     const blob = await response.blob();
@@ -41,7 +33,7 @@ const CopyProfileInformation = ({
         format: 'text/html',
         debug: true,
       });
-      copiedProfile();
+      toast.success('Copied to clipboard');
     };
 
     reader.readAsDataURL(blob);
@@ -50,12 +42,9 @@ const CopyProfileInformation = ({
   return (
     <button
       onClick={copyHtmlToClipboard}
-      className="mb-4 bottom-0 absolute profile-util-copy-left z-10"
+      className="mb-4 bottom-0 absolute profile-util-copy-left z-10 profile-util-copy"
     >
-      <FontAwesomeIcon
-        icon={faCopy}
-        className={isCopied ? 'text-ssw-red' : ''}
-      />
+      <FontAwesomeIcon icon={faCopy} />
     </button>
   );
 };
