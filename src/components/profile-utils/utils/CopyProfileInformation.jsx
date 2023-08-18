@@ -12,31 +12,35 @@ const CopyProfileInformation = ({
   profileImage,
 }) => {
   const copyHtmlToClipboard = async () => {
-    const response = await fetch(profileImage.src);
-    const blob = await response.blob();
-    const reader = new FileReader();
+    const PREPAID_DISCOUNT = 15;
+    const siteUrl = location?.href.split(slug)[0];
+    const imageUrl = siteUrl.concat(profileImage.src);
 
-    reader.onloadend = async () => {
-      const base64data = reader.result;
+    const htmlToCopy = `
+    <table border="0" cellspacing="0" cellpadding="0" style="width: auto;">
+      <tr>
+        <td>
+          <img src="${imageUrl}" alt="${fullName}'s profile picture" height="90">
+        </td>
+        <td style="vertical-align: top; padding-left: 5px;"> <!-- Adjusted padding-left here -->
+          <strong style="display: block; margin-bottom: 0;">${fullName}</strong>
+          <ul style="margin-top: 0; padding-left: 20px; padding-top: 0;">
+            <li style="margin-top: 0;">Profile: <a href="https://ssw.com.au/people/${slug}">https://ssw.com.au/people/${slug}</a></li>
+            <li>Standard Hourly Rate: $${billingRate}+GST</li>
+            <li>Prepaid Hourly Rate: $${
+              billingRate - PREPAID_DISCOUNT
+            }+GST (minimum 40 hours per resource, subject to prepaid terms)</li>
+          </ul>
+        </td>
+      </tr>
+    </table>
+  `;
 
-      const htmlToCopy = `
-        <img src="${base64data}" alt="${fullName}'s profile picture"><br>
-        <strong>${fullName}</strong><br>
-        Profile: https://ssw.com.au/people/${slug}<br>
-        Standard Hourly Rate: $${billingRate}+GST<br>
-        Prepaid Hourly Rate: $${
-          billingRate - 10
-        }+GST (minimum 40 hours per resource, subject to prepaid terms)
-      `;
-
-      copy(htmlToCopy, {
-        format: 'text/html',
-        debug: true,
-      });
-      toast.success('Copied to clipboard');
-    };
-
-    reader.readAsDataURL(blob);
+    copy(htmlToCopy, {
+      format: 'text/html',
+      debug: true,
+    });
+    toast.success('Copied to clipboard');
   };
 
   return (

@@ -8,7 +8,7 @@ const ProfilePhotoUtils = ({ profile }) => {
     <Fragment>
       <ProfileImageDownload profileImage={profile?.profileImage} />
       <CopyProfileInformation
-        billingRate={profile.billingRate}
+        billingRate={+profile.billingRate}
         profileImage={profile.profileImage}
         slug={profile.slug}
         fullName={profile.fullName}
