@@ -29,7 +29,8 @@ const CopyProfileInformation = ({
             <li style="margin-top: 0;">Standard: $${billingRate}+GST</li>
             <li>Prepaid: $${
               billingRate - PREPAID_DISCOUNT
-            }+GST (minimum 40h, subject to prepaid terms)</li>
+            }+GST (minimum 40h, subject to <a href="https://ssw.com.au/terms-and-conditions">prepaid terms</a>)</li>
+          
           </ul>
         </td>
       </tr>
