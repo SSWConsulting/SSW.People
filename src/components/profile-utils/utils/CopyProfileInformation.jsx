@@ -13,7 +13,10 @@ const CopyProfileInformation = ({
 }) => {
   const copyHtmlToClipboard = async () => {
     const PREPAID_DISCOUNT = 15;
-    const siteUrl = location?.origin;
+    const isLocalhost = location?.hostname === 'localhost';
+    const siteUrl = isLocalhost
+      ? location?.origin
+      : `${location?.origin}/people`;
     const imageUrl = siteUrl.concat(profileImage.src);
 
     const htmlToCopy = `
