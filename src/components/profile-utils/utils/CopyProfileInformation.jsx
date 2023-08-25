@@ -16,9 +16,7 @@ const CopyProfileInformation = ({
     const PREPAID_DISCOUNT = 15;
     const siteUrl = location?.origin;
     const imageUrl = siteUrl.concat(profileImage.src);
-    console.log(imageUrl);
-    console.log(location);
-    console.log(profileImage);
+
     const htmlToCopy = `
     <table border="0" cellspacing="0" cellpadding="0" style="width: auto;">
       <tr>
