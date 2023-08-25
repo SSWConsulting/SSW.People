@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { faCopy } from '@fortawesome/free-solid-svg-icons';
@@ -16,9 +15,7 @@ const CopyProfileInformation = ({
     const PREPAID_DISCOUNT = 15;
     const siteUrl = location?.origin;
     const imageUrl = siteUrl.concat(profileImage.src);
-    console.log(imageUrl);
-    console.log(location);
-    console.log(profileImage);
+
     const htmlToCopy = `
     <table border="0" cellspacing="0" cellpadding="0" style="width: auto;">
       <tr>
