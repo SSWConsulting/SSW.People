@@ -372,7 +372,6 @@ exports.createPages = async function ({ actions, graphql }) {
       const nickname = crmData ? crmData.nickname : null;
 
       const prefix = isCurrent ? '' : alumniPrefix.replace('/', '') + '/';
-
       return {
         slug: node.parent.name,
         path: prefix + node.parent.name.toLowerCase(),
@@ -453,11 +452,27 @@ exports.onPostBuild = async ({ store, pathPrefix }) => {
       (page) =>
         page.path !== alumniPrefix + '/' && page.path.startsWith(alumniPrefix)
     )
-    .map((page) => {
-      return {
-        fromPath: pathPrefix + '/' + page.path.replace(alumniPrefix + '/', ''),
-        toPath: pathPrefix + page.path,
-      };
+    .flatMap((page) => {
+      const fromPathWithSlash =
+        pathPrefix + '/' + page.path.replace(alumniPrefix + '/', '');
+      const toPathWithSlash = pathPrefix + page.path;
+      const fromPathWithoutSlash = fromPathWithSlash.replace(/\/$/, '');
+
+      return [
+        {
+          fromPath: fromPathWithSlash,
+          toPath: toPathWithSlash,
+        },
+        {
+          fromPath: fromPathWithoutSlash,
+          toPath: toPathWithSlash,
+        },
+      ];
+
+      // return {
+      //   fromPath: pathPrefix + '/' + page.path.replace(alumniPrefix + '/', ''),
+      //   toPath: pathPrefix + page.path,
+      // };
     });
 
   //Fetch existing URL redirects for previous Nicknames
@@ -486,5 +501,6 @@ exports.onPostBuild = async ({ store, pathPrefix }) => {
   const allRewritesUnique = [
     ...new Map(allRewrites.map((item) => [item.fromPath, item])).values(),
   ];
+
   await createRewriteMap.writeRewriteMapsFile(pluginData, allRewritesUnique);
 };
