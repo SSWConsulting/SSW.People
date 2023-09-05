@@ -468,11 +468,6 @@ exports.onPostBuild = async ({ store, pathPrefix }) => {
           toPath: toPathWithSlash,
         },
       ];
-
-      // return {
-      //   fromPath: pathPrefix + '/' + page.path.replace(alumniPrefix + '/', ''),
-      //   toPath: pathPrefix + page.path,
-      // };
     });
 
   //Fetch existing URL redirects for previous Nicknames
