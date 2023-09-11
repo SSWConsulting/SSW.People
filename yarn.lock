@@ -1456,7 +1456,7 @@
   dependencies:
     "@fortawesome/fontawesome-common-types" "6.4.0"
 
-"@fortawesome/react-fontawesome@^0.1.15":
+"@fortawesome/react-fontawesome@^0.1.14", "@fortawesome/react-fontawesome@^0.1.15":
   version "0.1.19"
   resolved "https://registry.yarnpkg.com/@fortawesome/react-fontawesome/-/react-fontawesome-0.1.19.tgz#2b36917578596f31934e71f92b7cf9c425fd06e4"
   integrity sha512-Hyb+lB8T18cvLNX0S3llz7PcSOAJMLwiVKBuuzwM/nI5uoBw+gQjnf9il0fR1C3DKOI5Kc79pkJ4/xB0Uw9aFQ==
@@ -6260,7 +6260,7 @@ class-utils@^0.3.5:
     isobject "^3.0.0"
     static-extend "^0.1.1"
 
-classnames@^2.2.6, classnames@^2.3.0:
+classnames@^2.2.6, classnames@^2.3.0, classnames@^2.3.2:
   version "2.3.2"
   resolved "https://registry.yarnpkg.com/classnames/-/classnames-2.3.2.tgz#351d813bf0137fcc6a76a16b88208d2560a0d924"
   integrity sha512-CSbhY4cFEJRe6/GQzIk5qXZ4Jeg5pcsP7b5peFSDpffpe1cqjASH/n9UTjBwOp6XpMSTwQ8Za2K5V02ueA7Tmw==
@@ -18159,10 +18159,15 @@ ssri@^8.0.1:
   dependencies:
     minipass "^3.1.1"
 
-ssw.megamenu@^3.1.3:
-  version "3.1.4"
-  resolved "https://registry.yarnpkg.com/ssw.megamenu/-/ssw.megamenu-3.1.4.tgz#f26a37f587c61362247d4dbd2392197a16371836"
-  integrity sha512-uqLmZgBH8jzjAIyHzCCAHJINrgx590rPXKWNI2Ty9XIoF7wfDIP/8HiVnheVZ8BjMn5xunQTz18ufve4q0ejiA==
+ssw.megamenu@^3.2.2:
+  version "3.2.2"
+  resolved "https://registry.yarnpkg.com/ssw.megamenu/-/ssw.megamenu-3.2.2.tgz#2cae3bbf645fcf041331f7c5f6f56865c1b5fbe7"
+  integrity sha512-Tnqq8Az3q45drMbmnl1uqL+SKyV/vplGv5GlfgQIza/UTzGYqEiEM+CTsv9ewGiFWoq+C2n4X0D7PpwwbJuKdA==
+  dependencies:
+    "@fortawesome/fontawesome-svg-core" "^1.2.35"
+    "@fortawesome/free-solid-svg-icons" "^5.15.3"
+    "@fortawesome/react-fontawesome" "^0.1.14"
+    classnames "^2.3.2"
 
 ssw.rules.widget@^1.5.4:
   version "1.5.4"
