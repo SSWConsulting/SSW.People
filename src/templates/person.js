@@ -71,7 +71,7 @@ const Person = ({ pageContext }) => {
       <RulesWidget
         token={process.env?.WIDGET_GITHUB_PAT}
         ruleEditor={githubUsername}
-        numberOfRules={10}
+        ruleCount={5}
         rulesUrl="https://www.ssw.com.au/rules/"
       />
     );
