@@ -85,7 +85,7 @@
     "react-tooltip": "^5.16.1",
     "react-youtube": "^10.0.0",
     "rollup": "^3.8.0",
-    "ssw.megamenu": "^3.2.2",
+    "ssw.megamenu": "3.2.3",
     "ssw.rules.widget": "^1.5.4",
     "stream-browserify": "^3.0.0",
     "stream-http": "^3.2.0",
