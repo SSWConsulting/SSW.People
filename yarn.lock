@@ -18159,7 +18159,7 @@ ssri@^8.0.1:
   dependencies:
     minipass "^3.1.1"
 
-ssw.megamenu@^3.2.2:
+ssw.megamenu@^3.2.3:
   version "3.2.3"
   resolved "https://registry.yarnpkg.com/ssw.megamenu/-/ssw.megamenu-3.2.3.tgz#ab50182511f34b32e1057eb30cd7917407aa1394"
   integrity sha512-kjrTqGG1PodbyunsfuiPD4kO353MCb70vZMowj8zROXE1UGoVrTZ2jskxcG/DGnbnKsCyatOm+ELPLeU7mL6gQ==
