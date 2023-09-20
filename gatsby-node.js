@@ -481,28 +481,7 @@ exports.onPostBuild = async ({ store, pathPrefix }) => {
       ];
     });
 
-  //Fetch existing URL redirects for previous Nicknames
-  const existingRewrites = await createRewriteMap.getExistingRewrites();
-  const additionalRewrites = Array.from(existingRewrites).map((rewrite) => {
-    let existingRedirect = rewrites.find(
-      (r) => r.fromPath === pathPrefix + '/' + rewrite.fullName
-    );
-    if (existingRedirect) {
-      return {
-        fromPath: pathPrefix + '/' + rewrite.nickName,
-        toPath: existingRedirect.toPath,
-      };
-    } else {
-      return {
-        fromPath: pathPrefix + '/' + rewrite.nickName,
-        toPath: pathPrefix + '/' + rewrite.fullName,
-      };
-    }
-  });
-
-  const allRewrites = rewrites
-    .concat(alumniRewrites)
-    .concat(additionalRewrites);
+  const allRewrites = rewrites.concat(alumniRewrites);
 
   const allRewritesUnique = [
     ...new Map(allRewrites.map((item) => [item.fromPath, item])).values(),
