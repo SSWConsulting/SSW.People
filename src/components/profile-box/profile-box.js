@@ -123,6 +123,7 @@ ProfileBox.propTypes = {
   }),
   sanitisedNickname: PropTypes.string,
   profileAudio: PropTypes.string,
+  isUniqueName: PropTypes.bool,
 };
 
 export default ProfileBox;
