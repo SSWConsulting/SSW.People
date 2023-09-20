@@ -5,7 +5,7 @@ const CheckUniqueName = (arr, target) => {
       count++;
     }
   }
-  return count == 0;
+  return count <= 1;
 };
 
 module.exports = CheckUniqueName;
