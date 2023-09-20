@@ -394,9 +394,28 @@ exports.createPages = async function ({ actions, graphql }) {
       };
     });
 
+  const personFirstNames = people.map((person) => {
+    return person.dataCRM?.fullName.split(' ')[0].toLowerCase();
+  });
+  function isUniqueFirstName(target) {
+    let count = 0;
+    for (let i = 0; i < personFirstNames.length; i++) {
+      if (personFirstNames[i] === target) {
+        count++;
+      }
+    }
+    return count == 0;
+  }
+
   people.forEach((person) => {
+    const pathToUse =
+      person.nicknamePath &&
+      isUniqueFirstName(person.dataCRM.nickname.toLowerCase())
+        ? person.nicknamePath
+        : person.path;
+
     actions.createPage({
-      path: person.nicknamePath ? person.nicknamePath : person.path,
+      path: pathToUse,
       component: require.resolve('./src/templates/person.js'),
       context: {
         slug: person.slug,
