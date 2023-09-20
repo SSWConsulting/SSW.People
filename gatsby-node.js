@@ -5,6 +5,7 @@ const DirectoryNamedWebpackPlugin = require('directory-named-webpack-plugin');
 const WebpackAssetsManifest = require('webpack-assets-manifest');
 const makePluginData = require('./src/helpers/plugin-data');
 const createRewriteMap = require('./src/helpers/createRewriteMap');
+const CheckUniqueName = require('./src/helpers/CheckUniqueName');
 const chinaHelper = require('./src/helpers/chinaHelper');
 const { SkillSort } = require('./src/helpers/skillSort');
 const { getViewDataFromCRM } = require('./src/helpers/CRMApi');
@@ -397,20 +398,11 @@ exports.createPages = async function ({ actions, graphql }) {
   const personFirstNames = people.map((person) => {
     return person.dataCRM?.fullName.split(' ')[0].toLowerCase();
   });
-  function isUniqueFirstName(target) {
-    let count = 0;
-    for (let i = 0; i < personFirstNames.length; i++) {
-      if (personFirstNames[i] === target) {
-        count++;
-      }
-    }
-    return count == 0;
-  }
 
   people.forEach((person) => {
     const pathToUse =
       person.nicknamePath &&
-      isUniqueFirstName(person.dataCRM.nickname.toLowerCase())
+      CheckUniqueName(personFirstNames, person.dataCRM.nickname.toLowerCase())
         ? person.nicknamePath
         : person.path;
 

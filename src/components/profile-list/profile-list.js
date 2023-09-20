@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import ProfileBox from 'components/profile-box';
 import Distinct from '../../helpers/arrayHelpers';
 import RoleSort from '../../helpers/roleSort';
+import CheckUniqueName from '../../helpers/CheckUniqueName';
 
 const ProfileList = ({ filteredPeople }) => {
   const distinctRoles = filteredPeople
@@ -13,7 +14,9 @@ const ProfileList = ({ filteredPeople }) => {
   const getPeopleInRole = (role) => {
     return filteredPeople.filter((p) => p.role === role);
   };
-
+  const firstNameList = filteredPeople.map((person) => {
+    return person.profile.fullName.split(' ')[0].toLowerCase();
+  });
   return (
     <>
       {distinctRoles.map((role, i) => {
@@ -32,6 +35,10 @@ const ProfileList = ({ filteredPeople }) => {
                       profileImages={person.profileImages}
                       sanitisedNickname={person.sanitisedNickname}
                       profileAudio={person.profileAudio}
+                      isUniqueName={CheckUniqueName(
+                        firstNameList,
+                        person.profile.nickname.toLowerCase()
+                      )}
                     />
                   );
                 })}

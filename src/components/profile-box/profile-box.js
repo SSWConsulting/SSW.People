@@ -12,6 +12,7 @@ const ProfileBox = ({
   profileImages,
   sanitisedNickname,
   profileAudio,
+  isUniqueName,
 }) => {
   const linkRef = useRef();
   const [hover, setHover] = useState(false);
@@ -96,7 +97,7 @@ const ProfileBox = ({
         <Link
           ref={linkRef}
           to={`/${
-            profile.nickname
+            profile.nickname && isUniqueName
               ? sanitisedNickname.toLowerCase()
               : sanitisedName.toLowerCase()
           }`}
