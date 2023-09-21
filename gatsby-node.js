@@ -5,6 +5,7 @@ const DirectoryNamedWebpackPlugin = require('directory-named-webpack-plugin');
 const WebpackAssetsManifest = require('webpack-assets-manifest');
 const makePluginData = require('./src/helpers/plugin-data');
 const createRewriteMap = require('./src/helpers/createRewriteMap');
+const CheckUniqueName = require('./src/helpers/CheckUniqueName');
 const chinaHelper = require('./src/helpers/chinaHelper');
 const { SkillSort } = require('./src/helpers/skillSort');
 const { getViewDataFromCRM } = require('./src/helpers/CRMApi');
@@ -394,9 +395,19 @@ exports.createPages = async function ({ actions, graphql }) {
       };
     });
 
+  const personFirstNames = people.map((person) => {
+    return person.dataCRM?.fullName.split(' ')[0].toLowerCase();
+  });
+
   people.forEach((person) => {
+    const pathToUse =
+      person.nicknamePath &&
+      CheckUniqueName(personFirstNames, person.dataCRM.nickname.toLowerCase())
+        ? person.nicknamePath
+        : person.path;
+
     actions.createPage({
-      path: person.nicknamePath ? person.nicknamePath : person.path,
+      path: pathToUse,
       component: require.resolve('./src/templates/person.js'),
       context: {
         slug: person.slug,
@@ -470,28 +481,7 @@ exports.onPostBuild = async ({ store, pathPrefix }) => {
       ];
     });
 
-  //Fetch existing URL redirects for previous Nicknames
-  const existingRewrites = await createRewriteMap.getExistingRewrites();
-  const additionalRewrites = Array.from(existingRewrites).map((rewrite) => {
-    let existingRedirect = rewrites.find(
-      (r) => r.fromPath === pathPrefix + '/' + rewrite.fullName
-    );
-    if (existingRedirect) {
-      return {
-        fromPath: pathPrefix + '/' + rewrite.nickName,
-        toPath: existingRedirect.toPath,
-      };
-    } else {
-      return {
-        fromPath: pathPrefix + '/' + rewrite.nickName,
-        toPath: pathPrefix + '/' + rewrite.fullName,
-      };
-    }
-  });
-
-  const allRewrites = rewrites
-    .concat(alumniRewrites)
-    .concat(additionalRewrites);
+  const allRewrites = rewrites.concat(alumniRewrites);
 
   const allRewritesUnique = [
     ...new Map(allRewrites.map((item) => [item.fromPath, item])).values(),
