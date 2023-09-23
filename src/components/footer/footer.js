@@ -38,8 +38,7 @@ const Footer = () => {
           <div className="xl:mx-6">
             <div className="mx-6 flex flex-col-reverse md:flex-row justify-between align-middle leading-6">
               <div className="py-2">
-                Copyright © {companyShortName} 1990 - {new Date().getFullYear()}
-                . All Rights Reserved.
+                &copy; 1990-{new Date().getFullYear()} SSW. All rights reserved.
               </div>
               <div className="w-full md:w-3/6 md:text-right py-2">
                 <a
@@ -51,7 +50,7 @@ const Footer = () => {
                 <span className="px-2">|</span>
                 <a
                   className="footer-link"
-                  href="https://www.ssw.com.au/ssw/Consulting/Terms-and-Conditions/"
+                  href="https://www.ssw.com.au/terms-and-conditions"
                 >
                   TERMS AND CONDITIONS
                 </a>
@@ -128,12 +127,12 @@ const Footer = () => {
                   </a>
                 </div>
               </div>
-              {/* Copyright © SSW 1990 - {new Date().getFullYear()}. All Rights Reserved. */}
+              {/* &copy; 1990-{new Date().getFullYear()} SSW. All rights reserved. */}
             </div>
             <hr className="border-gray-800 my-2"></hr>
             <div className="flex flex-col lg:flex-row justify-between mx-2 md:mx-6">
               <div className="py-2">
-                Our website is under{' '}
+                This website is under{' '}
                 <a
                   className="footer-link"
                   href="https://ssw.com.au/rules/do-you-continuously-deploy"
