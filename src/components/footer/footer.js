@@ -12,7 +12,6 @@ import {
   faWeixin,
   faYoutube,
 } from '@fortawesome/free-brands-svg-icons';
-import { companyShortName } from '../../../site-config';
 import China from '../../images/china.png';
 
 const buildTimestamp = preval`module.exports = new Date().getTime();`;
@@ -145,7 +144,7 @@ const Footer = () => {
               <div className="py-2">
                 <a
                   className="footer-link"
-                  href="https://rules.ssw.com.au/rules-to-better-internationalization"
+                  href="https://ssw.com.au/rules/rules-to-better-internationalization"
                 >
                   Chinafied
                   <img
@@ -158,14 +157,14 @@ const Footer = () => {
                 Powered by{' '}
                 <a
                   className="footer-link"
-                  href="https://rules.ssw.com.au/rules-to-better-azure"
+                  href="https://ssw.com.au/rules/rules-to-better-azure"
                 >
                   Azure
                 </a>{' '}
                 and{' '}
                 <a
                   className="footer-link"
-                  href="https://rules.ssw.com.au/rules-to-better-github"
+                  href="https://ssw.com.au/rules/rules-to-better-github"
                 >
                   {' '}
                   GitHub
