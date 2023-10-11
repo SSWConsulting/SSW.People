@@ -165,7 +165,7 @@ const Person = ({ pageContext }) => {
           </div>
         </div>
         <div className="sm:w-full lg:w-3/4 xl:w-5/6 print-full-width">
-          <div className="person-content-wrap ml-4">
+          <div className="person-content-wrap mx-4">
             <div className="hidden lg:block print-hidden">
               {profileDescription}
             </div>
