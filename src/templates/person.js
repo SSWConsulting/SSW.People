@@ -73,6 +73,7 @@ const Person = ({ pageContext }) => {
         ruleEditor={githubUsername}
         ruleCount={5}
         rulesUrl="https://www.ssw.com.au/rules/"
+        userRulesUrl="/rules/user/?author="
       />
     );
   };
