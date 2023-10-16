@@ -69,7 +69,10 @@ const Person = ({ pageContext }) => {
   const initWidget = () => {
     return (
       <RulesWidget
-        token={process.env?.WIDGET_GITHUB_PAT}
+        githubToken={process.env?.WIDGET_GITHUB_PAT}
+        appInsightsToken={
+          process.env?.RULESWIDGET_APPINSIGHTS_INSTRUMENTATIONKEY
+        }
         ruleEditor={githubUsername}
         ruleCount={5}
         rulesUrl="https://www.ssw.com.au/rules/"
