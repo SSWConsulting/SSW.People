@@ -114,11 +114,11 @@ const Person = ({ pageContext }) => {
   return (
     <>
       <div className="flex flex-wrap mb-5 person-content">
-        <div className="sm:w-full lg:w-1/4 xl:w-1/6 print-full-width">
+        <div className="w-full lg:w-1/4 xl:w-1/6 print-full-width">
           <div className="person-description md:hidden w-full my-auto print-hidden">
             {profileDescription}
           </div>
-          <div className="flex profile-image-quote">
+          <div className="flex justify-between">
             <div>
               <ProfilePhoto
                 profileImage={profileImage}
