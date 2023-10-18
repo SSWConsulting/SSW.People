@@ -39,6 +39,7 @@ ProfileDescription.propTypes = {
   jobTitle: PropTypes.string.isRequired,
   location: PropTypes.string,
   qualifications: PropTypes.string,
+  children: PropTypes.arrayOf(PropTypes.element),
 };
 
 export default ProfileDescription;
