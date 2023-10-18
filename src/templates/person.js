@@ -118,7 +118,7 @@ const Person = ({ pageContext }) => {
           <div className="person-description md:hidden w-full my-auto print-hidden">
             {profileDescription}
           </div>
-          <div className="flex justify-between">
+          <div className="flex md:justify-center justify-around">
             <div>
               <ProfilePhoto
                 profileImage={profileImage}
@@ -137,7 +137,7 @@ const Person = ({ pageContext }) => {
                 <SocialLinks crmData={crmData} />
               </div>
             </div>
-            <div className="w-full lg:hidden print-show px-2 md:p-2">
+            <div className="lg:hidden print-show px-2 md:p-2">
               <div className="mb-4 w-full hidden md:block lg:hidden print-show">
                 {profileDescription}
                 <hr />
