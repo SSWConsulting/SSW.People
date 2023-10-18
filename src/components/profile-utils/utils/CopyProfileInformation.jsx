@@ -47,7 +47,7 @@ const CopyProfileInformation = ({
   return (
     <button
       onClick={copyHtmlToClipboard}
-      className="mb-4 bottom-0 absolute profile-util-copy-left z-10 profile-util-copy"
+      className="text-ssw-red hover:text-black mb-4 bottom-0 absolute profile-util-copy-left z-10 profile-util-copy"
     >
       <FontAwesomeIcon icon={faCopy} />
     </button>
