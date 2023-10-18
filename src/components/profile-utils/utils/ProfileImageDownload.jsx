@@ -6,12 +6,12 @@ import ProfilePlaceholder from '../../../images/ssw-employee-profile-placeholder
 
 const ProfileImageDownload = ({ profileImage }) => (
   <a
-    className="download-image"
+    className="download-image absolute bottom-0  profile-util-download-left mb-4 z-10"
     href={profileImage ? profileImage.src : ProfilePlaceholder}
     download={profileImage?.name}
   >
-    <div className="absolute bottom-0 left-0 mb-4 ml-4 z-10">
-      <FontAwesomeIcon icon={faDownload} className="m-4" />
+    <div className="">
+      <FontAwesomeIcon icon={faDownload} className="" />
     </div>
   </a>
 );

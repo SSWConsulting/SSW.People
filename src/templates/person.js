@@ -94,15 +94,14 @@ const Person = ({ pageContext }) => {
 
   const profileDescription = (
     <>
-      <div className="float-right mx-2 md:mx-6 print-hidden">
-        <ActionButtons profileId={pageContext.slug}></ActionButtons>
-      </div>
       <ProfileDescription
         personName={personName}
         jobTitle={jobTitle}
         location={crmData?.location}
         qualifications={frontmatter.qualifications}
-      />
+      >
+        <ActionButtons profileId={pageContext.slug}></ActionButtons>
+      </ProfileDescription>
     </>
   );
 
@@ -159,11 +158,9 @@ const Person = ({ pageContext }) => {
                 {quote}
               </div>
             )}
-            <div className="block md:hidden lg:block hidden print-hidden">
-              {socialLinks}
-            </div>
+            <div className="md:block hidden print-hidden">{socialLinks}</div>
             <div className="block md:hidden w-full print-show">{quote}</div>
-            <div className="flex justify-center hidden md:block ">
+            <div className="hidden justify-center md:block ">
               {githubUsername && WidgetComponent}
             </div>
           </div>
@@ -194,6 +191,7 @@ const Person = ({ pageContext }) => {
             {crmData && crmData.gitHubUrl && (
               <GitHubContributionCalendar githubUrl={crmData.gitHubUrl} />
             )}
+            <hr className="md:hidden" />
             <div className="md:hidden">{githubUsername && WidgetComponent}</div>
             {crmData && (
               <>

@@ -671,9 +671,7 @@ pre {
 }
 
 @media screen and (max-width: 600px) {
-  header>div.flex {
-    flex-direction: column;
-  }
+
 
   .action-btn-link {
     margin-left: 0;
@@ -1270,8 +1268,13 @@ font-size: 0.8rem;
 }
 
 .profile-util-copy-left {
+  left: 10%;
+}
+
+.profile-util-download-left {
   left: 30%;
 }
+
 
 .profile-util-copy:hover {
   color: #cc4141;

@@ -24,7 +24,7 @@ const Header = () => {
   return (
     <AnimatedContainer>
       <header>
-        <div className="flex mx-2 md:mx-6 mt-4 mb-6">
+        <div className="flex justify-between items-center mx-2 md:mx-6 mt-4 mb-6">
           <div className="flex items-center">
             <a href={parentSiteUrl} className="unstyled cursor-pointer">
               <CompanyLogo aria-label="logo" />
