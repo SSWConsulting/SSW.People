@@ -120,14 +120,6 @@ const YoutubePlaylist = ({ youtubePlayListId }) => {
       <div className="youtube-playlist clearfix">
         <div>
           <h2 className="inline">Videos</h2>
-          <a
-            className="float-right top-2 pt-4"
-            target="_blank"
-            rel="noopener noreferrer"
-            href={`https://www.youtube.com/playlist?list=${youtubePlayListId}`}
-          >
-            View All
-          </a>
         </div>
         <div className="container">
           <Helmet
@@ -179,6 +171,14 @@ const YoutubePlaylist = ({ youtubePlayListId }) => {
               },
             }}
           />
+          <a
+            className="flex w-full justify-center text-center top-2 pt-4 text-ssw-red hover:text-black"
+            target="_blank"
+            rel="noopener noreferrer"
+            href={`https://www.youtube.com/playlist?list=${youtubePlayListId}`}
+          >
+            View all
+          </a>
         </div>
       </div>
     );

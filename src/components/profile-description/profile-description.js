@@ -8,10 +8,14 @@ const ProfileDescription = ({
   jobTitle,
   location,
   qualifications,
+  children,
 }) => {
   return (
     <div>
-      <h1 className="inline">{personName}</h1>
+      <div className="flex items-center justify-between">
+        <h1>{personName}</h1>
+        {children}
+      </div>
       <h4 className="mb-0">
         <span className="block md:inline">{jobTitle}</span>
         {location && (
@@ -35,6 +39,7 @@ ProfileDescription.propTypes = {
   jobTitle: PropTypes.string.isRequired,
   location: PropTypes.string,
   qualifications: PropTypes.string,
+  children: PropTypes.arrayOf(PropTypes.element),
 };
 
 export default ProfileDescription;

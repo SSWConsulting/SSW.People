@@ -94,15 +94,14 @@ const Person = ({ pageContext }) => {
 
   const profileDescription = (
     <>
-      <div className="float-right mx-2 md:mx-6 print-hidden">
-        <ActionButtons profileId={pageContext.slug}></ActionButtons>
-      </div>
       <ProfileDescription
         personName={personName}
         jobTitle={jobTitle}
         location={crmData?.location}
         qualifications={frontmatter.qualifications}
-      />
+      >
+        <ActionButtons profileId={pageContext.slug}></ActionButtons>
+      </ProfileDescription>
     </>
   );
 
@@ -115,11 +114,11 @@ const Person = ({ pageContext }) => {
   return (
     <>
       <div className="flex flex-wrap mb-5 person-content">
-        <div className="sm:w-full lg:w-1/4 xl:w-1/6 print-full-width">
+        <div className="w-full lg:w-1/4 xl:w-1/6 print-full-width">
           <div className="person-description md:hidden w-full my-auto print-hidden">
             {profileDescription}
           </div>
-          <div className="flex profile-image-quote">
+          <div className="flex md:justify-center justify-around">
             <div>
               <ProfilePhoto
                 profileImage={profileImage}
@@ -138,7 +137,7 @@ const Person = ({ pageContext }) => {
                 <SocialLinks crmData={crmData} />
               </div>
             </div>
-            <div className="w-full lg:hidden print-show px-2 md:p-2">
+            <div className="lg:hidden print-show px-2 md:p-2">
               <div className="mb-4 w-full hidden md:block lg:hidden print-show">
                 {profileDescription}
                 <hr />
@@ -159,11 +158,9 @@ const Person = ({ pageContext }) => {
                 {quote}
               </div>
             )}
-            <div className="block md:hidden lg:block hidden print-hidden">
-              {socialLinks}
-            </div>
+            <div className="md:block hidden print-hidden">{socialLinks}</div>
             <div className="block md:hidden w-full print-show">{quote}</div>
-            <div className="flex justify-center hidden md:block ">
+            <div className="hidden justify-center md:block ">
               {githubUsername && WidgetComponent}
             </div>
           </div>
@@ -194,6 +191,7 @@ const Person = ({ pageContext }) => {
             {crmData && crmData.gitHubUrl && (
               <GitHubContributionCalendar githubUrl={crmData.gitHubUrl} />
             )}
+            <hr className="md:hidden" />
             <div className="md:hidden">{githubUsername && WidgetComponent}</div>
             {crmData && (
               <>
