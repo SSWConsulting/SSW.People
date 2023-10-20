@@ -86,7 +86,7 @@
     "react-youtube": "^10.0.0",
     "rollup": "^3.8.0",
     "ssw.megamenu": "^3.2.3",
-    "ssw.rules.widget": "^1.6.0",
+    "ssw.rules.widget": "^1.6.2",
     "stream-browserify": "^3.0.0",
     "stream-http": "^3.2.0",
     "styled-components": "^5.3.6",
