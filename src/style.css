@@ -1275,6 +1275,12 @@ font-size: 0.8rem;
   left: 30%;
 }
 
+.profile-util {
+  background: #ffffff;
+  border-radius: 50%;
+  width: 25px;
+  height: 25px;
+}
 
 .profile-util-copy:hover {
   color: #cc4141;
