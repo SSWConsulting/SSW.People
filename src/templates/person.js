@@ -67,9 +67,10 @@ const Person = ({ pageContext }) => {
   const [WidgetComponent, setWidgetComponent] = useState();
 
   const initWidget = () => {
+    // Removing for the moment as it is not working as intended
     return (
       <RulesWidget
-        githubToken={process.env?.WIDGET_GITHUB_PAT}
+        githubToken={''}
         appInsightsToken={
           process.env?.RULESWIDGET_APPINSIGHTS_INSTRUMENTATIONKEY
         }
