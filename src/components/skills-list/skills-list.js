@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const SkillsList = ({ crmData }) => {
-  const intermediateSkills = crmData.skills?.intermediateSkills ?? [];
-  const advancedSkills = crmData.skills?.advancedSkills ?? [];
+  const intermediateSkills = crmData?.skills?.intermediateSkills ?? [];
+  const advancedSkills = crmData?.skills?.advancedSkills ?? [];
 
   return (
     <>

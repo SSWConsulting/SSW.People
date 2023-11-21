@@ -73,7 +73,7 @@ const getUsersSkills = async () => {
         userId: us._ssw_systemuserid_value,
         experienceLevel: getExperienceLevel(us.ssw_level),
         sortOrder: us.ssw_sortorder || null,
-        technology: skill ? skill.ssw_name : '',
+        technology: skill?.ssw_name ?? '',
         marketingPage,
         marketingPageUrl: consultingPages[marketingPage],
         published:
