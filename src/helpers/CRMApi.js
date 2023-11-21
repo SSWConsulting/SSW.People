@@ -43,24 +43,47 @@ const getSites = async () => {
   const responseSites = await axios.get(`${crmUrl}/sites`);
   return responseSites.data.value;
 };
+
 const getUsersSkills = async () => {
-  //get skills
-  const responseSkills = await axios.get(`${crmUrl}/ssw_skills`);
-  const skills = responseSkills.data.value;
-  //get users skils (filtering out deactivated user skills with statecode)
-  const responseUsersSkills = await axios.get(`${crmUrl}/ssw_userskills`);
-  const usersSkills = responseUsersSkills.data.value
-    .filter((us) => us.statecode == 0)
+  const skillsRes = await axios.get(`${crmUrl}/ssw_skills`);
+  const skills = skillsRes.data.value;
+
+  // Used to link skills to their marketing page urls
+  const consultingPages = {};
+
+  const consultingReq = await axios.get(`${crmUrl}/ssw_consultingservices`);
+  const consultingData = consultingReq.data.value;
+  Object.keys(consultingData).map((page) => {
+    const pageName = consultingData[page].ssw_name;
+    const pageUrl = consultingData[page].ssw_webpageurl;
+
+    consultingPages[pageName] = pageUrl;
+  });
+
+  const usersSkillsReq = await axios.get(`${crmUrl}/ssw_userskills`);
+  const usersSkills = usersSkillsReq.data.value
     .map((us) => {
       const skill = skills.find((s) => s.ssw_skillid === us._ssw_skillid_value);
+      const marketingPage =
+        skill?.[
+          '_ssw_marketingpage_value@OData.Community.Display.V1.FormattedValue'
+        ] ?? '';
 
-      return {
+      const userSkill = {
         userId: us._ssw_systemuserid_value,
         experienceLevel: getExperienceLevel(us.ssw_level),
         sortOrder: us.ssw_sortorder || null,
         technology: skill ? skill.ssw_name : '',
+        marketingPage,
+        marketingPageUrl: consultingPages[marketingPage],
+        published:
+          skill?.['statuscode@OData.Community.Display.V1.FormattedValue'] ?? '',
       };
-    });
+
+      return userSkill;
+    })
+    .filter((us) => us.published === 'Published');
+
   return usersSkills;
 };
 
@@ -88,12 +111,13 @@ const getToken = async () => {
 };
 
 const getEmployees = async (sites, usersSkills, current) => {
-  let viewId = current
+  const viewId = current
     ? process.env.CRM_VIEW_CURRENT
     : process.env.CRM_VIEW_PAST;
 
-  let queryFilter = `?savedQuery=${viewId}`;
-  let userQuery = `${crmUrl}/systemusers${queryFilter}`;
+  const queryFilter = `?savedQuery=${viewId}`;
+  const userQuery = `${crmUrl}/systemusers${queryFilter}`;
+
   const response = await axios.get(userQuery);
   const employees = convertToSimpleFormat(
     response.data.value,
@@ -101,6 +125,7 @@ const getEmployees = async (sites, usersSkills, current) => {
     usersSkills,
     current
   );
+
   return employees;
 };
 
@@ -133,4 +158,4 @@ const convertToSimpleFormat = (data, sites, usersSkills, current) => {
   });
 };
 
-module.exports = { getViewDataFromCRM };
+module.exports = { getViewDataFromCRM, getUsersSkills };

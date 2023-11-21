@@ -29,7 +29,6 @@ const Person = ({ pageContext }) => {
   const sketchImage = pageContext.data.sketchImage;
   const profileAudio = pageContext.data.audio;
   const crmData = pageContext.data.dataCRM || null;
-  const skillUrlData = pageContext.data.dataSkillUrls || null;
 
   let personName = frontmatter.name;
   let fullName = '';
@@ -106,10 +105,7 @@ const Person = ({ pageContext }) => {
     </>
   );
 
-  const skillsList = (
-    <SkillsList crmData={crmData} skillUrlData={skillUrlData} />
-  );
-
+  const skillsList = <SkillsList crmData={crmData} />;
   const socialLinks = <SocialLinks crmData={crmData} />;
 
   return (

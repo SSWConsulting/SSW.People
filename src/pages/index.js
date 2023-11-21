@@ -52,9 +52,11 @@ const Index = ({ data }) => {
         .flat()
         .filter(Distinct)
         .filter(FilterableSkill(skills))
-        .sort(Intl.Collator().compare),
+        .sort(Intl.Collator().compare)
+        .map((skill) => skill.service),
     [allPeople]
   );
+
   const allRoles = useMemo(
     () =>
       allPeople
@@ -72,6 +74,7 @@ const Index = ({ data }) => {
       };
     });
   };
+
   const countPerEvent = () => {
     return allEventsType.map((r) => {
       return {
@@ -81,12 +84,14 @@ const Index = ({ data }) => {
       };
     });
   };
+
   const countPerSkill = () => {
     return allSkills.map((r) => {
       return {
         item: r,
-        count: filteredPeople.filter((p) => p.skills.find((s) => s === r))
-          .length,
+        count: filteredPeople.filter((p) =>
+          p.skills.find((s) => s.service === r)
+        ).length,
       };
     });
   };
@@ -129,11 +134,13 @@ const Index = ({ data }) => {
         .filter(
           (p) => selectedRoles.length === 0 || selectedRoles.includes(p.role)
         )
-        .filter(
-          (p) =>
+        .filter((p) => {
+          const skills = p.skills.map((skill) => skill.service);
+          return (
             selectedSkills.length === 0 ||
-            selectedSkills.every((s) => p.skills.includes(s))
-        )
+            selectedSkills.every((s) => skills.includes(s))
+          );
+        })
         .filter(
           (p) =>
             selectedEvents.length === 0 ||
@@ -290,16 +297,10 @@ function buildPeople(data) {
 }
 
 const FilterableSkill = (skills) => (skill) => {
-  if (
-    skills.find((s) => s.exactMatch.includes(skill)) ||
-    skills.find(
-      (s) => s.fuzzyMatch.length > 0 && skill.indexOf(s.fuzzyMatch) != -1
-    )
-  ) {
-    return true;
-  } else {
-    return false;
-  }
+  return (
+    skills.find((s) => s.service.service.includes(skill.service)) ||
+    skills.find((s) => s.service.length > 0 && skill.indexOf(s.service) != -1)
+  );
 };
 
 const IndexWithQuery = (props) => (
@@ -378,8 +379,14 @@ const IndexWithQuery = (props) => (
         allCRMData: allCrmDataCollection {
           nodes {
             skills {
-              advancedSkills
-              intermediateSkills
+              advancedSkills {
+                service
+                marketingPageUrl
+              }
+              intermediateSkills {
+                service
+                marketingPageUrl
+              }
             }
             fullName
             location
@@ -393,8 +400,11 @@ const IndexWithQuery = (props) => (
         }
         allSkillUrls {
           nodes {
-            exactMatch
-            fuzzyMatch
+            service {
+              service
+              marketingPage
+              marketingPageUrl
+            }
           }
         }
       }
