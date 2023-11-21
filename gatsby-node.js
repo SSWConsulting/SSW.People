@@ -1,4 +1,3 @@
-const axios = require('axios');
 const crypto = require('crypto');
 const path = require('path');
 const DirectoryNamedWebpackPlugin = require('directory-named-webpack-plugin');
@@ -8,7 +7,7 @@ const createRewriteMap = require('./src/helpers/createRewriteMap');
 const CheckUniqueName = require('./src/helpers/CheckUniqueName');
 const chinaHelper = require('./src/helpers/chinaHelper');
 const { SkillSort } = require('./src/helpers/skillSort');
-const { getViewDataFromCRM } = require('./src/helpers/CRMApi');
+const { getViewDataFromCRM, getUsersSkills } = require('./src/helpers/CRMApi');
 const appInsights = require('applicationinsights');
 const fs = require('fs');
 const siteconfig = require('./site-config');
@@ -133,27 +132,21 @@ exports.sourceNodes = async ({
   createContentDigest,
 }) => {
   const { createNode } = actions;
-  let crmDataResult;
 
-  // if DATA_API_URL == FALSE then we load data from CRM
-  if (process.env.DATA_API_URL !== 'FALSE') {
-    var headers =
-      process.env.DATA_API_AUTHORIZATION === 'FALSE'
-        ? {}
-        : {
-            Authorization: process.env.DATA_API_AUTHORIZATION,
-          };
-
-    crmDataResult = await axios({
-      method: 'get',
-      url: process.env.DATA_API_URL,
-      data: {},
-      headers: headers,
-    });
-    crmDataResult = crmDataResult.data;
-  } else {
-    crmDataResult = await getViewDataFromCRM();
-  }
+  const crmDataResult = await getViewDataFromCRM();
+  let skills = await getUsersSkills();
+  skills = skills
+    .map((user) => {
+      return {
+        service: user.technology,
+        marketingPage: user.marketingPage,
+        marketingPageUrl: user.marketingPageUrl,
+      };
+    })
+    .filter(
+      (value, index, self) =>
+        index === self.findIndex((t) => t.service === value.service)
+    );
 
   // load data for the sample profile
   loadSampleData(crmDataResult);
@@ -182,11 +175,21 @@ exports.sourceNodes = async ({
         intermediateSkills: user.skills
           .filter((s) => s.experienceLevel === 'Intermediate')
           .sort(SkillSort)
-          .map((s) => s.technology),
+          .map((s) => {
+            return {
+              service: s.technology,
+              marketingPageUrl: s.marketingPageUrl,
+            };
+          }),
         advancedSkills: user.skills
           .filter((s) => s.experienceLevel === 'Advanced')
           .sort(SkillSort)
-          .map((s) => s.technology),
+          .map((s) => {
+            return {
+              service: s.technology,
+              marketingPageUrl: s.marketingPageUrl,
+            };
+          }),
       },
       isActive: user.isActive,
       nickname: user.nickname || '',
@@ -212,18 +215,16 @@ exports.sourceNodes = async ({
     createNode(userNode);
   });
 
-  let rawdata = fs.readFileSync('SkillUrlData.json');
-  let skillUrlData = JSON.parse(rawdata);
-  skillUrlData.map((service) =>
+  skills.map((service) => {
     createNode({
-      ...service,
-      id: createNodeId(service.pageUrl),
+      service,
+      id: createNodeId(service.service),
       internal: {
         type: 'SkillUrls',
         contentDigest: createContentDigest(service),
       },
-    })
-  );
+    });
+  });
 };
 
 exports.createPages = async function ({ actions, graphql }) {
@@ -232,9 +233,11 @@ exports.createPages = async function ({ actions, graphql }) {
       allSkillUrls {
         nodes {
           id
-          pageUrl
-          exactMatch
-          fuzzyMatch
+          service {
+            service
+            marketingPage
+            marketingPageUrl
+          }
         }
       }
       people: allMarkdownRemark {
@@ -262,8 +265,14 @@ exports.createPages = async function ({ actions, graphql }) {
           isActive
           nickname
           skills {
-            advancedSkills
-            intermediateSkills
+            advancedSkills {
+              service
+              marketingPageUrl
+            }
+            intermediateSkills {
+              service
+              marketingPageUrl
+            }
           }
           location
           jobTitle

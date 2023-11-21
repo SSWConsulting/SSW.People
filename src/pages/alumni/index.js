@@ -289,8 +289,14 @@ const IndexWithQuery = (props) => (
         allCRMData: allCrmDataCollection {
           nodes {
             skills {
-              advancedSkills
-              intermediateSkills
+              advancedSkills {
+                service
+                marketingPageUrl
+              }
+              intermediateSkills {
+                service
+                marketingPageUrl
+              }
             }
             fullName
             location

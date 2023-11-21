@@ -1,22 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import SkillToUrl from '../../helpers/skillToUrl';
 
-const SkillsList = ({ crmData, skillUrlData }) => {
-  let intermediateSkills = [];
-  let advancedSkills = [];
-  let skills = [];
-
-  if (skillUrlData) {
-    skills = skillUrlData;
-  }
-
-  if (crmData) {
-    intermediateSkills = crmData.skills
-      ? crmData.skills.intermediateSkills
-      : [];
-    advancedSkills = crmData.skills ? crmData.skills.advancedSkills : [];
-  }
+const SkillsList = ({ crmData }) => {
+  const intermediateSkills = crmData?.skills?.intermediateSkills ?? [];
+  const advancedSkills = crmData?.skills?.advancedSkills ?? [];
 
   return (
     <>
@@ -27,11 +14,7 @@ const SkillsList = ({ crmData, skillUrlData }) => {
           <span>
             {advancedSkills.map((skill, i, arr) => (
               <strong key={`advancedSkill-${i}`}>
-                {SkillToUrl(skill, skills) ? (
-                  <a href={SkillToUrl(skill, skills)}>{skill}</a>
-                ) : (
-                  <>{skill}</>
-                )}
+                <a href={skill.marketingPageUrl}>{skill.service}</a>
                 {(i !== arr.length - 1 ||
                   (i === arr.length - 1 && intermediateSkills.length > 0)) && (
                   <span className="skill-separator"> | </span>
@@ -40,11 +23,7 @@ const SkillsList = ({ crmData, skillUrlData }) => {
             ))}
             {intermediateSkills.map((skill, i, arr) => (
               <span key={`intermediateSkill-${i}`}>
-                {SkillToUrl(skill, skills) ? (
-                  <a href={SkillToUrl(skill, skills)}>{skill}</a>
-                ) : (
-                  <>{skill}</>
-                )}
+                <a href={skill.marketingPageUrl}>{skill.service}</a>
                 {i !== arr.length - 1 && (
                   <span className="skill-separator"> | </span>
                 )}
@@ -60,7 +39,6 @@ const SkillsList = ({ crmData, skillUrlData }) => {
 
 SkillsList.propTypes = {
   crmData: PropTypes.object.isRequired,
-  skillUrlData: PropTypes.array.isRequired,
 };
 
 export default SkillsList;
