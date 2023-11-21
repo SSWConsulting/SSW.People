@@ -1,4 +1,3 @@
-const axios = require('axios');
 const crypto = require('crypto');
 const path = require('path');
 const DirectoryNamedWebpackPlugin = require('directory-named-webpack-plugin');
@@ -228,7 +227,7 @@ exports.sourceNodes = async ({
   });
 };
 
-exports.createPages = async function({ actions, graphql }) {
+exports.createPages = async function ({ actions, graphql }) {
   const { data } = await graphql(`
     query {
       allSkillUrls {
@@ -412,7 +411,7 @@ exports.createPages = async function({ actions, graphql }) {
   people.forEach((person) => {
     const pathToUse =
       person.nicknamePath &&
-        CheckUniqueName(personFirstNames, person.dataCRM.nickname.toLowerCase())
+      CheckUniqueName(personFirstNames, person.dataCRM.nickname.toLowerCase())
         ? person.nicknamePath
         : person.path;
 
