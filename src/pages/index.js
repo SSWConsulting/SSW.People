@@ -45,18 +45,6 @@ const Index = ({ data }) => {
     [allPeople]
   );
 
-  const allSkills = useMemo(
-    () =>
-      allPeople
-        .map((d) => d.skills)
-        .flat()
-        .filter(Distinct)
-        .filter(FilterableSkill(skills))
-        .sort(Intl.Collator().compare)
-        .map((skill) => skill.service),
-    [allPeople]
-  );
-
   const allRoles = useMemo(
     () =>
       allPeople
@@ -66,32 +54,12 @@ const Index = ({ data }) => {
     [allPeople]
   );
 
-  const countPerRole = () => {
-    return allRoles.map((r) => {
-      return {
-        item: r,
-        count: filteredPeople.filter((p) => p.role === r).length,
-      };
-    });
-  };
-
   const countPerEvent = () => {
     return allEventsType.map((r) => {
       return {
         item: r,
         count: getPresentersOfEventType(r, eventsPresenters, filteredPeople)
           .length,
-      };
-    });
-  };
-
-  const countPerSkill = () => {
-    return allSkills.map((r) => {
-      return {
-        item: r,
-        count: filteredPeople.filter((p) =>
-          p.skills.find((s) => s.service === r)
-        ).length,
       };
     });
   };
@@ -111,6 +79,38 @@ const Index = ({ data }) => {
     { name: 'skills', selected: [] },
     { name: 'events', selected: [] },
   ]);
+
+  const allSkills = useMemo(() => {
+    const skillsInUse = new Set(
+      filteredPeople.flatMap((p) => p.skills.map((s) => s.service))
+    );
+
+    return skills
+      .filter((s) => skillsInUse.has(s.service.service))
+      .map((s) => s.service.service);
+  }, [skills, filteredPeople]);
+
+  const countPerSkill = useMemo(
+    () =>
+      allSkills.map((r) => {
+        return {
+          item: r,
+          count: filteredPeople.filter((p) =>
+            p.skills.find((s) => s.service === r)
+          ).length,
+        };
+      }),
+    [allSkills]
+  );
+
+  const countPerRole = useMemo(() => {
+    return allRoles.map((r) => {
+      return {
+        item: r,
+        count: filteredPeople.filter((p) => p.role === r).length,
+      };
+    });
+  }, [allRoles]);
 
   useEffect(() => {
     function filterPeople() {
@@ -189,9 +189,9 @@ const Index = ({ data }) => {
           <div className="mx-auto flex flex-col sm:flex-row lg:flex-col lg:w-5/6">
             <PeopleFilters
               allRoles={allRoles}
-              rolesCount={countPerRole()}
+              rolesCount={countPerRole}
               allSkills={allSkills}
-              skillsCount={countPerSkill()}
+              skillsCount={countPerSkill}
               allEvents={allEventsType}
               eventsCount={countPerEvent()}
               onFilterChange={setSelectedFilters}
@@ -295,13 +295,6 @@ function buildPeople(data) {
     .filter((x) => x !== undefined)
     .filter((x) => !x.sanitisedName.endsWith(profileChineseTag));
 }
-
-const FilterableSkill = (skills) => (skill) => {
-  return (
-    skills.find((s) => s.service.service.includes(skill.service)) ||
-    skills.find((s) => s.service.length > 0 && skill.indexOf(s.service) != -1)
-  );
-};
 
 const IndexWithQuery = (props) => (
   <StaticQuery

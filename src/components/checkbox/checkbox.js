@@ -17,7 +17,7 @@ const Checkbox = ({
 }) => {
   return (
     <label
-      className={`cursor-pointer ${
+      className={`cursor-pointer w-full ${
         isChecked ? checkedClassName : unCheckedClassName
       }`}
     >
