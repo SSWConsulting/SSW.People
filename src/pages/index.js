@@ -198,7 +198,7 @@ const Index = ({ data }) => {
             />
           </div>
         </div>
-        <div className="relative lg:w-3/4 overflow-hidden">
+        <div className="relative lg:w-3/4 overflow-hidden" id="title-section">
           <ProfileList filteredPeople={filteredPeople} />
 
           <div className="absolute bottom-0 right-0 alumniLink h-16">

@@ -30,6 +30,14 @@ const Filter = ({
   const node = useRef();
   const [listOpen, setListOpen] = useState(false);
 
+  //Scrolls to the top of the "page" when a filter is selected
+  const scrollToElement = () => {
+    const element = document.getElementById('title-section');
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
+
   const onItemClicked = (item) => {
     const previouslySelected = isItemSelected(item);
     if (previouslySelected) {
@@ -38,6 +46,7 @@ const Filter = ({
     } else {
       onItemChange([item, ...selectedItems]);
       updateUrlFilter(filterUrlTitle, search, item, true);
+      scrollToElement();
     }
   };
 
