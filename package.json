@@ -95,6 +95,7 @@
     "webpack-assets-manifest": "^5.1.0"
   },
   "devDependencies": {
+    "@babel/eslint-parser": "^7.23.3",
     "@fortawesome/fontawesome-svg-core": "^6.2.0",
     "@fortawesome/free-solid-svg-icons": "^6.2.0",
     "@fortawesome/react-fontawesome": "^0.2.0",
@@ -107,7 +108,10 @@
     "css-loader": "^6.7.2",
     "directory-named-webpack-plugin": "^4.0.0",
     "dotenv": "^16.0.3",
+    "eslint": "^8.54.0",
+    "eslint-plugin-jsx-a11y": "^6.8.0",
     "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-react": "^7.33.2",
     "favicons": "^6.2.2",
     "gatsby-cli": "^5.3.1",
     "lighthouse": "^9.6.8",
@@ -130,5 +134,5 @@
   "resolutions": {
     "sharp": "0.32.1"
   },
-  "packageManager": "yarn@1.22.19"
+  "packageManager": "yarn@4.0.2"
 }
