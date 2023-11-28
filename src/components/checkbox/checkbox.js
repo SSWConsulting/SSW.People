@@ -16,6 +16,9 @@ const Checkbox = ({
   checkboxColor,
 }) => {
   return (
+    // As per https://bobbyhadz.com/blog/form-label-must-be-associated-with-control#eslint-a-form-label-must-be-associated-with-a-control
+    // this should be fine. However, eslint still complains.
+    // eslint-disable-next-line jsx-a11y/label-has-associated-control
     <label
       className={`cursor-pointer w-full ${
         isChecked ? checkedClassName : unCheckedClassName
