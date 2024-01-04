@@ -47,6 +47,7 @@ const SkillsList = ({ crmData }) => {
 
 SkillsList.propTypes = {
   crmData: PropTypes.object.isRequired,
+  skill: PropTypes.object.isRequired,
 };
 
 export default SkillsList;
