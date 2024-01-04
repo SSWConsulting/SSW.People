@@ -5,6 +5,14 @@ const SkillsList = ({ crmData }) => {
   const intermediateSkills = crmData?.skills?.intermediateSkills ?? [];
   const advancedSkills = crmData?.skills?.advancedSkills ?? [];
 
+  const SkillLink = ({ skill }) => {
+    return skill.marketingPageUrl ? (
+      <a href={skill.marketingPageUrl}>{skill.service}</a>
+    ) : (
+      <span>{skill.service}</span>
+    );
+  };
+
   return (
     <>
       {((advancedSkills && !!advancedSkills.length) ||
@@ -14,7 +22,7 @@ const SkillsList = ({ crmData }) => {
           <span>
             {advancedSkills.map((skill, i, arr) => (
               <strong key={`advancedSkill-${i}`}>
-                <a href={skill.marketingPageUrl}>{skill.service}</a>
+                <SkillLink skill={skill} />
                 {(i !== arr.length - 1 ||
                   (i === arr.length - 1 && intermediateSkills.length > 0)) && (
                   <span className="skill-separator"> | </span>
@@ -23,7 +31,7 @@ const SkillsList = ({ crmData }) => {
             ))}
             {intermediateSkills.map((skill, i, arr) => (
               <span key={`intermediateSkill-${i}`}>
-                <a href={skill.marketingPageUrl}>{skill.service}</a>
+                <SkillLink skill={skill} />
                 {i !== arr.length - 1 && (
                   <span className="skill-separator"> | </span>
                 )}
@@ -39,6 +47,7 @@ const SkillsList = ({ crmData }) => {
 
 SkillsList.propTypes = {
   crmData: PropTypes.object.isRequired,
+  skill: PropTypes.object.isRequired,
 };
 
 export default SkillsList;
