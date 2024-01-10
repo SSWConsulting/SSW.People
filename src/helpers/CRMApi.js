@@ -61,26 +61,28 @@ const getUsersSkills = async () => {
   });
 
   const usersSkillsReq = await axios.get(`${crmUrl}/ssw_userskills`);
-  const usersSkills = usersSkillsReq.data.value.map((us) => {
-    const skill = skills.find((s) => s.ssw_skillid === us._ssw_skillid_value);
-    const marketingPage =
-      skill?.[
-        '_ssw_marketingpage_value@OData.Community.Display.V1.FormattedValue'
-      ] ?? '';
+  const usersSkills = usersSkillsReq.data.value
+    .filter((us) => us.statecode !== 1)
+    .map((us) => {
+      const skill = skills.find((s) => s.ssw_skillid === us._ssw_skillid_value);
+      const marketingPage =
+        skill?.[
+          '_ssw_marketingpage_value@OData.Community.Display.V1.FormattedValue'
+        ] ?? '';
 
-    const userSkill = {
-      userId: us._ssw_systemuserid_value,
-      experienceLevel: getExperienceLevel(us.ssw_level),
-      sortOrder: us.ssw_sortorder || null,
-      technology: skill?.ssw_name ?? '',
-      marketingPage,
-      marketingPageUrl: consultingPages[marketingPage],
-      published:
-        skill?.['statuscode@OData.Community.Display.V1.FormattedValue'] ?? '',
-    };
+      const userSkill = {
+        userId: us._ssw_systemuserid_value,
+        experienceLevel: getExperienceLevel(us.ssw_level),
+        sortOrder: us.ssw_sortorder || null,
+        technology: skill?.ssw_name ?? '',
+        marketingPage,
+        marketingPageUrl: consultingPages[marketingPage],
+        published:
+          skill?.['statuscode@OData.Community.Display.V1.FormattedValue'] ?? '',
+      };
 
-    return userSkill;
-  });
+      return userSkill;
+    });
   // .filter((us) => us.published === 'Published');
 
   return usersSkills;
