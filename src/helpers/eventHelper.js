@@ -2,30 +2,24 @@ import moment from 'moment';
 
 const EventsApi = process.env.EVENTS_API;
 async function getEventsPresenters() {
-  var dateFilter = new Date().toISOString();
-  var oDataFilterOngoing = `$filter=Enabled ne false and EndDateTime ge datetime'${dateFilter}'%26$select=StartDateTime,Presenter,CalendarType%26$orderby=StartDateTime asc%26$top=50`;
-  var presentersEvents;
+  let dateFilter = new Date().toISOString();
+  let oDataFilterOngoing = `$filter=Enabled ne false and EndDateTime ge datetime'${dateFilter}'%26$select=StartDateTime,Presenter,CalendarType%26$orderby=StartDateTime asc%26$top=50`;
+  let presentersEvents;
   await fetch(`${EventsApi}?odataFilter=${oDataFilterOngoing}`)
-    .then((response) => response.text())
+    .then((response) => response.json())
     .then((result) => {
-      var parser = new DOMParser();
-      var xmlDoc = parser.parseFromString(result, 'application/xml');
-      var presentersEventsXml = xmlDoc.getElementsByTagName('properties');
+      presentersEvents = result.map((element) => {
+        return {
+          eventType: element.CalendarType,
+          presenter: element.Presenter,
+        };
+      });
 
-      presentersEvents = Array.prototype.map.call(
-        presentersEventsXml,
-        (element) => {
-          return {
-            eventType:
-              element.getElementsByTagName('CalendarType')[0].textContent,
-            presenter: element.getElementsByTagName('Presenter')[0].textContent,
-          };
-        }
-      );
       presentersEvents = presentersEvents.sort(
         (a, b) => a.eventtype - b.eventtype
       );
     });
+
   return presentersEvents;
 }
 
@@ -106,9 +100,9 @@ function mapXmlToEventObj(properties) {
 }
 
 const isInPresenters = (profile, presenters) => {
+  if (!presenters) return;
   return (
-    (profile.nickname &&
-      profile.nickname.length > 0 &&
+    (profile.nickname?.length &&
       presenters.toLowerCase().indexOf(profile.nickname.toLowerCase()) >= 0) ||
     presenters.toLowerCase().indexOf(profile.fullName.toLowerCase()) >= 0
   );

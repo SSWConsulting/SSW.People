@@ -35,7 +35,7 @@ const PeopleFilters = ({
           filterCounts={rolesCount}
         />
       </div>
-      {process.env.EVENTS_API && process.env.EVENTS_API.length > 4 && (
+      {!!allEvents.length && process.env.EVENTS_API?.length > 4 && (
         <div className="w-full sm:w-1/2 lg:w-full mt-0 lg:mt-4">
           <Filter
             filterTitle="Upcoming speakers"
