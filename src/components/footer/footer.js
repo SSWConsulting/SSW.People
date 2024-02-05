@@ -9,7 +9,7 @@ import {
   faInstagram,
   faLinkedin,
   faTwitter,
-  faWeixin,
+  faTiktok,
   faYoutube,
 } from '@fortawesome/free-brands-svg-icons';
 import China from '../../images/china.png';
@@ -57,26 +57,15 @@ const Footer = () => {
                 <div className="inline-flex flex-row-reverse justify-end flex-nowrap">
                   <a
                     className="unstyled social-media-icon"
-                    id="wechat-icon"
-                    title="SSW on WeChat"
-                    href="https://mp.weixin.qq.com/s/jL4zEmzWM5VSTRu9DUW6-Q"
+                    title="SSW on TikTok"
+                    href="https://www.tiktok.com/@ssw_tv"
                     target="_blank"
                     rel="noreferrer"
                   >
-                    <FontAwesomeIcon icon={faWeixin} size="lg" />
-                    <span id="qr-code">
-                      <img
-                        src="https://www.ssw.com.au/ssw/Images/QRcode.jpg"
-                        alt="SSW QR Code"
-                        width="100"
-                        title="SSW WeChat QR Code"
-                        height="100"
-                      />
-                    </span>
+                    <FontAwesomeIcon icon={faTiktok} size="lg" />
                   </a>
                   <a
                     className="unstyled social-media-icon"
-                    id="twitter-icon"
                     title="SSW on Twitter"
                     href="https://twitter.com/SSW_TV"
                     target="_blank"
@@ -86,7 +75,6 @@ const Footer = () => {
                   </a>
                   <a
                     className="unstyled social-media-icon"
-                    id="instagram-icon"
                     title="SSW on Instagram"
                     href="https://www.instagram.com/ssw_tv"
                     target="_blank"
@@ -96,7 +84,6 @@ const Footer = () => {
                   </a>
                   <a
                     className="unstyled social-media-icon"
-                    id="facebook-icon"
                     title="SSW on Facebook"
                     href="https://www.facebook.com/SSW.page"
                     target="_blank"
@@ -106,7 +93,6 @@ const Footer = () => {
                   </a>
                   <a
                     className="unstyled social-media-icon"
-                    id="linkedin-icon"
                     title="SSW on LinkedIn"
                     href="https://www.linkedin.com/company/ssw/"
                     target="_blank"
@@ -116,7 +102,6 @@ const Footer = () => {
                   </a>
                   <a
                     className="unstyled social-media-icon"
-                    id="youtube-icon"
                     title="SSW on YouTube"
                     href="https://www.youtube.com/user/sswtechtalks/"
                     target="_blank"
