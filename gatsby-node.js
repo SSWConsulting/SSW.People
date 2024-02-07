@@ -438,7 +438,10 @@ exports.onPostBuild = async ({ store, pathPrefix }) => {
     )
     .flatMap((page) => {
       const { nicknamePath, originalPath } = page.context;
-      const fromPath = `${pathPrefix}/${nicknamePath.replace(`${alumniPrefix.substring(1)}/`, '')}`;
+      const fromPath = `${pathPrefix}/${nicknamePath.replace(
+        `${alumniPrefix.substring(1)}/`,
+        ''
+      )}`;
       const toPath = `${pathPrefix}/${originalPath}/`;
 
       const rewritesArray = [];
@@ -447,8 +450,14 @@ exports.onPostBuild = async ({ store, pathPrefix }) => {
         rewritesArray.push({ fromPath, toPath });
         rewritesArray.push({ fromPath: `${fromPath}/`, toPath });
       } else {
-        rewritesArray.push({ fromPath: `${pathPrefix}/${nicknamePath}`, toPath: `${pathPrefix}${page.path}` });
-        rewritesArray.push({ fromPath: `${pathPrefix}/${nicknamePath}/`, toPath: `${pathPrefix}${page.path}` });
+        rewritesArray.push({
+          fromPath: `${pathPrefix}/${nicknamePath}`,
+          toPath: `${pathPrefix}${page.path}`,
+        });
+        rewritesArray.push({
+          fromPath: `${pathPrefix}/${nicknamePath}/`,
+          toPath: `${pathPrefix}${page.path}`,
+        });
       }
 
       return rewritesArray;

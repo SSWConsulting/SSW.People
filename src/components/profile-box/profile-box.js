@@ -92,10 +92,7 @@ const ProfileBox = ({
           {content}
         </a>
       ) : (
-        <Link
-          ref={linkRef}
-          to={`/${sanitisedName.toLowerCase()}`}
-        >
+        <Link ref={linkRef} to={`/${sanitisedName.toLowerCase()}`}>
           {content}
         </Link>
       )}
