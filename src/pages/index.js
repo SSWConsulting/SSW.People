@@ -286,9 +286,6 @@ function buildPeople(data) {
                 dataCRM.skills.intermediateSkills,
               ].flat()
             : [],
-          sanitisedNickname: !isFixedTile
-            ? dataCRM.nickname.replace(/\s+/g, '-')
-            : node.parent.name,
         };
       }
     })

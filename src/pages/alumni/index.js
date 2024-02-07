@@ -189,9 +189,6 @@ function buildPeople(data) {
                 dataCRM.skills.intermediateSkills,
               ].flat()
             : [],
-          sanitisedNickname: !isFixedTile
-            ? 'alumni/' + dataCRM.nickname.replace(/\s+/g, '-')
-            : node.parent.name,
         };
       } else {
         const jobTitle = node.frontmatter.jobTitle;
@@ -220,7 +217,6 @@ function buildPeople(data) {
               node.parent.name.replace(profileChineseTag, '')
             ),
             skills: [],
-            sanitisedNickname: 'alumni/' + node.parent.name,
           };
         }
       }
