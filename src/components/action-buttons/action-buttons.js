@@ -2,9 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { profilesRepo } from '../../../site-config';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-  faQuestionCircle,
-} from '@fortawesome/free-solid-svg-icons';
+import { faQuestionCircle } from '@fortawesome/free-solid-svg-icons';
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
 
 const profileChineseTag = '-Chinese';
