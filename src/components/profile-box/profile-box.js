@@ -10,9 +10,7 @@ const ProfileBox = ({
   profile,
   sanitisedName,
   profileImages,
-  sanitisedNickname,
   profileAudio,
-  isUniqueName,
 }) => {
   const linkRef = useRef();
   const [hover, setHover] = useState(false);
@@ -94,14 +92,7 @@ const ProfileBox = ({
           {content}
         </a>
       ) : (
-        <Link
-          ref={linkRef}
-          to={`/${
-            profile.nickname && isUniqueName
-              ? sanitisedNickname.toLowerCase()
-              : sanitisedName.toLowerCase()
-          }`}
-        >
+        <Link ref={linkRef} to={`/${sanitisedName.toLowerCase()}`}>
           {content}
         </Link>
       )}
@@ -121,9 +112,7 @@ ProfileBox.propTypes = {
     profileImage: PropTypes.object,
     sketchProfileImage: PropTypes.object,
   }),
-  sanitisedNickname: PropTypes.string,
   profileAudio: PropTypes.string,
-  isUniqueName: PropTypes.bool,
 };
 
 export default ProfileBox;

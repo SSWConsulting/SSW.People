@@ -33,7 +33,6 @@ const ProfileList = ({ filteredPeople }) => {
                       profile={person.profile}
                       sanitisedName={person.sanitisedName}
                       profileImages={person.profileImages}
-                      sanitisedNickname={person.sanitisedNickname}
                       profileAudio={person.profileAudio}
                       isUniqueName={CheckUniqueName(
                         firstNameList,
