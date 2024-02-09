@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import GitHubIcon from '-!svg-react-loader!../../images/github.svg';
-import InfoIcon from '-!svg-react-loader!../../images/info.svg';
 import { profilesRepo } from '../../../site-config';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faQuestionCircle } from '@fortawesome/free-solid-svg-icons';
+import { faGithub } from '@fortawesome/free-brands-svg-icons';
 
 const profileChineseTag = '-Chinese';
 
@@ -19,16 +20,26 @@ const ActionButtons = ({ profileId }) => {
         className="action-btn-link"
       >
         <div className="action-btn-label">Edit</div>
-        <GitHubIcon aria-label="logo" className="action-btn-icon" />
+        <FontAwesomeIcon
+          icon={faGithub}
+          aria-label="logo"
+          className="ml-2 order-2"
+          size="1x"
+        />
       </a>
       <a
         target="_blank"
         rel="noopener noreferrer"
-        href="https://rules.ssw.com.au/make-your-site-easy-to-maintain"
+        href="https://github.com/SSWConsulting/SSW.People.Profiles/wiki"
         className="action-btn-link"
       >
         <div className="action-btn-label">Info</div>
-        <InfoIcon aria-label="logo" className="action-btn-icon" />
+        <FontAwesomeIcon
+          icon={faQuestionCircle}
+          aria-label="logo"
+          className="ml-2 order-2"
+          size="1x"
+        />
       </a>
     </div>
   );
