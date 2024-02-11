@@ -64,7 +64,11 @@ const Header = () => {
     <AnimatedContainer>
       <header>
         <div className="mx-2 md:mx-6 print-hidden no-underline">
-          <MegaMenuLayout title="People" menuBarItems={menuItems} className="megamenu" />
+          <MegaMenuLayout
+            title="People"
+            menuBarItems={menuItems}
+            className="megamenu"
+          />
         </div>
       </header>
     </AnimatedContainer>
