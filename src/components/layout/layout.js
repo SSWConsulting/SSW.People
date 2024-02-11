@@ -6,9 +6,7 @@ import Header from 'components/header';
 import Footer from 'components/footer';
 import '../../style.css';
 import Breadcrumbs from '../breadcrumb/breadcrumb';
-import { MenuBar } from 'ssw.megamenu';
 import { Toaster } from 'react-hot-toast';
-import 'ssw.megamenu/dist/style.css';
 
 const Layout = ({ children, pageTitle, crumbs, crumbLabel }) => {
   return (
@@ -17,9 +15,6 @@ const Layout = ({ children, pageTitle, crumbs, crumbLabel }) => {
         <Toaster position="top-center" reverseOrder={false} />
         <Head pageTitle={pageTitle} />
         <Header />
-        <div className="mx-2 md:mx-6 print-hidden">
-          <MenuBar />
-        </div>
         <div className="flex flex-row">
           <div className="w-3/4">
             {crumbs ? (

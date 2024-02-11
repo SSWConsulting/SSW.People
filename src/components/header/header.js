@@ -1,8 +1,7 @@
 import React from 'react';
 import posed from 'react-pose';
-import CompanyLogo from '-!svg-react-loader!../../images/branding/Logo.svg';
-import CountrySelect from '../country-select/country-select';
-import { parentSiteUrl } from '../../../site-config';
+import { MegaMenuLayout } from 'ssw.megamenu';
+import { graphql, useStaticQuery } from 'gatsby';
 
 // Example of a component-specific page transition
 const AnimatedContainer = posed.div({
@@ -21,19 +20,51 @@ const AnimatedContainer = posed.div({
 });
 
 const Header = () => {
+  const menuGroups = useStaticQuery(graphql`
+    query {
+      allMegaMenuGroup {
+        edges {
+          node {
+            name
+            url
+            menuColumns {
+              menuColumnGroups {
+                name
+                menuItems {
+                  name
+                  url
+                  description
+                  iconImg
+                }
+              }
+            }
+            sidebarItems {
+              name
+              items {
+                name
+                url
+                description
+                widgetType
+                icon
+              }
+            }
+            viewAll {
+              name
+              url
+            }
+          }
+        }
+      }
+    }
+  `);
+
+  const menuItems = menuGroups.allMegaMenuGroup.edges.map((edge) => edge.node);
+
   return (
     <AnimatedContainer>
       <header>
-        <div className="flex justify-between items-center mx-2 md:mx-6 mt-4 mb-6">
-          <div className="flex items-center">
-            <a href={parentSiteUrl} className="unstyled cursor-pointer">
-              <CompanyLogo aria-label="logo" />
-            </a>
-            <h1 className="title ml-2">People</h1>
-          </div>
-          <div className="action-btn-container print-hidden">
-            <CountrySelect />
-          </div>
+        <div className="mx-2 md:mx-6 print-hidden no-underline">
+          <MegaMenuLayout title="People" menuBarItems={menuItems} className="megamenu" />
         </div>
       </header>
     </AnimatedContainer>

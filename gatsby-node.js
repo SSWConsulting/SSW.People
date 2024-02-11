@@ -10,6 +10,7 @@ const { getViewDataFromCRM, getUsersSkills } = require('./src/helpers/CRMApi');
 const appInsights = require('applicationinsights');
 const fs = require('fs');
 const siteconfig = require('./site-config');
+const { createContentDigest } = require('gatsby-core-utils');
 
 if (process.env.APPINSIGHTS_INSTRUMENTATIONKEY) {
   // Log build time stats to appInsights
@@ -493,4 +494,25 @@ exports.onPostBuild = async ({ store, pathPrefix }) => {
   ];
 
   await createRewriteMap.writeRewriteMapsFile(pluginData, allRewritesUnique);
+};
+
+exports.sourceNodes = async ({ actions, createNodeId }) => {
+  const { createNode } = actions;
+  const res = await fetch('https://ssw.com.au/api/get-megamenu');
+  const menuData = await res.json();
+
+  menuData?.menuGroups.forEach((group) => {
+    const node = {
+      id: createNodeId(`megamenugroup-${group.name}`),
+      parent: null,
+      children: [],
+      internal: {
+        type: 'MegaMenuGroup',
+        contentDigest: createContentDigest(group),
+      },
+      ...group,
+    };
+
+    createNode(node);
+  });
 };
