@@ -10,7 +10,6 @@ const { getViewDataFromCRM, getUsersSkills } = require('./src/helpers/CRMApi');
 const appInsights = require('applicationinsights');
 const fs = require('fs');
 const siteconfig = require('./site-config');
-const { createContentDigest } = require('gatsby-core-utils');
 
 if (process.env.APPINSIGHTS_INSTRUMENTATIONKEY) {
   // Log build time stats to appInsights
@@ -247,7 +246,7 @@ exports.sourceNodes = async ({
   });
 };
 
-exports.createPages = async function({ actions, graphql }) {
+exports.createPages = async function ({ actions, graphql }) {
   const { data } = await graphql(`
     query {
       allSkillUrls {
