@@ -416,6 +416,10 @@ a:hover {
   transition: all 0.2s ease-in-out;
 }
 
+a:not(.megamenu) {
+  text-decoration: none
+}
+
 /** Custom blocks images handling **/
 
 .img-badge {

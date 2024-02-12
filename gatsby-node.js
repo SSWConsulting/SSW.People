@@ -132,6 +132,26 @@ exports.sourceNodes = async ({
 }) => {
   const { createNode } = actions;
 
+  {
+    const res = await fetch('https://ssw.com.au/api/get-megamenu');
+    const menuData = await res.json();
+
+    menuData?.menuGroups.forEach((group) => {
+      const node = {
+        id: createNodeId(`megamenugroup-${group.name}`),
+        parent: null,
+        children: [],
+        internal: {
+          type: 'MegaMenuGroup',
+          contentDigest: createContentDigest(group),
+        },
+        ...group,
+      };
+
+      createNode(node);
+    });
+  }
+
   const crmDataResult = await getViewDataFromCRM();
   let skills = await getUsersSkills();
   skills = skills
