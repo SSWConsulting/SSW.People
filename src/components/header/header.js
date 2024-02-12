@@ -2,6 +2,7 @@ import React from 'react';
 import posed from 'react-pose';
 import { MegaMenuLayout } from 'ssw.megamenu';
 import { graphql, useStaticQuery } from 'gatsby';
+import { siteUrl } from '../../../site-config.js';
 
 // Example of a component-specific page transition
 const AnimatedContainer = posed.div({
@@ -67,6 +68,8 @@ const Header = () => {
           <MegaMenuLayout
             title="People"
             menuBarItems={menuItems}
+            url="/people"
+            searchUrl={`${siteUrl}/people`}
             className="megamenu"
           />
         </div>
