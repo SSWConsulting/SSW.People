@@ -1,10 +1,7 @@
 module.exports = {
-  content: ['./src/**/*.js', 'node_modules/ssw.megamenu/**/*.js'],
+  content: ['./src/**/*.js', './node_modules/ssw.megamenu/**/*.js'],
   theme: {
     extend: {
-      screens: {
-        print: { raw: 'print' },
-      },
       colors: {
         ssw: {
           red: '#cc4141',
