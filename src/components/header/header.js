@@ -64,12 +64,13 @@ const Header = () => {
   return (
     <AnimatedContainer>
       <header>
-        <div className="mx-2 md:mx-6 print-hidden no-underline">
+        <div className="mx-2 md:mx-6 print-hidden">
           <MegaMenuLayout
             title="People"
             menuBarItems={menuItems}
             url="/people"
             searchUrl={`${siteUrl}/people`}
+            hidePhone
             className="megamenu"
           />
         </div>
