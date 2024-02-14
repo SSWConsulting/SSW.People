@@ -1,11 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const ContactInfo = ({ onClick, profileName }) => {
+const ContactInfo = ({ onClick, profileName, alumni }) => {
   return (
     <div className="contact">
       <h3 className="text-ssw-red">
-        Interested in what {profileName ? profileName : 'we'} can do for you?
+        Interested in what {profileName && !alumni ? profileName : 'we'} can do
+        for you?
       </h3>
       <p>
         Contact {profileName ? `${profileName}'s` : 'an'} Account Manager to
@@ -24,6 +25,7 @@ const ContactInfo = ({ onClick, profileName }) => {
 ContactInfo.propTypes = {
   profileName: PropTypes.string.isRequired,
   onClick: PropTypes.func.isRequired,
+  alumni: PropTypes.bool.isRequired,
 };
 
 export default ContactInfo;

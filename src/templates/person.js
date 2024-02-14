@@ -30,6 +30,7 @@ const Person = ({ pageContext }) => {
   const profileAudio = pageContext.data.audio;
   const crmData = pageContext.data.dataCRM || null;
 
+  let isActive = false;
   let personName = frontmatter.name;
   let fullName = '';
   let firstNameOrNickname = '';
@@ -40,6 +41,7 @@ const Person = ({ pageContext }) => {
     ? pageContext.nicknamePath
     : pageContext.originalPath;
   if (crmData) {
+    isActive = crmData.isActive;
     personName = crmData.nickname
       ? `${crmData.fullName} (${crmData.nickname})`
       : crmData.fullName;
@@ -202,6 +204,7 @@ const Person = ({ pageContext }) => {
             <Contact
               firstNameOrNickname={firstNameOrNickname}
               fullName={fullName}
+              alumni={!isActive}
             />
           </div>
         </div>
