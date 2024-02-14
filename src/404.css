@@ -1,30 +1,93 @@
+@tailwind base;
+@layer base {
+  header nav {
+    @apply overflow-visible !important;
+  }
+}
+
+.not-found-page {
+  background-image: url("./images/404/Broken-Chain.png");
+  height: 55rem;
+  background-repeat: no-repeat;
+  background-position: bottom;
+}
+
 .not-found-grid {
-    justify-content: center;
-    -moz-column-gap: 3rem;
-    column-gap: 3rem;
+  grid-template-columns: min-content auto;
+  grid-template-rows: 268px auto auto;
+  column-gap: 3rem;
+  display: grid;
+}
+
+.not-found-page h1 {
+  grid-column: 1;
+  @apply text-ssw-red;
+  font-size: 14rem;
+  font-weight: bold;
+  margin: -0.3rem 0 -2rem;
+}
+
+h2 {
+  line-height: 1;
+}
+
+h1 {
+  font-weight: 500;
+  line-height: 1.2;
+  margin-bottom: 1rem !important;
+  margin-top: 1rem !important;
+}
+
+.not-found-message {
+  padding-top: 1.8rem;
+  grid-column: 2;
+  grid-row-start: 1;
+  grid-row-end: 3;
+}
+
+.not-found-message h2 {
+  color: #666;
+  font-size: 3.1rem;
+  font-weight: 200;
+}
+
+.not-found-message h2 span {
+  font-weight: normal;
+}
+
+.not-found-grid a, .not-found-page button  {
+  @apply text-ssw-red !important;
+}
+
+.not-found-message a:hover, .not-found-message button:hover {
+  opacity: 0.8;
+  cursor: pointer;
+}
+
+.greybox {
+  padding: 1rem 1.5rem;
+  background-color: #eee;
+  width: 100%;
+  margin-bottom: .5rem;
+}
+
+.not-found-greybox {
+  margin-top: 16px;
+  margin-bottom: 16px;
+}
+
+@media (max-width: 850px) {
+  .not-found-grid {
+    grid-template-columns: auto;
+    grid-template-rows: unset;
     display: grid;
-    grid-template-columns: -webkit-min-content auto;
-    grid-template-columns: min-content auto;
-    grid-template-rows: 268px auto auto;
   }
-  
-  .not-found-page {
-    background-position: bottom;
-    background-repeat: no-repeat;
-    height: 55rem;
-    background-image: url("images/404/Broken-Chain.png");
-  }
-  .not-found-page h1 {
-    color: #cc4141;
-    font-size: 224px;
-  
-    font-weight: 700;
-    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
-    font: bolder;
-    line-height: 268.8px;
-    grid-column: 1;
-    margin: -0.3rem 0 -2rem;
-    margin-top: 16px;
+  .not-found-grid h1 {
+    font-size: 5rem;
+    padding-right: 0;
+    margin: auto;
+    text-align: center;
+    grid-row: 1;
   }
   h1 {
     font-weight: 500;
@@ -32,48 +95,48 @@
     margin-bottom: 1rem !important;
     margin-top: 1rem !important;
   }
-  
-  .unselectable {
-    user-select: none;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-  }
-  
   .not-found-message {
-    padding-top: 28px;
+    grid-row: 2;
+    grid-column: 1;
+    padding-top: 0;
+    margin: 0.5rem 0.5rem;
+    text-align: center;
   }
   .not-found-message h2 {
-    color: #666;
-    font-size: 3.1rem;
-    font-weight: 200;
-    
-  }
-  .not-found-message h2 span {
-    font-weight: 400;
-  }
-  
-  div.greybox{
-    display: block;
-    margin-bottom: 1rem;
-    margin-top: 1rem;
-    max-width: 95%;
+    font-size: 2rem;
   }
   .not-found-greybox {
-    margin: auto;
-    grid-column: 1;
+    grid-row: unset;
+    text-align: center;
   }
-  .greybox {
-    background-color: #eee;
-    padding: 1rem 1.5rem;
-    width: 100%;
-  }
-  
-  .not-found-grid a,
-  .not-found-page button {
-    color: #cc4141 !important;
-    border: none;
-    text-decoration: none;
-    
-  }
-  
+}
+
+.unselectable {
+  user-select: none;
+  -webkit-user-select: none; /* Safari 3.1+ */
+  -moz-user-select: none; /* Firefox 2+ */
+  -ms-user-select: none; /* IE 10+ */
+}
+
+/**
+* This injects Tailwind's component classes and any component classes
+* registered by plugins.
+*/
+
+@tailwind components;
+/**
+* This injects Tailwind's utility classes and any utility classes registered
+* by plugins.
+*/
+
+/* purgecss end ignore */
+@tailwind utilities;
+/**
+* Use this directive to control where Tailwind injects the responsive
+* variations of each utility.
+*
+* If omitted, Tailwind will append these classes to the very end of
+* your stylesheet by default.
+*/
+
+@tailwind variants;
