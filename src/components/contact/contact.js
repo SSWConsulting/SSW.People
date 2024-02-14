@@ -4,7 +4,7 @@ import ContactInfo from '../contact-info/contact-info';
 import ContactForm from '../contact-form/contact-form';
 import Modal from 'react-modal';
 
-const Contact = ({ firstNameOrNickname, fullName }) => {
+const Contact = ({ firstNameOrNickname, fullName, alumni }) => {
   const [displayContactForm, setDisplayContactForm] = useState(false);
 
   const onContactButtonClick = () => {
@@ -15,6 +15,7 @@ const Contact = ({ firstNameOrNickname, fullName }) => {
       <ContactInfo
         onClick={() => onContactButtonClick()}
         profileName={firstNameOrNickname}
+        alumni={alumni}
       />
       <Modal
         isOpen={displayContactForm}
@@ -33,6 +34,7 @@ const Contact = ({ firstNameOrNickname, fullName }) => {
 Contact.propTypes = {
   firstNameOrNickname: PropTypes.string.isRequired,
   fullName: PropTypes.string.isRequired,
+  alumni: PropTypes.bool.isRequired,
 };
 
 export default Contact;
