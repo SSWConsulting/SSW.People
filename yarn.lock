@@ -2878,19 +2878,29 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@floating-ui/core@npm:^1.3.1":
-  version: 1.3.1
-  resolution: "@floating-ui/core@npm:1.3.1"
-  checksum: 894bc3637c03beda184a4460cb53155fd30c2a0956569e1c714b7df9e3439517b1c34ad9a8114ea15a6c08d1e3f1d40741d259f0f1087fc3ea96fae7dfeb697e
+"@floating-ui/core@npm:^1.0.0":
+  version: 1.6.0
+  resolution: "@floating-ui/core@npm:1.6.0"
+  dependencies:
+    "@floating-ui/utils": "npm:^0.2.1"
+  checksum: 667a68036f7dd5ed19442c7792a6002ca02d1799221c4396691bbe0b6008b48f6ccad581225e81fa266bb91232f6c66838a5f825f554217e1ec886178b93381b
   languageName: node
   linkType: hard
 
-"@floating-ui/dom@npm:^1.0.0":
-  version: 1.4.5
-  resolution: "@floating-ui/dom@npm:1.4.5"
+"@floating-ui/dom@npm:^1.6.1":
+  version: 1.6.3
+  resolution: "@floating-ui/dom@npm:1.6.3"
   dependencies:
-    "@floating-ui/core": "npm:^1.3.1"
-  checksum: 2c406920221d99ba585f769c7aea450299cbd4d316b307151a214c861bd4deda3f724589d94b1bc676a9a33958d5a9d40b4b1e1065350e8699cc7a79f74f506e
+    "@floating-ui/core": "npm:^1.0.0"
+    "@floating-ui/utils": "npm:^0.2.0"
+  checksum: d6cac10877918ce5a8d1a24b21738d2eb130a0191043d7c0dd43bccac507844d3b4dc5d4107d3891d82f6007945ca8fb4207a1252506e91c37e211f0f73cf77e
+  languageName: node
+  linkType: hard
+
+"@floating-ui/utils@npm:^0.2.0, @floating-ui/utils@npm:^0.2.1":
+  version: 0.2.1
+  resolution: "@floating-ui/utils@npm:0.2.1"
+  checksum: ee77756712cf5b000c6bacf11992ffb364f3ea2d0d51cc45197a7e646a17aeb86ea4b192c0b42f3fbb29487aee918a565e84f710b8c3645827767f406a6b4cc9
   languageName: node
   linkType: hard
 
@@ -6195,10 +6205,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/chroma-js@npm:^2.4.0":
-  version: 2.4.0
-  resolution: "@types/chroma-js@npm:2.4.0"
-  checksum: f774e1dcdd0a9c75850ac7ae44a225c7a26b2c44b40f18a491e5c8172edd438e053296d090359933165438826989ca2be4a9c4e96cc99dec837f7f7d420641d6
+"@types/chroma-js@npm:^2.4.3":
+  version: 2.4.4
+  resolution: "@types/chroma-js@npm:2.4.4"
+  checksum: 8acd341c523fc960686ed9e60f23ae643da35bddf012b4b18cb0d941ee3bf82087262245ffa8c886ea31571cd5dc6eb553e849fab3c0509ea2c3a045a246178c
   languageName: node
   linkType: hard
 
@@ -9469,7 +9479,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"chroma-js@npm:^2.4.0":
+"chroma-js@npm:^2.4.2":
   version: 2.4.2
   resolution: "chroma-js@npm:2.4.2"
   checksum: 5657cd10892538c4a41e8bd95524d018c3a43318b26dfb20d572b2084bc6d5af742457a6d5701ddecb4d4eceb99995873b22293c1b396ab0b35ef55a264550c8
@@ -10783,6 +10793,13 @@ __metadata:
   dependencies:
     "@babel/runtime": "npm:^7.21.0"
   checksum: e4b521fbf22bc8c3db332bbfb7b094fd3e7627de0259a9d17c7551e2d2702608a7307a449206065916538e384f37b181565447ce2637ae09828427aed9cb5581
+  languageName: node
+  linkType: hard
+
+"date-fns@npm:^3.2.0":
+  version: 3.3.1
+  resolution: "date-fns@npm:3.3.1"
+  checksum: e04ff79244010e03b912d791cd3250af5f18866ce868604958d76bd87e5fb0b79f0a810b8e7066248452b41779b288c4fd21de1cac2cd4b6d384e9dd931c9674
   languageName: node
   linkType: hard
 
@@ -22423,17 +22440,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-activity-calendar@npm:^2.0.0":
-  version: 2.0.2
-  resolution: "react-activity-calendar@npm:2.0.2"
+"react-activity-calendar@npm:^2.2.5":
+  version: 2.2.7
+  resolution: "react-activity-calendar@npm:2.2.7"
   dependencies:
-    "@types/chroma-js": "npm:^2.4.0"
-    chroma-js: "npm:^2.4.0"
-    date-fns: "npm:^2.30.0"
+    "@types/chroma-js": "npm:^2.4.3"
+    chroma-js: "npm:^2.4.2"
+    date-fns: "npm:^3.2.0"
   peerDependencies:
     react: ^17.0.0 || ^18.0.0
     react-dom: ^17.0.0 || ^18.0.0
-  checksum: 0ffd8ee1db0463af5cfe778926fa8b53befb1b1b39244c368eff0dc62b6368fa838cee0698db8311f981005febf02e7794678e776d64df9c76f644c91307e42d
+  checksum: 2714e2a22f46b30436b050e370a0e3ffd27c36aaf5b0c07afefebfa0e4520e16cf994e86c6fb5eab6cf621941a3effc90c290325d18f55963f3e27643fd532ca
   languageName: node
   linkType: hard
 
@@ -22451,7 +22468,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-async-script@npm:^1.1.1":
+"react-async-script@npm:^1.2.0":
   version: 1.2.0
   resolution: "react-async-script@npm:1.2.0"
   dependencies:
@@ -22544,6 +22561,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-error-boundary@npm:^4.0.12":
+  version: 4.0.12
+  resolution: "react-error-boundary@npm:4.0.12"
+  dependencies:
+    "@babel/runtime": "npm:^7.12.5"
+  peerDependencies:
+    react: ">=16.13.1"
+  checksum: de599799efab78929447e11f4cfb3779e99ca87a8af1b3c56ab49ecb0bcc44fe924cfad4d2f3cc77c6cc8d992e3c47e356c70edebb825ae867aa621438035209
+  languageName: node
+  linkType: hard
+
 "react-error-overlay@npm:^6.0.11":
   version: 6.0.11
   resolution: "react-error-overlay@npm:6.0.11"
@@ -22584,27 +22612,28 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-github-calendar@npm:^4.0.0":
-  version: 4.0.1
-  resolution: "react-github-calendar@npm:4.0.1"
+"react-github-calendar@npm:^4.1.2":
+  version: 4.1.2
+  resolution: "react-github-calendar@npm:4.1.2"
   dependencies:
-    react-activity-calendar: "npm:^2.0.0"
+    react-activity-calendar: "npm:^2.2.5"
+    react-error-boundary: "npm:^4.0.12"
   peerDependencies:
     react: ^17.0.0 || ^18.0.0
     react-dom: ^17.0.0 || ^18.0.0
-  checksum: 720be6b1bbc2795ef33e8a2a69b6f0fd0cf732fb22ecb8d9f15a2925b07152d7e739d499260d3fc8d3d7b718bbce1beca767fa133c58a614f33e2b4c6c5cd194
+  checksum: dd0d7a7fc7186c4ae6d5d26f65bfd4f5d721c90c71e5976f3669063057945754211f0cbf4d2dd8db7ab1ed1bb67c0f47217276c6f280ac7c5e4176bad30bcc5c
   languageName: node
   linkType: hard
 
-"react-google-recaptcha@npm:^2.1.0":
-  version: 2.1.0
-  resolution: "react-google-recaptcha@npm:2.1.0"
+"react-google-recaptcha@npm:^3.1.0":
+  version: 3.1.0
+  resolution: "react-google-recaptcha@npm:3.1.0"
   dependencies:
     prop-types: "npm:^15.5.0"
-    react-async-script: "npm:^1.1.1"
+    react-async-script: "npm:^1.2.0"
   peerDependencies:
     react: ">=16.4.1"
-  checksum: c2f38cedd50ee90711e510cbc5c57e2810a9c5aa3c8508415fae635f9f66ad0ef571da30770b87bb6ab21dd9b5ccd69622624691ec2f26cdfc5f480d0e11d24b
+  checksum: 5ecaa6b88f238defd939012cb2671b4cbda59fe03f059158994b8c5215db482412e905eae6a67d23cef220d77cfe0430ab91ce7849d476515cda72f3a8a0a746
   languageName: node
   linkType: hard
 
@@ -22886,16 +22915,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-tooltip@npm:^5.16.1":
-  version: 5.18.1
-  resolution: "react-tooltip@npm:5.18.1"
+"react-tooltip@npm:^5.26.3":
+  version: 5.26.3
+  resolution: "react-tooltip@npm:5.26.3"
   dependencies:
-    "@floating-ui/dom": "npm:^1.0.0"
+    "@floating-ui/dom": "npm:^1.6.1"
     classnames: "npm:^2.3.0"
   peerDependencies:
     react: ">=16.14.0"
     react-dom: ">=16.14.0"
-  checksum: 8c97b7a945e6c25f739202d14b36ed16a534b8f9b95cb412481a9ec6e2fe332de5c08ad4b519a8eed3d9178161af4d7e5c6c784440c38e2c22bf1bb8bf5e2bba
+  checksum: fcce843ebfda0a74ddaf90b7d322879c9070bd180e490ae4634ff02052b1cd39158a0af3a27621a9ffe62a1a8ad246633908a1d214998aea0403ec7aeca874fb
   languageName: node
   linkType: hard
 
@@ -22934,7 +22963,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-youtube@npm:^10.0.0":
+"react-youtube@npm:^10.1.0":
   version: 10.1.0
   resolution: "react-youtube@npm:10.1.0"
   dependencies:
@@ -25057,15 +25086,15 @@ __metadata:
     react: "npm:^18.2.0"
     react-dom: "npm:^18.2.0"
     react-ga: "npm:^3.3.1"
-    react-github-calendar: "npm:^4.0.0"
-    react-google-recaptcha: "npm:^2.1.0"
+    react-github-calendar: "npm:^4.1.2"
+    react-google-recaptcha: "npm:^3.1.0"
     react-helmet: "npm:^6.1.0"
     react-hot-toast: "npm:^2.4.1"
     react-lazy-youtube: "npm:^1.0.1"
     react-modal: "npm:^3.16.1"
     react-pose: "npm:^4.0.10"
-    react-tooltip: "npm:^5.16.1"
-    react-youtube: "npm:^10.0.0"
+    react-tooltip: "npm:^5.26.3"
+    react-youtube: "npm:^10.1.0"
     rollup: "npm:^3.8.0"
     ssw.megamenu: "npm:^4.1.0"
     ssw.rules.widget: "npm:^1.6.2"
