@@ -6,8 +6,8 @@ const SkillSort = (a, b) => {
       a.technology.toLowerCase() < b.technology.toLowerCase()
         ? -1
         : a.technology.toLowerCase() > b.technology.toLowerCase()
-        ? 1
-        : 0;
+          ? 1
+          : 0;
   }
 
   return sorting;

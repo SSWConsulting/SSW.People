@@ -154,8 +154,8 @@ function buildPeople(data) {
           ? dataCRM.jobTitle.replace(/Mr/, '').replace(/Ms/, '')
             ? dataCRM.jobTitle
             : node.frontmatter.jobTitle
-            ? node.frontmatter.jobTitle
-            : ''
+              ? node.frontmatter.jobTitle
+              : ''
           : 'enthusiastic People';
         return {
           profile: {

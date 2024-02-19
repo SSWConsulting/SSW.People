@@ -10,6 +10,7 @@ const { getViewDataFromCRM, getUsersSkills } = require('./src/helpers/CRMApi');
 const appInsights = require('applicationinsights');
 const fs = require('fs');
 const siteconfig = require('./site-config');
+const Map = require('core-js/features/map');
 
 if (process.env.APPINSIGHTS_INSTRUMENTATIONKEY) {
   // Log build time stats to appInsights

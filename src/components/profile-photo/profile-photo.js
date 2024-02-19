@@ -9,8 +9,8 @@ const Image = ({ hover, profileImage, sketchImage }) => {
       ? sketchImage.src
       : SketchPlaceholder
     : profileImage
-    ? profileImage.src
-    : ProfilePlaceholder;
+      ? profileImage.src
+      : ProfilePlaceholder;
 
   return (
     <img className="profile-image bg-cover mx-auto" src={src} alt="Profile" />

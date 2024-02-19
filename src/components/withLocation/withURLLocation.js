@@ -8,18 +8,17 @@ let search =
     : {};
 
 // eslint-disable-next-line react/display-name
-const withURLLocation = (ComponentToWrap) => (props) =>
-  (
-    <Location>
-      {({ location, navigate }) => (
-        <ComponentToWrap
-          {...props}
-          location={location}
-          navigate={navigate}
-          search={search}
-        />
-      )}
-    </Location>
-  );
+const withURLLocation = (ComponentToWrap) => (props) => (
+  <Location>
+    {({ location, navigate }) => (
+      <ComponentToWrap
+        {...props}
+        location={location}
+        navigate={navigate}
+        search={search}
+      />
+    )}
+  </Location>
+);
 
 export default withURLLocation;
