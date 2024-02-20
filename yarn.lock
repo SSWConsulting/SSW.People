@@ -2511,6 +2511,26 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@bedrock-layout/use-forwarded-ref@npm:^1.3.1":
+  version: 1.6.1
+  resolution: "@bedrock-layout/use-forwarded-ref@npm:1.6.1"
+  dependencies:
+    "@bedrock-layout/use-stateful-ref": "npm:^1.4.1"
+  peerDependencies:
+    react: ^16.8 || ^17 || ^18
+  checksum: b0ebbc2a1962665109983324460e5085afcdcc5ef4788bd43015f28ac2017bb6dc3d9f743c90e2ae92b69697f4829845227f582c979ac68368bcc0ce8b6f9a66
+  languageName: node
+  linkType: hard
+
+"@bedrock-layout/use-stateful-ref@npm:^1.4.1":
+  version: 1.4.1
+  resolution: "@bedrock-layout/use-stateful-ref@npm:1.4.1"
+  peerDependencies:
+    react: ^16.8 || ^17 || ^18
+  checksum: aee0878498bc30e9b67b62578fc1f540541131eb0ea61a5f0b67ee3c1cd8f22659fc7dba7d34678bb3d9346cf7c1544c927ca89b617e441d923d580e407a45e3
+  languageName: node
+  linkType: hard
+
 "@brainhubeu/react-carousel@npm:^2.0.4":
   version: 2.0.4
   resolution: "@brainhubeu/react-carousel@npm:2.0.4"
@@ -8671,6 +8691,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"body-scroll-lock@npm:^3.1.5":
+  version: 3.1.5
+  resolution: "body-scroll-lock@npm:3.1.5"
+  checksum: 657c948d64ffe17d2c89958f57c2c636203cf5216e3ba33ad76604bf1b5144fd8f4b5d832d09105f8782d5b8bc96f38780331ec55f3af5f27694dff38a0cc9d7
+  languageName: node
+  linkType: hard
+
 "bonjour-service@npm:^1.0.11":
   version: 1.1.1
   resolution: "bonjour-service@npm:1.1.1"
@@ -9469,6 +9496,13 @@ __metadata:
   version: 2.3.2
   resolution: "classnames@npm:2.3.2"
   checksum: cd50ead57b4f97436aaa9f9885c6926323efc7c2bea8e3d4eb10e4e972aa6a1cfca1c7a0e06f8a199ca7498d4339e30bb6002e589e61c9f21248cbf3e8b0b18d
+  languageName: node
+  linkType: hard
+
+"classnames@npm:^2.3.1":
+  version: 2.5.1
+  resolution: "classnames@npm:2.5.1"
+  checksum: afff4f77e62cea2d79c39962980bf316bacb0d7c49e13a21adaadb9221e1c6b9d3cdb829d8bb1b23c406f4e740507f37e1dcf506f7e3b7113d17c5bab787aa69
   languageName: node
   linkType: hard
 
@@ -12579,13 +12613,6 @@ __metadata:
     signal-exit: "npm:^3.0.3"
     strip-final-newline: "npm:^2.0.0"
   checksum: c8e615235e8de4c5addf2fa4c3da3e3aa59ce975a3e83533b4f6a71750fb816a2e79610dc5f1799b6e28976c9ae86747a36a606655bf8cb414a74d8d507b304f
-  languageName: node
-  linkType: hard
-
-"exenv@npm:^1.2.0":
-  version: 1.2.2
-  resolution: "exenv@npm:1.2.2"
-  checksum: 4e96b355a6b9b9547237288ca779dd673b2e698458b409e88b50df09feb7c85ef94c07354b6b87bc3ed0193a94009a6f7a3c71956da12f45911c0d0f5aa3caa0
   languageName: node
   linkType: hard
 
@@ -22500,6 +22527,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-jotform@npm:^1.0.2":
+  version: 1.0.2
+  resolution: "react-jotform@npm:1.0.2"
+  peerDependencies:
+    react: ">=16.8.0"
+    react-dom: ">=16.8.0"
+  checksum: ff3a4509173dc9b54874746e359e089417b24be079d611333e3047159965bc57b81f9026b5f6137dcc17d665fb57637d96b64f79fcab341d691cdedb6acac349
+  languageName: node
+  linkType: hard
+
 "react-lazy-youtube@npm:^1.0.1":
   version: 1.0.1
   resolution: "react-lazy-youtube@npm:1.0.1"
@@ -22519,25 +22556,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-lifecycles-compat@npm:^3.0.0, react-lifecycles-compat@npm:^3.0.4":
+"react-lifecycles-compat@npm:^3.0.4":
   version: 3.0.4
   resolution: "react-lifecycles-compat@npm:3.0.4"
   checksum: 1d0df3c85af79df720524780f00c064d53a9dd1899d785eddb7264b378026979acbddb58a4b7e06e7d0d12aa1494fd5754562ee55d32907b15601068dae82c27
-  languageName: node
-  linkType: hard
-
-"react-modal@npm:^3.16.1":
-  version: 3.16.1
-  resolution: "react-modal@npm:3.16.1"
-  dependencies:
-    exenv: "npm:^1.2.0"
-    prop-types: "npm:^15.7.2"
-    react-lifecycles-compat: "npm:^3.0.0"
-    warning: "npm:^4.0.3"
-  peerDependencies:
-    react: ^0.14.0 || ^15.0.0 || ^16 || ^17 || ^18
-    react-dom: ^0.14.0 || ^15.0.0 || ^16 || ^17 || ^18
-  checksum: 7b56e2c505b2b924736c471a34754a4211df40ac2d6fb0949cf095aea5e65d3326bd9f111fa7898acf40afa54f526809ad8aa47e02b8328663d11422568dc7b1
   languageName: node
   linkType: hard
 
@@ -22602,6 +22624,20 @@ __metadata:
     "@types/react":
       optional: true
   checksum: 1325fbee120716604eeff82915f43800456bddea4be8c9a76848da4eaedf68d3d027fd9844ecff43670857a7a12ac87fb5138376258a903ac564dcc45a002ae3
+  languageName: node
+  linkType: hard
+
+"react-responsive-modal@npm:^6.4.2":
+  version: 6.4.2
+  resolution: "react-responsive-modal@npm:6.4.2"
+  dependencies:
+    "@bedrock-layout/use-forwarded-ref": "npm:^1.3.1"
+    body-scroll-lock: "npm:^3.1.5"
+    classnames: "npm:^2.3.1"
+  peerDependencies:
+    react: ^16.8.0 || ^17 || ^18
+    react-dom: ^16.8.0 || ^17 || ^18
+  checksum: ba62b002f61bf8bedfad286fdc56d295c55e0d4e716d96784c06f295cadb8117c926151189524ce1868df2aa4ab0edea3dda50c8d4b1f9fd1ab7782c840a357c
   languageName: node
   linkType: hard
 
@@ -24887,9 +24923,10 @@ __metadata:
     react-google-recaptcha: "npm:^2.1.0"
     react-helmet: "npm:^6.1.0"
     react-hot-toast: "npm:^2.4.1"
+    react-jotform: "npm:^1.0.2"
     react-lazy-youtube: "npm:^1.0.1"
-    react-modal: "npm:^3.16.1"
     react-pose: "npm:^4.0.5"
+    react-responsive-modal: "npm:^6.4.2"
     react-tooltip: "npm:^5.16.1"
     react-youtube: "npm:^10.0.0"
     rollup: "npm:^3.8.0"
