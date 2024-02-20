@@ -83,6 +83,7 @@
     "react-jotform": "^1.0.2",
     "react-lazy-youtube": "^1.0.1",
     "react-pose": "^4.0.10",
+    "react-responsive-modal": "^6.4.2",
     "react-tooltip": "^5.26.3",
     "react-youtube": "^10.1.0",
     "rollup": "^4.12.0",
