@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import ContactInfo from '../contact-info/contact-info';
 import JotFormEmbed from '../jobform/jobFormEmbed.jsx';
 
-const Contact = ({ firstNameOrNickname, fullName, alumni }) => {
+const Contact = ({ firstNameOrNickname, alumni }) => {
   const [displayContactForm, setDisplayContactForm] = useState(false);
 
   const onContactButtonClick = () => {
