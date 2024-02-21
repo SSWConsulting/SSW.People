@@ -1,5 +1,5 @@
 module.exports = {
-  content: ['./src/**/*.js', './node_modules/ssw.megamenu/**/*.js'],
+  content: ['./src/**/*.{js,jsx}', './node_modules/ssw.megamenu/**/*.js'],
   theme: {
     extend: {
       colors: {
