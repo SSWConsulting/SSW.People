@@ -203,7 +203,6 @@ const Person = ({ pageContext }) => {
             )}
             <Contact
               firstNameOrNickname={firstNameOrNickname}
-              fullName={fullName}
               alumni={!isActive}
             />
           </div>
