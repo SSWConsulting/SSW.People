@@ -18,7 +18,7 @@ const ProfileDescription = ({
         <h1>{personName}</h1>
         {!isActive && (
           <div class="flex flex-grow flex-wrap gap-2 sm:flex-grow-0 ml-3">
-            <div class="flex h-12 w-full shrink-0 items-center justify-center rounded-lg bg-ssw-red px-5 text-xl max-sm:my-5 sm:w-fit">
+            <div class="sm:flex hidden h-12 w-full shrink-0 items-center justify-center rounded-lg bg-ssw-red px-5 text-xl max-sm:my-5 sm:w-fit">
               <span class="flex items-center text-sm font-bold text-white">
                 <FontAwesomeIcon
                   icon={faBoxArchive}
