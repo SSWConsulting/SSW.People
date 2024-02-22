@@ -17,9 +17,9 @@ const ProfileDescription = ({
       <div className="flex items-center justify-between">
         <h1>{personName}</h1>
         {!isActive && (
-          <div class="flex flex-grow flex-wrap gap-2 sm:flex-grow-0 ml-3">
-            <div class="sm:flex hidden h-12 w-full shrink-0 items-center justify-center rounded-lg bg-ssw-red px-5 text-xl max-sm:my-5 sm:w-fit">
-              <span class="flex items-center text-sm font-bold text-white">
+          <div className="flex flex-grow flex-wrap gap-2 sm:flex-grow-0 ml-3">
+            <div className="sm:flex hidden h-12 w-full shrink-0 items-center justify-center rounded-lg bg-ssw-red px-5 text-xl max-sm:my-5 sm:w-fit">
+              <span className="flex items-center text-sm font-bold text-white">
                 <FontAwesomeIcon
                   icon={faBoxArchive}
                   className="mr-2"
@@ -57,6 +57,7 @@ ProfileDescription.propTypes = {
   location: PropTypes.string,
   qualifications: PropTypes.string,
   children: PropTypes.arrayOf(PropTypes.element),
+  isActive: PropTypes.bool,
 };
 
 export default ProfileDescription;
