@@ -9,8 +9,8 @@ const ContactInfo = ({ onClick, profileName, alumni }) => {
         for you?
       </h3>
       <p>
-        Contact {profileName ? `${profileName}'s` : 'an'} Account Manager to
-        discuss your project
+        Contact {profileName && !alumni ? `${profileName}'s` : 'an SSW'} Account
+        Manager to discuss your project
       </p>
       <button className="btn btn-red" onClick={() => onClick()}>
         Book a Free Initial Meeting
