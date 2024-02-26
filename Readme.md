@@ -2,7 +2,11 @@
 
 # SSW People
 
-v2 of the EmployeePages. No more SharePoint, idea is to prove the implementation for Rules v2
+This is a Gatsby generated website, leveraging data from SSW.People.Profiles (GitHub) and SSW CRM. Pages are automatically re-generated and published to our SSW website when a profile markdown page is updated. 
+
+Learn more on [Adam's Blog - Introducing SSW People!](https://adamcogan.com/2020/02/10/introducing-ssw-people)
+
+**SSW People** is the **SSW Employee Pages V2** - No more SharePoint!
 
 This is a Gatsby generated site pulling data from:
 
@@ -22,8 +26,6 @@ This is a Gatsby generated site pulling data from:
   
   ![Desktop Development with C++ workload](https://user-images.githubusercontent.com/38869720/183000582-463e2fb8-7c8f-4636-81fb-5bdb95758d78.png)
   **Figure: Desktop Development with C++ workload**
-
-
 
 ### Getting ready for development
 
