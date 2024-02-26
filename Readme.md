@@ -1,6 +1,6 @@
 <img src="https://github.com/SSWConsulting/SSW.People/raw/main/_wiki/images/ssw-banner.png">
 
-# SSW.People
+# SSW People
 
 v2 of the EmployeePages. No more SharePoint, idea is to prove the implementation for Rules v2
 
