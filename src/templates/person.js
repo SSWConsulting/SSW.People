@@ -101,6 +101,7 @@ const Person = ({ pageContext }) => {
         jobTitle={jobTitle}
         location={crmData?.location}
         qualifications={frontmatter.qualifications}
+        isActive={isActive}
       >
         <ActionButtons profileId={pageContext.slug}></ActionButtons>
       </ProfileDescription>
