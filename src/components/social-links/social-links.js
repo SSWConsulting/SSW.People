@@ -35,7 +35,8 @@ const SocialLinks = ({ crmData }) => {
 
   const sendEmail = (e) => {
     e.preventDefault();
-    window.location.href = 'mailTo:' + decodeEmail(encodedEmailAddress);
+    const decodedEmail = decodeEmail(encodedEmailAddress);
+    window.location.href = `mailTo:${decodedEmail}?subject=Contacting ${crmData.fullName} via SSW.People profile`;
   };
 
   return (
