@@ -35,7 +35,8 @@ const SocialLinks = ({ crmData }) => {
 
   const sendEmail = (e) => {
     e.preventDefault();
-    window.location.href = 'mailTo:' + decodeEmail(encodedEmailAddress);
+    const decodedEmail = decodeEmail(encodedEmailAddress);
+    window.location.href = `mailTo:${decodedEmail}?subject=Contacting ${crmData.fullName} via SSW.People profile`;
   };
 
   return (
@@ -44,17 +45,24 @@ const SocialLinks = ({ crmData }) => {
         <div className="favor-content w-full print-hidden">
           <ul className="favor-list">
             {crmData.emailAddress && (
-              <li className="social email">
-                <a
-                  href={'#0'}
-                  onClick={(event) => {
-                    sendEmail(event);
-                  }}
-                >
-                  {' '}
-                  Email{' '}
-                </a>
-              </li>
+              <>
+                <li className="social email flex items-center gap-x-1">
+                  <a
+                    href={'#0'}
+                    onClick={(event) => {
+                      sendEmail(event);
+                    }}
+                  >
+                    <span>Email </span>
+                  </a>
+                  <a
+                    href="https://github.com/SSWConsulting/SSW.People/wiki/4.-Extras#4-mailto-link-configure-your-default-mail-client"
+                    className="text-sm whitespace-nowrap cursor-pointer italic"
+                  >
+                    (Need help?)
+                  </a>
+                </li>
+              </>
             )}
             {crmData.blogUrl && (
               <li className="social blog">
