@@ -76,7 +76,7 @@ const Person = ({ pageContext }) => {
           process.env?.RULESWIDGET_APPINSIGHTS_INSTRUMENTATIONKEY
         }
         ruleEditor={githubUsername}
-        ruleCount={5}
+        ruleCount={15}
         rulesUrl="https://www.ssw.com.au/rules/"
         userRulesUrl="/rules/user/?author="
       />
