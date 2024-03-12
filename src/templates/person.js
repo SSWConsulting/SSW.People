@@ -109,7 +109,7 @@ const Person = ({ pageContext }) => {
   );
 
   const skillsList = <SkillsList crmData={crmData} />;
-  const socialLinks = <SocialLinks crmData={crmData} />;
+  const socialLinks = <SocialLinks crmData={crmData} alumni={!isActive} />;
 
   return (
     <>
@@ -134,7 +134,7 @@ const Person = ({ pageContext }) => {
                 ''
               )}
               <div className="mt-4 hidden md:block lg:hidden w-full">
-                <SocialLinks crmData={crmData} />
+                <SocialLinks crmData={crmData} alumni={!isActive} />
               </div>
             </div>
             <div className="lg:hidden print-show px-2 md:p-2">

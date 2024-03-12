@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const SocialLinks = ({ crmData }) => {
+const SocialLinks = ({ crmData, alumni }) => {
   let encodedEmailAddress = '';
 
   const encodeEmail = (emailAddress) => {
@@ -39,9 +39,23 @@ const SocialLinks = ({ crmData }) => {
     window.location.href = `mailTo:${decodedEmail}?subject=Contacting ${crmData.fullName} via SSW.People profile`;
   };
 
+  if (alumni) {
+    crmData.emailAddress = '';
+  }
+
+  const displayCrm =
+    crmData.emailAddress ||
+    crmData.blogUrl ||
+    crmData.facebookUrl ||
+    crmData.skypeUsername ||
+    crmData.linkedInUrl ||
+    crmData.twitterUsername ||
+    crmData.gitHubUrl ||
+    crmData.publicPhotoAlbumUrl;
+
   return (
     <>
-      {crmData && (
+      {displayCrm && (
         <div className="favor-content w-full print-hidden">
           <ul className="favor-list">
             {crmData.emailAddress && (
@@ -144,6 +158,7 @@ const SocialLinks = ({ crmData }) => {
 
 SocialLinks.propTypes = {
   crmData: PropTypes.object.isRequired,
+  alumni: PropTypes.bool.isRequired,
 };
 
 export default SocialLinks;
