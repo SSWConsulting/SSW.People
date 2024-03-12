@@ -39,6 +39,10 @@ const SocialLinks = ({ crmData, alumni }) => {
     window.location.href = `mailTo:${decodedEmail}?subject=Contacting ${crmData.fullName} via SSW.People profile`;
   };
 
+  if (!crmData) {
+    return <></>;
+  }
+
   if (alumni) {
     crmData.emailAddress = '';
   }
