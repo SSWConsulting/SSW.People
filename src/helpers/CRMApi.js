@@ -82,8 +82,8 @@ const getUsersSkills = async () => {
       };
 
       return userSkill;
-    });
-  // .filter((us) => us.published === 'Published');
+    })
+    .filter((us) => us.published === 'Published');
 
   return usersSkills;
 };
