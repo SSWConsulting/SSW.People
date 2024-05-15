@@ -1,11 +1,33 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import PropTypes from 'prop-types';
 import ProfileBox from 'components/profile-box';
 import Distinct from '../../helpers/arrayHelpers';
 import RoleSort from '../../helpers/roleSort';
 import CheckUniqueName from '../../helpers/CheckUniqueName';
 
+function getSkillsFromQuery() {
+  const params = new URLSearchParams(window.location.search)
+  const skills = []
+
+  for (const [key, value] of params) {
+    if (key === 'skill') {
+      skills.push(decodeURIComponent(value))
+    }
+  }
+
+  return skills
+}
+
 const ProfileList = ({ filteredPeople }) => {
+  const [skillFilter, setSkillFilter] = useState("");
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const skills = getSkillsFromQuery().join(' & ')
+      setSkillFilter(skills)
+    }
+  }, [filteredPeople])
+
   const distinctRoles = filteredPeople
     .map((p) => p.role)
     .filter(Distinct)
@@ -25,6 +47,7 @@ const ProfileList = ({ filteredPeople }) => {
           people.length > 0 && (
             <section key={i} className={'role-section mb-8 ' + role}>
               <h2 className="mb-2">{role}</h2>
+              {skillFilter && (<p className='mb-2'>Filter: Technologies — {skillFilter}</p>) }
               <div className="people-grid-container">
                 {people.map((person, id) => {
                   return (
