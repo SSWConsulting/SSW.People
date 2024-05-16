@@ -11,7 +11,7 @@ function getSkillsFromQuery() {
 
   for (const [key, value] of params) {
     if (key === 'skill') {
-      const skillName = decodeURIComponent(value).replaceAll('-', ' ')
+      const skillName = decodeURIComponent(value).replaceAll('-', ' ');
       skills.push(skillName);
     }
   }
