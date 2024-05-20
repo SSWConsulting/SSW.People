@@ -42,13 +42,13 @@ const ProfileList = ({ filteredPeople }) => {
   });
   return (
     <>
-      {distinctRoles.map((role, i) => {
+      {distinctRoles.map((role, index) => {
         const people = getPeopleInRole(role);
         return (
           people.length > 0 && (
-            <section key={i} className={'role-section mb-8 ' + role}>
+            <section key={index} className={'role-section mb-8 ' + role}>
               <h2 className="mb-2">{role}</h2>
-              {skillFilter && (
+              {skillFilter && index === 0 && (
                 <p className="mb-2">Filter: Technologies — {skillFilter}</p>
               )}
               <div className="people-grid-container">
