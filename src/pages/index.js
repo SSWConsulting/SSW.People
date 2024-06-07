@@ -81,12 +81,8 @@ const Index = ({ data }) => {
   ]);
   const [countPerSkill, setCountPerSkill] = useState([]);
 
-  const allSkills = useMemo(() => {
-    const skillsInUse = new Set(
-      filteredPeople.flatMap((p) => p.skills.map((s) => s.service))
-    );
-
-    const skillCount = skills.reduce((acc, skill) => {
+  const getSkillCounts = (skillsInUse) => {
+    return skills.reduce((acc, skill) => {
       const serviceName = skill.service.service;
       if (skillsInUse.has(serviceName)) {
         const serviceCount = filteredPeople.filter((p) =>
@@ -98,9 +94,9 @@ const Index = ({ data }) => {
       }
       return acc;
     }, []);
+  };
 
-    setCountPerSkill(skillCount);
-
+  const filterAndSortSkills = (skills, skillsInUse, skillCount) => {
     return skills
       .filter((s) => skillsInUse.has(s.service.service))
       .sort((a, b) => {
@@ -118,6 +114,17 @@ const Index = ({ data }) => {
         return countB - countA;
       })
       .map((s) => s.service.service);
+  };
+
+  const allSkills = useMemo(() => {
+    const skillsInUse = new Set(
+      filteredPeople.flatMap((p) => p.skills.map((s) => s.service))
+    );
+
+    const skillCount = getSkillCounts(skillsInUse);
+    setCountPerSkill(skillCount);
+
+    return filterAndSortSkills(skills, skillsInUse, skillCount);
   }, [skills, filteredPeople]);
 
   const countPerRole = useMemo(() => {
