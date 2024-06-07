@@ -161,6 +161,7 @@ exports.sourceNodes = async ({
         service: user.technology,
         marketingPage: user.marketingPage,
         marketingPageUrl: user.marketingPageUrl,
+        highlightskill: user.highlightskill
       };
     })
     .filter(
@@ -257,6 +258,7 @@ exports.createPages = async function ({ actions, graphql }) {
             service
             marketingPage
             marketingPageUrl
+            highlightskill
           }
         }
       }

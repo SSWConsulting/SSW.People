@@ -79,6 +79,7 @@ const getUsersSkills = async () => {
         marketingPageUrl: consultingPages[marketingPage],
         published:
           skill?.['statuscode@OData.Community.Display.V1.FormattedValue'] ?? '',
+        highlightskill: skill?.ssw_highlightskill
       };
 
       return userSkill;
