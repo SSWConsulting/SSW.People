@@ -161,7 +161,7 @@ exports.sourceNodes = async ({
         service: user.technology,
         marketingPage: user.marketingPage,
         marketingPageUrl: user.marketingPageUrl,
-        highlightskill: user.highlightskill
+        highlightskill: user.highlightskill,
       };
     })
     .filter(
