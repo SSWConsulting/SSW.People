@@ -79,29 +79,53 @@ const Index = ({ data }) => {
     { name: 'skills', selected: [] },
     { name: 'events', selected: [] },
   ]);
+  const [countPerSkill, setCountPerSkill] = useState([]);
+
+  const getSkillCounts = (skillsInUse) => {
+    return skills.reduce((acc, skill) => {
+      const serviceName = skill.service.service;
+      if (skillsInUse.has(serviceName)) {
+        const serviceCount = filteredPeople.filter((p) =>
+          p.skills.some((s) => s.service === serviceName)
+        ).length;
+        if (serviceCount > 0) {
+          acc.push({ item: serviceName, count: serviceCount });
+        }
+      }
+      return acc;
+    }, []);
+  };
+
+  const filterAndSortSkills = (skills, skillsInUse, skillCount) => {
+    return skills
+      .filter((s) => skillsInUse.has(s.service.service))
+      .sort((a, b) => {
+        const hasHighlightA = a.service.highlightskill ? 1 : 0;
+        const hasHighlightB = b.service.highlightskill ? 1 : 0;
+
+        if (hasHighlightA !== hasHighlightB) {
+          return hasHighlightB - hasHighlightA;
+        }
+
+        const countA =
+          skillCount.find((sc) => sc.item === a.service.service)?.count || 0;
+        const countB =
+          skillCount.find((sc) => sc.item === b.service.service)?.count || 0;
+        return countB - countA;
+      })
+      .map((s) => s.service.service);
+  };
 
   const allSkills = useMemo(() => {
     const skillsInUse = new Set(
       filteredPeople.flatMap((p) => p.skills.map((s) => s.service))
     );
 
-    return skills
-      .filter((s) => skillsInUse.has(s.service.service))
-      .map((s) => s.service.service);
-  }, [skills, filteredPeople]);
+    const skillCount = getSkillCounts(skillsInUse);
+    setCountPerSkill(skillCount);
 
-  const countPerSkill = useMemo(
-    () =>
-      allSkills.map((r) => {
-        return {
-          item: r,
-          count: filteredPeople.filter((p) =>
-            p.skills.find((s) => s.service === r)
-          ).length,
-        };
-      }),
-    [allSkills]
-  );
+    return filterAndSortSkills(skills, skillsInUse, skillCount);
+  }, [skills, filteredPeople]);
 
   const countPerRole = useMemo(() => {
     return allRoles.map((r) => {
@@ -394,6 +418,7 @@ const IndexWithQuery = (props) => (
               service
               marketingPage
               marketingPageUrl
+              highlightskill
             }
           }
         }
