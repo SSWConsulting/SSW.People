@@ -1,0 +1,108 @@
+name: Template - Build site
+
+on:
+  workflow_call:
+    inputs:
+      branch_name:
+        required: true
+        type: string
+      environment:
+        type: string
+        required: true
+        description: 'The environment to build for'
+
+jobs:
+
+  build-code:
+    name: Gatsby
+    runs-on: ubuntu-latest
+    environment: ${{ inputs.environment }}
+    steps:
+
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.branch_name }}
+
+      - uses: cschleiden/replace-tokens@v1
+        with:
+          tokenPrefix: '#{'
+          tokenSuffix: '}'
+          files: .env.template
+        env:
+          GOOGLE_GTM_ID: ${{ secrets.GOOGLE_GTM_ID }}
+          GOOGLE_ANALYTICS: ${{ secrets.GOOGLE_ANALYTICS }}
+          YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
+          EVENTS_API: ${{ secrets.EVENTS_API }}
+          CRM_APP_ID: ${{ secrets.CRM_APP_ID }}
+          CRM_TENANT: ${{ secrets.CRM_TENANT }}
+          CRM_TENANT_ID: ${{ secrets.CRM_TENANT_ID }}
+          CRM_APP_SECRET: ${{ secrets.CRM_APP_SECRET }}
+          CRM_SCOPE: ${{ secrets.CRM_SCOPE }}
+          CRM_VIEW_CURRENT: ${{ secrets.CRM_VIEW_CURRENT }}
+          CRM_VIEW_PAST: ${{ secrets.CRM_VIEW_PAST }}
+          APPINSIGHTS_INSTRUMENTATIONKEY: ${{ secrets.APPINSIGHTS_INSTRUMENTATIONKEY }}
+          RULESWIDGET_APPINSIGHTS_INSTRUMENTATIONKEY: ${{ secrets.RULESWIDGET_APPINSIGHTS_INSTRUMENTATIONKEY }}
+          CHINA_BUILD: FALSE
+          VERSION_DEPLOYED: ${{ github.run_number }}
+
+      - name: Rename env file
+        run: |
+          mv .env.template .env.production
+          cat .env.production
+
+      - name: Cache Gatsby .cache
+        uses: actions/cache@v4
+        with:
+          path: .cache
+          key: gatsby_cache | ${{ runner.os }}
+          restore-keys: |
+            gatsby_cache | ${{ runner.os }}
+
+      - name: Cache Gatsby public
+        uses: actions/cache@v4
+        with:
+          path: public
+          key: gatsby_public | ${{ runner.os }}
+          restore-keys: |
+            gatsby_public | ${{ runner.os }}
+
+      - name: Use Node
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: 'yarn'
+
+      - name: Install dependencies
+        run: yarn install --immutable
+
+      - name: Build
+        run: yarn build
+        env:
+          GATSBY_EXPERIMENTAL_PAGE_BUILD_ON_DATA_CHANGES: true
+
+      - name: Archive artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: build
+          path: public
+
+  build-infra:
+    name: Infra
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.branch_name }}
+          sparse-checkout: |
+            infra
+
+      - name: Check the result
+        run: |
+          mkdir arm
+          az bicep build --file infra/main.bicep --outdir arm
+
+      - name: Archive artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: infra
+          path: infra

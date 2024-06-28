@@ -1,0 +1,29 @@
+name: Production - build and deploy
+
+on:
+  push:
+    branches:
+      - release/*
+  workflow_dispatch:
+
+concurrency:
+  group: production
+
+jobs:
+
+  build:
+    name: Build
+    uses: ./.github/workflows/template-build.yml
+    with:
+      branch_name: ${{ github.ref }}
+      environment: production
+    secrets: inherit
+
+  deploy:
+    needs:
+      - build
+    name: Deploy
+    uses: ./.github/workflows/template-deploy.yml
+    with:
+      environment: production
+    secrets: inherit
