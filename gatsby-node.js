@@ -2,15 +2,12 @@ const crypto = require('crypto');
 const path = require('path');
 const DirectoryNamedWebpackPlugin = require('directory-named-webpack-plugin');
 const WebpackAssetsManifest = require('webpack-assets-manifest');
-const makePluginData = require('./src/helpers/plugin-data');
-const createRewriteMap = require('./src/helpers/createRewriteMap');
 const chinaHelper = require('./src/helpers/chinaHelper');
 const { SkillSort } = require('./src/helpers/skillSort');
 const { getViewDataFromCRM, getUsersSkills } = require('./src/helpers/CRMApi');
 const appInsights = require('applicationinsights');
 const fs = require('fs');
 const siteconfig = require('./site-config');
-const Map = require('core-js/features/map');
 
 if (process.env.APPINSIGHTS_INSTRUMENTATIONKEY) {
   // Log build time stats to appInsights
@@ -427,6 +424,10 @@ exports.createPages = async function ({ actions, graphql }) {
     });
 
   people.forEach((person) => {
+    console.log('Creating page for ' + person.slug);
+    console.log('\tPath: ' + person.path);
+    console.log('\tNickname: ' + person.nicknamePath);
+
     actions.createPage({
       path: person.path,
       component: require.resolve('./src/templates/person.js'),
@@ -447,73 +448,17 @@ exports.createPages = async function ({ actions, graphql }) {
         },
       },
     });
+
+    // if person has a nickname (even if they are alumni), create a redirect from it
+    if (person.nicknamePath && person.path !== person.nicknamePath) {
+      actions.createRedirect({
+        fromPath: person.nicknamePath.replace(
+          alumniPrefix.replace('/', ''),
+          ''
+        ),
+        toPath: `/${person.path}`,
+        isPermanent: true,
+      });
+    }
   });
-};
-
-exports.onPostBuild = async ({ store, pathPrefix }) => {
-  const { pages } = store.getState();
-  const pluginData = makePluginData(store, assetsManifest, pathPrefix);
-  const rewrites = Array.from(pages.values())
-    .filter(
-      (page) =>
-        page.context.nicknamePath &&
-        page.context.originalPath !== page.context.nicknamePath
-    )
-    .flatMap((page) => {
-      const { nicknamePath, originalPath } = page.context;
-      const fromPath = `${pathPrefix}/${nicknamePath.replace(
-        `${alumniPrefix.substring(1)}/`,
-        ''
-      )}`;
-      const toPath = `${pathPrefix}/${originalPath}/`;
-
-      const rewritesArray = [];
-
-      if (page.path.startsWith(alumniPrefix)) {
-        rewritesArray.push({ fromPath, toPath });
-        rewritesArray.push({ fromPath: `${fromPath}/`, toPath });
-      } else {
-        rewritesArray.push({
-          fromPath: `${pathPrefix}/${nicknamePath}`,
-          toPath: `${pathPrefix}${page.path}`,
-        });
-        rewritesArray.push({
-          fromPath: `${pathPrefix}/${nicknamePath}/`,
-          toPath: `${pathPrefix}${page.path}`,
-        });
-      }
-
-      return rewritesArray;
-    });
-
-  const alumniRewrites = Array.from(pages.values())
-    .filter(
-      (page) =>
-        page.path !== alumniPrefix + '/' && page.path.startsWith(alumniPrefix)
-    )
-    .flatMap((page) => {
-      const fromPathWithSlash =
-        pathPrefix + '/' + page.path.replace(alumniPrefix + '/', '');
-      const toPathWithSlash = pathPrefix + page.path;
-      const fromPathWithoutSlash = fromPathWithSlash.replace(/\/$/, '');
-
-      return [
-        {
-          fromPath: fromPathWithSlash,
-          toPath: toPathWithSlash,
-        },
-        {
-          fromPath: fromPathWithoutSlash,
-          toPath: toPathWithSlash,
-        },
-      ];
-    });
-
-  const allRewrites = rewrites.concat(alumniRewrites);
-
-  const allRewritesUnique = [
-    ...new Map(allRewrites.map((item) => [item.fromPath, item])).values(),
-  ];
-
-  await createRewriteMap.writeRewriteMapsFile(pluginData, allRewritesUnique);
 };
