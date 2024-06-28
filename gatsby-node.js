@@ -424,9 +424,11 @@ exports.createPages = async function ({ actions, graphql }) {
     });
 
   people.forEach((person) => {
+    /* eslint-disable no-console */
     console.log('Creating page for ' + person.slug);
     console.log('\tPath: ' + person.path);
     console.log('\tNickname: ' + person.nicknamePath);
+    /* eslint-enable no-console */
 
     actions.createPage({
       path: person.path,
