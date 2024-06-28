@@ -179,6 +179,6 @@ module.exports = {
   },
   plugins: [
     ...getPlugins(),
-    `gatsby-plugin-meta-redirect`, // make sure to put last in the array
+    'gatsby-plugin-meta-redirect', // make sure to put last in the array
   ],
 };
