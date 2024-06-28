@@ -35,15 +35,11 @@ This is a Gatsby generated site pulling data from:
   
   ``` env
   GOOGLE_ANALYTICS=
-  RECAPTCHA_KEY=
-  DATA_API_URL=FALSE
-  DATA_API_AUTHORIZATION=
   DATA_API_TENANT=
   YOUTUBE_API_KEY=
   VERSION_DEPLOYED=#{VERSION_DEPLOYED}
   CHINA_BUILD=FALSE
   EVENTS_API=https://www.ssw.com.au/ssw/SharePointEventsService.aspx
-  CONTACT_API=/ssw/api/crm/createlead
   CRM_APP_ID=
   CRM_TENANT=
   CRM_TENANT_ID=
@@ -52,7 +48,6 @@ This is a Gatsby generated site pulling data from:
   CRM_VIEW_CURRENT=
   CRM_VIEW_PAST=
   APPINSIGHTS_INSTRUMENTATIONKEY=#{APPINSIGHTS_INSTRUMENTATIONKEY}
-  REWRITES_JSON_URL=FALSE
   ```
 
 ### Development
