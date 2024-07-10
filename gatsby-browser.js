@@ -4,30 +4,55 @@ import AppProvider from 'store/provider';
 // import { isChinaBuild } from 'helpers/chinaHelper';
 // import axios from 'axios';
 import { ApplicationInsights } from '@microsoft/applicationinsights-web';
+import { SeverityLevel } from '@microsoft/applicationinsights-web';
 // import { siteUrlCn } from './site-config.js';
 
-const instrumentationKey = process.env.APPINSIGHTS_INSTRUMENTATIONKEY;
-
-if (!instrumentationKey) {
+const environment = process.env.NODE_ENV;
+const appInsightsConnectionString = process.env.APPLICATIONINSIGHTS_CONNECTION_STRING;
+if (!appInsightsConnectionString) {
   /* eslint-disable no-console */
-  console.warn('APPINSIGHTS_INSTRUMENTATIONKEY is not set');
+  console.warn('APPLICATIONINSIGHTS_CONNECTION_STRING is not set');
+} else if (environment === 'development') {
+  /* eslint-disable no-console */
+  console.info('Application Insights is disabled in development mode');
 } else {
   try {
     const appInsights = new ApplicationInsights({
       config: {
-        instrumentationKey,
+        connectionString: appInsightsConnectionString,
+        disableCorrelationHeaders: false
       },
     });
+
     appInsights.loadAppInsights();
     appInsights.addTelemetryInitializer((item) => {
       item.tags['ai.cloud.role'] = 'SSW.People-StaticClientPage';
+      item.data = item.data || {};
+      item.data.environment = environment;
     });
+
+    // Additional telemetry for unhandled errors and promise rejections
+    window.addEventListener('error', (event) => {
+      appInsights.trackException({
+        error: event.error,
+        severityLevel: SeverityLevel.Error
+      });
+    });
+
+    window.addEventListener('unhandledrejection', (event) => {
+      appInsights.trackException({
+        error: event.reason,
+        severityLevel: SeverityLevel.Error
+      });
+    });
+
     appInsights.trackPageView(); // Manually call trackPageView to establish the current user/session/pageview
   } catch (error) {
     /* eslint-disable no-console */
     console.error('Error initializing Application Insights', error);
   }
 }
+
 // React Context in Browser
 // eslint-disable-next-line react/prop-types
 export const wrapRootElement = ({ element }) => {
