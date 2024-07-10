@@ -1,21 +1,20 @@
+import wrapPageElementWithTransition from 'helpers/wrapPageElement';
 import React from 'react';
 import AppProvider from 'store/provider';
-import wrapPageElementWithTransition from 'helpers/wrapPageElement';
 // import { isChinaBuild } from 'helpers/chinaHelper';
 // import axios from 'axios';
-import { ApplicationInsights } from '@microsoft/applicationinsights-web';
 // import { siteUrlCn } from './site-config.js';
 
-const appInsights = new ApplicationInsights({
-  config: {
-    instrumentationKey: process.env.APPINSIGHTS_INSTRUMENTATIONKEY,
-  },
-});
-appInsights.loadAppInsights();
-appInsights.addTelemetryInitializer((item) => {
-  item.tags['ai.cloud.role'] = 'SSW.People-StaticClientPage';
-});
-appInsights.trackPageView(); // Manually call trackPageView to establish the current user/session/pageview
+// const appInsights = new ApplicationInsights({
+//   config: {
+//     // instrumentationKey: process.env.APPINSIGHTS_INSTRUMENTATIONKEY,
+//   },
+// });
+// appInsights.loadAppInsights();
+// appInsights.addTelemetryInitializer((item) => {
+//   item.tags['ai.cloud.role'] = 'SSW.People-StaticClientPage';
+// });
+// appInsights.trackPageView(); // Manually call trackPageView to establish the current user/session/pageview
 
 // React Context in Browser
 // eslint-disable-next-line react/prop-types
