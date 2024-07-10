@@ -9,6 +9,7 @@ import { ApplicationInsights } from '@microsoft/applicationinsights-web';
 const instrumentationKey = process.env.APPINSIGHTS_INSTRUMENTATIONKEY;
 
 if (!instrumentationKey) {
+  /* eslint-disable no-console */
   console.warn('APPINSIGHTS_INSTRUMENTATIONKEY is not set');
 } else {
   try {
@@ -23,6 +24,7 @@ if (!instrumentationKey) {
     });
     appInsights.trackPageView(); // Manually call trackPageView to establish the current user/session/pageview
   } catch (error) {
+    /* eslint-disable no-console */
     console.error('Error initializing Application Insights', error);
   }
 }
