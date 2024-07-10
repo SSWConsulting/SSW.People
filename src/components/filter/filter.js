@@ -1,22 +1,22 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-import React, { useEffect, useState, useRef } from 'react';
-import PropTypes from 'prop-types';
-import Checkbox from '../checkbox';
 import {
-  faCheck,
-  faAngleUp,
   faAngleDown,
+  faAngleUp,
+  faCheck,
   faTimes,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import '../../style.css';
-import withURLLocation from '../withLocation/withURLLocation';
+import PropTypes from 'prop-types';
+import React, { useEffect, useRef, useState } from 'react';
 import {
+  clearUrlFilter,
   initFilter,
   updateUrlFilter,
-  clearUrlFilter,
 } from '../../helpers/queryFilterHelper';
+import '../../style.css';
+import Checkbox from '../checkbox';
+import withURLLocation from '../withLocation/withURLLocation';
 
 const Filter = ({
   filterTitle,
@@ -39,6 +39,9 @@ const Filter = ({
   };
 
   const onItemClicked = (item) => {
+    0;
+
+    console.log('item clicked', item);
     const previouslySelected = isItemSelected(item);
     if (previouslySelected) {
       onItemChange(selectedItems.filter((s) => s !== item));
@@ -51,6 +54,7 @@ const Filter = ({
   };
 
   const clearFilter = () => {
+    console.log('clearing filter');
     onItemChange([]);
     setListOpen(false);
     clearUrlFilter(filterUrlTitle, search);
