@@ -9,17 +9,28 @@ const appInsights = require('applicationinsights');
 const fs = require('fs');
 const siteconfig = require('./site-config');
 
-if (process.env.APPINSIGHTS_INSTRUMENTATIONKEY) {
-  // Log build time stats to appInsights
-  appInsights
-    .setup()
-    .setAutoCollectConsole(true, true) // Enable logging of console.xxx
-    .start();
-} else {
+const environment = process.env.NODE_ENV;
+const appInsightsConnectionString = process.env.APPLICATIONINSIGHTS_CONNECTION_STRING;
+if (!appInsightsConnectionString) {
   // eslint-disable-next-line no-console
-  console.warn(
-    'Missing APPINSIGHTS_INSTRUMENTATIONKEY, this build will not be logged to Application Insights'
-  );
+  console.warn('Missing APPLICATIONINSIGHTS_CONNECTION_STRING, this build will not be logged to Application Insights');
+} else if (environment === 'development') {
+  /* eslint-disable no-console */
+  console.info('Application Insights is disabled in development mode');
+} else {
+  // Log build time stats to appInsights
+  const config = appInsights
+    .setup(appInsightsConnectionString)
+    .setAutoCollectConsole(true, true); // Enable logging of console.xxx
+
+  const client = appInsights.defaultClient;
+
+  // Add a telemetry initializer if needed
+  client.addTelemetryProcessor((envelope, contextObjects) => {
+    envelope.tags[appInsights.defaultClient.context.keys.cloudRole] = 'GatsbyBuildProcess';
+  });
+
+  config.start();
 }
 
 let assetsManifest = {};
