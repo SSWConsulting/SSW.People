@@ -23,17 +23,17 @@ async function getEventsPresenters() {
   return presentersEvents;
 }
 
-async function getEventsForPresenter(name, nickname) {
-  console.log('getting events for presenters');
+async function getEventsForPresenter(name) {
   const dateFilter = new Date().toISOString();
   return await fetchEvents(name, EVENTS_API, 'asc');
 }
 
-async function getPastEventsForPresenter(name, nickname) {
+async function getPastEventsForPresenter(name) {
   return await fetchEvents(name, PAST_EVENTS_API, 'desc');
 }
 
 async function fetchEvents(name, url, sort) {
+  name = name.toLowerCase().replace(' ', '-');
   var events;
   await fetch(`${url}=${name}`)
     .then((response) => response.json())
