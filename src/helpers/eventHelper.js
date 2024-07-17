@@ -1,11 +1,13 @@
 import moment from 'moment';
 
-const { EVENTS_API, PAST_EVENTS_API } = process.env;
+const EventsApi = process.env.EVENTS_API;
+
+const PastEventsApi = process.env.PAST_EVENTS_API;
+console.log('EVENTS_API', EventsApi);
 async function getEventsPresenters() {
-  let dateFilter = new Date().toISOString();
-  let oDataFilterOngoing = `$filter=Enabled ne false and EndDateTime ge datetime'${dateFilter}'%26$select=StartDateTime,Presenter,CalendarType%26$orderby=StartDateTime asc%26$top=50`;
+  console.log('getEventsPresenters start of  method');
   let presentersEvents;
-  await fetch(`${EventsApi}?odataFilter=${oDataFilterOngoing}`)
+  await fetch(`${EventsApi}?top=${50}`)
     .then((response) => response.json())
     .then((result) => {
       presentersEvents = result.map((element) => {
@@ -19,23 +21,22 @@ async function getEventsPresenters() {
         (a, b) => a.eventtype - b.eventtype
       );
     });
-
   return presentersEvents;
 }
 
 async function getEventsForPresenter(name) {
   const dateFilter = new Date().toISOString();
-  return await fetchEvents(name, EVENTS_API, 'asc');
+  return await fetchEvents(name, EventsApi, 'asc');
 }
 
 async function getPastEventsForPresenter(name) {
-  return await fetchEvents(name, PAST_EVENTS_API, 'desc');
+  return await fetchEvents(name, PastEventsApi, 'desc');
 }
 
 async function fetchEvents(name, url, sort) {
   name = name.toLowerCase().replace(' ', '-');
   var events;
-  await fetch(`${url}=${name}`)
+  await fetch(`${url}?presenterName=${name}`)
     .then((response) => response.json())
     .then((result) => {
       events = Array.prototype.map.call(result, (element) => mapEvent(element));
@@ -53,8 +54,10 @@ async function fetchEvents(name, url, sort) {
           )
         );
       }
+      console.log('events fetched successfully');
     })
     .catch((error) => {
+      console.log('Error in fetchEvents', error);
       events = [];
     });
   return events;
