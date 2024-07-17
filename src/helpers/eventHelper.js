@@ -3,9 +3,7 @@ import moment from 'moment';
 const EventsApi = process.env.EVENTS_API;
 
 const PastEventsApi = process.env.PAST_EVENTS_API;
-console.log('EVENTS_API', EventsApi);
 async function getEventsPresenters() {
-  console.log('getEventsPresenters start of  method');
   let presentersEvents;
   await fetch(`${EventsApi}?top=${50}`)
     .then((response) => response.json())
@@ -54,10 +52,8 @@ async function fetchEvents(name, url, sort) {
           )
         );
       }
-      console.log('events fetched successfully');
     })
     .catch((error) => {
-      console.log('Error in fetchEvents', error);
       events = [];
     });
   return events;
