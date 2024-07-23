@@ -1,8 +1,7 @@
 import moment from 'moment';
+import { hyphenate } from './hyphenate';
+const EventsApi = process.env.WEBSITE_API;
 
-const EventsApi = process.env.EVENTS_API;
-
-const PastEventsApi = process.env.PAST_EVENTS_API;
 async function getEventsPresenters() {
   let presentersEvents;
   await fetch(`${EventsApi}?top=${50}`)
@@ -14,7 +13,6 @@ async function getEventsPresenters() {
           presenter: element.Presenter,
         };
       });
-
       presentersEvents = presentersEvents.sort(
         (a, b) => a.eventtype - b.eventtype
       );
@@ -23,17 +21,20 @@ async function getEventsPresenters() {
 }
 
 async function getEventsForPresenter(name) {
-  return await fetchEvents(name, EventsApi, 'asc');
+  name = hyphenate(name);
+  const url = `${EventsApi}events/upcoming?presenterName=${name}`;
+  return await fetchEvents(url, 'asc');
 }
 
 async function getPastEventsForPresenter(name) {
-  return await fetchEvents(name, PastEventsApi, 'desc');
+  name = hyphenate(name);
+  const url = `${EventsApi}events/past?presenterName=${name}`;
+  return await fetchEvents(url, 'desc');
 }
 
-async function fetchEvents(name, url, sort) {
-  name = name.toLowerCase().replace(' ', '-');
+async function fetchEvents(url, sort) {
   var events;
-  await fetch(`${url}?presenterName=${name}`)
+  await fetch(url)
     .then((response) => response.json())
     .then((result) => {
       events = Array.prototype.map.call(result, (element) => mapEvent(element));
