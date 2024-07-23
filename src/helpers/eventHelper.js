@@ -23,7 +23,6 @@ async function getEventsPresenters() {
 }
 
 async function getEventsForPresenter(name) {
-  const dateFilter = new Date().toISOString();
   return await fetchEvents(name, EventsApi, 'asc');
 }
 
