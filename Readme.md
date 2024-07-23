@@ -17,7 +17,7 @@ This is a Gatsby generated site pulling data from:
 
 ### Required Tools
 
-- Install nodejs via <https://nodejs.org/en/> (LTS Version)
+- Install nodejs via <https://nodejs.org/en/> (LTS Version, last tested with 20)
 - Install yarn via <https://yarnpkg.com/lang/en/docs/install/> (Used for package management)
 - Package dependencies (Windows)
   - Python 3
