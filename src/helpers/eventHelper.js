@@ -4,7 +4,7 @@ const EventsApi = process.env.WEBSITE_API;
 
 async function getEventsPresenters() {
   let presentersEvents;
-  await fetch(`${EventsApi}?top=${50}`)
+  await fetch(`${EventsApi}events/upcoming?top=${50}`)
     .then((response) => response.json())
     .then((result) => {
       presentersEvents = result.map((element) => {
