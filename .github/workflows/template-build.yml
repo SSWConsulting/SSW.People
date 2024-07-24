@@ -32,7 +32,7 @@ jobs:
           GOOGLE_GTM_ID: ${{ secrets.GOOGLE_GTM_ID }}
           GOOGLE_ANALYTICS: ${{ secrets.GOOGLE_ANALYTICS }}
           YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
-          EVENTS_API: ${{ secrets.EVENTS_API }}
+          WEBSITE_API: ${{ secrets.WEBSITE_API }}
           CRM_APP_ID: ${{ secrets.CRM_APP_ID }}
           CRM_TENANT: ${{ secrets.CRM_TENANT }}
           CRM_TENANT_ID: ${{ secrets.CRM_TENANT_ID }}
