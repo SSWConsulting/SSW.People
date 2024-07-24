@@ -4,7 +4,7 @@ const EventsApi = process.env.WEBSITE_API;
 
 async function getEventsPresenters() {
   let presentersEvents;
-  await fetch(`${EventsApi}events/upcoming?top=${50}`)
+  await fetch(`${EventsApi}/events/upcoming?top=${50}`)
     .then((response) => response.json())
     .then((result) => {
       presentersEvents = result.map((element) => {
@@ -22,13 +22,13 @@ async function getEventsPresenters() {
 
 async function getEventsForPresenter(name) {
   name = hyphenate(name);
-  const url = `${EventsApi}events/upcoming?presenterName=${name}`;
+  const url = `${EventsApi}/events/upcoming?presenterName=${name}`;
   return await fetchEvents(url, 'asc');
 }
 
 async function getPastEventsForPresenter(name) {
   name = hyphenate(name);
-  const url = `${EventsApi}events/past?presenterName=${name}`;
+  const url = `${EventsApi}/events/past?presenterName=${name}`;
   return await fetchEvents(url, 'desc');
 }
 
