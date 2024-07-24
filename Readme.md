@@ -31,24 +31,8 @@ This is a Gatsby generated site pulling data from:
 
 - Clone the repo from <https://github.com/SSWConsulting/SSW.People>
 - Run *yarn* (or *npm install*) to install packages
-- Create environment files (.env.development and .env.production) and fill out the values for the following keys:
-  
-  ``` env
-  GOOGLE_ANALYTICS=
-  DATA_API_TENANT=
-  YOUTUBE_API_KEY=
-  VERSION_DEPLOYED=#{VERSION_DEPLOYED}
-  CHINA_BUILD=FALSE
-  EVENTS_API=https://www.ssw.com.au/ssw/SharePointEventsService.aspx
-  CRM_APP_ID=
-  CRM_TENANT=
-  CRM_TENANT_ID=
-  CRM_APP_SECRET=
-  CRM_SCOPE=
-  CRM_VIEW_CURRENT=
-  CRM_VIEW_PAST=
-  APPLICATIONINSIGHTS_CONNECTION_STRING=#{APPLICATIONINSIGHTS_CONNECTION_STRING}
-  ```
+- Create environment files (.env.development and .env.production) and copy the environment variables for SSW People on Keeper into both files
+- **Note**: You will need to update .env.template as well as the keeper record if you add any new environment variables
 
 ### Development
 

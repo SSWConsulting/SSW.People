@@ -1,11 +1,10 @@
 import moment from 'moment';
+import { hyphenate } from './hyphenate';
+const EventsApi = process.env.WEBSITE_API;
 
-const EventsApi = process.env.EVENTS_API;
 async function getEventsPresenters() {
-  let dateFilter = new Date().toISOString();
-  let oDataFilterOngoing = `$filter=Enabled ne false and EndDateTime ge datetime'${dateFilter}'%26$select=StartDateTime,Presenter,CalendarType%26$orderby=StartDateTime asc%26$top=50`;
   let presentersEvents;
-  await fetch(`${EventsApi}?odataFilter=${oDataFilterOngoing}`)
+  await fetch(`${EventsApi}events/upcoming?top=${50}`)
     .then((response) => response.json())
     .then((result) => {
       presentersEvents = result.map((element) => {
@@ -14,38 +13,32 @@ async function getEventsPresenters() {
           presenter: element.Presenter,
         };
       });
-
       presentersEvents = presentersEvents.sort(
         (a, b) => a.eventtype - b.eventtype
       );
     });
-
   return presentersEvents;
 }
 
-async function getEventsForPresenter(name, nickname) {
-  const dateFilter = new Date().toISOString();
-  const oDataFilterOngoing = `$filter=(substringof('${name}',Presenter) or substringof('${nickname}',Presenter)) and Enabled ne false and EndDateTime ge datetime'${dateFilter}'%26$select=StartDateTime,EndDateTime,Category,CalendarType,Title,Url,Thumbnail,Presenter,EventShortDescription%26$orderby=StartDateTime asc%26$top=50`;
-  return await fetchFromSharepoint(oDataFilterOngoing, 'asc');
+async function getEventsForPresenter(name) {
+  name = hyphenate(name);
+  const url = `${EventsApi}events/upcoming?presenterName=${name}`;
+  return await fetchEvents(url, 'asc');
 }
 
-async function getPastEventsForPresenter(name, nickname) {
-  const dateFilter = new Date().toISOString();
-  const oDataFilterOngoing = `$filter=(substringof('${name}',Presenter) or substringof('${nickname}',Presenter)) and Enabled ne false and EndDateTime lt datetime'${dateFilter}'%26$select=StartDateTime,EndDateTime,Category,CalendarType,Title,Url,Thumbnail,Presenter,EventShortDescription%26$orderby=StartDateTime desc%26$top=50`;
-  return await fetchFromSharepoint(oDataFilterOngoing, 'desc');
+async function getPastEventsForPresenter(name) {
+  name = hyphenate(name);
+  const url = `${EventsApi}events/past?presenterName=${name}`;
+  return await fetchEvents(url, 'desc');
 }
 
-async function fetchFromSharepoint(oDataFilterOngoing, sort) {
+async function fetchEvents(url, sort) {
   var events;
-  await fetch(`${EventsApi}?odataFilter=${encodeURI(oDataFilterOngoing)}`)
-    .then((response) => response.text())
+  await fetch(url)
+    .then((response) => response.json())
     .then((result) => {
-      var parser = new DOMParser();
-      var xmlDoc = parser.parseFromString(result, 'application/xml');
-      var eventsXml = xmlDoc.getElementsByTagName('properties');
-      events = Array.prototype.map.call(eventsXml, (element) =>
-        mapXmlToEventObj(element)
-      );
+      events = Array.prototype.map.call(result, (element) => mapEvent(element));
+
       if (sort === 'asc') {
         events = events.sort((a, b) =>
           moment(a.startdatetime, 'DD MMM YYYY').diff(
@@ -60,42 +53,34 @@ async function fetchFromSharepoint(oDataFilterOngoing, sort) {
         );
       }
     })
-    .catch(() => (events = []));
+    .catch((error) => {
+      events = [];
+    });
   return events;
 }
 
-function mapXmlToEventObj(properties) {
+function mapEvent(properties) {
   const today = moment().local().format('DD MMM YYYY');
-  const endDateTimeXml =
-    properties.getElementsByTagName('EndDateTime')[0].textContent;
-  const startdatetimeXml =
-    properties.getElementsByTagName('StartDateTime')[0].textContent;
+  const endDateTimeXml = properties.EndDateTime;
+  const startdatetimeXml = properties.StartDateTime;
   const startdatetime = moment(startdatetimeXml).local().format('DD MMM YYYY');
   const endDateTime = moment(endDateTimeXml).local().format('DD MMM YYYY');
 
   return {
-    url: properties
-      .getElementsByTagName('Url')[0]
-      .getElementsByTagName('Url')[0]
-      .textContent.replace('http:', 'https:'),
-    image: properties
-      .getElementsByTagName('Thumbnail')[0]
-      .getElementsByTagName('Url')[0]
-      .textContent.replace('http:', 'https:'),
-    title: properties
-      .getElementsByTagName('Url')[0]
-      .getElementsByTagName('Description')[0].textContent,
+    url: properties.Url.Url.replace('http:', 'https:'),
+
+    image: properties.Thumbnail.Url.replace('http:', 'https:'),
+    title: properties.Url.Description,
     startdatetime: startdatetime,
     endDateTime: endDateTime,
     isSameDay: startdatetime === endDateTime,
     daysToGo: moment(startdatetime).diff(moment(today), 'days'),
-    technologycategory:
-      properties.getElementsByTagName('Category')[0].textContent,
-    eventtype: properties.getElementsByTagName('CalendarType')[0].textContent,
-    presenter: properties.getElementsByTagName('Presenter')[0].textContent,
+    technologycategory: properties.Category,
+    eventtype: properties.CalendarType,
+    presenter: properties.Presenter,
+
     presenterprofileurl: null,
-    description: properties.getElementsByTagName('EventShortDescription')[0]
-      .textContent,
+    description: properties.EventShortDescription,
   };
 }
 
@@ -133,10 +118,10 @@ const isPresenterOfEventType = (eventType, profile, events) => {
 };
 
 export {
-  getEventsPresenters,
   getEventsForPresenter,
+  getEventsPresenters,
   getPastEventsForPresenter,
-  isInPresenters,
   getPresentersOfEventType,
+  isInPresenters,
   isPresenterOfEventType,
 };

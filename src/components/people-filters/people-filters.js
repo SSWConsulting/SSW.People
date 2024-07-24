@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import React, { useEffect, useState } from 'react';
 import Filter from '../filter/filter';
 
 const PeopleFilters = ({
@@ -14,7 +14,6 @@ const PeopleFilters = ({
   const [selectedSkills, setSelectedSkills] = useState([]);
   const [selectedRoles, setSelectedRoles] = useState([]);
   const [selectedEvents, setSelectedEvents] = useState([]);
-
   useEffect(() => {
     onFilterChange([
       { name: 'roles', selected: selectedRoles },
@@ -35,7 +34,7 @@ const PeopleFilters = ({
           filterCounts={rolesCount}
         />
       </div>
-      {!!allEvents.length && process.env.EVENTS_API?.length > 4 && (
+      {!!allEvents.length && (
         <div className="w-full sm:w-1/2 lg:w-full mt-0 lg:mt-4">
           <Filter
             filterTitle="Upcoming speakers"
