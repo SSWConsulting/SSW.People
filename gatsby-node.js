@@ -8,6 +8,7 @@ const { getViewDataFromCRM, getUsersSkills } = require('./src/helpers/CRMApi');
 const appInsights = require('applicationinsights');
 const fs = require('fs');
 const siteconfig = require('./site-config');
+const matter = require('gray-matter');
 
 const environment = process.env.NODE_ENV;
 const appInsightsConnectionString = process.env.APPLICATIONINSIGHTS_CONNECTION_STRING;
@@ -434,6 +435,18 @@ exports.createPages = async function ({ actions, graphql }) {
       };
     });
 
+  const peoplePath = './public';
+
+  if (!fs.existsSync(peoplePath)) {
+    fs.mkdirSync(peoplePath);
+  }
+
+  const peopleList = people
+    .filter((person) => !person.path.includes('alumni'))
+    .map((person) => person.path);
+
+  fs.writeFileSync(`${peoplePath}/people.json`, JSON.stringify(peopleList));
+
   people.forEach((person) => {
     /* eslint-disable no-console */
     console.log('Creating page for ' + person.slug);
@@ -473,5 +486,37 @@ exports.createPages = async function ({ actions, graphql }) {
         isPermanent: true,
       });
     }
+
+    if (person.path.includes('alumni')) {
+      return;
+    }
+
+    const filePath = `./public/${person.path}`;
+    if (!fs.existsSync(filePath)) {
+      fs.mkdirSync(filePath);
+    }
+
+    const skills = [];
+    skills.push(
+      ...person.dataCRM.skills.intermediateSkills.map((skill) => skill.service)
+    );
+    skills.push(
+      ...person.dataCRM.skills.advancedSkills.map((skill) => skill.service)
+    );
+
+
+
+    var profileData = {
+      skills: skills.join(' | '),
+      presenter: {
+        name: person.path.replace('-', ' '),
+        peopleProfileURL: ''
+      }
+    };
+
+    fs.writeFileSync(
+      `${filePath}/profile.md`,
+      matter.stringify('', profileData)
+    );
   });
 };
