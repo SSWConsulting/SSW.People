@@ -527,7 +527,7 @@ exports.createPages = async function ({ actions, graphql }) {
     var profileData = {
       skills: skills.join(' | '),
       presenter: {
-        name: person.path.replace('-', ' '),
+        name: person.dataCRM.fullName,
         peopleProfileURL: 'https://ssw.com.au/people/' + person.path,
       },
       about: sanitisedMarkdown(person.rawMarkdown),
