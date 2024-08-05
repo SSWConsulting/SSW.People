@@ -8,6 +8,7 @@ const { getViewDataFromCRM, getUsersSkills } = require('./src/helpers/CRMApi');
 const appInsights = require('applicationinsights');
 const fs = require('fs');
 const siteconfig = require('./site-config');
+const matter = require('gray-matter');
 
 const environment = process.env.NODE_ENV;
 const appInsightsConnectionString = process.env.APPLICATIONINSIGHTS_CONNECTION_STRING;
@@ -287,6 +288,7 @@ exports.createPages = async function ({ actions, graphql }) {
             jobTitle
           }
           html
+          rawMarkdownBody
         }
       }
       peopleCRM: allCrmDataCollection {
@@ -431,8 +433,21 @@ exports.createPages = async function ({ actions, graphql }) {
           (x) => x.name === node.parent.name.replace(profileChineseTag, '')
         ),
         html: node.html,
+        rawMarkdown: node.rawMarkdownBody,
       };
     });
+
+  const peoplePath = './public';
+
+  if (!fs.existsSync(peoplePath)) {
+    fs.mkdirSync(peoplePath);
+  }
+
+  const peopleList = people
+    .filter((person) => !person.path.includes('alumni'))
+    .map((person) => person.path);
+
+  fs.writeFileSync(`${peoplePath}/people.json`, JSON.stringify(peopleList));
 
   people.forEach((person) => {
     /* eslint-disable no-console */
@@ -473,5 +488,54 @@ exports.createPages = async function ({ actions, graphql }) {
         isPermanent: true,
       });
     }
+
+    if (person.path.includes('alumni')) {
+      return;
+    }
+
+    const filePath = `./public/${person.path}`;
+    if (!fs.existsSync(filePath)) {
+      fs.mkdirSync(filePath);
+    }
+
+    const skills = [];
+    skills.push(
+      ...person.dataCRM.skills.intermediateSkills.map((skill) => skill.service)
+    );
+    skills.push(
+      ...person.dataCRM.skills.advancedSkills.map((skill) => skill.service)
+    );
+
+    const sanitisedMarkdown = (input) => {
+      const lines = input.split('\n');
+
+      const filteredLines = lines.filter(x => {
+        const imgRegex = /!\[.*\](.*)/;
+        return (
+          !imgRegex.test(x) &&
+          !x.trim().includes('[[imgBadge]]') &&
+          !x.trim().includes('[Editing profiles]') &&
+          !x.trim().includes('<br/>') &&
+          x.length !== 0
+        );
+      });
+
+      var output = filteredLines.join('\n')
+      return output.split('\n', 2).join('\n');
+    }
+
+    var profileData = {
+      skills: skills.join(' | '),
+      presenter: {
+        name: person.dataCRM.fullName,
+        peopleProfileURL: 'https://ssw.com.au/people/' + person.path,
+      },
+      about: sanitisedMarkdown(person.rawMarkdown),
+    };
+
+    fs.writeFileSync(
+      `${filePath}/profile.md`,
+      matter.stringify('', profileData)
+    );
   });
 };
