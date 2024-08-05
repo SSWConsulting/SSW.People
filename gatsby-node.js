@@ -288,6 +288,7 @@ exports.createPages = async function ({ actions, graphql }) {
             jobTitle
           }
           html
+          rawMarkdownBody
         }
       }
       peopleCRM: allCrmDataCollection {
@@ -432,6 +433,7 @@ exports.createPages = async function ({ actions, graphql }) {
           (x) => x.name === node.parent.name.replace(profileChineseTag, '')
         ),
         html: node.html,
+        rawMarkdown: node.rawMarkdownBody,
       };
     });
 
@@ -504,14 +506,31 @@ exports.createPages = async function ({ actions, graphql }) {
       ...person.dataCRM.skills.advancedSkills.map((skill) => skill.service)
     );
 
+    const sanitisedMarkdown = (input) => {
+      const lines = input.split('\n');
 
+      const filteredLines = lines.filter(x => {
+        const imgRegex = /!\[.*\](.*)/;
+        return (
+          !imgRegex.test(x) &&
+          !x.trim().includes('[[imgBadge]]') &&
+          !x.trim().includes('[Editing profiles]') &&
+          !x.trim().includes('<br/>') &&
+          x.length !== 0
+        );
+      });
+
+      var output = filteredLines.join('\n')
+      return output.split('\n', 2).join('\n');
+    }
 
     var profileData = {
       skills: skills.join(' | '),
       presenter: {
         name: person.path.replace('-', ' '),
-        peopleProfileURL: ''
-      }
+        peopleProfileURL: 'https://ssw.com.au/people/' + person.path,
+      },
+      about: sanitisedMarkdown(person.rawMarkdown),
     };
 
     fs.writeFileSync(
