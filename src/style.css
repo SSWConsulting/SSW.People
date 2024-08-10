@@ -342,6 +342,11 @@ ul.favor-list li {
   background: url(./images/linkedin.png) 0 center no-repeat;
 }
 
+
+header > div > div > a /*TODO: Fix this at the source https://github.com/SSWConsulting/SSW.MegaMenu/issues/101*/
+{
+  text-decoration: none; 
+}
 .skype {
   background: url(./images/skype.png) 0 center no-repeat;
 }
