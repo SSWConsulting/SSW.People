@@ -2152,32 +2152,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@floating-ui/core@npm:^1.0.0":
-  version: 1.6.0
-  resolution: "@floating-ui/core@npm:1.6.0"
-  dependencies:
-    "@floating-ui/utils": "npm:^0.2.1"
-  checksum: 667a68036f7dd5ed19442c7792a6002ca02d1799221c4396691bbe0b6008b48f6ccad581225e81fa266bb91232f6c66838a5f825f554217e1ec886178b93381b
-  languageName: node
-  linkType: hard
-
-"@floating-ui/dom@npm:^1.6.1":
-  version: 1.6.3
-  resolution: "@floating-ui/dom@npm:1.6.3"
-  dependencies:
-    "@floating-ui/core": "npm:^1.0.0"
-    "@floating-ui/utils": "npm:^0.2.0"
-  checksum: d6cac10877918ce5a8d1a24b21738d2eb130a0191043d7c0dd43bccac507844d3b4dc5d4107d3891d82f6007945ca8fb4207a1252506e91c37e211f0f73cf77e
-  languageName: node
-  linkType: hard
-
-"@floating-ui/utils@npm:^0.2.0, @floating-ui/utils@npm:^0.2.1":
-  version: 0.2.1
-  resolution: "@floating-ui/utils@npm:0.2.1"
-  checksum: ee77756712cf5b000c6bacf11992ffb364f3ea2d0d51cc45197a7e646a17aeb86ea4b192c0b42f3fbb29487aee918a565e84f710b8c3645827767f406a6b4cc9
-  languageName: node
-  linkType: hard
-
 "@fortawesome/fontawesome-common-types@npm:6.6.0":
   version: 6.6.0
   resolution: "@fortawesome/fontawesome-common-types@npm:6.6.0"
@@ -7601,7 +7575,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"classnames@npm:^2.3.0, classnames@npm:^2.3.1, classnames@npm:^2.5.1":
+"classnames@npm:^2.3.1, classnames@npm:^2.5.1":
   version: 2.5.1
   resolution: "classnames@npm:2.5.1"
   checksum: afff4f77e62cea2d79c39962980bf316bacb0d7c49e13a21adaadb9221e1c6b9d3cdb829d8bb1b23c406f4e740507f37e1dcf506f7e3b7113d17c5bab787aa69
@@ -11322,6 +11296,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"gatsby-plugin-client-side-redirect@npm:^1.1.0":
+  version: 1.1.0
+  resolution: "gatsby-plugin-client-side-redirect@npm:1.1.0"
+  dependencies:
+    fs-extra: "npm:^7.0.0"
+  checksum: 6e885524394683f0e8b461549a722221bc5f5359276e1da819b2a7919d7f68f0f31a3381aa5328b583c05dad89fa60cafbb91244bc904cbebc8f516547c72736
+  languageName: node
+  linkType: hard
+
 "gatsby-plugin-google-gtag@npm:^5.13.1":
   version: 5.13.1
   resolution: "gatsby-plugin-google-gtag@npm:5.13.1"
@@ -11381,15 +11364,6 @@ __metadata:
     gatsby-source-filesystem:
       optional: true
   checksum: 00e82f49bba04407cc1667c9e12fac9cd404289daafb028d47cfb0f4643865dec0e5930761abde145a2b2d2090aa00f3976a860fe89ee9045d04a79591ab7875
-  languageName: node
-  linkType: hard
-
-"gatsby-plugin-meta-redirect@npm:^1.1.1":
-  version: 1.1.1
-  resolution: "gatsby-plugin-meta-redirect@npm:1.1.1"
-  dependencies:
-    fs-extra: "npm:^7.0.0"
-  checksum: 43350167cbf3afbe846bbbaa8fb51e4a79551b0b8698b2f62fe612adcc653bfeec7c678caf204a81a86f39cfd2ad5467b71b21fb1147483b57bf62fb96869b4c
   languageName: node
   linkType: hard
 
@@ -18693,19 +18667,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-tooltip@npm:^5.28.0":
-  version: 5.28.0
-  resolution: "react-tooltip@npm:5.28.0"
-  dependencies:
-    "@floating-ui/dom": "npm:^1.6.1"
-    classnames: "npm:^2.3.0"
-  peerDependencies:
-    react: ">=16.14.0"
-    react-dom: ">=16.14.0"
-  checksum: 817909584adf4d84d70768e41c7fdf66bf9affd980499742a2da54378e5c8be53a0867bf72bdfb441fa4aa35c79847585990b6e31c91e6647e789ba68e9b08a2
-  languageName: node
-  linkType: hard
-
 "react-youtube@npm:^10.1.0":
   version: 10.1.0
   resolution: "react-youtube@npm:10.1.0"
@@ -20514,10 +20475,10 @@ __metadata:
     gatsby: "npm:^5.13.7"
     gatsby-cli: "npm:^5.13.3"
     gatsby-plugin-breadcrumb: "npm:^12.3.2"
+    gatsby-plugin-client-side-redirect: "npm:^1.1.0"
     gatsby-plugin-google-gtag: "npm:^5.13.1"
     gatsby-plugin-google-tagmanager: "npm:^5.13.1"
     gatsby-plugin-image: "npm:^3.13.1"
-    gatsby-plugin-meta-redirect: "npm:^1.1.1"
     gatsby-plugin-postcss: "npm:^6.13.1"
     gatsby-plugin-react-helmet: "npm:^6.13.1"
     gatsby-plugin-react-svg: "npm:^3.3.0"
@@ -20563,7 +20524,6 @@ __metadata:
     react-lazy-youtube: "npm:^1.0.1"
     react-pose: "npm:^4.0.10"
     react-responsive-modal: "npm:^6.4.2"
-    react-tooltip: "npm:^5.28.0"
     react-youtube: "npm:^10.1.0"
     rollup: "npm:^4.20.0"
     ssw.megamenu: "npm:^4.5.9"
