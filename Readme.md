@@ -39,7 +39,7 @@ This is a Gatsby generated site pulling data from:
 1. Branch off main for your PBI
 2. Run *yarn build* (or *npm run-script build*) (.env.production is required for this step)
 3. Do your work
-4. Run the site in development mode by *yarn develop* (or *npm run-script develop*) (.env.development is required for this step)
+4. Run the site in development mode by *yarn dev* (or *npm run-script dev*) (.env.development is required for this step)
 5. Commit code and push
 6. Raise a PR
 7. Get it merged!

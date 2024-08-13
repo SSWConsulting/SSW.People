@@ -9,7 +9,7 @@ import { config } from '@fortawesome/fontawesome-svg-core';
 import { Location } from '@reach/router';
 import Filter from '../../components/filter/filter';
 import RoleSort from '../../helpers/roleSort';
-import ProfileSort from '../../helpers/profileSort';
+import AlphabeticalSort from '../../helpers/profileSort';
 import LocationFilter from '../../components/location-filter/location-filter';
 import LocationSanitiser from '../../helpers/locationSanitizer';
 import Distinct from '../../helpers/arrayHelpers';
@@ -64,7 +64,7 @@ const Index = ({ data }) => {
       .filter(
         (p) => selectedRoles.length === 0 || selectedRoles.includes(p.role)
       )
-      .sort(ProfileSort);
+      .sort(AlphabeticalSort);
 
     setFilteredPeople(people);
   }, [selectedLocation, selectedRoles]);

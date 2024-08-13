@@ -1,7 +1,7 @@
 import React from 'react';
 import GitHubCalendar from 'react-github-calendar';
 import PropTypes from 'prop-types';
-import ReactTooltip from 'react-tooltip';
+
 
 const GitHubContributionCalendar = ({ githubUrl }) => {
   let userName = githubUrl.split('/');
@@ -16,10 +16,7 @@ const GitHubContributionCalendar = ({ githubUrl }) => {
           blockMargin={3}
           fontSize={10}
           hideColorLegend={true}
-          colorScheme="light"
-        >
-          <ReactTooltip delayShow={50} html />
-        </GitHubCalendar>
+          colorScheme="light"/>
       </div>
     </>
   );
