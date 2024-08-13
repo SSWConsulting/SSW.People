@@ -8,7 +8,8 @@ import { SeverityLevel } from '@microsoft/applicationinsights-web';
 // import { siteUrlCn } from './site-config.js';
 
 const environment = process.env.NODE_ENV;
-const appInsightsConnectionString = process.env.APPLICATIONINSIGHTS_CONNECTION_STRING;
+const appInsightsConnectionString =
+  process.env.APPLICATIONINSIGHTS_CONNECTION_STRING;
 if (!appInsightsConnectionString) {
   /* eslint-disable no-console */
   console.warn('APPLICATIONINSIGHTS_CONNECTION_STRING is not set');
@@ -20,7 +21,7 @@ if (!appInsightsConnectionString) {
     const appInsights = new ApplicationInsights({
       config: {
         connectionString: appInsightsConnectionString,
-        disableCorrelationHeaders: false
+        disableCorrelationHeaders: false,
       },
     });
 
@@ -35,14 +36,14 @@ if (!appInsightsConnectionString) {
     window.addEventListener('error', (event) => {
       appInsights.trackException({
         error: event.error,
-        severityLevel: SeverityLevel.Error
+        severityLevel: SeverityLevel.Error,
       });
     });
 
     window.addEventListener('unhandledrejection', (event) => {
       appInsights.trackException({
         error: event.reason,
-        severityLevel: SeverityLevel.Error
+        severityLevel: SeverityLevel.Error,
       });
     });
 

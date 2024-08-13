@@ -5,7 +5,7 @@
  * plugins.
  */
 
-@tailwind base;
+@import 'tailwindcss/base';
 
 @layer base {
   header nav {
