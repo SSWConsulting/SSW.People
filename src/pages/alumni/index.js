@@ -9,7 +9,7 @@ import { config } from '@fortawesome/fontawesome-svg-core';
 import { Location } from '@reach/router';
 import Filter from '../../components/filter/filter';
 import RoleSort from '../../helpers/roleSort';
-import AlphabeticalSort from '../../helpers/profileSort';
+import { AlphabeticalSort } from '../../helpers/profileSort';
 import LocationFilter from '../../components/location-filter/location-filter';
 import LocationSanitiser from '../../helpers/locationSanitizer';
 import Distinct from '../../helpers/arrayHelpers';
