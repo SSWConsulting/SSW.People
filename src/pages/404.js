@@ -14,12 +14,12 @@ const NotFound = () => {
             </h2>
           </div>
           <div className="not-found-greybox greybox">
-            Visit <a href="https://ssw.com.au">SSW homepage</a> to find out how
-            we can help you.
+            Visit <a href="https://www.ssw.com.au">SSW homepage</a> to find out
+            how we can help you.
           </div>
           <div className="not-found-greybox greybox">
             Learn more about{' '}
-            <a href="https://ssw.com.au/rules/404-useful-error-page">
+            <a href="https://www.ssw.com.au/rules/404-useful-error-page">
               having a useful 404 error page.
             </a>
           </div>

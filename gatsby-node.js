@@ -11,10 +11,13 @@ const siteconfig = require('./site-config');
 const matter = require('gray-matter');
 
 const environment = process.env.NODE_ENV;
-const appInsightsConnectionString = process.env.APPLICATIONINSIGHTS_CONNECTION_STRING;
+const appInsightsConnectionString =
+  process.env.APPLICATIONINSIGHTS_CONNECTION_STRING;
 if (!appInsightsConnectionString) {
   // eslint-disable-next-line no-console
-  console.warn('Missing APPLICATIONINSIGHTS_CONNECTION_STRING, this build will not be logged to Application Insights');
+  console.warn(
+    'Missing APPLICATIONINSIGHTS_CONNECTION_STRING, this build will not be logged to Application Insights'
+  );
 } else if (environment === 'development') {
   /* eslint-disable no-console */
   console.info('Application Insights is disabled in development mode');
@@ -28,7 +31,8 @@ if (!appInsightsConnectionString) {
 
   // Add a telemetry initializer if needed
   client.addTelemetryProcessor((envelope, contextObjects) => {
-    envelope.tags[appInsights.defaultClient.context.keys.cloudRole] = 'GatsbyBuildProcess';
+    envelope.tags[appInsights.defaultClient.context.keys.cloudRole] =
+      'GatsbyBuildProcess';
   });
 
   config.start();
@@ -143,7 +147,7 @@ exports.sourceNodes = async ({
   const { createNode } = actions;
 
   {
-    const res = await fetch('https://ssw.com.au/api/get-megamenu');
+    const res = await fetch('https://www.ssw.com.au/api/get-megamenu');
     const menuData = await res.json();
 
     menuData?.menuGroups.forEach((group) => {
@@ -509,7 +513,7 @@ exports.createPages = async function ({ actions, graphql }) {
     const sanitisedMarkdown = (input) => {
       const lines = input.split('\n');
 
-      const filteredLines = lines.filter(x => {
+      const filteredLines = lines.filter((x) => {
         const imgRegex = /!\[.*\](.*)/;
         return (
           !imgRegex.test(x) &&
@@ -520,15 +524,15 @@ exports.createPages = async function ({ actions, graphql }) {
         );
       });
 
-      var output = filteredLines.join('\n')
+      var output = filteredLines.join('\n');
       return output.split('\n', 2).join('\n');
-    }
+    };
 
     var profileData = {
       skills: skills.join(' | '),
       presenter: {
         name: person.dataCRM.fullName,
-        peopleProfileURL: 'https://ssw.com.au/people/' + person.path,
+        peopleProfileURL: 'https://www.ssw.com.au/people/' + person.path,
       },
       about: sanitisedMarkdown(person.rawMarkdown),
     };
