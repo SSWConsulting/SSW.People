@@ -119,7 +119,7 @@ const Footer = () => {
                 This website is under{' '}
                 <a
                   className="footer-link"
-                  href="https://ssw.com.au/rules/do-you-continuously-deploy"
+                  href="https://www.ssw.com.au/rules/do-you-continuously-deploy"
                 >
                   CONSTANT CONTINUOUS DEPLOYMENT
                 </a>
@@ -129,7 +129,7 @@ const Footer = () => {
               <div className="py-2">
                 <a
                   className="footer-link"
-                  href="https://ssw.com.au/rules/rules-to-better-internationalization"
+                  href="https://www.ssw.com.au/rules/rules-to-better-internationalization"
                 >
                   Chinafied
                   <img
@@ -142,14 +142,14 @@ const Footer = () => {
                 Powered by{' '}
                 <a
                   className="footer-link"
-                  href="https://ssw.com.au/rules/rules-to-better-azure"
+                  href="https://www.ssw.com.au/rules/rules-to-better-azure"
                 >
                   Azure
                 </a>{' '}
                 and{' '}
                 <a
                   className="footer-link"
-                  href="https://ssw.com.au/rules/rules-to-better-github"
+                  href="https://www.ssw.com.au/rules/rules-to-better-github"
                 >
                   {' '}
                   GitHub

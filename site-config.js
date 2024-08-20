@@ -8,7 +8,7 @@ module.exports = {
   siteDescription:
     `We work together to form an amazing collective brain - SSW is made up of a great team of staff that are passionate about technology and how it meets business needs!` +
     `We're enthusiastic and have a "Make it happen" culture.`,
-  siteUrl: `https://ssw.com.au`,
+  siteUrl: `https://www.ssw.com.au`,
   siteUrlCn: `https://peoplecn.ssw.com.au`,
   themeColor: `#cc4141`,
   backgroundColor: `#fff`,
@@ -19,7 +19,7 @@ module.exports = {
     fbAppId: `120920301257947`,
     fbPage: `https://www.facebook.com/SSW.page`,
   },
-  parentSiteUrl: `https://ssw.com.au`,
+  parentSiteUrl: `https://www.ssw.com.au`,
   locationsListForOrdering: [`Sydney`, `Melbourne`, `Brisbane`, `Newcastle`],
   roleListOrdering: [
     `Managers`,
