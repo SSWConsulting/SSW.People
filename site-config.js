@@ -3,7 +3,7 @@
 module.exports = {
   companyName: `SSW Consulting`,
   companyShortName: `SSW`,
-  siteTitle: `SSW.People | Australia's Leading .NET and Azure Consultants`,
+  siteTitle: `SSW.People | Australia's Leading .NET and Azure Consultants (Open Source on GitHub)`,
   siteTitleShort: `SSW.People | Australia's Leading .NET and Azure Consultants`,
   siteDescription:
     `We work together to form an amazing collective brain - SSW is made up of a great team of staff that are passionate about technology and how it meets business needs!` +
