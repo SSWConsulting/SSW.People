@@ -483,14 +483,16 @@ exports.createPages = async function ({ actions, graphql }) {
 
     // if person has a nickname (even if they are alumni), create a redirect from it
     if (person.nicknamePath && person.path !== person.nicknamePath) {
+      const nicknamePath = person.nicknamePath.replace(
+        alumniPrefix.replace('/', ''),
+        ''
+      );
       actions.createRedirect({
-        fromPath: person.nicknamePath.replace(
-          alumniPrefix.replace('/', ''),
-          ''
-        ),
+        fromPath: nicknamePath,
         toPath: `/${person.path}`,
         isPermanent: true,
       });
+      console.log('Creating redirect from ' + nicknamePath + ' to ' + person.path);
     }
 
     if (person.path.includes('alumni')) {
