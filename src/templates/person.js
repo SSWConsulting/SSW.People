@@ -68,17 +68,10 @@ const Person = ({ pageContext }) => {
   const [WidgetComponent, setWidgetComponent] = useState();
 
   const initWidget = () => {
-    // Removing for the moment as it is not working as intended
     return (
       <RulesWidget
-        githubToken={''}
-        appInsightsToken={
-          process.env?.RULESWIDGET_APPINSIGHTS_INSTRUMENTATIONKEY
-        }
-        ruleEditor={githubUsername}
-        ruleCount={15}
-        rulesUrl="https://www.ssw.com.au/rules/"
-        userRulesUrl="/rules/user/?author="
+        numberOfRules={15}
+        author={githubUsername}
       />
     );
   };
