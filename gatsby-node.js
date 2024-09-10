@@ -492,7 +492,9 @@ exports.createPages = async function ({ actions, graphql }) {
         toPath: `/${person.path}`,
         isPermanent: true,
       });
-      console.log('Creating redirect from ' + nicknamePath + ' to ' + person.path);
+      console.log(
+        'Creating redirect from ' + nicknamePath + ' to ' + person.path
+      );
     }
 
     if (person.path.includes('alumni')) {
@@ -515,14 +517,19 @@ exports.createPages = async function ({ actions, graphql }) {
     const sanitisedMarkdown = (input) => {
       const lines = input.split('\n');
 
-      const filteredLines = lines.filter((x) => {
+      const filteredLines = lines.filter((line) => {
         const imgRegex = /!\[.*\](.*)/;
+        const emptyLineRegex = /^\s*$/; // this gets rid of '\r' lines
+
         return (
-          !imgRegex.test(x) &&
-          !x.trim().includes('[[imgBadge]]') &&
-          !x.trim().includes('[Editing profiles]') &&
-          !x.trim().includes('<br/>') &&
-          x.length !== 0
+          !imgRegex.test(line) &&
+          !line.trim().includes('[[imgBadge]]') &&
+          !line.trim().includes('[Editing profiles]') &&
+          !line.trim().includes('<br/>') &&
+          !line.trim().includes('---') &&
+          !line.trim().startsWith('#') &&
+          !emptyLineRegex.test(line) &&
+          line.length !== 0
         );
       });
 
@@ -532,12 +539,15 @@ exports.createPages = async function ({ actions, graphql }) {
 
     var profileData = {
       skills: skills.join(' | '),
+      position: person.dataCRM.jobTitle.trim(),
       presenter: {
         name: person.dataCRM.fullName,
         peopleProfileURL: 'https://www.ssw.com.au/people/' + person.path,
       },
       about: sanitisedMarkdown(person.rawMarkdown),
     };
+
+    console.log(profileData);
 
     fs.writeFileSync(
       `${filePath}/profile.md`,
