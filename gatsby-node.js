@@ -547,8 +547,6 @@ exports.createPages = async function ({ actions, graphql }) {
       about: sanitisedMarkdown(person.rawMarkdown),
     };
 
-    console.log(profileData);
-
     fs.writeFileSync(
       `${filePath}/profile.md`,
       matter.stringify('', profileData)
