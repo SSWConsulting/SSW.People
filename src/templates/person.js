@@ -70,7 +70,7 @@ const Person = ({ pageContext }) => {
   const initWidget = () => {
     return (
       <RulesWidget
-        numberOfRules={15}
+        numberOfRules={5}
         author={githubUsername}
       />
     );
