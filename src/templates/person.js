@@ -68,12 +68,7 @@ const Person = ({ pageContext }) => {
   const [WidgetComponent, setWidgetComponent] = useState();
 
   const initWidget = () => {
-    return (
-      <RulesWidget
-        numberOfRules={5}
-        author={githubUsername}
-      />
-    );
+    return <RulesWidget numberOfRules={5} author={githubUsername} />;
   };
 
   useEffect(() => {
@@ -126,9 +121,11 @@ const Person = ({ pageContext }) => {
               ) : (
                 ''
               )}
-              <div className="mt-4 hidden md:block lg:hidden w-full">
-                <SocialLinks crmData={crmData} alumni={!isActive} />
-              </div>
+              {isActive && (
+                <div className="mt-4 hidden md:block lg:hidden w-full">
+                  {socialLinks}
+                </div>
+              )}
             </div>
             <div className="lg:hidden print-show px-2 md:p-2">
               <div className="mb-4 w-full hidden md:block lg:hidden print-show">
@@ -136,8 +133,10 @@ const Person = ({ pageContext }) => {
                 <hr />
                 <div>{skillsList}</div>
               </div>
+              {isActive && (
+                <div className="w-full md:hidden">{socialLinks}</div>
+              )}
 
-              <div className="w-full md:hidden">{socialLinks}</div>
               {frontmatter.quote && (
                 <div className="hidden w-full md:block quoteblock print-hidden">
                   <div className="object-center">{quote}</div>

@@ -42,7 +42,7 @@ const ProfilePhoto = ({ profileImage, sketchImage, children }) => {
         profileImage={profileImage}
         sketchImage={sketchImage}
       />
-      {children ? children : null}
+      {children}
     </div>
   );
 };
@@ -55,7 +55,10 @@ ProfilePhoto.propTypes = {
   sketchImage: PropTypes.shape({
     src: PropTypes.string.isRequired,
   }).isRequired,
-  children: PropTypes.arrayOf(PropTypes.element),
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.element),
+    PropTypes.element,
+  ]),
 };
 
 export default ProfilePhoto;

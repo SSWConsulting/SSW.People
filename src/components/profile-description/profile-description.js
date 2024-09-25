@@ -30,7 +30,6 @@ const ProfileDescription = ({
             </div>
           </div>
         )}
-
         {children}
       </div>
       <h4 className="mb-0">
@@ -56,7 +55,10 @@ ProfileDescription.propTypes = {
   jobTitle: PropTypes.string.isRequired,
   location: PropTypes.string,
   qualifications: PropTypes.string,
-  children: PropTypes.arrayOf(PropTypes.element),
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.element),
+    PropTypes.element,
+  ]),
   isActive: PropTypes.bool,
 };
 
