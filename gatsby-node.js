@@ -482,7 +482,7 @@ exports.createPages = async function ({ actions, graphql }) {
     });
 
     function getLastSegment(url) {
-      let segments = url.split('/');
+      const segments = url.split('/');
       return segments[segments.length - 1];
     }
 
@@ -504,7 +504,7 @@ exports.createPages = async function ({ actions, graphql }) {
     }
 
     if (person.path.includes('alumni')) {
-      var originalPath = getLastSegment(person.path); // Gets the path, removing the /alumni/ prefix
+      const originalPath = getLastSegment(person.path); // Gets the path, removing the /alumni/ prefix
       actions.createRedirect({
         fromPath: originalPath,
         toPath: `/${person.path}`, // Redirects to the alumni page
