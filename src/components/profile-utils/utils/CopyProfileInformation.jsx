@@ -13,7 +13,7 @@ const CopyProfileInformation = ({
 }) => {
   const copyHtmlToClipboard = async () => {
     const PREPAID_DISCOUNT = 15;
-    const siteUrl = location?.origin;
+    const siteUrl = window.location?.origin;
     const imageUrl = siteUrl.concat(profileImage.src);
 
     const htmlToCopy = `
@@ -56,7 +56,7 @@ const CopyProfileInformation = ({
 };
 
 CopyProfileInformation.propTypes = {
-  profileImage: PropTypes.string.isRequired,
+  profileImage: PropTypes.string,
   fullName: PropTypes.string.isRequired,
   slug: PropTypes.string.isRequired,
   billingRate: PropTypes.number.isRequired,
