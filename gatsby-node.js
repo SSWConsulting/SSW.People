@@ -481,6 +481,11 @@ exports.createPages = async function ({ actions, graphql }) {
       },
     });
 
+    function getLastSegment(url) {
+      let segments = url.split('/');
+      return segments[segments.length - 1];
+    }
+
     // if person has a nickname (even if they are alumni), create a redirect from it
     if (person.nicknamePath && person.path !== person.nicknamePath) {
       const nicknamePath = person.nicknamePath.replace(
@@ -499,6 +504,12 @@ exports.createPages = async function ({ actions, graphql }) {
     }
 
     if (person.path.includes('alumni')) {
+      var originalPath = getLastSegment(person.path); // Gets the path, removing the /alumni/ prefix
+      actions.createRedirect({
+        fromPath: originalPath,
+        toPath: `/${person.path}`, // Redirects to the alumni page
+        isPermanent: true,
+      });
       return;
     }
 
