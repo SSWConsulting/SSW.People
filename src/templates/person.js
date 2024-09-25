@@ -68,12 +68,7 @@ const Person = ({ pageContext }) => {
   const [WidgetComponent, setWidgetComponent] = useState();
 
   const initWidget = () => {
-    return (
-      <RulesWidget
-        numberOfRules={5}
-        author={githubUsername}
-      />
-    );
+    return <RulesWidget numberOfRules={5} author={githubUsername} />;
   };
 
   useEffect(() => {
@@ -101,6 +96,8 @@ const Person = ({ pageContext }) => {
     </>
   );
 
+  console.log(isActive);
+
   const skillsList = <SkillsList crmData={crmData} />;
   const socialLinks = <SocialLinks crmData={crmData} alumni={!isActive} />;
 
@@ -126,9 +123,11 @@ const Person = ({ pageContext }) => {
               ) : (
                 ''
               )}
-              <div className="mt-4 hidden md:block lg:hidden w-full">
-                <SocialLinks crmData={crmData} alumni={!isActive} />
-              </div>
+              {isActive && (
+                <div className="mt-4 hidden md:block lg:hidden w-full">
+                  <SocialLinks crmData={crmData} alumni={!isActive} />
+                </div>
+              )}
             </div>
             <div className="lg:hidden print-show px-2 md:p-2">
               <div className="mb-4 w-full hidden md:block lg:hidden print-show">

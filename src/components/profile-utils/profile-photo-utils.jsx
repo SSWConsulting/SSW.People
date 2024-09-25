@@ -4,12 +4,14 @@ import PropTypes from 'prop-types';
 import CopyProfileInformation from './utils/CopyProfileInformation';
 
 const ProfilePhotoUtils = ({ profile }) => {
+  console.log(profile);
+
   return (
     <Fragment>
       <ProfileImageDownload profileImage={profile?.profileImage} />
       <CopyProfileInformation
         billingRate={+profile.billingRate}
-        profileImage={profile.profileImage}
+        profileImage={profile.profileImage.src}
         slug={profile.slug}
         fullName={profile.fullName}
       />

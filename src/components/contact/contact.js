@@ -27,7 +27,6 @@ const Contact = ({ firstNameOrNickname, alumni }) => {
 
 Contact.propTypes = {
   firstNameOrNickname: PropTypes.string.isRequired,
-  fullName: PropTypes.string.isRequired,
   alumni: PropTypes.bool.isRequired,
 };
 
