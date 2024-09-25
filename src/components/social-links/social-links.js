@@ -4,8 +4,6 @@ import PropTypes from 'prop-types';
 const SocialLinks = ({ crmData, alumni }) => {
   let encodedEmailAddress = '';
 
-  console.log(alumni);
-
   const encodeEmail = (emailAddress) => {
     let encodedString = '';
 

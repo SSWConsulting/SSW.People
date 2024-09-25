@@ -31,7 +31,7 @@ const updateUrlFilter = (filtername, search, filterToAdd, add) => {
     filterArray = filterArray.filter((s) => s !== sanitizeFilter(filterToAdd));
   }
   search[filtername] = filterArray;
-  history.pushState(
+  window.history.pushState(
     { search },
     filtername,
     '?' + queryString.stringify(search)
@@ -45,7 +45,7 @@ const sanitizeFilter = (filter) => {
 const clearUrlFilter = (filtername, search) => {
   delete search[filtername];
   const query = queryString.stringify(search);
-  history.pushState({ search }, filtername, '?' + query);
+  window.history.pushState({ search }, filtername, '?' + query);
 };
 
 export { initFilter, updateUrlFilter, clearUrlFilter };

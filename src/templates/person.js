@@ -96,8 +96,6 @@ const Person = ({ pageContext }) => {
     </>
   );
 
-  console.log(isActive);
-
   const skillsList = <SkillsList crmData={crmData} />;
   const socialLinks = <SocialLinks crmData={crmData} alumni={!isActive} />;
 
@@ -125,7 +123,7 @@ const Person = ({ pageContext }) => {
               )}
               {isActive && (
                 <div className="mt-4 hidden md:block lg:hidden w-full">
-                  <SocialLinks crmData={crmData} alumni={!isActive} />
+                  {socialLinks}
                 </div>
               )}
             </div>
@@ -135,8 +133,10 @@ const Person = ({ pageContext }) => {
                 <hr />
                 <div>{skillsList}</div>
               </div>
+              {isActive && (
+                <div className="w-full md:hidden">{socialLinks}</div>
+              )}
 
-              <div className="w-full md:hidden">{socialLinks}</div>
               {frontmatter.quote && (
                 <div className="hidden w-full md:block quoteblock print-hidden">
                   <div className="object-center">{quote}</div>

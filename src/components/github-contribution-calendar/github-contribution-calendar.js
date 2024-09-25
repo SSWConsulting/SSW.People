@@ -2,7 +2,6 @@ import React from 'react';
 import GitHubCalendar from 'react-github-calendar';
 import PropTypes from 'prop-types';
 
-
 const GitHubContributionCalendar = ({ githubUrl }) => {
   let userName = githubUrl.split('/');
   return (
@@ -12,11 +11,12 @@ const GitHubContributionCalendar = ({ githubUrl }) => {
       <div className="mx-3">
         <GitHubCalendar
           username={userName[userName.length - 1]}
-          blockSize={20}
+          blockSize={15}
           blockMargin={3}
           fontSize={10}
           hideColorLegend={true}
-          colorScheme="light"/>
+          colorScheme="light"
+        />
       </div>
     </>
   );

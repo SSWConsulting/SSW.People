@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 // Fix weird build error on some machines
 import 'array-flat-polyfill';
 import React, { useState, useEffect, useMemo } from 'react';

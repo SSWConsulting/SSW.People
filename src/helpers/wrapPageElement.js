@@ -28,7 +28,6 @@ const wrapPageElement = ({ element, props }) => {
     : null;
 
   const getCrumbLabel = () => {
-    // eslint-disable-next-line react/prop-types
     if (props.path === alumniPrefix) {
       return 'Alumni';
     } else if (crmData) {

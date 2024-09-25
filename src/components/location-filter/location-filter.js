@@ -27,7 +27,7 @@ const LocationFilter = ({
   const onLocationClicked = (location) => {
     onLocationChange(location);
     search.location = location;
-    history.pushState(
+    window.history.pushState(
       { search },
       'Location',
       '?' + queryString.stringify(search)

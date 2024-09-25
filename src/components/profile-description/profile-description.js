@@ -12,8 +12,6 @@ const ProfileDescription = ({
   children,
   isActive,
 }) => {
-  console.log('active: ' + isActive);
-
   return (
     <div>
       <div className="flex items-center justify-between">

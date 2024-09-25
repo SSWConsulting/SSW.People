@@ -30,7 +30,7 @@ if (!appInsightsConnectionString) {
   const client = appInsights.defaultClient;
 
   // Add a telemetry initializer if needed
-  client.addTelemetryProcessor((envelope, contextObjects) => {
+  client.addTelemetryProcessor((envelope) => {
     envelope.tags[appInsights.defaultClient.context.keys.cloudRole] =
       'GatsbyBuildProcess';
   });
@@ -134,7 +134,7 @@ const loadSampleData = (crmData) => {
         crmData.push(user);
       }
     });
-  } catch (err) {
+  } catch {
     // if error, then we don't add anything
   }
 };
@@ -492,6 +492,7 @@ exports.createPages = async function ({ actions, graphql }) {
         toPath: `/${person.path}`,
         isPermanent: true,
       });
+      /* eslint-disable no-console */
       console.log(
         'Creating redirect from ' + nicknamePath + ' to ' + person.path
       );

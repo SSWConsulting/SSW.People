@@ -2,6 +2,7 @@
   "name": "ssw-people",
   "license": "MIT",
   "author": "SSWDevelopers <SSWDevelopers@ssw.com.au>",
+  "type": "commonjs",
   "scripts": {
     "dev": "gatsby develop",
     "serve": "gatsby serve",
@@ -12,7 +13,7 @@
     "build": "yarn run build:dir && yarn run build:favicons && gatsby build --prefix-paths --log-pages",
     "devbuild": "yarn run build:dir && yarn run build:favicons && gatsby build",
     "test": "ava **/*.test.js --verbose",
-    "lint": "eslint --max-warnings=0 . --ext ts --ext tsx --ext js --ext jsx"
+    "lint": "eslint --max-warnings=0 ."
   },
   "greenkeeper": {
     "ignore": [

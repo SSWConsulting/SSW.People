@@ -5,14 +5,6 @@ const SkillsList = ({ crmData }) => {
   const intermediateSkills = crmData?.skills?.intermediateSkills ?? [];
   const advancedSkills = crmData?.skills?.advancedSkills ?? [];
 
-  const SkillLink = ({ skill }) => {
-    return skill.marketingPageUrl ? (
-      <a href={skill.marketingPageUrl}>{skill.service}</a>
-    ) : (
-      <span>{skill.service}</span>
-    );
-  };
-
   return (
     <>
       {((advancedSkills && !!advancedSkills.length) ||
@@ -45,8 +37,20 @@ const SkillsList = ({ crmData }) => {
   );
 };
 
+const SkillLink = ({ skill }) => {
+  return skill.marketingPageUrl ? (
+    <a href={skill.marketingPageUrl}>{skill.service}</a>
+  ) : (
+    <span>{skill.service}</span>
+  );
+};
+
 SkillsList.propTypes = {
   crmData: PropTypes.object.isRequired,
+};
+
+SkillLink.propTypes = {
+  skill: PropTypes.object.isRequired,
 };
 
 export default SkillsList;

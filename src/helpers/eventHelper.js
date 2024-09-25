@@ -53,7 +53,7 @@ async function fetchEvents(url, sort) {
         );
       }
     })
-    .catch((error) => {
+    .catch(() => {
       events = [];
     });
   return events;

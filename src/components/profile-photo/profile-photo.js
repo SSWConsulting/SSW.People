@@ -42,7 +42,7 @@ const ProfilePhoto = ({ profileImage, sketchImage, children }) => {
         profileImage={profileImage}
         sketchImage={sketchImage}
       />
-      {Array.isArray(children) ? children : [children]}
+      {children}
     </div>
   );
 };

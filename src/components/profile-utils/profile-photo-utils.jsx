@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import CopyProfileInformation from './utils/CopyProfileInformation';
 
 const ProfilePhotoUtils = ({ profile }) => {
-  console.log(profile);
 
   return (
     <Fragment>
