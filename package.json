@@ -23,6 +23,7 @@
   "dependencies": {
     "@babel/core": "^7.25.2",
     "@brainhubeu/react-carousel": "^2.0.4",
+    "@fontsource/inter": "^5.1.0",
     "@fortawesome/free-brands-svg-icons": "^6.6.0",
     "@fortawesome/free-regular-svg-icons": "^6.6.0",
     "@microsoft/applicationinsights-web": "^3.3.3",
