@@ -5,6 +5,7 @@ import AppProvider from 'store/provider';
 // import axios from 'axios';
 import { ApplicationInsights } from '@microsoft/applicationinsights-web';
 import { SeverityLevel } from '@microsoft/applicationinsights-web';
+import '@fontsource/inter';
 // import { siteUrlCn } from './site-config.js';
 
 const environment = process.env.NODE_ENV;
