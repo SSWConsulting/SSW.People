@@ -29,6 +29,7 @@ jobs:
           tokenSuffix: '}'
           files: .env.template
         env:
+          SITE_URL: ${{ secrets.SITE_URL }}
           GOOGLE_GTM_ID: ${{ secrets.GOOGLE_GTM_ID }}
           GOOGLE_ANALYTICS: ${{ secrets.GOOGLE_ANALYTICS }}
           YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
