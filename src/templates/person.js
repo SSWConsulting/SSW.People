@@ -68,7 +68,13 @@ const Person = ({ pageContext }) => {
   const [WidgetComponent, setWidgetComponent] = useState();
 
   const initWidget = () => {
-    return <RulesWidget numberOfRules={5} author={githubUsername} />;
+    return (
+      <RulesWidget
+        location={process.env.SITE_URL}
+        numberOfRules={5}
+        author={githubUsername}
+      />
+    );
   };
 
   useEffect(() => {
