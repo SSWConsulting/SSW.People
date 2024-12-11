@@ -3,7 +3,7 @@ import { Location } from '@reach/router';
 import queryString from 'query-string';
 
 let search =
-  typeof location !== 'undefined' && location.search
+  typeof window !== 'undefined' && window.location.search
     ? queryString.parse(window.location.search)
     : {};
 
