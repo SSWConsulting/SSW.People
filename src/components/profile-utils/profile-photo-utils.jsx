@@ -9,7 +9,7 @@ const ProfilePhotoUtils = ({ profile }) => {
       <ProfileImageDownload profileImage={profile?.profileImage} />
       <CopyProfileInformation
         billingRate={+profile.billingRate}
-        profileImage={profile.profileImage?.src}
+        profileImageSrc={profile.profileImage?.src}
         slug={profile.slug}
         fullName={profile.fullName}
       />
