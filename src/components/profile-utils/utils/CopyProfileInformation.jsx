@@ -14,7 +14,7 @@ const CopyProfileInformation = ({
   const copyHtmlToClipboard = async () => {
     const PREPAID_DISCOUNT = 15;
     const siteUrl = window.location?.origin;
-    const imageUrl = siteUrl.concat(profileImage.src);
+    const imageUrl = siteUrl.concat(profileImage);
 
     const htmlToCopy = `
     <table border="0" cellspacing="0" cellpadding="0" style="width: auto;">
