@@ -9,12 +9,12 @@ const CopyProfileInformation = ({
   fullName,
   slug,
   billingRate,
-  profileImage,
+  profileImageSrc,
 }) => {
   const copyHtmlToClipboard = async () => {
     const PREPAID_DISCOUNT = 15;
     const siteUrl = window.location?.origin;
-    const imageUrl = siteUrl.concat(profileImage.src);
+    const imageUrl = siteUrl.concat(profileImageSrc);
 
     const htmlToCopy = `
     <table border="0" cellspacing="0" cellpadding="0" style="width: auto;">
@@ -56,7 +56,7 @@ const CopyProfileInformation = ({
 };
 
 CopyProfileInformation.propTypes = {
-  profileImage: PropTypes.string,
+  profileImageSrc: PropTypes.string,
   fullName: PropTypes.string.isRequired,
   slug: PropTypes.string.isRequired,
   billingRate: PropTypes.number.isRequired,
