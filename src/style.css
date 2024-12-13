@@ -435,6 +435,10 @@ div.megamenu a {
   text-decoration: none;
 }
 
+div.megamenu {
+  z-index: 20;
+}
+
 /** Custom blocks images handling **/
 
 .img-badge {
