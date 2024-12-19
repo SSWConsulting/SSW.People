@@ -246,9 +246,14 @@ footer {
   margin-top: 0.5em;
 }
 
-/* .rw-title {
-  flex-direction: column !important;
-} */
+.rw-title {
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.rw-rules-container .rw-see-more {
+  color: rgb(0,0,0)
+}
 
 .profile-content {
   margin-top: 20px;
