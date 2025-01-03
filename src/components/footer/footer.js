@@ -61,6 +61,7 @@ const Footer = () => {
                     href="https://www.tiktok.com/@ssw_tv"
                     target="_blank"
                     rel="noreferrer"
+                    aria-label="SSW on TikTok"
                   >
                     <FontAwesomeIcon icon={faTiktok} size="lg" />
                   </a>
@@ -70,6 +71,7 @@ const Footer = () => {
                     href="https://twitter.com/SSW_TV"
                     target="_blank"
                     rel="noreferrer"
+                    aria-label="SSW on Twitter"
                   >
                     <FontAwesomeIcon icon={faTwitter} size="lg" />
                   </a>
@@ -79,6 +81,7 @@ const Footer = () => {
                     href="https://www.instagram.com/ssw_tv"
                     target="_blank"
                     rel="noreferrer"
+                    aria-label="SSW on Instagram"
                   >
                     <FontAwesomeIcon icon={faInstagram} size="lg" />
                   </a>
@@ -88,6 +91,7 @@ const Footer = () => {
                     href="https://www.facebook.com/SSW.page"
                     target="_blank"
                     rel="noreferrer"
+                    aria-label="SSW on Facebook"
                   >
                     <FontAwesomeIcon icon={faFacebook} size="lg" />
                   </a>
@@ -97,6 +101,7 @@ const Footer = () => {
                     href="https://www.linkedin.com/company/ssw/"
                     target="_blank"
                     rel="noreferrer"
+                    aria-label="SSW on LinkedIn"
                   >
                     <FontAwesomeIcon icon={faLinkedin} size="lg" />
                   </a>
@@ -106,6 +111,7 @@ const Footer = () => {
                     href="https://www.youtube.com/user/sswtechtalks/"
                     target="_blank"
                     rel="noreferrer"
+                    aria-label="SSW on YouTube"
                   >
                     <FontAwesomeIcon icon={faYoutube} size="lg" />
                   </a>
@@ -176,11 +182,11 @@ const getLastDeployTime = () => {
   var minutes = Math.floor(delta / 60) % 60;
   delta -= minutes * 60;
 
-  return days != 0
+  return days !== 0
     ? `${days} day(s)`
-    : '' + ' ' + hours != 0
+    : ' ' + hours !== 0
       ? `${hours} hour(s)`
-      : '' + ' ' + minutes > 1
+      : ' ' + minutes > 1
         ? `${minutes} minutes`
         : '1 minute';
 };

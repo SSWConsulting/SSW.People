@@ -56,7 +56,7 @@ const YoutubePlaylist = ({ youtubePlayListId }) => {
   useEffect(() => {
     const youtubeApiKey = process.env.YOUTUBE_API_KEY;
 
-    if (youtubePlayListId == '') {
+    if (youtubePlayListId === '') {
       return null;
     }
 
@@ -86,7 +86,7 @@ const YoutubePlaylist = ({ youtubePlayListId }) => {
     if (items.length >= 3) {
       numVideosDesktop = 3;
       numVideosTablet = 2;
-    } else if (items.length == 2) {
+    } else if (items.length === 2) {
       numVideosDesktop = 2;
       numVideosTablet = 2;
     } else {
@@ -138,7 +138,7 @@ const YoutubePlaylist = ({ youtubePlayListId }) => {
               .BrainhubCarousel__arrows:hover:enabled{
                 background-color:#CC4141
               }
-              
+
             `,
               },
             ]}
