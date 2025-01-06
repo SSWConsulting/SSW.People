@@ -32,7 +32,10 @@ const profileChineseTag = '-Chinese';
 
 const Index = ({ data }) => {
   const allPeople = useMemo(() => buildPeople(data), [data]);
-  const skills = useMemo(() => data.allSkillUrls.nodes);
+  const skills = useMemo(
+    () => data.allSkillUrls.nodes,
+    [data.allSkillUrls.nodes]
+  );
   const allLocations = useMemo(
     () => [
       'All',
@@ -80,21 +83,6 @@ const Index = ({ data }) => {
   ]);
   const [countPerSkill, setCountPerSkill] = useState([]);
 
-  const getSkillCounts = (skillsInUse) => {
-    return skills.reduce((acc, skill) => {
-      const serviceName = skill.service.service;
-      if (skillsInUse.has(serviceName)) {
-        const serviceCount = filteredPeople.filter((p) =>
-          p.skills.some((s) => s.service === serviceName)
-        ).length;
-        if (serviceCount > 0) {
-          acc.push({ item: serviceName, count: serviceCount });
-        }
-      }
-      return acc;
-    }, []);
-  };
-
   const filterAndSortSkills = (skills, skillsInUse, skillCount) => {
     return skills
       .filter((s) => skillsInUse.has(s.service.service))
@@ -116,6 +104,21 @@ const Index = ({ data }) => {
   };
 
   const allSkills = useMemo(() => {
+    const getSkillCounts = (skillsInUse) => {
+      return skills.reduce((acc, skill) => {
+        const serviceName = skill.service.service;
+        if (skillsInUse.has(serviceName)) {
+          const serviceCount = filteredPeople.filter((p) =>
+            p.skills.some((s) => s.service === serviceName)
+          ).length;
+          if (serviceCount > 0) {
+            acc.push({ item: serviceName, count: serviceCount });
+          }
+        }
+        return acc;
+      }, []);
+    };
+
     const skillsInUse = new Set(
       filteredPeople.flatMap((p) => p.skills.map((s) => s.service))
     );
@@ -133,7 +136,7 @@ const Index = ({ data }) => {
         count: filteredPeople.filter((p) => p.role === r).length,
       };
     });
-  }, [allRoles]);
+  }, [allRoles, filteredPeople]);
 
   useEffect(() => {
     function filterPeople() {
@@ -190,7 +193,7 @@ const Index = ({ data }) => {
     const people = filterPeople();
 
     setFilteredPeople(people);
-  }, [selectedLocation, selectedFilters]);
+  }, [allPeople, selectedLocation, selectedFilters, eventsPresenters]);
 
   return (
     <>
