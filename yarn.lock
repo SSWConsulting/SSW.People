@@ -7117,7 +7117,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ava@npm:^6.1.3":
+"ava@npm:^6.2.0":
   version: 6.2.0
   resolution: "ava@npm:6.2.0"
   dependencies:
@@ -24449,7 +24449,7 @@ __metadata:
     array-flat-polyfill: "npm:^1.0.1"
     assert: "npm:^2.1.0"
     autoprefixer: "npm:^10.4.20"
-    ava: "npm:^6.1.3"
+    ava: "npm:^6.2.0"
     axios: "npm:^1.7.9"
     babel-eslint: "npm:^10.1.0"
     browserify-zlib: "npm:^0.2.0"
@@ -24515,7 +24515,7 @@ __metadata:
     react-pose: "npm:^4.0.10"
     react-responsive-modal: "npm:^6.4.2"
     react-youtube: "npm:^10.1.0"
-    ssw.megamenu: "npm:^4.6.2"
+    ssw.megamenu: "npm:^4.9.2"
     ssw.rules.widget: "npm:^2.0.8"
     stream-browserify: "npm:^3.0.0"
     stream-http: "npm:^3.2.0"
@@ -24529,9 +24529,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"ssw.megamenu@npm:^4.6.2":
-  version: 4.9.1
-  resolution: "ssw.megamenu@npm:4.9.1"
+"ssw.megamenu@npm:^4.9.2":
+  version: 4.9.2
+  resolution: "ssw.megamenu@npm:4.9.2"
   dependencies:
     "@headlessui/react": "npm:^1.7.17"
     "@heroicons/react": "npm:^2.1.1"
@@ -24543,7 +24543,7 @@ __metadata:
   peerDependencies:
     react: ^18.2.0
     react-dom: ^18.2.0
-  checksum: 10c0/8a3d358ab351cd77e837e65cce217127f289d3f8b86fa8906218294f3fceba27f6ffa08991c24e160a6ca70c4f6008d96a488524099465f65f3377c8db3acf46
+  checksum: 10c0/ec61133aeafc32a7348cfc3b827b3c17b11a09160564993e6b5d292dd3d894a21b24ddfc2cedc9af8f332b3f65882c440564bcace4177589eefed42ef02a99f1
   languageName: node
   linkType: hard
 
