@@ -77,9 +77,7 @@ This is a Gatsby generated site pulling data from:
 
 > People profiles repository lives here: <https://github.com/SSWConsulting/SSW.People.Profiles>
 >
-- Sample Profile:
-  - Staging: <https://staging.ssw.com.au/people/bob-northwind>
-  - Production: <https://www.ssw.com.au/people/bob-northwind>
+- Sample Profile: <https://www.ssw.com.au/people/bob-northwind>
 
 Merging changes to **main** on this repo will trigger:
 
