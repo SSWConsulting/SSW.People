@@ -314,8 +314,9 @@ function buildPeople(data) {
             : [],
         };
       }
+      return null;
     })
-    .filter((x) => x !== undefined)
+    .filter((x) => x !== null)
     .filter((x) => !x.sanitisedName.endsWith(profileChineseTag));
 }
 
