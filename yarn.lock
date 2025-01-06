@@ -22087,14 +22087,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-activity-calendar@npm:^2.7.5":
-  version: 2.7.5
-  resolution: "react-activity-calendar@npm:2.7.5"
+"react-activity-calendar@npm:^2.7.6":
+  version: 2.7.6
+  resolution: "react-activity-calendar@npm:2.7.6"
   dependencies:
     date-fns: "npm:^4.1.0"
   peerDependencies:
     react: ^18.0.0 || ^19.0.0
-  checksum: 10c0/2020ae522c85773d9a3efe8f3d8833cb540ebc4e73cdffc9f4d8508c2716ca3ac47799c2aaf3db21ffff06db42a87d34d082fb9da1b97705eff3447b912c92b2
+  checksum: 10c0/b20b33653924633305c623e291204c857636281afaf1a1a78e1b6709fb15ebf37954a2b2cf035e809c97a0d414ed46c1c29cfea4a7b468efa3a80ceeaa364745
   languageName: node
   linkType: hard
 
@@ -22168,14 +22168,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-error-boundary@npm:^4.1.2":
-  version: 4.1.2
-  resolution: "react-error-boundary@npm:4.1.2"
+"react-error-boundary@npm:^5.0.0":
+  version: 5.0.0
+  resolution: "react-error-boundary@npm:5.0.0"
   dependencies:
     "@babel/runtime": "npm:^7.12.5"
   peerDependencies:
     react: ">=16.13.1"
-  checksum: 10c0/0737e5259bed40ce14eb0823b3c7b152171921f2179e604f48f3913490cdc594d6c22d43d7abb4ffb1512c832850228db07aa69d3b941db324953a5e393cb399
+  checksum: 10c0/38da5e7e81016a4750d3b090e3c740c2c1125c0bb9de14e1ab92ee3b5190d34517c199935302718a24aa35d3f89081412b3444edc23f63729bde2e862a2fbfec
   languageName: node
   linkType: hard
 
@@ -22203,15 +22203,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-github-calendar@npm:^4.5.2":
-  version: 4.5.2
-  resolution: "react-github-calendar@npm:4.5.2"
+"react-github-calendar@npm:^4.5.3":
+  version: 4.5.3
+  resolution: "react-github-calendar@npm:4.5.3"
   dependencies:
-    react-activity-calendar: "npm:^2.7.5"
-    react-error-boundary: "npm:^4.1.2"
+    react-activity-calendar: "npm:^2.7.6"
+    react-error-boundary: "npm:^5.0.0"
   peerDependencies:
     react: ^18.0.0 || ^19.0.0
-  checksum: 10c0/7893a56c729c87c85a5007c65cc82513679f2238c9c0d8f115338555c2a3b1ed46773bbe21a7fc0c5901de3209a2d34c4004adb6c8a48a3beafda2eff946e9ba
+  checksum: 10c0/5b709084acdaf15d81175b0ccc472e98b82079f95bd2e6b58d5fbfa2cfa88d78926badda7d6534b406a88307ec748405391aa441ce77ad04afdb07675d9bac36
   languageName: node
   linkType: hard
 
@@ -24507,7 +24507,7 @@ __metadata:
     react: "npm:^18.3.1"
     react-dom: "npm:^18.3.1"
     react-ga: "npm:^3.3.1"
-    react-github-calendar: "npm:^4.5.2"
+    react-github-calendar: "npm:^4.5.3"
     react-helmet: "npm:^6.1.0"
     react-hot-toast: "npm:^2.5.1"
     react-jotform: "npm:^1.0.2"
@@ -24519,7 +24519,7 @@ __metadata:
     ssw.rules.widget: "npm:^2.0.8"
     stream-browserify: "npm:^3.0.0"
     stream-http: "npm:^3.2.0"
-    styled-components: "npm:^6.1.13"
+    styled-components: "npm:^6.1.14"
     tailwindcss: "npm:^3.4.17"
     to: "npm:^0.2.9"
     update: "npm:^0.7.4"
@@ -25113,9 +25113,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"styled-components@npm:^6.1.13":
-  version: 6.1.13
-  resolution: "styled-components@npm:6.1.13"
+"styled-components@npm:^6.1.14":
+  version: 6.1.14
+  resolution: "styled-components@npm:6.1.14"
   dependencies:
     "@emotion/is-prop-valid": "npm:1.2.2"
     "@emotion/unitless": "npm:0.8.1"
@@ -25129,7 +25129,7 @@ __metadata:
   peerDependencies:
     react: ">= 16.8.0"
     react-dom: ">= 16.8.0"
-  checksum: 10c0/dd0379179c6ce9655c97285e9f6475b533d4cc4cad72e8f16824c5454803a9d12126877d8b2837cd5b54520250c55cde97a183e813eed720d2575362d9646663
+  checksum: 10c0/a1b982dda8e9a4e6872e293ac6845fd1d0747abd64862bdd694975e75bc4719ecbbd1636cd7819b59ad30e7a18d95d02f5de8a56e0053117d34394e02d7a8ebc
   languageName: node
   linkType: hard
 
