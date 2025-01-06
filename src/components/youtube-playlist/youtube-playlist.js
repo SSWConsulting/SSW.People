@@ -74,7 +74,7 @@ const YoutubePlaylist = ({ youtubePlayListId }) => {
           setError(error);
         }
       );
-  }, []);
+  }, [youtubePlayListId]);
 
   if (error) {
     return null;
