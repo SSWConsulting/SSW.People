@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 
 const PlayAudio = ({ hasAnimation, audioSrc }) => {
   const animationContainer = useRef(null);
-  const audioRef = useRef(new Audio());
+  const audioRef = useRef(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [hoverAudio, setHoverAudio] = useState(false);
 
@@ -38,6 +38,12 @@ const PlayAudio = ({ hasAnimation, audioSrc }) => {
     // outside click
     e.preventDefault();
   };
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      audioRef.current = new Audio();
+    }
+  }, []);
 
   useEffect(() => {
     const audio = audioRef.current;
