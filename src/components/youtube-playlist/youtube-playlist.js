@@ -9,28 +9,35 @@ import PropTypes from 'prop-types';
 import Icon from '../../images/branding/icon.png';
 import Player from 'react-lazy-youtube';
 
-const YoutubePlaylist = ({ youtubePlayListId }) => {
-  const [error, setError] = useState(null);
-  const [isLoaded, setIsLoaded] = useState(false);
+const YoutubePlaylist = ({ youtubePlayListId, playlistItems }) => {
   const [items, setItems] = useState([]);
+  const [isLoaded, setIsLoaded] = useState(false);
 
   var numVideosDesktop = 0;
   var numVideosTablet = 0;
 
+  useEffect(() => {
+    if (playlistItems && playlistItems.length > 0) {
+      setItems(playlistItems);
+      setIsLoaded(true);
+    }
+  }, [playlistItems]);
+
   const getVideosElements = () => {
-    return items.map((item) => (
+    return items.map((videoId) => (
       <div
-        key={item.contentDetails.videoId + 1}
+        key={videoId}
         className="gatsby-resp-iframe-wrapper"
+        style={{ padding: '0 10px' }}
       >
         <div className="embedVideo-container">
           {typeof window !== 'undefined' && (
             <Player
-              id={item.contentDetails.videoId}
+              id={videoId}
               imageSize="mqdefault"
               className={'embedVideo-iframe'}
               styles={{
-                width: '321px',
+                width: '300px',
                 height: '180px',
               }}
             />
@@ -53,32 +60,7 @@ const YoutubePlaylist = ({ youtubePlayListId }) => {
     }
   };
 
-  useEffect(() => {
-    const youtubeApiKey = process.env.YOUTUBE_API_KEY;
-
-    if (youtubePlayListId == '') {
-      return null;
-    }
-
-    fetch(
-      `https://www.googleapis.com/youtube/v3/playlistItems?part=contentDetails&maxResults=10&playlistId=${youtubePlayListId}&key=${youtubeApiKey}`
-    )
-      .then((res) => res.json())
-      .then(
-        (result) => {
-          setIsLoaded(true);
-          setItems(result.items);
-        },
-        (error) => {
-          setIsLoaded(true);
-          setError(error);
-        }
-      );
-  }, []);
-
-  if (error) {
-    return null;
-  } else if (!isLoaded) {
+  if (!isLoaded) {
     return <div></div>;
   } else if (items == null) {
     return null;
@@ -138,7 +120,11 @@ const YoutubePlaylist = ({ youtubePlayListId }) => {
               .BrainhubCarousel__arrows:hover:enabled{
                 background-color:#CC4141
               }
-              
+
+              .BrainhubCarousel__trackContainer{
+                margin-left: 10px;
+                margin-right: 10px;
+              }
             `,
               },
             ]}
@@ -187,6 +173,7 @@ const YoutubePlaylist = ({ youtubePlayListId }) => {
 
 YoutubePlaylist.propTypes = {
   youtubePlayListId: PropTypes.string.isRequired,
+  playlistItems: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
 
 export default YoutubePlaylist;

@@ -9,10 +9,13 @@ const appInsights = require('applicationinsights');
 const fs = require('fs');
 const siteconfig = require('./site-config');
 const matter = require('gray-matter');
+const fetch = require('node-fetch');
 
 const environment = process.env.NODE_ENV;
 const appInsightsConnectionString =
   process.env.APPLICATIONINSIGHTS_CONNECTION_STRING;
+const youtubeApiKey = process.env.YOUTUBE_API_KEY;
+
 if (!appInsightsConnectionString) {
   // eslint-disable-next-line no-console
   console.warn(
@@ -121,6 +124,10 @@ exports.createSchemaCustomization = ({ actions }) => {
       jobTitle: String
       alternativeUrl: String
     }
+    type PeopleYoutubePlaylists implements Node {
+      userId: String!
+      playlistItems: [String]!
+    }
   `;
   createTypes(typeDefs);
 };
@@ -136,6 +143,20 @@ const loadSampleData = (crmData) => {
     });
   } catch {
     // if error, then we don't add anything
+  }
+};
+
+const fetchYoutubePlaylist = async (playlistId) => {
+  const url = `https://www.googleapis.com/youtube/v3/playlistItems?part=contentDetails&maxResults=10&playlistId=${playlistId}&key=${youtubeApiKey}`;
+  try {
+    const response = await fetch(url);
+    const data = await response.json();
+    return data.items
+      ? data.items.map((item) => item.contentDetails.videoId)
+      : [];
+  } catch (error) {
+    console.error(`Failed to fetch YouTube playlist ${playlistId}:`, error);
+    return [];
   }
 };
 
@@ -184,6 +205,24 @@ exports.sourceNodes = async ({
 
   // load data for the sample profile
   loadSampleData(crmDataResult);
+  for (const user of crmDataResult) {
+    if (user.youTubePlayListId) {
+      const playlistItems = await fetchYoutubePlaylist(user.youTubePlayListId);
+
+      createNode({
+        id: createNodeId(`youtube-playlist-${user.userId}`),
+        userId: user.userId,
+        playlistItems,
+        internal: {
+          type: 'PeopleYoutubePlaylists',
+          contentDigest: createContentDigest({
+            userId: user.userId,
+            playlistItems,
+          }),
+        },
+      });
+    }
+  }
 
   crmDataResult.map((user) => {
     const userNode = {
@@ -326,6 +365,12 @@ exports.createPages = async function ({ actions, graphql }) {
           publicPhotoAlbumUrl
         }
       }
+      peopleYoutubePlaylists: allPeopleYoutubePlaylists {
+        nodes {
+          userId
+          playlistItems
+        }
+      }
       peopleAudios: allFile(
         filter: {
           sourceInstanceName: { eq: "people" }
@@ -386,6 +431,7 @@ exports.createPages = async function ({ actions, graphql }) {
     return node;
   });
 
+  const youtubePlaylists = data.peopleYoutubePlaylists.nodes;
   const peopleAudios = data.peopleAudios.nodes.map((node) => {
     return {
       src: node.publicURL,
@@ -413,6 +459,7 @@ exports.createPages = async function ({ actions, graphql }) {
     )
     .map((node) => {
       const crmData = peopleCRM.find((x) => x.id === node.frontmatter.id);
+      const playlist = youtubePlaylists.find((p) => p.userId === crmData?.id);
       const isCurrent = crmData ? crmData.isActive : false;
 
       const nickname = crmData ? crmData.nickname : null;
@@ -436,6 +483,7 @@ exports.createPages = async function ({ actions, graphql }) {
         sketchImage: peopleSketchImages.find(
           (x) => x.name === node.parent.name.replace(profileChineseTag, '')
         ),
+        playlistItems: playlist ? playlist.playlistItems : [],
         html: node.html,
         rawMarkdown: node.rawMarkdownBody,
       };
@@ -474,6 +522,7 @@ exports.createPages = async function ({ actions, graphql }) {
           frontmatter: person.frontmatter,
           dataCRM: person.dataCRM,
           dataSkillUrls: person.dataSkillUrls,
+          playlistItems: person.playlistItems,
           html: chinaHelper.isChinaBuild
             ? chinaHelper.cleanHtml(person.html)
             : person.html,
