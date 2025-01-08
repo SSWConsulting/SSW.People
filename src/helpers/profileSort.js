@@ -1,7 +1,7 @@
 export const BillingRateSort = (a, b) => {
   let sorting = b.billingRate - a.billingRate;
 
-  if (sorting != 0) {
+  if (sorting !== 0) {
     return sorting;
   }
 

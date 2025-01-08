@@ -1,7 +1,7 @@
 // This does not support nested pages (level 2 and up)
 // If you're working with deeply nested pages, remove this or rework it.
 
-export default ({
+const generateSchema = ({
   location,
   canonical,
   siteUrl,
@@ -48,3 +48,5 @@ export default ({
 
   return schema;
 };
+
+export default generateSchema;

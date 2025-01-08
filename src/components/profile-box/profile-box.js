@@ -75,11 +75,13 @@ const ProfileBox = ({
   useEffect(() => {
     if (hover && linkRef.current && linkRef.current.matches(':hover') === false)
       setHover(false);
-  });
+  }, [hover, setHover]);
 
   return (
     <div
       className="w-full flex-profile-box unstyled relative"
+      role="gridcell"
+      tabIndex="0"
       onMouseEnter={() => {
         setHover(true);
       }}

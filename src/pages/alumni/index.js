@@ -66,7 +66,7 @@ const Index = ({ data }) => {
       .sort(AlphabeticalSort);
 
     setFilteredPeople(people);
-  }, [selectedLocation, selectedRoles]);
+  }, [allPeople, selectedLocation, selectedRoles]);
 
   return (
     <>
@@ -218,6 +218,7 @@ function buildPeople(data) {
             skills: [],
           };
         }
+        return null;
       }
     })
     .filter((x) => x !== undefined)
