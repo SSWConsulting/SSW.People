@@ -11,103 +11,89 @@ import Player from 'react-lazy-youtube';
 
 const YoutubePlaylist = ({ youtubePlayListId, playlistItems }) => {
   const [items, setItems] = useState([]);
-  const [isLoaded, setIsLoaded] = useState(false);
-
-  var numVideosDesktop = 0;
-  var numVideosTablet = 0;
 
   useEffect(() => {
-    if (playlistItems && playlistItems.length > 0) {
+    if (playlistItems?.length) {
       setItems(playlistItems);
-      setIsLoaded(true);
     }
   }, [playlistItems]);
 
-  const getVideosElements = () => {
-    return items.map((videoId) => (
+  if (!items.length) return null;
+
+  const getVideoCounts = (length) => {
+    if (length >= 3) return { desktop: 3, tablet: 2 };
+    if (length === 2) return { desktop: 2, tablet: 2 };
+    return { desktop: 1, tablet: 1 };
+  };
+
+  const { desktop: numVideosDesktop, tablet: numVideosTablet } = getVideoCounts(
+    items.length
+  );
+
+  const renderVideoElements = () => {
+    const videoElements = items.map((videoId) => (
       <div
         key={videoId}
         className="gatsby-resp-iframe-wrapper"
         style={{ padding: '0 10px' }}
       >
         <div className="embedVideo-container">
-          {typeof window !== 'undefined' && (
-            <Player
-              id={videoId}
-              imageSize="mqdefault"
-              className={'embedVideo-iframe'}
-              styles={{
-                width: '300px',
-                height: '180px',
-              }}
-            />
-          )}
+          <Player
+            id={videoId}
+            imageSize="mqdefault"
+            className="embedVideo-iframe"
+            styles={{
+              width: '300px',
+              height: '180px',
+            }}
+          />
         </div>
       </div>
     ));
-  };
 
-  const getVideosElementsWithSeparator = () => {
-    if (items.length === 1) {
-      return getVideosElements();
-    } else {
-      return [
-        ...getVideosElements(),
-        <div key="0" className="m-auto">
-          <img alt={'Separator'} src={Icon} width="96px" />
-        </div>,
-      ];
-    }
-  };
-
-  if (!isLoaded) {
-    return <div></div>;
-  } else if (items == null) {
-    return null;
-  } else {
-    if (items.length >= 3) {
-      numVideosDesktop = 3;
-      numVideosTablet = 2;
-    } else if (items.length == 2) {
-      numVideosDesktop = 2;
-      numVideosTablet = 2;
-    } else {
-      numVideosDesktop = 1;
-      numVideosTablet = 1;
-    }
-
-    const slidesPerPage = (slideAmount) => {
-      return {
-        resolve: slidesToShowPlugin,
-        options: {
-          numberOfSlides: slideAmount,
-        },
-      };
-    };
-
-    const slidesPerScroll = (slideScrollAmount) => {
-      return {
-        resolve: slidesToScrollPlugin,
-        options: {
-          numberOfSlides: slideScrollAmount,
-        },
-      };
-    };
-
-    const renderArrows = () => {
-      return items.length > 1 ? ['arrows'] : [];
-    };
-
-    return (
-      <div className="youtube-playlist clearfix">
-        <div>
-          <h2 className="inline">Videos</h2>
+    if (items.length > 1) {
+      videoElements.push(
+        <div key="separator" className="m-auto">
+          <img alt="Separator" src={Icon} width="96px" />
         </div>
-        <div className="container">
-          <Helmet
-            style={[
-              {
-                cssText: `
+      );
+    }
+
+    return videoElements;
+  };
+
+  const slidesPerPage = (slideAmount) => {
+    return {
+      resolve: slidesToShowPlugin,
+      options: {
+        numberOfSlides: slideAmount,
+      },
+    };
+  };
+
+  const slidesPerScroll = (slideScrollAmount) => {
+    return {
+      resolve: slidesToScrollPlugin,
+      options: {
+        numberOfSlides: slideScrollAmount,
+      },
+    };
+  };
+
+  const renderArrows = () => {
+    return items.length > 1 ? ['arrows'] : [];
+  };
+
+  return (
+    <div className="youtube-playlist clearfix">
+      <div>
+        <h2 className="inline">Videos</h2>
+      </div>
+      <div className="container">
+        <Helmet
+          style={[
+            {
+              cssText: `
               .BrainhubCarousel__arrows{
                 padding: 17px;
                 background-color: #CC4141;
@@ -126,49 +112,48 @@ const YoutubePlaylist = ({ youtubePlayListId, playlistItems }) => {
                 margin-right: 10px;
               }
             `,
-              },
-            ]}
-          />
+            },
+          ]}
+        />
 
-          <Carousel
-            plugins={[
-              'infinite',
-              ...renderArrows(),
-              slidesPerPage(numVideosDesktop),
-              slidesPerScroll(numVideosDesktop),
-            ]}
-            slides={getVideosElementsWithSeparator()}
-            breakpoints={{
-              768: {
-                plugins: [
-                  'infinite',
-                  ...renderArrows(),
-                  slidesPerPage(1),
-                  slidesPerScroll(1),
-                ],
-              },
-              1280: {
-                plugins: [
-                  'infinite',
-                  ...renderArrows(),
-                  slidesPerPage(numVideosTablet),
-                  slidesPerScroll(numVideosTablet),
-                ],
-              },
-            }}
-          />
-          <a
-            className="flex w-full justify-center text-center top-2 pt-4 text-ssw-red hover:text-black"
-            target="_blank"
-            rel="noopener noreferrer"
-            href={`https://www.youtube.com/playlist?list=${youtubePlayListId}`}
-          >
-            View all
-          </a>
-        </div>
+        <Carousel
+          plugins={[
+            'infinite',
+            ...renderArrows(),
+            slidesPerPage(numVideosDesktop),
+            slidesPerScroll(numVideosDesktop),
+          ]}
+          slides={renderVideoElements()}
+          breakpoints={{
+            768: {
+              plugins: [
+                'infinite',
+                ...renderArrows(),
+                slidesPerPage(1),
+                slidesPerScroll(1),
+              ],
+            },
+            1280: {
+              plugins: [
+                'infinite',
+                ...renderArrows(),
+                slidesPerPage(numVideosTablet),
+                slidesPerScroll(numVideosTablet),
+              ],
+            },
+          }}
+        />
+        <a
+          className="flex w-full justify-center text-center top-2 pt-4 text-ssw-red hover:text-black"
+          target="_blank"
+          rel="noopener noreferrer"
+          href={`https://www.youtube.com/playlist?list=${youtubePlayListId}`}
+        >
+          View all
+        </a>
       </div>
-    );
-  }
+    </div>
+  );
 };
 
 YoutubePlaylist.propTypes = {
