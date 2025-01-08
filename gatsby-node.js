@@ -9,7 +9,6 @@ const appInsights = require('applicationinsights');
 const fs = require('fs');
 const siteconfig = require('./site-config');
 const matter = require('gray-matter');
-const fetch = require('node-fetch');
 
 const environment = process.env.NODE_ENV;
 const appInsightsConnectionString =
