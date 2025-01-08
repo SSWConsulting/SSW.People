@@ -86,6 +86,7 @@ const Index = ({ data }) => {
   const filterAndSortSkills = (skills, skillsInUse, skillCount) => {
     return skills
       .filter((s) => skillsInUse.has(s.service.service))
+      .sort((a, b) => a.service.service.localeCompare(b.service.service)) // Alphabetical sort
       .sort((a, b) => {
         const hasHighlightA = a.service.highlightskill ? 1 : 0;
         const hasHighlightB = b.service.highlightskill ? 1 : 0;
