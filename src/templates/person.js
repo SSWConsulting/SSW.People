@@ -181,6 +181,7 @@ const Person = ({ pageContext }) => {
                 <hr />
                 <YoutubePlaylist
                   youtubePlayListId={crmData.youTubePlayListId}
+                  playlistItems={pageContext.data.playlistItems}
                 />
               </>
             )}
