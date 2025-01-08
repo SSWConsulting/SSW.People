@@ -66,7 +66,7 @@ const Index = ({ data }) => {
       .sort(AlphabeticalSort);
 
     setFilteredPeople(people);
-  }, [selectedLocation, selectedRoles]);
+  }, [allPeople, selectedLocation, selectedRoles]);
 
   return (
     <>
@@ -218,6 +218,7 @@ function buildPeople(data) {
             skills: [],
           };
         }
+        return null;
       }
     })
     .filter((x) => x !== undefined)
@@ -253,7 +254,11 @@ const IndexWithQuery = (props) => (
           nodes {
             name
             childImageSharp {
-              gatsbyImageData(aspectRatio: 0.5)
+              gatsbyImageData(
+                height: 242
+                placeholder: NONE
+                layout: CONSTRAINED
+              )
             }
           }
         }
@@ -266,7 +271,11 @@ const IndexWithQuery = (props) => (
           nodes {
             name
             childImageSharp {
-              gatsbyImageData(aspectRatio: 0.5)
+              gatsbyImageData(
+                height: 242
+                placeholder: NONE
+                layout: CONSTRAINED
+              )
             }
           }
         }

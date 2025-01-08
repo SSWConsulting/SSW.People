@@ -1,4 +1,4 @@
-import React, { useState, useEffect, createRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import PlayIcon from '-!svg-react-loader!../../images/SSWPlay2x.svg';
 import PauseIcon from '-!svg-react-loader!../../images/SSWPause2x.svg';
 import lottie from 'lottie-web';
@@ -6,12 +6,13 @@ import animation from '../../animations/lf30_editor_DirdRw.json';
 import PropTypes from 'prop-types';
 
 const PlayAudio = ({ hasAnimation, audioSrc }) => {
-  const animationContainer = createRef();
-  const [audio, setAudio] = useState({});
+  const animationContainer = useRef(null);
+  const audioRef = useRef(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [hoverAudio, setHoverAudio] = useState(false);
 
   const playAudio = () => {
+    const audio = audioRef.current;
     setIsPlaying(true);
     audio.src = audioSrc;
     audio.play();
@@ -20,6 +21,7 @@ const PlayAudio = ({ hasAnimation, audioSrc }) => {
     }
   };
   const pauseAudio = () => {
+    const audio = audioRef.current;
     setIsPlaying(false);
     audio.pause();
     if (hasAnimation) {
@@ -37,15 +39,22 @@ const PlayAudio = ({ hasAnimation, audioSrc }) => {
     e.preventDefault();
   };
 
-  audio.onended = () => {
-    setIsPlaying(false);
-    if (hasAnimation) {
-      lottie.stop();
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      audioRef.current = new Audio();
     }
-  };
+  }, []);
 
   useEffect(() => {
-    setAudio(new Audio());
+    const audio = audioRef.current;
+
+    // Handle audio playback ending
+    audio.onended = () => {
+      setIsPlaying(false);
+      if (hasAnimation) {
+        lottie.stop();
+      }
+    };
 
     if (hasAnimation) {
       lottie.loadAnimation({
@@ -58,7 +67,7 @@ const PlayAudio = ({ hasAnimation, audioSrc }) => {
 
       return () => lottie.destroy();
     }
-  }, []);
+  }, [hasAnimation]);
 
   return (
     <>
@@ -97,6 +106,8 @@ const PlayAudio = ({ hasAnimation, audioSrc }) => {
             'absolute top-0 right-0 p-2 h-30px' +
             (hoverAudio ? ' hovered' : ' bg-grey-translucent')
           }
+          role="button"
+          tabIndex="0"
           onMouseEnter={() => {
             setHoverAudio(true);
           }}

@@ -20,7 +20,7 @@ const PeopleFilters = ({
       { name: 'skills', selected: selectedSkills },
       { name: 'events', selected: selectedEvents },
     ]);
-  }, [selectedEvents, selectedSkills, selectedRoles]);
+  }, [selectedEvents, selectedSkills, selectedRoles, onFilterChange]);
 
   return (
     <>

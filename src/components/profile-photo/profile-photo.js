@@ -34,6 +34,8 @@ const ProfilePhoto = ({ profileImage, sketchImage, children }) => {
   return (
     <div
       className="image-bg relative text-center"
+      role="gridcell"
+      tabIndex="0"
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
     >

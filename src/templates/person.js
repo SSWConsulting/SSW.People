@@ -1,5 +1,3 @@
-import '@fortawesome/fontawesome-svg-core/styles.css';
-
 import React, { useState, useEffect } from 'react';
 
 import ActionButtons from '../components/action-buttons/action-buttons';
@@ -67,19 +65,17 @@ const Person = ({ pageContext }) => {
 
   const [WidgetComponent, setWidgetComponent] = useState();
 
-  const initWidget = () => {
-    return (
-      <RulesWidget
-        location={process.env.SITE_URL}
-        numberOfRules={5}
-        author={githubUsername}
-      />
-    );
-  };
-
   useEffect(() => {
-    githubUsername && setWidgetComponent(initWidget());
-  }, []);
+    if (githubUsername) {
+      setWidgetComponent(
+        <RulesWidget
+          location={process.env.SITE_URL}
+          numberOfRules={5}
+          author={githubUsername}
+        />
+      );
+    }
+  }, [githubUsername]);
 
   const quote = (
     <Quote
