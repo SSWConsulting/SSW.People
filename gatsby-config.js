@@ -151,6 +151,30 @@ const getPlugins = () => {
         includeInDevelopment: true,
       },
     },
+    {
+      resolve: 'gatsby-plugin-manifest',
+      options: {
+        name: 'SSW.People',
+        short_name: 'SSW.People',
+        start_url: '/',
+        background_color: '#ffffff',
+        theme_color: '#cc4141',
+        display: 'standalone',
+        icon: 'src/images/branding/icon.png',
+        icons: [
+          {
+            src: 'src/images/branding/icon-192x192.png',
+            sizes: '192x192',
+            type: 'image/png',
+          },
+          {
+            src: 'src/images/branding/icon-512x512.png',
+            sizes: '512x512',
+            type: 'image/png',
+          },
+        ],
+      },
+    },
   ];
 
   if (process.env.CHINA_BUILD && process.env.CHINA_BUILD === 'FALSE') {
