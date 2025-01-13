@@ -49,7 +49,7 @@ const EventList = ({ presenterName, presenterNickname }) => {
               <span role="img" aria-label="Speaker">
                 🎙️
               </span>
-              &nbsp;Upcoming talks
+              &nbsp;Upcoming Talks
             </h2>
           </div>
           {allEvents &&
@@ -111,7 +111,7 @@ const EventList = ({ presenterName, presenterNickname }) => {
                 <span role="img" aria-label="Speaker">
                   🎙️
                 </span>
-                &nbsp;Past talks
+                &nbsp;Past Talks
               </h2>
             </div>
             <div className="past-talks-grid">
