@@ -48,7 +48,7 @@ const PeopleFilters = ({
       )}
       <div className="w-full sm:w-1/2 lg:w-full mt-0 lg:mt-4">
         <Filter
-          filterTitle="Tech by Count"
+          filterTitle="Tech (by Count)"
           filterUrlTitle="skill"
           allFilterItems={allSkills}
           selectedItems={selectedSkills}
