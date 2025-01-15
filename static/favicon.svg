@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="192px" height="192px" viewBox="0 0 192 192" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Group</title>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Group" transform="translate(0.000000, 0.000000)">
+            <polygon id="Fill-9" fill="#2E2F2C" points="102.4 89.6 192 89.6 192 0 102.4 0"></polygon>
+            <polygon id="Fill-10" fill="#72736F" points="7.27595761e-13 89.6 89.6 89.6 89.6 -3.63797881e-13 7.27595761e-13 -3.63797881e-13"></polygon>
+            <polygon id="Fill-11" fill="#B94241" points="102.4 192 192 192 192 102.4 102.4 102.4"></polygon>
+            <polygon id="Fill-12" fill="#A2A39F" points="-3.63797881e-13 192 89.6 192 89.6 102.4 -3.63797881e-13 102.4"></polygon>
+        </g>
+    </g>
+</svg>
