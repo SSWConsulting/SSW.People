@@ -36,15 +36,21 @@ export const onRenderBody = ({ setHeadComponents }) => {
       key="svg-favicon"
       rel="icon"
       type="image/svg+xml"
-      href="/favicon.svg"
+      href="/people/favicon.svg"
     />,
     <link
       key="png-favicon"
       rel="icon"
       sizes="48x48"
-      href="/favicon-48x48.png"
+      href="/people/favicon-48x48.png"
     />,
-    <link key="ico-favicon" rel="icon" href="/favicon.ico" />,
+    <link
+      key="png-favicon"
+      rel="icon"
+      sizes="96x96"
+      href="/people/favicon-96x96.png"
+    />,
+    <link key="ico-favicon" rel="icon" href="/people/favicon.ico" />,
   ]);
 };
 
