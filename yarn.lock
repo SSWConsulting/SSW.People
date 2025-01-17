@@ -24515,7 +24515,7 @@ __metadata:
     react-pose: "npm:^4.0.10"
     react-responsive-modal: "npm:^6.4.2"
     react-youtube: "npm:^10.1.0"
-    ssw.megamenu: "npm:^4.9.3"
+    ssw.megamenu: "npm:^4.9.4"
     ssw.rules.widget: "npm:^2.0.8"
     stream-browserify: "npm:^3.0.0"
     stream-http: "npm:^3.2.0"
@@ -24529,9 +24529,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"ssw.megamenu@npm:^4.9.3":
-  version: 4.9.3
-  resolution: "ssw.megamenu@npm:4.9.3"
+"ssw.megamenu@npm:^4.9.4":
+  version: 4.9.4
+  resolution: "ssw.megamenu@npm:4.9.4"
   dependencies:
     "@headlessui/react": "npm:^1.7.17"
     "@heroicons/react": "npm:^2.1.1"
@@ -24543,7 +24543,7 @@ __metadata:
   peerDependencies:
     react: ^18.2.0
     react-dom: ^18.2.0
-  checksum: 10c0/849a5fa109ae92b97ec7c3916e298bc444d6b2819d39767008f3cf59c71845c9ad2d16c2802cc6c892824ee01509697deb6fe86e75eda92115bd03db5f708478
+  checksum: 10c0/f1d6b295b98f1ed66a231a327dea7e37f830c0a73afb13ff0ed71de8388f9f9c01f24819b5d86ee96aaffaf0507d5b9ed5598947075c2e7f38a0dff1ab6a6b1e
   languageName: node
   linkType: hard
 
