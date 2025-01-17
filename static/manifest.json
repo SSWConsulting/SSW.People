@@ -2,11 +2,34 @@
   "name": "SSW.People",
   "short_name": "SSW.People",
   "theme_color": "#cc4141",
+  "background_color": "#ffffff",
+  "display": "standalone",
+  "start_url": "/",
   "icons": [
     {
-      "src": "/favicon.ico",
-      "type": "image/icon",
+      "src": "/people/favicon.ico",
+      "type": "image/x-icon",
       "sizes": "16x16"
+    },
+    {
+      "src": "/people/favicon-48x48.png",
+      "type": "image/png",
+      "sizes": "48x48"
+    },
+    {
+      "src": "/people/favicon-96x96.png",
+      "type": "image/png",
+      "sizes": "96x96"
+    },
+    {
+      "src": "/people/favicon-192x192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "/people/favicon-512x512.png",
+      "type": "image/png",
+      "sizes": "512x512"
     }
   ]
 }

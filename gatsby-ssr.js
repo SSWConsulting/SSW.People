@@ -32,6 +32,27 @@ export const onRenderBody = ({ setHeadComponents }) => {
       crossOrigin="anonymous"
       key="interPreload"
     />,
+    <link
+      key="svg-favicon"
+      rel="icon"
+      type="image/svg+xml"
+      href="/people/favicon.svg"
+    />,
+    <link
+      key="png-favicon-48"
+      rel="icon"
+      type="image/png"
+      sizes="48x48"
+      href="/people/favicon-48x48.png"
+    />,
+    <link
+      key="png-favicon-96"
+      rel="icon"
+      type="image/png"
+      sizes="96x96"
+      href="/people/favicon-96x96.png"
+    />,
+    <link key="ico-favicon" rel="shortcut icon" href="/people/favicon.ico" />,
   ]);
 };
 
