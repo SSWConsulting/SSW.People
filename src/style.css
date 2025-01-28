@@ -439,6 +439,11 @@ div.megamenu {
   z-index: 20;
 }
 
+/* Ensure ssw.megamenu appears above all other elements */
+div[id^="headlessui-dialog-panel"] {
+  z-index: 50;
+}
+
 /** Custom blocks images handling **/
 
 .img-badge {
