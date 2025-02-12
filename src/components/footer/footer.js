@@ -3,6 +3,7 @@ import preval from 'preval.macro';
 import moment from 'moment';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
+import GitHubButton from 'react-github-btn';
 import {
   faFacebook,
   faGithub,
@@ -19,17 +20,42 @@ const buildTimestamp = preval`module.exports = new Date().getTime();`;
 const Footer = () => {
   return (
     <>
-      <div className="py-2 text-center bg-grey-translucent text-sm">
-        <section className="main-container">
-          We <FontAwesomeIcon icon={faHeart} className="text-ssw-red" /> open
-          source. Fork this on{' '}
-          <a
-            className="action-button-label"
+      <div className="p-4 text-center bg-grey-translucent text-sm">
+        <section className="main-container flex items-center justify-center gap-2	flex-wrap">
+          <span>
+            We <FontAwesomeIcon icon={faHeart} className="text-ssw-red" /> open
+            source.
+          </span>
+          <span>
+            Loving SSW People?{' '}
+            <a
+              href="https://github.com/SSWConsulting/SSW.People"
+              target="_blank"
+              rel="noreferrer"
+              className="action-button-label footer-greybar-link"
+            >
+              Star us on GitHub.
+            </a>{' '}
+          </span>
+          <GitHubButton
             href="https://github.com/SSWConsulting/SSW.People"
+            data-size="large"
+            data-show-count="true"
+            aria-label="Star SSWConsulting/SSW.People on GitHub"
           >
-            GitHub <FontAwesomeIcon icon={faGithub} />
-          </a>{' '}
-          and start using it for yourself.
+            Star
+          </GitHubButton>
+        </section>
+        <section className="main-container flex items-center justify-center mt-4">
+          <span>
+            Stand by... we&apos;re migrating this site to{' '}
+            <a
+              className="action-button-label footer-greybar-link"
+              href="https://tina.io"
+            >
+              TinaCMS
+            </a>
+          </span>
         </section>
       </div>
       <footer className="bg-black py-6 md:py-4 lg:py-2">
