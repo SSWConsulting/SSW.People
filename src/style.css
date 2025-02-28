@@ -1280,6 +1280,24 @@ font-size: 0.8rem;
   transition: all 0.2s ease-in-out;
 }
 
+.custom-block.img-large .gatsby-resp-image-wrapper {
+  max-width: 600px !important;
+  width: 100% !important;
+  height: auto !important;
+}
+
+.custom-block.img-medium .gatsby-resp-image-wrapper {
+  max-width: 400px !important;
+  width: 100% !important;
+  height: auto !important;
+}
+
+.custom-block.img-small .gatsby-resp-image-wrapper {
+  max-width: 200px !important;
+  width: 100% !important;
+  height: auto !important;
+}
+
 /**
 * This injects Tailwind's component classes and any component classes
 * registered by plugins.
