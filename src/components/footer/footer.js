@@ -6,7 +6,6 @@ import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import GitHubButton from 'react-github-btn';
 import {
   faFacebook,
-  faGithub,
   faInstagram,
   faLinkedin,
   faTwitter,
