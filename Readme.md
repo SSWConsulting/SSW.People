@@ -19,14 +19,7 @@ This is a Gatsby generated site pulling data from:
 
 - Install nodejs via <https://nodejs.org/en/> (LTS Version, last tested with 20)
 - Install yarn via <https://yarnpkg.com/lang/en/docs/install/> (Used for package management)
-- Package dependencies (Windows)
-  - Python 3
-  - Node-gyp - see https://github.com/nodejs/node-gyp#on-windows
-  - Install Visual Studio 2022 - Desktop Development with C++ in the Visual Studio Installer
   
-  ![Desktop Development with C++ workload](https://user-images.githubusercontent.com/38869720/183000582-463e2fb8-7c8f-4636-81fb-5bdb95758d78.png)
-  **Figure: Desktop Development with C++ workload**
-
 ### Getting ready for development
 
 - Clone the repo from <https://github.com/SSWConsulting/SSW.People>
@@ -37,9 +30,9 @@ This is a Gatsby generated site pulling data from:
 ### Development
 
 1. Branch off main for your PBI
-2. Run *yarn build* (or *npm run-script build*) (.env.production is required for this step)
+2. Run the site in development mode - *yarn dev* (or *npm run-script dev*) (.env.development is required for this step)
 3. Do your work
-4. Run the site in development mode by *yarn dev* (or *npm run-script dev*) (.env.development is required for this step)
+4. Build the site in production mode - *yarn build* (or *npm run-script build*) (.env.production is required for this step)
 5. Commit code and push
 6. Raise a PR
 7. Get it merged!
