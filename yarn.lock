@@ -8038,7 +8038,18 @@ __metadata:
   languageName: node
   linkType: hard
 
-"axios@npm:^1.10.0, axios@npm:^1.6.4":
+"axios@npm:^1.11.0":
+  version: 1.11.0
+  resolution: "axios@npm:1.11.0"
+  dependencies:
+    follow-redirects: "npm:^1.15.6"
+    form-data: "npm:^4.0.4"
+    proxy-from-env: "npm:^1.1.0"
+  checksum: 10c0/5de273d33d43058610e4d252f0963cc4f10714da0bfe872e8ef2cbc23c2c999acc300fd357b6bce0fc84a2ca9bd45740fa6bb28199ce2c1266c8b1a393f2b36e
+  languageName: node
+  linkType: hard
+
+"axios@npm:^1.6.4":
   version: 1.10.0
   resolution: "axios@npm:1.10.0"
   dependencies:
@@ -13752,7 +13763,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"form-data@npm:^4.0.0":
+"form-data@npm:^4.0.0, form-data@npm:^4.0.4":
   version: 4.0.4
   resolution: "form-data@npm:4.0.4"
   dependencies:
@@ -25263,7 +25274,7 @@ __metadata:
     assert: "npm:^2.1.0"
     autoprefixer: "npm:^10.4.21"
     ava: "npm:^6.4.1"
-    axios: "npm:^1.10.0"
+    axios: "npm:^1.11.0"
     babel-eslint: "npm:^10.1.0"
     browserify-zlib: "npm:^0.2.0"
     buffer: "npm:^6.0.3"
