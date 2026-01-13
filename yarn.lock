@@ -5776,24 +5776,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tanstack/query-core@npm:5.83.0":
-  version: 5.83.0
-  resolution: "@tanstack/query-core@npm:5.83.0"
-  checksum: 10c0/e6dc480bc99eaca552a9ad65423788b60368cf99308681252fc7dbe42a3f2c1c978db0d3471cc3349b9112cfb4d967ace4e192a1d7e987e30c5c1ff74809c77c
-  languageName: node
-  linkType: hard
-
-"@tanstack/react-query@npm:^5.14.1":
-  version: 5.83.0
-  resolution: "@tanstack/react-query@npm:5.83.0"
-  dependencies:
-    "@tanstack/query-core": "npm:5.83.0"
-  peerDependencies:
-    react: ^18 || ^19
-  checksum: 10c0/883229f9219ca906a54d7caafd44d59b57db5dbe87e954f8a7027f460e9f8b97842dfbd0d676dc3111d577baf312c64f6c1fdd67cd1e4b0f0bf574e29670c606
-  languageName: node
-  linkType: hard
-
 "@tanstack/react-virtual@npm:^3.13.9":
   version: 3.13.12
   resolution: "@tanstack/react-virtual@npm:3.13.12"
@@ -22977,7 +22959,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-dom@npm:^18.2.0, react-dom@npm:^18.3.1":
+"react-dom@npm:^18.3.1":
   version: 18.3.1
   resolution: "react-dom@npm:18.3.1"
   dependencies:
@@ -23220,7 +23202,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react@npm:^18.2.0, react@npm:^18.3.1":
+"react@npm:^18.3.1":
   version: 18.3.1
   resolution: "react@npm:18.3.1"
   dependencies:
@@ -25330,7 +25312,6 @@ __metadata:
     react-responsive-modal: "npm:^6.4.2"
     react-youtube: "npm:^10.1.0"
     ssw.megamenu: "npm:^4.12.0"
-    ssw.rules.widget: "npm:^2.0.8"
     stream-browserify: "npm:^3.0.0"
     stream-http: "npm:^3.2.0"
     styled-components: "npm:^6.1.19"
@@ -25358,21 +25339,6 @@ __metadata:
     react: ^18.2.0
     react-dom: ^18.2.0
   checksum: 10c0/658ebe6eed8b88c2928582e03fd300512b5746699d10d88d981719baf73de8959b9bf6af7ce117eff382c161e3a191cc2463246f1f461385bb31217afa69dec7
-  languageName: node
-  linkType: hard
-
-"ssw.rules.widget@npm:^2.0.8":
-  version: 2.0.8
-  resolution: "ssw.rules.widget@npm:2.0.8"
-  dependencies:
-    "@tanstack/react-query": "npm:^5.14.1"
-    date-fns: "npm:^2.30.0"
-    react: "npm:^18.2.0"
-    react-dom: "npm:^18.2.0"
-    react-icons: "npm:^4.12.0"
-    style-inject: "npm:^0.3.0"
-    vite-plugin-css-injected-by-js: "npm:^3.3.0"
-  checksum: 10c0/4e6e7371b3072c254f02af8809d95e9ba6ddd6c58cbe84c9c3a2ec756dd968cc9689d488427d3ced65bf230c1a8abd624b57812eb0aa8110dfaf79419508cef6
   languageName: node
   linkType: hard
 
@@ -25886,13 +25852,6 @@ __metadata:
   version: 1.2.5
   resolution: "stubborn-fs@npm:1.2.5"
   checksum: 10c0/0676befd9901d4dd4e162700fa0396f11d523998589cd6b61b06d1021db811dc4c1e6713869748c6cfa49d58beb9b6f0dc5b6aca6b075811b949e1602ce1e26f
-  languageName: node
-  linkType: hard
-
-"style-inject@npm:^0.3.0":
-  version: 0.3.0
-  resolution: "style-inject@npm:0.3.0"
-  checksum: 10c0/3fa6a8410a4e4dfbd49a5026a4307e85bb30ee9d3691a806246d893d4f0ca9b4e8b1bfdafed3f90801d9b8c32589f5fb0b4ec7fb6ab3e8f14ac992e26d987828
   languageName: node
   linkType: hard
 
@@ -27885,15 +27844,6 @@ __metadata:
     remove-trailing-separator: "npm:^1.0.1"
     replace-ext: "npm:^1.0.0"
   checksum: 10c0/e7073fe5a3e10bbd5a3abe7ccf3351ed1b784178576b09642c08b0ef4056265476610aabd29eabfaaf456ada45f05f4112a35687d502f33aab33b025fc6ec38f
-  languageName: node
-  linkType: hard
-
-"vite-plugin-css-injected-by-js@npm:^3.3.0":
-  version: 3.5.2
-  resolution: "vite-plugin-css-injected-by-js@npm:3.5.2"
-  peerDependencies:
-    vite: ">2.0.0-0"
-  checksum: 10c0/5c6a2434d4f302640a4bfc7695d56cf83eca03a4f89f05820057fedd8a2e788186105942360d19808042872ba0970ed6b1c04cd02337bbe67d8321993a464c04
   languageName: node
   linkType: hard
 
