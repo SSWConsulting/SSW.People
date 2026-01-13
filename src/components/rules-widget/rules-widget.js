@@ -50,7 +50,7 @@ export default function RulesWidget({
     }, [author, numberOfRules]);
 
     const enabled = !!author;
-    const moreHref = seeMoreUrl || `${rulesUrl}/user-rules?author=${encodeURIComponent(author || "")}`;
+    const moreHref = seeMoreUrl || `${rulesUrl}/user?author=${encodeURIComponent(author || "")}`;
 
     const content = (() => {
         if (!enabled) return <p className="text-center text-sm text-gray-600">No Rules Found</p>;
