@@ -11,7 +11,7 @@ import PropTypes from 'prop-types';
 import Quote from '../components/quote/quote';
 import SkillsList from '../components/skills-list/skills-list';
 import SocialLinks from '../components/social-links/social-links';
-import { RulesWidget } from 'ssw.rules.widget';
+import RulesWidget from '../components/rules-widget/rules-widget';
 import YoutubePlaylist from '../components/youtube-playlist/youtube-playlist';
 import { config } from '@fortawesome/fontawesome-svg-core';
 import { isChinaBuild } from '../helpers/chinaHelper';
