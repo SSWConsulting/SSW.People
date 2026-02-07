@@ -632,17 +632,14 @@ pre {
 }
 
 .action-btn-container {
-  margin-left: auto;
-  order: 2;
   display: flex;
   align-items: center;
 }
 
 .action-btn-link {
   display: flex;
-  margin-right: auto;
   align-items: center;
-  margin-left: 12px;
+  margin-right: 1rem;
 }
 
 .action-btn-label {
@@ -656,15 +653,6 @@ pre {
   .img-banner {
     height: auto;
     min-width: 600px;
-  }
-}
-
-@media screen and (max-width: 600px) {
-
-
-  .action-btn-link {
-    margin-left: 0;
-    margin-right: 10px;
   }
 }
 
