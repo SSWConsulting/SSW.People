@@ -33,9 +33,9 @@ const ProfileDescription = ({
         {children}
       </div>
       <h4>
-        <span className="block md:inline">{jobTitle}</span>
+        <span>{jobTitle}</span>
         {location && (
-          <span className="mb-0 block md:inline md:ml-2">
+          <span className="ml-2">
             <FontAwesomeIcon
               icon={faMapMarkerAlt}
               className="mr-2"
@@ -45,7 +45,7 @@ const ProfileDescription = ({
           </span>
         )}
       </h4>
-      <p>{qualifications && <strong>{qualifications}</strong>}</p>
+      <p className="my-2">{qualifications && <strong>{qualifications}</strong>}</p>
     </div>
   );
 };
