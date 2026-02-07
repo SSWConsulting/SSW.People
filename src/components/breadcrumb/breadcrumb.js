@@ -7,7 +7,7 @@ import Icon from '../../images/branding/icon.png';
 const Breadcrumbs = ({ crumbs, crumbLabel }) => {
   return (
     <div className="breadcrumb-container print-hidden">
-      <div className="mx-2 md:mx-6 mb-3 breadcrumb">
+      <div className="mx-6 md:mx-8 breadcrumb">
         <a href={parentSiteUrl}>
           <img alt={'SSW Consulting'} src={Icon} className="w-4" />
         </a>
