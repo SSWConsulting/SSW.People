@@ -32,7 +32,7 @@ const ProfileDescription = ({
         )}
         {children}
       </div>
-      <h4 className="mb-0">
+      <h4>
         <span className="block md:inline">{jobTitle}</span>
         {location && (
           <span className="mb-0 block md:inline md:ml-2">
