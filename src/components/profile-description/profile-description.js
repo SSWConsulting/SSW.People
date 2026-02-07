@@ -14,7 +14,7 @@ const ProfileDescription = ({
 }) => {
   return (
     <div>
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col-reverse sm:flex-row">
         <h1>{personName}</h1>
         {!isActive && (
           <div className="flex flex-grow flex-wrap gap-2 sm:flex-grow-0 ml-3 scale-75">
