@@ -640,6 +640,10 @@ pre {
   margin-right: 1rem;
 }
 
+.action-btn-link:last-child {
+  margin-right: 0;
+}
+
 .action-btn-label {
   margin-right: auto;
   order: 1;
