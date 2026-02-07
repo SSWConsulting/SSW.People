@@ -361,11 +361,7 @@ header > div > div > a /*TODO: Fix this at the source https://github.com/SSWCons
   background: url(./images/favor_email.gif) 0 center no-repeat;
 }
 
-.breadcrumb-container{
-  font-size: 0.8rem;
-  color: #333333;
-  margin-top: 1rem;
-}
+.breadcrumb-container{margin: .5rem 0 1rem;}
 
 .breadcrumb {
   display: inline-flex;
