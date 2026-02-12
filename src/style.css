@@ -306,10 +306,6 @@ footer {
   margin: 20px 0;
 }
 
-.favor-list {
-  margin: 1rem;
-}
-
 ul.favor-list li {
   line-height: 2em;
 
@@ -359,12 +355,6 @@ header > div > div > a /*TODO: Fix this at the source https://github.com/SSWCons
 }
 .email {
   background: url(./images/favor_email.gif) 0 center no-repeat;
-}
-
-.breadcrumb-container{
-  font-size: 0.8rem;
-  color: #333333;
-  margin-top: 1rem;
 }
 
 .breadcrumb {
@@ -636,17 +626,18 @@ pre {
 }
 
 .action-btn-container {
-  margin-left: auto;
-  order: 2;
   display: flex;
   align-items: center;
 }
 
 .action-btn-link {
   display: flex;
-  margin-right: auto;
   align-items: center;
-  margin-left: 12px;
+  margin-right: 1rem;
+}
+
+.action-btn-link:last-child {
+  margin-right: 0;
 }
 
 .action-btn-label {
@@ -660,15 +651,6 @@ pre {
   .img-banner {
     height: auto;
     min-width: 600px;
-  }
-}
-
-@media screen and (max-width: 600px) {
-
-
-  .action-btn-link {
-    margin-left: 0;
-    margin-right: 10px;
   }
 }
 

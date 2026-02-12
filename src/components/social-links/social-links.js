@@ -61,7 +61,7 @@ const SocialLinks = ({ crmData, alumni }) => {
     <>
       {displayCrm && (
         <div className="favor-content w-full print-hidden">
-          <ul className="favor-list">
+          <ul className="favor-list mx-4 my-2">
             {crmData.emailAddress && (
               <>
                 <li className="social email flex items-center gap-x-1">

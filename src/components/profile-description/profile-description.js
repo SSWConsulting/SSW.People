@@ -14,7 +14,7 @@ const ProfileDescription = ({
 }) => {
   return (
     <div>
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col-reverse sm:flex-row">
         <h1>{personName}</h1>
         {!isActive && (
           <div className="flex flex-grow flex-wrap gap-2 sm:flex-grow-0 ml-3 scale-75">
@@ -32,10 +32,10 @@ const ProfileDescription = ({
         )}
         {children}
       </div>
-      <h4 className="mb-0">
-        <span className="block md:inline">{jobTitle}</span>
+      <h4>
+        <span>{jobTitle}</span>
         {location && (
-          <span className="mb-0 block md:inline md:ml-2">
+          <span className="ml-2">
             <FontAwesomeIcon
               icon={faMapMarkerAlt}
               className="mr-2"
@@ -45,7 +45,7 @@ const ProfileDescription = ({
           </span>
         )}
       </h4>
-      <p>{qualifications && <strong>{qualifications}</strong>}</p>
+      <p className="my-2">{qualifications && <strong>{qualifications}</strong>}</p>
     </div>
   );
 };
