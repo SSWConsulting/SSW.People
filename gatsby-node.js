@@ -6,6 +6,7 @@ const chinaHelper = require('./src/helpers/chinaHelper');
 const { SkillSort } = require('./src/helpers/skillSort');
 const { getViewDataFromCRM, getUsersSkills } = require('./src/helpers/CRMApi');
 const appInsights = require('applicationinsights');
+const axios = require('axios');
 const fs = require('fs');
 const siteconfig = require('./site-config');
 const matter = require('gray-matter');
@@ -611,5 +612,35 @@ exports.createPages = async function ({ actions, graphql }) {
       `${filePath}/profile.md`,
       matter.stringify('', profileData)
     );
+  });
+};
+
+// Dev-only proxy to avoid browser CORS when fetching rules JSON from localhost
+exports.onCreateDevServer = ({ app }) => {
+  app.get('/__rules/people-latest-rules.json', async (req, res) => {
+    try {
+      const upstream = await axios.get(
+        'https://www.ssw.com.au/rules/people-latest-rules.json',
+        {
+          responseType: 'stream',
+          headers: {
+            Accept: 'application/json',
+            'User-Agent': 'SSW.People Gatsby dev proxy',
+          },
+        }
+      );
+
+      res.status(upstream.status);
+      res.set(
+        'Content-Type',
+        upstream.headers['content-type'] || 'application/json; charset=utf-8'
+      );
+      res.set('Cache-Control', 'no-store');
+      res.set('X-SSW-People-Proxy', 'axios');
+
+      upstream.data.pipe(res);
+    } catch (e) {
+      res.status(500).json({ error: 'Failed to proxy rules JSON' });
+    }
   });
 };
