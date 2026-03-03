@@ -638,8 +638,23 @@ exports.onCreateDevServer = ({ app }) => {
       res.set('Cache-Control', 'no-store');
       res.set('X-SSW-People-Proxy', 'axios');
 
-      upstream.data.pipe(res);
-    } catch (e) {
+      const upstreamStream = upstream.data;
+      const abortUpstream = () => {
+        if (upstreamStream && !upstreamStream.destroyed) upstreamStream.destroy();
+      };
+
+      upstreamStream.on('error', () => {
+        if (!res.headersSent) res.status(502);
+        if (!res.writableEnded && !res.destroyed) res.end();
+      });
+
+      req.on('aborted', abortUpstream);
+      res.on('close', () => {
+        if (!res.writableEnded) abortUpstream();
+      });
+
+      upstreamStream.pipe(res);
+    } catch {
       res.status(500).json({ error: 'Failed to proxy rules JSON' });
     }
   });

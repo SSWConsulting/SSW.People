@@ -22,9 +22,7 @@ function normalizeAuthor(author) {
         const u = new URL(raw);
         const last = u.pathname.split("/").filter(Boolean).pop();
         return (last || "").trim();
-    } catch (e) {
-        // not a URL
-    }
+    } catch { }
 
     return raw
         .replace(/^@/, "")
@@ -95,7 +93,7 @@ export default function RulesWidget({
                     setItems(filtered);
                     setStatus("success");
                 }
-            } catch (e) {
+            } catch {
                 if (!cancelled) {
                     setItems([]);
                     setStatus("error");
