@@ -15,7 +15,7 @@ const ProfileDescription = ({
   return (
     <div>
       <div className="flex flex-col-reverse sm:flex-row">
-        <h1>{personName}</h1>
+        <h1 className="mr-2">{personName}</h1>
         {!isActive && (
           <div className="flex flex-grow flex-wrap gap-2 sm:flex-grow-0 ml-3 scale-75">
             <div className="flex h-12 w-full shrink-0 items-center justify-center rounded-lg bg-ssw-grey px-5 text-xl max-sm:my-5 sm:w-fit">
