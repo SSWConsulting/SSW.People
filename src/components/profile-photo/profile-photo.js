@@ -13,7 +13,7 @@ const Image = ({ hover, profileImage, sketchImage }) => {
       : ProfilePlaceholder;
 
   return (
-    <img className="profile-image bg-cover mx-auto" src={src} alt="Profile" />
+    <img className="profile-image p-2 mx-auto" src={src} alt="Profile" />
   );
 };
 
@@ -33,7 +33,7 @@ const ProfilePhoto = ({ profileImage, sketchImage, children }) => {
 
   return (
     <div
-      className="image-bg relative text-center"
+      className="border mb-4 shadow-md relative text-center"
       role="gridcell"
       tabIndex="0"
       onMouseEnter={() => setHover(true)}
