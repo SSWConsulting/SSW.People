@@ -292,9 +292,7 @@ footer {
 }
 
 .favor-content {
-  background-color: #eeeeee;
-  border: 1px solid #cccccc;
-  margin: 20px 0;
+  background-color: #f5f5f5;
 }
 
 ul.favor-list li {
@@ -585,12 +583,6 @@ pre {
   }
   .person-description {
     margin: 15px 20px;
-  }
-  .favor-content {
-    background-color: #efefef;
-    border: 1px solid #dddddd;
-    border-radius: 4px;
-    margin: 0px;
   }
 
   .filter-role-opener{
