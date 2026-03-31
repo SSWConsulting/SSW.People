@@ -427,6 +427,7 @@ div[id^="headlessui-dialog-panel"] {
 
 .img-badge {
   display: inline-block;
+  margin:0 .5rem;
 
   a {
     border-bottom: none !important;
@@ -434,7 +435,7 @@ div[id^="headlessui-dialog-panel"] {
   }
 
   img {
-    height: 135px;
+    height: 100px;
   }
 
   p {
