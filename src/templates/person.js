@@ -148,7 +148,7 @@ const Person = ({ pageContext }) => {
           </div>
           <div className="flex person-favor flex-wrap lg:flex-col md:hidden lg:block print-show">
             {frontmatter.quote && (
-              <div className="quoteblock">
+              <div className="quoteblock px-4 md:px-1 pt-4 md:pt-1">
                 {quote}
               </div>
             )}
