@@ -64,7 +64,7 @@ const SocialLinks = ({ crmData, alumni }) => {
           <ul className="favor-list mx-4 my-2">
             {crmData.emailAddress && (
               <>
-                <li className="social email flex items-center gap-x-1">
+                <li className="social email flex items-center">
                   <a
                     href={'#0'}
                     onClick={(event) => {
@@ -75,7 +75,7 @@ const SocialLinks = ({ crmData, alumni }) => {
                   </a>
                   <a
                     href="https://github.com/SSWConsulting/SSW.People/wiki/4.-Extras#4-mailto-link-configure-your-default-mail-client"
-                    className="text-sm whitespace-nowrap cursor-pointer italic"
+                    className="text-sm whitespace-nowrap cursor-pointer italic ml-2"
                   >
                     (Need help?)
                   </a>
