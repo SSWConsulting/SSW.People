@@ -75,9 +75,9 @@ const SocialLinks = ({ crmData, alumni }) => {
                   </a>
                   <a
                     href="https://github.com/SSWConsulting/SSW.People/wiki/4.-Extras#4-mailto-link-configure-your-default-mail-client"
-                    className="text-sm whitespace-nowrap cursor-pointer italic ml-2"
+                    className="text-xs whitespace-nowrap cursor-pointer italic ml-2"
                   >
-                    (Need help?)
+                    Need help?
                   </a>
                 </li>
               </>
