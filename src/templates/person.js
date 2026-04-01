@@ -129,7 +129,7 @@ const Person = ({ pageContext }) => {
                 </div>
               )}
             </div>
-            <div className="lg:hidden print-show px-2 md:p-2">
+            <div className="lg:hidden print-show mt-2">
               <div className="mb-4 w-full hidden md:block lg:hidden print-show">
                 {profileDescription}
                 <hr />
