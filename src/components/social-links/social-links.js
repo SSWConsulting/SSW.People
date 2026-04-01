@@ -127,7 +127,7 @@ const SocialLinks = ({ crmData, alumni }) => {
                   rel="noopener noreferrer"
                   href={`https://www.twitter.com/${crmData.twitterUsername}`}
                 >
-                  X
+                  X (Twitter)
                 </a>
               </li>
             )}
