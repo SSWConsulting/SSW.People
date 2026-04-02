@@ -105,10 +105,10 @@ const Person = ({ pageContext }) => {
     <>
       <div className="flex flex-wrap mb-5 person-content">
         <div className="w-full lg:w-1/4 xl:w-1/6 print-full-width">
-          <div className="person-description md:hidden w-full my-auto print-hidden pb-0 md:pb-4">
+          <div className="person-description mx-4 mb-4 md:hidden w-full my-auto print-hidden pb-0 md:pb-4">
             {profileDescription}
           </div>
-          <div className="flex mx-4 md:justify-center justify-around">
+          <div className="flex mx-4 justify-around gap-4">
             <div>
               <ProfilePhoto
                 profileImage={profileImage}
@@ -129,7 +129,7 @@ const Person = ({ pageContext }) => {
                 </div>
               )}
             </div>
-            <div className="lg:hidden print-show px-2 md:p-2">
+            <div className="lg:hidden print-show mt-2">
               <div className="mb-4 w-full hidden md:block lg:hidden print-show">
                 {profileDescription}
                 <hr />
