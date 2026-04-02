@@ -9,7 +9,7 @@ const profileChineseTag = '-Chinese';
 
 const ActionButtons = ({ profileId }) => {
   return (
-    <div className="action-btn-container my-2 self-end print-hidden">
+    <div className="action-btn-container my-2 print-hidden">
       <a
         target="_blank"
         rel="noopener noreferrer"
