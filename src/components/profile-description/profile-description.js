@@ -14,7 +14,7 @@ const ProfileDescription = ({
 }) => {
   return (
     <div>
-      <div className="flex sm:flex-row">
+      <div className="flex sm:flex-row justify-between">
         <h1 className="mr-4">{personName}</h1>
         {!isActive && (
           <div className="flex flex-grow flex-wrap gap-2 sm:flex-grow-0 ml-3 scale-75">
