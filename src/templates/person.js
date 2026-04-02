@@ -105,7 +105,7 @@ const Person = ({ pageContext }) => {
     <>
       <div className="flex flex-wrap mb-5 person-content">
         <div className="w-full lg:w-1/4 xl:w-1/6 print-full-width">
-          <div className="person-description md:hidden w-full my-auto print-hidden pb-0 md:pb-4">
+          <div className="person-description mx-4 mb-4 md:hidden w-full my-auto print-hidden pb-0 md:pb-4">
             {profileDescription}
           </div>
           <div className="flex mx-4 justify-around gap-4">
