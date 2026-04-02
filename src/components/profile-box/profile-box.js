@@ -19,7 +19,7 @@ const ProfileBox = ({
     : profile.fullName.split(' ')[0];
 
   const content = (
-    <div className="relative shadow-lg profile-image profile-image-height">
+    <div className="relative shadow-md border profile-image profile-image-height">
       {profileImages.profileImage && (
         <GatsbyImage
           image={profileImages.profileImage}
