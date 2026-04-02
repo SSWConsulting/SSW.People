@@ -51,7 +51,6 @@ const SocialLinks = ({ crmData, alumni }) => {
     crmData.emailAddress ||
     crmData.blogUrl ||
     crmData.facebookUrl ||
-    crmData.skypeUsername ||
     crmData.linkedInUrl ||
     crmData.twitterUsername ||
     crmData.gitHubUrl ||
@@ -102,11 +101,6 @@ const SocialLinks = ({ crmData, alumni }) => {
                 >
                   Facebook
                 </a>
-              </li>
-            )}
-            {crmData.skypeUsername && (
-              <li className="social skype">
-                <a href={`skype:${crmData.skypeUsername}?call`}>Skype</a>
               </li>
             )}
             {crmData.linkedInUrl && (

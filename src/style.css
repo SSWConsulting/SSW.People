@@ -432,7 +432,7 @@ div[id^="headlessui-dialog-panel"] {
 
 .img-badge {
   display: inline-block;
-  margin:0 .5rem;
+  margin: 0 .5rem;
 
   a {
     border-bottom: none !important;
@@ -587,16 +587,15 @@ pre {
     height: auto;
     max-width: 100%;
   }
-<<<<<<< remove-unnecessary-duplicated-quote
   .person-description {
     margin: 15px 20px;
-=======
+  }
+
   .favor-content {
     background-color: #efefef;
     border: 1px solid #dddddd;
     border-radius: 4px;
     margin: 0px;
->>>>>>> main
   }
 
   .filter-role-opener{
