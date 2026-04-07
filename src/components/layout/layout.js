@@ -11,7 +11,7 @@ import { Toaster } from 'react-hot-toast';
 const Layout = ({ children, pageTitle, crumbs, crumbLabel }) => {
   return (
     <div>
-      <div className="flex flex-col min-h-screen w-fit main-container mt-2">
+      <div className="flex flex-col min-h-screen w-fit main-container mt-4">
         <Toaster position="top-center" reverseOrder={false} />
         <Head pageTitle={pageTitle} />
         <Header />
