@@ -92,11 +92,11 @@ const Footer = () => {
                   </a>
                   <a
                     className="unstyled social-media-icon"
-                    title="SSW on Twitter"
-                    href="https://twitter.com/SSW_TV"
+                    title="SSW on X (Twitter)"
+                    href="https://x.com/SSW_TV"
                     target="_blank"
                     rel="noreferrer"
-                    aria-label="SSW on Twitter"
+                    aria-label="SSW on X (Twitter)"
                   >
                     <FontAwesomeIcon icon={faTwitter} size="lg" />
                   </a>
