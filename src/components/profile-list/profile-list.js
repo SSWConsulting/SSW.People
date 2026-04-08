@@ -46,7 +46,7 @@ const ProfileList = ({ filteredPeople }) => {
         const people = getPeopleInRole(role);
         return (
           people.length > 0 && (
-            <section key={index} className={'role-section mb-8 ' + role}>
+            <section key={index} className={'role-section mb-8 last:mb-16' + role}>
               <h2 className="mb-2">{role}</h2>
               {skillFilter && index === 0 && (
                 <p className="mb-2">Filter: Technologies — {skillFilter}</p>

@@ -14,11 +14,9 @@ const ProfileDescription = ({
 }) => {
   return (
     <div>
-      <div className="flex flex-col-reverse sm:flex-row">
-        <h1>{personName}</h1>
-        {!isActive && (
-          <div className="flex flex-grow flex-wrap gap-2 sm:flex-grow-0 ml-3 scale-75">
-            <div className="flex h-12 w-full shrink-0 items-center justify-center rounded-lg bg-ssw-grey px-5 text-xl max-sm:my-5 sm:w-fit">
+      {!isActive && (
+          <div className="mb-2">
+            <div className="flex h-10 shrink-0 items-center justify-center rounded-lg bg-ssw-grey px-4 text-xl max-sm:my-4">
               <span className="flex items-center text-sm font-bold text-ssw-red">
                 <FontAwesomeIcon
                   icon={faBoxArchive}
@@ -29,7 +27,9 @@ const ProfileDescription = ({
               </span>
             </div>
           </div>
-        )}
+      )}
+      <div className="flex sm:flex-row justify-between">
+        <h1 className="mr-4">{personName}</h1>
         {children}
       </div>
       <h4>
