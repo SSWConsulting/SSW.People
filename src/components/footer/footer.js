@@ -57,14 +57,14 @@ const Footer = () => {
           </span>
         </section>
       </div>
-      <footer className="bg-black py-6 md:py-4 lg:py-2">
+      <footer className="bg-black text-center px-4 py-6 md:py-4 lg:py-2">
         <section className="main-container">
           <div className="xl:mx-6">
             <div className="mx-6 flex flex-col-reverse md:flex-row justify-between align-middle leading-6">
               <div className="py-2">
                 &copy; 1990-{new Date().getFullYear()} SSW. All rights reserved.
               </div>
-              <div className="w-full md:w-3/6 md:text-right py-2">
+              <div className="w-full md:w-3/4 md:text-right py-2">
                 <a
                   className="footer-link"
                   href="https://github.com/SSWConsulting/SSW.People/issues"
