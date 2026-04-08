@@ -53,7 +53,7 @@ const Footer = () => {
               href="https://tina.io"
             >
               TinaCMS
-            </a>
+            </a>.
           </span>
         </section>
       </div>
