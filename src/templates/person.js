@@ -108,7 +108,7 @@ const Person = ({ pageContext }) => {
           <div className="person-description mx-4 mb-4 md:hidden w-full my-auto print-hidden pb-0 md:pb-4">
             {profileDescription}
           </div>
-          <div className="flex mx-4 justify-around gap-4">
+          <div className="flex sm:mx-4 gap-4">
             <div>
               <ProfilePhoto
                 profileImage={profileImage}
