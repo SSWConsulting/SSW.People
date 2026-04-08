@@ -7,7 +7,7 @@ import ProfilePlaceholder from '../../../images/ssw-employee-profile-placeholder
 const ProfileImageDownload = ({ profileImage }) => (
   <a
     title="Download colour photo"
-    className="profile-util download-image absolute bottom-0  profile-util-download-left mb-4 z-10"
+    className="profile-util download-image absolute bottom-0  profile-util-download-left mb-4 ml-2 z-10"
     href={profileImage ? profileImage.src : ProfilePlaceholder}
     download={profileImage?.name}
   >
