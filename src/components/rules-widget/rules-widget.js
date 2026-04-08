@@ -2,10 +2,56 @@ import React, { useEffect, useState } from "react";
 import { FaClock } from "react-icons/fa";
 import { formatDistanceStrict } from "date-fns";
 
+const PEOPLE_LATEST_RULES_URL =
+    "https://www.ssw.com.au/rules/people-latest-rules.json";
+const PEOPLE_LATEST_RULES_DEV_PROXY_PATH = "/__rules/people-latest-rules.json";
+
 function getLastUpdatedTime(isoDate) {
     return formatDistanceStrict(new Date(isoDate), new Date())
         .replace("minute", "min")
         .replace("second", "sec");
+}
+
+function normalizeAuthor(author) {
+    if (!author) return "";
+    const raw = String(author).trim();
+    if (!raw) return "";
+
+    // If a full URL was passed, extract last path segment
+    try {
+        const u = new URL(raw);
+        const last = u.pathname.split("/").filter(Boolean).pop();
+        return (last || "").trim();
+    } catch { }
+
+    return raw
+        .replace(/^@/, "")
+        .split("?")[0]
+        .split("#")[0]
+        .replace(/\/+$/, "")
+        .trim();
+}
+
+function pickRulesForAuthor(data, author) {
+    if (!data || typeof data !== "object") return [];
+
+    const a = normalizeAuthor(author);
+    if (!a) return [];
+
+    const candidates = [
+        // JSON keys are expected to be encodeURIComponent(author), but try both to be resilient
+        encodeURIComponent(a),
+        encodeURIComponent(a.toLowerCase()),
+        a,
+        a.toLowerCase(),
+    ];
+
+    for (const key of candidates) {
+        const arr = data?.[key];
+        if (Array.isArray(arr)) return arr;
+    }
+
+    return [];
 }
 
 export default function RulesWidget({
@@ -19,24 +65,35 @@ export default function RulesWidget({
     const [status, setStatus] = useState("idle"); // idle | loading | error | success
 
     useEffect(() => {
-        if (!author) return;
+        const normalizedAuthor = normalizeAuthor(author);
+        if (!normalizedAuthor) return;
 
         let cancelled = false;
 
         (async () => {
             try {
                 setStatus("loading");
-                const res = await fetch(
-                    `${rulesUrl}/api/rules/last-modified?username=${encodeURIComponent(author)}&limit=${numberOfRules}`,
-                    { cache: "no-store" }
-                );
-                if (!res.ok) throw new Error("Failed to fetch last modified rules");
+                const jsonUrl =
+                    process.env.NODE_ENV === "development"
+                        ? PEOPLE_LATEST_RULES_DEV_PROXY_PATH
+                        : PEOPLE_LATEST_RULES_URL;
+                const res = await fetch(jsonUrl, { cache: "no-store" });
+                if (!res.ok) throw new Error("Failed to fetch people latest rules JSON");
                 const data = await res.json();
+
+                const rawItems = pickRulesForAuthor(data, normalizedAuthor);
+                const toTime = (x) => (x?.lastModifiedAt ? Date.parse(x.lastModifiedAt) || 0 : 0);
+                const filtered = rawItems
+                    .filter((x) => x && x.title && x.uri)
+                    // newest first (JSON is expected to already be latest, but keep deterministic)
+                    .sort((a, b) => toTime(b) - toTime(a))
+                    .slice(0, numberOfRules);
+
                 if (!cancelled) {
-                    setItems(Array.isArray(data?.items) ? data.items : []);
+                    setItems(filtered);
                     setStatus("success");
                 }
-            } catch (e) {
+            } catch {
                 if (!cancelled) {
                     setItems([]);
                     setStatus("error");
@@ -49,8 +106,9 @@ export default function RulesWidget({
         };
     }, [author, numberOfRules]);
 
-    const enabled = !!author;
-    const moreHref = seeMoreUrl || `${rulesUrl}/user?author=${encodeURIComponent(author || "")}`;
+    const normalizedAuthor = normalizeAuthor(author);
+    const enabled = !!normalizedAuthor;
+    const moreHref = seeMoreUrl || `${rulesUrl}/user?author=${encodeURIComponent(normalizedAuthor || "")}`;
 
     const content = (() => {
         if (!enabled) return <p className="text-center text-sm text-gray-600">No Rules Found</p>;
