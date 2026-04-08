@@ -70,7 +70,6 @@ const Header = () => {
             menuBarItems={menuItems}
             url="/people"
             searchUrl={`${siteUrl}/people`}
-            hidePhone
             className="megamenu"
           />
         </div>

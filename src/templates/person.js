@@ -11,7 +11,7 @@ import PropTypes from 'prop-types';
 import Quote from '../components/quote/quote';
 import SkillsList from '../components/skills-list/skills-list';
 import SocialLinks from '../components/social-links/social-links';
-import { RulesWidget } from 'ssw.rules.widget';
+import RulesWidget from '../components/rules-widget/rules-widget';
 import YoutubePlaylist from '../components/youtube-playlist/youtube-playlist';
 import { config } from '@fortawesome/fontawesome-svg-core';
 import { isChinaBuild } from '../helpers/chinaHelper';
@@ -105,10 +105,10 @@ const Person = ({ pageContext }) => {
     <>
       <div className="flex flex-wrap mb-5 person-content">
         <div className="w-full lg:w-1/4 xl:w-1/6 print-full-width">
-          <div className="person-description md:hidden w-full my-auto print-hidden pb-0 md:pb-4">
+          <div className="person-description mx-4 mb-4 md:hidden w-full my-auto print-hidden pb-0 md:pb-4">
             {profileDescription}
           </div>
-          <div className="flex md:justify-center justify-around">
+          <div className="flex mx-4 justify-around gap-4">
             <div>
               <ProfilePhoto
                 profileImage={profileImage}
@@ -129,7 +129,7 @@ const Person = ({ pageContext }) => {
                 </div>
               )}
             </div>
-            <div className="lg:hidden print-show px-2 md:p-2">
+            <div className="lg:hidden print-show mt-2">
               <div className="mb-4 w-full hidden md:block lg:hidden print-show">
                 {profileDescription}
                 <hr />
@@ -148,14 +148,13 @@ const Person = ({ pageContext }) => {
           </div>
           <div className="flex person-favor flex-wrap lg:flex-col md:hidden lg:block print-show">
             {frontmatter.quote && (
-              <div className="hidden w-1/2 pr-2 lg:pr-0 lg:w-full lg:block quoteblock print-hidden">
+              <div className="quoteblock px-4 md:px-1 pt-4 md:pt-1">
                 {quote}
               </div>
             )}
             {isActive && (
               <div className="md:block hidden print-hidden">{socialLinks}</div>
             )}
-            <div className="block md:hidden w-full print-show">{quote}</div>
             <div className="hidden justify-center md:block lg:mt-2">
               {githubUsername && WidgetComponent}
             </div>
