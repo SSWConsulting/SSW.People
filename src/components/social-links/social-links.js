@@ -1,5 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  faEnvelope,
+  faNewspaper,
+  faImages,
+} from '@fortawesome/free-solid-svg-icons';
+import {
+  faFacebook,
+  faLinkedin,
+  faXTwitter,
+  faGithub,
+  faSkype,
+} from '@fortawesome/free-brands-svg-icons';
 
 const SocialLinks = ({ crmData, alumni }) => {
   let encodedEmailAddress = '';
@@ -51,7 +64,6 @@ const SocialLinks = ({ crmData, alumni }) => {
     crmData.emailAddress ||
     crmData.blogUrl ||
     crmData.facebookUrl ||
-    crmData.skypeUsername ||
     crmData.linkedInUrl ||
     crmData.twitterUsername ||
     crmData.gitHubUrl ||
@@ -60,11 +72,12 @@ const SocialLinks = ({ crmData, alumni }) => {
   return (
     <>
       {displayCrm && (
-        <div className="favor-content w-full print-hidden">
-          <ul className="favor-list">
+        <div className="favor-content md:my-4 p-2 rounded w-full print-hidden">
+          <ul className="favor-list mx-4 my-2">
             {crmData.emailAddress && (
               <>
-                <li className="social email flex items-center gap-x-1">
+                <li className="social flex items-center">
+                  <FontAwesomeIcon icon={faEnvelope} className="mr-1" />
                   <a
                     href={'#0'}
                     onClick={(event) => {
@@ -75,80 +88,81 @@ const SocialLinks = ({ crmData, alumni }) => {
                   </a>
                   <a
                     href="https://github.com/SSWConsulting/SSW.People/wiki/4.-Extras#4-mailto-link-configure-your-default-mail-client"
-                    className="text-sm whitespace-nowrap cursor-pointer italic"
+                    className="text-xs whitespace-nowrap cursor-pointer italic ml-2"
                   >
-                    (Need help?)
+                    Need help?
                   </a>
                 </li>
               </>
             )}
             {crmData.blogUrl && (
-              <li className="social blog">
+              <li className="social">
                 <a
                   target="_blank"
                   rel="noopener noreferrer"
                   href={crmData.blogUrl}
                 >
+                  <FontAwesomeIcon icon={faNewspaper} className="mr-1" />
                   Blog
                 </a>
               </li>
             )}
             {crmData.facebookUrl && (
-              <li className="social facebook">
+              <li className="social">
                 <a
                   target="_blank"
                   rel="noopener noreferrer"
                   href={crmData.facebookUrl}
                 >
+                  <FontAwesomeIcon icon={faFacebook} className="mr-1" />
                   Facebook
                 </a>
               </li>
             )}
-            {crmData.skypeUsername && (
-              <li className="social skype">
-                <a href={`skype:${crmData.skypeUsername}?call`}>Skype</a>
-              </li>
-            )}
             {crmData.linkedInUrl && (
-              <li className="social linkedin">
+              <li className="social">
                 <a
                   target="_blank"
                   rel="noopener noreferrer"
                   href={crmData.linkedInUrl}
                 >
+                  <FontAwesomeIcon icon={faLinkedin} className="mr-1" />
                   LinkedIn
                 </a>
               </li>
             )}
             {crmData.twitterUsername && (
-              <li className="social twitter">
+              <li className="social">
                 <a
                   target="_blank"
                   rel="noopener noreferrer"
                   href={`https://www.twitter.com/${crmData.twitterUsername}`}
                 >
-                  Twitter
+                  <FontAwesomeIcon icon={faXTwitter} className="mr-1" />
+                  X (Twitter)
                 </a>
               </li>
             )}
             {crmData.gitHubUrl && (
-              <li className="social github">
+              <li className="social">
                 <a
                   target="_blank"
                   rel="noopener noreferrer"
                   href={crmData.gitHubUrl}
                 >
+                  <FontAwesomeIcon icon={faGithub} className="mr-1" />
                   GitHub
                 </a>
               </li>
             )}
             {crmData.publicPhotoAlbumUrl && (
-              <li className="social gallery">
+              <li className="social">
                 <a
                   href={crmData.publicPhotoAlbumUrl}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
+                  <FontAwesomeIcon icon={faImages} className="mr-1" />
                   Photos
                 </a>
               </li>
