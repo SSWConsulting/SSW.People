@@ -74,7 +74,7 @@ const PlayAudio = ({ hasAnimation, audioSrc }) => {
       {hasAnimation ? (
         // eslint-disable-next-line jsx-a11y/no-static-element-interactions
         <div
-          className="cursor-pointer flex mr-1 ml-1 bg-grey-translucent h-30px print-hidden"
+          className="cursor-pointer flex border rounded-sm h-30px print-hidden"
           onMouseEnter={() => {
             setHoverAudio(true);
           }}
@@ -96,7 +96,7 @@ const PlayAudio = ({ hasAnimation, audioSrc }) => {
             <div
               ref={animationContainer}
               className={'absolute'}
-              style={{ top: '-48px' }}
+              style={{ top: '-50px' }}
             ></div>
           </div>
         </div>
