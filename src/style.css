@@ -226,7 +226,7 @@ footer {
 }
 
 .person-quote {
-  padding-left: 10px;
+  padding-left: .5rem;
   background-image: url(./images/selfquoteMark.gif);
   background-repeat: no-repeat;
   font-style: italic;
