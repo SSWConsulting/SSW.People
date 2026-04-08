@@ -292,9 +292,7 @@ footer {
 }
 
 .favor-content {
-  background-color: #eeeeee;
-  border: 1px solid #cccccc;
-  margin: 20px 0;
+  background-color: #f5f5f5;
 }
 
 ul.favor-list li {
@@ -312,41 +310,6 @@ ul.favor-list li {
   font-weight: 400;
 }
 
-.social::before {
-  margin-right: .25rem;
-}
-  .email::before {
-    content: "\f0e0";
-    font-family: "Font Awesome 6 Free";
-  }
-  .gallery::before {
-    content: "\f302";
-    font-family: "Font Awesome 6 Free";
-  }
-  .blog::before {
-    content: "\f1ea";
-    font-family: "Font Awesome 6 Free";
-  }
-  .facebook::before {
-    content: "\f082";
-    font-family: "Font Awesome 6 Brands";
-  }
-  .linkedin::before {
-    content: "\f08c";
-    font-family: "Font Awesome 6 Brands";
-  }
-  .twitter::before {
-    content: "\e61b";
-    font-family: "Font Awesome 6 Brands";
-  }
-  .github::before {
-    content: "\f09b";
-    font-family: "Font Awesome 6 Brands";
-  }
-  .skype::before {
-    content: "\f17e";
-    font-family: "Font Awesome 6 Brands";
-  }
 
 header > div > div > a /*TODO: Fix this at the source https://github.com/SSWConsulting/SSW.MegaMenu/issues/101*/
 {
@@ -434,6 +397,7 @@ div[id^="headlessui-dialog-panel"] {
 
 .img-badge {
   display: inline-block;
+  margin: 0 .5rem;
 
   a {
     border-bottom: none !important;
@@ -441,7 +405,7 @@ div[id^="headlessui-dialog-panel"] {
   }
 
   img {
-    height: 135px;
+    height: 100px;
   }
 
   p {
@@ -588,6 +552,7 @@ pre {
     height: auto;
     max-width: 100%;
   }
+
   .favor-content {
     background-color: #efefef;
     border: 1px solid #dddddd;
@@ -597,12 +562,6 @@ pre {
 
   .filter-role-opener{
     display: inline;
-  }
-  .quoteblock{
-    font: large;
-    padding-top: 1rem;
-    padding-left: 1rem;
-    padding-right: 1rem
   }
   .filter-role li,
   .filter-skills li {
