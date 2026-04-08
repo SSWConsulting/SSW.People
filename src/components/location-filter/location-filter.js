@@ -37,7 +37,7 @@ const LocationFilter = ({
   initLocation();
 
   return (
-    <div className="flex bg-ssw-grey text-black justify-center">
+    <div className="px-2 flex bg-ssw-grey justify-center">
       <div className="flex flex-wrap justify-around location-filter">
         {locations.sort(LocationSort).map((location, i) => {
           return (
