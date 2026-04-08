@@ -153,7 +153,7 @@ export default function RulesWidget({
     return (
         <div className="text-base">
             <div className="flex flex-col items-center">
-                <h4 className="mt-4">
+                <h4 className="mt-4 mb-0">
                     <a className="no-underline hover:text-[#cc4141]" target="_blank" rel="noreferrer" href={rulesUrl}>
                         {title}
                     </a>
