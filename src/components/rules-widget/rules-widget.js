@@ -142,7 +142,7 @@ export default function RulesWidget({
                 ))}
 
                 <div className="text-center leading-[0.8] p-3">
-                    <a className="text-base text-[#cc4141] underline" target="_blank" rel="noreferrer" href={moreHref}>
+                    <a className="text-base underline" target="_blank" rel="noreferrer" href={moreHref}>
                         See more
                     </a>
                 </div>
