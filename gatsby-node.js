@@ -128,6 +128,43 @@ exports.createSchemaCustomization = ({ actions }) => {
       userId: String!
       playlistItems: [String]!
     }
+    type CrmDataCollection implements Node {
+      slug: String
+      fullName: String
+      emailAddress: String
+      location: String
+      jobTitle: String
+      role: String
+      billingRate: String
+      skills: CrmSkills
+      isActive: Boolean
+      nickname: String
+      blogUrl: String
+      facebookUrl: String
+      skypeUsername: String
+      linkedInUrl: String
+      twitterUsername: String
+      gitHubUrl: String
+      youTubePlayListId: String
+      publicPhotoAlbumUrl: String
+    }
+    type CrmSkills {
+      intermediateSkills: [CrmSkillItem]
+      advancedSkills: [CrmSkillItem]
+    }
+    type CrmSkillItem {
+      service: String
+      marketingPageUrl: String
+    }
+    type SkillUrls implements Node {
+      service: SkillUrlsService
+    }
+    type SkillUrlsService {
+      service: String
+      marketingPage: String
+      marketingPageUrl: String
+      highlightskill: Boolean
+    }
   `;
   createTypes(typeDefs);
 };
@@ -187,21 +224,34 @@ exports.sourceNodes = async ({
     });
   }
 
-  const crmDataResult = await getViewDataFromCRM();
-  let skills = await getUsersSkills();
-  skills = skills
-    .map((user) => {
-      return {
-        service: user.technology,
-        marketingPage: user.marketingPage,
-        marketingPageUrl: user.marketingPageUrl,
-        highlightskill: user.highlightskill,
-      };
-    })
-    .filter(
-      (value, index, self) =>
-        index === self.findIndex((t) => t.service === value.service)
-    );
+  let crmDataResult = [];
+  let skills = [];
+
+  const hasCrmCredentials = process.env.CRM_APP_ID && process.env.CRM_APP_SECRET;
+  if (hasCrmCredentials) {
+    try {
+      crmDataResult = await getViewDataFromCRM();
+      skills = await getUsersSkills();
+      skills = skills
+        .map((user) => {
+          return {
+            service: user.technology,
+            marketingPage: user.marketingPage,
+            marketingPageUrl: user.marketingPageUrl,
+            highlightskill: user.highlightskill,
+          };
+        })
+        .filter(
+          (value, index, self) =>
+            index === self.findIndex((t) => t.service === value.service)
+        );
+    } catch (error) {
+      console.warn('Failed to fetch CRM data:', error.message);
+      console.warn('Continuing build without CRM data...');
+    }
+  } else {
+    console.warn('CRM credentials not found. Skipping CRM data fetch. Set CRM_APP_ID and CRM_APP_SECRET in .env.development to enable.');
+  }
 
   // load data for the sample profile
   loadSampleData(crmDataResult);
@@ -423,15 +473,15 @@ exports.createPages = async function ({ actions, graphql }) {
     }
   `);
 
-  const skillUrls = data.allSkillUrls.nodes.map((node) => {
+  const skillUrls = data.allSkillUrls?.nodes?.map((node) => {
     return node;
-  });
+  }) || [];
 
-  const peopleCRM = data.peopleCRM.nodes.map((node) => {
+  const peopleCRM = data.peopleCRM?.nodes?.map((node) => {
     return node;
-  });
+  }) || [];
 
-  const youtubePlaylists = data.peopleYoutubePlaylists.nodes;
+  const youtubePlaylists = data.peopleYoutubePlaylists?.nodes || [];
   const peopleAudios = data.peopleAudios.nodes.map((node) => {
     return {
       src: node.publicURL,
