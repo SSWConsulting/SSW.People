@@ -86,9 +86,7 @@ const YoutubePlaylist = ({ youtubePlayListId, playlistItems }) => {
 
   return (
     <div className="youtube-playlist clearfix">
-      <div>
-        <h2 className="inline">Videos</h2>
-      </div>
+      <h2>Videos</h2>
       <div className="container">
         <Helmet
           style={[
@@ -144,7 +142,7 @@ const YoutubePlaylist = ({ youtubePlayListId, playlistItems }) => {
           }}
         />
         <a
-          className="flex w-full justify-center text-center top-2 pt-4 text-ssw-red hover:text-black"
+          className="flex w-full justify-center text-center top-2 pt-4"
           target="_blank"
           rel="noopener noreferrer"
           href={`https://www.youtube.com/playlist?list=${youtubePlayListId}`}

@@ -226,15 +226,10 @@ footer {
 }
 
 .person-quote {
-  padding-left: 10px;
+  padding-left: .5rem;
   background-image: url(./images/selfquoteMark.gif);
   background-repeat: no-repeat;
   font-style: italic;
-}
-
-.person-quote-name {
-  text-align: right;
-  margin-top: 0.5em;
 }
 
 /* .rw-title {

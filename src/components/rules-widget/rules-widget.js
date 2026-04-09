@@ -142,7 +142,7 @@ export default function RulesWidget({
                 ))}
 
                 <div className="text-center leading-[0.8] p-3">
-                    <a className="text-base text-[#cc4141] underline" target="_blank" rel="noreferrer" href={moreHref}>
+                    <a className="text-base underline" target="_blank" rel="noreferrer" href={moreHref}>
                         See more
                     </a>
                 </div>
@@ -153,14 +153,14 @@ export default function RulesWidget({
     return (
         <div className="text-base">
             <div className="flex flex-col items-center">
-                <h4 className="m-0">
-                    <a className="no-underline text-gray-800 hover:text-[#cc4141]" target="_blank" rel="noreferrer" href={rulesUrl}>
+                <h4 className="mt-4 mb-0">
+                    <a className="no-underline hover:text-[#cc4141]" target="_blank" rel="noreferrer" href={rulesUrl}>
                         {title}
                     </a>
                 </h4>
             </div>
 
-            <div className="border-none text-gray-800 rounded">{content}</div>
+            <div>{content}</div>
         </div>
     );
 }
