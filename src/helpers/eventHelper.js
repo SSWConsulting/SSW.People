@@ -74,7 +74,7 @@ function mapEvent(properties) {
     startdatetime: startdatetime,
     endDateTime: endDateTime,
     isSameDay: startdatetime === endDateTime,
-    daysToGo: moment(startdatetime).diff(moment(today), 'days'),
+    daysToGo: moment(startdatetime, 'DD MMM YYYY').diff(moment(today, 'DD MMM YYYY'), 'days'),
     technologycategory: properties.Category,
     eventtype: properties.CalendarType,
     presenter: properties.Presenter,
