@@ -81,9 +81,9 @@ const Index = ({ data }) => {
           onLocationChange={setSelectedLocation}
         />
       </div>
-      <div className="mx-2 md:mx-6 flex flex-col lg:flex-row">
-        <div className="lg:w-1/4">
-          <div className="mx-auto flex flex-col sm:flex-row lg:flex-col lg:w-5/6">
+      <div className="mx-4 flex flex-col lg:flex-row">
+        <div className="mb-8 lg:w-1/4">
+          <div className="flex flex-col sm:flex-row lg:flex-col lg:w-5/6">
             <div className="w-full sm:w-1/2 lg:w-full">
               <Filter
                 filterTitle="Roles"

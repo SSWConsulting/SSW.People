@@ -199,21 +199,21 @@ const Index = ({ data }) => {
   return (
     <>
       <div
-        className="hero-para mx-2 md:mx-6"
+        className="hero-para mx-4"
         dangerouslySetInnerHTML={{
           __html: data.homeJson.content.childMarkdownRemark.html,
         }}
       />
-      <div className="my-8 mx-0 xl:mx-6">
+      <div className="my-8 mx-0 xl:mx-4">
         <LocationFilter
           locations={allLocations}
           selectedLocation={selectedLocation}
           onLocationChange={setSelectedLocation}
         />
       </div>
-      <div className="mx-2 md:mx-6 flex flex-col lg:flex-row">
-        <div className="lg:w-1/4">
-          <div className="mx-auto flex flex-col sm:flex-row lg:flex-col lg:w-5/6">
+      <div className="mx-4 flex flex-col lg:flex-row">
+        <div className="mb-8 lg:w-1/4">
+          <div className="flex flex-col sm:flex-row lg:flex-col lg:w-5/6">
             <PeopleFilters
               allRoles={allRoles}
               rolesCount={countPerRole}
