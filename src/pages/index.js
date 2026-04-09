@@ -204,7 +204,7 @@ const Index = ({ data }) => {
           __html: data.homeJson.content.childMarkdownRemark.html,
         }}
       />
-      <div className="my-8 mx-0 xl:mx-6">
+      <div className="my-8 mx-0 xl:mx-4">
         <LocationFilter
           locations={allLocations}
           selectedLocation={selectedLocation}
