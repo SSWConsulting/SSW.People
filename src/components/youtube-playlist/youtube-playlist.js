@@ -144,7 +144,7 @@ const YoutubePlaylist = ({ youtubePlayListId, playlistItems }) => {
           }}
         />
         <a
-          className="flex w-full justify-center text-center top-2 pt-4 text-ssw-red hover:text-black"
+          className="flex w-full justify-center text-center top-2 pt-4"
           target="_blank"
           rel="noopener noreferrer"
           href={`https://www.youtube.com/playlist?list=${youtubePlayListId}`}
