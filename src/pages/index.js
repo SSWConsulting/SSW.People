@@ -212,7 +212,7 @@ const Index = ({ data }) => {
         />
       </div>
       <div className="mx-4 flex flex-col lg:flex-row">
-        <div className="lg:w-1/4">
+        <div className="mb-8 lg:w-1/4">
           <div className="flex flex-col sm:flex-row lg:flex-col lg:w-5/6">
             <PeopleFilters
               allRoles={allRoles}
