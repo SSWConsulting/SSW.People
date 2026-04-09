@@ -86,9 +86,7 @@ const YoutubePlaylist = ({ youtubePlayListId, playlistItems }) => {
 
   return (
     <div className="youtube-playlist clearfix">
-      <div>
-        <h2 className="inline">Videos</h2>
-      </div>
+      <h2>Videos</h2>
       <div className="container">
         <Helmet
           style={[
