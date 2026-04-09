@@ -19,7 +19,7 @@ jobs:
     environment: ${{ inputs.environment }}
     steps:
 
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
           ref: ${{ inputs.branch_name }}
 
@@ -81,7 +81,7 @@ jobs:
           GATSBY_EXPERIMENTAL_PAGE_BUILD_ON_DATA_CHANGES: true
 
       - name: Archive artifacts
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: build
           path: public
@@ -90,7 +90,7 @@ jobs:
     name: Infra
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
           ref: ${{ inputs.branch_name }}
           sparse-checkout: |
@@ -102,7 +102,7 @@ jobs:
           az bicep build --file infra/main.bicep --outdir arm
 
       - name: Archive artifacts
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: infra
           path: infra
