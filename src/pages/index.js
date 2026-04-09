@@ -199,7 +199,7 @@ const Index = ({ data }) => {
   return (
     <>
       <div
-        className="hero-para mx-2 md:mx-6"
+        className="hero-para mx-4"
         dangerouslySetInnerHTML={{
           __html: data.homeJson.content.childMarkdownRemark.html,
         }}
