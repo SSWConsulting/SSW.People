@@ -38,7 +38,7 @@ const ProfileDescription = ({
           <span className="ml-2">
             <FontAwesomeIcon
               icon={faMapMarkerAlt}
-              className="mr-2"
+              className="mr-1"
               fontSize={16}
             />
             {location}
