@@ -35,7 +35,7 @@ const ProfileDescription = ({
       <h4>
         <span>{jobTitle}</span>
         {location && (
-          <span className="ml-2">
+          <span className="block mb-2 sm:inline sm:mb-0 sm:ml-4">
             <FontAwesomeIcon
               icon={faMapMarkerAlt}
               className="mr-1"
