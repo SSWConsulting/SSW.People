@@ -86,6 +86,11 @@ h3 {
 }
 
 h4 {
+  @apply text-xl;
+  @apply mb-2;
+}
+
+h5 {
   @apply text-lg;
   @apply mb-2;
 }
