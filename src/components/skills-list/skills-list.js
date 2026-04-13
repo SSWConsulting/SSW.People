@@ -17,7 +17,7 @@ const SkillsList = ({ crmData }) => {
                 <SkillLink skill={skill} />
                 {(i !== arr.length - 1 ||
                   (i === arr.length - 1 && intermediateSkills.length > 0)) && (
-                  <span className="skill-separator"> | </span>
+                  <span className="font-light opacity-30 mx-1"> | </span>
                 )}
               </strong>
             ))}
@@ -25,7 +25,7 @@ const SkillsList = ({ crmData }) => {
               <span key={`intermediateSkill-${i}`}>
                 <SkillLink skill={skill} />
                 {i !== arr.length - 1 && (
-                  <span className="skill-separator"> | </span>
+                  <span className="font-light opacity-30 mx-1"> | </span>
                 )}
               </span>
             ))}
