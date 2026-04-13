@@ -299,12 +299,6 @@ ul.favor-list li {
   }
 }
 
-.skill-separator {
-  color: #aaa;
-  font-weight: 400;
-}
-
-
 header > div > div > a /*TODO: Fix this at the source https://github.com/SSWConsulting/SSW.MegaMenu/issues/101*/
 {
   text-decoration: none;
