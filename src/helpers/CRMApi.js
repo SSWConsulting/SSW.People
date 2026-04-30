@@ -11,6 +11,26 @@ const SCOPE = process.env.CRM_SCOPE;
 
 const crmUrl = `https://${TENANT}/api/data/v9.1`;
 
+// Dataverse caps each OData response at 5000 rows and returns an
+// @odata.nextLink for the rest. Follow the link until exhausted so we
+// don't silently drop data once a collection grows past one page.
+const fetchAllPages = async (url) => {
+  let all = [];
+  let next = url;
+  let pages = 0;
+  while (next) {
+    const res = await axios.get(next);
+    all = all.concat(res.data.value);
+    next = res.data['@odata.nextLink'];
+    pages++;
+  }
+  // eslint-disable-next-line no-console
+  console.log(
+    `Fetched ${all.length} rows from ${url.split('?')[0]} across ${pages} page(s)`
+  );
+  return all;
+};
+
 const getViewDataFromCRM = async () => {
   const accessToken = await getToken();
 
@@ -45,14 +65,14 @@ const getSites = async () => {
 };
 
 const getUsersSkills = async () => {
-  const skillsRes = await axios.get(`${crmUrl}/ssw_skills`);
-  const skills = skillsRes.data.value;
+  const skills = await fetchAllPages(`${crmUrl}/ssw_skills`);
 
   // Used to link skills to their marketing page urls
   const consultingPages = {};
 
-  const consultingReq = await axios.get(`${crmUrl}/ssw_consultingservices`);
-  const consultingData = consultingReq.data.value;
+  const consultingData = await fetchAllPages(
+    `${crmUrl}/ssw_consultingservices`
+  );
   Object.keys(consultingData).map((page) => {
     const pageName = consultingData[page].ssw_name;
     const pageUrl = consultingData[page].ssw_webpageurl;
@@ -60,8 +80,8 @@ const getUsersSkills = async () => {
     consultingPages[pageName] = pageUrl;
   });
 
-  const usersSkillsReq = await axios.get(`${crmUrl}/ssw_userskills`);
-  const usersSkills = usersSkillsReq.data.value
+  const usersSkillsRaw = await fetchAllPages(`${crmUrl}/ssw_userskills`);
+  const usersSkills = usersSkillsRaw
     .filter((us) => us.statecode !== 1)
     .map((us) => {
       const skill = skills.find((s) => s.ssw_skillid === us._ssw_skillid_value);
@@ -120,13 +140,8 @@ const getEmployees = async (sites, usersSkills, current) => {
   const queryFilter = `?savedQuery=${viewId}`;
   const userQuery = `${crmUrl}/systemusers${queryFilter}`;
 
-  const response = await axios.get(userQuery);
-  const employees = convertToSimpleFormat(
-    response.data.value,
-    sites,
-    usersSkills,
-    current
-  );
+  const users = await fetchAllPages(userQuery);
+  const employees = convertToSimpleFormat(users, sites, usersSkills, current);
 
   return employees;
 };
