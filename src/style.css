@@ -1213,6 +1213,13 @@ font-size: 0.8rem;
   height: auto !important;
 }
 
+.custom-block.img-logo .gatsby-resp-image-wrapper {
+  max-width: none !important;
+  max-height: 100px !important;
+  width: auto !important;
+  height: auto !important;
+}
+
 /**
 * This injects Tailwind's component classes and any component classes
 * registered by plugins.
