@@ -150,6 +150,7 @@ const Footer = () => {
                 This website is under{' '}
                 <a
                   className="text-white hover:text-ssw-red transition-colors"
+                  style={{ textDecoration: 'none' }}
                   href="https://www.ssw.com.au/rules/rules-to-better-websites-deployment"
                 >
                   continuous deployment
@@ -172,6 +173,7 @@ const Footer = () => {
                     . Last commit{' '}
                     <a
                       className="text-white hover:text-ssw-red transition-colors"
+                      style={{ textDecoration: 'none' }}
                       href={`https://github.com/SSWConsulting/SSW.People/commit/${process.env.COMMIT_HASH}`}
                       target="_blank"
                       rel="noreferrer"
@@ -232,12 +234,12 @@ const getLastDeployTime = () => {
   delta -= minutes * 60;
 
   return days !== 0
-    ? `${days} day(s)`
-    : ' ' + hours !== 0
-      ? `${hours} hour(s)`
-      : ' ' + minutes > 1
-        ? `${minutes} minutes`
-        : '1 minute';
+    ? `${days} day${days > 1 ? 's' : ''}`
+    : hours !== 0
+      ? `${hours} hour${hours > 1 ? 's' : ''}`
+      : minutes > 1
+        ? `${minutes} min`
+        : '1 min';
 };
 
 Footer.propTypes = {};
