@@ -44,6 +44,7 @@ jobs:
           APPLICATIONINSIGHTS_CONNECTION_STRING: ${{ secrets.APPLICATIONINSIGHTS_CONNECTION_STRING }}
           CHINA_BUILD: FALSE
           VERSION_DEPLOYED: ${{ github.run_number }}
+          COMMIT_HASH: ${{ github.sha }}
 
       - name: Rename env file
         run: |

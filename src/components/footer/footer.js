@@ -149,13 +149,37 @@ const Footer = () => {
               <div className="py-2">
                 This website is under{' '}
                 <a
-                  className="footer-link"
-                  href="https://www.ssw.com.au/rules/do-you-continuously-deploy"
+                  className="text-white hover:text-ssw-red transition-colors"
+                  href="https://www.ssw.com.au/rules/rules-to-better-websites-deployment"
                 >
-                  CONSTANT CONTINUOUS DEPLOYMENT
+                  continuous deployment
                 </a>
-                . Last deployed {getLastDeployTime()} ago (Build #{' '}
-                {process.env.VERSION_DEPLOYED})
+                . Last updated{' '}
+                <span
+                  className="group relative inline-block cursor-help text-white hover:text-ssw-red transition-colors"
+                  title={`Last updated ${moment(buildTimestamp).utc().format('D MMM YYYY [at] HH:mm UTC')}`}
+                >
+                  {getLastDeployTime()} ago
+                  <span
+                    role="tooltip"
+                    className="absolute left-1/2 -translate-x-1/2 bottom-full mb-1 px-2 py-1 bg-white text-gray-900 text-xs leading-none rounded whitespace-nowrap opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-150 shadow-md z-10"
+                  >
+                    Last updated {moment(buildTimestamp).utc().format('D MMM YYYY [at] HH:mm UTC')}
+                  </span>
+                </span>
+                {process.env.COMMIT_HASH && (
+                  <>
+                    . Last commit{' '}
+                    <a
+                      className="text-white hover:text-ssw-red transition-colors"
+                      href={`https://github.com/SSWConsulting/SSW.People/commit/${process.env.COMMIT_HASH}`}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      {process.env.COMMIT_HASH.slice(0, 7)}
+                    </a>
+                  </>
+                )}
               </div>
               <div className="py-2">
                 <a
