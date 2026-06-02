@@ -15,6 +15,11 @@ import {
 import China from '../../images/china.png';
 
 const buildTimestamp = preval`module.exports = new Date().getTime();`;
+const commitHash = process.env.COMMIT_HASH;
+const lastUpdatedTooltip = `Last updated ${moment(buildTimestamp)
+  .utc()
+  .format('D MMM YYYY [at] HH:mm UTC')}`;
+const deploymentTooltipId = 'deployment-tooltip';
 
 const Footer = () => {
   return (
@@ -149,7 +154,7 @@ const Footer = () => {
               <div className="py-2">
                 This website is under{' '}
                 <a
-                  className="text-white hover:text-ssw-red transition-colors"
+                  className="text-white hover:text-ssw-red focus-visible:text-ssw-red transition-colors"
                   style={{ textDecoration: 'none' }}
                   href="https://www.ssw.com.au/rules/rules-to-better-websites-deployment"
                 >
@@ -157,28 +162,31 @@ const Footer = () => {
                 </a>
                 . Last updated{' '}
                 <span
-                  className="group relative inline-block cursor-help text-white hover:text-ssw-red transition-colors"
-                  title={`Last updated ${moment(buildTimestamp).utc().format('D MMM YYYY [at] HH:mm UTC')}`}
+                  className="group relative inline-block cursor-help text-white hover:text-ssw-red focus-visible:text-ssw-red transition-colors"
+                  tabIndex={0}
+                  aria-describedby={deploymentTooltipId}
+                  title={lastUpdatedTooltip}
                 >
                   {getLastDeployTime()} ago
                   <span
+                    id={deploymentTooltipId}
                     role="tooltip"
-                    className="absolute left-1/2 -translate-x-1/2 bottom-full mb-1 px-2 py-1 bg-white text-gray-900 text-xs leading-none rounded whitespace-nowrap opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-150 shadow-md z-10"
+                    className="absolute left-1/2 -translate-x-1/2 bottom-full mb-1 px-2 py-1 bg-white text-gray-900 text-xs leading-none rounded whitespace-nowrap opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100 pointer-events-none transition-opacity duration-150 shadow-md z-10"
                   >
-                    Last updated {moment(buildTimestamp).utc().format('D MMM YYYY [at] HH:mm UTC')}
+                    {lastUpdatedTooltip}
                   </span>
                 </span>
-                {process.env.COMMIT_HASH && (
+                {commitHash && (
                   <>
                     . Last commit{' '}
                     <a
-                      className="text-white hover:text-ssw-red transition-colors"
+                      className="text-white hover:text-ssw-red focus-visible:text-ssw-red transition-colors"
                       style={{ textDecoration: 'none' }}
-                      href={`https://github.com/SSWConsulting/SSW.People/commit/${process.env.COMMIT_HASH}`}
+                      href={`https://github.com/SSWConsulting/SSW.People/commit/${commitHash}`}
                       target="_blank"
-                      rel="noreferrer"
+                      rel="noopener noreferrer nofollow"
                     >
-                      {process.env.COMMIT_HASH.slice(0, 7)}
+                      {commitHash.slice(0, 7)}
                     </a>
                   </>
                 )}
