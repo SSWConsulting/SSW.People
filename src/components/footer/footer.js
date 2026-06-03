@@ -15,6 +15,11 @@ import {
 import China from '../../images/china.png';
 
 const buildTimestamp = preval`module.exports = new Date().getTime();`;
+const commitHash = process.env.COMMIT_HASH;
+const lastUpdatedTooltip = `Last updated ${moment(buildTimestamp)
+  .utc()
+  .format('D MMM YYYY [at] HH:mm UTC')}`;
+const deploymentTooltipId = 'deployment-tooltip';
 
 const Footer = () => {
   return (
@@ -149,13 +154,42 @@ const Footer = () => {
               <div className="py-2">
                 This website is under{' '}
                 <a
-                  className="footer-link"
-                  href="https://www.ssw.com.au/rules/do-you-continuously-deploy"
+                  className="text-white hover:text-ssw-red focus-visible:text-ssw-red transition-colors"
+                  style={{ textDecoration: 'none' }}
+                  href="https://www.ssw.com.au/rules/rules-to-better-websites-deployment"
                 >
-                  CONSTANT CONTINUOUS DEPLOYMENT
+                  continuous deployment
                 </a>
-                . Last deployed {getLastDeployTime()} ago (Build #{' '}
-                {process.env.VERSION_DEPLOYED})
+                . Last updated{' '}
+                <span
+                  className="group relative inline-block cursor-help text-white hover:text-ssw-red focus-visible:text-ssw-red transition-colors"
+                  tabIndex={0}
+                  aria-describedby={deploymentTooltipId}
+                  title={lastUpdatedTooltip}
+                >
+                  {getLastDeployTime()} ago
+                  <span
+                    id={deploymentTooltipId}
+                    role="tooltip"
+                    className="absolute left-1/2 -translate-x-1/2 bottom-full mb-1 px-2 py-1 bg-white text-gray-900 text-xs leading-none rounded whitespace-nowrap opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100 pointer-events-none transition-opacity duration-150 shadow-md z-10"
+                  >
+                    {lastUpdatedTooltip}
+                  </span>
+                </span>
+                {commitHash && (
+                  <>
+                    . Last commit{' '}
+                    <a
+                      className="text-white hover:text-ssw-red focus-visible:text-ssw-red transition-colors"
+                      style={{ textDecoration: 'none' }}
+                      href={`https://github.com/SSWConsulting/SSW.People/commit/${commitHash}`}
+                      target="_blank"
+                      rel="noopener noreferrer nofollow"
+                    >
+                      {commitHash.slice(0, 7)}
+                    </a>
+                  </>
+                )}
               </div>
               <div className="py-2">
                 <a
@@ -208,12 +242,12 @@ const getLastDeployTime = () => {
   delta -= minutes * 60;
 
   return days !== 0
-    ? `${days} day(s)`
-    : ' ' + hours !== 0
-      ? `${hours} hour(s)`
-      : ' ' + minutes > 1
-        ? `${minutes} minutes`
-        : '1 minute';
+    ? `${days} day${days > 1 ? 's' : ''}`
+    : hours !== 0
+      ? `${hours} hour${hours > 1 ? 's' : ''}`
+      : minutes > 1
+        ? `${minutes} min`
+        : '1 min';
 };
 
 Footer.propTypes = {};
