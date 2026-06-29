@@ -5,9 +5,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import GitHubButton from 'react-github-btn';
 import {
+  faBluesky,
   faFacebook,
   faInstagram,
   faLinkedin,
+  faThreads,
   faTwitter,
   faTiktok,
   faYoutube,
@@ -97,6 +99,16 @@ const Footer = () => {
                   </a>
                   <a
                     className="unstyled social-media-icon"
+                    title="SSW on BlueSky"
+                    href="https://bsky.app/profile/ssw.com.au"
+                    target="_blank"
+                    rel="noreferrer"
+                    aria-label="SSW on BlueSky"
+                  >
+                    <FontAwesomeIcon icon={faBluesky} size="lg" />
+                  </a>
+                  <a
+                    className="unstyled social-media-icon"
                     title="SSW on X (Twitter)"
                     href="https://x.com/SSW_TV"
                     target="_blank"
@@ -104,6 +116,16 @@ const Footer = () => {
                     aria-label="SSW on X (Twitter)"
                   >
                     <FontAwesomeIcon icon={faTwitter} size="lg" />
+                  </a>
+                  <a
+                    className="unstyled social-media-icon"
+                    title="SSW on Threads"
+                    href="https://www.threads.net/@ssw_tv"
+                    target="_blank"
+                    rel="noreferrer"
+                    aria-label="SSW on Threads"
+                  >
+                    <FontAwesomeIcon icon={faThreads} size="lg" />
                   </a>
                   <a
                     className="unstyled social-media-icon"
