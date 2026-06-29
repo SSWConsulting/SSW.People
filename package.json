@@ -21,7 +21,7 @@
     ]
   },
   "dependencies": {
-    "@babel/core": "^7.29.0",
+    "@babel/core": "^7.29.6",
     "@brainhubeu/react-carousel": "^2.0.4",
     "@fontsource-variable/inter": "^5.2.8",
     "@fortawesome/free-brands-svg-icons": "^6.7.2",
