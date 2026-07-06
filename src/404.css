@@ -5,6 +5,11 @@
   background-position: bottom;
 }
 
+header {
+  position: relative;
+  z-index: 100;
+}
+
 .not-found-grid {
   grid-template-columns: min-content auto;
   grid-template-rows: 268px auto auto;
