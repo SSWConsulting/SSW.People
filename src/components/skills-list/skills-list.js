@@ -1,9 +1,27 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 
 const SkillsList = ({ crmData }) => {
   const intermediateSkills = crmData?.skills?.intermediateSkills ?? [];
   const advancedSkills = crmData?.skills?.advancedSkills ?? [];
+
+  const skillsRef = useRef(null);
+  const [isExpanded, setIsExpanded] = useState(false);
+  const [canExpand, setCanExpand] = useState(false);
+
+  // Only measure while collapsed - once expanded the element never overflows,
+  // so re-measuring would hide the 'Show less' button.
+  useEffect(() => {
+    const element = skillsRef.current;
+    if (!element || isExpanded) return;
+
+    const checkOverflow = () =>
+      setCanExpand(element.scrollHeight > element.clientHeight + 1);
+
+    checkOverflow();
+    window.addEventListener('resize', checkOverflow);
+    return () => window.removeEventListener('resize', checkOverflow);
+  }, [isExpanded]);
 
   return (
     <>
@@ -11,7 +29,10 @@ const SkillsList = ({ crmData }) => {
         (intermediateSkills && !!intermediateSkills.length)) && (
         <>
           <h2>Skills</h2>
-          <span>
+          <div
+            ref={skillsRef}
+            className={`print:line-clamp-none ${isExpanded ? '' : 'line-clamp-3'}`}
+          >
             {advancedSkills.map((skill, i, arr) => (
               <strong key={`advancedSkill-${i}`}>
                 <SkillLink skill={skill} />
@@ -29,7 +50,17 @@ const SkillsList = ({ crmData }) => {
                 )}
               </span>
             ))}
-          </span>
+          </div>
+          {canExpand && (
+            <button
+              type="button"
+              className="mt-1 text-ssw-red underline print-hidden"
+              aria-expanded={isExpanded}
+              onClick={() => setIsExpanded((expanded) => !expanded)}
+            >
+              {isExpanded ? 'Show less' : 'Show more'}
+            </button>
+          )}
           <hr className="print-hidden" />
         </>
       )}
