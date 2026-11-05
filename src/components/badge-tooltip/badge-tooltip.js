@@ -8,46 +8,100 @@ const useIsomorphicLayoutEffect =
 // px kept clear of the viewport edges and of the badge itself
 const GAP = 8;
 
-// Phones have no hover, so the title tooltips badgeHelper.js puts on badges
-// never show there. On touch devices, tapping a badge shows its name in a
-// small popover instead, and a linked badge follows its link on a second tap.
+// Long enough that sweeping the pointer across a row of badges doesn't flash
+// a tooltip for each one.
+const HOVER_DELAY = 300;
+
+const badgeFrom = (target) => target.closest?.('.img-badge');
+
+const nameOf = (badge) =>
+  badge?.querySelector('img[data-badge-name]')?.getAttribute('data-badge-name');
+
+// Shows a badge's name (set by badgeHelper.js) in a small popover: after a
+// short hover with a mouse, straight away on keyboard focus, and on tap on
+// touch devices, where a linked badge follows its link on a second tap.
 const BadgeTooltip = () => {
   const [tip, setTip] = useState(null);
   const tipRef = useRef(null);
   const openBadge = useRef(null);
 
   useEffect(() => {
-    if (!window.matchMedia('(hover: none)').matches) return;
+    let timer;
+    let pendingBadge = null;
+
+    const open = (badge) => {
+      clearTimeout(timer);
+      pendingBadge = null;
+      openBadge.current = badge;
+      setTip({
+        name: nameOf(badge),
+        anchor: badge.querySelector('img').getBoundingClientRect(),
+      });
+    };
 
     const close = () => {
+      clearTimeout(timer);
+      pendingBadge = null;
       openBadge.current = null;
       setTip(null);
     };
 
     const handleClick = (e) => {
-      const badge = e.target.closest('.img-badge');
-      const name = badge?.querySelector('img[title]')?.getAttribute('title');
+      const badge = badgeFrom(e.target);
 
-      if (!name || badge === openBadge.current) {
+      if (!nameOf(badge) || badge === openBadge.current) {
         close();
         return;
       }
 
       if (e.target.closest('a')) e.preventDefault();
-
-      openBadge.current = badge;
-      setTip({
-        name,
-        anchor: badge.querySelector('img').getBoundingClientRect(),
-      });
+      open(badge);
     };
 
-    document.addEventListener('click', handleClick, true);
+    const handleMouseOver = (e) => {
+      const badge = badgeFrom(e.target);
+      if (!nameOf(badge) || badge === openBadge.current) return;
+      if (badge === pendingBadge) return;
+
+      clearTimeout(timer);
+      pendingBadge = badge;
+      timer = setTimeout(() => open(badge), HOVER_DELAY);
+    };
+
+    const handleMouseOut = (e) => {
+      const badge = badgeFrom(e.target);
+      if (badge && !badge.contains(e.relatedTarget)) close();
+    };
+
+    const handleFocusIn = (e) => {
+      const badge = badgeFrom(e.target);
+      if (nameOf(badge)) open(badge);
+    };
+
+    const handleFocusOut = (e) => {
+      if (badgeFrom(e.target)) close();
+    };
+
+    const listeners = window.matchMedia('(hover: none)').matches
+      ? [['click', handleClick, true]]
+      : [
+          ['mouseover', handleMouseOver],
+          ['mouseout', handleMouseOut],
+          ['focusin', handleFocusIn],
+          ['focusout', handleFocusOut],
+        ];
+
+    listeners.forEach(([type, listener, capture]) =>
+      document.addEventListener(type, listener, capture)
+    );
     window.addEventListener('scroll', close, { passive: true });
     window.addEventListener('resize', close);
 
     return () => {
-      document.removeEventListener('click', handleClick, true);
+      clearTimeout(timer);
+      listeners.forEach(([type, listener, capture]) =>
+        document.removeEventListener(type, listener, capture)
+      );
       window.removeEventListener('scroll', close);
       window.removeEventListener('resize', close);
     };
