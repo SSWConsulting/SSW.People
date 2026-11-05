@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 import ActionButtons from '../components/action-buttons/action-buttons';
+import BadgeTooltip from '../components/badge-tooltip/badge-tooltip';
 import Contact from '../components/contact/contact';
 import EventList from '../components/event-list/event-list';
 import GitHubContributionCalendar from '../components/github-contribution-calendar/github-contribution-calendar';
@@ -175,6 +176,7 @@ const Person = ({ pageContext }) => {
                 __html: profileHtml,
               }}
             />
+            <BadgeTooltip />
             {!isChinaBuild && crmData && crmData.youTubePlayListId && (
               <>
                 <hr />
