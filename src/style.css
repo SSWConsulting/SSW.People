@@ -395,7 +395,7 @@ div[id^="headlessui-dialog-panel"] {
   /* gatsby-remark-images sizes the wrapper with an inline style and absolutely
      positions the image inside it, so capping the height needs both. */
   .gatsby-resp-image-wrapper {
-    height: 100px !important;
+    height: 80px !important;
     width: auto !important;
     max-width: none !important;
     margin: 0 !important;
@@ -408,7 +408,7 @@ div[id^="headlessui-dialog-panel"] {
 
   img {
     position: static !important;
-    height: 100px !important;
+    height: 80px !important;
     width: auto !important;
     object-fit: contain;
   }
@@ -428,7 +428,7 @@ div[id^="headlessui-dialog-panel"] {
   display: flex;
   flex-wrap: nowrap;
   align-items: center;
-  gap: .75rem;
+  gap: 1rem;
   overflow-x: auto;
   overscroll-behavior-x: contain;
   scroll-snap-type: x proximity;
