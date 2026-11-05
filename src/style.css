@@ -438,6 +438,20 @@ div[id^="headlessui-dialog-panel"] {
   }
 }
 
+/* Phones: smaller badges so more fit on each row. */
+@media(max-width: 767px) {
+  .img-badge {
+    .gatsby-resp-image-wrapper,
+    img {
+      height: 60px !important;
+    }
+  }
+
+  .img-badge-row {
+    gap: .75rem;
+  }
+}
+
 .img-banner figcaption,
 .img-logo figcaption{
   display: none;
