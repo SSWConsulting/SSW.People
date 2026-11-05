@@ -443,12 +443,12 @@ div[id^="headlessui-dialog-panel"] {
   .img-badge {
     .gatsby-resp-image-wrapper,
     img {
-      height: 60px !important;
+      height: 40px !important;
     }
   }
 
   .img-badge-row {
-    gap: .75rem;
+    gap: .5rem;
   }
 }
 
