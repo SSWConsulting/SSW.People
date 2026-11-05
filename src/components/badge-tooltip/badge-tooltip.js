@@ -12,10 +12,18 @@ const GAP = 8;
 // a tooltip for each one.
 const HOVER_DELAY = 300;
 
-const badgeFrom = (target) => target.closest?.('.img-badge');
+// The badge image under the pointer or finger. Each image sits in its own
+// <figure>, so this is the hovered image even in a block holding several.
+const imageFrom = (target) => {
+  if (!target.closest?.('.img-badge')) return null;
 
-const nameOf = (badge) =>
-  badge?.querySelector('img[data-badge-name]')?.getAttribute('data-badge-name');
+  const figure = target.closest('figure');
+  if (figure) return figure.querySelector('img[data-badge-name]');
+
+  return target.matches('img[data-badge-name]') ? target : null;
+};
+
+const areaOf = (image) => image.closest('figure') || image;
 
 // Shows a badge's name (set by badgeHelper.js) in a small popover: after a
 // short hover with a mouse, straight away on keyboard focus, and on tap on
@@ -23,63 +31,63 @@ const nameOf = (badge) =>
 const BadgeTooltip = () => {
   const [tip, setTip] = useState(null);
   const tipRef = useRef(null);
-  const openBadge = useRef(null);
+  const openImage = useRef(null);
 
   useEffect(() => {
     let timer;
-    let pendingBadge = null;
+    let pendingImage = null;
 
-    const open = (badge) => {
+    const open = (image) => {
       clearTimeout(timer);
-      pendingBadge = null;
-      openBadge.current = badge;
+      pendingImage = null;
+      openImage.current = image;
       setTip({
-        name: nameOf(badge),
-        anchor: badge.querySelector('img').getBoundingClientRect(),
+        name: image.getAttribute('data-badge-name'),
+        anchor: image.getBoundingClientRect(),
       });
     };
 
     const close = () => {
       clearTimeout(timer);
-      pendingBadge = null;
-      openBadge.current = null;
+      pendingImage = null;
+      openImage.current = null;
       setTip(null);
     };
 
     const handleClick = (e) => {
-      const badge = badgeFrom(e.target);
+      const image = imageFrom(e.target);
 
-      if (!nameOf(badge) || badge === openBadge.current) {
+      if (!image || image === openImage.current) {
         close();
         return;
       }
 
       if (e.target.closest('a')) e.preventDefault();
-      open(badge);
+      open(image);
     };
 
     const handleMouseOver = (e) => {
-      const badge = badgeFrom(e.target);
-      if (!nameOf(badge) || badge === openBadge.current) return;
-      if (badge === pendingBadge) return;
+      const image = imageFrom(e.target);
+      if (!image || image === openImage.current) return;
+      if (image === pendingImage) return;
 
       clearTimeout(timer);
-      pendingBadge = badge;
-      timer = setTimeout(() => open(badge), HOVER_DELAY);
+      pendingImage = image;
+      timer = setTimeout(() => open(image), HOVER_DELAY);
     };
 
     const handleMouseOut = (e) => {
-      const badge = badgeFrom(e.target);
-      if (badge && !badge.contains(e.relatedTarget)) close();
+      const image = imageFrom(e.target);
+      if (image && !areaOf(image).contains(e.relatedTarget)) close();
     };
 
     const handleFocusIn = (e) => {
-      const badge = badgeFrom(e.target);
-      if (nameOf(badge)) open(badge);
+      const image = imageFrom(e.target);
+      if (image) open(image);
     };
 
     const handleFocusOut = (e) => {
-      if (badgeFrom(e.target)) close();
+      if (imageFrom(e.target)) close();
     };
 
     const listeners = window.matchMedia('(hover: none)').matches
