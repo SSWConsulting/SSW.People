@@ -422,24 +422,19 @@ div[id^="headlessui-dialog-panel"] {
   }
 }
 
-/* A run of badges, wrapped at build time by src/helpers/badgeHelper.js.
-   One row that scrolls sideways rather than wrapping down the page. */
+/* A run of badges, wrapped at build time by src/helpers/badgeHelper.js so
+   they share one parent and get even spacing as they wrap. */
 .img-badge-row {
   display: flex;
-  flex-wrap: nowrap;
+  flex-wrap: wrap;
   align-items: center;
   gap: 1rem;
-  overflow-x: auto;
-  overscroll-behavior-x: contain;
-  scroll-snap-type: x proximity;
-  scrollbar-width: thin;
-  padding: .25rem 0 .5rem;
+  padding-top: .25rem;
   margin-bottom: 1rem;
 
   .img-badge {
     flex: 0 0 auto;
     margin: 0;
-    scroll-snap-align: start;
   }
 }
 
@@ -1125,11 +1120,6 @@ font-size: 0.8rem;
   .img-badge p a::after,
   .contact a::after{
     content: none !important;
-  }
-
-  .img-badge-row {
-    flex-wrap: wrap;
-    overflow-x: visible;
   }
 
   .print-hidden{
