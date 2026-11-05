@@ -55,20 +55,32 @@ const getBadgeName = (imgTag, block) => {
   return null;
 };
 
-// Show the badge's name as a tooltip on hover.
-const addBadgeTitle = (block) => {
+const setAttribute = (tag, attribute, value) => {
+  const existing = new RegExp(`\\s${attribute}="[^"]*"`);
+  const replacement = ` ${attribute}="${value}"`;
+
+  return existing.test(tag)
+    ? tag.replace(existing, () => replacement)
+    : tag.replace('<img', () => `<img${replacement}`);
+};
+
+// Hand the badge's name to BadgeTooltip, which shows it on hover or tap. Not a
+// title attribute, or the browser's own tooltip would show as well. It also
+// replaces the alt text, which gatsby-remark-images builds from the file name.
+const addBadgeName = (block) => {
   const img = block.match(/<img\b[^>]*>/);
   if (!img) return block;
 
   const name = getBadgeName(img[0], block);
   if (!name) return block;
 
-  const title = ` title="${name}"`;
-  const imgWithTitle = /\stitle="[^"]*"/.test(img[0])
-    ? img[0].replace(/\stitle="[^"]*"/, () => title)
-    : img[0].replace('<img', () => `<img${title}`);
+  const named = setAttribute(
+    setAttribute(img[0], 'alt', name),
+    'data-badge-name',
+    name
+  );
 
-  return block.replace(img[0], () => imgWithTitle);
+  return block.replace(img[0], () => named);
 };
 
 const wrapBadgeRuns = (html) => {
@@ -91,7 +103,7 @@ const wrapBadgeRuns = (html) => {
       const end = findBlockEnd(html, next);
       if (end === -1) break;
 
-      row += html.slice(runEnd, next) + addBadgeTitle(html.slice(next, end));
+      row += html.slice(runEnd, next) + addBadgeName(html.slice(next, end));
       runEnd = end;
       next = end + html.slice(end).match(/^\s*/)[0].length;
     }
