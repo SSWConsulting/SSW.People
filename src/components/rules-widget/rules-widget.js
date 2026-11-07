@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { FaClock } from 'react-icons/fa';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faClock } from '@fortawesome/free-solid-svg-icons';
 import {
   differenceInMonths,
   differenceInYears,
@@ -171,7 +172,7 @@ export default function RulesWidget({
 
                 <p className="text-[#aaa] flex items-center gap-1 text-sm">
                   <span className="inline-flex items-start">
-                    <FaClock size={14} />
+                    <FontAwesomeIcon icon={faClock} />
                   </span>
                   {lastUpdated ? `${lastUpdated} ago` : '—'}
                 </p>

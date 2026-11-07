@@ -15,12 +15,21 @@ const SkillsList = ({ crmData }) => {
     const element = skillsRef.current;
     if (!element || isExpanded) return;
 
-    const checkOverflow = () =>
-      setCanExpand(element.scrollHeight > element.clientHeight + 1);
+    let active = true;
+    const checkOverflow = () => {
+      if (active) setCanExpand(element.scrollHeight > element.clientHeight + 1);
+    };
 
     checkOverflow();
+    // Inter can finish loading after this and re-wrap the list onto a 4th line,
+    // which would otherwise stay clamped with no button to expand it.
+    document.fonts?.ready.then(checkOverflow);
     window.addEventListener('resize', checkOverflow);
-    return () => window.removeEventListener('resize', checkOverflow);
+
+    return () => {
+      active = false;
+      window.removeEventListener('resize', checkOverflow);
+    };
   }, [isExpanded]);
 
   return (

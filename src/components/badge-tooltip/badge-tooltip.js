@@ -28,6 +28,7 @@ const areaOf = (image) => image.closest('figure') || image;
 // Shows a badge's name (set by badgeHelper.js) in a small popover: after a
 // short hover with a mouse, straight away on keyboard focus, and on tap on
 // touch devices, where a linked badge follows its link on a second tap.
+// Escape dismisses it, as WCAG 1.4.13 requires for content shown on hover.
 const BadgeTooltip = () => {
   const [tip, setTip] = useState(null);
   const tipRef = useRef(null);
@@ -36,6 +37,8 @@ const BadgeTooltip = () => {
   useEffect(() => {
     let timer;
     let pendingImage = null;
+    // Dismissed with Escape - stays closed until the pointer leaves it.
+    let dismissedImage = null;
 
     const open = (image) => {
       clearTimeout(timer);
@@ -69,7 +72,7 @@ const BadgeTooltip = () => {
     const handleMouseOver = (e) => {
       const image = imageFrom(e.target);
       if (!image || image === openImage.current) return;
-      if (image === pendingImage) return;
+      if (image === pendingImage || image === dismissedImage) return;
 
       clearTimeout(timer);
       pendingImage = image;
@@ -78,7 +81,17 @@ const BadgeTooltip = () => {
 
     const handleMouseOut = (e) => {
       const image = imageFrom(e.target);
-      if (image && !areaOf(image).contains(e.relatedTarget)) close();
+      if (!image || areaOf(image).contains(e.relatedTarget)) return;
+
+      if (image === dismissedImage) dismissedImage = null;
+      close();
+    };
+
+    const handleKeyDown = (e) => {
+      if (e.key !== 'Escape' || !(openImage.current || pendingImage)) return;
+
+      dismissedImage = openImage.current || pendingImage;
+      close();
     };
 
     const handleFocusIn = (e) => {
@@ -102,6 +115,7 @@ const BadgeTooltip = () => {
     listeners.forEach(([type, listener, capture]) =>
       document.addEventListener(type, listener, capture)
     );
+    document.addEventListener('keydown', handleKeyDown);
     window.addEventListener('scroll', close, { passive: true });
     window.addEventListener('resize', close);
 
@@ -110,6 +124,7 @@ const BadgeTooltip = () => {
       listeners.forEach(([type, listener, capture]) =>
         document.removeEventListener(type, listener, capture)
       );
+      document.removeEventListener('keydown', handleKeyDown);
       window.removeEventListener('scroll', close);
       window.removeEventListener('resize', close);
     };
