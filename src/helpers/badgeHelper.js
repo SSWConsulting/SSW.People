@@ -32,7 +32,8 @@ const escapeAttribute = (text) =>
 
 // Look the badge up by its file name. Badges outside SSW.People.Profiles/badges
 // fall back to the author's caption, unless that is just a file name too.
-const getBadgeName = (imgTag, block) => {
+// `following` is the markup after the image, up to the next one.
+const getBadgeName = (imgTag, following) => {
   const src = imgTag.match(/\ssrc="([^"]+)"/);
   const file =
     src &&
@@ -45,7 +46,7 @@ const getBadgeName = (imgTag, block) => {
 
   if (file && badgeNames[file]) return escapeAttribute(badgeNames[file]);
 
-  const caption = block.match(/<figcaption>([^<]*)<\/figcaption>/);
+  const caption = following.match(/<figcaption>([^<]*)<\/figcaption>/);
   const text = caption && caption[1].trim();
   if (text && !/\.(png|jpe?g|gif|svg|webp)$/i.test(text)) {
     // Already HTML text, so only the quote needs escaping for an attribute.
@@ -64,23 +65,39 @@ const setAttribute = (tag, attribute, value) => {
     : tag.replace('<img', () => `<img${replacement}`);
 };
 
-// Hand the badge's name to BadgeTooltip, which shows it on hover or tap. Not a
+// Hand each image's name to BadgeTooltip, which shows it on hover or tap. Not a
 // title attribute, or the browser's own tooltip would show as well. It also
 // replaces the alt text, which gatsby-remark-images builds from the file name.
-const addBadgeName = (block) => {
-  const img = block.match(/<img\b[^>]*>/);
-  if (!img) return block;
+const addBadgeNames = (block) =>
+  block.replace(/<img\b[^>]*>/g, (img, offset) => {
+    const rest = block.slice(offset + img.length);
+    const nextImg = rest.search(/<img\b/);
+    const name = getBadgeName(
+      img,
+      nextImg === -1 ? rest : rest.slice(0, nextImg)
+    );
+    if (!name) return img;
 
-  const name = getBadgeName(img[0], block);
-  if (!name) return block;
+    return setAttribute(
+      setAttribute(img, 'alt', name),
+      'data-badge-name',
+      name
+    );
+  });
 
-  const named = setAttribute(
-    setAttribute(img[0], 'alt', name),
-    'data-badge-name',
-    name
-  );
+// One [[imgBadge]] block can hold several images, each in its own <figure>.
+// Give each its own block, so every image is one item in the row - spaced and
+// wrapped like any other badge, rather than stacked inside a single item.
+const splitBadgeBlock = (block) => {
+  const figures = block.match(/<figure\b[\s\S]*?<\/figure>/g);
+  if (!figures || figures.length < 2) return block;
 
-  return block.replace(img[0], () => named);
+  return figures
+    .map(
+      (figure) =>
+        `${BADGE_OPEN}<div class="custom-block-body">${figure}</div></div>`
+    )
+    .join('');
 };
 
 const wrapBadgeRuns = (html) => {
@@ -103,7 +120,9 @@ const wrapBadgeRuns = (html) => {
       const end = findBlockEnd(html, next);
       if (end === -1) break;
 
-      row += html.slice(runEnd, next) + addBadgeName(html.slice(next, end));
+      row +=
+        html.slice(runEnd, next) +
+        addBadgeNames(splitBadgeBlock(html.slice(next, end)));
       runEnd = end;
       next = end + html.slice(end).match(/^\s*/)[0].length;
     }
