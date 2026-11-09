@@ -138,19 +138,13 @@ export default function RulesWidget({
 
   const content = (() => {
     if (!enabled)
-      return (
-        <p className="text-center text-sm text-gray-600">No Rules Found</p>
-      );
+      return <p className="text-center text-sm text-weak">No Rules Found</p>;
     if (status === 'loading')
-      return <p className="text-center text-sm text-gray-600">Loading...</p>;
+      return <p className="text-center text-sm text-weak">Loading...</p>;
     if (status === 'error')
-      return (
-        <p className="text-center text-sm text-gray-600">No Rules Found</p>
-      );
+      return <p className="text-center text-sm text-weak">No Rules Found</p>;
     if (!items.length)
-      return (
-        <p className="text-center text-sm text-gray-600">No Rules Found</p>
-      );
+      return <p className="text-center text-sm text-weak">No Rules Found</p>;
 
     return (
       <>
@@ -163,14 +157,14 @@ export default function RulesWidget({
               href={`${rulesUrl}/${item.uri}`}
               target="_blank"
               rel="noreferrer"
-              className="block no-underline text-gray-800 hover:text-[#cc4141]"
+              className="block no-underline text-strong hover:text-ssw-red"
             >
-              <div className="my-2.5 p-3 bg-[#f5f5f5] border-l-2 border-l-[#cc4141] text-left transition-shadow hover:shadow-md">
-                <p className="text-base text-gray-800 leading-[1.2] break-words mb-1">
+              <div className="my-2.5 p-3 bg-[#f5f5f5] border-l-2 border-l-ssw-red text-left transition-shadow hover:shadow-md">
+                <p className="text-base text-strong leading-[1.2] break-words mb-1">
                   {item.title}
                 </p>
 
-                <p className="text-[#aaa] flex items-center gap-1 text-sm">
+                <p className="text-weak flex items-center gap-1 text-sm">
                   <span className="inline-flex items-start">
                     <FontAwesomeIcon icon={faClock} />
                   </span>
@@ -200,7 +194,7 @@ export default function RulesWidget({
       <div className="flex flex-col items-center">
         <h4 className="mt-4 mb-0">
           <a
-            className="no-underline hover:text-[#cc4141]"
+            className="no-underline hover:text-ssw-red"
             target="_blank"
             rel="noreferrer"
             href={rulesUrl}
