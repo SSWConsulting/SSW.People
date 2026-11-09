@@ -478,13 +478,22 @@ div[id^="headlessui-dialog-panel"] {
   flex-wrap: wrap;
   align-items: center;
   gap: 1rem;
-  padding-top: .25rem;
+  padding: .25rem 0 1rem;
   margin-bottom: 1rem;
+  border-bottom: 1px solid var(--stroke-weak);
 
   .img-badge {
     flex: 0 0 auto;
     margin: 0;
   }
+}
+
+/* The row draws its own divider, so a separator authored in the profile
+   markdown right after it would double up. */
+.img-badge-row + hr,
+.img-badge-row + br,
+.img-badge-row + br + hr {
+  display: none;
 }
 
 /* Phones: smaller badges so more fit on each row. */
