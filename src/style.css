@@ -17,28 +17,49 @@
   @import 'react-responsive-modal/styles.css';
 }
 
+/* SSW Design System tokens (design.ssw.com.au). Its components need React 19
+   and Tailwind 4, so for now the site adopts these values only. */
+:root {
+  --primary: #cc4141;
+  /* The Design System value is rgba(0, 0, 0, 0.9). Stays #333 until agreed. */
+  --text-strong: #333;
+  --text-weak: rgba(0, 0, 0, 0.6);
+  --stroke-weak: rgba(0, 0, 0, 0.1);
+  --radius-sm: 4px;
+  --font-size-h1: 40px;
+  --font-size-h2: 32px;
+  --font-size-h3: 24px;
+  --font-size-h4: 20px;
+  --line-height-h1: 48px;
+  --line-height-h2: 40px;
+  --line-height-h3: 32px;
+  --line-height-h4: 28px;
+  --letter-spacing-h1: -0.5px;
+}
+
 .text-ssw-red {
-  color: #cc4141;
+  color: var(--primary);
 }
 
 .bg-ssw-red {
-  background-color: #cc4141;
+  background-color: var(--primary);
 }
 
 .border-ssw-red {
-  border-color: #cc4141;
+  border-color: var(--primary);
 }
 
 .color-ssw-red {
-  color: #cc4141;
+  color: var(--primary);
 }
 
 .bg-button-hover{
-    background-color: #cc2121;
+    /* The Design System's hover: a 10% white overlay on the fill. */
+  background-color: color-mix(in srgb, var(--primary) 90%, white);
 }
 
 .color-hover{
-  color: #cc2121;
+  color: var(--primary);
 }
 
 .bg-ssw-grey {
@@ -59,35 +80,58 @@
 
 html {
   font-family: "Inter Variable", sans-serif;
-  color:#333;
+  color: var(--text-strong);
 }
 
 h1 {
-  @apply text-4xl;
+  font-size: var(--font-size-h1);
+  line-height: var(--line-height-h1);
+  letter-spacing: var(--letter-spacing-h1);
   @apply mb-2;
   @apply text-ssw-red;
 }
 
 h1.title {
   font-size: 2em;
-  color: #333333;
+  color: var(--text-strong);
   margin-bottom: 0.1em;
 }
 
 h2 {
-  @apply text-3xl;
+  font-size: var(--font-size-h2);
+  line-height: var(--line-height-h2);
   @apply mb-2;
   @apply text-ssw-red;
 }
 
 h3 {
-  @apply text-2xl;
+  font-size: var(--font-size-h3);
+  line-height: var(--line-height-h3);
   @apply mb-2;
 }
 
 h4 {
-  @apply text-xl;
+  font-size: var(--font-size-h4);
+  line-height: var(--line-height-h4);
   @apply mb-2;
+}
+
+/* The Design System has one type scale. On phones the name shares a row with
+   Edit and Info, so the top two heading levels step down one size. */
+@media(max-width: 767px) {
+  h1 {
+    font-size: var(--font-size-h2);
+    line-height: var(--line-height-h2);
+  }
+
+  h2 {
+    font-size: var(--font-size-h3);
+    line-height: var(--line-height-h3);
+  }
+}
+
+hr {
+  border-color: var(--stroke-weak);
 }
 
 h5 {
@@ -151,6 +195,11 @@ footer {
   font-size: 0.75rem;
 }
 
+/* The calendar renders its own <footer>, which picks up the rule above. */
+.react-activity-calendar__count {
+  color: var(--text-weak);
+}
+
 .social-media-icon {
   color: #fff;
   display: block;
@@ -192,7 +241,7 @@ footer {
 .hero-para h1 {
   @apply text-2xl;
   @apply mb-2;
-  color: #333;
+  color: var(--text-strong);
 }
 
 .filter-role li,
@@ -274,7 +323,7 @@ footer {
 }
 
 .profile-content ul li::marker{
-	color: #cc4141;
+	color: var(--primary);
 }
 
 .profile-content ol {
@@ -323,7 +372,7 @@ header > div > div > a /*TODO: Fix this at the source https://github.com/SSWCons
 
 .breadcrumb a{
   &.breadcrumb__link__active{
-    color: #333;
+    color: var(--text-strong);
     text-decoration: none;
     border-bottom: 0px ;
     cursor: default;
@@ -340,7 +389,7 @@ header > div > div > a /*TODO: Fix this at the source https://github.com/SSWCons
 }
 
 .breadcrumb__link__active:hover{
-  color: #333;
+  color: var(--text-strong);
 }
 
 .hovered {
@@ -745,14 +794,14 @@ pre {
 .btn{
     color: #fff;
     cursor: pointer;
-    font-size: 1rem;
-    line-height: 18px;
-    text-transform: uppercase;
+    font-size: 0.875rem;
+    line-height: 20px;
     font-weight: normal;
     display: inline-block;
     text-decoration: none;
     margin: 1rem;
-    padding: 8px 15px;
+    padding: 10px 16px;
+    border-radius: var(--radius-sm);
     text-align: center;
     vertical-align: middle;
     touch-action: manipulation;
@@ -825,7 +874,7 @@ pre {
   outline: none;
   font-size: 16px;
   line-height: 1.75;
-  color: #333;
+  color: var(--text-strong);
   background-image: none;
   border: 1px solid #ccc;
   -ms-word-break: normal;
@@ -838,7 +887,7 @@ pre {
   background: transparent;
   box-shadow: none;
   padding: 6px 12px 6px 0;
-  color: #333;
+  color: var(--text-strong);
   font-size: 1em;
   font-family: sans-serif;
 }
@@ -860,7 +909,7 @@ pre {
   padding: 6px 12px;
   font-size: 14px;
   line-height: 1.42857143;
-  color: #333;
+  color: var(--text-strong);
   background-color: transparent;
   background-image: none;
   border: 1px solid #ccc;
@@ -873,7 +922,7 @@ pre {
 }
 
 .form-control::placeholder {
-  color: #999;
+  color: var(--text-weak);
 }
 
 .form-group label {
@@ -881,7 +930,7 @@ pre {
   top: -10px;
   left: -10px;
   font-size: 12px;
-  color: #999;
+  color: var(--text-weak);
   transition: all .1s linear;
   opacity: 0;
   background-image: linear-gradient(to bottom,#fff,#fff);
@@ -905,7 +954,7 @@ pre {
 }
 
 label {
-  color: #666;
+  color: var(--text-weak);
   display: inline-block;
   max-width: 100%;
 }
@@ -963,7 +1012,7 @@ label {
   line-height: inherit;
 }
 .event-item a {
-  color: #333;
+  color: var(--text-strong);
 }
 .event-item .thumbnail {
   float: left;
@@ -1083,11 +1132,11 @@ font-size: 0.8rem;
 }
 .btn-more:hover {
   @apply color-hover;
-  color: #cc2121;
+  color: var(--primary);
 }
 
 .btn-archive {
-  color: #a0aec0;
+  color: var(--text-weak);
   float: right;
 }
 
@@ -1098,7 +1147,7 @@ font-size: 0.8rem;
 
 .btn-archive:hover,
 .btn-archive-active:hover {
-  color: #cc2121;
+  color: var(--primary);
 }
 
 .archive-list{
@@ -1238,7 +1287,7 @@ font-size: 0.8rem;
 }
 
 .profile-util-copy:hover {
-  color: #cc4141;
+  color: var(--primary);
   transition: all 0.2s ease-in-out;
 }
 

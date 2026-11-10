@@ -13,7 +13,7 @@ const ContactInfo = ({ onClick, profileName, alumni }) => {
         Manager to discuss your project
       </p>
       <button className="btn btn-red" onClick={() => onClick()}>
-        Book a Free Initial Meeting
+        Book a free initial meeting
       </button>
       <p>
         or call on <a href="tel:+61299533000">+61 2 9953 3000</a>
