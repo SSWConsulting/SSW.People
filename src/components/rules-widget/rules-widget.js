@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faClock } from '@fortawesome/free-solid-svg-icons';
+import { faArrowRight, faClock } from '@fortawesome/free-solid-svg-icons';
 import {
   differenceInMonths,
   differenceInYears,
@@ -137,74 +137,68 @@ export default function RulesWidget({
     `${rulesUrl}/user?author=${encodeURIComponent(normalizedAuthor || '')}`;
 
   const content = (() => {
-    if (!enabled)
-      return <p className="text-center text-sm text-weak">No Rules Found</p>;
+    if (!enabled) return <p className="text-sm text-weak">No Rules Found</p>;
     if (status === 'loading')
-      return <p className="text-center text-sm text-weak">Loading...</p>;
+      return <p className="text-sm text-weak">Loading...</p>;
     if (status === 'error')
-      return <p className="text-center text-sm text-weak">No Rules Found</p>;
+      return <p className="text-sm text-weak">No Rules Found</p>;
     if (!items.length)
-      return <p className="text-center text-sm text-weak">No Rules Found</p>;
+      return <p className="text-sm text-weak">No Rules Found</p>;
 
     return (
       <>
-        {items.map((item, idx) => {
-          const lastUpdated = getLastUpdatedTime(item.lastModifiedAt);
+        <ul className="m-0 p-0 list-none">
+          {items.map((item, idx) => {
+            const lastUpdated = getLastUpdatedTime(item.lastModifiedAt);
 
-          return (
-            <a
-              key={`${item.uri}-${idx}`}
-              href={`${rulesUrl}/${item.uri}`}
-              target="_blank"
-              rel="noreferrer"
-              className="block no-underline text-strong hover:text-ssw-red"
-            >
-              <div className="my-2.5 p-3 bg-[#f5f5f5] border-l-2 border-l-ssw-red text-left transition-shadow hover:shadow-md">
-                <p className="text-base text-strong leading-[1.2] break-words mb-1">
+            return (
+              <li key={`${item.uri}-${idx}`} className="mb-5">
+                <a
+                  href={`${rulesUrl}/${item.uri}`}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="block text-sm font-medium text-strong no-underline break-words hover:text-ssw-red"
+                >
                   {item.title}
-                </p>
-
-                <p className="text-weak flex items-center gap-1 text-sm">
-                  <span className="inline-flex items-start">
-                    <FontAwesomeIcon icon={faClock} />
-                  </span>
+                </a>
+                <p className="flex items-center gap-1 mt-1 text-xs text-weak">
+                  <FontAwesomeIcon icon={faClock} />
                   {lastUpdated ? `${lastUpdated} ago` : '—'}
                 </p>
-              </div>
-            </a>
-          );
-        })}
+              </li>
+            );
+          })}
+        </ul>
 
-        <div className="text-center leading-[0.8] p-3">
-          <a
-            className="text-base underline"
-            target="_blank"
-            rel="noreferrer"
-            href={moreHref}
-          >
-            See more
-          </a>
-        </div>
+        {/* Styled like the Edit link in the profile header. */}
+        <a
+          className="inline-flex items-center text-sm text-strong underline hover:text-ssw-red"
+          target="_blank"
+          rel="noreferrer"
+          href={moreHref}
+        >
+          See more
+          <FontAwesomeIcon icon={faArrowRight} className="ml-2" />
+        </a>
       </>
     );
   })();
 
+  // Matches the sidebar cards on the SSW Rules site (www.ssw.com.au/rules).
   return (
-    <div className="text-base">
-      <div className="flex flex-col items-center">
-        <h4 className="mt-4 mb-0">
-          <a
-            className="no-underline hover:text-ssw-red"
-            target="_blank"
-            rel="noreferrer"
-            href={rulesUrl}
-          >
-            {title}
-          </a>
-        </h4>
-      </div>
+    <div className="mt-4 p-4 bg-white border border-[#cfcfcf] rounded-md">
+      <h4 className="mt-0 mb-4 text-lg font-semibold">
+        <a
+          className="text-strong no-underline hover:text-ssw-red"
+          target="_blank"
+          rel="noreferrer"
+          href={rulesUrl}
+        >
+          {title}
+        </a>
+      </h4>
 
-      <div>{content}</div>
+      {content}
     </div>
   );
 }
