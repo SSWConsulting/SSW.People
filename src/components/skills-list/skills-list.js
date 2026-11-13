@@ -12,7 +12,7 @@ const SkillsList = ({ crmData }) => {
   const [canExpand, setCanExpand] = useState(false);
 
   // Only measure while collapsed - once expanded the element never overflows,
-  // so re-measuring would hide the 'Show less' button.
+  // so re-measuring would hide the 'See less' button.
   useEffect(() => {
     const element = skillsRef.current;
     if (!element || isExpanded) return;
@@ -70,7 +70,7 @@ const SkillsList = ({ crmData }) => {
               aria-expanded={isExpanded}
               onClick={() => setIsExpanded((expanded) => !expanded)}
             >
-              {isExpanded ? 'Show less' : 'Show more'}
+              {isExpanded ? 'See less' : 'See more'}
               <FontAwesomeIcon
                 icon={isExpanded ? faChevronUp : faChevronDown}
                 className="ml-2"
