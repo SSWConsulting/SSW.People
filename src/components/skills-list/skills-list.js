@@ -1,5 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faChevronDown, faChevronUp } from '@fortawesome/free-solid-svg-icons';
 
 const SkillsList = ({ crmData }) => {
   const intermediateSkills = crmData?.skills?.intermediateSkills ?? [];
@@ -10,7 +12,7 @@ const SkillsList = ({ crmData }) => {
   const [canExpand, setCanExpand] = useState(false);
 
   // Only measure while collapsed - once expanded the element never overflows,
-  // so re-measuring would hide the 'Show less' button.
+  // so re-measuring would hide the 'See less' button.
   useEffect(() => {
     const element = skillsRef.current;
     if (!element || isExpanded) return;
@@ -61,13 +63,19 @@ const SkillsList = ({ crmData }) => {
             ))}
           </div>
           {canExpand && (
+            // Styled like the Edit and Info links in the profile header.
             <button
               type="button"
-              className="mt-1 text-ssw-red underline print-hidden"
+              className="flex items-center mt-1 text-strong underline hover:text-ssw-red print-hidden"
               aria-expanded={isExpanded}
               onClick={() => setIsExpanded((expanded) => !expanded)}
             >
-              {isExpanded ? 'Show less' : 'Show more'}
+              {isExpanded ? 'See less' : 'See more'}
+              <FontAwesomeIcon
+                icon={isExpanded ? faChevronUp : faChevronDown}
+                className="ml-2"
+                size="1x"
+              />
             </button>
           )}
           <hr className="print-hidden" />
