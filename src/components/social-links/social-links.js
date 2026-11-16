@@ -11,7 +11,6 @@ import {
   faLinkedin,
   faXTwitter,
   faGithub,
-  faSkype,
 } from '@fortawesome/free-brands-svg-icons';
 
 const SocialLinks = ({ crmData, alumni }) => {
@@ -60,117 +59,61 @@ const SocialLinks = ({ crmData, alumni }) => {
     crmData.emailAddress = '';
   }
 
-  const displayCrm =
-    crmData.emailAddress ||
-    crmData.blogUrl ||
-    crmData.facebookUrl ||
-    crmData.linkedInUrl ||
-    crmData.twitterUsername ||
-    crmData.gitHubUrl ||
-    crmData.publicPhotoAlbumUrl;
+  // Shown in this order, after Email. Links without a URL are skipped.
+  const links = [
+    { label: 'Blog', icon: faNewspaper, url: crmData.blogUrl },
+    { label: 'Photos', icon: faImages, url: crmData.publicPhotoAlbumUrl },
+    { label: 'GitHub', icon: faGithub, url: crmData.gitHubUrl },
+    { label: 'LinkedIn', icon: faLinkedin, url: crmData.linkedInUrl },
+    {
+      label: 'X (Twitter)',
+      icon: faXTwitter,
+      url:
+        crmData.twitterUsername &&
+        `https://www.twitter.com/${crmData.twitterUsername}`,
+    },
+    { label: 'Facebook', icon: faFacebook, url: crmData.facebookUrl },
+  ].filter((link) => link.url);
 
+  if (!crmData.emailAddress && !links.length) {
+    return <></>;
+  }
+
+  // Same card as the Latest Rules widget, which matches the SSW Rules site.
   return (
-    <>
-      {displayCrm && (
-        <div className="favor-content border md:my-4 p-2 rounded w-full print-hidden">
-          <ul className="favor-list mx-4 my-2">
-            {crmData.emailAddress && (
-              <>
-                <li className="social flex items-center">
-                  <FontAwesomeIcon icon={faEnvelope} className="mr-1" />
-                  <a
-                    href={'#0'}
-                    onClick={(event) => {
-                      sendEmail(event);
-                    }}
-                  >
-                    <span>Email </span>
-                  </a>
-                  <a
-                    href="https://github.com/SSWConsulting/SSW.People/wiki/4.-Extras#4-mailto-link-configure-your-default-mail-client"
-                    className="text-xs whitespace-nowrap cursor-pointer italic ml-2"
-                  >
-                    Need help?
-                  </a>
-                </li>
-              </>
-            )}
-            {crmData.blogUrl && (
-              <li className="social">
-                <a
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  href={crmData.blogUrl}
-                >
-                  <FontAwesomeIcon icon={faNewspaper} className="mr-1" />
-                  Blog
-                </a>
-              </li>
-            )}
-            {crmData.facebookUrl && (
-              <li className="social">
-                <a
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  href={crmData.facebookUrl}
-                >
-                  <FontAwesomeIcon icon={faFacebook} className="mr-1" />
-                  Facebook
-                </a>
-              </li>
-            )}
-            {crmData.linkedInUrl && (
-              <li className="social">
-                <a
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  href={crmData.linkedInUrl}
-                >
-                  <FontAwesomeIcon icon={faLinkedin} className="mr-1" />
-                  LinkedIn
-                </a>
-              </li>
-            )}
-            {crmData.twitterUsername && (
-              <li className="social">
-                <a
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  href={`https://www.twitter.com/${crmData.twitterUsername}`}
-                >
-                  <FontAwesomeIcon icon={faXTwitter} className="mr-1" />
-                  X (Twitter)
-                </a>
-              </li>
-            )}
-            {crmData.gitHubUrl && (
-              <li className="social">
-                <a
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  href={crmData.gitHubUrl}
-                >
-                  <FontAwesomeIcon icon={faGithub} className="mr-1" />
-                  GitHub
-                </a>
-              </li>
-            )}
-            {crmData.publicPhotoAlbumUrl && (
-              <li className="social">
-                <a
-                  href={crmData.publicPhotoAlbumUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <FontAwesomeIcon icon={faImages} className="mr-1" />
-                  Photos
-                </a>
-              </li>
-            )}
-          </ul>
-        </div>
-      )}
-    </>
+    <div className="md:my-4 p-4 w-full bg-white border border-[#cfcfcf] rounded-md print-hidden">
+      <ul className="favor-list m-0">
+        {crmData.emailAddress && (
+          <li className="social flex items-center">
+            <FontAwesomeIcon icon={faEnvelope} className="mr-1" />
+            <a
+              href={'#0'}
+              onClick={(event) => {
+                sendEmail(event);
+              }}
+            >
+              <span>Email </span>
+            </a>
+            <a
+              href="https://github.com/SSWConsulting/SSW.People/wiki/4.-Extras#4-mailto-link-configure-your-default-mail-client"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-xs whitespace-nowrap cursor-pointer ml-2"
+            >
+              Having issues?
+            </a>
+          </li>
+        )}
+        {links.map(({ label, icon, url }) => (
+          <li key={label} className="social">
+            <a target="_blank" rel="noopener noreferrer" href={url}>
+              <FontAwesomeIcon icon={icon} className="mr-1" />
+              {label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 };
 
