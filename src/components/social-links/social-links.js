@@ -79,7 +79,7 @@ const SocialLinks = ({ crmData, alumni }) => {
     return <></>;
   }
 
-  // Same card as the Latest Rules widget, which matches the SSW Rules site.
+  // Same card as the Rules Contributions widget, which matches the SSW Rules site.
   return (
     <div className="md:my-4 p-4 w-full bg-white border border-[#cfcfcf] rounded-md print-hidden">
       <ul className="favor-list m-0">

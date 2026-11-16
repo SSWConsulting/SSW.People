@@ -81,7 +81,7 @@ export default function RulesWidget({
   author,
   rulesUrl = 'https://www.ssw.com.au/rules',
   seeMoreUrl,
-  title = 'Latest Rules',
+  title = 'Rules Contributions',
 }) {
   const [items, setItems] = useState([]);
   const [status, setStatus] = useState('idle'); // idle | loading | error | success
@@ -136,53 +136,9 @@ export default function RulesWidget({
     seeMoreUrl ||
     `${rulesUrl}/user?author=${encodeURIComponent(normalizedAuthor || '')}`;
 
-  const content = (() => {
-    if (!enabled) return <p className="text-sm text-weak">No Rules Found</p>;
-    if (status === 'loading')
-      return <p className="text-sm text-weak">Loading...</p>;
-    if (status === 'error')
-      return <p className="text-sm text-weak">No Rules Found</p>;
-    if (!items.length)
-      return <p className="text-sm text-weak">No Rules Found</p>;
-
-    return (
-      <>
-        <ul className="m-0 p-0 list-none">
-          {items.map((item, idx) => {
-            const lastUpdated = getLastUpdatedTime(item.lastModifiedAt);
-
-            return (
-              <li key={`${item.uri}-${idx}`} className="mb-5">
-                <a
-                  href={`${rulesUrl}/${item.uri}`}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="block text-sm font-medium text-strong no-underline break-words hover:text-ssw-red"
-                >
-                  {item.title}
-                </a>
-                <p className="flex items-center gap-1 mt-1 text-xs text-weak">
-                  <FontAwesomeIcon icon={faClock} />
-                  {lastUpdated ? `${lastUpdated} ago` : '—'}
-                </p>
-              </li>
-            );
-          })}
-        </ul>
-
-        {/* Styled like the Edit link in the profile header. */}
-        <a
-          className="inline-flex items-center text-sm text-strong underline hover:text-ssw-red"
-          target="_blank"
-          rel="noreferrer"
-          href={moreHref}
-        >
-          See more
-          <FontAwesomeIcon icon={faArrowRight} className="ml-2" />
-        </a>
-      </>
-    );
-  })();
+  // Show nothing until there are rules to list, so people who haven't
+  // written or edited a rule get no empty card.
+  if (!enabled || status !== 'success' || !items.length) return null;
 
   // Matches the sidebar cards on the SSW Rules site (www.ssw.com.au/rules).
   return (
@@ -198,7 +154,39 @@ export default function RulesWidget({
         </a>
       </h4>
 
-      {content}
+      <ul className="m-0 p-0 list-none">
+        {items.map((item, idx) => {
+          const lastUpdated = getLastUpdatedTime(item.lastModifiedAt);
+
+          return (
+            <li key={`${item.uri}-${idx}`} className="mb-5">
+              <a
+                href={`${rulesUrl}/${item.uri}`}
+                target="_blank"
+                rel="noreferrer"
+                className="block text-sm font-medium text-strong no-underline break-words hover:text-ssw-red"
+              >
+                {item.title}
+              </a>
+              <p className="flex items-center gap-1 mt-1 text-xs text-weak">
+                <FontAwesomeIcon icon={faClock} />
+                {lastUpdated ? `${lastUpdated} ago` : '—'}
+              </p>
+            </li>
+          );
+        })}
+      </ul>
+
+      {/* Styled like the Edit link in the profile header. */}
+      <a
+        className="inline-flex items-center text-sm text-strong underline hover:text-ssw-red"
+        target="_blank"
+        rel="noreferrer"
+        href={moreHref}
+      >
+        See more
+        <FontAwesomeIcon icon={faArrowRight} className="ml-2" />
+      </a>
     </div>
   );
 }
