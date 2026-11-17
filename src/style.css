@@ -820,6 +820,33 @@ pre {
   @apply bg-button-hover;
 }
 
+/* The Design System's Outline button (design.ssw.com.au, ui-atoms-button).
+   Usable from profile markdown, e.g. <a class="btn-outline" href="...">. */
+.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: .5rem;
+  height: 36px;
+  padding: 0 16px;
+  font-size: .875rem;
+  line-height: 20px;
+  font-weight: 500;
+  white-space: nowrap;
+  color: rgba(0, 0, 0, .9);
+  background-color: #fff;
+  /* !important beats the global `a { border-bottom: none !important }`. */
+  border: 1px solid rgba(0, 0, 0, .1) !important;
+  border-radius: var(--radius-sm);
+  text-decoration: none;
+  transition: background-color .15s;
+}
+
+.btn-outline:hover {
+  color: rgba(0, 0, 0, .9);
+  background-color: rgba(0, 0, 0, .04);
+}
+
 .modal{
   position: absolute;
   top: 0px;
