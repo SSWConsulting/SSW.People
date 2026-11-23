@@ -848,14 +848,12 @@ pre {
     outline-offset: 2px;
   }
 
+  /* Comes after :hover so the fill stays on hover. A lighter red would drop
+     the white label below WCAG AA contrast (4.5:1). */
   &[aria-pressed='true'] {
     color: #fff;
     background-color: var(--primary);
     border-color: var(--primary);
-
-    &:hover {
-      @apply bg-button-hover;
-    }
   }
 }
 
