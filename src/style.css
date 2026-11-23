@@ -25,6 +25,7 @@
   --text-strong: #333;
   --text-weak: rgba(0, 0, 0, 0.6);
   --stroke-weak: rgba(0, 0, 0, 0.1);
+  --surface-hover: rgba(0, 0, 0, 0.04);
   --radius-sm: 4px;
   --font-size-h1: 40px;
   --font-size-h2: 32px;
@@ -394,7 +395,8 @@ header > div > div > a /*TODO: Fix this at the source https://github.com/SSWCons
   fill: #fff;
 }
 
-button:focus {
+/* Hide the focus ring for mouse clicks only, so keyboard users still see it. */
+button:focus:not(:focus-visible) {
   outline: 0;
 }
 
@@ -404,8 +406,12 @@ button:focus {
 }
 
 a {
-  border-bottom: none !important;
   text-decoration: underline;
+}
+
+/* Links styled as buttons keep their own border. */
+a:not(.btn-outline) {
+  border-bottom: none !important;
 }
 
 a:hover {
@@ -688,16 +694,6 @@ pre {
   }
 }
 
-.location-filter {
-  button {
-    &:hover {
-      @apply hovered;
-      transition: all 0.2s ease-in-out;
-    }
-  }
-
-}
-
 .past-talks-grid{
   display: grid;
 }
@@ -821,7 +817,9 @@ pre {
 }
 
 /* The Design System's Outline button (design.ssw.com.au, ui-atoms-button).
-   Usable from profile markdown, e.g. <a class="btn-outline" href="...">. */
+   Works on <a> and <button>, including from profile markdown:
+   <a class="btn-outline" href="...">. As a toggle (aria-pressed="true"),
+   it fills red, e.g. the city filter. */
 .btn-outline {
   display: inline-flex;
   align-items: center;
@@ -833,18 +831,30 @@ pre {
   line-height: 20px;
   font-weight: 500;
   white-space: nowrap;
-  color: rgba(0, 0, 0, .9);
+  color: var(--text-strong);
   background-color: #fff;
-  /* !important beats the global `a { border-bottom: none !important }`. */
-  border: 1px solid rgba(0, 0, 0, .1) !important;
+  border: 1px solid var(--stroke-weak);
   border-radius: var(--radius-sm);
   text-decoration: none;
   transition: background-color .15s;
-}
 
-.btn-outline:hover {
-  color: rgba(0, 0, 0, .9);
-  background-color: rgba(0, 0, 0, .04);
+  &:hover {
+    color: var(--text-strong);
+    background-color: var(--surface-hover);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
+  }
+
+  /* Comes after :hover so the fill stays on hover. A lighter red would drop
+     the white label below WCAG AA contrast (4.5:1). */
+  &[aria-pressed='true'] {
+    color: #fff;
+    background-color: var(--primary);
+    border-color: var(--primary);
+  }
 }
 
 .modal{

@@ -70,11 +70,11 @@ const Index = ({ data }) => {
 
   return (
     <>
-      <div className="hero-para mx-2 md:mx-6">
+      <div className="hero-para mx-4">
         <h1>SSW Alumni</h1>
         Employees that have graced the rooms and corridors of SSW in the past.
       </div>
-      <div className="my-8 mx-0 xl:mx-6">
+      <div className="my-8 mx-4">
         <LocationFilter
           locations={allLocations}
           selectedLocation={selectedLocation}
