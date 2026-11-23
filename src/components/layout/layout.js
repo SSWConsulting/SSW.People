@@ -8,21 +8,24 @@ import '../../style.css';
 import Breadcrumbs from '../breadcrumb/breadcrumb';
 import { Toaster } from 'react-hot-toast';
 
-const Layout = ({ children, pageTitle, crumbs, crumbLabel }) => {
+const Layout = ({ children, pageTitle, crumbs, crumbLabel, wideGutter }) => {
+  // On phones, the list pages line their content up with the header (32px).
+  const gutter = wideGutter ? ' px-4 sm:px-0' : '';
+
   return (
     <div>
       <div className="flex flex-col min-h-screen w-fit main-container mt-4 sm:mt-0">
         <Toaster position="top-center" reverseOrder={false} />
         <Head pageTitle={pageTitle} />
         <Header />
-        <div className="flex flex-row">
-            {crumbs ? (
-              <Breadcrumbs crumbs={crumbs} crumbLabel={crumbLabel} />
-            ) : (
-              <></>
-            )}
+        <div className={`flex flex-row${gutter}`}>
+          {crumbs ? (
+            <Breadcrumbs crumbs={crumbs} crumbLabel={crumbLabel} />
+          ) : (
+            <></>
+          )}
         </div>
-        <main className="flex-1 mx-auto lg:w-full">{children}</main>
+        <main className={`flex-1 mx-auto lg:w-full${gutter}`}>{children}</main>
       </div>
       <Footer />
     </div>
@@ -36,6 +39,7 @@ Layout.propTypes = {
   pageTitle: PropTypes.string,
   crumbs: PropTypes.array,
   crumbLabel: PropTypes.string,
+  wideGutter: PropTypes.bool,
 };
 
 const LayoutWithQuery = (props) => (

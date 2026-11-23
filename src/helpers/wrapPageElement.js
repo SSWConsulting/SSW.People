@@ -35,11 +35,17 @@ const wrapPageElement = ({ element, props }) => {
     } else return null;
   };
 
+  // The people and alumni lists get a wider phone gutter. Profile pages keep
+  // theirs for now: their video carousel overflows with extra padding.
+  const path = (props.path || '').replace(/\/$/, '');
+  const isListPage = path === '' || path === alumniPrefix;
+
   return (
     <Layout
       crumbs={crumbs}
       crumbLabel={getCrumbLabel()}
       pageTitle={getCrumbLabel()}
+      wideGutter={isListPage}
     >
       <Transition {...props}>{element}</Transition>
     </Layout>

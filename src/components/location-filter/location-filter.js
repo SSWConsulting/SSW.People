@@ -36,24 +36,28 @@ const LocationFilter = ({
 
   initLocation();
 
+  // One chip per city, styled like the Design System's Toggle Group.
   return (
-    <div className="px-2 flex bg-ssw-grey justify-center">
-      <div className="flex flex-wrap justify-around location-filter">
-        {locations.sort(LocationSort).map((location, i) => {
-          return (
-            <button
-              key={i}
-              id={location}
-              className={`p-3 ${
-                selectedLocation === location ? 'font-bold text-ssw-red' : ''
-              }`}
-              onClick={() => onLocationClicked(location)}
-            >
-              {location}
-            </button>
-          );
-        })}
-      </div>
+    <div
+      role="group"
+      aria-label="Location"
+      className="location-filter flex flex-wrap gap-2"
+    >
+      {locations.sort(LocationSort).map((location) => {
+        const isSelected = selectedLocation === location;
+        return (
+          <button
+            key={location}
+            id={location}
+            type="button"
+            aria-pressed={isSelected}
+            className={`location-chip${isSelected ? ' location-chip-selected' : ''}`}
+            onClick={() => onLocationClicked(location)}
+          >
+            {location}
+          </button>
+        );
+      })}
     </div>
   );
 };

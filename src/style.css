@@ -688,14 +688,40 @@ pre {
   }
 }
 
-.location-filter {
-  button {
-    &:hover {
-      @apply hovered;
-      transition: all 0.2s ease-in-out;
-    }
+/* City filter chips, after the Design System's Toggle Group
+   (design.ssw.com.au, ui-atoms-togglegroup). The selected city is filled red. */
+.location-chip {
+  height: 36px;
+  padding: 0 14px;
+  font-size: .875rem;
+  line-height: 20px;
+  font-weight: 500;
+  color: rgba(0, 0, 0, .9);
+  background-color: #fff;
+  border: 1px solid rgba(0, 0, 0, .2);
+  border-radius: var(--radius-sm);
+  transition: background-color .15s, border-color .15s;
+
+  &:hover {
+    background-color: rgba(0, 0, 0, .04);
   }
 
+  /* The global `button:focus { outline: 0 }` hides focus, so restore it
+     for keyboard users. */
+  &:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
+  }
+}
+
+.location-chip.location-chip-selected {
+  color: #fff;
+  background-color: var(--primary);
+  border-color: var(--primary);
+}
+
+.location-chip.location-chip-selected:hover {
+  @apply bg-button-hover;
 }
 
 .past-talks-grid{
