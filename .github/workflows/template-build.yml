@@ -51,21 +51,19 @@ jobs:
           mv .env.template .env.production
           cat .env.production
 
-      - name: Cache Gatsby .cache
-        uses: actions/cache@v4
+      # .cache and public are cached together so they always match. Each main
+      # build saves a fresh copy and every build restores the latest one. The
+      # old fixed keys were never updated, so builds started from a stale
+      # snapshot and could miss files copied from profiles (e.g. SVG badges).
+      - name: Restore Gatsby cache
+        uses: actions/cache/restore@v4
         with:
-          path: .cache
-          key: gatsby_cache | ${{ runner.os }}
+          path: |
+            .cache
+            public
+          key: gatsby-build-${{ runner.os }}-${{ github.run_id }}
           restore-keys: |
-            gatsby_cache | ${{ runner.os }}
-
-      - name: Cache Gatsby public
-        uses: actions/cache@v4
-        with:
-          path: public
-          key: gatsby_public | ${{ runner.os }}
-          restore-keys: |
-            gatsby_public | ${{ runner.os }}
+            gatsby-build-${{ runner.os }}-
 
       - name: Use Node
         uses: actions/setup-node@v4
@@ -80,6 +78,16 @@ jobs:
         run: yarn build
         env:
           GATSBY_EXPERIMENTAL_PAGE_BUILD_ON_DATA_CHANGES: true
+
+      # Only main saves, so PR and release builds don't fill the cache quota.
+      - name: Save Gatsby cache
+        if: github.ref == 'refs/heads/main'
+        uses: actions/cache/save@v4
+        with:
+          path: |
+            .cache
+            public
+          key: gatsby-build-${{ runner.os }}-${{ github.run_id }}
 
       - name: Archive artifacts
         uses: actions/upload-artifact@v7
