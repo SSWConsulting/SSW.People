@@ -6,7 +6,9 @@ const Quote = ({ quote, author }) => {
     <>
       <div className="quote-container m-auto">
         <div className="person-quote mr-2 text-left">{quote}</div>
-        <div className="person-quote-name uppercase text-sm mt-2 mr-2 text-right">{author}</div>
+        <div className="person-quote-name uppercase text-sm mt-2 mr-2 text-right">
+          {author}
+        </div>
       </div>
     </>
   );

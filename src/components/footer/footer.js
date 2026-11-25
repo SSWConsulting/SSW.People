@@ -60,7 +60,8 @@ const Footer = () => {
               href="https://tina.io"
             >
               TinaCMS
-            </a>.
+            </a>
+            .
           </span>
         </section>
       </div>
@@ -183,9 +184,9 @@ const Footer = () => {
                   continuous deployment
                 </a>
                 . Last updated{' '}
-                <span
+                <button
+                  type="button"
                   className="group relative inline-block cursor-help text-white hover:text-ssw-red focus-visible:text-ssw-red transition-colors"
-                  tabIndex={0}
                   aria-describedby={deploymentTooltipId}
                   title={lastUpdatedTooltip}
                 >
@@ -197,7 +198,7 @@ const Footer = () => {
                   >
                     {lastUpdatedTooltip}
                   </span>
-                </span>
+                </button>
                 {commitHash && (
                   <>
                     . Last commit{' '}

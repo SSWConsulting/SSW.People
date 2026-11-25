@@ -12,9 +12,7 @@ const Image = ({ hover, profileImage, sketchImage }) => {
       ? profileImage.src
       : ProfilePlaceholder;
 
-  return (
-    <img className="profile-image p-2 mx-auto" src={src} alt="Profile" />
-  );
+  return <img className="profile-image p-2 mx-auto" src={src} alt="Profile" />;
 };
 
 Image.propTypes = {

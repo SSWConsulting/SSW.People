@@ -643,7 +643,8 @@ exports.onCreateDevServer = ({ app }) => {
 
       const upstreamStream = upstream.data;
       const abortUpstream = () => {
-        if (upstreamStream && !upstreamStream.destroyed) upstreamStream.destroy();
+        if (upstreamStream && !upstreamStream.destroyed)
+          upstreamStream.destroy();
       };
 
       upstreamStream.on('error', () => {
