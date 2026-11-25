@@ -4,6 +4,7 @@ const DirectoryNamedWebpackPlugin = require('directory-named-webpack-plugin');
 const WebpackAssetsManifest = require('webpack-assets-manifest');
 const chinaHelper = require('./src/helpers/chinaHelper');
 const badgeHelper = require('./src/helpers/badgeHelper');
+const { addMissingIframeTitles } = require('./src/helpers/iframeTitles');
 const { SkillSort } = require('./src/helpers/skillSort');
 const { getViewDataFromCRM, getUsersSkills } = require('./src/helpers/CRMApi');
 const appInsights = require('applicationinsights');
@@ -524,10 +525,12 @@ exports.createPages = async function ({ actions, graphql }) {
           dataCRM: person.dataCRM,
           dataSkillUrls: person.dataSkillUrls,
           playlistItems: person.playlistItems,
-          html: badgeHelper.wrapBadgeRuns(
-            chinaHelper.isChinaBuild
-              ? chinaHelper.cleanHtml(person.html)
-              : person.html
+          html: addMissingIframeTitles(
+            badgeHelper.wrapBadgeRuns(
+              chinaHelper.isChinaBuild
+                ? chinaHelper.cleanHtml(person.html)
+                : person.html
+            )
           ),
         },
       },

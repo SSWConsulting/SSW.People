@@ -32,7 +32,7 @@ const ProfileDescription = ({
         <h1 className="mr-4">{personName}</h1>
         {children}
       </div>
-      <h4>
+      <p className="job-title">
         <span>{jobTitle}</span>
         {location && (
           <span className="block mb-2 sm:inline sm:mb-0 sm:ml-4">
@@ -44,7 +44,7 @@ const ProfileDescription = ({
             {location}
           </span>
         )}
-      </h4>
+      </p>
       <p className="my-2">
         {qualifications && <strong>{qualifications}</strong>}
       </p>

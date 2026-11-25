@@ -48,6 +48,7 @@ const Footer = () => {
             data-size="large"
             data-show-count="true"
             aria-label="Star SSWConsulting/SSW.People on GitHub"
+            title="Star SSWConsulting/SSW.People on GitHub"
           >
             Star
           </GitHubButton>
