@@ -12,6 +12,7 @@ const ProfilePhotoUtils = ({ profile }) => {
         profileImageSrc={profile.profileImage?.src}
         slug={profile.slug}
         fullName={profile.fullName}
+        jobTitle={profile.jobTitle}
       />
     </Fragment>
   );
@@ -24,6 +25,7 @@ ProfilePhotoUtils.propTypes = {
       name: PropTypes.string.isRequired,
     }),
     fullName: PropTypes.string.isRequired,
+    jobTitle: PropTypes.string,
     billingRate: PropTypes.number.isRequired,
     slug: PropTypes.string.isRequired,
   }).isRequired,
