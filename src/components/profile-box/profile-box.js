@@ -80,8 +80,6 @@ const ProfileBox = ({
   return (
     <div
       className="w-full flex-profile-box unstyled relative"
-      role="gridcell"
-      tabIndex="0"
       onMouseEnter={() => {
         setHover(true);
       }}
