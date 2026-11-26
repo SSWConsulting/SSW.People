@@ -4,42 +4,27 @@ import { faCopy } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import copy from 'copy-to-clipboard';
 import toast from 'react-hot-toast';
+import { buildCopyDetailsHtml } from '../../../helpers/copyDetailsHtml';
 
 const CopyProfileInformation = ({
   fullName,
+  jobTitle,
   slug,
   billingRate,
   profileImageSrc,
 }) => {
-  const copyHtmlToClipboard = async () => {
-    const PREPAID_DISCOUNT = 15;
+  const copyHtmlToClipboard = () => {
     const siteUrl = window.location?.origin;
-    const imageUrl = siteUrl.concat(profileImageSrc);
-
-    const htmlToCopy = `
-    <table border="0" cellspacing="0" cellpadding="0" style="width: auto;">
-      <tr>
-        <td>
-          <img src="${imageUrl}" alt="${fullName}'s profile picture" height="90">
-        </td>
-        <td style="vertical-align: top; padding-left: 5px;">
-          <strong style="text-transform: uppercase;">${fullName}</strong> | <a href="https://www.ssw.com.au/people/${slug}">ssw.com.au/people/${slug}</a><br>
-          Hourly Rates:
-          <ul style="margin-top: 0; padding-left: 20px; padding-top: 0;">
-            <li style="margin-top: 0;">Standard: $${billingRate}+GST</li>
-            <li>Prepaid: $${
-              billingRate - PREPAID_DISCOUNT
-            }+GST (minimum 40h, subject to <a href="https://www.ssw.com.au/terms-and-conditions">prepaid terms</a>)</li>
-
-          </ul>
-        </td>
-      </tr>
-    </table>
-    `;
+    const htmlToCopy = buildCopyDetailsHtml({
+      fullName,
+      jobTitle,
+      slug,
+      billingRate,
+      imageUrl: siteUrl.concat(profileImageSrc),
+    });
 
     copy(htmlToCopy, {
       format: 'text/html',
-      debug: true,
     });
     toast.success('Copied to clipboard');
   };
@@ -58,6 +43,7 @@ const CopyProfileInformation = ({
 CopyProfileInformation.propTypes = {
   profileImageSrc: PropTypes.string,
   fullName: PropTypes.string.isRequired,
+  jobTitle: PropTypes.string,
   slug: PropTypes.string.isRequired,
   billingRate: PropTypes.number.isRequired,
 };

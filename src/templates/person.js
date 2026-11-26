@@ -116,7 +116,13 @@ const Person = ({ pageContext }) => {
                 sketchImage={sketchImage}
               >
                 <ProfilePhotoUtils
-                  profile={{ profileImage, fullName, slug, billingRate }}
+                  profile={{
+                    profileImage,
+                    fullName,
+                    jobTitle,
+                    slug,
+                    billingRate,
+                  }}
                 />
               </ProfilePhoto>
               {profileAudio ? (
