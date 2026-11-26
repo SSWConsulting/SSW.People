@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import preval from 'preval.macro';
 import moment from 'moment';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -22,8 +22,20 @@ const lastUpdatedTooltip = `Last updated ${moment(buildTimestamp)
   .utc()
   .format('D MMM YYYY [at] HH:mm UTC')}`;
 const deploymentTooltipId = 'deployment-tooltip';
+// The static HTML is built once, so a relative time rendered at build time
+// would differ from the browser's and break hydration. Render the build date
+// first, then switch to "X ago" after mount.
+// The copyright year comes from the build for the same reason.
+const buildYear = new Date(buildTimestamp).getUTCFullYear();
+const buildDate = `on ${moment(buildTimestamp).utc().format('D MMM YYYY')}`;
 
 const Footer = () => {
+  const [lastUpdated, setLastUpdated] = useState(buildDate);
+
+  useEffect(() => {
+    setLastUpdated(`${getLastDeployTime()} ago`);
+  }, []);
+
   return (
     <>
       <div className="p-4 text-center bg-grey-translucent text-sm">
@@ -69,7 +81,7 @@ const Footer = () => {
           <div className="xl:mx-6">
             <div className="mx-6 flex flex-col-reverse md:flex-row justify-between align-middle leading-6">
               <div className="py-2">
-                &copy; 1990-{new Date().getFullYear()} SSW. All rights reserved.
+                &copy; 1990-{buildYear} SSW. All rights reserved.
               </div>
               <div className="w-full md:w-3/4 md:text-right py-2">
                 <a
@@ -189,7 +201,7 @@ const Footer = () => {
                   aria-describedby={deploymentTooltipId}
                   title={lastUpdatedTooltip}
                 >
-                  {getLastDeployTime()} ago
+                  {lastUpdated}
                   <span
                     id={deploymentTooltipId}
                     role="tooltip"
