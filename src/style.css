@@ -117,6 +117,14 @@ h4 {
   @apply mb-2;
 }
 
+/* The job title under a person's name looks like an h4 but is not a
+   heading, so it does not break the heading order after the h1. */
+.job-title {
+  font-size: var(--font-size-h4);
+  line-height: var(--line-height-h4);
+  @apply mb-2;
+}
+
 /* The Design System has one type scale. On phones the name shares a row with
    Edit and Info, so the top two heading levels step down one size. */
 @media(max-width: 767px) {

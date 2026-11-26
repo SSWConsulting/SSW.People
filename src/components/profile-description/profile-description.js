@@ -15,24 +15,24 @@ const ProfileDescription = ({
   return (
     <div>
       {!isActive && (
-          <div className="mb-2">
-            <div className="flex h-10 shrink-0 items-center justify-center rounded-lg bg-ssw-grey px-4 text-xl max-sm:my-4">
-              <span className="flex items-center text-sm font-bold text-ssw-red">
-                <FontAwesomeIcon
-                  icon={faBoxArchive}
-                  className="mr-2"
-                  fontSize={16}
-                />
-                ALUMNI
-              </span>
-            </div>
+        <div className="mb-2">
+          <div className="flex h-10 shrink-0 items-center justify-center rounded-lg bg-ssw-grey px-4 text-xl max-sm:my-4">
+            <span className="flex items-center text-sm font-bold text-ssw-red">
+              <FontAwesomeIcon
+                icon={faBoxArchive}
+                className="mr-2"
+                fontSize={16}
+              />
+              ALUMNI
+            </span>
           </div>
+        </div>
       )}
       <div className="flex sm:flex-row justify-between">
         <h1 className="mr-4">{personName}</h1>
         {children}
       </div>
-      <h4>
+      <p className="job-title">
         <span>{jobTitle}</span>
         {location && (
           <span className="block mb-2 sm:inline sm:mb-0 sm:ml-4">
@@ -44,8 +44,10 @@ const ProfileDescription = ({
             {location}
           </span>
         )}
-      </h4>
-      <p className="my-2">{qualifications && <strong>{qualifications}</strong>}</p>
+      </p>
+      <p className="my-2">
+        {qualifications && <strong>{qualifications}</strong>}
+      </p>
     </div>
   );
 };

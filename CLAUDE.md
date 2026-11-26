@@ -11,7 +11,7 @@ Package manager is **yarn 4** (Berry). Node 20 LTS.
 - `yarn devbuild` — same as build, without prefix paths / page log
 - `yarn serve` / `yarn ssr` — serve a built site (`ssr` = build then serve)
 - `yarn lint` — eslint with `--max-warnings=0`
-- `yarn test` — runs `ava **/*.test.js --verbose` (currently only `scripts/lighthouse.test.js`)
+- `yarn test` — runs ava on `src/**/*.test.js` and `scripts/**/*.test.js` (file list in `package.json` → `ava`). `scripts/lighthouse.test.js` runs only when `LIGHTHOUSE_URL` is set (optional `LIGHTHOUSE_PRESET=desktop`, `LIGHTHOUSE_MIN_SCORE`)
 - `yarn format` — prettier on `src/**/*.js`
 
 `.env.development` and `.env.production` are required for `dev` and `build` respectively. Variables are listed in `.env.template`; values are stored in the SSW Keeper record.

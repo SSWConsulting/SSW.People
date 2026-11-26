@@ -12,8 +12,14 @@
     "build:favicons": "node scripts/favicons",
     "build": "yarn run build:dir && yarn run build:favicons && gatsby build --prefix-paths --log-pages",
     "devbuild": "yarn run build:dir && yarn run build:favicons && gatsby build",
-    "test": "ava **/*.test.js --verbose",
+    "test": "ava --verbose",
     "lint": "eslint --max-warnings=0 ."
+  },
+  "ava": {
+    "files": [
+      "src/**/*.test.js",
+      "scripts/**/*.test.js"
+    ]
   },
   "greenkeeper": {
     "ignore": [
